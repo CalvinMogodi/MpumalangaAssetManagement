@@ -19,5 +19,45 @@ namespace MAM.BusinessLayer.Models
         public string UserDepartment { get; set; }
         public string FacilityName { get; set; }
         public string IncomeLeaseStatus { get; set; }
+
+        public LandUseManagementDetail ConvertLandUseManagementDetail(DataAccess.Tables.LandUseManagementDetail landUseManagementDetail)
+        {
+            return new LandUseManagementDetail
+            {
+                Id = landUseManagementDetail.Id,
+                TitleDeedNumber = landUseManagementDetail.TitleDeedNumber,
+                RegistrationDate = landUseManagementDetail.RegistrationDate,
+                RegisteredOwner = landUseManagementDetail.RegisteredOwner,
+                VestingDate = landUseManagementDetail.VestingDate,
+                ConditionsOfTitle = landUseManagementDetail.ConditionsOfTitle,
+                OwnershipCategory = landUseManagementDetail.OwnershipCategory,
+                StateOwnedPercentage = landUseManagementDetail.StateOwnedPercentage,
+                LandUse = landUseManagementDetail.LandUse,
+                Zoning = landUseManagementDetail.Zoning,
+                UserDepartment = landUseManagementDetail.UserDepartment,
+                FacilityName = landUseManagementDetail.FacilityName,
+                IncomeLeaseStatus = landUseManagementDetail.IncomeLeaseStatus,
+            };
+        }
+
+        public DataAccess.Tables.LandUseManagementDetail ConvertLandUseManagementDetail(LandUseManagementDetail landUseManagementDetail)
+        {
+            return new DataAccess.Tables.LandUseManagementDetail
+            {
+                Id = landUseManagementDetail.Id,
+                TitleDeedNumber = landUseManagementDetail.TitleDeedNumber,
+                RegistrationDate = landUseManagementDetail.RegistrationDate,
+                RegisteredOwner = landUseManagementDetail.RegisteredOwner,
+                VestingDate = landUseManagementDetail.VestingDate,
+                ConditionsOfTitle = landUseManagementDetail.ConditionsOfTitle,
+                OwnershipCategory = landUseManagementDetail.OwnershipCategory,
+                StateOwnedPercentage = landUseManagementDetail.StateOwnedPercentage,
+                LandUse = landUseManagementDetail.LandUse,
+                Zoning = landUseManagementDetail.Zoning,
+                UserDepartment = landUseManagementDetail.UserDepartment,
+                FacilityName = landUseManagementDetail.FacilityName,
+                IncomeLeaseStatus = landUseManagementDetail.IncomeLeaseStatus,
+            };
+        }
     }
 }

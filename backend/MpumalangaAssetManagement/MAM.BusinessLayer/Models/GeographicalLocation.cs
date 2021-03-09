@@ -18,5 +18,41 @@ namespace MAM.BusinessLayer.Models
         public string Latitude { get; set; }
         public string Longitude { get; set; }
         public string MagisterialDistrict { get; set; }
+
+        public GeographicalLocation ConvertGeographicalLocation(DataAccess.Tables.GeographicalLocation geographicalLocation) {
+            return new GeographicalLocation {
+                Id = geographicalLocation.Id,
+                Province = geographicalLocation.Province,
+                Town = geographicalLocation.Town,
+                Suburb = geographicalLocation.Suburb,
+                StreetName = geographicalLocation.StreetName,
+                StreetNumber = geographicalLocation.StreetNumber,
+                DistrictMunicipality = geographicalLocation.DistrictMunicipality,
+                Region = geographicalLocation.Region,
+                LocalAuthority = geographicalLocation.LocalAuthority,
+                Latitude = geographicalLocation.Latitude,
+                Longitude = geographicalLocation.Longitude,
+                MagisterialDistrict = geographicalLocation.MagisterialDistrict
+            };
+        }
+
+        public DataAccess.Tables.GeographicalLocation ConvertGeographicalLocation(GeographicalLocation geographicalLocation)
+        {
+            return new DataAccess.Tables.GeographicalLocation
+            {
+                Id = geographicalLocation.Id,
+                Province = geographicalLocation.Province,
+                Town = geographicalLocation.Town,
+                Suburb = geographicalLocation.Suburb,
+                StreetName = geographicalLocation.StreetName,
+                StreetNumber = geographicalLocation.StreetNumber,
+                DistrictMunicipality = geographicalLocation.DistrictMunicipality,
+                Region = geographicalLocation.Region,
+                LocalAuthority = geographicalLocation.LocalAuthority,
+                Latitude = geographicalLocation.Latitude,
+                Longitude = geographicalLocation.Longitude,
+                MagisterialDistrict = geographicalLocation.MagisterialDistrict
+            };
+        }
     }
 }

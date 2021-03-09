@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Projects\\Asset Register MP\\MpumalangaAssetManagement\\MAM.DataAccess\\MAM.DataAccess.csproj": {}
+    "C:\\Projects\\Asset Register MP\\backend\\MpumalangaAssetManagement\\MAM.DataAccess\\MAM.DataAccess.csproj": {}
   },
   "projects": {
-    "C:\\Projects\\Asset Register MP\\MpumalangaAssetManagement\\MAM.DataAccess\\MAM.DataAccess.csproj": {
+    "C:\\Projects\\Asset Register MP\\backend\\MpumalangaAssetManagement\\MAM.DataAccess\\MAM.DataAccess.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Projects\\Asset Register MP\\MpumalangaAssetManagement\\MAM.DataAccess\\MAM.DataAccess.csproj",
+        "projectUniqueName": "C:\\Projects\\Asset Register MP\\backend\\MpumalangaAssetManagement\\MAM.DataAccess\\MAM.DataAccess.csproj",
         "projectName": "MAM.DataAccess",
-        "projectPath": "C:\\Projects\\Asset Register MP\\MpumalangaAssetManagement\\MAM.DataAccess\\MAM.DataAccess.csproj",
+        "projectPath": "C:\\Projects\\Asset Register MP\\backend\\MpumalangaAssetManagement\\MAM.DataAccess\\MAM.DataAccess.csproj",
         "packagesPath": "C:\\Users\\cmogo\\.nuget\\packages\\",
-        "outputPath": "C:\\Projects\\Asset Register MP\\MpumalangaAssetManagement\\MAM.DataAccess\\obj\\",
+        "outputPath": "C:\\Projects\\Asset Register MP\\backend\\MpumalangaAssetManagement\\MAM.DataAccess\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\"

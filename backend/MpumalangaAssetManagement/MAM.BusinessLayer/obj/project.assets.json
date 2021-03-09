@@ -6234,11 +6234,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Projects\\Asset Register MP\\MpumalangaAssetManagement\\MAM.BusinessLayer\\MAM.BusinessLayer.csproj",
+      "projectUniqueName": "C:\\Projects\\Asset Register MP\\backend\\MpumalangaAssetManagement\\MAM.BusinessLayer\\MAM.BusinessLayer.csproj",
       "projectName": "MAM.BusinessLayer",
-      "projectPath": "C:\\Projects\\Asset Register MP\\MpumalangaAssetManagement\\MAM.BusinessLayer\\MAM.BusinessLayer.csproj",
+      "projectPath": "C:\\Projects\\Asset Register MP\\backend\\MpumalangaAssetManagement\\MAM.BusinessLayer\\MAM.BusinessLayer.csproj",
       "packagesPath": "C:\\Users\\cmogo\\.nuget\\packages\\",
-      "outputPath": "C:\\Projects\\Asset Register MP\\MpumalangaAssetManagement\\MAM.BusinessLayer\\obj\\",
+      "outputPath": "C:\\Projects\\Asset Register MP\\backend\\MpumalangaAssetManagement\\MAM.BusinessLayer\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Microsoft\\Xamarin\\NuGet\\"
@@ -6259,8 +6259,8 @@
         "netstandard2.0": {
           "targetAlias": "netstandard2.0",
           "projectReferences": {
-            "C:\\Projects\\Asset Register MP\\MpumalangaAssetManagement\\MAM.DataAccess\\MAM.DataAccess.csproj": {
-              "projectPath": "C:\\Projects\\Asset Register MP\\MpumalangaAssetManagement\\MAM.DataAccess\\MAM.DataAccess.csproj"
+            "C:\\Projects\\Asset Register MP\\backend\\MpumalangaAssetManagement\\MAM.DataAccess\\MAM.DataAccess.csproj": {
+              "projectPath": "C:\\Projects\\Asset Register MP\\backend\\MpumalangaAssetManagement\\MAM.DataAccess\\MAM.DataAccess.csproj"
             }
           }
         }

@@ -422,7 +422,41 @@ namespace MAM.BusinessLayer.Repositories
                     }
             }
             return isDeleted = true;
-        }       
+        }
+
+        public Facility SaveFacilityLand(Facility facility) {
+
+            using (var dataAccess = new DataAccess.Repositories.PropertyDescriptionRepository(appSettings.ConnectionString))
+            {
+                facility.Land.PropertyDescription.Id = dataAccess.AddPropertyDescription(facility.Land.PropertyDescription.ConvertPropertyDescription(facility.Land.PropertyDescription));
+                facility.Land.PropertyDescriptionId = facility.Land.PropertyDescription.Id;
+            }
+
+            using (var dataAccess = new DataAccess.Repositories.GeographicalLocationRepository(appSettings.ConnectionString))
+            {
+                facility.Land.GeographicalLocation.Id = dataAccess.AddGeographicalLocation(facility.Land.GeographicalLocation.ConvertGeographicalLocation(facility.Land.GeographicalLocation));
+                facility.Land.GeographicalLocationId = facility.Land.GeographicalLocation.Id;
+            }
+
+            using (var dataAccess = new DataAccess.Repositories.LeaseStatusRepository(appSettings.ConnectionString))
+            {
+                facility.Land.LeaseStatus.Id = dataAccess.AddLeaseStatus(facility.Land.LeaseStatus.ConvertLeaseStatus(facility.Land.LeaseStatus));
+                facility.Land.LeaseStatusId = facility.Land.LeaseStatus.Id;
+            }
+
+            using (var dataAccess = new DataAccess.Repositories.LandUseManagementDetailRepository(appSettings.ConnectionString))
+            {
+                facility.Land.LandUseManagementDetail.Id = dataAccess.AddLandUseManagementDetail(facility.Land.LandUseManagementDetail.ConvertLandUseManagementDetail(facility.Land.LandUseManagementDetail));
+                facility.Land.LandUseManagementDetailId = facility.Land.LandUseManagementDetail.Id;
+            }
+
+            using (var dataAccess = new DataAccess.Repositories.LandRepository(appSettings.ConnectionString))
+            {
+                facility.Land.Id = dataAccess.AddLand(facility.Land.ConvertLand(facility.Land));
+            }
+
+            return facility;
+        }
 
         public void Dispose()
         {

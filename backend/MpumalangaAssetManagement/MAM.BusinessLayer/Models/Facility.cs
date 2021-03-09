@@ -43,6 +43,8 @@ namespace MAM.BusinessLayer.Models
         public int? ModifiedBy { get; set; }
         public DateTime? ModifiedDate { get; set; }
 
+        public Land Land { get; set; }
+
         public List<Facility> ConvertDwellingToFacility(List<DwellingFacility> dwellingFacilities)
         {
             return dwellingFacilities.Select(f => new Facility() { Id = f.Id,

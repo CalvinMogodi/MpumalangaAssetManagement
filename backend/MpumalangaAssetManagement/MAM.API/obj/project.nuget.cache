@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "k+DEFUCnGp1JtSMXdujLtvZ+durjep2jKvoU8JLDCuTw85+qweQR5nfhB7QyQy4eXA9qkeOCYGoAe/B17++uxA==",
+  "dgSpecHash": "KGxlUZGa1VYYL13zUksniO+7KTaLkR6tsYWGd70R5SWtYPjkZ0B5oHxvSGNsWDVVP84bXe0g7oDUGW39vDMfvg==",
   "success": true,
-  "projectFilePath": "C:\\Projects\\Asset Register MP\\MpumalangaAssetManagement\\MAM.API\\MAM.API.csproj",
+  "projectFilePath": "C:\\Projects\\Asset Register MP\\backend\\MpumalangaAssetManagement\\MAM.API\\MAM.API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\cmogo\\.nuget\\packages\\enums.net\\3.0.3\\enums.net.3.0.3.nupkg.sha512",
     "C:\\Users\\cmogo\\.nuget\\packages\\log4net\\2.0.8\\log4net.2.0.8.nupkg.sha512",

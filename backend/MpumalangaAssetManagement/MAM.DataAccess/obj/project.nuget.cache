@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "MCagijlIlXdIrIL7uVKy5nzvreEU5p9KySZASnPYfk0IzXGbwG5DxfxxmZY3fT93jolxUFlUz7G6RCkizrCSeA==",
+  "dgSpecHash": "fC16sGtfVBT23lOR2RLyBkuS0LKPBHzSldzBeWTw1pP08QDMmRVCbcEdpbdDkEuYw1BaWhkr2H2KGSYvnaq8yA==",
   "success": true,
-  "projectFilePath": "C:\\Projects\\Asset Register MP\\MpumalangaAssetManagement\\MAM.DataAccess\\MAM.DataAccess.csproj",
+  "projectFilePath": "C:\\Projects\\Asset Register MP\\backend\\MpumalangaAssetManagement\\MAM.DataAccess\\MAM.DataAccess.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\cmogo\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.0\\microsoft.bcl.asyncinterfaces.1.1.0.nupkg.sha512",
     "C:\\Users\\cmogo\\.nuget\\packages\\microsoft.bcl.hashcode\\1.1.0\\microsoft.bcl.hashcode.1.1.0.nupkg.sha512",
