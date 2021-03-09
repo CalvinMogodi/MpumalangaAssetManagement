@@ -1,0 +1,24 @@
+C:\Users\calvin.mogodi\Documents\Mogz Group\Customers\Mpumalanga Province\Web Applications\MpumalangaAssetManagement\MAM.BusinessLayer\bin\Debug\netstandard2.0\MAM.BusinessLayer.deps.json
+C:\Users\calvin.mogodi\Documents\Mogz Group\Customers\Mpumalanga Province\Web Applications\MpumalangaAssetManagement\MAM.BusinessLayer\bin\Debug\netstandard2.0\MAM.BusinessLayer.dll
+C:\Users\calvin.mogodi\Documents\Mogz Group\Customers\Mpumalanga Province\Web Applications\MpumalangaAssetManagement\MAM.BusinessLayer\bin\Debug\netstandard2.0\MAM.BusinessLayer.pdb
+C:\Users\calvin.mogodi\Documents\Mogz Group\Customers\Mpumalanga Province\Web Applications\MpumalangaAssetManagement\MAM.BusinessLayer\bin\Debug\netstandard2.0\MAM.DataAccess.dll
+C:\Users\calvin.mogodi\Documents\Mogz Group\Customers\Mpumalanga Province\Web Applications\MpumalangaAssetManagement\MAM.BusinessLayer\bin\Debug\netstandard2.0\MAM.DataAccess.pdb
+C:\Users\calvin.mogodi\Documents\Mogz Group\Customers\Mpumalanga Province\Web Applications\MpumalangaAssetManagement\MAM.BusinessLayer\obj\Debug\netstandard2.0\MAM.BusinessLayer.csprojAssemblyReference.cache
+C:\Users\calvin.mogodi\Documents\Mogz Group\Customers\Mpumalanga Province\Web Applications\MpumalangaAssetManagement\MAM.BusinessLayer\obj\Debug\netstandard2.0\MAM.BusinessLayer.AssemblyInfoInputs.cache
+C:\Users\calvin.mogodi\Documents\Mogz Group\Customers\Mpumalanga Province\Web Applications\MpumalangaAssetManagement\MAM.BusinessLayer\obj\Debug\netstandard2.0\MAM.BusinessLayer.AssemblyInfo.cs
+C:\Users\calvin.mogodi\Documents\Mogz Group\Customers\Mpumalanga Province\Web Applications\MpumalangaAssetManagement\MAM.BusinessLayer\obj\Debug\netstandard2.0\MAM.BusinessLayer.csproj.CopyComplete
+C:\Users\calvin.mogodi\Documents\Mogz Group\Customers\Mpumalanga Province\Web Applications\MpumalangaAssetManagement\MAM.BusinessLayer\obj\Debug\netstandard2.0\MAM.BusinessLayer.dll
+C:\Users\calvin.mogodi\Documents\Mogz Group\Customers\Mpumalanga Province\Web Applications\MpumalangaAssetManagement\MAM.BusinessLayer\obj\Debug\netstandard2.0\MAM.BusinessLayer.pdb
+C:\Users\calvin.mogodi\Documents\Mogz Group\Customers\Mpumalanga Province\Web Applications\MpumalangaAssetManagement\MAM.BusinessLayer\obj\Debug\netstandard2.0\MAM.BusinessLayer.csproj.CoreCompileInputs.cache
+C:\Projects\Asset Register MP\MpumalangaAssetManagement\MAM.BusinessLayer\bin\Debug\netstandard2.0\MAM.BusinessLayer.deps.json
+C:\Projects\Asset Register MP\MpumalangaAssetManagement\MAM.BusinessLayer\bin\Debug\netstandard2.0\MAM.BusinessLayer.dll
+C:\Projects\Asset Register MP\MpumalangaAssetManagement\MAM.BusinessLayer\bin\Debug\netstandard2.0\MAM.BusinessLayer.pdb
+C:\Projects\Asset Register MP\MpumalangaAssetManagement\MAM.BusinessLayer\bin\Debug\netstandard2.0\MAM.DataAccess.dll
+C:\Projects\Asset Register MP\MpumalangaAssetManagement\MAM.BusinessLayer\bin\Debug\netstandard2.0\MAM.DataAccess.pdb
+C:\Projects\Asset Register MP\MpumalangaAssetManagement\MAM.BusinessLayer\obj\Debug\netstandard2.0\MAM.BusinessLayer.csprojAssemblyReference.cache
+C:\Projects\Asset Register MP\MpumalangaAssetManagement\MAM.BusinessLayer\obj\Debug\netstandard2.0\MAM.BusinessLayer.AssemblyInfoInputs.cache
+C:\Projects\Asset Register MP\MpumalangaAssetManagement\MAM.BusinessLayer\obj\Debug\netstandard2.0\MAM.BusinessLayer.AssemblyInfo.cs
+C:\Projects\Asset Register MP\MpumalangaAssetManagement\MAM.BusinessLayer\obj\Debug\netstandard2.0\MAM.BusinessLayer.csproj.CoreCompileInputs.cache
+C:\Projects\Asset Register MP\MpumalangaAssetManagement\MAM.BusinessLayer\obj\Debug\netstandard2.0\MAM.BusinessLayer.csproj.CopyComplete
+C:\Projects\Asset Register MP\MpumalangaAssetManagement\MAM.BusinessLayer\obj\Debug\netstandard2.0\MAM.BusinessLayer.dll
+C:\Projects\Asset Register MP\MpumalangaAssetManagement\MAM.BusinessLayer\obj\Debug\netstandard2.0\MAM.BusinessLayer.pdb
