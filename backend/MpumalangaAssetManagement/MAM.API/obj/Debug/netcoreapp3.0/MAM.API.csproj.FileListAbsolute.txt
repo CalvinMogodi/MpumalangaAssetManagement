@@ -229,3 +229,8 @@ C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.API\obj\Debu
 C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.API\obj\Debug\netcoreapp3.0\MAM.API.dll
 C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.API\obj\Debug\netcoreapp3.0\MAM.API.pdb
 C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.API\obj\Debug\netcoreapp3.0\MAM.API.genruntimeconfig.cache
+C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.API\bin\Debug\netcoreapp3.0\Microsoft.OpenApi.dll
+C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.API\bin\Debug\netcoreapp3.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.API\bin\Debug\netcoreapp3.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.API\bin\Debug\netcoreapp3.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.API\obj\Debug\netcoreapp3.0\MAM.API.MvcApplicationPartsAssemblyInfo.cs

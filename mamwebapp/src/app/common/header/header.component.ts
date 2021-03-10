@@ -76,7 +76,6 @@ export class HeaderComponent implements OnInit {
     if (this.changePasswordForm.invalid || (this.f.newpassword.value !== this.f.confirmpassword.value)) {
       return;
     }
-    return;
     this.loading = true;
     this.userService.changePassword(this.currentUser.username, this.f.newpassword.value, this.f.oldpassword.value).pipe()
       .subscribe(
