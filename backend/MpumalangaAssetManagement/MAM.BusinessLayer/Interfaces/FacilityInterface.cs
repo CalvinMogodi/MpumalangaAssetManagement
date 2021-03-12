@@ -13,5 +13,6 @@ namespace MAM.BusinessLayer.Interfaces
         List<FacilitySummaryChart> GetFacilitySummaries();
         List<MapCoordinate> GetMapCoordinates();
         Facility getFacilityById(int id, FacilityTypes facilityType);
+        Facility SaveFacility(Facility facility);
     }
 }

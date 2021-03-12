@@ -17,7 +17,7 @@ namespace MAM.API.Services
         List<MapCoordinate> GetMapCoordinates();
         List<Facility> GetAllFacilities();
         Facility GetFacilityById(int id, FacilityTypes facilityType);
-        Facility CreateFacility(Facility facility);
+        Facility SaveFacility(Facility facility);
         bool UpdateFacility(Facility facility);
         bool DeleteFacility(Facility facility);
     }
@@ -77,11 +77,11 @@ namespace MAM.API.Services
             }
         }
 
-        public Facility CreateFacility(Facility facility)
+        public Facility SaveFacility(Facility facility)
         {
             using (var _facilityRepository = new FacilityRepository(_appSettings))
             {
-                return _facilityRepository.CreateFacility(facility);
+                return _facilityRepository.SaveFacility(facility);
             }
         }
 

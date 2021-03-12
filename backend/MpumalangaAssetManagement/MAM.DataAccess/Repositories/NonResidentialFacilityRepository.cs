@@ -9,7 +9,7 @@ using System.Text;
 
 namespace MAM.DataAccess.Repositories
 {
-    public class NonResidentialFacilityRepository : NonResidentialFacilityInterface, IDisposable
+    public class NonResidentialFacilityRepository : IDisposable
     {
         // Flag: Has Dispose already been called?
         bool disposed = false;

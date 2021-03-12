@@ -9,7 +9,7 @@ using System.Text;
 
 namespace MAM.DataAccess.Repositories
 {
-    public class LeaseStatusRepository : LeaseStatusInterface, IDisposable
+    public class LeaseStatusRepository : IDisposable
     {
         // Flag: Has Dispose already been called?
         bool disposed = false;
@@ -23,40 +23,7 @@ namespace MAM.DataAccess.Repositories
         _connectionString = connectionString;
     }
 
-    public int AddLeaseStatus(LeaseStatus leaseStatus)
-    {
-        using (var db = new DataContext(_connectionString))
-        {
-            db.LeaseStatuses.Add(leaseStatus);
-            db.SaveChanges();
-            return leaseStatus.Id;
-        }
-    }
-
-    public LeaseStatus GetLeaseStatusById(int id)
-    {
-        using (var db = new DataContext(_connectionString))
-        {
-            return db.LeaseStatuses.FirstOrDefault(b => b.Id == id);
-        }
-    }
-
-    public List<LeaseStatus> GetLeaseStatuses()
-    {
-        using (var db = new DataContext(_connectionString))
-        {
-            return db.LeaseStatuses.Select(l => l).ToList();
-        }
-    }
-
-    public void UpdateLeaseStatus(LeaseStatus leaseStatus)
-    {
-        using (var db = new DataContext(_connectionString))
-        {
-            db.LeaseStatuses.Update(leaseStatus);
-            db.SaveChanges();
-        }
-    }
+    
 
     public void Dispose()
     {

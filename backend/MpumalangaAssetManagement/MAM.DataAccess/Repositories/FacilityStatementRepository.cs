@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 
 namespace MAM.DataAccess.Repositories
 {
-    public class FacilityStatementRepository : FacilityStatementInterface, IDisposable
+    public class FacilityStatementRepository : IFacilityStatement, IDisposable
     {
         // Flag: Has Dispose already been called?
         bool disposed = false;

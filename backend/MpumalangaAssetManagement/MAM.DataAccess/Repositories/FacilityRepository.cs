@@ -1,0 +1,86 @@
+﻿using MAM.DataAccess.Interfaces;
+using MAM.DataAccess.Tables;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Win32.SafeHandles;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.InteropServices;
+using System.Text;
+
+namespace MAM.DataAccess.Repositories
+{
+    public class FacilityRepository : IFacility, IDisposable
+    {
+        // Flag: Has Dispose already been called?
+        bool disposed = false;
+        // Instantiate a SafeHandle instance.
+        SafeHandle handle = new SafeFileHandle(IntPtr.Zero, true);
+
+        private string _connectionString { get; set; }
+
+        public FacilityRepository(string connectionString)
+        {
+            _connectionString = connectionString;
+        }
+
+        public int AddFacility(Facility facility)
+        {
+            using (var db = new DataContext(_connectionString))
+            {
+                db.Facilities.Add(facility);
+                db.SaveChanges();
+                return facility.Id;
+            }
+        }
+
+        public void UpdateFacility(Facility facility)
+        {
+            using (var db = new DataContext(_connectionString))
+            {
+                db.Facilities.Update(facility);
+                db.SaveChanges();
+            }
+        }
+
+        public List<Facility> GetFacilities()
+        {
+            using (var db = new DataContext(_connectionString))
+            {
+                return db.Facilities.Where(f => f.Status != "Deleted").Include(a => a.Land).Include(a => a.Improvements).Include(a => a.Finance).ToList();
+            }            
+        }
+
+        public Facility GetFacilityById(int id)
+        {
+            using (var db = new DataContext(_connectionString))
+            {
+                return db.Facilities.Where(f => f.Status != "Deleted" && f.Id == id).Include(a => a.Land).Include(a => a.Improvements).Include(a => a.Finance).FirstOrDefault();
+            }
+        }
+
+        public void Dispose()
+        {
+            // Dispose of unmanaged resources.
+            Dispose(true);
+            // Suppress finalization.
+            GC.SuppressFinalize(this);
+        }
+
+        // Protected implementation of Dispose pattern.
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposed)
+                return;
+
+            if (disposing)
+            {
+                handle.Dispose();
+                // Free any other managed objects here.
+                //
+            }
+
+            disposed = true;
+        }
+    }
+}

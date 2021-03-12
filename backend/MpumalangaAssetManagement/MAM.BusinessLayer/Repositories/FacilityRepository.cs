@@ -294,77 +294,32 @@ namespace MAM.BusinessLayer.Repositories
         {
             List<Facility> facilities = new List<Facility>();
             Facility facility = new Facility();
-            using (var dataAccess = new DataAccess.Repositories.DwellingFacilityRepository(appSettings.ConnectionString))
+            using (var dataAccess = new DataAccess.Repositories.FacilityRepository(appSettings.ConnectionString))
             {
-                var _facilities = facility.ConvertDwellingToFacility(dataAccess.GetDwellingFacilities());
-                facilities.AddRange(_facilities);
-            }
-
-            using (var dataAccess = new DataAccess.Repositories.LandFacilityRepository(appSettings.ConnectionString))
-            {
-                var _facilities = facility.ConvertLandToFacility(dataAccess.GetLandFacilities());
-                facilities.AddRange(_facilities);
-            }
-
-            using (var dataAccess = new DataAccess.Repositories.NonResidentialFacilityRepository(appSettings.ConnectionString))
-            {
-                var _facilities = facility.ConvertNonResidentialToFacility(dataAccess.GetNonResidentialFacilities());
+                var _facilities = facility.ConvertToFacilities(dataAccess.GetFacilities());
                 facilities.AddRange(_facilities);
             }
             return facilities;
-        }
-
-        
+        }        
 
         public Facility getFacilityById(int id, FacilityTypes facilityType)
         {
             Facility facility = new Facility();
-            switch ((int)facilityType)
+            
+            using (var dataAccess = new DataAccess.Repositories.FacilityRepository(appSettings.ConnectionString))
             {
-                case 1:
-                    using (var dataAccess = new DataAccess.Repositories.DwellingFacilityRepository(appSettings.ConnectionString))
-                    {
-                        facility = facility.ConvertDBFacilityToFacility(dataAccess.GetDwellingFacilityById(id), null, null);
-                        break;
-                    }
-                case 2:
-                    using (var dataAccess = new DataAccess.Repositories.LandFacilityRepository(appSettings.ConnectionString))
-                    {
-                        facility = facility.ConvertDBFacilityToFacility(null, dataAccess.GetLandFacilityById(id),  null);
-                        break;
-                    }
-                case 3:
-                    using (var dataAccess = new DataAccess.Repositories.NonResidentialFacilityRepository(appSettings.ConnectionString))
-                    {
-                        facility = facility.ConvertDBFacilityToFacility(null, null, dataAccess.GetNonResidentialFacilityById(id));
-                        break;
-                    }
+                facility = facility.ConvertToFacility(dataAccess.GetFacilityById(id));
+                
             }            
+                       
             return facility;
         }
 
         public Facility CreateFacility(Facility facility)
         {
-            switch ((int)facility.FacilityTypes)
+            using (var dataAccess = new DataAccess.Repositories.FacilityRepository(appSettings.ConnectionString))
             {
-                case 1:
-                    using (var dataAccess = new DataAccess.Repositories.DwellingFacilityRepository(appSettings.ConnectionString))
-                    {
-                        facility.Id = dataAccess.AddDwellingFacility(facility.ConvertToDwellingFacility(facility));                       
-                        break;
-                    }
-                case 2:
-                    using (var dataAccess = new DataAccess.Repositories.LandFacilityRepository(appSettings.ConnectionString))
-                    {
-                        facility.Id = dataAccess.AddLandFacility(facility.ConvertToLandFacility(facility));
-                        break;
-                    }
-                case 3:
-                    using (var dataAccess = new DataAccess.Repositories.NonResidentialFacilityRepository(appSettings.ConnectionString))
-                    {
-                        facility.Id = dataAccess.AddNonResidentialFacilities(facility.ConvertToNonResidentialFacility(facility));
-                        break;
-                    }
+                facility.Id = dataAccess.AddFacility(facility.ConvertToFacility(facility));              
             }
             return facility;
         }
@@ -372,26 +327,9 @@ namespace MAM.BusinessLayer.Repositories
         public bool UpdateFacility(Facility facility)
         {
             bool isUpdated = false;
-            switch ((int)facility.FacilityTypes)
+            using (var dataAccess = new DataAccess.Repositories.FacilityRepository(appSettings.ConnectionString))
             {
-                case 1:
-                    using (var dataAccess = new DataAccess.Repositories.DwellingFacilityRepository(appSettings.ConnectionString))
-                    {
-                        facility.Id = dataAccess.AddDwellingFacility(facility.ConvertToDwellingFacility(facility));
-                        break;
-                    }
-                case 2:
-                    using (var dataAccess = new DataAccess.Repositories.LandFacilityRepository(appSettings.ConnectionString))
-                    {
-                        facility.Id = dataAccess.AddLandFacility(facility.ConvertToLandFacility(facility));
-                        break;
-                    }
-                case 3:
-                    using (var dataAccess = new DataAccess.Repositories.NonResidentialFacilityRepository(appSettings.ConnectionString))
-                    {
-                        facility.Id = dataAccess.AddNonResidentialFacilities(facility.ConvertToNonResidentialFacility(facility));
-                        break;
-                    }
+                facility.Id = dataAccess.AddFacility(facility.ConvertToFacility(facility));               
             }
             return isUpdated = true;
         }
@@ -400,62 +338,78 @@ namespace MAM.BusinessLayer.Repositories
         {
             bool isDeleted = false;
             facility.Status = "Deleted";
-            switch (facility.FacilityType)
+            using (var dataAccess = new DataAccess.Repositories.FacilityRepository(appSettings.ConnectionString))
             {
-                case "Dwelling":
-                    using (var dataAccess = new DataAccess.Repositories.DwellingFacilityRepository(appSettings.ConnectionString))
-                    {                        
-                        dataAccess.UpdateDwellingFacility(facility.ConvertToDwellingFacility(facility));
-                        break;
-                    }
-                case "Land":
-                    using (var dataAccess = new DataAccess.Repositories.LandFacilityRepository(appSettings.ConnectionString))
-                    {
-                        dataAccess.UpdateLandFacility(facility.ConvertToLandFacility(facility));
-                        break;
-                    }
-                case "NonResidential":
-                    using (var dataAccess = new DataAccess.Repositories.NonResidentialFacilityRepository(appSettings.ConnectionString))
-                    {
-                        dataAccess.UpdateNonResidentialFacilities(facility.ConvertToNonResidentialFacility(facility));
-                        break;
-                    }
+                dataAccess.UpdateFacility(facility.ConvertToFacility(facility));
+                isDeleted = true;
             }
-            return isDeleted = true;
+            return isDeleted;
         }
 
-        public Facility SaveFacilityLand(Facility facility) {
+        public Facility SaveFacility(Facility facility) {
+            facility.Land = SaveLand(facility.Land);
+            facility.Finance = SaveFinance(facility.Finance);
+            facility.FinanceId = facility.Finance.Id;
+            facility.LandId = facility.Land.Id;
 
-            using (var dataAccess = new DataAccess.Repositories.PropertyDescriptionRepository(appSettings.ConnectionString))
+            using (var dataAccess = new DataAccess.Repositories.FacilityRepository(appSettings.ConnectionString))
             {
-                facility.Land.PropertyDescription.Id = dataAccess.AddPropertyDescription(facility.Land.PropertyDescription.ConvertPropertyDescription(facility.Land.PropertyDescription));
-                facility.Land.PropertyDescriptionId = facility.Land.PropertyDescription.Id;
+                facility.Id = dataAccess.AddFacility(facility.ConvertToFacility(facility));
             }
 
-            using (var dataAccess = new DataAccess.Repositories.GeographicalLocationRepository(appSettings.ConnectionString))
-            {
-                facility.Land.GeographicalLocation.Id = dataAccess.AddGeographicalLocation(facility.Land.GeographicalLocation.ConvertGeographicalLocation(facility.Land.GeographicalLocation));
-                facility.Land.GeographicalLocationId = facility.Land.GeographicalLocation.Id;
-            }
+            facility.Improvements = SaveImprovement(facility.Improvements,facility.Id);
+            return facility;
+        }
 
-            using (var dataAccess = new DataAccess.Repositories.LeaseStatusRepository(appSettings.ConnectionString))
-            {
-                facility.Land.LeaseStatus.Id = dataAccess.AddLeaseStatus(facility.Land.LeaseStatus.ConvertLeaseStatus(facility.Land.LeaseStatus));
-                facility.Land.LeaseStatusId = facility.Land.LeaseStatus.Id;
-            }
-
-            using (var dataAccess = new DataAccess.Repositories.LandUseManagementDetailRepository(appSettings.ConnectionString))
-            {
-                facility.Land.LandUseManagementDetail.Id = dataAccess.AddLandUseManagementDetail(facility.Land.LandUseManagementDetail.ConvertLandUseManagementDetail(facility.Land.LandUseManagementDetail));
-                facility.Land.LandUseManagementDetailId = facility.Land.LandUseManagementDetail.Id;
-            }
+        public Land SaveLand(Land land) {
 
             using (var dataAccess = new DataAccess.Repositories.LandRepository(appSettings.ConnectionString))
             {
-                facility.Land.Id = dataAccess.AddLand(facility.Land.ConvertLand(facility.Land));
+                land.PropertyDescription.Id = dataAccess.AddPropertyDescription(land.PropertyDescription.ConvertPropertyDescription(land.PropertyDescription));
+                land.PropertyDescriptionId = land.PropertyDescription.Id;
+           
+                land.GeographicalLocation.Id = dataAccess.AddGeographicalLocation(land.GeographicalLocation.ConvertGeographicalLocation(land.GeographicalLocation));
+                land.GeographicalLocationId = land.GeographicalLocation.Id;
+           
+                land.LeaseStatus.Id = dataAccess.AddLeaseStatus(land.LeaseStatus.ConvertLeaseStatus(land.LeaseStatus));
+                land.LeaseStatusId = land.LeaseStatus.Id;
+          
+                land.LandUseManagementDetail.Id = dataAccess.AddLandUseManagementDetail(land.LandUseManagementDetail.ConvertLandUseManagementDetail(land.LandUseManagementDetail));
+                land.LandUseManagementDetailId = land.LandUseManagementDetail.Id;
+            
+                land.Id = dataAccess.AddLand(land.ConvertLand(land));
             }
+            return land;
+        }
 
-            return facility;
+        public Finance SaveFinance(Finance finance)
+        {
+
+            using (var dataAccess = new DataAccess.Repositories.FinanceRepository(appSettings.ConnectionString))
+            {
+                finance.SecondaryInformationNote.Id = dataAccess.AddSecondaryInformationNote(finance.SecondaryInformationNote.ConvertToSecondaryInformationNote(finance.SecondaryInformationNote));
+                finance.SecondaryInformationNoteId = finance.SecondaryInformationNote.Id;
+
+                finance.Valuation.Id = dataAccess.AddValuation(finance.Valuation.ConvertToValuation(finance.Valuation));
+                finance.ValuationId = finance.Valuation.Id;
+
+                finance.Id = dataAccess.AddFinance(finance.ConvertToFinance(finance));
+            }
+            return finance;
+        }
+
+        public List<Improvement> SaveImprovement(List<Improvement> improvements, int facilityId)
+        {
+            Improvement improvement = new Improvement();
+            using (var dataAccess = new DataAccess.Repositories.ImprovementRepository(appSettings.ConnectionString))
+            {
+                foreach (var item in improvements)
+                {
+                    item.FacilityId = facilityId;
+                    item.Id = dataAccess.AddImprovement(improvement.ConvertToImprovement(item));
+                }
+            }
+            return improvements;
         }
 
         public void Dispose()

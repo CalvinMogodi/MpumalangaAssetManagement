@@ -7,7 +7,7 @@ namespace MAM.BusinessLayer.Models
     public class Land
     {
         public int Id { get; set; }
-        public string DeedOffice { get; set; }
+        public string DeedsOffice { get; set; }
         public string AssetClass { get; set; }
         public string AssetType { get; set; }
         public int GeographicalLocationId { get; set; }
@@ -22,7 +22,7 @@ namespace MAM.BusinessLayer.Models
         public Land ConvertLand(DataAccess.Tables.Land land) {
             return new Land {
                 Id = land.Id,
-                DeedOffice = land.DeedOffice,
+                DeedsOffice = land.DeedsOffice,
                 AssetClass = land.AssetClass,
                 AssetType = land.AssetType,
                 GeographicalLocationId = land.GeographicalLocationId,
@@ -37,7 +37,7 @@ namespace MAM.BusinessLayer.Models
             return new DataAccess.Tables.Land
             {
                 Id = land.Id,
-                DeedOffice = land.DeedOffice,
+                DeedsOffice = land.DeedsOffice,
                 AssetClass = land.AssetClass,
                 AssetType = land.AssetType,
                 GeographicalLocationId = land.GeographicalLocationId,

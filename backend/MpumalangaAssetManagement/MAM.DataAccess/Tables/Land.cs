@@ -7,7 +7,7 @@ namespace MAM.DataAccess.Tables
     public class Land
     {  
         public int Id { get; set; }
-        public string DeedOffice { get; set; }
+        public string DeedsOffice { get; set; }
         public string AssetClass { get; set; }
         public string AssetType { get; set; }
         public int GeographicalLocationId { get; set; }

@@ -160,28 +160,12 @@ namespace MAM.API.Controllers
         }
 
         [HttpPost]
-        [Route("createFacility")]
-        public IActionResult CreateFacility(Facility facility)
+        [Route("saveFacility/{step}")]
+        public IActionResult SaveFacility(int step, Facility facility)
         {
             try
             {
-                facility = _facilityService.CreateFacility(facility);
-                return Ok(facility);
-            }
-            catch (Exception ex)
-            {
-                log.Info("Error");
-                throw ex;
-            }
-        }
-
-        [HttpPost]
-        [Route("saveFacility")]
-        public IActionResult SaveFacility(Facility facility)
-        {
-            try
-            {
-                facility = _facilityService.CreateFacility(facility);
+                facility = _facilityService.SaveFacility(facility);
                 return Ok(facility);
             }
             catch (Exception ex)

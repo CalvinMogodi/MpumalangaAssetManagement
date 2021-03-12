@@ -10,3 +10,15 @@ C:\Projects\Asset Register MP\MpumalangaAssetManagement\MAM.BusinessLayer\obj\Re
 C:\Projects\Asset Register MP\MpumalangaAssetManagement\MAM.BusinessLayer\obj\Release\netstandard2.0\MAM.BusinessLayer.csproj.CopyComplete
 C:\Projects\Asset Register MP\MpumalangaAssetManagement\MAM.BusinessLayer\obj\Release\netstandard2.0\MAM.BusinessLayer.dll
 C:\Projects\Asset Register MP\MpumalangaAssetManagement\MAM.BusinessLayer\obj\Release\netstandard2.0\MAM.BusinessLayer.pdb
+C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.BusinessLayer\bin\Release\netstandard2.0\MAM.BusinessLayer.deps.json
+C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.BusinessLayer\bin\Release\netstandard2.0\MAM.BusinessLayer.dll
+C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.BusinessLayer\bin\Release\netstandard2.0\MAM.BusinessLayer.pdb
+C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.BusinessLayer\bin\Release\netstandard2.0\MAM.DataAccess.dll
+C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.BusinessLayer\bin\Release\netstandard2.0\MAM.DataAccess.pdb
+C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.BusinessLayer\obj\Release\netstandard2.0\MAM.BusinessLayer.csprojAssemblyReference.cache
+C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.BusinessLayer\obj\Release\netstandard2.0\MAM.BusinessLayer.AssemblyInfoInputs.cache
+C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.BusinessLayer\obj\Release\netstandard2.0\MAM.BusinessLayer.AssemblyInfo.cs
+C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.BusinessLayer\obj\Release\netstandard2.0\MAM.BusinessLayer.csproj.CoreCompileInputs.cache
+C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.BusinessLayer\obj\Release\netstandard2.0\MAM.BusinessLayer.csproj.CopyComplete
+C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.BusinessLayer\obj\Release\netstandard2.0\MAM.BusinessLayer.dll
+C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.BusinessLayer\obj\Release\netstandard2.0\MAM.BusinessLayer.pdb

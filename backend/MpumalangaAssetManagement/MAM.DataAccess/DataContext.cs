@@ -17,6 +17,7 @@ namespace MAM.DataAccess
 
         public DbSet<User> Users { get; set; }
         public DbSet<Role> Roles { get; set; }
+        public DbSet<Facility> Facilities { get; set; }
         public DbSet<LandFacility> LandFacilities { get; set; }
         public DbSet<NonResidentialFacility> NonResidentialFacilities { get; set; }
         public DbSet<DwellingFacility> DwellingFacilities { get; set; }
@@ -26,7 +27,10 @@ namespace MAM.DataAccess
         public DbSet<PropertyDescription> PropertyDescriptions { get; set; }
         public DbSet<LandUseManagementDetail> LandUseManagementDetails { get; set; }
         public DbSet<LeaseStatus> LeaseStatuses { get; set; }
-
+        public DbSet<Improvement> Improvements { get; set; }
+        public DbSet<Finance> Finances { get; set; }
+        public DbSet<SecondaryInformationNote> SecondaryInformationNotes { get; set; }
+        public DbSet<Valuation> Valuations { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(_connectionString);

@@ -9,7 +9,7 @@ using System.Text;
 
 namespace MAM.DataAccess.Repositories
 {
-    public class UserRepository : UserInterface , IDisposable
+    public class UserRepository : IUser , IDisposable
     {
         // Flag: Has Dispose already been called?
         bool disposed = false;
