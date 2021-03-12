@@ -1,45 +1,35 @@
-import { Component, OnInit, Input, ElementRef  } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MenuItem, MessageService } from 'primeng/api';
 import { Subscription } from 'rxjs';
 import { first } from 'rxjs/internal/operators/first';
 import { Facility } from 'src/app/models/facility.model';
 import { FacilityService } from 'src/app/services/facility/facility.service';
+import { ConfirmationService } from 'primeng/api';
 
 @Component({
   selector: 'app-addassetregister',
   templateUrl: './addassetregister.component.html',
-  styleUrls: ['./addassetregister.component.css']
+  styleUrls: ['./addassetregister.component.css'],
+  providers: [ConfirmationService]
 })
 
 export class AddassetregisterComponent implements OnInit {
-  
-  @Input() selectedAsset:any;
+  @Output() newAsset = new EventEmitter<any>();
+  @Input() selectedAsset: any;
   steps: MenuItem[];
-  landisSubmitted: boolean = false;
+  improvements = [];
+  landIsSubmitted: boolean = false;
+  improvementIsSubmitted: boolean = false;
+  financeIsSubmitted: boolean = false;
+  isSubmitted: boolean = false;
+  selectedImprovement: any;
   generalInformation: {
     deedsOffice: '',
     class: '',
     type: ''
   };
-  error = '';  
-  newCaptured = 0;
-  awaitingAppoval = 0;
-  awaitingVerification = 0;
-  items = [
-    { label: 'Dashboard', url: 'dashboard' },
-    { label: 'Asset Register' }];
-  cols = [
-    { field: 'fileReference', header: 'File Reference' },
-    { field: 'clientCode', header: 'Property Code' },
-    { field: 'status', header: 'Status' }
-  ];
-  improvementCols = [
-    { field: 'buildingName', header: 'Building Name' },
-    { field: 'type', header: 'Type' },
-    { field: 'size', header: 'Size' }
-  ];
- 
+  error = '';
   subscription: Subscription;
   activeItem: MenuItem;
   loading = true;
@@ -56,7 +46,7 @@ export class AddassetregisterComponent implements OnInit {
   classes: any[];
   regions: any[];
   types: any[];
-
+  buttonItems: MenuItem[];
   submitted = false;
   localAuthorities: any[];
   registrationDivisions: any[];
@@ -75,35 +65,54 @@ export class AddassetregisterComponent implements OnInit {
   province: { name: 'Mpumalanga', code: 'MP', factor: 6 };
   registrationDivision: { name: 'Mpumalanga', code: 'M', factor: 4 };
   savingLand: boolean = false;
- 
+  improvementCols = [
+    { field: 'buildingName', header: 'Building Name' },
+    { field: 'type', header: 'Type' },
+    { field: 'size', header: 'Size' },
+    { field: 'potentualUse', header: 'Potentual Use' },
+    { field: 'usableArea', header: 'Usable Area' },
+    { field: 'conditionRating', header: 'Condition Rating' }
+  ];
 
-  facility: Facility
-  
+  facility: any;
+
   financial: {};
   improvement: {}
 
-  constructor(public facilityService: FacilityService, private formBuilder: FormBuilder, private messageService: MessageService) { }
+  constructor(private confirmationService: ConfirmationService, public facilityService: FacilityService, private formBuilder: FormBuilder, private messageService: MessageService) { }
 
   ngOnInit() {
     this.buildForm();
-    this.steps = [
-    { label: 'Land', icon: 'pi pi-fw pi-globe' },
-    { label: 'Financials', icon: 'pi pi-fw pi-money-bill' },
-    { label: 'Impronements', icon: 'pi pi-fw pi-home' }
-  ];
-  this.activeItem = this.steps[0];
-
-    if(this.selectedAsset.facilityId != undefined){
+    if (this.selectedAsset.facilityId != undefined) {
       this.mode = this.selectedAsset.mode;
       this.facilityService.getFacilityById(this.selectedAsset.facilityId, this.selectedAsset.facilityType).pipe(first()).subscribe(facility => {
         this.loading = false;
         this.facility = facility;
-        this.assginfacility();       
-    });
-    }else{
+        this.initFacility();
+      });
+    } else {
       this.mode = this.selectedAsset.mode;
       this.loading = false;
-    } 
+    }
+
+    this.facility = {
+      id: 0,
+      name: '',
+      fileReference: '',
+      facilityType: '',
+      clientCode: '',
+      vestingInformation: '',
+      comments: '',
+      userId: 0,
+      status: "1",
+      createdBy: '',
+      createdDate: new Date(),
+      modifiedBy: '',
+      modifiedDate: new Date(),   
+      land: {},
+      financial: {},  
+      improvements: []
+    }
   }
 
   get l() { return this.landForm.controls; }
@@ -167,103 +176,164 @@ export class AddassetregisterComponent implements OnInit {
   }
 
   onFinancialFormSubmit() {
-
+    this.financeIsSubmitted = true;
+    if (this.financialForm.valid) {
+      this.assignFacility(false, false, true);
+    }
   }
 
   onImprovementFormSubmit() {
-
+    this.improvementIsSubmitted = true;
+    if (this.landForm.valid) {
+      this.assignFacility(false, true, false);
+    }
   }
 
   onLandFormSubmit() {
-    this.landisSubmitted = true;
-    if(this.landForm.valid){
-      this.facility.land = {
-        deedOffice: this.landForm.controls["deedsOffice"].value.name,
-        assetType: this.landForm.controls["assetType"].value,
-        assetClass: this.landForm.controls["assetClass"].value,
-        geographicalLocation: {
-          province: this.landForm.controls["province"].value.name,
-          town: this.landForm.controls["town"].value,
-          suburb: this.landForm.controls["suburb"].value,
-          streetName: this.landForm.controls["streetName"].value,
-          streetNumber: this.landForm.controls["streetNumber"].value,
-          districtMunicipality: this.landForm.controls["districtMunicipality"].value,
-          region: this.landForm.controls["region"].value,
-          localAuthority: this.landForm.controls["localAuthority"].value,
-          latitude: this.landForm.controls["latitude"].value,
-          longitude: this.landForm.controls["longitude"].value,
-          magisterialDistrict: this.landForm.controls["magisterialDistrict"].value,
-        },
-        propertyDescription: {
-          registrationDivision: this.landForm.controls["registrationDivision"].value,
-          townshipName: this.landForm.controls["townshipName"].value,
-          landParcel: this.landForm.controls["landParcel"].value,
-          landPortion: this.landForm.controls["landPortion"].value,
-          oldDescription: this.landForm.controls["oldDescription"].value,
-          landRemainder: this.landForm.controls["landRemainder"].value,
-          farmName: this.landForm.controls["farmName"].value,
-          SGDiagramNumber: this.landForm.controls["SGDiagramNumber"].value,
-          extent: this.landForm.controls["extent"].value,
-          LPICode: this.landForm.controls["LPICode"].value,
-          acquired: this.landForm.controls["acquired"].value,
-          acquiredOther: this.landForm.controls["acquiredOther"].value,
-        },
-        landUseManagementDetail: {
-          titleDeedNumber: this.landForm.controls["titleDeedNumber"].value,
-          registrationDate: this.landForm.controls["registrationDate"].value,
-          registeredOwner: this.landForm.controls["registeredOwner"].value,
-          vestingDate: this.landForm.controls["vestingDate"].value,
-          conditionsOfTitle: this.landForm.controls["conditionsOfTitle"].value,
-          ownershipCategory: this.landForm.controls["ownershipCategory"].value,
-          stateOwnedPercentage: this.landForm.controls["stateOwnedPercentage"].value,
-          landUse: this.landForm.controls["landUse"].value,
-          zoning: this.landForm.controls["zoning"].value,
-          userDepartment: this.landForm.controls["userDepartment"].value,
-          facilityName: this.landForm.controls["facilityName"].value, 
-          incomeLeaseStatus: this.landForm.controls["incomeLeaseStatus"].value,
-        },
-        leaseStatus: {
-          natureOfLease: this.landForm.controls["natureOfLease"].value,
-          IDNumberCompanyRegistrationNumber: this.landForm.controls["IDNumberCompanyRegistrationNumber"].value,
-          POBox: this.landForm.controls["POBox"].value,
-          contactNumber: this.landForm.controls["contactNumber"].value,
-          capacityofContactPerson: this.landForm.controls["capacityofContactPerson"].value,
-          contactPerson: this.landForm.controls["contactPerson"].value,
-          postalCode: this.landForm.controls["postalCode"].value,
-          leaseStatusTown: this.landForm.controls["leaseStatusTown"].value,
-          rentalAmount: this.landForm.controls["rentalAmount"].value,
-          terminationDate: this.landForm.controls["terminationDate"].value,
-          startingDate: this.landForm.controls["startingDate"].value,
-          occupationDate: this.landForm.controls["occupationDate"].value,
-          escalation: this.landForm.controls["escalation"].value,
-          vat: this.landForm.controls["vat"].value,
-          leaseNumber: this.landForm.controls["leaseNumber"].value,
-          otherCharges: this.landForm.controls["otherCharges"].value,
-        }
-      };
-
+    this.landIsSubmitted = true;
+    if (this.landForm.valid) {
+      this.assignFacility(true, false, false);
       this.facilityService.saveFacility(this.facility, 0).pipe(first()).subscribe(isSaved => {
-        if(isSaved){
+        if (isSaved) {
           this.savingLand = false;
-          this.messageService.add({severity:'warn', summary:'Deleted', detail:'Asset is deleted successful.'});
-         
+          this.messageService.add({ severity: 'warn', summary: 'Deleted', detail: 'Asset is deleted successful.' });
         }
-        else{
+        else {
           this.savingLand = false;
-          this.messageService.add({severity:'error', summary:'Error', detail:'An error occurred while delete asset.'});
-        }     
+          this.messageService.add({ severity: 'error', summary: 'Error', detail: 'An error occurred while delete asset.' });
+        }
       });
 
     }
   }
 
-  onRowEditCancel(row, e) {
+  onSubmit() {
+    this.errorMsg = '';
+    this.isSubmitted = true;
+    if (this.landForm.invalid && this.improvementForm.invalid && this.financialForm.invalid) {
+      this.errorMsg = "Please capture all required information"
+      return;
+    }
+    this.assignFacility(true, true, true);
+    this.facilityService.saveFacility(this.facility, 2).pipe(first()).subscribe(isSaved => {
+      if (isSaved) {
+        this.newAsset.emit({ mode: "Add", data: this.facility, response: "isUpdatedSuccessful" });
+        this.savingLand = false;
+        this.messageService.add({ severity: 'warn', summary: 'Deleted', detail: 'Asset is added successful.' });
+      }
+      else {
+        this.savingLand = false;
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'An error occurred while adding an asset.' });
+      }
+    });
 
   }
 
-  onSubmit() {
-    this.showToast('Reset Password', 'Asset has been added successful');
-    this.showDialog = false; // closes/hides the dialog box
+  assignFacility(isLandSave: boolean, isFinancialSave: boolean, isImprovementSave: boolean) {
+    if (isLandSave) {
+      if (this.facility.land != undefined && this.facility.land != null) {
+        this.facility.land = {
+          id: 0,
+          deedOffice: this.landForm.controls["deedsOffice"].value.name,
+          type: this.landForm.controls["type"].value,
+          class: this.landForm.controls["class"].value,
+          geographicalLocation: {
+            id: 0,
+            province: this.landForm.controls["province"].value.name,
+            town: this.landForm.controls["town"].value,
+            suburb: this.landForm.controls["suburb"].value,
+            streetName: this.landForm.controls["streetName"].value,
+            streetNumber: this.landForm.controls["streetNumber"].value,
+            districtMunicipality: this.landForm.controls["districtMunicipality"].value,
+            region: this.landForm.controls["region"].value,
+            localAuthority: this.landForm.controls["localAuthority"].value,
+            latitude: this.landForm.controls["latitude"].value,
+            longitude: this.landForm.controls["longitude"].value,
+            magisterialDistrict: this.landForm.controls["magisterialDistrict"].value,
+          },
+          propertyDescription: {
+            id: 0,
+            registrationDivision: this.landForm.controls["registrationDivision"].value,
+            townshipName: this.landForm.controls["townshipName"].value,
+            landParcel: this.landForm.controls["landParcel"].value,
+            landPortion: this.landForm.controls["landPortion"].value,
+            oldDescription: this.landForm.controls["oldDescription"].value,
+            landRemainder: this.landForm.controls["landRemainder"].value,
+            farmName: this.landForm.controls["farmName"].value,
+            SGDiagramNumber: this.landForm.controls["SGDiagramNumber"].value,
+            extent: this.landForm.controls["extent"].value,
+            LPICode: this.landForm.controls["LPICode"].value,
+            acquired: this.landForm.controls["acquired"].value,
+            acquiredOther: this.landForm.controls["acquiredOther"].value,
+          },
+          landUseManagementDetail: {
+            id: 0,
+            titleDeedNumber: this.landForm.controls["titleDeedNumber"].value,
+            registrationDate: this.landForm.controls["registrationDate"].value,
+            registeredOwner: this.landForm.controls["registeredOwner"].value,
+            vestingDate: this.landForm.controls["vestingDate"].value,
+            conditionsOfTitle: this.landForm.controls["conditionsOfTitle"].value,
+            ownershipCategory: this.landForm.controls["ownershipCategory"].value,
+            stateOwnedPercentage: this.landForm.controls["stateOwnedPercentage"].value,
+            landUse: this.landForm.controls["landUse"].value,
+            zoning: this.landForm.controls["zoning"].value,
+            userDepartment: this.landForm.controls["userDepartment"].value,
+            facilityName: this.landForm.controls["facilityName"].value,
+            incomeLeaseStatus: this.landForm.controls["incomeLeaseStatus"].value,
+          },
+          leaseStatus: {
+            id: 0,
+            natureOfLease: this.landForm.controls["natureOfLease"].value,
+            IDNumberCompanyRegistrationNumber: this.landForm.controls["IDNumberCompanyRegistrationNumber"].value,
+            POBox: this.landForm.controls["POBox"].value,
+            contactNumber: this.landForm.controls["contactNumber"].value,
+            capacityofContactPerson: this.landForm.controls["capacityofContactPerson"].value,
+            contactPerson: this.landForm.controls["contactPerson"].value,
+            postalCode: this.landForm.controls["postalCode"].value,
+            leaseStatusTown: this.landForm.controls["leaseStatusTown"].value,
+            rentalAmount: this.landForm.controls["rentalAmount"].value,
+            terminationDate: this.landForm.controls["terminationDate"].value,
+            startingDate: this.landForm.controls["startingDate"].value,
+            occupationDate: this.landForm.controls["occupationDate"].value,
+            escalation: this.landForm.controls["escalation"].value,
+            vat: this.landForm.controls["vat"].value,
+            leaseNumber: this.landForm.controls["leaseNumber"].value,
+            otherCharges: this.landForm.controls["otherCharges"].value,
+          }
+        };
+      }
+    }
+    if (isFinancialSave) {
+      if (this.facility.financial != undefined && this.facility.financial != null) {
+        this.facility.financial = {
+          id: 0,
+          landUseClass: this.financialForm.controls["landUseClass"].value,
+          natureofAsset: this.financialForm.controls["natureofAsset"].value,
+          secondaryInformationNote: {
+            additionCash: this.financialForm.controls["additionCash"].value,
+            additionNonCash: this.financialForm.controls["additionNonCash"].value,
+            addition: this.financialForm.controls["addition"].value,
+            disposal: this.financialForm.controls["disposal"].value,
+            closingBalance: this.financialForm.controls["closingBalance"].value,
+          },
+          valuation: {
+            dateofMunicipalValuation: this.financialForm.controls["dateofMunicipalValuation"].value,
+            dateofNonMunicipalValuation: this.financialForm.controls["dateofNonMunicipalValuation"].value,
+            municipalValuation: this.financialForm.controls["municipalValuation"].value,
+            nonMunicipalValuation: this.financialForm.controls["nonMunicipalValuation"].value,
+            propetyRatesAccount: this.financialForm.controls["propetyRatesAccount"].value,
+            value: this.financialForm.controls["value"].value,
+            accountNoForService: this.financialForm.controls["accountNoForService"].value,
+            personInstitutionResposible: this.financialForm.controls["personInstitutionResposible"].value,
+          }
+        }
+      }
+    }
+    if (isImprovementSave) {
+      if (this.facility.improvements != undefined && this.facility.improvements != null) {
+        this.facility.improvements = this.improvements;
+      }
+    }
   }
 
   buildForm() {
@@ -325,25 +395,33 @@ export class AddassetregisterComponent implements OnInit {
     });
     this.improvementForm = this.formBuilder.group({
       buildingName: ['', Validators.required],
-      typeOfImprovement: ['', Validators.required],
-      sizeofImprovement: ['', [Validators.required]],
+      type: ['', Validators.required],
+      size: ['', [Validators.required]],
       potentialUse: ['', [Validators.required]],
-      town: ['', [Validators.required]],
-      suburb: ['', [Validators.required]],
-      streetName: ['', [Validators.required]],
-      streetNumber: ['', [Validators.required]],
       siteCoverag: ['', [Validators.required]],
-      functionalPerformanceRating: ['', [Validators.required]],
+      levelofUtilization: ['', [Validators.required]],
       extentofBuilding: ['', [Validators.required]],
       conditionRating: ['', [Validators.required]],
       usableArea: ['', [Validators.required]],
+      functionalPerformanceRating: ['', [Validators.required]],
+      comment: ['', [Validators.required]],
     });
     this.financialForm = this.formBuilder.group({
       landUseClass: ['', Validators.required],
       natureofAsset: ['', Validators.required],
       additionCash: ['', [Validators.required]],
+      additionNonCash: ['', [Validators.required]],
+      addition: ['', [Validators.required]],
+      disposal: ['', [Validators.required]],
+      closingBalance: ['', [Validators.required]],
       dateofMunicipalValuation: ['', [Validators.required]],
       dateofNonMunicipalValuation: ['', [Validators.required]],
+      municipalValuation: ['', [Validators.required]],
+      nonMunicipalValuation: ['', [Validators.required]],
+      propetyRatesAccount: ['', [Validators.required]],
+      value: ['', [Validators.required]],
+      accountNoForService: ['', [Validators.required]],
+      personInstitutionResposible: ['', [Validators.required]],
     });
 
     this.magisterialDistricts = [
@@ -367,6 +445,34 @@ export class AddassetregisterComponent implements OnInit {
       { name: 'Victor Khanye ', code: 'VK', factor: 18 },
       { name: 'Umjindi ', code: 'U', factor: 19 }
     ];
+
+    this.buttonItems = [
+      {
+        label: 'Update', icon: 'pi pi-pencil', command: () =>
+          this.editImprovement()
+      },
+      { separator: true },
+      {
+        label: 'Delete', icon: 'pi pi-trash', command: () =>
+          this.confirmDelete()
+      }
+    ];
+    this.steps = [
+      { label: 'Land', icon: 'pi pi-fw pi-globe' },
+      { label: 'Financials', icon: 'pi pi-fw pi-money-bill' },
+      { label: 'Impronements', icon: 'pi pi-fw pi-home' }
+    ];
+
+    this.potentialUseList = [
+      { name: 'School', code: 'S', factor: 1 },
+      { name: 'Farm', code: 'F', factor: 2 },
+      { name: 'House', code: 'H', factor: 3 }];
+
+    this.typeOfImprovements = [
+      { name: 'Hotel', code: 'H', factor: 1 },
+      { name: 'House', code: 'HH', factor: 2 }];
+
+    this.activeItem = this.steps[0];
 
     this.userDepartments = [
       { name: 'Agriculture, rural development, land & environmental affairs', code: 'ARALEA', factor: 1 },
@@ -498,8 +604,8 @@ export class AddassetregisterComponent implements OnInit {
     this.messageService.add({ severity: 'success', summary: summary, detail: detail });
   }
 
-  assginfacility(){
-    let deedsOffice = 
+  initFacility() {
+
     this.landForm = this.formBuilder.group({
       deedsOffice: ['', Validators.required],
       class: ['', Validators.required],
@@ -580,4 +686,50 @@ export class AddassetregisterComponent implements OnInit {
     });
   }
 
+  confirmDelete() {
+
+    this.improvements.splice(this.selectedImprovement);
+  }
+
+  editImprovement() {
+    this.improvementForm = this.formBuilder.group({
+      buildingName: [this.selectedImprovement.buildingName, Validators.required],
+      typeOfImprovement: [this.selectedImprovement.typeOfImprovement, Validators.required],
+      sizeofImprovement: [this.selectedImprovement.sizeofImprovement, [Validators.required]],
+      potentialUse: [this.selectedImprovement.potentialUse, [Validators.required]],
+      town: [this.selectedImprovement.town, [Validators.required]],
+      suburb: [this.selectedImprovement.suburb, [Validators.required]],
+      streetName: [this.selectedImprovement.streetName, [Validators.required]],
+      streetNumber: [this.selectedImprovement.streetNumber, [Validators.required]],
+      siteCoverag: [this.selectedImprovement.siteCoverag, [Validators.required]],
+      functionalPerformanceRating: [this.selectedImprovement.functionalPerformanceRating, [Validators.required]],
+      extentofBuilding: [this.selectedImprovement.extentofBuilding, [Validators.required]],
+      conditionRating: [this.selectedImprovement.conditionRating, [Validators.required]],
+      usableArea: [this.selectedImprovement.usableArea, [Validators.required]],
+    });
+  }
+
+  selectImprovement(improvement) {
+    this.selectedImprovement = improvement;
+  }
+
+  AddImprovement() {
+    if (this.improvementForm.valid) {
+      let improvement = {
+        id: this.improvements.length + 1,
+        buildingName: this.improvementForm.controls["buildingName"].value,
+        type: this.improvementForm.controls["type"].value.name,
+        size: this.improvementForm.controls["size"].value,
+        potentialUse: this.improvementForm.controls["potentialUse"].value,
+        siteCoverag: this.improvementForm.controls["siteCoverag"].value,
+        levelofUtilization: this.improvementForm.controls["levelofUtilization"].value,
+        extentofBuilding: this.improvementForm.controls["extentofBuilding"].value,
+        conditionRating: this.improvementForm.controls["conditionRating"].value.name,
+        usableArea: this.improvementForm.controls["usableArea"].value,
+        functionalPerformanceRating: this.improvementForm.controls["functionalPerformanceRating"].value.name,
+        comment: this.improvementForm.controls["comment"].value,
+      };
+      this.improvements.push(improvement);
+    }
+  }
 }

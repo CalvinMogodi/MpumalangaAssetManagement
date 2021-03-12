@@ -92,7 +92,7 @@
 <p-dialog [(visible)]="showDialog" *ngIf="showDialog" [style]="{width: '80vw'}"
     [baseZIndex]="10000">
     <p-header> {{ dialogHeader }} </p-header>
-    <app-addassetregister [selectedAsset]="selectedAsset"></app-addassetregister>
+    <app-addassetregister (newAsset)='addUpdateAsset($event)' [selectedAsset]="selectedAsset"></app-addassetregister>
 </p-dialog>
 
 <p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>

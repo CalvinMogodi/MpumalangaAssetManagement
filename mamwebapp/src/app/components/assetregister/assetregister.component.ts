@@ -6,6 +6,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from '../../services/authentication.service';
 import { ConfirmationService } from 'primeng/api';
 import { Facility, Land } from 'src/app/models/facility.model';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-assetregister',
@@ -56,8 +57,8 @@ export class AssetregisterComponent implements OnInit {
     this.facilityService.getAllFacilities().pipe(first()).subscribe(facilities => {
       this.loading = false;
       this.facilities = facilities;
-      this.landTotal = facilities.filter(f => f.facilityType == "Land").length;
-      this.buildingTotal = facilities.filter(f => f.facilityType != "Land").length;
+      this.landTotal = facilities.filter(f => f.type == "Land").length;
+      this.buildingTotal = facilities.filter(f => f.type != "Land").length;
     });
   }
 
@@ -77,11 +78,11 @@ export class AssetregisterComponent implements OnInit {
   update() {
     this.showDialog = false;
     if(this.facility != undefined){
-      this.dialogHeader = this.facility.facilityType + ' ' + this.facility.clientCode + ' ' + this.facility.name;
+      this.dialogHeader = this.facility.type + ' ' + this.facility.clientCode;
       this.selectedAsset = {
         mode : 'Edit',
         facilityId: this.facility.id,
-        facilityType: this.facility.facilityType,
+        facilityType: this.facility.type,
         facility: this.facility
       };
       this.showDialog = true;
@@ -116,5 +117,13 @@ export class AssetregisterComponent implements OnInit {
 
   selectFacility(facility){
     this.facility = facility;
+  }
+
+  addUpdateAsset(e){
+    if(e.response = "isAddedSuccessful"){
+
+    }else if(e.response = "isUpdatedSuccessful"){
+      
+    }
   }
 }

@@ -2,62 +2,50 @@ import { LandComponent } from '../components/assetregister/addassetregister/land
 import { MapCoordinate } from './map-oordinate.model';
 
 export class Facility {
-    deedsOffice: string;
-    id: Number;
+    id: number;
     name: string;
     fileReference: string;
-    facilityType: string;
-    clientCode: string;
-    propType: string;
-    parcel: string;
-    portion: string;
-    farmName: string;
-    landLoc: string;
     type: string;
-    valuationDate: Date;
-    SGDiagram: string;
-    areaHA: string;
-    regOwner: string;
-    ownershipCategory: string;
-    zoning: string;
-    regDivision: string;
-    userDept: string;
-    conditionRating: string;
-    intendUseOfTheProperty: string;
-    currentUse: string;
-    mapCoordinate: MapCoordinate;
-    vestingInformation: string;
-    comments: string;
-    userId: Number;
-    status: string;
+    clientCode: string;    
+    userId: number;
+    status: string;    
+    land: Land;
+    finance: Finance;
+    improvements: Improvement[];
     createdBy: string;
     createdDate: Date;
     modifiedBy: string;
-    modifiedDate?: Date;    
-    land: Land;
-    financial: Financial;
-    improvement: Improvement;
+    modifiedDate: Date;
 }
 
 export class Land {
+    id: number;
     deedOffice: string;
-    assetClass: string;
-    assetType: string;
+    class: string;
+    type: string;
     geographicalLocation: GeographicalLocation;   
     propertyDescription: PropertyDescription;
     landUseManagementDetail: LandUseManagementDetail;
     leaseStatus: LeaseStatus;
 }
 
-export class Financial {
-
-};
-
 export class Improvement {
-
+    id: number;
+    buildingName: string;
+    type: string;
+    size: string;
+    potentialUse: string;
+    siteCoverag: string;
+    levelofUtilization: string;
+    extentOfBuilding: string;
+    conditionRating: string;
+    usableArea: string;
+    functionalPerformanceRating: string;
+    comment: string;
 };
 
 export class GeographicalLocation{
+    id: number;
     province: string;
     town: string;
     suburb: string;
@@ -71,7 +59,8 @@ export class GeographicalLocation{
     magisterialDistrict: string;
 }
 
-export class PropertyDescription{   
+export class PropertyDescription{ 
+    id: number;  
     registrationDivision: string;
     townshipName: string;
     landParcel: string;
@@ -87,6 +76,7 @@ export class PropertyDescription{
 }
 
 export class LandUseManagementDetail{
+    id: number;
     titleDeedNumber: string;
     registrationDate: Date;
     registeredOwner: string;
@@ -101,7 +91,8 @@ export class LandUseManagementDetail{
     incomeLeaseStatus: string;
 }
 
-export class LeaseStatus{    
+export class LeaseStatus{
+    id: number;    
     natureOfLease: string;
     IDNumberCompanyRegistrationNumber: number;
     POBox: string;
@@ -119,3 +110,32 @@ export class LeaseStatus{
     leaseNumber: number;
     otherCharges: number;
 }
+
+export class Finance {    
+    id: number;
+    landUseClass: string;
+    natureofAsset: string;
+    secondaryInformationNote: SecondaryInformationNote;
+    valuation: Valuation;
+}
+
+export class SecondaryInformationNote { 
+    additionCash: number;
+    additionNonCash: number;
+    addition: number;
+    disposal: number;
+    closingBalance: number;
+}
+
+export class Valuation { 
+    dateofMunicipalValuation: Date;
+    dateofNonMunicipalValuation: Date;
+    municipalValuation: string;
+    nonMunicipalValuation: string;
+    propetyRatesAccount: string;
+    value: string;
+    accountNoForService: string;
+    personInstitutionResposible: string;
+}
+
+
