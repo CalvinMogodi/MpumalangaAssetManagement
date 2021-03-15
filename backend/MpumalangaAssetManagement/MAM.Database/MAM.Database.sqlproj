@@ -78,5 +78,15 @@
     <Build Include="dbo\Tables\DwellingFacilities.sql" />
     <Build Include="dbo\Tables\DeedsOffice.sql" />
     <Build Include="dbo\Tables\AuditLog.sql" />
+    <Build Include="dbo\Tables\Valuations.sql" />
+    <Build Include="dbo\Tables\SecondaryInformationNotes.sql" />
+    <Build Include="dbo\Tables\PropertyDescriptions.sql" />
+    <Build Include="dbo\Tables\LeaseStatuses.sql" />
+    <Build Include="dbo\Tables\LandUseManagementDetails.sql" />
+    <Build Include="dbo\Tables\Lands.sql" />
+    <Build Include="dbo\Tables\Improvements.sql" />
+    <Build Include="dbo\Tables\GeographicalLocations.sql" />
+    <Build Include="dbo\Tables\Finances.sql" />
+    <Build Include="dbo\Tables\Facilities.sql" />
   </ItemGroup>
 </Project>

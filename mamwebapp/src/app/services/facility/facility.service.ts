@@ -45,11 +45,11 @@ export class FacilityService {
     return this.http.post<Facility>(`${environment.apiUrl}/api/facility/deleteFacility/`,facility );
   }
 
-  updateFacility(facility : Facility) {
-    return this.http.post<Facility>(`${environment.apiUrl}/api/facility/updateFacility/`, facility);
+  updateFacility(facility : Facility, step: string) {
+    return this.http.post<Facility>(`${environment.apiUrl}/api/facility/updateFacility/` + step, facility);
   }
 
-  saveFacility(facility : Facility, step: number) {
+  saveFacility(facility : Facility, step: string) {
     return this.http.post<Facility>(`${environment.apiUrl}/api/facility/saveFacility/` + step, facility);
   }
 }

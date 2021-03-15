@@ -7,10 +7,10 @@ namespace MAM.DataAccess.Tables
     public class SecondaryInformationNote
     {
         public int Id { get; set; }
-        public decimal? AdditionCash { get; set; }
-        public decimal? AdditionNonCash { get; set; }
-        public decimal? Addition { get; set; }
-        public decimal? Disposal { get; set; }
-        public decimal? ClosingBalance { get; set; }
+        public double? AdditionCash { get; set; }
+        public double? AdditionNonCash { get; set; }
+        public double? Addition { get; set; }
+        public double? Disposal { get; set; }
+        public double? ClosingBalance { get; set; }
     }
 }

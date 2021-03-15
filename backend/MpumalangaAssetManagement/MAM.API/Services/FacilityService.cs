@@ -17,9 +17,9 @@ namespace MAM.API.Services
         List<MapCoordinate> GetMapCoordinates();
         List<Facility> GetAllFacilities();
         Facility GetFacilityById(int id, FacilityTypes facilityType);
-        Facility SaveFacility(Facility facility);
-        bool UpdateFacility(Facility facility);
-        bool DeleteFacility(Facility facility);
+        Facility SaveFacility(string step, Facility facility);
+        bool UpdateFacility(string step, Facility facility);
+        bool DeleteFacility(int id);
     }
 
     public class FacilityService : IFacilityService
@@ -73,31 +73,34 @@ namespace MAM.API.Services
         {
             using (var _facilityRepository = new FacilityRepository(_appSettings))
             {
-                return _facilityRepository.getFacilityById(id, facilityType);
+                return _facilityRepository.GetFacilityById(id, facilityType);
             }
         }
 
-        public Facility SaveFacility(Facility facility)
+        public Facility SaveFacility(string step, Facility facility)
         {
             using (var _facilityRepository = new FacilityRepository(_appSettings))
             {
-                return _facilityRepository.SaveFacility(facility);
+                return _facilityRepository.SaveFacility(step, facility);
             }
         }
 
-        public bool UpdateFacility(Facility facility)
+        public bool UpdateFacility(string step, Facility facility)
         {
+            bool isUpdated = false;
             using (var _facilityRepository = new FacilityRepository(_appSettings))
             {
-                return _facilityRepository.UpdateFacility(facility);
+                _facilityRepository.UpdateFacility(step, facility);
+                isUpdated = true;
             }
+            return isUpdated;
         }
 
-        public bool DeleteFacility(Facility facility)
+        public bool DeleteFacility(int id)
         {
             using (var _facilityRepository = new FacilityRepository(_appSettings))
             {
-                return _facilityRepository.DeleteFacility(facility);
+                return _facilityRepository.DeleteFacility(id);
             }
         }
     }

@@ -25,5 +25,11 @@
     </Content>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Uploads\Land\" />
+    <Folder Include="Uploads\Finance\" />
+    <Folder Include="Uploads\Improvement\" />
+  </ItemGroup>
+
 
 </Project>

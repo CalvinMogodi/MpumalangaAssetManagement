@@ -16,11 +16,3 @@ C:\Projects\Asset Register MP\MpumalangaAssetManagement\MAM.DataAccess\obj\Debug
 C:\Projects\Asset Register MP\MpumalangaAssetManagement\MAM.DataAccess\obj\Debug\netstandard2.0\MAM.DataAccess.dll
 C:\Projects\Asset Register MP\MpumalangaAssetManagement\MAM.DataAccess\obj\Debug\netstandard2.0\MAM.DataAccess.pdb
 C:\Projects\Asset Register MP\MpumalangaAssetManagement\MAM.DataAccess\obj\Debug\netstandard2.0\MAM.DataAccess.csprojAssemblyReference.cache
-C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.DataAccess\bin\Debug\netstandard2.0\MAM.DataAccess.deps.json
-C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.DataAccess\bin\Debug\netstandard2.0\MAM.DataAccess.dll
-C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.DataAccess\bin\Debug\netstandard2.0\MAM.DataAccess.pdb
-C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.DataAccess\obj\Debug\netstandard2.0\MAM.DataAccess.AssemblyInfoInputs.cache
-C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.DataAccess\obj\Debug\netstandard2.0\MAM.DataAccess.AssemblyInfo.cs
-C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.DataAccess\obj\Debug\netstandard2.0\MAM.DataAccess.csproj.CoreCompileInputs.cache
-C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.DataAccess\obj\Debug\netstandard2.0\MAM.DataAccess.dll
-C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.DataAccess\obj\Debug\netstandard2.0\MAM.DataAccess.pdb

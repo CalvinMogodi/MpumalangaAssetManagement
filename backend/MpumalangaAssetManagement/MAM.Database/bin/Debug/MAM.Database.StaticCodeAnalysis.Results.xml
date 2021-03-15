@@ -1,0 +1,1187 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Problems>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name(LAND KEY NUMBER) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\DwellingOriginal.sql</SourceFile>
+    <Line>2</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name(UNIQUE PROPERTY CODE) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\DwellingOriginal.sql</SourceFile>
+    <Line>3</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name(FARM NAME) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\DwellingOriginal.sql</SourceFile>
+    <Line>7</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name(LAND LOC) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\DwellingOriginal.sql</SourceFile>
+    <Line>8</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name(FACILITY NAME) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\DwellingOriginal.sql</SourceFile>
+    <Line>9</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name( OPENNING BALANCE 2018 ) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\DwellingOriginal.sql</SourceFile>
+    <Line>10</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name( VALUE ADJUSTMENT 2018 ) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\DwellingOriginal.sql</SourceFile>
+    <Line>11</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name( PPEA(IN) 2018 ) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\DwellingOriginal.sql</SourceFile>
+    <Line>12</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name( PPEA(OUT) 2018 ) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\DwellingOriginal.sql</SourceFile>
+    <Line>13</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name( DISPOSALS 2018 ) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\DwellingOriginal.sql</SourceFile>
+    <Line>14</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name( CLOSING BALANCE 2018 ) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\DwellingOriginal.sql</SourceFile>
+    <Line>15</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name(Column 14) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\DwellingOriginal.sql</SourceFile>
+    <Line>16</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name( OPENNING BALANCE 2019 ) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\DwellingOriginal.sql</SourceFile>
+    <Line>17</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name( ADDITIONS 2019 ) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\DwellingOriginal.sql</SourceFile>
+    <Line>18</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name( DISPOSALS 2019 ) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\DwellingOriginal.sql</SourceFile>
+    <Line>19</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name( CLOSING BALANCE 2019 ) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\DwellingOriginal.sql</SourceFile>
+    <Line>20</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name( DATE OF VALUATION ) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\DwellingOriginal.sql</SourceFile>
+    <Line>21</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name(FACILITY TYPE) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\DwellingOriginal.sql</SourceFile>
+    <Line>22</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name(STREET NAME) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\DwellingOriginal.sql</SourceFile>
+    <Line>23</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name(DEEDS OFFICE) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\DwellingOriginal.sql</SourceFile>
+    <Line>27</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name(MAGISTERIAL DISTRICT) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\DwellingOriginal.sql</SourceFile>
+    <Line>28</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name(DISTRICT MUNICIPALITY) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\DwellingOriginal.sql</SourceFile>
+    <Line>29</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name(LOCAL MUNICIPALITY) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\DwellingOriginal.sql</SourceFile>
+    <Line>30</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name(TITLE DEEDS) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\DwellingOriginal.sql</SourceFile>
+    <Line>31</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name(SG DIAGRAM) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\DwellingOriginal.sql</SourceFile>
+    <Line>32</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name(REG OWNER) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\DwellingOriginal.sql</SourceFile>
+    <Line>34</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name(OWNERSHIP CATEGORY) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\DwellingOriginal.sql</SourceFile>
+    <Line>35</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name(REG DIVISION) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\DwellingOriginal.sql</SourceFile>
+    <Line>37</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name(DATE REGISTRATION) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\DwellingOriginal.sql</SourceFile>
+    <Line>38</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name(USER DEPT) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\DwellingOriginal.sql</SourceFile>
+    <Line>39</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name(CONDITION RATING) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\DwellingOriginal.sql</SourceFile>
+    <Line>40</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name(INTEND USE OF THE PROPERTY) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\DwellingOriginal.sql</SourceFile>
+    <Line>41</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name(CURRENT USE) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\DwellingOriginal.sql</SourceFile>
+    <Line>42</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name(GPS COORDINATES SOUTH) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\DwellingOriginal.sql</SourceFile>
+    <Line>43</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name(GPS COORDINATES EAST) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\DwellingOriginal.sql</SourceFile>
+    <Line>44</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name(VESTING INFORMATION) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\DwellingOriginal.sql</SourceFile>
+    <Line>45</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name(LAND KEY NUMBER) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\Import.sql</SourceFile>
+    <Line>2</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name(UNIQUE PROPERTY CODE) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\Import.sql</SourceFile>
+    <Line>3</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name(FARM NAME) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\Import.sql</SourceFile>
+    <Line>7</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name(LAND LOC) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\Import.sql</SourceFile>
+    <Line>8</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name(FACILITY NAME) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\Import.sql</SourceFile>
+    <Line>9</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name( OPENNING BALANCE 2018 ) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\Import.sql</SourceFile>
+    <Line>10</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name( ADDITIONS 2018 ) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\Import.sql</SourceFile>
+    <Line>11</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name( VALUE ADJUSTMENT 2018 ) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\Import.sql</SourceFile>
+    <Line>12</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name( PPEA(IN) 2018 ) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\Import.sql</SourceFile>
+    <Line>13</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name( PPEA(OUT) 2018 ) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\Import.sql</SourceFile>
+    <Line>14</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name( DISPOSALS 2018 ) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\Import.sql</SourceFile>
+    <Line>15</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name( CLOSING BALANCE 2018 ) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\Import.sql</SourceFile>
+    <Line>16</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name(Column 15) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\Import.sql</SourceFile>
+    <Line>17</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name( OPENNING BALANCE 2019 ) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\Import.sql</SourceFile>
+    <Line>18</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name( ADDITIONS 2019 ) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\Import.sql</SourceFile>
+    <Line>19</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name( DISPOSALS 2019 ) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\Import.sql</SourceFile>
+    <Line>20</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name( CLOSING BALANCE 2019 ) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\Import.sql</SourceFile>
+    <Line>21</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name( DATE OF VALUATION ) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\Import.sql</SourceFile>
+    <Line>22</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name(FACILITY TYPE) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\Import.sql</SourceFile>
+    <Line>23</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name(STREET NAME) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\Import.sql</SourceFile>
+    <Line>24</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name(DEEDS OFFICE) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\Import.sql</SourceFile>
+    <Line>28</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name(MAGISTERIAL DISTRICT) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\Import.sql</SourceFile>
+    <Line>29</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name(DISTRICT MUNICIPALITY) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\Import.sql</SourceFile>
+    <Line>30</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name(LOCAL MUNICIPALITY) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\Import.sql</SourceFile>
+    <Line>31</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name(TITLE DEEDS) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\Import.sql</SourceFile>
+    <Line>32</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name(SG DIAGRAM) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\Import.sql</SourceFile>
+    <Line>33</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name(REG OWNER) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\Import.sql</SourceFile>
+    <Line>35</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name(OWNERSHIP CATEGORY) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\Import.sql</SourceFile>
+    <Line>36</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name(REG DIVISION) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\Import.sql</SourceFile>
+    <Line>38</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name(DATE REGISTRATION) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\Import.sql</SourceFile>
+    <Line>39</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name(USER DEPT) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\Import.sql</SourceFile>
+    <Line>40</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name(CONDTION RATING) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\Import.sql</SourceFile>
+    <Line>41</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name(INTEND USE OF THE PROPERTY) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\Import.sql</SourceFile>
+    <Line>42</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name(CURRENT USE) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\Import.sql</SourceFile>
+    <Line>43</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name(GPS COORDINATES SOUTH) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\Import.sql</SourceFile>
+    <Line>44</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name(GPS COORDINATES EAST) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\Import.sql</SourceFile>
+    <Line>45</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name(VESTING INFORMATION) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\Import.sql</SourceFile>
+    <Line>46</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name(LAND KEY NUMBER) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\LandIoriginal.sql</SourceFile>
+    <Line>2</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name(UNIQUE PROPERTY CODE) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\LandIoriginal.sql</SourceFile>
+    <Line>3</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name(FARM NAME) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\LandIoriginal.sql</SourceFile>
+    <Line>7</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name(LAND LOC) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\LandIoriginal.sql</SourceFile>
+    <Line>8</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name(FACILITY NAME) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\LandIoriginal.sql</SourceFile>
+    <Line>9</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name( OPENNING BALANCE 2018 ) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\LandIoriginal.sql</SourceFile>
+    <Line>10</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name( ADDITIONS 2018 ) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\LandIoriginal.sql</SourceFile>
+    <Line>11</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name( VALUE ADJUSTMENT 2018 ) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\LandIoriginal.sql</SourceFile>
+    <Line>12</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name( PPEA(IN) 2018 ) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\LandIoriginal.sql</SourceFile>
+    <Line>13</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name( PPEA(OUT) 2018 ) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\LandIoriginal.sql</SourceFile>
+    <Line>14</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name( DISPOSALS 2018 ) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\LandIoriginal.sql</SourceFile>
+    <Line>15</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name( CLOSING BALANCE 2018 ) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\LandIoriginal.sql</SourceFile>
+    <Line>16</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name(Column 15) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\LandIoriginal.sql</SourceFile>
+    <Line>17</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name( OPENNING BALANCE 2019 ) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\LandIoriginal.sql</SourceFile>
+    <Line>18</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name( ADDITIONS 2019 ) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\LandIoriginal.sql</SourceFile>
+    <Line>19</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name( DISPOSALS 2019 ) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\LandIoriginal.sql</SourceFile>
+    <Line>20</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name( CLOSING BALANCE 2019 ) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\LandIoriginal.sql</SourceFile>
+    <Line>21</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name( DATE OF VALUATION ) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\LandIoriginal.sql</SourceFile>
+    <Line>22</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name(FACILITY TYPE) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\LandIoriginal.sql</SourceFile>
+    <Line>23</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name(STREET NAME) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\LandIoriginal.sql</SourceFile>
+    <Line>24</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name(DEEDS OFFICE) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\LandIoriginal.sql</SourceFile>
+    <Line>28</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name(MAGISTERIAL DISTRICT) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\LandIoriginal.sql</SourceFile>
+    <Line>29</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name(DISTRICT MUNICIPALITY) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\LandIoriginal.sql</SourceFile>
+    <Line>30</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name(LOCAL MUNICIPALITY) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\LandIoriginal.sql</SourceFile>
+    <Line>31</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name(TITLE DEEDS) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\LandIoriginal.sql</SourceFile>
+    <Line>32</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name(SG DIAGRAM) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\LandIoriginal.sql</SourceFile>
+    <Line>33</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name(REG OWNER) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\LandIoriginal.sql</SourceFile>
+    <Line>35</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name(OWNERSHIP CATEGORY) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\LandIoriginal.sql</SourceFile>
+    <Line>36</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name(REG DIVISION) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\LandIoriginal.sql</SourceFile>
+    <Line>38</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name(DATE REGISTRATION) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\LandIoriginal.sql</SourceFile>
+    <Line>39</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name(USER DEPT) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\LandIoriginal.sql</SourceFile>
+    <Line>40</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name(CONDTION RATING) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\LandIoriginal.sql</SourceFile>
+    <Line>41</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name(INTEND USE OF THE PROPERTY) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\LandIoriginal.sql</SourceFile>
+    <Line>42</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name(CURRENT USE) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\LandIoriginal.sql</SourceFile>
+    <Line>43</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name(GPS COORDINATES SOUTH) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\LandIoriginal.sql</SourceFile>
+    <Line>44</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name(GPS COORDINATES EAST) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\LandIoriginal.sql</SourceFile>
+    <Line>45</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name(VESTING INFORMATION) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\LandIoriginal.sql</SourceFile>
+    <Line>46</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name(LAND KEY NUMBER) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\NonResidentialAssetsOriginal.sql</SourceFile>
+    <Line>2</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name(UNIQUE PROPERTY CODE) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\NonResidentialAssetsOriginal.sql</SourceFile>
+    <Line>3</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name(FARM NAME) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\NonResidentialAssetsOriginal.sql</SourceFile>
+    <Line>7</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name(LAND LOC) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\NonResidentialAssetsOriginal.sql</SourceFile>
+    <Line>8</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name(FACILITY NAME) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\NonResidentialAssetsOriginal.sql</SourceFile>
+    <Line>9</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name( OPENNING BALANCE 2018 ) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\NonResidentialAssetsOriginal.sql</SourceFile>
+    <Line>10</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name( ADDITIONS 2018 ) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\NonResidentialAssetsOriginal.sql</SourceFile>
+    <Line>11</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name( VALUE ADJUSTMENT 2018 ) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\NonResidentialAssetsOriginal.sql</SourceFile>
+    <Line>12</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name( PPEA(IN) 2018 ) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\NonResidentialAssetsOriginal.sql</SourceFile>
+    <Line>13</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name( PPEA(OUT) 2018 ) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\NonResidentialAssetsOriginal.sql</SourceFile>
+    <Line>14</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name( DISPOSALS 2018 ) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\NonResidentialAssetsOriginal.sql</SourceFile>
+    <Line>15</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name( CLOSING BALANCE 2018 ) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\NonResidentialAssetsOriginal.sql</SourceFile>
+    <Line>16</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name(Column 15) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\NonResidentialAssetsOriginal.sql</SourceFile>
+    <Line>17</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name( OPENNING BALANCE 2019 ) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\NonResidentialAssetsOriginal.sql</SourceFile>
+    <Line>18</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name( ADDITIONS 2019 ) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\NonResidentialAssetsOriginal.sql</SourceFile>
+    <Line>19</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name( DISPOSAL 2019 ) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\NonResidentialAssetsOriginal.sql</SourceFile>
+    <Line>20</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name( CLOSING BALANCE 2019 ) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\NonResidentialAssetsOriginal.sql</SourceFile>
+    <Line>21</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name( DATE OF VALUATION ) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\NonResidentialAssetsOriginal.sql</SourceFile>
+    <Line>22</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name(FACILITY TYPE) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\NonResidentialAssetsOriginal.sql</SourceFile>
+    <Line>23</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name(STREET NAME) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\NonResidentialAssetsOriginal.sql</SourceFile>
+    <Line>24</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name(DEEDS OFFICE) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\NonResidentialAssetsOriginal.sql</SourceFile>
+    <Line>28</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name(MAGISTERIAL DISTRICT) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\NonResidentialAssetsOriginal.sql</SourceFile>
+    <Line>29</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name(DISTRICT MUNICIPALITY) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\NonResidentialAssetsOriginal.sql</SourceFile>
+    <Line>30</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name(LOCAL MUNICIPALITY) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\NonResidentialAssetsOriginal.sql</SourceFile>
+    <Line>31</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name(TITLE DEEDS) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\NonResidentialAssetsOriginal.sql</SourceFile>
+    <Line>32</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name(SG DIAGRAM) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\NonResidentialAssetsOriginal.sql</SourceFile>
+    <Line>33</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name(REG OWNER) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\NonResidentialAssetsOriginal.sql</SourceFile>
+    <Line>35</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name(OWNERSHIP CATEGORY) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\NonResidentialAssetsOriginal.sql</SourceFile>
+    <Line>36</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name(REG DIVISION) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\NonResidentialAssetsOriginal.sql</SourceFile>
+    <Line>38</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name(DATE REGISTRATION) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\NonResidentialAssetsOriginal.sql</SourceFile>
+    <Line>39</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name(USER DEPT) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\NonResidentialAssetsOriginal.sql</SourceFile>
+    <Line>40</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name(CONDITION RATING) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\NonResidentialAssetsOriginal.sql</SourceFile>
+    <Line>41</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name(INTEND USE OF THE PROPERTY) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\NonResidentialAssetsOriginal.sql</SourceFile>
+    <Line>42</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name(CURRENT USE) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\NonResidentialAssetsOriginal.sql</SourceFile>
+    <Line>43</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name(GPS COORDINATES SOUTH) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\NonResidentialAssetsOriginal.sql</SourceFile>
+    <Line>44</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name(GPS COORDINATES EAST) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\NonResidentialAssetsOriginal.sql</SourceFile>
+    <Line>45</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name(VESTING INFORMATION) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\NonResidentialAssetsOriginal.sql</SourceFile>
+    <Line>46</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Microsoft.Rules.Data.SR0011</Rule>
+    <ProblemDescription>Object name(Column 46) contains special characters.</ProblemDescription>
+    <SourceFile>C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\dbo\Tables\NonResidentialAssetsOriginal.sql</SourceFile>
+    <Line>48</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+</Problems>

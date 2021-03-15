@@ -121,7 +121,8 @@ export class AssetregisterComponent implements OnInit {
 
   addUpdateAsset(e){
     if(e.response = "isAddedSuccessful"){
-
+      this.showDialog = false;
+      this.facilities.push(e.data)
     }else if(e.response = "isUpdatedSuccessful"){
       
     }

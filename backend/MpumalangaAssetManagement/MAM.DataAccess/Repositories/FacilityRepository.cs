@@ -47,7 +47,12 @@ namespace MAM.DataAccess.Repositories
         {
             using (var db = new DataContext(_connectionString))
             {
-                return db.Facilities.Where(f => f.Status != "Deleted").Include(a => a.Land).Include(a => a.Improvements).Include(a => a.Finance).ToList();
+                 var list = db.Facilities.Where(f => f.Status != "Deleted").Include(a => a.Land).
+                    Include(f => f.Land.PropertyDescription).Include(a => a.Land.GeographicalLocation).Include(a => a.Land.LandUseManagementDetail)
+                    .Include(a => a.Land.LeaseStatus).
+                    Include(a => a.Improvements).Include(a => a.Finance).Include(f => f.Finance.Valuation)                    
+                    .Include(f => f.Finance.SecondaryInformationNote).ToList();
+                return list;
             }            
         }
 

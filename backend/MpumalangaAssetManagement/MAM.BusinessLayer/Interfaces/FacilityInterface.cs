@@ -12,7 +12,15 @@ namespace MAM.BusinessLayer.Interfaces
         List<DashboardWedge> GetDashboardWedges();
         List<FacilitySummaryChart> GetFacilitySummaries();
         List<MapCoordinate> GetMapCoordinates();
-        Facility getFacilityById(int id, FacilityTypes facilityType);
-        Facility SaveFacility(Facility facility);
+        Facility GetFacilityById(int id, FacilityTypes facilityType);
+        Facility SaveFacility(string step, Facility facility);
+        Land SaveLand(Land land);
+        Finance SaveFinance(Finance finance);
+        List<Improvement> SaveImprovement(List<Improvement> improvement, int facilityId);
+        void UpdateFacility(string step, Facility facility);
+        void UpdateLand(Land land);
+        void UpdateFinance(Finance finance);
+        void UpdateImprovement(List<Improvement> improvement);
+        bool DeleteFacility(int id);
     }
 }

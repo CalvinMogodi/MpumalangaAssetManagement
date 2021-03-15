@@ -15,6 +15,7 @@ using MAM.BusinessLayer.Models.Enums;
 using MAM.BusinessLayer.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 
@@ -129,13 +130,13 @@ namespace MAM.API.Controllers
             }
         }
 
-        [HttpPost]
-        [Route("deleteFacility")]
-        public IActionResult DeleteFacility(Facility facility)
+        [HttpDelete]
+        [Route("deleteFacility/{id}")]
+        public IActionResult DeleteFacility(int id)
         {
             try
             {
-                return Ok(_facilityService.DeleteFacility(facility));
+                return Ok(_facilityService.DeleteFacility(id));
             }
             catch (Exception ex)
             {
@@ -145,12 +146,12 @@ namespace MAM.API.Controllers
         }
 
         [HttpPost]
-        [Route("updateFacility")]
-        public IActionResult UpdateFacility(Facility facility)
+        [Route("updateFacility/{step}")]
+        public IActionResult UpdateFacility(string step, Facility facility)
         {
             try
             {
-                return Ok(_facilityService.UpdateFacility(facility));
+                return Ok(_facilityService.UpdateFacility(step, facility));
             }
             catch (Exception ex)
             {
@@ -161,11 +162,11 @@ namespace MAM.API.Controllers
 
         [HttpPost]
         [Route("saveFacility/{step}")]
-        public IActionResult SaveFacility(int step, Facility facility)
+        public IActionResult SaveFacility(string step, Facility facility)
         {
             try
             {
-                facility = _facilityService.SaveFacility(facility);
+                facility = _facilityService.SaveFacility(step, facility);
                 return Ok(facility);
             }
             catch (Exception ex)
@@ -174,8 +175,35 @@ namespace MAM.API.Controllers
                 throw ex;
             }
         }
-                
-        private static void SetLog4NetConfiguration()
+
+        [HttpPost, DisableRequestSizeLimit]
+        [Route("uploadFiles")]
+        public async Task<IActionResult> UploadFiles(List<IFormFile> files)
+        {
+            bool isUploaded = false;
+
+            string path = Path.Combine("C:\\Users\\cmogo\\OneDrive\\Pictures\\Screenshots", "Uploads");
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+
+            List<string> uploadedFiles = new List<string>();
+            foreach (IFormFile postedFile in files)
+            {
+                string fileName = Path.GetFileName(postedFile.FileName);
+                using (FileStream stream = new FileStream(Path.Combine(path, fileName), FileMode.Create))
+                {
+                    postedFile.CopyTo(stream);
+                    uploadedFiles.Add(fileName);
+                    ViewBag.Message += string.Format("<b>{0}</b> uploaded.<br />", fileName);
+                }
+            }
+            isUploaded = true;
+            return Ok(isUploaded);
+        }
+
+            private static void SetLog4NetConfiguration()
         {
             XmlDocument log4netConfig = new XmlDocument();
             log4netConfig.Load(System.IO.File.OpenRead("log4net.config"));

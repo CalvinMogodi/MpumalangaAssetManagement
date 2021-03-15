@@ -13,7 +13,7 @@
                                 formControlName="deedsOffice" (onChange)="setDeedsOffice($event)" optionLabel="name"
                                 placeholder="Select a Deeds Office"></p-dropdown>
                             <div *ngIf="(submitted || landisSubmitted) && f.deedsOffices.errors" class="text-error"><br>
-                                <div *ngIf="f.deedsOffices.errors.required">This field is required.</div>
+                                <div *ngIf="l.deedsOffices.errors.required">This field is required.</div>
                             </div>
                         </div>
                         <div class="ui-g-4 ui-md-4">
@@ -23,7 +23,7 @@
                                 placeholder="Select a Class">
                             </p-dropdown>
                             <div *ngIf="(submitted || landisSubmitted) && f.class.errors" class="text-error"><br>
-                                <div *ngIf="f.class.errors.required">This field is required.</div>
+                                <div *ngIf="l.class.errors.required">This field is required.</div>
                             </div>
                         </div>
                         <div class="ui-g-4 ui-md-4">
@@ -33,7 +33,7 @@
                                 placeholder="Select a Type"></p-dropdown>
                             <div *ngIf="(submitted || landisSubmitted) && f.fileReferenceNumber.errors"
                                 class="text-error"><br>
-                                <div *ngIf="f.fileReferenceNumber.errors.required">This field is required.</div>
+                                <div *ngIf="l.fileReferenceNumber.errors.required">This field is required.</div>
                             </div>
                         </div>
                     </div>
@@ -48,7 +48,7 @@
                             </p-dropdown>
                             <div *ngIf="(submitted || landisSubmitted) && f.fileReferenceNumber.errors"
                                 class="text-error"><br>
-                                <div *ngIf="f.fileReferenceNumber.errors.required">This field is required.</div>
+                                <div *ngIf="l.fileReferenceNumber.errors.required">This field is required.</div>
                             </div>
                         </div>
                         <div class="ui-g-4 ui-md-4">
@@ -58,7 +58,7 @@
                                 optionLabel="name" placeholder="Select a District Municipality"></p-dropdown>
                             <div *ngIf="(submitted || landisSubmitted) && f.fileReferenceNumber.errors"
                                 class="text-error"><br>
-                                <div *ngIf="f.fileReferenceNumber.errors.required">This field is required.</div>
+                                <div *ngIf="l.fileReferenceNumber.errors.required">This field is required.</div>
                             </div>
                         </div>
                         <div class="ui-g-4 ui-md-4">
@@ -68,7 +68,7 @@
                             </p-dropdown>
                             <div *ngIf="(submitted || landisSubmitted) && f.fileReferenceNumber.errors"
                                 class="text-error"><br>
-                                <div *ngIf="f.fileReferenceNumber.errors.required">This field is required.</div>
+                                <div *ngIf="l.fileReferenceNumber.errors.required">This field is required.</div>
                             </div>
                         </div>
                     </div>
@@ -80,7 +80,7 @@
                                 optionLabel="name" placeholder="Select a Local Authority"></p-dropdown>
                             <div *ngIf="(submitted || landisSubmitted) && f.fileReferenceNumber.errors"
                                 class="text-error"><br>
-                                <div *ngIf="f.fileReferenceNumber.errors.required">This field is required.</div>
+                                <div *ngIf="l.fileReferenceNumber.errors.required">This field is required.</div>
                             </div>
                         </div>
                         <div class="ui-g-4 ui-md-4">
@@ -90,7 +90,7 @@
                                 optionLabel="name" placeholder="Select Magisterial District"></p-dropdown>
                             <div *ngIf="(submitted || landisSubmitted) && f.fileReferenceNumber.errors"
                                 class="text-error"><br>
-                                <div *ngIf="f.fileReferenceNumber.errors.required">This field is required.</div>
+                                <div *ngIf="l.fileReferenceNumber.errors.required">This field is required.</div>
                             </div>
                         </div>
                         <div class="ui-g-4 ui-md-4">
@@ -100,7 +100,7 @@
                                 [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
                             <div *ngIf="(submitted || landisSubmitted) && f.fileReferenceNumber.errors"
                                 class="text-error"><br>
-                                <div *ngIf="f.fileReferenceNumber.errors.required">This field is required.</div>
+                                <div *ngIf="l.fileReferenceNumber.errors.required">This field is required.</div>
                             </div>
                         </div>
                     </div>
@@ -112,7 +112,7 @@
                                 [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
                             <div *ngIf="(submitted || landisSubmitted) && f.fileReferenceNumber.errors"
                                 class="text-error"><br>
-                                <div *ngIf="f.fileReferenceNumber.errors.required">This field is required.</div>
+                                <div *ngIf="l.fileReferenceNumber.errors.required">This field is required.</div>
                             </div>
                         </div>
                         <div class="ui-g-4 ui-md-4">
@@ -122,7 +122,7 @@
                                 [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
                             <div *ngIf="(submitted || landisSubmitted) && f.fileReferenceNumber.errors"
                                 class="text-error"><br>
-                                <div *ngIf="f.fileReferenceNumber.errors.required">This field is required.</div>
+                                <div *ngIf="l.fileReferenceNumber.errors.required">This field is required.</div>
                             </div>
                         </div>
                         <div class="ui-g-4 ui-md-4">
@@ -131,7 +131,7 @@
                                 class="ui-inputtext ui-widget" [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
                             <div *ngIf="(submitted || landisSubmitted) && f.fileReferenceNumber.errors"
                                 class="text-error"><br>
-                                <div *ngIf="f.fileReferenceNumber.errors.required">This field is required.</div>
+                                <div *ngIf="l.fileReferenceNumber.errors.required">This field is required.</div>
                             </div>
                         </div>
                     </div>
@@ -143,7 +143,7 @@
                                 class="ui-inputtext ui-widget" [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
                             <div *ngIf="(submitted || landisSubmitted) && f.fileReferenceNumber.errors"
                                 class="text-error"><br>
-                                <div *ngIf="f.fileReferenceNumber.errors.required">This field is required.</div>
+                                <div *ngIf="l.fileReferenceNumber.errors.required">This field is required.</div>
                             </div>
                         </div>
                         <div class="ui-g-4 ui-md-4">
@@ -154,7 +154,7 @@
                                 [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
                             <div *ngIf="(submitted || landisSubmitted) && f.fileReferenceNumber.errors"
                                 class="text-error"><br>
-                                <div *ngIf="f.fileReferenceNumber.errors.required">This field is required.</div>
+                                <div *ngIf="l.fileReferenceNumber.errors.required">This field is required.</div>
                             </div>
                         </div>
                     </div>
@@ -168,7 +168,7 @@
                                 optionLabel="name" placeholder="Select Registration Division"></p-dropdown>
                             <div *ngIf="(submitted || landisSubmitted) && f.registrationDivision.errors"
                                 class="text-error"><br>
-                                <div *ngIf="f.registrationDivision.errors.required">This field is required.</div>
+                                <div *ngIf="l.registrationDivision.errors.required">This field is required.</div>
                             </div>
                         </div>
                         <div class="ui-g-4 ui-md-4">
@@ -177,7 +177,7 @@
                                 placeholder="Township Name" class="ui-inputtext ui-widget"
                                 [ngClass]="{ 'is-invalid': submitted && f.townshipName.errors }">
                             <div *ngIf="(submitted || landisSubmitted) && f.townshipName.errors" class="text-error"><br>
-                                <div *ngIf="f.townshipName.errors.required">This field is required.</div>
+                                <div *ngIf="l.townshipName.errors.required">This field is required.</div>
                             </div>
                         </div>
                         <div class="ui-g-4 ui-md-4">
@@ -187,7 +187,7 @@
                                 [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
                             <div *ngIf="(submitted || landisSubmitted) && f.fileReferenceNumber.errors"
                                 class="text-error"><br>
-                                <div *ngIf="f.fileReferenceNumber.errors.required">This field is required.</div>
+                                <div *ngIf="l.fileReferenceNumber.errors.required">This field is required.</div>
                             </div>
                         </div>
                     </div>
@@ -199,7 +199,7 @@
                                 [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
                             <div *ngIf="(submitted || landisSubmitted) && f.fileReferenceNumber.errors"
                                 class="text-error"><br>
-                                <div *ngIf="f.fileReferenceNumber.errors.required">This field is required.</div>
+                                <div *ngIf="l.fileReferenceNumber.errors.required">This field is required.</div>
                             </div>
                         </div>
                         <div class="ui-g-4 ui-md-4">
@@ -209,7 +209,7 @@
                                 [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
                             <div *ngIf="(submitted || landisSubmitted) && f.fileReferenceNumber.errors"
                                 class="text-error"><br>
-                                <div *ngIf="f.fileReferenceNumber.errors.required">This field is required.</div>
+                                <div *ngIf="l.fileReferenceNumber.errors.required">This field is required.</div>
                             </div>
                         </div>
                         <div class="ui-g-4 ui-md-4">
@@ -219,7 +219,7 @@
                                 placeholder="Select a Land Remainder"></p-dropdown>
                             <div *ngIf="(submitted || landisSubmitted) && f.fileReferenceNumber.errors"
                                 class="text-error"><br>
-                                <div *ngIf="f.fileReferenceNumber.errors.required">This field is required.</div>
+                                <div *ngIf="l.fileReferenceNumber.errors.required">This field is required.</div>
                             </div>
                         </div>
                     </div>
@@ -231,7 +231,7 @@
                                 [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
                             <div *ngIf="(submitted || landisSubmitted) && f.fileReferenceNumber.errors"
                                 class="text-error"><br>
-                                <div *ngIf="f.fileReferenceNumber.errors.required">This field is required.</div>
+                                <div *ngIf="l.fileReferenceNumber.errors.required">This field is required.</div>
                             </div>
                         </div>
                         <div class="ui-g-4 ui-md-4">
@@ -241,7 +241,7 @@
                                 [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
                             <div *ngIf="(submitted || landisSubmitted) && f.fileReferenceNumber.errors"
                                 class="text-error"><br>
-                                <div *ngIf="f.fileReferenceNumber.errors.required">This field is required.</div>
+                                <div *ngIf="l.fileReferenceNumber.errors.required">This field is required.</div>
                             </div>
                         </div>
                         <div class="ui-g-4 ui-md-4">
@@ -251,7 +251,7 @@
                                 [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
                             <div *ngIf="(submitted || landisSubmitted) && f.fileReferenceNumber.errors"
                                 class="text-error"><br>
-                                <div *ngIf="f.fileReferenceNumber.errors.required">This field is required.</div>
+                                <div *ngIf="l.fileReferenceNumber.errors.required">This field is required.</div>
                             </div>
                         </div>
                     </div>
@@ -263,17 +263,17 @@
                                 [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
                             <div *ngIf="(submitted || landisSubmitted) && f.fileReferenceNumber.errors"
                                 class="text-error"><br>
-                                <div *ngIf="f.fileReferenceNumber.errors.required">This field is required.</div>
+                                <div *ngIf="l.fileReferenceNumber.errors.required">This field is required.</div>
                             </div>
                         </div>
                         <div class="ui-g-4 ui-md-4">
                             <label for="province">How Acquired</label>
-                            <p-dropdown inputId="howAcquired" [options]="howAcquired" [(ngModel)]="howAcquired"
+                            <p-dropdown inputId="howAcquired" [options]="howAcquireds" [(ngModel)]="howAcquired"
                                 formControlName="acquired" (onChange)="setHowAcquired($event)" optionLabel="name"
                                 placeholder="Select How Acquired"></p-dropdown>
                             <div *ngIf="(submitted || landisSubmitted) && f.fileReferenceNumber.errors"
                                 class="text-error"><br>
-                                <div *ngIf="f.fileReferenceNumber.errors.required">This field is required.</div>
+                                <div *ngIf="l.fileReferenceNumber.errors.required">This field is required.</div>
                             </div>
                         </div>
                         <div class="ui-g-4 ui-md-4" *ngIf="howAcquired.name === 'Other'">
@@ -282,7 +282,7 @@
                                 placeholder="How Acquired" class="ui-inputtext ui-widget"
                                 [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
                             <div *ngIf="(submitted || landisSubmitted) && f.howAcquired.errors" class="text-error"><br>
-                                <div *ngIf="f.howAcquired.errors.required">This field is required.</div>
+                                <div *ngIf="l.howAcquired.errors.required">This field is required.</div>
                             </div>
                         </div>
                     </div>
@@ -297,7 +297,7 @@
                                 [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
                             <div *ngIf="(submitted || landisSubmitted) && f.titleDeedNumber.errors" class="text-error">
                                 <br>
-                                <div *ngIf="f.titleDeedNumber.errors.required">This field is required.</div>
+                                <div *ngIf="l.titleDeedNumber.errors.required">This field is required.</div>
                             </div>
                         </div>
                         <div class="ui-g-4 ui-md-4">
@@ -306,7 +306,7 @@
                                 showButtonBar="true"></p-calendar>
                             <div *ngIf="(submitted || landisSubmitted) && f.fileReferenceNumber.errors"
                                 class="text-error"><br>
-                                <div *ngIf="f.fileReferenceNumber.errors.required">This field is required.</div>
+                                <div *ngIf="l.fileReferenceNumber.errors.required">This field is required.</div>
                             </div>
                         </div>
                         <div class="ui-g-4 ui-md-4">
@@ -316,7 +316,7 @@
                                 [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
                             <div *ngIf="(submitted || landisSubmitted) && f.registeredOwner.errors" class="text-error">
                                 <br>
-                                <div *ngIf="f.registeredOwner.errors.required">This field is required.</div>
+                                <div *ngIf="l.registeredOwner.errors.required">This field is required.</div>
                             </div>
                         </div>
                     </div>
@@ -327,7 +327,7 @@
                             <p-calendar formControlName="vestingDate" dateFormat="dd/mm/yy" showOtherMonths="true"
                                 showButtonBar="true"></p-calendar>
                             <div *ngIf="(submitted || landisSubmitted) && f.vestingDate.errors" class="text-error"><br>
-                                <div *ngIf="f.vestingDate.errors.required">This field is required.</div>
+                                <div *ngIf="l.vestingDate.errors.required">This field is required.</div>
                             </div>
                         </div>
                         <div class="ui-g-4 ui-md-4">
@@ -337,7 +337,7 @@
                                 [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
                             <div *ngIf="(submitted || landisSubmitted) && f.conditionsOfTitle.errors"
                                 class="text-error"><br>
-                                <div *ngIf="f.conditionsOfTitle.errors.required">This field is required.</div>
+                                <div *ngIf="l.conditionsOfTitle.errors.required">This field is required.</div>
                             </div>
                         </div>
                         <div class="ui-g-4 ui-md-4">
@@ -347,7 +347,7 @@
                                 placeholder="Select Ownership Category"></p-dropdown>
                             <div *ngIf="(submitted || landisSubmitted) && f.ownershipCategory.errors"
                                 class="text-error"><br>
-                                <div *ngIf="f.ownershipCategory.errors.required">This field is required.</div>
+                                <div *ngIf="l.ownershipCategory.errors.required">This field is required.</div>
                             </div>
                         </div>
                     </div>
@@ -360,7 +360,7 @@
                                 [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
                             <div *ngIf="(submitted || landisSubmitted) && f.stateOwnedPercentage.errors"
                                 class="text-error"><br>
-                                <div *ngIf="f.stateOwnedPercentage.errors.required">This field is required.</div>
+                                <div *ngIf="l.stateOwnedPercentage.errors.required">This field is required.</div>
                             </div>
                         </div>
                         <div class="ui-g-4 ui-md-4">
@@ -369,7 +369,7 @@
                                 placeholder="Land Use" class="ui-inputtext ui-widget"
                                 [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
                             <div *ngIf="(submitted || landisSubmitted) && f.landUse.errors" class="text-error"><br>
-                                <div *ngIf="f.landUse.errors.required">This field is required.</div>
+                                <div *ngIf="l.landUse.errors.required">This field is required.</div>
                             </div>
                         </div>
                         <div class="ui-g-4 ui-md-4">
@@ -378,7 +378,7 @@
                                 placeholder="Zoning" class="ui-inputtext ui-widget"
                                 [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
                             <div *ngIf="(submitted || landisSubmitted) && f.zoning.errors" class="text-error"><br>
-                                <div *ngIf="f.zoning.errors.required">This field is required.</div>
+                                <div *ngIf="l.zoning.errors.required">This field is required.</div>
                             </div>
                         </div>
                     </div>
@@ -394,7 +394,7 @@
                                 [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
                             <div *ngIf="(submitted || landisSubmitted) && f.userDepartment.errors" class="text-error">
                                 <br>
-                                <div *ngIf="f.userDepartment.errors.required">This field is required.</div>
+                                <div *ngIf="l.userDepartment.errors.required">This field is required.</div>
                             </div>
                         </div>
                         <div class="ui-g-4 ui-md-4">
@@ -403,7 +403,7 @@
                                 placeholder="Facility Name" class="ui-inputtext ui-widget"
                                 [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
                             <div *ngIf="(submitted || landisSubmitted) && f.facilityName.errors" class="text-error"><br>
-                                <div *ngIf="f.facilityName.errors.required">This field is required.</div>
+                                <div *ngIf="l.facilityName.errors.required">This field is required.</div>
                             </div>
                         </div>
                         <div class="ui-g-4 ui-md-4">
@@ -413,7 +413,7 @@
                                 placeholder="Select Income Lease Status"></p-dropdown>
                             <div *ngIf="(submitted || landisSubmitted) && f.incomeLeaseStatus.errors"
                                 class="text-error"><br>
-                                <div *ngIf="f.incomeLeaseStatus.errors.required">This field is required.</div>
+                                <div *ngIf="l.incomeLeaseStatus.errors.required">This field is required.</div>
                             </div>
                         </div>
                     </div>
@@ -428,7 +428,7 @@
                                 placeholder="Select Nature of Lease"></p-dropdown>
                             <div *ngIf="(submitted || landisSubmitted) && f.natureOfLease.errors" class="text-error">
                                 <br>
-                                <div *ngIf="f.natureOfLease.errors.required">This field is required.</div>
+                                <div *ngIf="l.natureOfLease.errors.required">This field is required.</div>
                             </div>
                         </div>
                         <div class="ui-g-4 ui-md-4">
@@ -440,7 +440,7 @@
                             <div *ngIf="(submitted || landisSubmitted) && f.IDNumberCompanyRegistrationNumber.errors"
                                 class="text-error">
                                 <br>
-                                <div *ngIf="f.IDNumberCompanyRegistrationNumber.errors.required">This field is
+                                <div *ngIf="l.IDNumberCompanyRegistrationNumber.errors.required">This field is
                                     required.</div>
                             </div>
                         </div>
@@ -450,7 +450,7 @@
                                 placeholder="P.O.Box" class="ui-inputtext ui-widget"
                                 [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
                             <div *ngIf="(submitted || landisSubmitted) && f.POBox.errors" class="text-error"><br>
-                                <div *ngIf="f.POBox.errors.required">This field is required.</div>
+                                <div *ngIf="l.POBox.errors.required">This field is required.</div>
                             </div>
                         </div>
                     </div>
@@ -461,7 +461,7 @@
                                 placeholder="Town" class="ui-inputtext ui-widget"
                                 [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
                             <div *ngIf="(submitted || landisSubmitted) && f.town.errors" class="text-error"><br>
-                                <div *ngIf="f.town.errors.required">This field is required.</div>
+                                <div *ngIf="l.town.errors.required">This field is required.</div>
                             </div>
                         </div>
                         <div class="ui-g-4 ui-md-4">
@@ -470,7 +470,7 @@
                                 placeholder="Postal Code" class="ui-inputtext ui-widget"
                                 [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
                             <div *ngIf="(submitted || landisSubmitted) && f.postalCode.errors" class="text-error"><br>
-                                <div *ngIf="f.postalCode.errors.required">This field is required.</div>
+                                <div *ngIf="l.postalCode.errors.required">This field is required.</div>
                             </div>
                         </div>
                         <div class="ui-g-4 ui-md-4">
@@ -480,7 +480,7 @@
                                 [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
                             <div *ngIf="(submitted || landisSubmitted) && f.contactPerson.errors" class="text-error">
                                 <br>
-                                <div *ngIf="f.contactPerson.errors.required">This field is required.</div>
+                                <div *ngIf="l.contactPerson.errors.required">This field is required.</div>
                             </div>
                         </div>
                     </div>
@@ -492,7 +492,7 @@
                                 [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
                             <div *ngIf="(submitted || landisSubmitted) && f.capacityofContactPerson.errors"
                                 class="text-error"><br>
-                                <div *ngIf="f.capacityofContactPerson.errors.required">This field is required.</div>
+                                <div *ngIf="l.capacityofContactPerson.errors.required">This field is required.</div>
                             </div>
                         </div>
                         <div class="ui-g-4 ui-md-4">
@@ -502,7 +502,7 @@
                                 [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
                             <div *ngIf="(submitted || landisSubmitted) && f.contactNumber.errors" class="text-error">
                                 <br>
-                                <div *ngIf="f.contactNumber.errors.required">This field is required.</div>
+                                <div *ngIf="l.contactNumber.errors.required">This field is required.</div>
                             </div>
                         </div>
                         <div class="ui-g-4 ui-md-4">
@@ -511,7 +511,7 @@
                                 placeholder="Escalation" class="ui-inputtext ui-widget"
                                 [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
                             <div *ngIf="(submitted || landisSubmitted) && f.escalation.errors" class="text-error"><br>
-                                <div *ngIf="f.escalation.errors.required">This field is required.</div>
+                                <div *ngIf="l.escalation.errors.required">This field is required.</div>
                             </div>
                         </div>
                     </div>
@@ -522,7 +522,7 @@
                                 showButtonBar="true"></p-calendar>
                             <div *ngIf="(submitted || landisSubmitted) && f.occupationDate.errors" class="text-error">
                                 <br>
-                                <div *ngIf="f.occupationDate.errors.required">This field is required.</div>
+                                <div *ngIf="l.occupationDate.errors.required">This field is required.</div>
                             </div>
                         </div>
                         <div class="ui-g-4 ui-md-4">
@@ -530,7 +530,7 @@
                             <p-calendar formControlName="startingDate" dateFormat="dd/mm/yy" showOtherMonths="true"
                                 showButtonBar="true"></p-calendar>
                             <div *ngIf="(submitted || landisSubmitted) && f.startingDate.errors" class="text-error"><br>
-                                <div *ngIf="f.startingDate.errors.required">This field is required.</div>
+                                <div *ngIf="l.startingDate.errors.required">This field is required.</div>
                             </div>
                         </div>
                         <div class="ui-g-4 ui-md-4">
@@ -539,7 +539,7 @@
                                 showButtonBar="true"></p-calendar>
                             <div *ngIf="(submitted || landisSubmitted) && f.terminationDate.errors" class="text-error">
                                 <br>
-                                <div *ngIf="f.terminationDate.errors.required">This field is required.</div>
+                                <div *ngIf="l.terminationDate.errors.required">This field is required.</div>
                             </div>
                         </div>
                     </div>
@@ -550,7 +550,7 @@
                                 placeholder="Rental Amount" class="ui-inputtext ui-widget"
                                 [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
                             <div *ngIf="(submitted || landisSubmitted) && f.rentalAmount.errors" class="text-error"><br>
-                                <div *ngIf="f.rentalAmount.errors.required">This field is required.</div>
+                                <div *ngIf="l.rentalAmount.errors.required">This field is required.</div>
                             </div>
                         </div>
                         <div class="ui-g-4 ui-md-4">
@@ -559,7 +559,7 @@
                                 placeholder="Other charges" class="ui-inputtext ui-widget"
                                 [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
                             <div *ngIf="(submitted || landisSubmitted) && f.otherCharges.errors" class="text-error"><br>
-                                <div *ngIf="f.otherCharges.errors.required">This field is required.</div>
+                                <div *ngIf="l.otherCharges.errors.required">This field is required.</div>
                             </div>
                         </div>
                         <div class="ui-g-4 ui-md-4">
@@ -568,7 +568,7 @@
                                 placeholder="Lease Number" class="ui-inputtext ui-widget"
                                 [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
                             <div *ngIf="(submitted || landisSubmitted) && f.leaseNumber.errors" class="text-error"><br>
-                                <div *ngIf="f.leaseNumber.errors.required">This field is required.</div>
+                                <div *ngIf="l.leaseNumber.errors.required">This field is required.</div>
                             </div>
                         </div>
                     </div>
@@ -578,7 +578,7 @@
                             <p-dropdown inputId="vat" [options]="vats" formControlName="vat" (onChange)="setVat($event)"
                                 optionLabel="name" placeholder="Select Vat"></p-dropdown>
                             <div *ngIf="submitted && f.vat.errors" class="text-error"><br>
-                                <div *ngIf="f.vat.errors.required">This field is required.</div>
+                                <div *ngIf="l.vat.errors.required">This field is required.</div>
                             </div>
                         </div>
                     </div>
@@ -594,7 +594,7 @@
             </p-footer>
         </form>
     </p-tabPanel>
-    <p-tabPanel header="Financials">
+    <p-tabPanel header="Finance">
         <form [formGroup]="financialForm" *ngIf="!loading" (ngSubmit)="onFinancialFormSubmit()">
             <div class="ui-g ui-fluid" style="overflow-y: auto; overflow-x: hidden; height: 500px;width: 100%">
                 <div class="ui-g-12 ui-md-12">
@@ -603,7 +603,7 @@
                 <p-fieldset legend="General" [toggleable]="true">
                     <div class="ui-g-12 ui-md-12">
                         <div class="ui-g-6 ui-md-6">
-                            <label for="deedsOffice">Land Use Class</label>
+                            <label for="landUseClass">Land Use Class</label>
                             <input formControlName="landUseClass" autocomplete="off" type="text" pInputText
                                 placeholder="Land Use Class" class="ui-inputtext ui-widget"
                                 [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
@@ -627,8 +627,8 @@
                 <p-fieldset legend="Secondary Information Note" [toggleable]="true">
                     <div class="ui-g-12 ui-md-12">
                         <div class="ui-g-4 ui-md-4">
-                            <label for="type">Additions Cash</label>
-                            <input formControlName="additionCash" autocomplete="off" type="text" pInputText
+                            <label for="additionCash">Additions Cash</label>
+                            <input formControlName="additionCash" autocomplete="off" type="number" pInputText
                                 placeholder="Additions Cash" class="ui-inputtext ui-widget"
                                 [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
                             <div *ngIf="submitted && f.additionCash.errors" class="text-error"><br>
@@ -636,9 +636,9 @@
                             </div>
                         </div>
                         <div class="ui-g-4 ui-md-4">
-                            <label for="deedsOffice">Additions Non Cash</label>
-                            <input formControlName="landUseClass" autocomplete="off" type="text" pInputText
-                                placeholder="Building Name" class="ui-inputtext ui-widget"
+                            <label for="additionNonCash">Additions Non Cash</label>
+                            <input formControlName="additionNonCash" autocomplete="off" type="number" pInputText
+                                placeholder="Addition Non Cash" class="ui-inputtext ui-widget"
                                 [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
                             <div *ngIf="submitted && f.additionNonCash.errors" class="text-error"><br>
                                 <div *ngIf="f.additionNonCash.errors.required">This field is required.</div>
@@ -646,7 +646,7 @@
                         </div>
                         <div class="ui-g-4 ui-md-4">
                             <label for="class">Additions</label>
-                            <input formControlName="natureofAsset" autocomplete="off" type="text" pInputText
+                            <input formControlName="addition" autocomplete="off" type="number" pInputText
                                 placeholder="Additions" class="ui-inputtext ui-widget"
                                 [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
                             <div *ngIf="submitted && f.addition.errors" class="text-error"><br>
@@ -655,32 +655,33 @@
                         </div>
                     </div>
                     <div class="ui-g-12 ui-md-12">
-                        <div class="ui-g-6 ui-md-6">
-                            <label for="type">Disposal</label>
-                            <input formControlName="additionCash" autocomplete="off" type="text" pInputText
+                        <div class="ui-g-6 ui-md-4">
+                            <label for="disposal">Disposal</label>
+                            <input formControlName="disposal" autocomplete="off" type="number" pInputText
                                 placeholder="Disposal" class="ui-inputtext ui-widget"
                                 [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
                             <div *ngIf="submitted && f.disposal.errors" class="text-error"><br>
                                 <div *ngIf="f.disposal.errors.required">This field is required.</div>
                             </div>
                         </div>
-                        <div class="ui-g-6 ui-md-6">
-                            <label for="deedsOffice">Closing Balance</label>
-                            <input formControlName="landUseClass" autocomplete="off" type="text" pInputText
+                        <div class="ui-g-6 ui-md-4">
+                            <label for="closingBalance">Closing Balance</label>
+                            <input formControlName="closingBalance" autocomplete="off" type="number" pInputText
                                 placeholder="Closing Balance" class="ui-inputtext ui-widget"
                                 [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
                             <div *ngIf="submitted && f.closingBalance.errors" class="text-error"><br>
                                 <div *ngIf="f.closingBalance.errors.required">This field is required.</div>
                             </div>
                         </div>
+                        <div class="ui-g-6 ui-md-4"></div>
                     </div>
                 </p-fieldset>
 
                 <p-fieldset legend="Valuations" [toggleable]="true">
                     <div class="ui-g-12 ui-md-12">
                         <div class="ui-g-4 ui-md-4">
-                            <label for="type">Municipal Valuations</label>
-                            <input formControlName="additionCash" autocomplete="off" type="text" pInputText
+                            <label for="municipalValuation">Municipal Valuations</label>
+                            <input formControlName="municipalValuation" autocomplete="off" type="text" pInputText
                                 placeholder="Municipal Valuations" class="ui-inputtext ui-widget"
                                 [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
                             <div *ngIf="submitted && f.municipalValuation.errors" class="text-error"><br>
@@ -688,54 +689,54 @@
                             </div>
                         </div>
                         <div class="ui-g-4 ui-md-4">
-                            <label for="dateofMunicipalValuation">Date of Municipal Valuation</label>
-                            <p-calendar formControlName="dateofMunicipalValuation" dateFormat="dd/mm/yy"
+                            <label for="municipalValuationDate">Date of Municipal Valuation</label>
+                            <p-calendar formControlName="municipalValuationDate" dateFormat="dd/mm/yy"
                                 showOtherMonths="true" showButtonBar="true"></p-calendar>
-                            <div *ngIf="submitted && f.dateofMunicipalValuation.errors" class="text-error"><br>
-                                <div *ngIf="f.dateofMunicipalValuation.errors.required">This field is required.</div>
+                            <div *ngIf="submitted && f.municipalValuationDate.errors" class="text-error"><br>
+                                <div *ngIf="f.municipalValuationDate.errors.required">This field is required.</div>
                             </div>
                         </div>
                         <div class="ui-g-4 ui-md-4">
                             <label for="class">Non Municipal Valuation</label>
-                            <input formControlName="natureofAsset" autocomplete="off" type="text" pInputText
+                            <input formControlName="nonMunicipalValuation" autocomplete="off" type="text" pInputText
                                 placeholder="Non Municipal Valuation" class="ui-inputtext ui-widget"
                                 [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
-                            <div *ngIf="submitted && f.natureofAsset.errors" class="text-error"><br>
-                                <div *ngIf="f.natureofAsset.errors.required">This field is required.</div>
+                            <div *ngIf="submitted && f.nonMunicipalValuation.errors" class="text-error"><br>
+                                <div *ngIf="f.nonMunicipalValuation.errors.required">This field is required.</div>
                             </div>
                         </div>
                     </div>
                     <div class="ui-g-12 ui-md-12">
                         <div class="ui-g-4 ui-md-4">
                             <label for="type">Value</label>
-                            <input formControlName="additionCash" autocomplete="off" type="text" pInputText
+                            <input formControlName="value" autocomplete="off" type="text" pInputText
                                 placeholder="Value" class="ui-inputtext ui-widget"
                                 [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
-                            <div *ngIf="submitted && f.additionCash.errors" class="text-error"><br>
-                                <div *ngIf="f.additionCash.errors.required">This field is required.</div>
+                            <div *ngIf="submitted && f.value.errors" class="text-error"><br>
+                                <div *ngIf="f.value.errors.required">This field is required.</div>
                             </div>
                         </div>
                         <div class="ui-g-4 ui-md-4">
-                            <label for="dateofNonMunicipalValuation">Date of Non Municipal Valuation</label>
-                            <p-calendar formControlName="dateofNonMunicipalValuation" dateFormat="dd/mm/yy"
+                            <label for="nonMunicipalValuationDate">Date of Non Municipal Valuation</label>
+                            <p-calendar formControlName="nonMunicipalValuationDate" dateFormat="dd/mm/yy"
                                 showOtherMonths="true" showButtonBar="true"></p-calendar>
-                            <div *ngIf="submitted && f.dateofNonMunicipalValuation.errors" class="text-error"><br>
-                                <div *ngIf="f.dateofNonMunicipalValuation.errors.required">This field is required.</div>
+                            <div *ngIf="submitted && f.nonMunicipalValuationDate.errors" class="text-error"><br>
+                                <div *ngIf="f.nonMunicipalValuationDate.errors.required">This field is required.</div>
                             </div>
                         </div>
                         <div class="ui-g-4 ui-md-4">
-                            <label for="class">Property Rates Account No</label>
-                            <input formControlName="natureofAsset" autocomplete="off" type="text" pInputText
+                            <label for="propetyRatesAccount">Property Rates Account No</label>
+                            <input formControlName="propetyRatesAccount" autocomplete="off" type="text" pInputText
                                 placeholder="Property Rates Account No" class="ui-inputtext ui-widget"
                                 [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
-                            <div *ngIf="submitted && f.natureofAsset.errors" class="text-error"><br>
-                                <div *ngIf="f.natureofAsset.errors.required">This field is required.</div>
+                            <div *ngIf="submitted && f.propetyRatesAccount.errors" class="text-error"><br>
+                                <div *ngIf="f.propetyRatesAccount.errors.required">This field is required.</div>
                             </div>
                         </div>
                     </div>
                     <div class="ui-g-12 ui-md-12">
-                        <div class="ui-g-6 ui-md-6">
-                            <label for="type">Account no for Services</label>
+                        <div class="ui-g-6 ui-md-4">
+                            <label for="accountNoForService">Account no for Services</label>
                             <input formControlName="accountNoForService" autocomplete="off" type="text" pInputText
                                 placeholder="Account no for Services" class="ui-inputtext ui-widget"
                                 [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
@@ -743,8 +744,8 @@
                                 <div *ngIf="f.accountNoForService.errors.required">This field is required.</div>
                             </div>
                         </div>
-                        <div class="ui-g-6 ui-md-6">
-                            <label for="deedsOffice">Person/Institution responsible for account</label>
+                        <div class="ui-g-6 ui-md-4">
+                            <label for="personInstitutionResposible">Person/Institution responsible for account</label>
                             <input formControlName="personInstitutionResposible" autocomplete="off" type="text"
                                 pInputText placeholder="Person/Institution responsible for account"
                                 class="ui-inputtext ui-widget" [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
@@ -752,6 +753,7 @@
                                 <div *ngIf="f.personInstitutionResposible.errors.required">This field is required.</div>
                             </div>
                         </div>
+                        <div class="ui-g-6 ui-md-4"></div>
                     </div>
                 </p-fieldset>
             </div>
@@ -777,9 +779,9 @@
                             <label for="deedsOffice">Building Name</label>
                             <input formControlName="buildingName" autocomplete="off" type="text" pInputText
                                 placeholder="Building Name" class="ui-inputtext ui-widget"
-                                [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
-                            <div *ngIf="submitted && f.buildingName.errors" class="text-error"><br>
-                                <div *ngIf="f.buildingName.errors.required">This field is required.</div>
+                                [ngClass]="{ 'is-invalid': submitted && I.name.errors }">
+                            <div *ngIf="submitted && I.buildingName.errors" class="text-error"><br>
+                                <div *ngIf="I.buildingName.errors.required">This field is required.</div>
                             </div>
                         </div>
                         <div class="ui-g-3 ui-md-3">
@@ -788,16 +790,16 @@
                                 (onChange)="setClass($event)" optionLabel="name"
                                 placeholder="Select a Improvement type">
                             </p-dropdown>
-                            <div *ngIf="submitted && f.type.errors" class="text-error"><br>
-                                <div *ngIf="f.type.errors.required">This field is required.</div>
+                            <div *ngIf="submitted && I.type.errors" class="text-error"><br>
+                                <div *ngIf="I.type.errors.required">This field is required.</div>
                             </div>
                         </div>
                         <div class="ui-g-3 ui-md-3">
                             <label for="type">Size (m2)</label>
                             <input formControlName="size" autocomplete="off" type="number" pInputText placeholder="Size"
                                 class="ui-inputtext ui-widget" [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
-                            <div *ngIf="submitted && f.size.errors" class="text-error"><br>
-                                <div *ngIf="f.size.errors.required">This field is required.</div>
+                            <div *ngIf="submitted && I.size.errors" class="text-error"><br>
+                                <div *ngIf="I.size.errors.required">This field is required.</div>
                             </div>
                         </div>
                         <div class="ui-g-3 ui-md-3">
@@ -806,8 +808,8 @@
                                 formControlName="potentialUse" (onChange)="setClass($event)" optionLabel="name"
                                 placeholder="Select a Potential Use">
                             </p-dropdown>
-                            <div *ngIf="submitted && f.potentialUse.errors" class="text-error"><br>
-                                <div *ngIf="f.potentialUse.errors.required">This field is required.</div>
+                            <div *ngIf="submitted && I.potentialUse.errors" class="text-error"><br>
+                                <div *ngIf="I.potentialUse.errors.required">This field is required.</div>
                             </div>
                         </div>
                     </div>
@@ -818,8 +820,8 @@
                             <input formControlName="siteCoverag" autocomplete="off" type="number" pInputText
                                 placeholder="Site Coverag" class="ui-inputtext ui-widget"
                                 [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
-                            <div *ngIf="submitted && f.siteCoverag.errors" class="text-error"><br>
-                                <div *ngIf="f.siteCoverag.errors.required">This field is required.</div>
+                            <div *ngIf="submitted && I.siteCoverag.errors" class="text-error"><br>
+                                <div *ngIf="I.siteCoverag.errors.required">This field is required.</div>
                             </div>
                         </div>
                         <div class="ui-g-3 ui-md-3">
@@ -827,8 +829,8 @@
                             <input formControlName="levelofUtilization" autocomplete="off" type="number" pInputText
                                 placeholder="size of Improvement" class="ui-inputtext ui-widget"
                                 [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
-                            <div *ngIf="submitted && f.levelofUtilization.errors" class="text-error"><br>
-                                <div *ngIf="f.levelofUtilization.errors.required">This field is required.</div>
+                            <div *ngIf="submitted && I.levelofUtilization.errors" class="text-error"><br>
+                                <div *ngIf="I.levelofUtilization.errors.required">This field is required.</div>
                             </div>
                         </div>
                         <div class="ui-g-3 ui-md-3">
@@ -836,8 +838,8 @@
                             <input formControlName="extentofBuilding" autocomplete="off" type="number" pInputText
                                 placeholder="Extent of Building" class="ui-inputtext ui-widget"
                                 [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
-                            <div *ngIf="submitted && f.extentofBuilding.errors" class="text-error"><br>
-                                <div *ngIf="f.extentofBuilding.errors.required">This field is required.</div>
+                            <div *ngIf="submitted && I.extentofBuilding.errors" class="text-error"><br>
+                                <div *ngIf="I.extentofBuilding.errors.required">This field is required.</div>
                             </div>
                         </div>
                         <div class="ui-g-3 ui-md-3">
@@ -846,8 +848,8 @@
                                 formControlName="conditionRating" (onChange)="setConditionRating($event)"
                                 optionLabel="name" placeholder="Select condition rating">
                             </p-dropdown>
-                            <div *ngIf="submitted && f.conditionRating.errors" class="text-error"><br>
-                                <div *ngIf="f.conditionRating.errors.required">This field is required.</div>
+                            <div *ngIf="submitted && I.conditionRating.errors" class="text-error"><br>
+                                <div *ngIf="I.conditionRating.errors.required">This field is required.</div>
                             </div>
                         </div>
                     </div>
@@ -857,8 +859,8 @@
                             <input formControlName="usableArea" autocomplete="off" type="number" pInputText
                                 placeholder="Usable Area" class="ui-inputtext ui-widget"
                                 [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
-                            <div *ngIf="submitted && f.usableArea.errors" class="text-error"><br>
-                                <div *ngIf="f.usableArea.errors.required">This field is required.</div>
+                            <div *ngIf="submitted && I.usableArea.errors" class="text-error"><br>
+                                <div *ngIf="I.usableArea.errors.required">This field is required.</div>
                             </div>
                         </div>
                         <div class="ui-g-3 ui-md-3">
@@ -867,8 +869,8 @@
                                 formControlName="functionalPerformanceRating" (onChange)="setClass($event)"
                                 optionLabel="name" placeholder="Select a functional performance rating">
                             </p-dropdown>
-                            <div *ngIf="submitted && f.functionalPerformanceRating.errors" class="text-error"><br>
-                                <div *ngIf="f.functionalPerformanceRating.errors.required">This field is required.</div>
+                            <div *ngIf="submitted && I.functionalPerformanceRating.errors" class="text-error"><br>
+                                <div *ngIf="I.functionalPerformanceRating.errors.required">This field is required.</div>
                             </div>
                         </div>
                         <div class="ui-g-3 ui-md-3">
@@ -876,8 +878,8 @@
                             <input formControlName="comment" autocomplete="off" type="text" pInputText
                                 placeholder="Comment" class="ui-inputtext ui-widget"
                                 [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
-                            <div *ngIf="submitted && f.comment.errors" class="text-error"><br>
-                                <div *ngIf="f.comment.errors.required">This field is required.</div>
+                            <div *ngIf="submitted && I.comment.errors" class="text-error"><br>
+                                <div *ngIf="I.comment.errors.required">This field is required.</div>
                             </div>
                         </div>
                         <div class="ui-g-3 ui-md-3" style="float: right;">

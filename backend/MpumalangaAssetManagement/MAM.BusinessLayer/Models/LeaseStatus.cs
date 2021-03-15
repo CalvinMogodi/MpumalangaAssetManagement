@@ -15,7 +15,7 @@ namespace MAM.BusinessLayer.Models
         public string ContactPerson { get; set; }
         public int PostalCode { get; set; }
         public string LeaseStatusTown { get; set; }
-        public decimal RentalAmount { get; set; }
+        public double RentalAmount { get; set; }
         public DateTime TerminationDate { get; set; }
         public DateTime StartingDate { get; set; }
         public DateTime OccupationDate { get; set; }

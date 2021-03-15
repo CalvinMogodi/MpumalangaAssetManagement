@@ -6,6 +6,8 @@ import { first } from 'rxjs/internal/operators/first';
 import { Facility } from 'src/app/models/facility.model';
 import { FacilityService } from 'src/app/services/facility/facility.service';
 import { ConfirmationService } from 'primeng/api';
+import { User } from 'src/app/models/user.model';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 
 @Component({
   selector: 'app-addassetregister',
@@ -24,6 +26,7 @@ export class AddassetregisterComponent implements OnInit {
   financeIsSubmitted: boolean = false;
   isSubmitted: boolean = false;
   selectedImprovement: any;
+  selectedDeedsOffice: any;
   generalInformation: {
     deedsOffice: '',
     class: '',
@@ -56,7 +59,10 @@ export class AddassetregisterComponent implements OnInit {
   vats: any[];
   userDepartments: any[];
   landRemainders: any[];
-  howAcquired: any[];
+  howAcquireds: any[];
+  howAcquired: any = {
+    name: undefined
+  };
   provinces: any[];
   functionalPerformanceRatings: any[];
   ownershipCategories: any;
@@ -76,41 +82,52 @@ export class AddassetregisterComponent implements OnInit {
 
   facility: any;
 
-  financial: {};
+  finance: {};
   improvement: {}
+  currentUser: User;
 
-  constructor(private confirmationService: ConfirmationService, public facilityService: FacilityService, private formBuilder: FormBuilder, private messageService: MessageService) { }
+  constructor(private authenticationService: AuthenticationService,private confirmationService: ConfirmationService, public facilityService: FacilityService, private formBuilder: FormBuilder, private messageService: MessageService) { }
 
   ngOnInit() {
     this.buildForm();
+    this.authenticationService.currentUser.pipe().subscribe(x => {
+      this.currentUser = x;
+    });
+  
     if (this.selectedAsset.facilityId != undefined) {
       this.mode = this.selectedAsset.mode;
-      this.facilityService.getFacilityById(this.selectedAsset.facilityId, this.selectedAsset.facilityType).pipe(first()).subscribe(facility => {
+      if(this.mode == "Edit"){
         this.loading = false;
-        this.facility = facility;
+        this.facility = this.selectedAsset.facility;
         this.initFacility();
-      });
+      }else{
+        this.facilityService.getFacilityById(this.selectedAsset.facilityId, this.selectedAsset.facilityType).pipe(first()).subscribe(facility => {
+          this.loading = false;
+          this.facility = facility;
+          this.initFacility();
+        });
+      }
+      
     } else {
+      this.buildForm();
       this.mode = this.selectedAsset.mode;
       this.loading = false;
     }
 
     this.facility = {
       id: 0,
-      name: '',
-      fileReference: '',
-      facilityType: '',
-      clientCode: '',
-      vestingInformation: '',
-      comments: '',
-      userId: 0,
-      status: "1",
-      createdBy: '',
+      name: 'Land T0IS00000000000700020',
+      fileReference: 'Land' + this.makeId(4),
+      type: 'Land',
+      clientCode: 'T0IS00000000000700020',
+      userId: this.currentUser.id,
+      status: "New",
+      createdBy: this.currentUser.id,
       createdDate: new Date(),
-      modifiedBy: '',
+      modifiedBy: this.currentUser.id,
       modifiedDate: new Date(),   
       land: {},
-      financial: {},  
+      finance: {},  
       improvements: []
     }
   }
@@ -178,14 +195,35 @@ export class AddassetregisterComponent implements OnInit {
   onFinancialFormSubmit() {
     this.financeIsSubmitted = true;
     if (this.financialForm.valid) {
-      this.assignFacility(false, false, true);
+      this.assignFacility(false, true, false);
+      
+      this.facilityService.saveFacility(this.facility, "finance").pipe(first()).subscribe(isSaved => {
+        if (isSaved) {
+          this.savingLand = false;
+          this.messageService.add({ severity: 'info', summary: 'Saving', detail: 'Financial records are saved successful.' });
+        }
+        else {
+          this.savingLand = false;
+          this.messageService.add({ severity: 'error', summary: 'Error', detail: 'An error occurred while saving!' });
+        }
+      });
     }
   }
 
   onImprovementFormSubmit() {
     this.improvementIsSubmitted = true;
     if (this.landForm.valid) {
-      this.assignFacility(false, true, false);
+      this.assignFacility(false, false, true);
+      this.facilityService.saveFacility(this.facility, "improvement").pipe(first()).subscribe(isSaved => {
+        if (isSaved) {
+          this.savingLand = false;
+          this.messageService.add({ severity: 'info', summary: 'Saving', detail: 'Improvement records are saved successful.' });
+        }
+        else {
+          this.savingLand = false;
+          this.messageService.add({ severity: 'error', summary: 'Error', detail: 'An error occurred while saving!' });
+        }
+      });
     }
   }
 
@@ -193,14 +231,14 @@ export class AddassetregisterComponent implements OnInit {
     this.landIsSubmitted = true;
     if (this.landForm.valid) {
       this.assignFacility(true, false, false);
-      this.facilityService.saveFacility(this.facility, 0).pipe(first()).subscribe(isSaved => {
+      this.facilityService.saveFacility(this.facility, "land").pipe(first()).subscribe(isSaved => {
         if (isSaved) {
           this.savingLand = false;
-          this.messageService.add({ severity: 'warn', summary: 'Deleted', detail: 'Asset is deleted successful.' });
+          this.messageService.add({ severity: 'info', summary: 'Saving', detail: 'Land records are saved successful.' });
         }
         else {
           this.savingLand = false;
-          this.messageService.add({ severity: 'error', summary: 'Error', detail: 'An error occurred while delete asset.' });
+          this.messageService.add({ severity: 'error', summary: 'Error', detail: 'An error occurred while saving!' });
         }
       });
 
@@ -215,9 +253,9 @@ export class AddassetregisterComponent implements OnInit {
       return;
     }
     this.assignFacility(true, true, true);
-    this.facilityService.saveFacility(this.facility, 2).pipe(first()).subscribe(isSaved => {
+    this.facilityService.saveFacility(this.facility, "facility").pipe(first()).subscribe(isSaved => {
       if (isSaved) {
-        this.newAsset.emit({ mode: "Add", data: this.facility, response: "isUpdatedSuccessful" });
+        this.newAsset.emit({ mode: "Add", data: this.facility, response: "isAddedSuccessful" });
         this.savingLand = false;
         this.messageService.add({ severity: 'warn', summary: 'Deleted', detail: 'Asset is added successful.' });
       }
@@ -243,27 +281,27 @@ export class AddassetregisterComponent implements OnInit {
             town: this.landForm.controls["town"].value,
             suburb: this.landForm.controls["suburb"].value,
             streetName: this.landForm.controls["streetName"].value,
-            streetNumber: this.landForm.controls["streetNumber"].value,
-            districtMunicipality: this.landForm.controls["districtMunicipality"].value,
-            region: this.landForm.controls["region"].value,
-            localAuthority: this.landForm.controls["localAuthority"].value,
-            latitude: this.landForm.controls["latitude"].value,
-            longitude: this.landForm.controls["longitude"].value,
-            magisterialDistrict: this.landForm.controls["magisterialDistrict"].value,
+            streetNumber: Number(this.landForm.controls["streetNumber"].value),
+            districtMunicipality: this.landForm.controls["districtMunicipality"].value.name,
+            region: this.landForm.controls["region"].value.name,
+            localAuthority: this.landForm.controls["localAuthority"].value.name,
+            latitude: this.landForm.controls["latitude"].value.toString(),
+            longitude: this.landForm.controls["longitude"].value.toString(),
+            magisterialDistrict: this.landForm.controls["magisterialDistrict"].value.name,
           },
           propertyDescription: {
             id: 0,
-            registrationDivision: this.landForm.controls["registrationDivision"].value,
+            registrationDivision: this.landForm.controls["registrationDivision"].value.name,
             townshipName: this.landForm.controls["townshipName"].value,
             landParcel: this.landForm.controls["landParcel"].value,
             landPortion: this.landForm.controls["landPortion"].value,
             oldDescription: this.landForm.controls["oldDescription"].value,
-            landRemainder: this.landForm.controls["landRemainder"].value,
+            landRemainder: this.landForm.controls["landRemainder"].value.name == "Yes" ? true : false,
             farmName: this.landForm.controls["farmName"].value,
-            SGDiagramNumber: this.landForm.controls["SGDiagramNumber"].value,
+            SGDiagramNumber: Number(this.landForm.controls["SGDiagramNumber"].value),
             extent: this.landForm.controls["extent"].value,
             LPICode: this.landForm.controls["LPICode"].value,
-            acquired: this.landForm.controls["acquired"].value,
+            acquired: this.landForm.controls["acquired"].value.name,
             acquiredOther: this.landForm.controls["acquiredOther"].value,
           },
           landUseManagementDetail: {
@@ -273,30 +311,30 @@ export class AddassetregisterComponent implements OnInit {
             registeredOwner: this.landForm.controls["registeredOwner"].value,
             vestingDate: this.landForm.controls["vestingDate"].value,
             conditionsOfTitle: this.landForm.controls["conditionsOfTitle"].value,
-            ownershipCategory: this.landForm.controls["ownershipCategory"].value,
+            ownershipCategory: this.landForm.controls["ownershipCategory"].value.name,
             stateOwnedPercentage: this.landForm.controls["stateOwnedPercentage"].value,
             landUse: this.landForm.controls["landUse"].value,
             zoning: this.landForm.controls["zoning"].value,
-            userDepartment: this.landForm.controls["userDepartment"].value,
+            userDepartment: this.landForm.controls["userDepartment"].value.toString(),
             facilityName: this.landForm.controls["facilityName"].value,
-            incomeLeaseStatus: this.landForm.controls["incomeLeaseStatus"].value,
+            incomeLeaseStatus: this.landForm.controls["incomeLeaseStatus"].value.name,
           },
           leaseStatus: {
             id: 0,
-            natureOfLease: this.landForm.controls["natureOfLease"].value,
+            natureOfLease: this.landForm.controls["natureOfLease"].value.name,
             IDNumberCompanyRegistrationNumber: this.landForm.controls["IDNumberCompanyRegistrationNumber"].value,
-            POBox: this.landForm.controls["POBox"].value,
+            POBox: this.landForm.controls["POBox"].value.toString(),
             contactNumber: this.landForm.controls["contactNumber"].value,
             capacityofContactPerson: this.landForm.controls["capacityofContactPerson"].value,
-            contactPerson: this.landForm.controls["contactPerson"].value,
-            postalCode: this.landForm.controls["postalCode"].value,
+            contactPerson: this.landForm.controls["contactPerson"].value.toString(),
+            postalCode: Number(this.landForm.controls["postalCode"].value),
             leaseStatusTown: this.landForm.controls["leaseStatusTown"].value,
             rentalAmount: this.landForm.controls["rentalAmount"].value,
             terminationDate: this.landForm.controls["terminationDate"].value,
             startingDate: this.landForm.controls["startingDate"].value,
             occupationDate: this.landForm.controls["occupationDate"].value,
-            escalation: this.landForm.controls["escalation"].value,
-            vat: this.landForm.controls["vat"].value,
+            escalation: this.landForm.controls["escalation"].value.toString(),
+            vat: this.landForm.controls["vat"].value.name,
             leaseNumber: this.landForm.controls["leaseNumber"].value,
             otherCharges: this.landForm.controls["otherCharges"].value,
           }
@@ -304,8 +342,8 @@ export class AddassetregisterComponent implements OnInit {
       }
     }
     if (isFinancialSave) {
-      if (this.facility.financial != undefined && this.facility.financial != null) {
-        this.facility.financial = {
+      if (this.facility.finance != undefined && this.facility.finance != null) {
+        this.facility.finance = {
           id: 0,
           landUseClass: this.financialForm.controls["landUseClass"].value,
           natureofAsset: this.financialForm.controls["natureofAsset"].value,
@@ -317,8 +355,8 @@ export class AddassetregisterComponent implements OnInit {
             closingBalance: this.financialForm.controls["closingBalance"].value,
           },
           valuation: {
-            dateofMunicipalValuation: this.financialForm.controls["dateofMunicipalValuation"].value,
-            dateofNonMunicipalValuation: this.financialForm.controls["dateofNonMunicipalValuation"].value,
+            municipalValuationDate: this.financialForm.controls["municipalValuationDate"].value,
+            nonMunicipalValuationDate: this.financialForm.controls["nonMunicipalValuationDate"].value,
             municipalValuation: this.financialForm.controls["municipalValuation"].value,
             nonMunicipalValuation: this.financialForm.controls["nonMunicipalValuation"].value,
             propetyRatesAccount: this.financialForm.controls["propetyRatesAccount"].value,
@@ -414,8 +452,8 @@ export class AddassetregisterComponent implements OnInit {
       addition: ['', [Validators.required]],
       disposal: ['', [Validators.required]],
       closingBalance: ['', [Validators.required]],
-      dateofMunicipalValuation: ['', [Validators.required]],
-      dateofNonMunicipalValuation: ['', [Validators.required]],
+      municipalValuationDate: ['', [Validators.required]],
+      nonMunicipalValuationDate: ['', [Validators.required]],
       municipalValuation: ['', [Validators.required]],
       nonMunicipalValuation: ['', [Validators.required]],
       propetyRatesAccount: ['', [Validators.required]],
@@ -459,7 +497,7 @@ export class AddassetregisterComponent implements OnInit {
     ];
     this.steps = [
       { label: 'Land', icon: 'pi pi-fw pi-globe' },
-      { label: 'Financials', icon: 'pi pi-fw pi-money-bill' },
+      { label: 'Finane', icon: 'pi pi-fw pi-money-bill' },
       { label: 'Impronements', icon: 'pi pi-fw pi-home' }
     ];
 
@@ -563,7 +601,7 @@ export class AddassetregisterComponent implements OnInit {
       { name: '3 -Functional Performance does not meet the standard expected for functional and operational requirements', code: '3', factor: 3 }
     ];
 
-    this.howAcquired = [
+    this.howAcquireds = [
       { name: 'Purchased', code: 'P', factor: 1 },
       { name: 'Expropriated', code: 'E', factor: 2 },
       { name: 'Donation', code: 'D', factor: 3 },
@@ -605,89 +643,117 @@ export class AddassetregisterComponent implements OnInit {
   }
 
   initFacility() {
+     
+    let deedsOffice = this.deedsOffices.filter(d => d.name == this.facility.land.deedsOffice)[0];
+    let type = this.types.filter(d => d.name == this.facility.land.type)[0];
+    let assetClass = this.classes.filter(d => d.name == this.facility.land.class)[0];
+    let province = this.provinces.filter(d => d.name == this.facility.land.geographicalLocation.province)[0];
+    let districtMunicipality = this.districtMunicipalities.filter(d => d.name == this.facility.land.geographicalLocation.districtMunicipality)[0];
+   
+    let region = this.regions.filter(d => d.name == this.facility.land.region)[0];
+    let registrationDivision = this.registrationDivisions.filter(d => d.name == this.facility.land.propertyDescription.registrationDivision)[0];
+    let landRemainder = this.landRemainders.filter(d => d.name == this.facility.land.propertyDescription.landRemainder)[0];
+    let acquired = this.howAcquireds.filter(d => d.name == this.facility.land.propertyDescription.acquired)[0];
+    let ownershipCategory = this.ownershipCategories.filter(d => d.name == this.facility.land.landUseManagementDetail.ownershipCategory)[0];
+    let userDepartment = this.userDepartments.filter(d => d.name == this.facility.land.landUseManagementDetail.userDepartment)[0];
+    let incomeLeaseStatus = this.incomeLeaseStatuses.filter(d => d.name == this.facility.land.landUseManagementDetail.incomeLeaseStatus)[0];
+    let natureOfLease = this.natureOfLeases.filter(d => d.name == this.facility.land.leaseStatus.natureOfLease)[0];
+    let vat = this.vats.filter(d => d.name == this.facility.land.leaseStatus.vat)[0];
+    let _districtMunicipality = {
+      value: districtMunicipality
+    };
+    this.setDistrictMunicipality(_districtMunicipality);
+    let localAuthority = this.localAuthorities.filter(d => d.name == this.facility.land.geographicalLocation.localAuthority)[0];
 
     this.landForm = this.formBuilder.group({
-      deedsOffice: ['', Validators.required],
-      class: ['', Validators.required],
-      type: ['', [Validators.required]],
-      province: ['', [Validators.required]],
-      town: ['', [Validators.required]],
-      suburb: ['', [Validators.required]],
-      streetName: ['', [Validators.required]],
-      streetNumber: ['', [Validators.required]],
-      districtMunicipality: ['', [Validators.required]],
-      region: ['', [Validators.required]],
-      localAuthority: ['', [Validators.required]],
-      latitude: ['', [Validators.required]],
-      longitude: ['', [Validators.required]],
-      registrationDivision: ['', [Validators.required]],
-      townshipName: ['', [Validators.required]],
-      landParcel: ['', [Validators.required]],
-      landPortion: ['', [Validators.required]],
-      oldDescription: ['', [Validators.required]],
-      landRemainder: ['', [Validators.required]],
-      farmName: ['', [Validators.required]],
-      SGDiagramNumber: ['', [Validators.required]],
-      extent: ['', [Validators.required]],
-      LPICode: ['', [Validators.required]],
-      acquired: ['', [Validators.required]],
-      acquiredOther: ['', [Validators.required]],
-      titleDeedNumber: ['', [Validators.required]],
-      registrationDate: ['', [Validators.required]],
-      registeredOwner: ['', [Validators.required]],
-      vestingDate: ['', [Validators.required]],
-      conditionsOfTitle: ['', [Validators.required]],
-      ownershipCategory: ['', [Validators.required]],
-      stateOwnedPercentage: ['', [Validators.required]],
-      landUse: ['', [Validators.required]],
-      zoning: ['', [Validators.required]],
-      userDepartment: ['', [Validators.required]],
-      facilityName: ['', [Validators.required]],
-      incomeLeaseStatus: ['', [Validators.required]],
-      vat: ['', [Validators.required]],
-      leaseNumber: ['', [Validators.required]],
-      otherCharges: ['', [Validators.required]],
-      rentalAmount: ['', [Validators.required]],
-      terminationDate: ['', [Validators.required]],
-      startingDate: ['', [Validators.required]],
-      occupationDate: ['', [Validators.required]],
-      escalation: ['', [Validators.required]],
-      contactNumber: ['', [Validators.required]],
-      capacityofContactPerson: ['', [Validators.required]],
-      contactPerson: ['', [Validators.required]],
-      postalCode: ['', [Validators.required]],
-      leaseStatusTown: ['', [Validators.required]],
-      POBox: ['', [Validators.required]],
-      IDNumberCompanyRegistrationNumber: ['', [Validators.required]],
-      natureOfLease: ['', [Validators.required]],
-      magisterialDistrict: ['', [Validators.required]]
+      deedsOffice: [deedsOffice, Validators.required],
+      class: [assetClass, Validators.required],
+      type: [type, [Validators.required]],
+      province: [province, [Validators.required]],
+      town: [this.facility.land.geographicalLocation.town, [Validators.required]],
+      suburb: [this.facility.land.geographicalLocation.suburb, [Validators.required]],
+      streetName: [this.facility.land.geographicalLocation.streetName, [Validators.required]],
+      streetNumber: [this.facility.land.geographicalLocation.streetNumber, [Validators.required]],
+      districtMunicipality: [districtMunicipality, [Validators.required]],
+      region: [region, [Validators.required]],
+      localAuthority: [localAuthority, [Validators.required]],
+      latitude: [this.facility.land.geographicalLocation.town, [Validators.required]],
+      longitude: [this.facility.land.geographicalLocation.town, [Validators.required]],
+      magisterialDistrict: [this.facility.land.propertyDescription.magisterialDistrict, [Validators.required]],
+      registrationDivision: [registrationDivision, [Validators.required]],
+      townshipName: [this.facility.land.propertyDescription.town, [Validators.required]],
+      landParcel: [this.facility.land.propertyDescription.landParcel, [Validators.required]],
+      landPortion: [this.facility.land.propertyDescription.landPortion, [Validators.required]],
+      oldDescription: [this.facility.land.propertyDescription.oldDescription, [Validators.required]],
+      landRemainder: [landRemainder, [Validators.required]],
+      farmName: [this.facility.land.propertyDescription.farmName, [Validators.required]],
+      SGDiagramNumber: [this.facility.land.propertyDescription.sGDiagramNumber, [Validators.required]],
+      extent: [this.facility.land.propertyDescription.extent, [Validators.required]],
+      LPICode: [this.facility.land.propertyDescription.lPICode, [Validators.required]],
+      acquired: [acquired, [Validators.required]],
+      acquiredOther: [this.facility.land.propertyDescription.acquiredOther, [Validators.required]],
+      titleDeedNumber: [this.facility.land.landUseManagementDetail.titleDeedNumber, [Validators.required]],
+      registrationDate: [new Date(this.facility.land.landUseManagementDetail.registrationDate), [Validators.required]],
+      registeredOwner: [this.facility.land.landUseManagementDetail.registeredOwner, [Validators.required]],
+      vestingDate: [this.facility.land.landUseManagementDetail.vestingDate, [Validators.required]],
+      conditionsOfTitle: [this.facility.land.landUseManagementDetail.conditionsOfTitle, [Validators.required]],
+      ownershipCategory: [ownershipCategory, [Validators.required]],
+      stateOwnedPercentage: [this.facility.land.landUseManagementDetail.stateOwnedPercentage, [Validators.required]],
+      landUse: [this.facility.land.landUseManagementDetail.landUse, [Validators.required]],
+      zoning: [this.facility.land.landUseManagementDetail.zoning, [Validators.required]],
+      userDepartment: [userDepartment, [Validators.required]],
+      facilityName: [this.facility.land.landUseManagementDetail.facilityName, [Validators.required]],
+      incomeLeaseStatus: [incomeLeaseStatus, [Validators.required]],
+      leaseNumber: [this.facility.land.leaseStatus.leaseNumber, [Validators.required]],
+      otherCharges: [this.facility.land.leaseStatus.otherCharges, [Validators.required]],
+      rentalAmount: [this.facility.land.leaseStatus.rentalAmount, [Validators.required]],
+      terminationDate: [new Date(this.facility.land.leaseStatus.terminationDate), [Validators.required]],
+      startingDate: [new Date(this.facility.land.leaseStatus.startingDate), [Validators.required]],
+      occupationDate:[ new Date(this.facility.land.leaseStatus.occupationDate), [Validators.required]],
+      escalation: [this.facility.land.leaseStatus.escalation, [Validators.required]],
+      contactNumber: [this.facility.land.leaseStatus.contactNumber, [Validators.required]],
+      capacityofContactPerson: [this.facility.land.leaseStatus.capacityofContactPerson, [Validators.required]],
+      contactPerson: [this.facility.land.leaseStatus.contactPerson, [Validators.required]],
+      postalCode: [this.facility.land.leaseStatus.postalCode, [Validators.required]],
+      leaseStatusTown: [this.facility.land.leaseStatus.leaseStatusTown, [Validators.required]],
+      POBox: [this.facility.land.leaseStatus.pOBox, [Validators.required]],
+      IDNumberCompanyRegistrationNumber: [this.facility.land.leaseStatus.IDNumberCompanyRegistrationNumber, [Validators.required]],
+      natureOfLease: [natureOfLease, [Validators.required]],     
+      vat: [vat, [Validators.required]],
     });
     this.improvementForm = this.formBuilder.group({
       buildingName: ['', Validators.required],
-      typeOfImprovement: ['', Validators.required],
-      sizeofImprovement: ['', [Validators.required]],
+      type: ['', Validators.required],
+      size: ['', [Validators.required]],
       potentialUse: ['', [Validators.required]],
-      town: ['', [Validators.required]],
-      suburb: ['', [Validators.required]],
-      streetName: ['', [Validators.required]],
-      streetNumber: ['', [Validators.required]],
       siteCoverag: ['', [Validators.required]],
-      functionalPerformanceRating: ['', [Validators.required]],
+      levelofUtilization: ['', [Validators.required]],
       extentofBuilding: ['', [Validators.required]],
       conditionRating: ['', [Validators.required]],
       usableArea: ['', [Validators.required]],
+      functionalPerformanceRating: ['', [Validators.required]],
+      comment: ['', [Validators.required]],
     });
     this.financialForm = this.formBuilder.group({
-      landUseClass: ['', Validators.required],
-      natureofAsset: ['', Validators.required],
-      additionCash: ['', [Validators.required]],
-      dateofMunicipalValuation: ['', [Validators.required]],
-      dateofNonMunicipalValuation: ['', [Validators.required]],
+      landUseClass: [this.facility.finance.landUseClass, Validators.required],
+      natureofAsset: [this.facility.finance.natureofAsset, Validators.required],
+      additionCash: [this.facility.finance.secondaryInformationNote.additionCash, [Validators.required]],
+      additionNonCash: [this.facility.finance.secondaryInformationNote.additionNonCash, [Validators.required]],
+      addition: [this.facility.finance.secondaryInformationNote.addition, [Validators.required]],
+      disposal: [this.facility.finance.secondaryInformationNote.disposal, [Validators.required]],
+      closingBalance: [this.facility.finance.secondaryInformationNote.closingBalance, [Validators.required]],
+      municipalValuationDate: [this.facility.finance.valuation.municipalValuationDate, [Validators.required]],
+      nonMunicipalValuationDate: [this.facility.finance.valuation.nonMunicipalValuationDate, [Validators.required]],
+      municipalValuation: [this.facility.finance.valuation.municipalValuation, [Validators.required]],
+      nonMunicipalValuation: [this.facility.finance.valuation.nonMunicipalValuation, [Validators.required]],
+      propetyRatesAccount: [this.facility.finance.valuation.propetyRatesAccount, [Validators.required]],
+      value: [this.facility.finance.valuation.value, [Validators.required]],
+      accountNoForService: [this.facility.finance.valuation.accountNoForService, [Validators.required]],
+      personInstitutionResposible: [this.facility.finance.valuation.personInstitutionResposible, [Validators.required]],
     });
   }
 
   confirmDelete() {
-
     this.improvements.splice(this.selectedImprovement);
   }
 
@@ -716,20 +782,30 @@ export class AddassetregisterComponent implements OnInit {
   AddImprovement() {
     if (this.improvementForm.valid) {
       let improvement = {
-        id: this.improvements.length + 1,
+        id: 0,
         buildingName: this.improvementForm.controls["buildingName"].value,
         type: this.improvementForm.controls["type"].value.name,
         size: this.improvementForm.controls["size"].value,
-        potentialUse: this.improvementForm.controls["potentialUse"].value,
-        siteCoverag: this.improvementForm.controls["siteCoverag"].value,
-        levelofUtilization: this.improvementForm.controls["levelofUtilization"].value,
-        extentofBuilding: this.improvementForm.controls["extentofBuilding"].value,
+        potentialUse: this.improvementForm.controls["potentialUse"].value.name,
+        siteCoverag: this.improvementForm.controls["siteCoverag"].value.toString(),
+        levelofUtilization: this.improvementForm.controls["levelofUtilization"].value.toString(),
+        extentofBuilding: this.improvementForm.controls["extentofBuilding"].value.toString(),
         conditionRating: this.improvementForm.controls["conditionRating"].value.name,
-        usableArea: this.improvementForm.controls["usableArea"].value,
+        usableArea: this.improvementForm.controls["usableArea"].value.toString(),
         functionalPerformanceRating: this.improvementForm.controls["functionalPerformanceRating"].value.name,
         comment: this.improvementForm.controls["comment"].value,
       };
       this.improvements.push(improvement);
     }
   }
+
+  makeId(length) {
+    var result           = '';
+    var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    var charactersLength = characters.length;
+    for ( var i = 0; i < length; i++ ) {
+       result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
+ }
 }

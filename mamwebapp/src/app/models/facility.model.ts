@@ -128,8 +128,8 @@ export class SecondaryInformationNote {
 }
 
 export class Valuation { 
-    dateofMunicipalValuation: Date;
-    dateofNonMunicipalValuation: Date;
+    municipalValuationDate: Date;
+    nonMunicipalValuationDate: Date;
     municipalValuation: string;
     nonMunicipalValuation: string;
     propetyRatesAccount: string;
