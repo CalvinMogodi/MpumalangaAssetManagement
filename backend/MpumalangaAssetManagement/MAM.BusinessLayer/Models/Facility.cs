@@ -55,8 +55,8 @@ namespace MAM.BusinessLayer.Models
                 {
                     Id = f.Land.Id,
                     DeedsOffice = f.Land.DeedsOffice,
-                    AssetClass = f.Land.AssetClass,
-                    AssetType = f.Land.AssetType,
+                    Class = f.Land.Class,
+                    Type = f.Land.Type,
                     GeographicalLocationId = f.Land.GeographicalLocationId,
                     PropertyDescriptionId = f.Land.PropertyDescriptionId,
                     LandUseManagementDetailId = f.Land.LandUseManagementDetailId,
@@ -107,8 +107,8 @@ namespace MAM.BusinessLayer.Models
                 {
                     Id = facility.Land.Id,
                     DeedsOffice = facility.Land.DeedsOffice,
-                    AssetClass = facility.Land.AssetClass,
-                    AssetType = facility.Land.AssetType,
+                    Class = facility.Land.Class,
+                    Type = facility.Land.Type,
                     GeographicalLocationId = facility.Land.GeographicalLocationId,
                     PropertyDescriptionId = facility.Land.PropertyDescriptionId,
                     LandUseManagementDetailId = facility.Land.LandUseManagementDetailId,

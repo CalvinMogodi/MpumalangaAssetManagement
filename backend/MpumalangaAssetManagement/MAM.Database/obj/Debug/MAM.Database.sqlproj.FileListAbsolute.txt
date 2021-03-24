@@ -25,4 +25,3 @@ C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\obj
 C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\obj\Debug\predeploy.sql
 C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\obj\Debug\MAM.Database.dll
 C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\obj\Debug\MAM.Database.pdb
-C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\obj\Debug\MAM.Database.sqlprojAssemblyReference.cache

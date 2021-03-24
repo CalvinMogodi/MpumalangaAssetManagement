@@ -1,3 +1,4 @@
+<p-toast [style]="{marginTop: '80px'}" position="top-right"></p-toast>
 <p-tabView [(activeIndex)]="activeIndex">
     <p-tabPanel header="Land">
         <form [formGroup]="landForm" *ngIf="!loading" (ngSubmit)="onLandFormSubmit()">
@@ -139,7 +140,7 @@
                         <div class="ui-g-4 ui-md-4">
                             <label for="longitude">GPS Coordinates Longitude</label>
                             <input formControlName="longitude" ng-pattern="/^[-+]?[0-9]{1,7}(\.[0-9]+)?$/"
-                                autocomplete="off" type="number" pInputText placeholder="Longitude"
+                                autocomplete="off" type="text" pInputText placeholder="Longitude"
                                 class="ui-inputtext ui-widget" [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
                             <div *ngIf="(submitted || landisSubmitted) && f.fileReferenceNumber.errors"
                                 class="text-error"><br>
@@ -149,7 +150,7 @@
                         <div class="ui-g-4 ui-md-4">
                             <label for="latitude">GPS Coordinates Latitude</label>
                             <input formControlName="latitude" autocomplete="off"
-                                ng-pattern="/^[-+]?[0-9]{1,7}(\.[0-9]+)?$/" type="number" pInputText
+                                ng-pattern="/^[-+]?[0-9]{1,7}(\.[0-9]+)?$/" type="text" pInputText
                                 placeholder="Latitude" class="ui-inputtext ui-widget"
                                 [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
                             <div *ngIf="(submitted || landisSubmitted) && f.fileReferenceNumber.errors"
@@ -385,11 +386,11 @@
                     <div class="ui-g-12 ui-md-12">
                         <div class="ui-g-4 ui-md-4">
                             <label for="userDepartment">User Department</label>
-                            <p-dropdown inputId="userDepartment" [options]="userDepartments"
+                           <!--<p-dropdown inputId="userDepartment" [options]="userDepartments"
                                 formControlName="userDepartment" optionLabel="name"
-                                placeholder="Select User Department"></p-dropdown>
+                                placeholder="Select User Department"></p-dropdown>--> 
 
-                            <input formControlName="userDepartment" autocomplete="off" type="number" pInputText
+                            <input formControlName="userDepartment" autocomplete="off" type="text" pInputText
                                 placeholder="User Department" class="ui-inputtext ui-widget"
                                 [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
                             <div *ngIf="(submitted || landisSubmitted) && f.userDepartment.errors" class="text-error">

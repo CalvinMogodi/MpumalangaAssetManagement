@@ -8,8 +8,8 @@ namespace MAM.BusinessLayer.Models
     public class Valuation
     {
         public int Id { get; set; }
-        public DateTime MunicipalValuationDate { get; set; }
-        public DateTime NonMunicipalValuationDate { get; set; }
+        public DateTime? MunicipalValuationDate { get; set; }
+        public DateTime? NonMunicipalValuationDate { get; set; }
         public string MunicipalValuation { get; set; }
         public string NonMunicipalValuation { get; set; }
         public string PropetyRatesAccount { get; set; }

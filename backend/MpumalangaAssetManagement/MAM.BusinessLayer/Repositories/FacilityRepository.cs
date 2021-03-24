@@ -304,11 +304,15 @@ namespace MAM.BusinessLayer.Repositories
             }
 
 
-            if (facility.Id == 0)
-            {
-                using (var dataAccess = new DataAccess.Repositories.FacilityRepository(appSettings.ConnectionString))
+            
+           using (var dataAccess = new DataAccess.Repositories.FacilityRepository(appSettings.ConnectionString))
+           {
+                if (facility.Id == 0)
                 {
                     facility.Id = dataAccess.AddFacility(facility.ConvertToFacility(facility));
+                }
+                else {
+                    dataAccess.UpdateFacility(facility.ConvertToFacility(facility));
                 }
             }
 
@@ -350,19 +354,53 @@ namespace MAM.BusinessLayer.Repositories
 
             using (var dataAccess = new DataAccess.Repositories.LandRepository(appSettings.ConnectionString))
             {
-                land.PropertyDescription.Id = dataAccess.AddPropertyDescription(land.PropertyDescription.ConvertPropertyDescription(land.PropertyDescription));
-                land.PropertyDescriptionId = land.PropertyDescription.Id;
+                if (land.PropertyDescription.Id == 0)
+                {
+                    land.PropertyDescription.Id = dataAccess.AddPropertyDescription(land.PropertyDescription.ConvertPropertyDescription(land.PropertyDescription));
+                    land.PropertyDescriptionId = land.PropertyDescription.Id;
+                }
+                else {
+                    dataAccess.UpdatePropertyDescription(land.PropertyDescription.ConvertPropertyDescription(land.PropertyDescription));
+                    land.PropertyDescriptionId = land.PropertyDescription.Id;
+                }
 
-                land.GeographicalLocation.Id = dataAccess.AddGeographicalLocation(land.GeographicalLocation.ConvertGeographicalLocation(land.GeographicalLocation));
-                land.GeographicalLocationId = land.GeographicalLocation.Id;
+                if (land.GeographicalLocation.Id == 0)
+                {
+                    land.GeographicalLocation.Id = dataAccess.AddGeographicalLocation(land.GeographicalLocation.ConvertGeographicalLocation(land.GeographicalLocation));
+                    land.GeographicalLocationId = land.GeographicalLocation.Id;
+                }
+                else {
+                    dataAccess.UpdateGeographicalLocation(land.GeographicalLocation.ConvertGeographicalLocation(land.GeographicalLocation));
+                    land.GeographicalLocationId = land.GeographicalLocation.Id;
+                }
 
-                land.LeaseStatus.Id = dataAccess.AddLeaseStatus(land.LeaseStatus.ConvertLeaseStatus(land.LeaseStatus));
-                land.LeaseStatusId = land.LeaseStatus.Id;
+                if (land.LeaseStatus.Id == 0)
+                {
+                    land.LeaseStatus.Id = dataAccess.AddLeaseStatus(land.LeaseStatus.ConvertLeaseStatus(land.LeaseStatus));
+                    land.LeaseStatusId = land.LeaseStatus.Id;
+                }
+                else {
+                    dataAccess.UpdateLeaseStatus(land.LeaseStatus.ConvertLeaseStatus(land.LeaseStatus));
+                    land.LeaseStatusId = land.LeaseStatus.Id;
+                }
 
-                land.LandUseManagementDetail.Id = dataAccess.AddLandUseManagementDetail(land.LandUseManagementDetail.ConvertLandUseManagementDetail(land.LandUseManagementDetail));
-                land.LandUseManagementDetailId = land.LandUseManagementDetail.Id;
+                if (land.LandUseManagementDetail.Id == 0)
+                {
+                    land.LandUseManagementDetail.Id = dataAccess.AddLandUseManagementDetail(land.LandUseManagementDetail.ConvertLandUseManagementDetail(land.LandUseManagementDetail));
+                    land.LandUseManagementDetailId = land.LandUseManagementDetail.Id;
+                }
+                else {
+                    dataAccess.UpdateLandUseManagementDetail(land.LandUseManagementDetail.ConvertLandUseManagementDetail(land.LandUseManagementDetail));
+                    land.LandUseManagementDetailId = land.LandUseManagementDetail.Id;
+                }
 
-                land.Id = dataAccess.AddLand(land.ConvertLand(land));
+                if (land.Id == 0)
+                {
+                    land.Id = dataAccess.AddLand(land.ConvertLand(land));
+                }
+                else {
+                    dataAccess.UpdateLand(land.ConvertLand(land));
+                }
             }
             return land;
         }
@@ -372,13 +410,31 @@ namespace MAM.BusinessLayer.Repositories
 
             using (var dataAccess = new DataAccess.Repositories.FinanceRepository(appSettings.ConnectionString))
             {
-                finance.SecondaryInformationNote.Id = dataAccess.AddSecondaryInformationNote(finance.SecondaryInformationNote.ConvertToSecondaryInformationNote(finance.SecondaryInformationNote));
-                finance.SecondaryInformationNoteId = finance.SecondaryInformationNote.Id;
+                if (finance.SecondaryInformationNote.Id == 0)
+                {
+                    finance.SecondaryInformationNote.Id = dataAccess.AddSecondaryInformationNote(finance.SecondaryInformationNote.ConvertToSecondaryInformationNote(finance.SecondaryInformationNote));
+                    finance.SecondaryInformationNoteId = finance.SecondaryInformationNote.Id;
+                }
+                else {
+                    dataAccess.UpdateSecondaryInformationNote(finance.SecondaryInformationNote.ConvertToSecondaryInformationNote(finance.SecondaryInformationNote));
+                }
 
-                finance.Valuation.Id = dataAccess.AddValuation(finance.Valuation.ConvertToValuation(finance.Valuation));
-                finance.ValuationId = finance.Valuation.Id;
+                if (finance.Valuation.Id == 0)
+                {
+                    finance.Valuation.Id = dataAccess.AddValuation(finance.Valuation.ConvertToValuation(finance.Valuation));
+                    finance.ValuationId = finance.Valuation.Id;
+                }
+                else {
+                    dataAccess.UpdateValuation(finance.Valuation.ConvertToValuation(finance.Valuation));
+                }
 
-                finance.Id = dataAccess.AddFinance(finance.ConvertToFinance(finance));
+                if (finance.Id == 0)
+                {
+                    finance.Id = dataAccess.AddFinance(finance.ConvertToFinance(finance));
+                }
+                else {
+                    dataAccess.UpdateFinance(finance.ConvertToFinance(finance));
+                }
             }
             return finance;
         }

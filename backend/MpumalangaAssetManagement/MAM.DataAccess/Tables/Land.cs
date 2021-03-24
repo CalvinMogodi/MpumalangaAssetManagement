@@ -8,12 +8,12 @@ namespace MAM.DataAccess.Tables
     {  
         public int Id { get; set; }
         public string DeedsOffice { get; set; }
-        public string AssetClass { get; set; }
-        public string AssetType { get; set; }
-        public int GeographicalLocationId { get; set; }
-        public int PropertyDescriptionId { get; set; }
-        public int LandUseManagementDetailId { get; set; }
-        public int LeaseStatusId { get; set; }
+        public string Class { get; set; }
+        public string Type { get; set; }
+        public int? GeographicalLocationId { get; set; }
+        public int? PropertyDescriptionId { get; set; }
+        public int? LandUseManagementDetailId { get; set; }
+        public int? LeaseStatusId { get; set; }
         public GeographicalLocation GeographicalLocation { get; set; }
         public PropertyDescription PropertyDescription { get; set; }
         public LandUseManagementDetail LandUseManagementDetail { get; set; }
