@@ -232,62 +232,20 @@ namespace MAM.BusinessLayer.Repositories
         public List<MapCoordinate> GetMapCoordinates()
         {
             List<MapCoordinate> mapCoordinates = new List<MapCoordinate>();
-            using (var dataAccess = new DataAccess.Repositories.DwellingFacilityRepository(appSettings.ConnectionString))
+            using (var dataAccess = new DataAccess.Repositories.FacilityRepository(appSettings.ConnectionString))
             {
-                var dwellingFacilities = dataAccess.GetDwellingFacilities();
-                foreach (var item in dwellingFacilities)
+                var facilities = dataAccess.GetFacilities();
+                foreach (var item in facilities)
                 {
-                    if (!string.IsNullOrEmpty(item.GPSCoordinatesEast) && !string.IsNullOrEmpty(item.GPSCoordinatesSouth))
+                    if (!string.IsNullOrEmpty(item.Land.GeographicalLocation.Longitude) && !string.IsNullOrEmpty(item.Land.GeographicalLocation.Latitude))
                     {
                         MapCoordinate mapCoordinate = new MapCoordinate()
                         {
-                            Longitude = item.GPSCoordinatesEast.Replace(",", "."),
-                            Latitude = item.GPSCoordinatesSouth.Replace(",", "."),
+                            Longitude = item.Land.GeographicalLocation.Longitude.Replace(",", "."),
+                            Latitude = item.Land.GeographicalLocation.Latitude.Replace(",", "."),
                             Description = string.Format("Dwelling: {0} - {1}", item.ClientCode, item.Name),
                             FacilityId = item.Id,
                             FacilityType = FacilityTypes.Dwellings
-                        };
-                        mapCoordinates.Add(mapCoordinate);
-                    }
-
-                }
-            }
-
-            using (var dataAccess = new DataAccess.Repositories.LandFacilityRepository(appSettings.ConnectionString))
-            {
-                var landFacilities = dataAccess.GetLandFacilities();
-                foreach (var item in landFacilities)
-                {
-                    if (!string.IsNullOrEmpty(item.GPSCoordinatesEast) && !string.IsNullOrEmpty(item.GPSCoordinatesSouth))
-                    {
-                        MapCoordinate mapCoordinate = new MapCoordinate()
-                        {
-                            Longitude = item.GPSCoordinatesSouth,
-                            Latitude = item.GPSCoordinatesEast,
-                            Description = string.Format("Land: {0} - {1}", item.ClientCode, item.Name),
-                            FacilityId = item.Id,
-                            FacilityType = FacilityTypes.Land
-                        };
-                        mapCoordinates.Add(mapCoordinate);
-                    }
-
-                }
-            }
-
-            using (var dataAccess = new DataAccess.Repositories.NonResidentialFacilityRepository(appSettings.ConnectionString))
-            {
-                var nonResidentialFacilities = dataAccess.GetNonResidentialFacilities();
-                foreach (var item in nonResidentialFacilities)
-                {
-                    if (!string.IsNullOrEmpty(item.GPSCoordinatesEast) && !string.IsNullOrEmpty(item.GPSCoordinatesSouth))
-                    {
-                        MapCoordinate mapCoordinate = new MapCoordinate()
-                        {
-                            Longitude = item.GPSCoordinatesSouth,
-                            Latitude = item.GPSCoordinatesEast,
-                            Description = string.Format("Non Residential: {0} - {1}", item.ClientCode, item.Name),
-                            FacilityId = item.Id,
-                            FacilityType = FacilityTypes.NonResidentialBuildings
                         };
                         mapCoordinates.Add(mapCoordinate);
                     }

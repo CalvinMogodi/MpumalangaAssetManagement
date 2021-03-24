@@ -8,7 +8,7 @@ namespace MAM.DataAccess.Tables
     {
         public int Id { get; set; }
         public string TitleDeedNumber { get; set; }
-        public DateTime RegistrationDate { get; set; }
+        public string RegistrationDate { get; set; }
         public string RegisteredOwner { get; set; }
         public DateTime VestingDate { get; set; }
         public string ConditionsOfTitle { get; set; }

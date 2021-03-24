@@ -14,7 +14,7 @@ namespace MAM.DataAccess.Tables
         public string OldDescription { get; set; }
         public bool LandRemainder { get; set; }
         public string FarmName { get; set; }
-        public int SGDiagramNumber { get; set; }
+        public string SGDiagramNumber { get; set; }
         public int Extent { get; set; }
         public string LPICode { get; set; }
         public string Acquired { get; set; }

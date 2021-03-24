@@ -139,33 +139,34 @@ export class AddassetregisterComponent implements OnInit {
   setLocalAuthorities(e) { }
 
   setDistrictMunicipality(e) {
-    if (e.value.factor == 1) {
-      this.localAuthorities = [
-        { name: 'Mbombela', code: 'M', factor: 1 },
-        { name: 'Nkomazi', code: 'N', factor: 2 },
-        { name: 'Thaba Chweu', code: 'TC', factor: 3 },
-        { name: 'Bushbuckridge', code: 'B', factor: 4 }
-      ];
-    } else if (e.value.factor == 2) {
-      this.localAuthorities = [
-        { name: 'Emalahleni', code: 'E', factor: 1 },
-        { name: 'Emakahzeni', code: 'E', factor: 2 },
-        { name: 'DR JS Moroka', code: 'JSM', factor: 3 },
-        { name: 'Thembisile Hani', code: 'TH', factor: 4 },
-        { name: 'Victor Khanye', code: 'VK', factor: 5 }
-      ];
-    } else {
-      this.localAuthorities = [
-        { name: 'Goven Mbeki', code: 'GM', factor: 1 },
-        { name: 'Albert Luthuli', code: 'AL', factor: 2 },
-        { name: 'Lekwa', code: 'L', factor: 3 },
-        { name: 'Dipaleseng', code: 'D', factor: 4 },
-        { name: 'Pixley ka Seme', code: 'PKS', factor: 5 },
-        { name: 'Mkhondo', code: 'M', factor: 6 },
-        { name: 'Msukaligwa', code: 'MS', factor: 7 }
-      ];
-    }
-
+    if(e != undefined){
+      if (e.value.factor == 1) {
+        this.localAuthorities = [
+          { name: 'Mbombela', code: 'M', factor: 1 },
+          { name: 'Nkomazi', code: 'N', factor: 2 },
+          { name: 'Thaba Chweu', code: 'TC', factor: 3 },
+          { name: 'Bushbuckridge', code: 'B', factor: 4 }
+        ];
+      } else if (e.value.factor == 2) {
+        this.localAuthorities = [
+          { name: 'Emalahleni', code: 'E', factor: 1 },
+          { name: 'Emakahzeni', code: 'E', factor: 2 },
+          { name: 'DR JS Moroka', code: 'JSM', factor: 3 },
+          { name: 'Thembisile Hani', code: 'TH', factor: 4 },
+          { name: 'Victor Khanye', code: 'VK', factor: 5 }
+        ];
+      } else {
+        this.localAuthorities = [
+          { name: 'Goven Mbeki', code: 'GM', factor: 1 },
+          { name: 'Albert Luthuli', code: 'AL', factor: 2 },
+          { name: 'Lekwa', code: 'L', factor: 3 },
+          { name: 'Dipaleseng', code: 'D', factor: 4 },
+          { name: 'Pixley ka Seme', code: 'PKS', factor: 5 },
+          { name: 'Mkhondo', code: 'M', factor: 6 },
+          { name: 'Msukaligwa', code: 'MS', factor: 7 }
+        ];
+      }
+    } 
   }
 
   setDeedsOffice(e) {
