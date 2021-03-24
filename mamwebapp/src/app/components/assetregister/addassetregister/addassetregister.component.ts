@@ -643,6 +643,7 @@ export class AddassetregisterComponent implements OnInit {
   }
 
   initFacility() {
+    this.improvements = this.facility.improvements;
      
     let deedsOffice = this.deedsOffices.filter(d => d.name == this.facility.land.deedsOffice)[0];
     let type = this.types.filter(d => d.name == this.facility.land.type)[0];
