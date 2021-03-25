@@ -21,6 +21,8 @@ export class AddassetregisterComponent implements OnInit {
   @Input() selectedAsset: any;
   steps: MenuItem[];
   improvements = [];
+  uploadedFiles: any[] = [];
+  myfile: any[] = [];
   landIsSubmitted: boolean = false;
   improvementIsSubmitted: boolean = false;
   financeIsSubmitted: boolean = false;
@@ -218,8 +220,8 @@ export class AddassetregisterComponent implements OnInit {
   }
 
   onFinancialFormSubmit() {
-    this.financeIsSubmitted = true;
-    if (this.financialForm.valid) {
+    //this.financeIsSubmitted = true;
+    //if (this.financialForm.valid) {
       this.assignFacility(false, true, false);
       this.facility.status = 'Saved';
       this.facilityService.saveFacility(this.facility, "finance").pipe(first()).subscribe(isSaved => {
@@ -232,12 +234,12 @@ export class AddassetregisterComponent implements OnInit {
           this.messageService.add({ severity: 'error', summary: 'Error', detail: 'An error occurred while saving!' });
         }
       });
-    }
+    //}
   }
 
   onImprovementFormSubmit() {
-    this.improvementIsSubmitted = true;
-    if (this.landForm.valid) {
+    //this.improvementIsSubmitted = true;
+    //if (this.landForm.valid) {
       this.assignFacility(false, false, true);
       this.facility.status = 'Saved';
       this.facilityService.saveFacility(this.facility, "improvement").pipe(first()).subscribe(isSaved => {
@@ -250,12 +252,14 @@ export class AddassetregisterComponent implements OnInit {
           this.messageService.add({ severity: 'error', summary: 'Error', detail: 'An error occurred while saving!' });
         }
       });
-    }
+   // }
   }
 
+
+
   onLandFormSubmit() {
-    this.landIsSubmitted = true;
-    if (this.landForm.valid) {
+    //this.landIsSubmitted = true;
+    //if (this.landForm.valid) {    
       this.assignFacility(true, false, false);
       this.facility.status = 'Saved';
       this.facilityService.saveFacility(this.facility, "land").pipe(first()).subscribe(facility => {
@@ -270,7 +274,7 @@ export class AddassetregisterComponent implements OnInit {
         }
       });
 
-    }
+   // }
   }
 
   onSubmit() {
@@ -839,7 +843,7 @@ export class AddassetregisterComponent implements OnInit {
   }
 
   AddImprovement() {
-    if (this.improvementForm.valid) {
+    //if (this.improvementForm.valid) {
       let improvement = {
         id: 0,
         buildingName: this.improvementForm.controls["buildingName"].value,
@@ -855,7 +859,7 @@ export class AddassetregisterComponent implements OnInit {
         comment: this.improvementForm.controls["comment"].value,
       };
       this.improvements.push(improvement);
-    }
+   // }
   }
 
   makeId(length) {
@@ -867,4 +871,20 @@ export class AddassetregisterComponent implements OnInit {
     }
     return result;
   }
+
+  onSelectImage(evt: any) {
+    let uploadedFile = evt[0];
+    //uploadedFile.name = "Land" + this.makeId(8);
+    this.uploadedFiles.push(uploadedFile);
+  }
+
+  uploadfiles(){
+    
+    this.facilityService.uploadFiles(this.uploadedFiles).pipe(first()).subscribe(uploaded => {
+      if(uploaded){
+
+      }
+    });
+  }
+
 }

@@ -1,11 +1,11 @@
 <p-tabView [(activeIndex)]="activeIndex">
-    <p-header>
+   <!--<p-header>
         <div style="text-align: center;">
             <p-button label="Start UAMP"></p-button> 
         </div>
     </p-header>
    
-    
+    --> 
     <p-tabPanel header="Land">
         <p-fieldset legend="Geographical Location" [toggleable]="true">
             <div class="ui-g-12 ui-md-12">
@@ -18,7 +18,7 @@
                 <div class="ui-g-4 ui-md-4">
                     <label for="districtMunicipality">District Municipality</label>
                     <div>
-                        {{selectedFacility.land.geographicalLocation.districtMuniciplaity}}
+                        {{selectedFacility.land.geographicalLocation.districtMunicipality}}
                     </div>
                 </div>
                 <div class="ui-g-4 ui-md-4">
@@ -36,7 +36,7 @@
                     </div>
                 </div>
                 <div class="ui-g-4 ui-md-4">
-                    <label for="districtMunicipality">Magisterial District</label>
+                    <label for="magisterialDistrict">Magisterial District</label>
                     <div>
                         {{selectedFacility.land.geographicalLocation.magisterialDistrict}}
                     </div>
@@ -134,9 +134,9 @@
                     </div>
                 </div>
                 <div class="ui-g-4 ui-md-4">
-                    <label for="districtMunicipality">SG Diagram Number</label>
+                    <label for="sGDiagramNumber">SG Diagram Number</label>
                     <div>
-                        {{selectedFacility.land.propertyDescription.sgDiagramNumber}}
+                        {{selectedFacility.land.propertyDescription.sGDiagramNumber}}
                     </div>
                 </div>
                 <div class="ui-g-4 ui-md-4">
@@ -194,13 +194,13 @@
                 <div class="ui-g-4 ui-md-4">
                     <label for="districtMunicipality">Conditions of Title</label>
                     <div>
-                        {{selectedFacility.land.landUseManagementDetail.ownershipCategory}}
+                        {{selectedFacility.land.landUseManagementDetail.conditionsOfTitle}}
                     </div>
                 </div>
                 <div class="ui-g-4 ui-md-4">
                     <label for="region">Ownership Category</label>
                     <div>
-                        {{selectedFacility.land.landUseManagementDetail.landRemainder}}
+                        {{selectedFacility.land.landUseManagementDetail.ownershipCategory}}
                     </div>
                 </div>
             </div>
@@ -256,13 +256,13 @@
                 <div class="ui-g-4 ui-md-4">
                     <label for="districtMunicipality">ID Number/Company Registration Number</label>
                     <div>
-                        {{selectedFacility.land.leaseStatus.idNumberCompanyRegistrationNumber}}
+                        {{selectedFacility.land.leaseStatus.iDNumberCompanyRegistrationNumber}}
                     </div>
                 </div>
                 <div class="ui-g-4 ui-md-4">
                     <label for="region">P.O Box</label>
                     <div>
-                        {{selectedFacility.land.leaseStatus.poBox}}
+                        {{selectedFacility.land.leaseStatus.pOBox}}
                     </div>
                 </div>
             </div>

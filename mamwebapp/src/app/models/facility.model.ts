@@ -68,7 +68,7 @@ export class PropertyDescription{
     oldDescription: string;
     landRemainder: boolean;
     farmName: string;
-    SGDiagramNumber: number;
+    sGDiagramNumber: number;
     extent: number;
     LPICode: string;
     acquired: string;
@@ -94,8 +94,8 @@ export class LandUseManagementDetail{
 export class LeaseStatus{
     id: number;    
     natureOfLease: string;
-    IDNumberCompanyRegistrationNumber: number;
-    POBox: string;
+    iDNumberCompanyRegistrationNumber: number;
+    pOBox: string;
     contactNumber: string;
     capacityofContactPerson: string;
     contactPerson: string;

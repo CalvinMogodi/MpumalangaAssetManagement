@@ -4,6 +4,8 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { GoogleMapsModule } from '@angular/google-maps'
+// for HttpClient import:
+import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
 
 import { JwtInterceptor } from '../app/helpers/jwt.interceptor';
 import { ErrorInterceptor } from '../app/helpers/error.interceptor';
@@ -75,6 +77,7 @@ import { SplitButtonModule } from 'primeng/splitbutton';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    LoadingBarHttpClientModule,
     MessageModule,
     ButtonModule,
     ScrollPanelModule,

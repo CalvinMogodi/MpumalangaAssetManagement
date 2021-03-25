@@ -45,6 +45,7 @@
     </ng-template>
 </p-table>
 
+<div *ngIf="showDialog" class="dialogBackgroud"></div>
 <p-dialog [(visible)]="showDialog" *ngIf="showDialog" [style]="{width: '80vw'}"
     [baseZIndex]="10000">
     <p-header> Property </p-header>

@@ -17,6 +17,7 @@ import { FormControl } from '@angular/forms';
 export class UserComponent implements OnInit {
   loading = false;
   isAdding = false;
+  showResetPasswordComfirmation: boolean = false;
   users: User[] = [];
   clonedUsers: User[] = [];
   cols: any[];
@@ -32,15 +33,15 @@ export class UserComponent implements OnInit {
   showConfirmResetPassword: boolean = false;
   msgs: any[] = [];
   newUserError: string = '';
-  errorMsg:string = 'error';
+  errorMsg: string = 'error';
 
-  constructor(private userService: UserService,    
+  constructor(private userService: UserService,
     private formBuilder: FormBuilder,
     private confirmationService: ConfirmationService,
     private authenticationService: AuthenticationService,
     private messageService: MessageService,
     private changeDetectionRef: ChangeDetectorRef) { }
-    roles: any[];
+  roles: any[];
 
   ngOnInit() {
     this.showToast('Update User', 'User has been updated successful.');
@@ -48,21 +49,21 @@ export class UserComponent implements OnInit {
       this.currentUser = x;
     });
 
-    this.roles = [    
+    this.roles = [
       { name: 'Viewer', code: 'V', factor: 1 },
       { name: 'Administrator', code: 'SA', factor: 2 },
       { name: 'Capturer', code: 'C', factor: 3 },
       { name: 'Approver', code: 'A', factor: 4 },
       { name: 'Verifier', code: 'DV', factor: 5 },
       { name: 'Manager', code: 'M', factor: 6 },
-      
+
     ];
 
     this.addUserForm = this.formBuilder.group({
-      name: new FormControl('',Validators.compose( [Validators.required])),
-      surname: new FormControl('',Validators.compose( [ Validators.required])),
-      email: new FormControl('',Validators.compose( [Validators.required, Validators.email])),
-      role: new FormControl('',Validators.compose( [Validators.required])),
+      name: new FormControl('', Validators.compose([Validators.required])),
+      surname: new FormControl('', Validators.compose([Validators.required])),
+      email: new FormControl('', Validators.compose([Validators.required, Validators.email])),
+      role: new FormControl('', Validators.compose([Validators.required])),
     });
 
     this.items = [
@@ -112,16 +113,16 @@ export class UserComponent implements OnInit {
     });
   }
 
-  validEmail(str : string, id: number) {
+  validEmail(str: string, id: number) {
     var email = str == undefined ? this.f.email.value : str;
-    if(id != undefined){//for edit
-      if(str === undefined || str === '')
+    if (id != undefined) {//for edit
+      if (str === undefined || str === '')
         return false
       else
-       return this.users.filter(u => u.email.toLowerCase() == email.toLowerCase() && u.id != id).length > 0;
-    }else{ //for add      
+        return this.users.filter(u => u.email.toLowerCase() == email.toLowerCase() && u.id != id).length > 0;
+    } else { //for add      
       return this.users.filter(u => u.email.toLowerCase() == email.toLowerCase()).length > 0 ? this.emailExsist = true : this.emailExsist = false;
-    }    
+    }
   }
 
   onRowEditCancel(user: User, index: number) {
@@ -129,26 +130,24 @@ export class UserComponent implements OnInit {
   }
 
   showToast(summary: string, detail: string) {
-    this.messageService.add({severity:'success', summary:summary, detail:detail});
+    this.messageService.add({ severity: 'success', summary: summary, detail: detail });
   }
   showErrorToast(summary: string, detail: string) {
     this.messageService.add({ severity: 'error', summary: summary, detail: detail });
   }
 
-  setDeedsOffice(e){}
+  setDeedsOffice(e) { }
 
   onRowEditInit(e) { }
 
   onSubmit() {
     this.submitted = true;
-    this.isAdding = false;  
-    
+    this.isAdding = false;
+
     // stop here if form is invalid
     if (this.addUserForm.invalid) {
       return;
     }
-    
-    return;
     var randomstring = Math.random().toString(36).slice(-8);
 
     this.isAdding = true;
@@ -162,7 +161,7 @@ export class UserComponent implements OnInit {
       isActive: true,
       email: this.f.email.value,
       passwordIsChanged: false,
-      createdDate: new Date, 
+      createdDate: new Date,
       createdUserId: this.currentUser.id
     }
     this.userService.addUser(user).pipe()
@@ -179,28 +178,21 @@ export class UserComponent implements OnInit {
         });
   }
 
+  deleteUser() {
+    var randomstring = Math.random().toString(36).slice(-8);  
+    this.userService.resetPassword(this.resetUser.username, randomstring).pipe(first()).subscribe(isUpdated => {
+      if (isUpdated) {
+        this.showToast('Reset Password', 'Please check your email to reset your password');
+        this.loading = false;
+      } else {
+        this.showErrorToast('Reset Password', 'Failed to reset your password.');
+        this.loading = false;
+      }
+    });
+  }
+
   confirm1(user) {
     this.resetUser = user;
-    this.confirmationService.confirm({
-        message: 'Are you sure that you want to reset password?',
-        header: 'Confirmation',
-        icon: 'pi pi-exclamation-triangle',
-        accept: () => {
-          var randomstring = Math.random().toString(36).slice(-8);
-          this.userService.resetPassword(user.username, randomstring).pipe(first()).subscribe(isUpdated => {
-            if (isUpdated) {
-              this.showToast('Reset Password','Please check your email to reset your password');
-              this.loading = false;
-            } else {
-              this.showErrorToast('Reset Password', 'Failed to reset your password.');
-              this.loading = false;
-            }
-          });
-           
-        },
-        reject: () => {
-        }
-    });
-}
-
+    this.showResetPasswordComfirmation = true;
+  }
 }

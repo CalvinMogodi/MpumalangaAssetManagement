@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, Input, OnChanges, OnDestroy } from '@angular/core';
 import { first } from 'rxjs/operators';
 import { FacilityService } from '../../services/facility/facility.service';
 import { MenuItem, MessageService } from 'primeng/api';
@@ -14,9 +14,10 @@ import { Observable } from 'rxjs';
   styleUrls: ['./assetregister.component.css'],
   providers: [MessageService, ConfirmationService]
 })
-export class AssetregisterComponent implements OnInit {
+export class AssetregisterComponent implements OnInit  {
   loading = false;
   dialogHeader:string = '';  
+  showdelete: boolean = false;
   @Input() selectedAsset: any
   buttonItems: MenuItem[];
   facility: Facility;
@@ -41,7 +42,7 @@ export class AssetregisterComponent implements OnInit {
   landTotal: number = 0;
   buildingTotal:number = 0;
   
-  constructor(private confirmationService: ConfirmationService, public facilityService: FacilityService, private formBuilder: FormBuilder, private messageService: MessageService) { }
+  constructor(private confirmationService: ConfirmationService,  public facilityService: FacilityService, private formBuilder: FormBuilder, private messageService: MessageService) { }
 
   ngOnInit() {
     this.buttonItems = [
@@ -89,29 +90,33 @@ export class AssetregisterComponent implements OnInit {
     }    
   }
 
-  confirmDelete() {
-      this.confirmationService.confirm({
+  confirmDelete() {  
+
+    this.showdelete = true;
+     /* this.confirmationService.confirm({
           message: 'Are you sure that you want to delete this asset?',
           accept: () => {
             this.deleting = true;
             this.deleteFacility(this.facility);
           }
-      });     
+      });   */  
   }
 
-  deleteFacility(facility){
+  deleteFacility(){
+    let facility = this.facility;
     this.facilityService.deleteFacility(facility.id).pipe(first()).subscribe(isDeleted => {
       if(isDeleted){
         this.deleting = false;
         this.messageService.add({severity:'warn', summary:'Deleted', detail:'Asset is deleted successful.'});
         this.facilities = this.facilities.filter(f => f.id != facility.id);
-        this.landTotal = this.facilities.filter(f => f.facilityType == "Land" && f.Id != facility.Id).length;
-        this.buildingTotal = this.facilities.filter(f => f.facilityType != "Land" && f.Id != facility.Id).length;
+        this.landTotal = this.facilities.filter(f => f.facilityType == "Land" && f.Id != facility.id).length;
+        this.buildingTotal = this.facilities.filter(f => f.facilityType != "Land" && f.Id != facility.id).length;
       }
       else{
         this.deleting = false;
         this.messageService.add({severity:'error', summary:'Error', detail:'An error occurred while delete asset.'});
-      }     
+      }   
+      this.showdelete = false;  
     });
   }
 
@@ -127,4 +132,6 @@ export class AssetregisterComponent implements OnInit {
       
     }
   }
+  
+    
 }
