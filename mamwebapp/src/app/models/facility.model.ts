@@ -20,7 +20,7 @@ export class Facility {
 
 export class Land {
     id: number;
-    deedOffice: string;
+    deedsOffice: string;
     class: string;
     type: string;
     geographicalLocation: GeographicalLocation;   

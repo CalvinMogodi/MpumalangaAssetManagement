@@ -13,15 +13,15 @@ namespace MAM.DataAccess.Tables
         public string ContactNumber { get; set; }
         public string CapacityofContactPerson { get; set; }
         public string ContactPerson { get; set; }
-        public int PostalCode { get; set; }
+        public int? PostalCode { get; set; }
         public string LeaseStatusTown { get; set; }
-        public double RentalAmount { get; set; }
-        public DateTime TerminationDate { get; set; }
-        public DateTime StartingDate { get; set; }
-        public DateTime OccupationDate { get; set; }
+        public double? RentalAmount { get; set; }
+        public DateTime? TerminationDate { get; set; }
+        public DateTime? StartingDate { get; set; }
+        public DateTime? OccupationDate { get; set; }
         public string Escalation { get; set; }
         public string Vat { get; set; }
-        public int LeaseNumber { get; set; }
-        public int OtherCharges { get; set; }
+        public int? LeaseNumber { get; set; }
+        public int? OtherCharges { get; set; }
     }
 }

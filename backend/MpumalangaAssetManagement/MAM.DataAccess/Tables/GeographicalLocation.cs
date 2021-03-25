@@ -11,7 +11,7 @@ namespace MAM.DataAccess.Tables
         public string Town { get; set; }
         public string Suburb { get; set; }
         public string StreetName { get; set; }
-        public int StreetNumber { get; set; }
+        public int? StreetNumber { get; set; }
         public string DistrictMunicipality { get; set; }
         public string Region { get; set; }
         public string LocalAuthority { get; set; }

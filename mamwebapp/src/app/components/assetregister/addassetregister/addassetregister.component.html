@@ -1,3 +1,4 @@
+<p-toast [style]="{marginTop: '80px'}" position="top-right"></p-toast>
 <p-tabView [(activeIndex)]="activeIndex">
     <p-tabPanel header="Land">
         <form [formGroup]="landForm" *ngIf="!loading" (ngSubmit)="onLandFormSubmit()">
@@ -94,7 +95,7 @@
                             </div>
                         </div>
                         <div class="ui-g-4 ui-md-4">
-                            <label for="province">Street Number</label>
+                            <label for="streetNumber">Street Number</label>
                             <input formControlName="streetNumber" autocomplete="off" type="number" pInputText
                                 placeholder="Street Number" class="ui-inputtext ui-widget"
                                 [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
@@ -106,7 +107,7 @@
                     </div>
                     <div class="ui-g-12 ui-md-12">
                         <div class="ui-g-4 ui-md-4">
-                            <label for="province">Street Name </label>
+                            <label for="streetName">Street Name </label>
                             <input formControlName="streetName" autocomplete="off" type="text" pInputText
                                 placeholder="Street Name" class="ui-inputtext ui-widget"
                                 [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
@@ -116,7 +117,7 @@
                             </div>
                         </div>
                         <div class="ui-g-4 ui-md-4">
-                            <label for="province">Suburb</label>
+                            <label for="suburb">Suburb</label>
                             <input formControlName="suburb" autocomplete="off" type="text" pInputText
                                 placeholder="Suburb" class="ui-inputtext ui-widget"
                                 [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
@@ -126,7 +127,7 @@
                             </div>
                         </div>
                         <div class="ui-g-4 ui-md-4">
-                            <label for="province">Town</label>
+                            <label for="town">Town</label>
                             <input formControlName="town" autocomplete="off" type="text" pInputText placeholder="Town"
                                 class="ui-inputtext ui-widget" [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
                             <div *ngIf="(submitted || landisSubmitted) && f.fileReferenceNumber.errors"
@@ -139,7 +140,7 @@
                         <div class="ui-g-4 ui-md-4">
                             <label for="longitude">GPS Coordinates Longitude</label>
                             <input formControlName="longitude" ng-pattern="/^[-+]?[0-9]{1,7}(\.[0-9]+)?$/"
-                                autocomplete="off" type="number" pInputText placeholder="Longitude"
+                                autocomplete="off" type="text" pInputText placeholder="Longitude"
                                 class="ui-inputtext ui-widget" [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
                             <div *ngIf="(submitted || landisSubmitted) && f.fileReferenceNumber.errors"
                                 class="text-error"><br>
@@ -149,7 +150,7 @@
                         <div class="ui-g-4 ui-md-4">
                             <label for="latitude">GPS Coordinates Latitude</label>
                             <input formControlName="latitude" autocomplete="off"
-                                ng-pattern="/^[-+]?[0-9]{1,7}(\.[0-9]+)?$/" type="number" pInputText
+                                ng-pattern="/^[-+]?[0-9]{1,7}(\.[0-9]+)?$/" type="text" pInputText
                                 placeholder="Latitude" class="ui-inputtext ui-widget"
                                 [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
                             <div *ngIf="(submitted || landisSubmitted) && f.fileReferenceNumber.errors"
@@ -181,7 +182,7 @@
                             </div>
                         </div>
                         <div class="ui-g-4 ui-md-4">
-                            <label for="province">Land Parcel</label>
+                            <label for="landParcel">Land Parcel</label>
                             <input formControlName="landParcel" autocomplete="off" type="text" pInputText
                                 placeholder="Land Parcel" class="ui-inputtext ui-widget"
                                 [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
@@ -193,7 +194,7 @@
                     </div>
                     <div class="ui-g-12 ui-md-12">
                         <div class="ui-g-4 ui-md-4">
-                            <label for="province">Land Portion</label>
+                            <label for="landPortion">Land Portion</label>
                             <input formControlName="landPortion" autocomplete="off" type="text" pInputText
                                 placeholder="Land Portion" class="ui-inputtext ui-widget"
                                 [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
@@ -203,7 +204,7 @@
                             </div>
                         </div>
                         <div class="ui-g-4 ui-md-4">
-                            <label for="province">Old Description</label>
+                            <label for="oldDescription">Old Description</label>
                             <input formControlName="oldDescription" autocomplete="off" type="text" pInputText
                                 placeholder="Old Description" class="ui-inputtext ui-widget"
                                 [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
@@ -213,7 +214,7 @@
                             </div>
                         </div>
                         <div class="ui-g-4 ui-md-4">
-                            <label for="province">Land Remainder</label>
+                            <label for="landRemainder">Land Remainder</label>
                             <p-dropdown inputId="landRemainder" [options]="landRemainders"
                                 formControlName="landRemainder" (onChange)="setProvince($event)" optionLabel="name"
                                 placeholder="Select a Land Remainder"></p-dropdown>
@@ -225,7 +226,7 @@
                     </div>
                     <div class="ui-g-12 ui-md-12">
                         <div class="ui-g-4 ui-md-4">
-                            <label for="province">Farm Name</label>
+                            <label for="farmName">Farm Name</label>
                             <input formControlName="farmName" autocomplete="off" type="text" pInputText
                                 placeholder="Farm Name" class="ui-inputtext ui-widget"
                                 [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
@@ -235,7 +236,7 @@
                             </div>
                         </div>
                         <div class="ui-g-4 ui-md-4">
-                            <label for="province">SG Diagram Number</label>
+                            <label for="SGDiagramNumber">SG Diagram Number</label>
                             <input formControlName="SGDiagramNumber" autocomplete="off" type="text" pInputText
                                 placeholder="SG Diagram Number" class="ui-inputtext ui-widget"
                                 [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
@@ -245,7 +246,7 @@
                             </div>
                         </div>
                         <div class="ui-g-4 ui-md-4">
-                            <label for="province">Extent (Size of Land) (HA)</label>
+                            <label for="extent">Extent (Size of Land) (HA)</label>
                             <input formControlName="extent" autocomplete="off" type="number" pInputText
                                 placeholder="Extent" class="ui-inputtext ui-widget"
                                 [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
@@ -257,7 +258,7 @@
                     </div>
                     <div class="ui-g-12 ui-md-12">
                         <div class="ui-g-4 ui-md-4">
-                            <label for="province">LPI Code </label>
+                            <label for="LPICode">LPI Code </label>
                             <input formControlName="LPICode" autocomplete="off" type="text" pInputText
                                 placeholder="LPI Code" class="ui-inputtext ui-widget"
                                 [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
@@ -267,7 +268,7 @@
                             </div>
                         </div>
                         <div class="ui-g-4 ui-md-4">
-                            <label for="province">How Acquired</label>
+                            <label for="howAcquired">How Acquired</label>
                             <p-dropdown inputId="howAcquired" [options]="howAcquireds" [(ngModel)]="howAcquired"
                                 formControlName="acquired" (onChange)="setHowAcquired($event)" optionLabel="name"
                                 placeholder="Select How Acquired"></p-dropdown>
@@ -277,7 +278,7 @@
                             </div>
                         </div>
                         <div class="ui-g-4 ui-md-4" *ngIf="howAcquired.name === 'Other'">
-                            <label for="province">How acquired: other</label>
+                            <label for="acquiredOther">How acquired: other</label>
                             <input formControlName="acquiredOther" autocomplete="off" type="text" pInputText
                                 placeholder="How Acquired" class="ui-inputtext ui-widget"
                                 [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
@@ -385,11 +386,11 @@
                     <div class="ui-g-12 ui-md-12">
                         <div class="ui-g-4 ui-md-4">
                             <label for="userDepartment">User Department</label>
-                            <p-dropdown inputId="userDepartment" [options]="userDepartments"
+                           <!--<p-dropdown inputId="userDepartment" [options]="userDepartments"
                                 formControlName="userDepartment" optionLabel="name"
-                                placeholder="Select User Department"></p-dropdown>
+                                placeholder="Select User Department"></p-dropdown>--> 
 
-                            <input formControlName="userDepartment" autocomplete="off" type="number" pInputText
+                            <input formControlName="userDepartment" autocomplete="off" type="text" pInputText
                                 placeholder="User Department" class="ui-inputtext ui-widget"
                                 [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
                             <div *ngIf="(submitted || landisSubmitted) && f.userDepartment.errors" class="text-error">
@@ -934,9 +935,9 @@
                 <div>
                     <button style="float: left; margin-top: 15px;" type="button" pButton icon="pi pi-angle-left"
                     (click)="activeIndex = 1" label="Back" class="ui-button-secondary"></button>
-                <button style="float: right; margin-top: 15px" type="submit" (click)="onSubmit()" pButton
+                <button style="float: right; margin-top: 15px" type="button" (click)="onSubmit()" pButton
                     icon="pi pi-angle-right" label="Submit" (click)="activeIndex = 2"></button>
-                <button style="float: right; margin-top: 15px;margin-right: 10px" type="button" pButton
+                <button style="float: right; margin-top: 15px;margin-right: 10px" type="submit" pButton
                     icon="pi pi-check" label="Save"></button>
                 </div>
                

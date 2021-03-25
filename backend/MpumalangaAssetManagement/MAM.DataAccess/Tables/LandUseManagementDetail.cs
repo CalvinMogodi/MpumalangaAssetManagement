@@ -8,12 +8,12 @@ namespace MAM.DataAccess.Tables
     {
         public int Id { get; set; }
         public string TitleDeedNumber { get; set; }
-        public DateTime RegistrationDate { get; set; }
+        public string RegistrationDate { get; set; }
         public string RegisteredOwner { get; set; }
-        public DateTime VestingDate { get; set; }
+        public DateTime? VestingDate { get; set; }
         public string ConditionsOfTitle { get; set; }
         public string OwnershipCategory { get; set; }
-        public int StateOwnedPercentage { get; set; }
+        public int? StateOwnedPercentage { get; set; }
         public string LandUse { get; set; }
         public string Zoning { get; set; }
         public string UserDepartment { get; set; }

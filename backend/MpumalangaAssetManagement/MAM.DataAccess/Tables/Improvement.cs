@@ -7,10 +7,10 @@ namespace MAM.DataAccess.Tables
     public class Improvement
     {
         public int Id { get; set; }
-        public int FacilityId { get; set; }
+        public int? FacilityId { get; set; }
         public string BuildingName { get; set; }
         public string Type { get; set; }
-        public int Size { get; set; }
+        public int? Size { get; set; }
         public string PotentialUse { get; set; }
         public string SiteCoverag { get; set; }
         public string LevelofUtilization { get; set; }

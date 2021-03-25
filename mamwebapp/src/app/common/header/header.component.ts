@@ -79,7 +79,9 @@ export class HeaderComponent implements OnInit {
     this.loading = true;
     this.userService.changePassword(this.currentUser.username, this.f.newpassword.value, this.f.oldpassword.value).pipe()
       .subscribe(
-        data => {
+        data => {          
+          this.currentUser.passwordIsChanged = true;
+          localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
           this.showSuccess('Change Password', 'Password has been changed successful.');
           this.showDialog = false;
         },

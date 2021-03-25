@@ -232,62 +232,20 @@ namespace MAM.BusinessLayer.Repositories
         public List<MapCoordinate> GetMapCoordinates()
         {
             List<MapCoordinate> mapCoordinates = new List<MapCoordinate>();
-            using (var dataAccess = new DataAccess.Repositories.DwellingFacilityRepository(appSettings.ConnectionString))
+            using (var dataAccess = new DataAccess.Repositories.FacilityRepository(appSettings.ConnectionString))
             {
-                var dwellingFacilities = dataAccess.GetDwellingFacilities();
-                foreach (var item in dwellingFacilities)
+                var facilities = dataAccess.GetFacilities();
+                foreach (var item in facilities)
                 {
-                    if (!string.IsNullOrEmpty(item.GPSCoordinatesEast) && !string.IsNullOrEmpty(item.GPSCoordinatesSouth))
+                    if (!string.IsNullOrEmpty(item.Land.GeographicalLocation.Longitude) && !string.IsNullOrEmpty(item.Land.GeographicalLocation.Latitude))
                     {
                         MapCoordinate mapCoordinate = new MapCoordinate()
                         {
-                            Longitude = item.GPSCoordinatesEast.Replace(",", "."),
-                            Latitude = item.GPSCoordinatesSouth.Replace(",", "."),
-                            Description = string.Format("Dwelling: {0} - {1}", item.ClientCode, item.Name),
+                            Longitude = item.Land.GeographicalLocation.Longitude.Replace(",", "."),
+                            Latitude = item.Land.GeographicalLocation.Latitude.Replace(",", "."),
+                            Description = item.Name,
                             FacilityId = item.Id,
                             FacilityType = FacilityTypes.Dwellings
-                        };
-                        mapCoordinates.Add(mapCoordinate);
-                    }
-
-                }
-            }
-
-            using (var dataAccess = new DataAccess.Repositories.LandFacilityRepository(appSettings.ConnectionString))
-            {
-                var landFacilities = dataAccess.GetLandFacilities();
-                foreach (var item in landFacilities)
-                {
-                    if (!string.IsNullOrEmpty(item.GPSCoordinatesEast) && !string.IsNullOrEmpty(item.GPSCoordinatesSouth))
-                    {
-                        MapCoordinate mapCoordinate = new MapCoordinate()
-                        {
-                            Longitude = item.GPSCoordinatesSouth,
-                            Latitude = item.GPSCoordinatesEast,
-                            Description = string.Format("Land: {0} - {1}", item.ClientCode, item.Name),
-                            FacilityId = item.Id,
-                            FacilityType = FacilityTypes.Land
-                        };
-                        mapCoordinates.Add(mapCoordinate);
-                    }
-
-                }
-            }
-
-            using (var dataAccess = new DataAccess.Repositories.NonResidentialFacilityRepository(appSettings.ConnectionString))
-            {
-                var nonResidentialFacilities = dataAccess.GetNonResidentialFacilities();
-                foreach (var item in nonResidentialFacilities)
-                {
-                    if (!string.IsNullOrEmpty(item.GPSCoordinatesEast) && !string.IsNullOrEmpty(item.GPSCoordinatesSouth))
-                    {
-                        MapCoordinate mapCoordinate = new MapCoordinate()
-                        {
-                            Longitude = item.GPSCoordinatesSouth,
-                            Latitude = item.GPSCoordinatesEast,
-                            Description = string.Format("Non Residential: {0} - {1}", item.ClientCode, item.Name),
-                            FacilityId = item.Id,
-                            FacilityType = FacilityTypes.NonResidentialBuildings
                         };
                         mapCoordinates.Add(mapCoordinate);
                     }
@@ -333,31 +291,25 @@ namespace MAM.BusinessLayer.Repositories
 
         public Facility SaveFacility(string step, Facility facility)
         {
-            if (step.Trim().ToLower().Equals("land") || step.Trim().ToLower().Equals("facility"))
-            {
-                facility.Land = SaveLand(facility.Land);
-                facility.LandId = facility.Land.Id;
-            }
-
-            if (step.Trim().ToLower().Equals("finance") || step.Trim().ToLower().Equals("facility"))
-            {
-                facility.Finance = SaveFinance(facility.Finance);
-                facility.FinanceId = facility.Finance.Id;
-            }
-
-
-            if (facility.Id == 0)
-            {
-                using (var dataAccess = new DataAccess.Repositories.FacilityRepository(appSettings.ConnectionString))
+            facility.Land = SaveLand(facility.Land);
+            facility.LandId = facility.Land.Id;
+            
+            facility.Finance = SaveFinance(facility.Finance);
+            facility.FinanceId = facility.Finance.Id;
+                        
+           using (var dataAccess = new DataAccess.Repositories.FacilityRepository(appSettings.ConnectionString))
+           {
+                if (facility.Id == 0)
                 {
                     facility.Id = dataAccess.AddFacility(facility.ConvertToFacility(facility));
                 }
+                else {
+                    dataAccess.UpdateFacility(facility.ConvertToFacility(facility));
+                }
             }
-
-            if (step.Trim().ToLower().Equals("improvement") || step.Trim().ToLower().Equals("facility"))
-            {
-                facility.Improvements = SaveImprovement(facility.Improvements, facility.Id);
-            }
+            
+            facility.Improvements = SaveImprovement(facility.Improvements, facility.Id);
+           
             return facility;
         }
 
@@ -392,19 +344,53 @@ namespace MAM.BusinessLayer.Repositories
 
             using (var dataAccess = new DataAccess.Repositories.LandRepository(appSettings.ConnectionString))
             {
-                land.PropertyDescription.Id = dataAccess.AddPropertyDescription(land.PropertyDescription.ConvertPropertyDescription(land.PropertyDescription));
-                land.PropertyDescriptionId = land.PropertyDescription.Id;
+                if (land.PropertyDescription.Id == 0)
+                {
+                    land.PropertyDescription.Id = dataAccess.AddPropertyDescription(land.PropertyDescription.ConvertPropertyDescription(land.PropertyDescription));
+                    land.PropertyDescriptionId = land.PropertyDescription.Id;
+                }
+                else {
+                    dataAccess.UpdatePropertyDescription(land.PropertyDescription.ConvertPropertyDescription(land.PropertyDescription));
+                    land.PropertyDescriptionId = land.PropertyDescription.Id;
+                }
 
-                land.GeographicalLocation.Id = dataAccess.AddGeographicalLocation(land.GeographicalLocation.ConvertGeographicalLocation(land.GeographicalLocation));
-                land.GeographicalLocationId = land.GeographicalLocation.Id;
+                if (land.GeographicalLocation.Id == 0)
+                {
+                    land.GeographicalLocation.Id = dataAccess.AddGeographicalLocation(land.GeographicalLocation.ConvertGeographicalLocation(land.GeographicalLocation));
+                    land.GeographicalLocationId = land.GeographicalLocation.Id;
+                }
+                else {
+                    dataAccess.UpdateGeographicalLocation(land.GeographicalLocation.ConvertGeographicalLocation(land.GeographicalLocation));
+                    land.GeographicalLocationId = land.GeographicalLocation.Id;
+                }
 
-                land.LeaseStatus.Id = dataAccess.AddLeaseStatus(land.LeaseStatus.ConvertLeaseStatus(land.LeaseStatus));
-                land.LeaseStatusId = land.LeaseStatus.Id;
+                if (land.LeaseStatus.Id == 0)
+                {
+                    land.LeaseStatus.Id = dataAccess.AddLeaseStatus(land.LeaseStatus.ConvertLeaseStatus(land.LeaseStatus));
+                    land.LeaseStatusId = land.LeaseStatus.Id;
+                }
+                else {
+                    dataAccess.UpdateLeaseStatus(land.LeaseStatus.ConvertLeaseStatus(land.LeaseStatus));
+                    land.LeaseStatusId = land.LeaseStatus.Id;
+                }
 
-                land.LandUseManagementDetail.Id = dataAccess.AddLandUseManagementDetail(land.LandUseManagementDetail.ConvertLandUseManagementDetail(land.LandUseManagementDetail));
-                land.LandUseManagementDetailId = land.LandUseManagementDetail.Id;
+                if (land.LandUseManagementDetail.Id == 0)
+                {
+                    land.LandUseManagementDetail.Id = dataAccess.AddLandUseManagementDetail(land.LandUseManagementDetail.ConvertLandUseManagementDetail(land.LandUseManagementDetail));
+                    land.LandUseManagementDetailId = land.LandUseManagementDetail.Id;
+                }
+                else {
+                    dataAccess.UpdateLandUseManagementDetail(land.LandUseManagementDetail.ConvertLandUseManagementDetail(land.LandUseManagementDetail));
+                    land.LandUseManagementDetailId = land.LandUseManagementDetail.Id;
+                }
 
-                land.Id = dataAccess.AddLand(land.ConvertLand(land));
+                if (land.Id == 0)
+                {
+                    land.Id = dataAccess.AddLand(land.ConvertLand(land));
+                }
+                else {
+                    dataAccess.UpdateLand(land.ConvertLand(land));
+                }
             }
             return land;
         }
@@ -414,13 +400,31 @@ namespace MAM.BusinessLayer.Repositories
 
             using (var dataAccess = new DataAccess.Repositories.FinanceRepository(appSettings.ConnectionString))
             {
-                finance.SecondaryInformationNote.Id = dataAccess.AddSecondaryInformationNote(finance.SecondaryInformationNote.ConvertToSecondaryInformationNote(finance.SecondaryInformationNote));
-                finance.SecondaryInformationNoteId = finance.SecondaryInformationNote.Id;
+                if (finance.SecondaryInformationNote.Id == 0)
+                {
+                    finance.SecondaryInformationNote.Id = dataAccess.AddSecondaryInformationNote(finance.SecondaryInformationNote.ConvertToSecondaryInformationNote(finance.SecondaryInformationNote));
+                    finance.SecondaryInformationNoteId = finance.SecondaryInformationNote.Id;
+                }
+                else {
+                    dataAccess.UpdateSecondaryInformationNote(finance.SecondaryInformationNote.ConvertToSecondaryInformationNote(finance.SecondaryInformationNote));
+                }
 
-                finance.Valuation.Id = dataAccess.AddValuation(finance.Valuation.ConvertToValuation(finance.Valuation));
-                finance.ValuationId = finance.Valuation.Id;
+                if (finance.Valuation.Id == 0)
+                {
+                    finance.Valuation.Id = dataAccess.AddValuation(finance.Valuation.ConvertToValuation(finance.Valuation));
+                    finance.ValuationId = finance.Valuation.Id;
+                }
+                else {
+                    dataAccess.UpdateValuation(finance.Valuation.ConvertToValuation(finance.Valuation));
+                }
 
-                finance.Id = dataAccess.AddFinance(finance.ConvertToFinance(finance));
+                if (finance.Id == 0)
+                {
+                    finance.Id = dataAccess.AddFinance(finance.ConvertToFinance(finance));
+                }
+                else {
+                    dataAccess.UpdateFinance(finance.ConvertToFinance(finance));
+                }
             }
             return finance;
         }

@@ -8,12 +8,12 @@ namespace MAM.BusinessLayer.Models
     {
         public int Id { get; set; }
         public string DeedsOffice { get; set; }
-        public string AssetClass { get; set; }
-        public string AssetType { get; set; }
-        public int GeographicalLocationId { get; set; }
-        public int PropertyDescriptionId { get; set; }
-        public int LandUseManagementDetailId { get; set; }
-        public int LeaseStatusId { get; set; }
+        public string Class { get; set; }
+        public string Type { get; set; }
+        public int? GeographicalLocationId { get; set; }
+        public int? PropertyDescriptionId { get; set; }
+        public int? LandUseManagementDetailId { get; set; }
+        public int? LeaseStatusId { get; set; }
         public GeographicalLocation GeographicalLocation { get; set; }
         public PropertyDescription PropertyDescription { get; set; }
         public LandUseManagementDetail LandUseManagementDetail { get; set; }
@@ -23,8 +23,8 @@ namespace MAM.BusinessLayer.Models
             return new Land {
                 Id = land.Id,
                 DeedsOffice = land.DeedsOffice,
-                AssetClass = land.AssetClass,
-                AssetType = land.AssetType,
+                Class = land.Class,
+                Type = land.Type,
                 GeographicalLocationId = land.GeographicalLocationId,
                 PropertyDescriptionId = land.PropertyDescriptionId,
                 LandUseManagementDetailId = land.LandUseManagementDetailId,
@@ -38,8 +38,8 @@ namespace MAM.BusinessLayer.Models
             {
                 Id = land.Id,
                 DeedsOffice = land.DeedsOffice,
-                AssetClass = land.AssetClass,
-                AssetType = land.AssetType,
+                Class = land.Class,
+                Type = land.Type,
                 GeographicalLocationId = land.GeographicalLocationId,
                 PropertyDescriptionId = land.PropertyDescriptionId,
                 LandUseManagementDetailId = land.LandUseManagementDetailId,
