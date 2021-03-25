@@ -17,6 +17,8 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { UserComponent } from './components/user/user.component';
 import { AddUserComponent } from './components/user/add-user/add-user.component';
 import { AssetregisterComponent } from './components/assetregister/assetregister.component'
+import { PropertiesComponent } from './components/properties/properties.component';
+import { ViewPropertyComponent } from './components/properties/view-property/view-property.component';
 
 //primeng
 import { SlideMenuModule } from 'primeng/slidemenu';
@@ -47,7 +49,6 @@ import { ImprovementsComponent } from './components/assetregister/addassetregist
 import { LandComponent } from './components/assetregister/addassetregister/land/land.component';
 import { CalendarModule } from 'primeng/calendar';
 import { SplitButtonModule } from 'primeng/splitbutton';
-import { PropertiesComponent } from './components/properties/properties.component';
 
 @NgModule({
   declarations: [
@@ -64,7 +65,8 @@ import { PropertiesComponent } from './components/properties/properties.componen
     LandComponent,
     ImprovementsComponent,
     FinancialsComponent,
-    PropertiesComponent
+    PropertiesComponent,
+    ViewPropertyComponent
   ],
   imports: [
     BrowserModule,

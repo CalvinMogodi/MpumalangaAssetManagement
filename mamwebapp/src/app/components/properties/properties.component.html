@@ -36,7 +36,17 @@
             <td>{{facility.fileReference}}</td>
             <td>{{facility.land.propertyDescription.lpiCode}}</td>
             <td>{{facility.status}}</td>
-            <td></td>
+            <td>
+                <div style="text-align: center;">
+                    <p-button label="View" (click)="viewFacility(facility)"></p-button> 
+                </div>
+            </td>
         </tr>
     </ng-template>
 </p-table>
+
+<p-dialog [(visible)]="showDialog" *ngIf="showDialog" [style]="{width: '80vw'}"
+    [baseZIndex]="10000">
+    <p-header> Property </p-header>
+    <app-view-property [selectedFacility]="selectedFacility"></app-view-property>
+</p-dialog>

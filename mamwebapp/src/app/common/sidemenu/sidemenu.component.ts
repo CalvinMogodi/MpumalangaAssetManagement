@@ -33,10 +33,10 @@ export class SidemenuComponent implements OnInit {
       return false;
   }
 
-  ngOnDestroy() {
-    if (!this.changeDetectionRef['destroyed']) {
-      this.changeDetectionRef.detectChanges();
-    }
-  }
+  // ngOnDestroy() {
+  //   if (!this.changeDetectionRef['destroyed']) {
+  //     this.changeDetectionRef.detectChanges();
+  //   }
+  // }
 
 }

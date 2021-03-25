@@ -10,8 +10,10 @@ import { FacilityService } from '../../services/facility/facility.service';
 })
 export class PropertiesComponent implements OnInit {
   facilities: Facility[];
+  selectedFacility: Facility;
   leasedPropertyCount: Number = 0;
   stateOwnedPropertyCount: Number = 0;
+  showDialog: Boolean = false;
 
   constructor(public facilityService: FacilityService) { 
     
@@ -34,6 +36,11 @@ export class PropertiesComponent implements OnInit {
         }
       })
     });
+  }
+
+  viewFacility(facility) {
+    this.selectedFacility = facility;
+    this.showDialog = true;
   }
 
 }

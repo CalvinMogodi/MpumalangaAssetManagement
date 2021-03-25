@@ -49,7 +49,7 @@ const routes: Routes = [
   {
     path: 'properties',
     component: PropertiesComponent,
-    //canActivate: [AuthGuard],
+    canActivate: [AuthGuard],
   },
   {
     path: 'login',
