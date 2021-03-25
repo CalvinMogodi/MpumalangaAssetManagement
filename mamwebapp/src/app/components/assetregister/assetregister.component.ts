@@ -100,11 +100,11 @@ export class AssetregisterComponent implements OnInit {
   }
 
   deleteFacility(facility){
-    this.facilityService.deleteFacility(facility).pipe(first()).subscribe(isDeleted => {
+    this.facilityService.deleteFacility(facility.id).pipe(first()).subscribe(isDeleted => {
       if(isDeleted){
         this.deleting = false;
         this.messageService.add({severity:'warn', summary:'Deleted', detail:'Asset is deleted successful.'});
-        this.facilities = this.facilities.filter(f => f.id != facility.id && f.clientCode != facility.clientCode && f.facilityType != facility.facilityType);
+        this.facilities = this.facilities.filter(f => f.id != facility.id);
         this.landTotal = this.facilities.filter(f => f.facilityType == "Land" && f.Id != facility.Id).length;
         this.buildingTotal = this.facilities.filter(f => f.facilityType != "Land" && f.Id != facility.Id).length;
       }

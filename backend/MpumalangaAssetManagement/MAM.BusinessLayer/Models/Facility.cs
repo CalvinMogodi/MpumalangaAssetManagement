@@ -51,7 +51,7 @@ namespace MAM.BusinessLayer.Models
                 CreatedDate = f.CreatedDate,
                 ModifiedBy = f.ModifiedBy,
                 ModifiedDate = f.ModifiedDate,
-                Land = new Land()
+                Land = f.Land != null ? new Land()
                 {
                     Id = f.Land.Id,
                     DeedsOffice = f.Land.DeedsOffice,
@@ -65,7 +65,7 @@ namespace MAM.BusinessLayer.Models
                     PropertyDescription = f.Land.PropertyDescription != null ? pd.ConvertPropertyDescription(f.Land.PropertyDescription) : pd,
                     LandUseManagementDetail = f.Land.LandUseManagementDetail != null ? lumd.ConvertLandUseManagementDetail(f.Land.LandUseManagementDetail) : new LandUseManagementDetail(),
                     LeaseStatus = f.Land.LeaseStatus != null ? ls.ConvertLeaseStatus(f.Land.LeaseStatus) : new LeaseStatus(),
-                },
+                } : new Land(),
                 Finance = f.Finance != null ? new Finance()
                 {
                     Id = f.Finance.Id,

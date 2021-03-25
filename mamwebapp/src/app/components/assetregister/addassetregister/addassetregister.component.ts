@@ -86,28 +86,28 @@ export class AddassetregisterComponent implements OnInit {
   improvement: {}
   currentUser: User;
 
-  constructor(private authenticationService: AuthenticationService,private confirmationService: ConfirmationService, public facilityService: FacilityService, private formBuilder: FormBuilder, private messageService: MessageService) { }
+  constructor(private authenticationService: AuthenticationService, private confirmationService: ConfirmationService, public facilityService: FacilityService, private formBuilder: FormBuilder, private messageService: MessageService) { }
 
   ngOnInit() {
     this.buildForm();
     this.authenticationService.currentUser.pipe().subscribe(x => {
       this.currentUser = x;
     });
-  
+
     if (this.selectedAsset.facilityId != undefined) {
       this.mode = this.selectedAsset.mode;
-      if(this.mode == "Edit"){
+      if (this.mode == "Edit") {
         this.loading = false;
         this.facility = this.selectedAsset.facility;
         this.initFacility();
-      }else{
+      } else {
         this.facilityService.getFacilityById(this.selectedAsset.facilityId, this.selectedAsset.facilityType).pipe(first()).subscribe(facility => {
           this.loading = false;
           this.facility = facility;
           this.initFacility();
         });
       }
-      
+
     } else {
       this.buildForm();
       this.mode = this.selectedAsset.mode;
@@ -125,7 +125,7 @@ export class AddassetregisterComponent implements OnInit {
       createdBy: this.currentUser.id,
       createdDate: new Date(),
       modifiedBy: this.currentUser.id,
-      modifiedDate: new Date(),   
+      modifiedDate: new Date(),
       land: {
         id: 0,
         geographicalLocation: {
@@ -149,7 +149,7 @@ export class AddassetregisterComponent implements OnInit {
         valuation: {
           id: 0
         }
-      },  
+      },
       improvements: []
     }
   }
@@ -161,34 +161,36 @@ export class AddassetregisterComponent implements OnInit {
   setLocalAuthorities(e) { }
 
   setDistrictMunicipality(e) {
-    if(e != undefined){
-      if (e.value.factor == 1) {
-        this.localAuthorities = [
-          { name: 'Mbombela', code: 'M', factor: 1 },
-          { name: 'Nkomazi', code: 'N', factor: 2 },
-          { name: 'Thaba Chweu', code: 'TC', factor: 3 },
-          { name: 'Bushbuckridge', code: 'B', factor: 4 }
-        ];
-      } else if (e.value.factor == 2) {
-        this.localAuthorities = [
-          { name: 'Emalahleni', code: 'E', factor: 1 },
-          { name: 'Emakahzeni', code: 'E', factor: 2 },
-          { name: 'DR JS Moroka', code: 'JSM', factor: 3 },
-          { name: 'Thembisile Hani', code: 'TH', factor: 4 },
-          { name: 'Victor Khanye', code: 'VK', factor: 5 }
-        ];
-      } else {
-        this.localAuthorities = [
-          { name: 'Goven Mbeki', code: 'GM', factor: 1 },
-          { name: 'Albert Luthuli', code: 'AL', factor: 2 },
-          { name: 'Lekwa', code: 'L', factor: 3 },
-          { name: 'Dipaleseng', code: 'D', factor: 4 },
-          { name: 'Pixley ka Seme', code: 'PKS', factor: 5 },
-          { name: 'Mkhondo', code: 'M', factor: 6 },
-          { name: 'Msukaligwa', code: 'MS', factor: 7 }
-        ];
+    if (e != undefined) {
+      if (e.value != undefined) {
+        if (e.value.factor == 1) {
+          this.localAuthorities = [
+            { name: 'Mbombela', code: 'M', factor: 1 },
+            { name: 'Nkomazi', code: 'N', factor: 2 },
+            { name: 'Thaba Chweu', code: 'TC', factor: 3 },
+            { name: 'Bushbuckridge', code: 'B', factor: 4 }
+          ];
+        } else if (e.value.factor == 2) {
+          this.localAuthorities = [
+            { name: 'Emalahleni', code: 'E', factor: 1 },
+            { name: 'Emakahzeni', code: 'E', factor: 2 },
+            { name: 'DR JS Moroka', code: 'JSM', factor: 3 },
+            { name: 'Thembisile Hani', code: 'TH', factor: 4 },
+            { name: 'Victor Khanye', code: 'VK', factor: 5 }
+          ];
+        } else {
+          this.localAuthorities = [
+            { name: 'Goven Mbeki', code: 'GM', factor: 1 },
+            { name: 'Albert Luthuli', code: 'AL', factor: 2 },
+            { name: 'Lekwa', code: 'L', factor: 3 },
+            { name: 'Dipaleseng', code: 'D', factor: 4 },
+            { name: 'Pixley ka Seme', code: 'PKS', factor: 5 },
+            { name: 'Mkhondo', code: 'M', factor: 6 },
+            { name: 'Msukaligwa', code: 'MS', factor: 7 }
+          ];
+        }
       }
-    } 
+    }
   }
 
   setDeedsOffice(e) {
@@ -219,7 +221,7 @@ export class AddassetregisterComponent implements OnInit {
     this.financeIsSubmitted = true;
     if (this.financialForm.valid) {
       this.assignFacility(false, true, false);
-      
+      this.facility.status = 'Saved';
       this.facilityService.saveFacility(this.facility, "finance").pipe(first()).subscribe(isSaved => {
         if (isSaved) {
           this.savingLand = false;
@@ -237,6 +239,7 @@ export class AddassetregisterComponent implements OnInit {
     this.improvementIsSubmitted = true;
     if (this.landForm.valid) {
       this.assignFacility(false, false, true);
+      this.facility.status = 'Saved';
       this.facilityService.saveFacility(this.facility, "improvement").pipe(first()).subscribe(isSaved => {
         if (isSaved) {
           this.savingLand = false;
@@ -254,6 +257,7 @@ export class AddassetregisterComponent implements OnInit {
     this.landIsSubmitted = true;
     if (this.landForm.valid) {
       this.assignFacility(true, false, false);
+      this.facility.status = 'Saved';
       this.facilityService.saveFacility(this.facility, "land").pipe(first()).subscribe(facility => {
         if (facility) {
           this.savingLand = false;
@@ -277,6 +281,7 @@ export class AddassetregisterComponent implements OnInit {
       return;
     }
     this.assignFacility(true, true, true);
+    this.facility.status = 'Submitted';
     this.facilityService.saveFacility(this.facility, "facility").pipe(first()).subscribe(isSaved => {
       if (isSaved) {
         this.newAsset.emit({ mode: "Add", data: this.facility, response: "isAddedSuccessful" });
@@ -298,7 +303,7 @@ export class AddassetregisterComponent implements OnInit {
           id: this.facility.land.id == 0 ? 0 : this.facility.land.id,
           deedsOffice: this.landForm.controls["deedsOffice"].value != undefined ? this.landForm.controls["deedsOffice"].value.name : null,
           type: this.landForm.controls["type"].value != undefined ? this.landForm.controls["type"].value.name : null,
-          class: this.landForm.controls["class"].value != undefined ?  this.landForm.controls["class"].value.name : null,
+          class: this.landForm.controls["class"].value != undefined ? this.landForm.controls["class"].value.name : null,
           geographicalLocation: {
             id: this.facility.land.geographicalLocation.id == 0 ? 0 : this.facility.land.geographicalLocation.id,
             province: this.landForm.controls["province"].value != undefined ? this.landForm.controls["province"].value.name : null,
@@ -308,7 +313,7 @@ export class AddassetregisterComponent implements OnInit {
             streetNumber: Number(this.landForm.controls["streetNumber"].value),
             districtMunicipality: this.landForm.controls["districtMunicipality"].value != undefined ? this.landForm.controls["districtMunicipality"].value.name : null,
             region: this.landForm.controls["region"].value != undefined ? this.landForm.controls["region"].value.name : null,
-            localAuthority: this.landForm.controls["localAuthority"].value != undefined? this.landForm.controls["localAuthority"].value.name : null,
+            localAuthority: this.landForm.controls["localAuthority"].value != undefined ? this.landForm.controls["localAuthority"].value.name : null,
             latitude: this.landForm.controls["latitude"].value,
             longitude: this.landForm.controls["longitude"].value,
             magisterialDistrict: this.landForm.controls["magisterialDistrict"].value != undefined ? this.landForm.controls["magisterialDistrict"].value.name : null,
@@ -354,9 +359,9 @@ export class AddassetregisterComponent implements OnInit {
             postalCode: Number(this.landForm.controls["postalCode"].value),
             leaseStatusTown: this.landForm.controls["leaseStatusTown"].value,
             rentalAmount: this.landForm.controls["rentalAmount"].value != "" ? this.landForm.controls["rentalAmount"].value : null,
-            terminationDate:this.landForm.controls["terminationDate"].value != "" ?  this.landForm.controls["terminationDate"].value : null,
-            startingDate: this.landForm.controls["startingDate"].value != "" ?  this.landForm.controls["startingDate"].value : null,
-            occupationDate:this.landForm.controls["occupationDate"].value != "" ?  this.landForm.controls["occupationDate"].value : null,
+            terminationDate: this.landForm.controls["terminationDate"].value != "" ? this.landForm.controls["terminationDate"].value : null,
+            startingDate: this.landForm.controls["startingDate"].value != "" ? this.landForm.controls["startingDate"].value : null,
+            occupationDate: this.landForm.controls["occupationDate"].value != "" ? this.landForm.controls["occupationDate"].value : null,
             escalation: this.landForm.controls["escalation"].value,
             vat: this.landForm.controls["vat"].value != undefined ? this.landForm.controls["vat"].value.name : null,
             leaseNumber: this.landForm.controls["leaseNumber"].value != "" ? this.landForm.controls["leaseNumber"].value : null,
@@ -373,16 +378,16 @@ export class AddassetregisterComponent implements OnInit {
           natureofAsset: this.financialForm.controls["natureofAsset"].value,
           secondaryInformationNote: {
             id: this.facility.finance.secondaryInformationNote.id == 0 ? 0 : this.facility.finance.secondaryInformationNote.id,
-            additionCash: this.financialForm.controls["additionCash"].value,
-            additionNonCash: this.financialForm.controls["additionNonCash"].value,
-            addition: this.financialForm.controls["addition"].value,
-            disposal: this.financialForm.controls["disposal"].value,
-            closingBalance: this.financialForm.controls["closingBalance"].value,
+            additionCash: this.financialForm.controls["additionCash"].value != "" ? this.financialForm.controls["additionCash"].value : null,
+            additionNonCash: this.financialForm.controls["additionNonCash"].value != "" ? this.financialForm.controls["additionNonCash"].value : null,
+            addition: this.financialForm.controls["addition"].value != "" ? this.financialForm.controls["addition"].value : null,
+            disposal: this.financialForm.controls["disposal"].value != "" ? this.financialForm.controls["disposal"].value : null,
+            closingBalance: this.financialForm.controls["closingBalance"].value != "" ? this.financialForm.controls["closingBalance"].value : null,
           },
           valuation: {
             id: this.facility.finance.valuation.id == 0 ? 0 : this.facility.finance.valuation.id,
-            municipalValuationDate: this.financialForm.controls["municipalValuationDate"].value,
-            nonMunicipalValuationDate: this.financialForm.controls["nonMunicipalValuationDate"].value,
+            municipalValuationDate: this.financialForm.controls["municipalValuationDate"].value != "" ?  this.financialForm.controls["municipalValuationDate"].value : null,
+            nonMunicipalValuationDate:  this.financialForm.controls["nonMunicipalValuationDate"].value != "" ? this.financialForm.controls["nonMunicipalValuationDate"].value : null,
             municipalValuation: this.financialForm.controls["municipalValuation"].value,
             nonMunicipalValuation: this.financialForm.controls["nonMunicipalValuation"].value,
             propetyRatesAccount: this.financialForm.controls["propetyRatesAccount"].value,
@@ -670,27 +675,54 @@ export class AddassetregisterComponent implements OnInit {
 
   initFacility() {
     this.improvements = this.facility.improvements;
-     
-    let deedsOffice = this.deedsOffices.filter(d => d.name == this.facility.land.deedsOffice)[0];
-    let type = this.types.filter(d => d.name == this.facility.land.type)[0];
-    let assetClass = this.classes.filter(d => d.name == this.facility.land.class)[0];
-    let province = this.provinces.filter(d => d.name == this.facility.land.geographicalLocation.province)[0];
-    let districtMunicipality = this.districtMunicipalities.filter(d => d.name == this.facility.land.geographicalLocation.districtMunicipality)[0];
-   
-    let region = this.regions.filter(d => d.name == this.facility.land.region)[0];
-    let registrationDivision = this.registrationDivisions.filter(d => d.name == this.facility.land.propertyDescription.registrationDivision)[0];
-    let landRemainder = this.landRemainders.filter(d => d.name == this.facility.land.propertyDescription.landRemainder)[0];
-    let acquired = this.howAcquireds.filter(d => d.name == this.facility.land.propertyDescription.acquired)[0];
-    let ownershipCategory = this.ownershipCategories.filter(d => d.name == this.facility.land.landUseManagementDetail.ownershipCategory)[0];
-    let userDepartment = this.userDepartments.filter(d => d.name == this.facility.land.landUseManagementDetail.userDepartment)[0];
-    let incomeLeaseStatus = this.incomeLeaseStatuses.filter(d => d.name == this.facility.land.landUseManagementDetail.incomeLeaseStatus)[0];
-    let natureOfLease = this.natureOfLeases.filter(d => d.name == this.facility.land.leaseStatus.natureOfLease)[0];
+    if (this.facility.land == undefined) {
+      this.facility.land = { id: 0 }
+    }
+    if (this.facility.land.geographicalLocation == undefined) {
+      this.facility.land.geographicalLocation = { id: 0 }
+    }
+
+    if (this.facility.land.geographicalLocation == undefined) {
+      this.facility.land.propertyDescription = { id: 0 }
+    }
+
+    if (this.facility.land.landUseManagementDetail == undefined) {
+      this.facility.land.landUseManagementDetail = { id: 0 }
+    }
+    if (this.facility.land.leaseStatus == undefined) {
+      this.facility.land.leaseStatus = { id: 0 }
+    }
+
+    if (this.facility.finance == undefined) {
+      this.facility.finance = { id: 0 }
+    }
+    if (this.facility.finance.secondaryInformationNote == undefined) {
+      this.facility.finance.secondaryInformationNote = { id: 0 }
+    }
+    if (this.facility.finance.valuation == undefined) {
+      this.facility.finance.valuation = { id: 0 }
+    }
+
+    let deedsOffice = this.deedsOffices.filter(d => d.name.toLowerCase().trim() == (this.facility.land.deedsOffice != undefined ? this.facility.land.deedsOffice.toLowerCase().trim() : this.facility.land.deedsOffice))[0];
+    let type = this.types.filter(d => d.name.toLowerCase().trim() == (this.facility.land.type != undefined ? this.facility.land.type.toLowerCase().trim() : this.facility.land.type))[0];
+    let assetClass = this.classes.filter(d => d.name.toLowerCase().trim() == (this.facility.land.class != undefined ? this.facility.land.class.toLowerCase().trim() : this.facility.land.class))[0];
+    let province = this.provinces.filter(d => d.name.toLowerCase().trim() == (this.facility.land.geographicalLocation.province != undefined ? this.facility.land.geographicalLocation.province.toLowerCase().trim() : this.facility.land.geographicalLocation.province))[0];
+    let districtMunicipality = this.districtMunicipalities.filter(d => d.name.toLowerCase().trim() == (this.facility.land.geographicalLocation.districtMunicipality != undefined ? this.facility.land.geographicalLocation.districtMunicipality.toLowerCase().trim() : this.facility.land.geographicalLocation.districtMunicipality))[0];
+
+    let region = this.regions.filter(d => d.name.toLowerCase().trim() == (this.facility.land.region != undefined ? this.facility.land.region.toLowerCase().trim() : this.facility.land.region))[0];
+    let registrationDivision = this.registrationDivisions.filter(d => d.name.toLowerCase().trim() == (this.facility.land.propertyDescription.registrationDivision != undefined ? this.facility.land.propertyDescription.registrationDivision.toLowerCase().trim() : this.facility.land.propertyDescription.registrationDivision))[0];
+    let landRemainder = this.landRemainders.filter(d => d.name == (this.facility.land.propertyDescription.landRemainder == false ? 'No' : 'Yes'))[0];
+    let acquired = this.howAcquireds.filter(d => d.name.toLowerCase().trim() == (this.facility.land.propertyDescription.acquired != undefined ? this.facility.land.propertyDescription.acquired.toLowerCase().trim() : this.facility.land.propertyDescription.acquired))[0];
+    let ownershipCategory = this.ownershipCategories.filter(d => d.name.toLowerCase().trim() == (this.facility.land.landUseManagementDetail.ownershipCategory != undefined ? this.facility.land.landUseManagementDetail.ownershipCategory.toLowerCase().trim() : this.facility.land.landUseManagementDetail.ownershipCategory))[0];
+    let userDepartment = this.userDepartments.filter(d => d.name.toLowerCase().trim() == (this.facility.land.landUseManagementDetail.userDepartment != undefined ? this.facility.land.landUseManagementDetail.userDepartment.toLowerCase().trim() : this.facility.land.landUseManagementDetail.userDepartment))[0];
+    let incomeLeaseStatus = this.incomeLeaseStatuses.filter(d => d.name.toLowerCase().trim() == (this.facility.land.landUseManagementDetail.incomeLeaseStatus != undefined ? this.facility.land.landUseManagementDetail.incomeLeaseStatus.toLowerCase().trim() : this.facility.land.landUseManagementDetail.incomeLeaseStatus))[0];
+    let natureOfLease = this.natureOfLeases.filter(d => d.name.toLowerCase().trim() == (this.facility.land.leaseStatus.natureOfLease != undefined ? this.facility.land.leaseStatus.natureOfLease.toLowerCase().trim() : this.facility.land.leaseStatus.natureOfLease))[0];
     let vat = this.vats.filter(d => d.name == this.facility.land.leaseStatus.vat)[0];
     let _districtMunicipality = {
       value: districtMunicipality
     };
     this.setDistrictMunicipality(_districtMunicipality);
-    let localAuthority = this.localAuthorities.filter(d => d.name == this.facility.land.geographicalLocation.localAuthority)[0];
+    let localAuthority = undefined;// this.localAuthorities.filter(d => d.name.toLowerCase().trim() == (_districtMunicipality.value != undefined ? this.facility.land.geographicalLocation.localAuthority.toLowerCase().trim()  : this.facility.land.geographicalLocation.localAuthority))[0];
 
     this.landForm = this.formBuilder.group({
       deedsOffice: [deedsOffice],
@@ -720,7 +752,7 @@ export class AddassetregisterComponent implements OnInit {
       acquired: [acquired],
       acquiredOther: [this.facility.land.propertyDescription.acquiredOther],
       titleDeedNumber: [this.facility.land.landUseManagementDetail.titleDeedNumber],
-      registrationDate: [new Date(this.facility.land.landUseManagementDetail.registrationDate)],
+      registrationDate: [this.facility.land.landUseManagementDetail.registrationDate != undefined ? new Date(this.facility.land.landUseManagementDetail.registrationDate) : new Date()],
       registeredOwner: [this.facility.land.landUseManagementDetail.registeredOwner],
       vestingDate: [this.facility.land.landUseManagementDetail.vestingDate],
       conditionsOfTitle: [this.facility.land.landUseManagementDetail.conditionsOfTitle],
@@ -734,9 +766,9 @@ export class AddassetregisterComponent implements OnInit {
       leaseNumber: [this.facility.land.leaseStatus.leaseNumber],
       otherCharges: [this.facility.land.leaseStatus.otherCharges],
       rentalAmount: [this.facility.land.leaseStatus.rentalAmount],
-      terminationDate: [new Date(this.facility.land.leaseStatus.terminationDate)],
-      startingDate: [new Date(this.facility.land.leaseStatus.startingDate)],
-      occupationDate:[ new Date(this.facility.land.leaseStatus.occupationDate)],
+      terminationDate: [this.facility.land.leaseStatus.terminationDate != undefined ? new Date(this.facility.land.leaseStatus.terminationDate) : new Date()],
+      startingDate: [this.facility.land.leaseStatus.startingDate != undefined ? new Date(this.facility.land.leaseStatus.startingDate) : new Date()],
+      occupationDate: [this.facility.land.leaseStatus.occupationDate != undefined ? new Date(this.facility.land.leaseStatus.occupationDate) : new Date()],
       escalation: [this.facility.land.leaseStatus.escalation],
       contactNumber: [this.facility.land.leaseStatus.contactNumber],
       capacityofContactPerson: [this.facility.land.leaseStatus.capacityofContactPerson],
@@ -745,7 +777,7 @@ export class AddassetregisterComponent implements OnInit {
       leaseStatusTown: [this.facility.land.leaseStatus.leaseStatusTown],
       POBox: [this.facility.land.leaseStatus.pOBox],
       IDNumberCompanyRegistrationNumber: [this.facility.land.leaseStatus.IDNumberCompanyRegistrationNumber],
-      natureOfLease: [natureOfLease],     
+      natureOfLease: [natureOfLease],
       vat: [vat],
     });
     this.improvementForm = this.formBuilder.group({
@@ -811,15 +843,15 @@ export class AddassetregisterComponent implements OnInit {
       let improvement = {
         id: 0,
         buildingName: this.improvementForm.controls["buildingName"].value,
-        type: this.improvementForm.controls["type"].value.name,
+        type: this.improvementForm.controls["type"].value != undefined ? this.improvementForm.controls["type"].value.name : null,
         size: this.improvementForm.controls["size"].value,
-        potentialUse: this.improvementForm.controls["potentialUse"].value.name,
-        siteCoverag: this.improvementForm.controls["siteCoverag"].value,
-        levelofUtilization: this.improvementForm.controls["levelofUtilization"].value,
-        extentofBuilding: this.improvementForm.controls["extentofBuilding"].value,
-        conditionRating: this.improvementForm.controls["conditionRating"].value.name,
-        usableArea: this.improvementForm.controls["usableArea"].value,
-        functionalPerformanceRating: this.improvementForm.controls["functionalPerformanceRating"].value.name,
+        potentialUse: this.improvementForm.controls["potentialUse"].value != undefined ? this.improvementForm.controls["potentialUse"].value.name : null,
+        siteCoverag: this.improvementForm.controls["siteCoverag"].value != "" ? this.improvementForm.controls["siteCoverag"].value.toString() : null,
+        levelofUtilization: this.improvementForm.controls["levelofUtilization"].value != "" ? this.improvementForm.controls["levelofUtilization"].value.toString() : null,
+        extentofBuilding: this.improvementForm.controls["extentofBuilding"].value != "" ? this.improvementForm.controls["extentofBuilding"].value.toString() : null,
+        conditionRating: this.improvementForm.controls["conditionRating"].value != undefined ? this.improvementForm.controls["conditionRating"].value.name: null,
+        usableArea: this.improvementForm.controls["usableArea"].value != "" ? this.improvementForm.controls["usableArea"].value.toString() : null,
+        functionalPerformanceRating: this.improvementForm.controls["functionalPerformanceRating"].value != undefined ? this.improvementForm.controls["functionalPerformanceRating"].value.name : null,
         comment: this.improvementForm.controls["comment"].value,
       };
       this.improvements.push(improvement);
@@ -827,12 +859,12 @@ export class AddassetregisterComponent implements OnInit {
   }
 
   makeId(length) {
-    var result           = '';
-    var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    var result = '';
+    var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
     var charactersLength = characters.length;
-    for ( var i = 0; i < length; i++ ) {
-       result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    for (var i = 0; i < length; i++) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
     }
     return result;
- }
+  }
 }

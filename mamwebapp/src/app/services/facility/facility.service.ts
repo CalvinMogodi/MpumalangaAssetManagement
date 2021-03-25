@@ -41,8 +41,8 @@ export class FacilityService {
     return this.http.get<Facility>(`${environment.apiUrl}/api/facility/getFacilityByCode/`+id+`/`+facilityType);
   }
 
-  deleteFacility(facility : Facility) {
-    return this.http.post<Facility>(`${environment.apiUrl}/api/facility/deleteFacility/`,facility );
+  deleteFacility(id : number) {
+    return this.http.delete<Facility>(`${environment.apiUrl}/api/facility/deleteFacility/`+ id );
   }
 
   updateFacility(facility : Facility, step: string) {

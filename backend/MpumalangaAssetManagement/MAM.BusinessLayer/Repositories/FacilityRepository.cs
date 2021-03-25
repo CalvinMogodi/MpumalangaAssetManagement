@@ -243,7 +243,7 @@ namespace MAM.BusinessLayer.Repositories
                         {
                             Longitude = item.Land.GeographicalLocation.Longitude.Replace(",", "."),
                             Latitude = item.Land.GeographicalLocation.Latitude.Replace(",", "."),
-                            Description = string.Format("Dwelling: {0} - {1}", item.ClientCode, item.Name),
+                            Description = item.Name,
                             FacilityId = item.Id,
                             FacilityType = FacilityTypes.Dwellings
                         };
@@ -291,20 +291,12 @@ namespace MAM.BusinessLayer.Repositories
 
         public Facility SaveFacility(string step, Facility facility)
         {
-            if (step.Trim().ToLower().Equals("land") || step.Trim().ToLower().Equals("facility"))
-            {
-                facility.Land = SaveLand(facility.Land);
-                facility.LandId = facility.Land.Id;
-            }
-
-            if (step.Trim().ToLower().Equals("finance") || step.Trim().ToLower().Equals("facility"))
-            {
-                facility.Finance = SaveFinance(facility.Finance);
-                facility.FinanceId = facility.Finance.Id;
-            }
-
-
+            facility.Land = SaveLand(facility.Land);
+            facility.LandId = facility.Land.Id;
             
+            facility.Finance = SaveFinance(facility.Finance);
+            facility.FinanceId = facility.Finance.Id;
+                        
            using (var dataAccess = new DataAccess.Repositories.FacilityRepository(appSettings.ConnectionString))
            {
                 if (facility.Id == 0)
@@ -315,11 +307,9 @@ namespace MAM.BusinessLayer.Repositories
                     dataAccess.UpdateFacility(facility.ConvertToFacility(facility));
                 }
             }
-
-            if (step.Trim().ToLower().Equals("improvement") || step.Trim().ToLower().Equals("facility"))
-            {
-                facility.Improvements = SaveImprovement(facility.Improvements, facility.Id);
-            }
+            
+            facility.Improvements = SaveImprovement(facility.Improvements, facility.Id);
+           
             return facility;
         }
 
