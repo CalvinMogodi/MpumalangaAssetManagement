@@ -99,6 +99,22 @@ namespace MAM.API.Controllers
         }
 
         [HttpGet]
+        [Route("getproperties")]
+        public IActionResult GetProperties()
+        {
+            try
+            {
+                List<Facility> facilities = _facilityService.GetProperties();
+                return Ok(facilities);
+            }
+            catch (Exception ex)
+            {
+                log.Info("Error");
+                throw ex;
+            }
+        }
+
+        [HttpGet]
         [Route("getallfacilities")]
         public IActionResult GetAllFacilities()
         {

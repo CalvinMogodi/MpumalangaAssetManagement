@@ -237,17 +237,23 @@ namespace MAM.BusinessLayer.Repositories
                 var facilities = dataAccess.GetFacilities();
                 foreach (var item in facilities)
                 {
-                    if (!string.IsNullOrEmpty(item.Land.GeographicalLocation.Longitude) && !string.IsNullOrEmpty(item.Land.GeographicalLocation.Latitude))
+                    if (item.Land != null)
                     {
-                        MapCoordinate mapCoordinate = new MapCoordinate()
+                        if (item.Land.GeographicalLocation != null)
                         {
-                            Longitude = item.Land.GeographicalLocation.Longitude.Replace(",", "."),
-                            Latitude = item.Land.GeographicalLocation.Latitude.Replace(",", "."),
-                            Description = item.Name,
-                            FacilityId = item.Id,
-                            FacilityType = FacilityTypes.Dwellings
-                        };
-                        mapCoordinates.Add(mapCoordinate);
+                            if (!string.IsNullOrEmpty(item.Land.GeographicalLocation.Longitude) && !string.IsNullOrEmpty(item.Land.GeographicalLocation.Latitude))
+                            {
+                                MapCoordinate mapCoordinate = new MapCoordinate()
+                                {
+                                    Longitude = item.Land.GeographicalLocation.Longitude.Replace(",", "."),
+                                    Latitude = item.Land.GeographicalLocation.Latitude.Replace(",", "."),
+                                    Description = item.Name,
+                                    FacilityId = item.Id,
+                                    FacilityType = FacilityTypes.Dwellings
+                                };
+                                mapCoordinates.Add(mapCoordinate);
+                            }
+                        }
                     }
 
                 }
@@ -256,6 +262,18 @@ namespace MAM.BusinessLayer.Repositories
         }
 
         public List<Facility> GetAllFacilities()
+        {
+            List<Facility> facilities = new List<Facility>();
+            Facility facility = new Facility();
+            using (var dataAccess = new DataAccess.Repositories.FacilityRepository(appSettings.ConnectionString))
+            {
+                var _facilities = facility.ConvertToFacilities(dataAccess.GetFacilities());
+                facilities.AddRange(_facilities);
+            }
+            return facilities;
+        }
+
+        public List<Facility> GetProperties()
         {
             List<Facility> facilities = new List<Facility>();
             Facility facility = new Facility();

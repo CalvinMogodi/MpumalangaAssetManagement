@@ -20,20 +20,29 @@ export class PropertiesComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getAllFacilities();
+    this.getProperties();
   }
 
-  getAllFacilities(){
-    this.facilityService.getAllFacilities().pipe(first()).subscribe(facilities => {
-      this.facilities = facilities;    
-
-      this.facilities.forEach((facility) => {
-        if (new Date(facility.land.leaseStatus.terminationDate).getTime() > new Date().getTime()) {
-          this.leasedPropertyCount = +this.leasedPropertyCount + 1;
-        }
-        else {
-          this.stateOwnedPropertyCount = +this.stateOwnedPropertyCount + 1
-        }
+  getProperties(){
+    this.facilities = [];
+    this.facilityService.getProperties().pipe(first()).subscribe(facilities => {
+        facilities.forEach((facility) => {
+          if(facility.status.toLowerCase().trim() == 'submitted'){
+          if(facility.land != undefined && facility.finance != undefined){
+            if(facility.land.leaseStatus != undefined && facility.land.propertyDescription != undefined 
+              && facility.land.geographicalLocation != undefined && facility.land.landUseManagementDetail != undefined
+              && facility.finance.secondaryInformationNote != undefined && facility.finance.valuation != undefined ){
+              if (new Date(facility.land.leaseStatus.terminationDate).getTime() > new Date().getTime()) {
+                this.leasedPropertyCount = +this.leasedPropertyCount + 1;
+              }
+              else {
+                this.stateOwnedPropertyCount = +this.stateOwnedPropertyCount + 1
+              }              
+              this.facilities.push(facility);
+              }              
+            }
+            
+          }        
       })
     });
   }

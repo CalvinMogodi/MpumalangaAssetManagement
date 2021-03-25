@@ -467,7 +467,7 @@
                         </div>
                         <div class="ui-g-4 ui-md-4">
                             <label for="postalCode">Postal Code</label>
-                            <input formControlName="postalCode" autocomplete="off" type="text" pInputText
+                            <input formControlName="postalCode" autocomplete="off" type="number" pInputText
                                 placeholder="Postal Code" class="ui-inputtext ui-widget"
                                 [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
                             <div *ngIf="(submitted || landisSubmitted) && f.postalCode.errors" class="text-error"><br>
@@ -476,7 +476,7 @@
                         </div>
                         <div class="ui-g-4 ui-md-4">
                             <label for="contactPerson">Contact Person</label>
-                            <input formControlName="contactPerson" autocomplete="off" type="number" pInputText
+                            <input formControlName="contactPerson" autocomplete="off" type="text" pInputText
                                 placeholder="Contact Person" class="ui-inputtext ui-widget"
                                 [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
                             <div *ngIf="(submitted || landisSubmitted) && f.contactPerson.errors" class="text-error">
