@@ -9,6 +9,7 @@ import { Role } from '../app/models/role.model';
 import { FinancialsComponent } from './components/assetregister/addassetregister/financials/financials.component';
 import { ImprovementsComponent } from './components/assetregister/addassetregister/improvements/improvements.component';
 import { LandComponent } from './components/assetregister/addassetregister/land/land.component';
+import { PropertiesComponent } from './components/properties/properties.component';
 
 
 const routes: Routes = [
@@ -45,6 +46,11 @@ const routes: Routes = [
     component: FinancialsComponent,
     canActivate: [AuthGuard],
   },  
+  {
+    path: 'properties',
+    component: PropertiesComponent,
+    //canActivate: [AuthGuard],
+  },
   {
     path: 'login',
     component: LoginComponent,    

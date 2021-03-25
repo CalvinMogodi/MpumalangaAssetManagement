@@ -1,0 +1,25 @@
+.grid {
+  display: grid;
+  gap: 1rem;
+  grid-auto-flow: column;
+  margin: 0 0 1rem 0;
+}
+
+.grid > div {
+  min-width: 10px;
+}
+
+.number-count {
+  color: #66cfb6;
+  font-size: 2em;
+  font-weight: 700;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+  border: 3px solid green;
+}
