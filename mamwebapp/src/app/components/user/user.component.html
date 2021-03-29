@@ -132,8 +132,20 @@
                 <label>Role</label>
                 <div class="ui-inputgroup">
                     <p-dropdown [style]="{'width':'570px'}" inputId="role" [options]="roles" formControlName="role"
-                                     optionLabel="name"
+                                     optionLabel="name" (onChange)="setRole($event)"
                                     placeholder="Select a Role"></p-dropdown>
+                    <div *ngIf="submitted && f.role.errors"
+                        class="text-error"><br>
+                        <div *ngIf="f.role.errors.required">This field is required.</div>                        
+                    </div>                    
+                </div>
+            </div>
+            <div class="ui-g-12 ui-md-12" *ngIf="selectedRole == 7">
+                <label>Department</label>
+                <div class="ui-inputgroup">
+                    <p-dropdown [style]="{'width':'570px'}" inputId="department" [options]="departments" formControlName="department"
+                                     optionLabel="name"
+                                    placeholder="Select a department"></p-dropdown>
                     <div *ngIf="submitted && f.role.errors"
                         class="text-error"><br>
                         <div *ngIf="f.role.errors.required">This field is required.</div>                        

@@ -7,6 +7,7 @@ export class Facility {
     fileReference: string;
     type: string;
     clientCode: string;    
+    survey: string;
     userId: number;
     status: string;    
     land: Land;

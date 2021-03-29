@@ -19,5 +19,6 @@ namespace MAM.DataAccess.Tables
         public DateTime? ModifiedDate { get; set; }
         public int CreatedUserId { get; set; }
         public int? ModifiedUserId { get; set; }
+        public string Department { get; set; }
     }
 }

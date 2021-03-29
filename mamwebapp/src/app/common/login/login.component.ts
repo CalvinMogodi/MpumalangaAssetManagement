@@ -74,7 +74,12 @@ export class LoginComponent implements OnInit {
       .subscribe(
         data => {
           if(data.username != null){
-            this.router.navigate(['dashboard']);
+            if(data.roleId == 7){
+              this.router.navigate(['properties']);
+            }else{
+              this.router.navigate(['dashboard']);
+            }
+           
           }else{
             this.error = 'Invalid username or password';
             this.loading = false;

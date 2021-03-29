@@ -51,6 +51,7 @@ import { ImprovementsComponent } from './components/assetregister/addassetregist
 import { LandComponent } from './components/assetregister/addassetregister/land/land.component';
 import { CalendarModule } from 'primeng/calendar';
 import { SplitButtonModule } from 'primeng/splitbutton';
+import { PrintAssetComponent } from './components/assetregister/print-asset/print-asset.component';
 
 @NgModule({
   declarations: [
@@ -68,7 +69,8 @@ import { SplitButtonModule } from 'primeng/splitbutton';
     ImprovementsComponent,
     FinancialsComponent,
     PropertiesComponent,
-    ViewPropertyComponent
+    ViewPropertyComponent,
+    PrintAssetComponent
   ],
   imports: [
     BrowserModule,

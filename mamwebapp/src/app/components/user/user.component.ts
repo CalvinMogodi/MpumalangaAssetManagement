@@ -34,6 +34,8 @@ export class UserComponent implements OnInit {
   msgs: any[] = [];
   newUserError: string = '';
   errorMsg: string = 'error';
+  departments: any[] = [];
+  selectedRole: Number;
 
   constructor(private userService: UserService,
     private formBuilder: FormBuilder,
@@ -56,7 +58,21 @@ export class UserComponent implements OnInit {
       { name: 'Approver', code: 'A', factor: 4 },
       { name: 'Verifier', code: 'DV', factor: 5 },
       { name: 'Manager', code: 'M', factor: 6 },
+      { name: 'Department user', code: 'D', factor: 7 },
 
+    ];
+    this.departments = [
+      { name: 'Agriculture, rural development, land & environmental affairs', code: 'ARALEA', factor: 1 },
+      { name: 'Economic development & tourism', code: 'EDT', factor: 2 },
+      { name: 'Co-operative governance & traditional affairs', code: 'CGTA', factor: 3 },
+      { name: 'Community safety, security & liason', code: 'CSSL', factor: 4 },
+      { name: 'Culture, sport & recreation', code: 'CSR', factor: 5 },
+      { name: 'Education', code: 'E', factor: 6 },
+      { name: 'Provincial treasury', code: 'PT', factor: 7 },
+      { name: 'Health', code: 'H', factor: 8 },
+      { name: 'Human settlements', code: 'HS', factor: 9 },
+      { name: 'Social development', code: 'SD', factor: 10 },
+      { name: 'Publick works, roads & transport', code: 'PWRT', factor: 11 },
     ];
 
     this.addUserForm = this.formBuilder.group({
@@ -64,6 +80,7 @@ export class UserComponent implements OnInit {
       surname: new FormControl('', Validators.compose([Validators.required])),
       email: new FormControl('', Validators.compose([Validators.required, Validators.email])),
       role: new FormControl('', Validators.compose([Validators.required])),
+      department:new FormControl('')
     });
 
     this.items = [
@@ -76,6 +93,7 @@ export class UserComponent implements OnInit {
       { field: 'email', header: 'Email' },
       { field: 'createdDate', header: 'Created Date' },
       { field: 'role', header: 'Role', element: true },
+      { field: 'department', header: 'Department', element: true },
       { field: 'isActive', header: 'Active' }
     ];
 
@@ -136,7 +154,9 @@ export class UserComponent implements OnInit {
     this.messageService.add({ severity: 'error', summary: summary, detail: detail });
   }
 
-  setDeedsOffice(e) { }
+  setRole(e) {
+    this.selectedRole = e.value.factor
+   }
 
   onRowEditInit(e) { }
 
@@ -158,6 +178,7 @@ export class UserComponent implements OnInit {
       name: this.f.name.value,
       surname: this.f.surname.value,
       roleId: this.addUserForm.controls["role"].value.factor,
+      department: this.addUserForm.controls["department"].value != undefined ? this.addUserForm.controls["department"].value.name : null,
       isActive: true,
       email: this.f.email.value,
       passwordIsChanged: false,

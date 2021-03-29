@@ -33,6 +33,16 @@ export class SidemenuComponent implements OnInit {
       return false;
   }
 
+  isDepartmantUser() {
+    if(this.currentUser != null)
+    {
+    if(this.currentUser.role != null)
+      return this.currentUser && (this.currentUser.role.id === 7);
+    else
+      return false;
+    }else
+    return false;
+  }
   // ngOnDestroy() {
   //   if (!this.changeDetectionRef['destroyed']) {
   //     this.changeDetectionRef.detectChanges();

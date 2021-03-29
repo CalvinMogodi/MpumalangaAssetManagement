@@ -102,11 +102,17 @@
 </div>
 
 
-<div *ngIf="showDialog" class="dialogBackgroud"></div>
+<div *ngIf="showDialog || showPrintDialog" class="dialogBackgroud"></div>
 <p-dialog [(visible)]="showDialog" *ngIf="showDialog" [style]="{width: '80vw'}"
     [baseZIndex]="10000">
     <p-header> {{ dialogHeader }} </p-header>
     <app-addassetregister (newAsset)='addUpdateAsset($event)' [selectedAsset]="selectedAsset"></app-addassetregister>
+</p-dialog>
+
+<p-dialog [(visible)]="showPrintDialog" *ngIf="showPrintDialog" [style]="{width: '80vw'}"
+    [baseZIndex]="10000">
+    <p-header> {{printDialogHeader}} </p-header>
+    <app-print-asset [selectedFacility]="selectedAsset"></app-print-asset>
 </p-dialog>
 
 <div *ngIf="showdelete" class="dialogBackgroud"></div>

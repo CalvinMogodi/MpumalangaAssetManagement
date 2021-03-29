@@ -16,7 +16,9 @@ import { Observable } from 'rxjs';
 })
 export class AssetregisterComponent implements OnInit  {
   loading = false;
+  showPrintDialog: boolean= false;
   dialogHeader:string = '';  
+  printDialogHeader: string = '';
   showdelete: boolean = false;
   @Input() selectedAsset: any
   buttonItems: MenuItem[];
@@ -46,6 +48,9 @@ export class AssetregisterComponent implements OnInit  {
 
   ngOnInit() {
     this.buttonItems = [
+      {label: 'Print', icon: 'pi pi-print', command: () => 
+          this.print()
+      },
       {label: 'Update', icon: 'pi pi-pencil', command: () => 
           this.update()
       },
@@ -87,6 +92,15 @@ export class AssetregisterComponent implements OnInit  {
         facility: this.facility
       };
       this.showDialog = true;
+    }    
+  }
+
+  print() {
+    this.showPrintDialog = false;
+    if(this.facility != undefined){
+      this.printDialogHeader = this.facility.type + ' ' + this.facility.clientCode;
+      this.selectedAsset = this.facility
+      this.showPrintDialog = true;
     }    
   }
 

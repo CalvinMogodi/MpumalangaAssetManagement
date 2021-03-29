@@ -57,15 +57,22 @@ export class FacilityService {
     return this.http.post<Facility>(`${environment.apiUrl}/api/facility/saveFacility/` + step, facility);
   }
 
-  uploadFiles(files : any) {
+  uploadFiles(files : any, fileName: string) {
     const formData: FormData = new FormData();
-
-    formData.append('json', JSON.stringify("test"));
-
-    for (let file of files) {
-      formData.append('documento', file.data, file.data.name);
-    }
-    let headers = new HttpHeaders();
-    return this.http.post<Facility>(`${environment.apiUrl}/api/facility/uploadFiles/`, formData,{ headers: headers });
+    files.forEach(file => {
+      formData.append('file', file, file.name);
+    });
+    
+    let header = new HttpHeaders({
+        'enctype': 'multipart/form-data',
+        'Accept': 'application/json'
+      });
+ 
+    return this.http.post<Facility>(`${environment.apiUrl}/api/facility/uploadFiles/`+ fileName, formData,{ headers: header });
   }
+
+  getFiles(fileReference: string) {
+    return this.http.get<any[]>(`${environment.apiUrl}/api/facility/getFiles/`+fileReference);
+  }
+
 }

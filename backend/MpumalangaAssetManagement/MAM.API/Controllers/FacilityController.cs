@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Reflection;
 using System.Threading.Tasks;
 using System.Xml;
@@ -34,13 +35,13 @@ namespace MAM.API.Controllers
             _facilityService = facilityService;
             SetLog4NetConfiguration();
         }
-        
+
         [HttpGet]
         [Route("getfacilityzonings")]
         public IActionResult GetFacilityZonings()
         {
             try
-            {                
+            {
                 List<FacilityType> facilityTypes = _facilityService.GetFacilityZonings();
                 return Ok(facilityTypes);
             }
@@ -85,7 +86,8 @@ namespace MAM.API.Controllers
 
         [HttpGet]
         [Route("getmapcoordinates")]
-        public IActionResult GetMapCoordinates() {
+        public IActionResult GetMapCoordinates()
+        {
             try
             {
                 List<MapCoordinate> mapCoordinates = _facilityService.GetMapCoordinates();
@@ -192,34 +194,59 @@ namespace MAM.API.Controllers
             }
         }
 
-        [HttpPost, DisableRequestSizeLimit]
-        [Route("uploadFiles")]
-        public async Task<IActionResult> UploadFiles(List<IFormFile> files)
+        [HttpGet]
+        [Route("getFiles/{fileReference}")]
+        public IActionResult GetFiles(string fileReference)
         {
+            var pathToSave = Directory.GetCurrentDirectory();
+            var fullPath = Path.Combine(pathToSave, "Uploads","Facilities");
+            var files = Directory.GetFiles(fullPath).Where(f => f.Contains(fileReference)).ToList();
+            return Ok(files);
+        }
+
+        [HttpPost, DisableRequestSizeLimit]
+        [Route("uploadFiles/{fileName}")]
+        public IActionResult UploadFiles(string fileName)
+        {
+            
             bool isUploaded = false;
 
-            string path = Path.Combine("C:\\Users\\cmogo\\OneDrive\\Pictures\\Screenshots", "Uploads");
-            if (!Directory.Exists(path))
+            try
             {
-                Directory.CreateDirectory(path);
-            }
-
-            List<string> uploadedFiles = new List<string>();
-            foreach (IFormFile postedFile in files)
-            {
-                string fileName = Path.GetFileName(postedFile.FileName);
-                using (FileStream stream = new FileStream(Path.Combine(path, fileName), FileMode.Create))
+                for (int i = 0; i < Request.Form.Files.Count(); i++)
                 {
-                    postedFile.CopyTo(stream);
-                    uploadedFiles.Add(fileName);
-                    ViewBag.Message += string.Format("<b>{0}</b> uploaded.<br />", fileName);
-                }
+                    var file = Request.Form.Files[i];
+                    //fileName = fileName + '_' + i;
+                    var oFileName =  ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
+                    string _fileName = fileName +"_" + i + Path.GetExtension(oFileName);
+                    var folderName = Path.Combine("Uploads", "Facilities");
+                    var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderName);
+
+                    if (file.Length > 0)
+                    {
+                        var fullPath = Path.Combine(pathToSave, _fileName);
+                        var dbPath = Path.Combine(folderName, _fileName);
+                        using (FileStream stream = new FileStream(fullPath, FileMode.Create))
+                        {
+                            file.CopyTo(stream);
+                        }
+                    }
+                    else {
+                        return BadRequest();
+                    }
+                }               
             }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+          
             isUploaded = true;
             return Ok(isUploaded);
         }
 
-            private static void SetLog4NetConfiguration()
+        private static void SetLog4NetConfiguration()
         {
             XmlDocument log4netConfig = new XmlDocument();
             log4netConfig.Load(System.IO.File.OpenRead("log4net.config"));

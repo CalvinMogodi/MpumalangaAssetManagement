@@ -50,7 +50,10 @@ export class AddassetregisterComponent implements OnInit {
   potentialUseList: any[];
   classes: any[];
   regions: any[];
-  types: any[];
+  types: any[] = [];
+  ifiles: any[] = [];
+  lfiles: any[] = [];
+  ffiles: any[] = [];
   buttonItems: MenuItem[];
   submitted = false;
   localAuthorities: any[];
@@ -65,6 +68,7 @@ export class AddassetregisterComponent implements OnInit {
   howAcquired: any = {
     name: undefined
   };
+  surveys: any[];
   provinces: any[];
   functionalPerformanceRatings: any[];
   ownershipCategories: any;
@@ -77,13 +81,13 @@ export class AddassetregisterComponent implements OnInit {
     { field: 'buildingName', header: 'Building Name' },
     { field: 'type', header: 'Type' },
     { field: 'size', header: 'Size' },
-    { field: 'potentualUse', header: 'Potentual Use' },
+    { field: 'potentialUse', header: 'Potential Use' },
     { field: 'usableArea', header: 'Usable Area' },
     { field: 'conditionRating', header: 'Condition Rating' }
   ];
 
   facility: any;
-
+  filesAreLoaded:boolean = false;
   finance: {};
   improvement: {}
   currentUser: User;
@@ -101,10 +105,12 @@ export class AddassetregisterComponent implements OnInit {
       if (this.mode == "Edit") {
         this.loading = false;
         this.facility = this.selectedAsset.facility;
+        this.getFiles(this.selectedAsset.facility.fileReference);
         this.initFacility();
       } else {
         this.facilityService.getFacilityById(this.selectedAsset.facilityId, this.selectedAsset.facilityType).pipe(first()).subscribe(facility => {
           this.loading = false;
+          this.getFiles(facility.fileReference);
           this.facility = facility;
           this.initFacility();
         });
@@ -119,7 +125,7 @@ export class AddassetregisterComponent implements OnInit {
     this.facility = {
       id: 0,
       name: 'Land T0IS00000000000700020',
-      fileReference: 'Land' + this.makeId(4),
+      fileReference: this.makeId(8),
       type: 'Land',
       clientCode: 'T0IS00000000000700020',
       userId: this.currentUser.id,
@@ -166,22 +172,26 @@ export class AddassetregisterComponent implements OnInit {
     if (e != undefined) {
       if (e.value != undefined) {
         if (e.value.factor == 1) {
-          this.localAuthorities = [
+          let list =  [
             { name: 'Mbombela', code: 'M', factor: 1 },
             { name: 'Nkomazi', code: 'N', factor: 2 },
             { name: 'Thaba Chweu', code: 'TC', factor: 3 },
             { name: 'Bushbuckridge', code: 'B', factor: 4 }
           ];
+          this.magisterialDistricts = list;
+          this.localAuthorities = list;
         } else if (e.value.factor == 2) {
-          this.localAuthorities = [
+          let list = [
             { name: 'Emalahleni', code: 'E', factor: 1 },
             { name: 'Emakahzeni', code: 'E', factor: 2 },
             { name: 'DR JS Moroka', code: 'JSM', factor: 3 },
             { name: 'Thembisile Hani', code: 'TH', factor: 4 },
             { name: 'Victor Khanye', code: 'VK', factor: 5 }
           ];
+          this.magisterialDistricts = list;
+          this.localAuthorities = list;
         } else {
-          this.localAuthorities = [
+          let list = [
             { name: 'Goven Mbeki', code: 'GM', factor: 1 },
             { name: 'Albert Luthuli', code: 'AL', factor: 2 },
             { name: 'Lekwa', code: 'L', factor: 3 },
@@ -190,6 +200,8 @@ export class AddassetregisterComponent implements OnInit {
             { name: 'Mkhondo', code: 'M', factor: 6 },
             { name: 'Msukaligwa', code: 'MS', factor: 7 }
           ];
+          this.magisterialDistricts = list;
+          this.localAuthorities = list;
         }
       }
     }
@@ -303,6 +315,7 @@ export class AddassetregisterComponent implements OnInit {
   assignFacility(isLandSave: boolean, isFinancialSave: boolean, isImprovementSave: boolean) {
     if (isLandSave) {
       if (this.facility.land != undefined && this.facility.land != null) {
+        this.facility.clientCode = this.landForm.controls["clientCode"].value;
         this.facility.land = {
           id: this.facility.land.id == 0 ? 0 : this.facility.land.id,
           deedsOffice: this.landForm.controls["deedsOffice"].value != undefined ? this.landForm.controls["deedsOffice"].value.name : null,
@@ -411,6 +424,8 @@ export class AddassetregisterComponent implements OnInit {
 
   buildForm() {
     this.landForm = this.formBuilder.group({
+      survey:[''],
+      clientCode:[''],
       deedsOffice: [''],
       class: [''],
       type: [''],
@@ -497,28 +512,6 @@ export class AddassetregisterComponent implements OnInit {
       personInstitutionResposible: [''],
     });
 
-    this.magisterialDistricts = [
-      { name: 'Chief Albert Luthuli', code: 'CAL', factor: 1 },
-      { name: 'Bushbuckridge', code: 'BB', factor: 2 },
-      { name: 'Bohlabela', code: 'B', factor: 3 },
-      { name: 'Dipaleseng', code: 'D', factor: 4 },
-      { name: 'Dr JS Moroka', code: 'JSM', factor: 5 },
-      { name: 'Emakhazeni ', code: 'EK', factor: 6 },
-      { name: 'Emalahleni', code: 'E', factor: 7 },
-      { name: 'Govan Mbeki', code: 'GM', factor: 8 },
-      { name: 'Lekwa ', code: 'L', factor: 9 },
-      { name: 'Mbombela', code: 'M', factor: 10 },
-      { name: 'Mkhondo', code: 'MK', factor: 11 },
-      { name: 'Msukaligwa', code: 'MS', factor: 12 },
-      { name: 'Nkomazi', code: 'N', factor: 13 },
-      { name: 'Dr Pixley ka Seme', code: 'PKS', factor: 14 },
-      { name: 'Steve Tshwete', code: 'ST', factor: 15 },
-      { name: 'Thaba Chweu', code: 'TC', factor: 16 },
-      { name: 'Thembisile Hani', code: 'TH', factor: 17 },
-      { name: 'Victor Khanye ', code: 'VK', factor: 18 },
-      { name: 'Umjindi ', code: 'U', factor: 19 }
-    ];
-
     this.buttonItems = [
       {
         label: 'Update', icon: 'pi pi-pencil', command: () =>
@@ -537,9 +530,16 @@ export class AddassetregisterComponent implements OnInit {
     ];
 
     this.potentialUseList = [
-      { name: 'School', code: 'S', factor: 1 },
-      { name: 'Farm', code: 'F', factor: 2 },
-      { name: 'House', code: 'H', factor: 3 }];
+      { name: 'Agriculture', code: 'A', factor: 1 },
+      { name: 'Alternative Payments-Sliding Scales', code: 'AP', factor: 3 },
+      { name: 'Flats', code: 'F', factor: 3 },
+      { name: 'Industrial', code: 'I', factor: 1 },
+      { name: 'Offices', code: 'O', factor: 2 },
+      { name: 'Residential', code: 'R', factor: 2 },   
+      { name: 'Vacant Land', code: 'VL', factor: 1 },
+      { name: 'Sold', code: 'S', factor: 2 },
+      { name: 'Other Uses', code: 'OU', factor: 3 },
+    ];
 
     this.typeOfImprovements = [
       { name: 'Hotel', code: 'H', factor: 1 },
@@ -603,12 +603,12 @@ export class AddassetregisterComponent implements OnInit {
       { name: 'Vryburg', code: 'K', factor: 6 },
     ];
     this.provinces = [
-      { name: 'Eastern Cape', code: 'EC', factor: 1 },
-      { name: 'Free State', code: 'FS', factor: 2 },
-      { name: 'Gauteng', code: 'G', factor: 3 },
-      { name: 'Kwazulu Natal', code: 'KZN', factor: 4 },
-      { name: 'Limpopo', code: 'L', factor: 5 },
-      { name: 'Mpumalanga', code: 'MP', factor: 6 },
+      { name: 'Mpumalanga', code: 'MP', factor: 1 },
+      { name: 'Eastern Cape', code: 'EC', factor: 2 },
+      { name: 'Free State', code: 'FS', factor:3 },
+      { name: 'Gauteng', code: 'G', factor: 4 },
+      { name: 'Kwazulu Natal', code: 'KZN', factor: 5},
+      { name: 'Limpopo', code: 'L', factor: 6 },
       { name: 'Northern Cape', code: 'NC', factor: 7 },
       { name: 'North West', code: 'NW', factor: 8 },
       { name: 'Western Cape', code: 'WC', factor: 9 }
@@ -655,12 +655,17 @@ export class AddassetregisterComponent implements OnInit {
     ];
 
     this.conditionRatings = [
-      { name: 'C1 (Very Poor)', code: 'C1', factor: 1 },
-      { name: 'C2 (Poor)', code: 'C2', factor: 2 },
+      { name: 'C1 (Excellent)', code: 'C1', factor: 1 },
+      { name: 'C2 (Good)', code: 'C2', factor: 2 },
       { name: 'C3 (Fair)', code: 'C3', factor: 3 },
-      { name: 'C4 (Good)', code: 'C4', factor: 4 },
-      { name: 'C5 (Excellent)', code: 'C5', factor: 5 },
+      { name: 'C4 (Poor)', code: 'C4', factor: 4 },
+      { name: 'C5 (Very Poor)', code: 'C5', factor: 5 },
     ];
+
+    this.surveys = [
+      {name: 'surveyed', code: 's', factor: 1},
+      {name: 'non-surveyed', code: 's', factor: 1}
+    ]; 
 
     this.incomeLeaseStatuses = [
       { name: 'Yes', code: 'Y', factor: 1 },
@@ -729,6 +734,7 @@ export class AddassetregisterComponent implements OnInit {
     let localAuthority = undefined;// this.localAuthorities.filter(d => d.name.toLowerCase().trim() == (_districtMunicipality.value != undefined ? this.facility.land.geographicalLocation.localAuthority.toLowerCase().trim()  : this.facility.land.geographicalLocation.localAuthority))[0];
 
     this.landForm = this.formBuilder.group({
+      clientCode:[this.facility.clientCode],
       deedsOffice: [deedsOffice],
       class: [assetClass],
       type: [type],
@@ -872,18 +878,41 @@ export class AddassetregisterComponent implements OnInit {
     return result;
   }
 
-  onSelectImage(evt: any) {
+  onLandSelectFile(evt: any) {
     let uploadedFile = evt[0];
-    //uploadedFile.name = "Land" + this.makeId(8);
-    this.uploadedFiles.push(uploadedFile);
+    this.uploadedFiles.push({file:uploadedFile,type:'Land'+ this.facility.fileReference});    
   }
 
-  uploadfiles(){
-    
-    this.facilityService.uploadFiles(this.uploadedFiles).pipe(first()).subscribe(uploaded => {
+  onFinanceSelectFile(evt: any) {
+    let uploadedFile = evt[0];
+    this.uploadedFiles.push({file:uploadedFile,type:'Finance'+ this.facility.fileReference});    
+  }
+
+  onImprovementSelectFile(evt: any) {
+    let uploadedFile = evt[0];
+    this.uploadedFiles.push({file:uploadedFile,type:'Improvement'+ this.facility.fileReference});    
+  }
+
+  onRemoveFile(evt: any){
+    var fileIndex = this.uploadedFiles.indexOf(evt.file)
+    this.uploadedFiles.slice(-1, fileIndex);
+  }
+
+  uploadfiles(){    
+    this.facilityService.uploadFiles(this.uploadedFiles, this.facility.fileReference).pipe(first()).subscribe(uploaded => {
       if(uploaded){
 
       }
+    });
+  }
+
+  getFiles(fileReference:string){    
+    this.facilityService.getFiles(fileReference).pipe(first()).subscribe(files => {
+     
+      for (let i = 0; i < files.length ; i++) {
+        this.lfiles.push({url: files[i], name: 'Land'+fileReference+'_'+i});
+      };
+      this.filesAreLoaded = true;
     });
   }
 

@@ -29,6 +29,7 @@
     <Folder Include="Uploads\Land\" />
     <Folder Include="Uploads\Finance\" />
     <Folder Include="Uploads\Improvement\" />
+    <Folder Include="Uploads\Facilties\" />
   </ItemGroup>
 
 

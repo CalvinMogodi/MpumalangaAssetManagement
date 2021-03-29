@@ -43,4 +43,11 @@ export class AppComponent {
     else
       return false;
   }
+
+  isDepartmantUser() {
+    if(this.currentUser.role != null)
+      return this.currentUser && (this.currentUser.role.id === 7);
+    else
+      return false;
+  }
 }
