@@ -12,7 +12,8 @@ namespace MAM.BusinessLayer.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public string FileReference { get; set; }        
+        public string FileReference { get; set; }
+        public string Survey { get; set; }
         public string Type { get; set; }
         public string ClientCode { get; set; }
         public string Status { get; set; }
@@ -94,6 +95,7 @@ namespace MAM.BusinessLayer.Models
             {
                 Id = facility.Id,
                 FileReference = facility.FileReference,
+                Survey = facility.Survey,
                 Name = facility.Name,
                 Type = facility.Type,
                 ClientCode = facility.ClientCode,
@@ -141,6 +143,7 @@ namespace MAM.BusinessLayer.Models
                 Name = facility.Name,
                 Type = facility.Type,
                 ClientCode = facility.ClientCode,
+                Survey = facility.Survey,
                 LandId = facility.LandId,
                 FinanceId = facility.FinanceId,
                 UserId = facility.UserId,

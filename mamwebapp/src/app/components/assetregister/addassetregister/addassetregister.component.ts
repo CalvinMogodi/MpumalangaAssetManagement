@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MenuItem, MessageService } from 'primeng/api';
-import { Subscription } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
 import { first } from 'rxjs/internal/operators/first';
 import { Facility } from 'src/app/models/facility.model';
 import { FacilityService } from 'src/app/services/facility/facility.service';
@@ -21,7 +21,9 @@ export class AddassetregisterComponent implements OnInit {
   @Input() selectedAsset: any;
   steps: MenuItem[];
   improvements = [];
-  uploadedFiles: any[] = [];
+  uploadedImprovementFiles: any[] = [];
+  uploadedFinanceFiles: any[] = [];
+  uploadedLandFiles: any[] = [];
   myfile: any[] = [];
   landIsSubmitted: boolean = false;
   improvementIsSubmitted: boolean = false;
@@ -49,11 +51,12 @@ export class AddassetregisterComponent implements OnInit {
   typeOfImprovements: any[];
   potentialUseList: any[];
   classes: any[];
+  landFiles: any[] = [];
   regions: any[];
   types: any[] = [];
-  ifiles: any[] = [];
+  improvementFiles: any[] = [];
   lfiles: any[] = [];
-  ffiles: any[] = [];
+  financeFiles: any[] = [];
   buttonItems: MenuItem[];
   submitted = false;
   localAuthorities: any[];
@@ -239,6 +242,12 @@ export class AddassetregisterComponent implements OnInit {
       this.facilityService.saveFacility(this.facility, "finance").pipe(first()).subscribe(isSaved => {
         if (isSaved) {
           this.savingLand = false;
+          if(this.uploadedLandFiles.length > 0)
+          this.uploadLandFiles();
+        if(this.uploadedFinanceFiles.length > 0)
+          this.uploadFinanceFiles();
+        if(this.uploadedImprovementFiles.length > 0)
+          this.uploadImprovementFiles();
           this.messageService.add({ severity: 'success', summary: 'Saving', detail: 'Financial records are saved successful.' });
         }
         else {
@@ -256,6 +265,12 @@ export class AddassetregisterComponent implements OnInit {
       this.facility.status = 'Saved';
       this.facilityService.saveFacility(this.facility, "improvement").pipe(first()).subscribe(isSaved => {
         if (isSaved) {
+          if(this.uploadedLandFiles.length > 0)
+            this.uploadLandFiles();
+          if(this.uploadedFinanceFiles.length > 0)
+            this.uploadFinanceFiles();
+          if(this.uploadedImprovementFiles.length > 0)
+            this.uploadImprovementFiles();
           this.savingLand = false;
           this.messageService.add({ severity: 'success', summary: 'Saving', detail: 'Improvement records are saved successful.' });
         }
@@ -277,6 +292,12 @@ export class AddassetregisterComponent implements OnInit {
       this.facilityService.saveFacility(this.facility, "land").pipe(first()).subscribe(facility => {
         if (facility) {
           this.savingLand = false;
+          if(this.uploadedLandFiles.length > 0)
+            this.uploadLandFiles();
+          if(this.uploadedFinanceFiles.length > 0)
+            this.uploadFinanceFiles();
+          if(this.uploadedImprovementFiles.length > 0)
+            this.uploadImprovementFiles();
           this.facility = facility;
           this.messageService.add({ severity: 'success', summary: 'Saving', detail: 'Land records are saved successful.' });
         }
@@ -300,6 +321,12 @@ export class AddassetregisterComponent implements OnInit {
     this.facility.status = 'Submitted';
     this.facilityService.saveFacility(this.facility, "facility").pipe(first()).subscribe(isSaved => {
       if (isSaved) {
+        if(this.uploadedLandFiles.length > 0)
+        this.uploadLandFiles();
+      if(this.uploadedFinanceFiles.length > 0)
+        this.uploadFinanceFiles();
+      if(this.uploadedImprovementFiles.length > 0)
+        this.uploadImprovementFiles();
         this.newAsset.emit({ mode: "Add", data: this.facility, response: "isAddedSuccessful" });
         this.savingLand = false;
         this.messageService.add({ severity: 'warn', summary: 'Deleted', detail: 'Asset is added successful.' });
@@ -316,6 +343,7 @@ export class AddassetregisterComponent implements OnInit {
     if (isLandSave) {
       if (this.facility.land != undefined && this.facility.land != null) {
         this.facility.clientCode = this.landForm.controls["clientCode"].value;
+        this.facility.survey = this.landForm.controls["survey"].value != undefined ? this.landForm.controls["survey"].value.name : null,
         this.facility.land = {
           id: this.facility.land.id == 0 ? 0 : this.facility.land.id,
           deedsOffice: this.landForm.controls["deedsOffice"].value != undefined ? this.landForm.controls["deedsOffice"].value.name : null,
@@ -361,7 +389,7 @@ export class AddassetregisterComponent implements OnInit {
             stateOwnedPercentage: this.landForm.controls["stateOwnedPercentage"].value != "" ? this.landForm.controls["stateOwnedPercentage"].value : null,
             landUse: this.landForm.controls["landUse"].value,
             zoning: this.landForm.controls["zoning"].value,
-            userDepartment: this.landForm.controls["userDepartment"].value,
+            userDepartment: this.landForm.controls["userDepartment"].value != undefined ? this.landForm.controls["userDepartment"].value.name : null, 
             facilityName: this.landForm.controls["facilityName"].value,
             incomeLeaseStatus: this.landForm.controls["incomeLeaseStatus"].value != undefined ? this.landForm.controls["incomeLeaseStatus"].value.name : null,
           },
@@ -663,8 +691,8 @@ export class AddassetregisterComponent implements OnInit {
     ];
 
     this.surveys = [
-      {name: 'surveyed', code: 's', factor: 1},
-      {name: 'non-surveyed', code: 's', factor: 1}
+      {name: 'Surveyed', code: 's', factor: 1},
+      {name: 'Non-Surveyed', code: 'ns', factor: 1}
     ]; 
 
     this.incomeLeaseStatuses = [
@@ -718,6 +746,9 @@ export class AddassetregisterComponent implements OnInit {
     let province = this.provinces.filter(d => d.name.toLowerCase().trim() == (this.facility.land.geographicalLocation.province != undefined ? this.facility.land.geographicalLocation.province.toLowerCase().trim() : this.facility.land.geographicalLocation.province))[0];
     let districtMunicipality = this.districtMunicipalities.filter(d => d.name.toLowerCase().trim() == (this.facility.land.geographicalLocation.districtMunicipality != undefined ? this.facility.land.geographicalLocation.districtMunicipality.toLowerCase().trim() : this.facility.land.geographicalLocation.districtMunicipality))[0];
 
+    let survey = this.surveys.filter(d => d.name.toLowerCase().trim() == (this.facility.survey != undefined ? this.facility.survey.toLowerCase().trim() : this.facility.survey))[0];
+   
+
     let region = this.regions.filter(d => d.name.toLowerCase().trim() == (this.facility.land.region != undefined ? this.facility.land.region.toLowerCase().trim() : this.facility.land.region))[0];
     let registrationDivision = this.registrationDivisions.filter(d => d.name.toLowerCase().trim() == (this.facility.land.propertyDescription.registrationDivision != undefined ? this.facility.land.propertyDescription.registrationDivision.toLowerCase().trim() : this.facility.land.propertyDescription.registrationDivision))[0];
     let landRemainder = this.landRemainders.filter(d => d.name == (this.facility.land.propertyDescription.landRemainder == false ? 'No' : 'Yes'))[0];
@@ -734,6 +765,7 @@ export class AddassetregisterComponent implements OnInit {
     let localAuthority = undefined;// this.localAuthorities.filter(d => d.name.toLowerCase().trim() == (_districtMunicipality.value != undefined ? this.facility.land.geographicalLocation.localAuthority.toLowerCase().trim()  : this.facility.land.geographicalLocation.localAuthority))[0];
 
     this.landForm = this.formBuilder.group({
+      survey:[survey],
       clientCode:[this.facility.clientCode],
       deedsOffice: [deedsOffice],
       class: [assetClass],
@@ -764,13 +796,13 @@ export class AddassetregisterComponent implements OnInit {
       titleDeedNumber: [this.facility.land.landUseManagementDetail.titleDeedNumber],
       registrationDate: [this.facility.land.landUseManagementDetail.registrationDate != undefined ? new Date(this.facility.land.landUseManagementDetail.registrationDate) : new Date()],
       registeredOwner: [this.facility.land.landUseManagementDetail.registeredOwner],
-      vestingDate: [this.facility.land.landUseManagementDetail.vestingDate],
+      vestingDate: [this.facility.land.landUseManagementDetail.vestingDate != undefined ? new Date(this.facility.land.landUseManagementDetail.vestingDate) : new Date()],
       conditionsOfTitle: [this.facility.land.landUseManagementDetail.conditionsOfTitle],
       ownershipCategory: [ownershipCategory],
       stateOwnedPercentage: [this.facility.land.landUseManagementDetail.stateOwnedPercentage],
       landUse: [this.facility.land.landUseManagementDetail.landUse],
       zoning: [this.facility.land.landUseManagementDetail.zoning],
-      userDepartment: [this.facility.land.landUseManagementDetail.userDepartment],
+      userDepartment: [userDepartment],
       facilityName: [this.facility.land.landUseManagementDetail.facilityName],
       incomeLeaseStatus: [incomeLeaseStatus],
       leaseNumber: [this.facility.land.leaseStatus.leaseNumber],
@@ -811,8 +843,8 @@ export class AddassetregisterComponent implements OnInit {
       addition: [this.facility.finance.secondaryInformationNote.addition],
       disposal: [this.facility.finance.secondaryInformationNote.disposal],
       closingBalance: [this.facility.finance.secondaryInformationNote.closingBalance],
-      municipalValuationDate: [this.facility.finance.valuation.municipalValuationDate],
-      nonMunicipalValuationDate: [this.facility.finance.valuation.nonMunicipalValuationDate],
+      municipalValuationDate: [this.facility.finance.valuation.municipalValuationDate != undefined ? new Date(this.facility.finance.valuation.municipalValuationDate) : new Date()],
+      nonMunicipalValuationDate: [this.facility.finance.valuation.nonMunicipalValuationDate != undefined ? new Date(this.facility.finance.valuation.nonMunicipalValuationDate) : new Date()],
       municipalValuation: [this.facility.finance.valuation.municipalValuation],
       nonMunicipalValuation: [this.facility.finance.valuation.nonMunicipalValuation],
       propetyRatesAccount: [this.facility.finance.valuation.propetyRatesAccount],
@@ -880,29 +912,46 @@ export class AddassetregisterComponent implements OnInit {
 
   onLandSelectFile(evt: any) {
     let uploadedFile = evt[0];
-    this.uploadedFiles.push({file:uploadedFile,type:'Land'+ this.facility.fileReference});    
+    this.uploadedLandFiles.push(uploadedFile);    
   }
 
   onFinanceSelectFile(evt: any) {
     let uploadedFile = evt[0];
-    this.uploadedFiles.push({file:uploadedFile,type:'Finance'+ this.facility.fileReference});    
+    this.uploadedFinanceFiles.push(uploadedFile);    
   }
 
   onImprovementSelectFile(evt: any) {
     let uploadedFile = evt[0];
-    this.uploadedFiles.push({file:uploadedFile,type:'Improvement'+ this.facility.fileReference});    
+    this.uploadedImprovementFiles.push(uploadedFile);    
   }
 
-  onRemoveFile(evt: any){
-    var fileIndex = this.uploadedFiles.indexOf(evt.file)
-    this.uploadedFiles.slice(-1, fileIndex);
+  onLandRemoveFile(evt: any){
+    var fileIndex = this.uploadedLandFiles.indexOf(evt.file)
+    this.uploadedLandFiles.slice(-1, fileIndex);
   }
 
-  uploadfiles(){    
-    this.facilityService.uploadFiles(this.uploadedFiles, this.facility.fileReference).pipe(first()).subscribe(uploaded => {
-      if(uploaded){
+  onFinanceRemoveFile(evt: any){
+    var fileIndex = this.uploadedFinanceFiles.indexOf(evt.file)
+    this.uploadedFinanceFiles.slice(-1, fileIndex);
+  }
 
-      }
+  onImprovementRemoveFile(evt: any){
+    var fileIndex = this.uploadedImprovementFiles.indexOf(evt.file)
+    this.uploadedImprovementFiles.slice(-1, fileIndex);
+  }
+
+  uploadLandFiles(){    
+    this.facilityService.uploadFiles(this.uploadedLandFiles, 'Land'+ this.facility.fileReference).pipe(first()).subscribe(uploaded => {    
+    });
+  }
+
+  uploadImprovementFiles(){    
+    this.facilityService.uploadFiles(this.uploadedImprovementFiles, 'Improvement'+ this.facility.fileReference).pipe(first()).subscribe(uploaded => {    
+    });
+  }
+
+  uploadFinanceFiles(){    
+    this.facilityService.uploadFiles(this.uploadedFinanceFiles, 'Finance'+ this.facility.fileReference).pipe(first()).subscribe(uploaded => {    
     });
   }
 
@@ -910,7 +959,18 @@ export class AddassetregisterComponent implements OnInit {
     this.facilityService.getFiles(fileReference).pipe(first()).subscribe(files => {
      
       for (let i = 0; i < files.length ; i++) {
-        this.lfiles.push({url: files[i], name: 'Land'+fileReference+'_'+i});
+        if(files[i].toString().includes('Land'))
+        {
+          this.landFiles.push({url: files[i], name: 'Land'+fileReference+'_'+i});
+        } 
+        if(files[i].toString().includes('Finance'))
+        {
+          this.financeFiles.push({url: files[i], name: 'Finance'+fileReference+'_'+i});
+        } 
+        if(files[i].toString().includes('Improvement'))
+        {
+          this.improvementFiles.push({url: files[i], name: 'Improvement'+fileReference+'_'+i});
+        }       
       };
       this.filesAreLoaded = true;
     });

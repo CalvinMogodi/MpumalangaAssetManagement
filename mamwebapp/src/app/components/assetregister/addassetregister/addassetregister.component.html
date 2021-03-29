@@ -4,17 +4,14 @@
         <form [formGroup]="landForm" *ngIf="!loading" (ngSubmit)="onLandFormSubmit()">
             <div class="ui-g ui-fluid" style="overflow-y: auto; overflow-x: hidden; height: 500px;width: 100%">
                 <div class="ui-g-12 ui-md-12" *ngIf="mode != 'View'">
-                    <p-fileUpload #lFiles [showUploadButton]="false" [showCancelButton]="false" (onRemove)="onRemoveFile($event)" multiple="multiple" (onSelect)="onLandSelectFile($event.files)" ></p-fileUpload>
-                    <div *ngIf="filesAreLoaded">
-                        <ul>
-                            <li *ngFor="let item of lFiles; let i = index" [attr.data-index]="i">
-                                {{item.href}}
+                    <p-fileUpload [showUploadButton]="false" [showCancelButton]="false" (onRemove)="onLandRemoveFile($event)" multiple="multiple" (onSelect)="onLandSelectFile($event.files)" ></p-fileUpload>
+                    <div>
+                        <ul *ngFor="let file of landFiles; let i = index" style="list-style-type:none;">
+                            <li>
+                                <p><a target="_blank" href="{{ file.url }}">{{ file.name }}</a></p>
                             </li>
-                        </ul>
-                        
-                    </div>
-                   
-                    
+                        </ul>                        
+                    </div>   
                 </div>
                 <p-fieldset legend="General" [toggleable]="true" >
                     <div class="ui-g-12 ui-md-12">
@@ -352,7 +349,7 @@
                             <label for="vestingDate">Vesting Date</label>
                             <p-calendar formControlName="vestingDate" dateFormat="dd/mm/yy" showOtherMonths="true"
                                 showButtonBar="true"></p-calendar>
-                            <div *ngIf="submitted && f.vestingDate.errors" class="text-error"><br>
+                            <div *ngIf="submitted && l.vestingDate.errors" class="text-error"><br>
                                 <div *ngIf="l.vestingDate.errors.required">This field is required.</div>
                             </div>
                         </div>
@@ -608,7 +605,14 @@
         <form [formGroup]="financialForm" *ngIf="!loading" (ngSubmit)="onFinancialFormSubmit()">
             <div class="ui-g ui-fluid" style="overflow-y: auto; overflow-x: hidden; height: 500px;width: 100%">
                 <div class="ui-g-12 ui-md-12">
-                    <p-fileUpload #fFiles [showUploadButton]="false" [showCancelButton]="false" (onRemove)="onRemoveFile($event)"  (onSelect)="onFinanceSelectFile($event.files)" name="myfile[]" url="./upload.php" multiple="multiple"></p-fileUpload>
+                    <p-fileUpload #fFiles [showUploadButton]="false" [showCancelButton]="false" (onRemove)="onFinanceRemoveFile($event)"  (onSelect)="onFinanceSelectFile($event.files)" name="myfile[]" url="./upload.php" multiple="multiple"></p-fileUpload>
+                    <div>
+                        <ul *ngFor="let file of financeFiles; let i = index" style="list-style-type:none;">
+                            <li>
+                                <p><a target="_blank" href="{{ file.url }}">{{ file.name }}</a></p>
+                            </li>
+                        </ul>                        
+                    </div>   
                 </div>
                 <p-fieldset legend="General" [toggleable]="true">
                     <div class="ui-g-12 ui-md-12">
@@ -769,7 +773,14 @@
         <form [formGroup]="improvementForm" *ngIf="!loading" (ngSubmit)="onImprovementFormSubmit()">
             <div class="ui-g ui-fluid">
                 <div class="ui-g-12 ui-md-12">
-                    <p-fileUpload #iFiles [showUploadButton]="false" [showCancelButton]="false" (onRemove)="onRemoveFile($event)" (onSelect)="onImprovementSelectFile($event.files)" name="myfile[]" multiple="multiple" (uploadHandler)="upload($event)"></p-fileUpload>
+                    <p-fileUpload #iFiles [showUploadButton]="false" [showCancelButton]="false" (onRemove)="onImprovementRemoveFile($event)" (onSelect)="onImprovementSelectFile($event.files)" name="myfile[]" multiple="multiple" (uploadHandler)="upload($event)"></p-fileUpload>
+                    <div>
+                        <ul *ngFor="let file of improvementFiles; let i = index" style="list-style-type:none;">
+                            <li>
+                                <p><a target="_blank" href="{{ file.url }}">{{ file.name }}</a></p>
+                            </li>
+                        </ul>                        
+                    </div>  
                 </div>
                 <p-fieldset legend="General" [toggleable]="true">
                     <div class="ui-g-12 ui-md-12">
