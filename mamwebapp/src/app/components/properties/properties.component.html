@@ -1,3 +1,10 @@
+<div>
+    <span>
+        <div style="text-align: end;padding: 20px;">
+            <button pButton type="button" label="Start UAMP" (click)="viewUAMP()"></button>
+        </div>
+    </span>
+</div>
 <div class="grid">
     <div>
         <p-card>
@@ -50,4 +57,11 @@
     [baseZIndex]="10000">
     <p-header> Property </p-header>
     <app-view-property [selectedFacility]="selectedFacility"></app-view-property>
+</p-dialog>
+
+<div *ngIf="showUAMP" class="dialogBackgroud"></div>
+<p-dialog [(visible)]="showUAMP" *ngIf="showUAMP" [style]="{width: '80vw'}"
+    [baseZIndex]="10000">
+    <p-header> UAMP </p-header>
+    <app-template-one></app-template-one>
 </p-dialog>

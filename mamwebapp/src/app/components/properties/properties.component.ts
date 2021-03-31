@@ -14,6 +14,7 @@ export class PropertiesComponent implements OnInit {
   leasedPropertyCount: Number = 0;
   stateOwnedPropertyCount: Number = 0;
   showDialog: Boolean = false;
+  showUAMP: Boolean = false;
 
   constructor(public facilityService: FacilityService) { 
     
@@ -50,6 +51,10 @@ export class PropertiesComponent implements OnInit {
   viewFacility(facility) {
     this.selectedFacility = facility;
     this.showDialog = true;
+  }
+
+  viewUAMP() {
+    this.showUAMP = true;
   }
 
 }

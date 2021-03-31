@@ -45,6 +45,7 @@ import { TabViewModule } from 'primeng/tabview';
 import { DropdownModule } from 'primeng/dropdown';
 import { FieldsetModule } from 'primeng/fieldset';
 import { FileUploadModule } from 'primeng/fileupload';
+import { InputTextareaModule}  from 'primeng/inputtextarea';
 import { AddassetregisterComponent } from './components/assetregister/addassetregister/addassetregister.component';
 import { FinancialsComponent } from './components/assetregister/addassetregister/financials/financials.component';
 import { ImprovementsComponent } from './components/assetregister/addassetregister/improvements/improvements.component';
@@ -52,6 +53,7 @@ import { LandComponent } from './components/assetregister/addassetregister/land/
 import { CalendarModule } from 'primeng/calendar';
 import { SplitButtonModule } from 'primeng/splitbutton';
 import { PrintAssetComponent } from './components/assetregister/print-asset/print-asset.component';
+import { TemplateOneComponent } from './components/properties/template-one/template-one.component';
 
 @NgModule({
   declarations: [
@@ -70,7 +72,8 @@ import { PrintAssetComponent } from './components/assetregister/print-asset/prin
     FinancialsComponent,
     PropertiesComponent,
     ViewPropertyComponent,
-    PrintAssetComponent
+    PrintAssetComponent,
+    TemplateOneComponent
   ],
   imports: [
     BrowserModule,
@@ -104,7 +107,8 @@ import { PrintAssetComponent } from './components/assetregister/print-asset/prin
     FieldsetModule,
     CalendarModule,
     FileUploadModule,
-    SplitButtonModule
+    SplitButtonModule,
+    InputTextareaModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
