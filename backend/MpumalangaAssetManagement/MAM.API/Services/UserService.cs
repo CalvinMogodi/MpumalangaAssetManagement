@@ -22,6 +22,7 @@ namespace MAM.API.Services
         bool ChangePassword(string username, string newPassword, string oldPassword);
         bool ResetPassword(string username, string newPassword);
         bool UpdateUser(User user);
+        bool DeleteUser(User user);
         User AddUser(User user);
         bool ForgotPassword(string username, string newPassword);
     }
@@ -102,6 +103,14 @@ namespace MAM.API.Services
             using (var _userRepository = new UserRepository(_appSettings))
             {
                 return _userRepository.UpdateUser(user);
+            }
+        }
+
+        public bool DeleteUser(User user)
+        {
+            using (var _userRepository = new UserRepository(_appSettings))
+            {
+                return _userRepository.DeleteUser(user);
             }
         }
 

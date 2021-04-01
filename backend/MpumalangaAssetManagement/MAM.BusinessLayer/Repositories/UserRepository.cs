@@ -54,6 +54,17 @@ namespace MAM.BusinessLayer.Repositories
             }
         }
 
+        public bool DeleteUser(User user)
+        {
+            using (var dataAccess = new DataAccess.Repositories.UserRepository(appSettings.ConnectionString))
+            {
+                user.IsActive = false;
+                user.ModifiedDate = DateTime.Now;
+                dataAccess.UpdateUser(user.ConvertToUserTable(user));
+                return true;
+            }
+        }
+
         public List<User> GetUsers()
         {
             List<User> list = new List<User>();

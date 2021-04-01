@@ -42,16 +42,4 @@ export class PrintAssetComponent implements OnInit {
       this.selectedFacility.finance.geographicalLocation = {};
     }    
   }
-
-  PrintOut(){
-    let printContents = document.getElementById("componentID").innerHTML;
-     let originalContents = document.body.innerHTML;
-     document.body.innerHTML = printContents;
-     
-     window.focus();
-     window.print();
-     window.close();
-     document.body.innerHTML = originalContents;
-  }
-
 }

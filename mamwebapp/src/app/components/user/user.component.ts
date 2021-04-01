@@ -17,6 +17,7 @@ import { FormControl } from '@angular/forms';
 export class UserComponent implements OnInit {
   loading = false;
   isAdding = false;
+  showComfirmaDelete = false;
   showResetPasswordComfirmation: boolean = false;
   users: User[] = [];
   clonedUsers: User[] = [];
@@ -29,6 +30,8 @@ export class UserComponent implements OnInit {
   emailExsist: boolean = false;
   currentUser: User;
   resetUser: User;
+  selectedUser: User;
+  index: any;
   showDialog: boolean = false;
   showConfirmResetPassword: boolean = false;
   msgs: any[] = [];
@@ -36,6 +39,8 @@ export class UserComponent implements OnInit {
   errorMsg: string = 'error';
   departments: any[] = [];
   selectedRole: Number;
+  buttonItems: MenuItem[];
+  header: string = 'Add';
 
   constructor(private userService: UserService,
     private formBuilder: FormBuilder,
@@ -50,6 +55,18 @@ export class UserComponent implements OnInit {
     this.authenticationService.currentUser.subscribe(x => {
       this.currentUser = x;
     });
+
+    this.buttonItems = [
+      {
+        label: 'Update', icon: 'pi pi-pencil', command: () =>
+          this.update()
+      },
+      { separator: true },
+      {
+        label: 'Delete', icon: 'pi pi-trash', command: () =>
+          this.confirmDelete()
+      }
+    ];
 
     this.roles = [
       { name: 'Viewer', code: 'V', factor: 1 },
@@ -80,7 +97,7 @@ export class UserComponent implements OnInit {
       surname: new FormControl('', Validators.compose([Validators.required])),
       email: new FormControl('', Validators.compose([Validators.required, Validators.email])),
       role: new FormControl('', Validators.compose([Validators.required])),
-      department:new FormControl('')
+      department: new FormControl('')
     });
 
     this.items = [
@@ -93,8 +110,7 @@ export class UserComponent implements OnInit {
       { field: 'email', header: 'Email' },
       { field: 'createdDate', header: 'Created Date' },
       { field: 'role', header: 'Role', element: true },
-      { field: 'department', header: 'Department', element: true },
-      { field: 'isActive', header: 'Active' }
+      { field: 'department', header: 'Department', element: true },     
     ];
 
     this.loading = true;
@@ -143,7 +159,9 @@ export class UserComponent implements OnInit {
     }
   }
 
-  onRowEditCancel(user: User, index: number) {
+  onRowEditCancel() {
+    let user = this.selectedUser;
+    let index = this.index;
     this.users[index] = this.clonedUsers[user.id];
   }
 
@@ -156,7 +174,7 @@ export class UserComponent implements OnInit {
 
   setRole(e) {
     this.selectedRole = e.value.factor
-   }
+  }
 
   onRowEditInit(e) { }
 
@@ -178,6 +196,7 @@ export class UserComponent implements OnInit {
       name: this.f.name.value,
       surname: this.f.surname.value,
       roleId: this.addUserForm.controls["role"].value.factor,
+      role: this.addUserForm.controls["role"].value,
       department: this.addUserForm.controls["department"].value != undefined ? this.addUserForm.controls["department"].value.name : null,
       isActive: true,
       email: this.f.email.value,
@@ -185,35 +204,107 @@ export class UserComponent implements OnInit {
       createdDate: new Date,
       createdUserId: this.currentUser.id
     }
-    this.userService.addUser(user).pipe()
-      .subscribe(
-        newUser => {
-          this.users.push(newUser);
-          this.showDialog = false;
-          this.isAdding = false;
-          this.showToast('Add User', 'User has been added successful');
-        },
-        error => {
-          this.error = error;
-          this.isAdding = false;
-        });
+    if (this.header == 'Add') {
+      this.addUser(user);
+    } else {
+      user.id = this.selectedUser.id;
+      this.editUser(user);
+    }
   }
 
-  deleteUser() {
-    var randomstring = Math.random().toString(36).slice(-8);  
+  editUser(user: User) {
+    this.userService.updateUser(user).pipe().subscribe(newUser => {
+      if (newUser) {
+        this.users[this.index] = user;
+        this.messageService.add({ severity: 'success', summary: 'Update User', detail: 'User has been updated successful.' });
+      } else {
+        this.messageService.add({ severity: 'error', summary: 'Update User', detail: 'User has been updated successful' });
+      }
+      this.showDialog = false;
+      this.isAdding = false;
+    },
+      error => {
+        this.messageService.add({ severity: 'error', summary: 'Error Occurred', detail: 'An error occurred while processing your request. please try again!' });
+        this.error = error;
+        this.isAdding = false;
+      });
+  }
+
+  addUser(user: User) {
+    this.userService.addUser(user).pipe().subscribe(newUser => {
+      if (newUser.id != 0) {
+        this.users.push(newUser);
+        this.showToast('Add User', 'User has been added successful');
+      } else {
+        this.messageService.add({ severity: 'error', summary: 'Add User', detail: 'User is not added successful.' });
+      }
+      this.showDialog = false;
+      this.isAdding = false;
+    },
+      error => {
+        this.messageService.add({ severity: 'error', summary: 'Error Occurred', detail: 'An error occurred while processing your request. please try again!' });
+        this.error = error;
+        this.isAdding = false;
+      });
+  }
+
+  resetPassword() {
+    var randomstring = Math.random().toString(36).slice(-8);
     this.userService.resetPassword(this.resetUser.username, randomstring).pipe(first()).subscribe(isUpdated => {
       if (isUpdated) {
         this.showToast('Reset Password', 'Please check your email to reset your password');
         this.loading = false;
       } else {
-        this.showErrorToast('Reset Password', 'Failed to reset your password.');
+        this.messageService.add({ severity: 'error', summary: 'Reset Password', detail: 'Failed to reset your password.' });
         this.loading = false;
       }
+    }, error => {
+      this.messageService.add({ severity: 'error', summary: 'Error Occurred', detail: 'An error occurred while processing your request. please try again!' });
+      this.loading = false;
     });
   }
 
-  confirm1(user) {
+  deleteUser() {
+    this.userService.deleteUser(this.selectedUser).pipe(first()).subscribe(isDeleted => {
+      if (isDeleted) {
+        this.messageService.add({ severity: 'warn', summary: 'Delete User', detail: 'User has been deleted successful.' });       
+        this.users.splice(this.index, 1);
+      } else {
+        this.messageService.add({ severity: 'error', summary: 'Delete User', detail: 'User is not deleted successful.' });
+      }
+      this.loading = false;
+    }, error => {
+      this.messageService.add({ severity: 'error', summary: 'Error Occurred', detail: 'An error occurred while processing your request. please try again!' });
+    });
+  }
+
+  confirmResetPassword(user) {
     this.resetUser = user;
     this.showResetPasswordComfirmation = true;
+  }
+
+  confirmDelete() {
+    this.showComfirmaDelete = true;
+  }
+
+  update() {
+    this.header = 'Edit';
+    this.showDialog = true;
+    this.selectedRole = this.selectedUser.roleId;
+    let role = this.roles.filter(u => u.factor == this.selectedUser.roleId)[0];
+    let department = this.departments.filter(u => u.name == this.selectedUser.department)[0];
+    this.addUserForm = this.formBuilder.group({
+      name: new FormControl(this.selectedUser.name, Validators.compose([Validators.required])),
+      surname: new FormControl(this.selectedUser.surname, Validators.compose([Validators.required])),
+      email: new FormControl(this.selectedUser.email, Validators.compose([Validators.required, Validators.email])),
+      role: new FormControl(role, Validators.compose([Validators.required])),
+      department: new FormControl(department)
+    });
+  }
+
+  selectUser(user: User, index: Number) {
+
+    this.selectedUser = user;
+    this.index = index;
   }
 }

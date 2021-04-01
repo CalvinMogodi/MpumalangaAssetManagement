@@ -21,6 +21,7 @@ import { AddUserComponent } from './components/user/add-user/add-user.component'
 import { AssetregisterComponent } from './components/assetregister/assetregister.component'
 import { PropertiesComponent } from './components/properties/properties.component';
 import { ViewPropertyComponent } from './components/properties/view-property/view-property.component';
+import { NgxPrintModule } from 'ngx-print';
 
 //primeng
 import { SlideMenuModule } from 'primeng/slidemenu';
@@ -108,7 +109,8 @@ import { TemplateOneComponent } from './components/properties/template-one/templ
     CalendarModule,
     FileUploadModule,
     SplitButtonModule,
-    InputTextareaModule
+    InputTextareaModule,
+    NgxPrintModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
