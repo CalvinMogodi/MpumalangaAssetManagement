@@ -172,6 +172,22 @@ namespace MAM.API.Controllers
             }            
         }
 
+        [HttpPost]
+        [Route("deleteUser")]
+        public IActionResult DeletUser([FromBody] User user)
+        {
+            try
+            {
+                bool isUpdated = _userService.DeleteUser(user);
+                return Ok(isUpdated);
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex);
+                throw ex;
+            }
+        }
+
         private static void SetLog4NetConfiguration()
         {
             XmlDocument log4netConfig = new XmlDocument();

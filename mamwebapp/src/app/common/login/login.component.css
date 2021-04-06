@@ -103,7 +103,7 @@
     appearance: none;
 }
 .ui-widget {
-    font-family: "Sarabun", sans-serif;
+    font-family: "calibri";
     font-size: 14px;
     text-decoration: none;
 }
@@ -146,7 +146,7 @@ body .ui-corner-all {
     border-radius: 3px;
 }
 body .ui-widget {
-    font-family: "Sarabun", sans-serif;
+    font-family: "calibri";
     font-size: 14px;
     text-decoration: none;
 }

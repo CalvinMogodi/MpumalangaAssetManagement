@@ -36,4 +36,7 @@ export class UserService {
   updateUser(user: User) {
     return this.http.post<boolean>(`${environment.apiUrl}/api/user/updateuser`,user);
   }
+  deleteUser(user: User){
+    return this.http.post<boolean>(`${environment.apiUrl}/api/user/deleteuser`,user);
+  }
 }

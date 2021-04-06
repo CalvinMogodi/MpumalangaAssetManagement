@@ -1,36 +1,39 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
-  <PropertyGroup>
-    <TargetFramework>netcoreapp3.0</TargetFramework>
-    <UserSecretsId>2b993030-8a93-44e2-999c-c6820ff24084</UserSecretsId>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>netcoreapp3.0</TargetFramework>
+		<UserSecretsId>2b993030-8a93-44e2-999c-c6820ff24084</UserSecretsId>
+	</PropertyGroup>
+	<ItemGroup>
+		<Compile Remove="Uploads\Facilties\**" />
+		<Content Remove="Uploads\Facilties\**" />
+		<EmbeddedResource Remove="Uploads\Facilties\**" />
+		<None Remove="Uploads\Facilties\**" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="log4net" Version="2.0.8" />
-    <PackageReference Include="MicroKnights.Log4NetAdoNetAppender" Version="1.0.2" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="2.2.0" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.1" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
-    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="5.6.0" />
-    <PackageReference Include="Microsoft.AspNetCore.App" /> 
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="log4net" Version="2.0.8" />
+		<PackageReference Include="MicroKnights.Log4NetAdoNetAppender" Version="1.0.2" />
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="2.2.0" />
+		<PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.1" />
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
+		<PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="5.6.0" />
+		<PackageReference Include="Microsoft.AspNetCore.App" />
+	</ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\MAM.BusinessLayer\MAM.BusinessLayer.csproj" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\MAM.BusinessLayer\MAM.BusinessLayer.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<Content Update="log4net.config">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+	</ItemGroup>
 
-  <ItemGroup>
-    <Content Update="log4net.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Uploads\Land\" />
-    <Folder Include="Uploads\Finance\" />
-    <Folder Include="Uploads\Improvement\" />
-    <Folder Include="Uploads\Facilties\" />
-  </ItemGroup>
-
-
+	<ItemGroup>
+		<Folder Include="Uploads\Facilities\" />
+		<Folder Include="Uploads\Land\" />
+		<Folder Include="Uploads\Finance\" />
+		<Folder Include="Uploads\Improvement\" />
+	</ItemGroup>
 </Project>

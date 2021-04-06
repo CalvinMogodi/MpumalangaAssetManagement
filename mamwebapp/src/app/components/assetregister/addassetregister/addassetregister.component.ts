@@ -276,7 +276,7 @@ export class AddassetregisterComponent implements OnInit {
         }
         else {
           this.savingLand = false;
-          this.messageService.add({ severity: 'error', summary: 'Error', detail: 'An error occurred while saving!' });
+          this.messageService.add({ severity: 'error', summary: 'Error Occurred', detail: 'An error occurred while processing your request. please try again!' });
         }
       });
    // }
@@ -961,15 +961,21 @@ export class AddassetregisterComponent implements OnInit {
       for (let i = 0; i < files.length ; i++) {
         if(files[i].toString().includes('Land'))
         {
-          this.landFiles.push({url: files[i], name: 'Land'+fileReference+'_'+i});
+          let name = files[i].split('\\').pop();
+          let url = "https://amethysthemisphere.dedicated.co.za:81/Uploads/Facilities/"+ name;
+          this.landFiles.push({url: url, name: 'Land'+fileReference+'_'+i});
         } 
         if(files[i].toString().includes('Finance'))
         {
-          this.financeFiles.push({url: files[i], name: 'Finance'+fileReference+'_'+i});
+          let name = files[i].split('\\').pop();
+          let url = "https://amethysthemisphere.dedicated.co.za:81/Uploads/Facilities/"+ name;
+          this.financeFiles.push({url: url, name: 'Finance'+fileReference+'_'+i});
         } 
         if(files[i].toString().includes('Improvement'))
         {
-          this.improvementFiles.push({url: files[i], name: 'Improvement'+fileReference+'_'+i});
+          let name = files[i].split('\\').pop();
+          let url = "https://amethysthemisphere.dedicated.co.za:81/Uploads/Facilities/"+ name;
+          this.improvementFiles.push({url: url, name: 'Improvement'+fileReference+'_'+i});
         }       
       };
       this.filesAreLoaded = true;

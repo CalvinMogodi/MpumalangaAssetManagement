@@ -8,7 +8,7 @@
 </div>
 
 <div class="row">
-    <button style="float: right;" (click)="showDialog=true" pButton type="button" label="Add User" class="ui-button-info"></button>
+    <button style="float: right;" (click)="showDialog=true;header='Add'" pButton type="button" label="Add User" class="ui-button-info"></button>
 </div>
 <div class="row">
     <p-table #dt [columns]="cols" [paginator]="true" [rows]="10" selectionMode="single" rowExpandMode="single"
@@ -27,7 +27,7 @@
                     <p-sortIcon [field]="col.field" ariaLabel="Activate to sort" ariaLabelDesc="Activate to sort in descending order" ariaLabelAsc="Activate to sort in ascending order"></p-sortIcon>
                 </th>
                 <th style="width:10em">Reset Password</th>
-                <th style="width:8em"></th>
+                <th>Actions</th>
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-rowData let-editing="editing" let-ri="rowIndex">
@@ -35,9 +35,7 @@
                 <td *ngFor="let col of cols">
                     <p-cellEditor>
                         <ng-template pTemplate="input" >
-                            <input required *ngIf="col.field === 'name' || col.field === 'surname' || col.field === 'email'" pInputText type="text" [(ngModel)]="rowData[col.field]" class="ui-inputtext ui-widget" [ngClass]="{ 'is-invalid': submitted && f.newpassword.errors }">
-                            <p-checkbox *ngIf="col.field === 'isActive'" name="groupname" [value]="rowData[col.field]" [(ngModel)]="rowData[col.field]"></p-checkbox>
-                            <label  *ngIf="col.field === 'createdDate'">{{rowData[col.field] | date:'yyyy MMMM d'}}</label> 
+                            <label *ngIf="col.field === 'createdDate'">{{rowData[col.field] | date:'yyyy MMMM d'}}</label> 
                         </ng-template>
                         <ng-template pTemplate="output">
                             <label *ngIf="col.field === 'createdDate'" >
@@ -55,36 +53,40 @@
                             </label>
                         </ng-template>
                     </p-cellEditor>
-                </td>
-               
+                </td>               
                 <td>
-                    <a (click)="confirm1(rowData)"> Reset</a>
-                </td>
-                
+                    <a (click)="confirmResetPassword(rowData)"> Reset</a>
+                </td>                
                 <td style="text-align:center">
-                    <button *ngIf="!editing" pButton type="button" pInitEditableRow icon="pi pi-pencil" class="ui-button-info" (click)="onRowEditInit(rowData)"></button>
-                    <button *ngIf="editing" pButton type="button" pSaveEditableRow icon="pi pi-check" class="ui-button-success" style="margin-right: .5em" (click)="onRowEditSave(rowData)"></button>
-                    <button *ngIf="editing" pButton type="button" pCancelEditableRow icon="pi pi-times" class="ui-button-danger" (click)="onRowEditCancel(rowData, ri)"></button>
+                    <p-splitButton label="More" [model]="buttonItems" (onDropdownClick)="selectUser(rowData, ri)" styleClass="p-button-secondary"></p-splitButton>
                 </td>
             </tr>
         </ng-template>
     </p-table>
 </div>
 
-<!--<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>-->
 <div *ngIf="showResetPasswordComfirmation" class="dialogBackgroud"></div>
 <p-dialog header="Confirmation" [(visible)]="showResetPasswordComfirmation" [breakpoints]="{'960px': '75vw'}" [style]="{width: '25vw'}" [baseZIndex]="10000" 
     [draggable]="false" [resizable]="false">
     <p>Are you sure that you want to reset password?</p>
     <p-footer>
             <button style="float: left;" (click)="showResetPasswordComfirmation=false" pButton type="button" label="No" class="ui-button-info"></button>
-            <button style="float: right;" (click)="showResetPasswordComfirmation=false;deleteUser()" pButton type="button" label="Yes" class="ui-button-info"></button>
+            <button style="float: right;" (click)="showResetPasswordComfirmation=false;resetPassword()" pButton type="button" label="Yes" class="ui-button-info"></button>
     </p-footer>
 </p-dialog>
 
-<p-messages [value]="msgs"></p-messages>
+<div *ngIf="showComfirmaDelete" class="dialogBackgroud"></div>
+<p-dialog header="Confirmation" [(visible)]="showComfirmaDelete" [breakpoints]="{'960px': '75vw'}" [style]="{width: '25vw'}" [baseZIndex]="10000" 
+    [draggable]="false" [resizable]="false">
+    <p>Are you sure that you want to delete this user?</p>
+    <p-footer>
+            <button style="float: left;" (click)="showComfirmaDelete=false" pButton type="button" label="No" class="ui-button-info"></button>
+            <button style="float: right;" (click)="showComfirmaDelete=false;deleteUser()" pButton type="button" label="Yes" class="ui-button-info"></button>
+    </p-footer>
+</p-dialog>
+
 <div *ngIf="showDialog" class="dialogBackgroud"></div>
-<p-dialog header="Create User" [(visible)]="showDialog" [style]="{width: '40vw'}" [baseZIndex]="10000">
+<p-dialog header="{{header}}" [(visible)]="showDialog" [style]="{width: '40vw'}" [baseZIndex]="10000">
     <form [formGroup]="addUserForm" (ngSubmit)="onSubmit()">
         <div class="ui-g ui-fluid">
             <div class="ui-g-12 ui-md-12">
@@ -155,10 +157,11 @@
             <div *ngIf="newUserError" style="color: red;" class="alert alert-danger mt-3 mb-0 text-error text-center">{{newUserError}}</div>
         </div>
         <p-footer>
-            <br><br>
+            <br>
             <button style="float: left;" type="button" pButton icon="pi pi-times" (click)="showDialog=false"
                 label="Cancel" class="ui-button-secondary"></button>
-            <button style="float: right;" type="submit" pButton icon="pi pi-check" label="Submit"></button>
+            <button *ngIf="header == 'Add'" style="float: right;" type="submit" pButton icon="pi pi-check" label="Submit"></button>
+            <button *ngIf="header == 'Edit'" style="float: right;" type="submit" pButton icon="pi pi-check" label="Update"></button>
         </p-footer>
     </form>
 </p-dialog>
