@@ -54,6 +54,10 @@ import { CalendarModule } from 'primeng/calendar';
 import { SplitButtonModule } from 'primeng/splitbutton';
 import { PrintAssetComponent } from './components/assetregister/print-asset/print-asset.component';
 import { TemplateOneComponent } from './components/properties/template-one/template-one.component';
+import { TemplateTwoComponent } from './components/properties/template-two/template-two.component';
+import { TemplateThreeComponent } from './components/properties/template-three/template-three.component';
+import { ScheduleOfCurrentUtilisationComponent } from './components/properties/schedule-of-current-utilisation/schedule-of-current-utilisation.component';
+import { GapAnalysisComponent } from './components/properties/gap-analysis/gap-analysis.component';
 
 @NgModule({
   declarations: [
@@ -73,7 +77,11 @@ import { TemplateOneComponent } from './components/properties/template-one/templ
     PropertiesComponent,
     ViewPropertyComponent,
     PrintAssetComponent,
-    TemplateOneComponent
+    TemplateOneComponent,
+    TemplateTwoComponent,
+    TemplateThreeComponent,
+    ScheduleOfCurrentUtilisationComponent,
+    GapAnalysisComponent
   ],
   imports: [
     BrowserModule,
