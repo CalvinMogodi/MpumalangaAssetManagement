@@ -59,6 +59,8 @@ import { TemplateTwoComponent } from './components/properties/template-two/templ
 import { TemplateThreeComponent } from './components/properties/template-three/template-three.component';
 import { ScheduleOfCurrentUtilisationComponent } from './components/properties/schedule-of-current-utilisation/schedule-of-current-utilisation.component';
 import { GapAnalysisComponent } from './components/properties/gap-analysis/gap-analysis.component';
+import { RefurbishmentReconfigurationComponent } from './components/properties/refurbishment-reconfiguration/refurbishment-reconfiguration.component';
+import { RepairRequirementsComponent } from './components/properties/repair-requirements/repair-requirements.component';
 
 @NgModule({
   declarations: [
@@ -82,7 +84,9 @@ import { GapAnalysisComponent } from './components/properties/gap-analysis/gap-a
     TemplateTwoComponent,
     TemplateThreeComponent,
     ScheduleOfCurrentUtilisationComponent,
-    GapAnalysisComponent
+    GapAnalysisComponent,
+    RefurbishmentReconfigurationComponent,
+    RepairRequirementsComponent
   ],
   imports: [
     BrowserModule,
