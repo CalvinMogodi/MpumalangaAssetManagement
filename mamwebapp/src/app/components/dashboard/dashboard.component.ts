@@ -205,7 +205,7 @@ export class DashboardComponent implements OnInit {
   openInfo(marker) {
     this.dialogHeader = marker.data.description;
     this.selectedAsset = {
-      mode : 'View',
+      mode : 'ViewTODO',
       facilityId: marker.data.facilityId,
       facilityType: marker.data.facilityType
     };

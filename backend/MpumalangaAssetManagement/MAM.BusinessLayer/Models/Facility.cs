@@ -16,6 +16,8 @@ namespace MAM.BusinessLayer.Models
         public string Survey { get; set; }
         public string Type { get; set; }
         public string ClientCode { get; set; }
+        public string AFS { get; set; }
+        public string VestedType { get; set; }
         public string Status { get; set; }
         public int UserId { get; set; }
         public int? LandId { get; set; }
@@ -48,7 +50,12 @@ namespace MAM.BusinessLayer.Models
                 ClientCode = f.ClientCode,
                 UserId = f.UserId,
                 Status = f.Status,
+                Survey = f.Survey,
+                AFS = f.AFS,
+                VestedType = f.VestedType,
                 CreatedBy = f.CreatedBy,
+                LandId = f.LandId,
+                FinanceId = f.FinanceId,
                 CreatedDate = f.CreatedDate,
                 ModifiedBy = f.ModifiedBy,
                 ModifiedDate = f.ModifiedDate,
@@ -101,6 +108,8 @@ namespace MAM.BusinessLayer.Models
                 ClientCode = facility.ClientCode,
                 UserId = facility.UserId,
                 Status = facility.Status,
+                AFS = facility.AFS,
+                VestedType = facility.VestedType,
                 CreatedBy = facility.CreatedBy,
                 CreatedDate = facility.CreatedDate,
                 ModifiedBy = facility.ModifiedBy,
@@ -144,6 +153,8 @@ namespace MAM.BusinessLayer.Models
                 Type = facility.Type,
                 ClientCode = facility.ClientCode,
                 Survey = facility.Survey,
+                AFS = facility.AFS,
+                VestedType = facility.VestedType,
                 LandId = facility.LandId,
                 FinanceId = facility.FinanceId,
                 UserId = facility.UserId,

@@ -13,6 +13,8 @@ namespace MAM.DataAccess.Tables
         public string FileReference { get; set; }
         public string Type { get; set; }
         public string Survey { get; set; }
+        public string AFS { get; set; }
+        public string VestedType { get; set; }
         public string ClientCode { get; set; }
         [ForeignKey("Id")]
         public int UserId { get; set; }

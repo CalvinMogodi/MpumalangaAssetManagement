@@ -8,6 +8,8 @@ export class Facility {
     type: string;
     clientCode: string;    
     survey: string;
+    afs: string;
+    vestedType: string;
     userId: number;
     status: string;    
     land: Land;

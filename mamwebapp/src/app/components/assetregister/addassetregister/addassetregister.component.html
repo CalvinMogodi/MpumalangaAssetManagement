@@ -67,17 +67,29 @@
                             </div>
                         </div>
                     </div>
-                    <!--<div class="ui-g-12 ui-md-12">                       
+                    <div class="ui-g-12 ui-md-12">                       
                         <div class="ui-g-4 ui-md-4">
-                          
+                            <label for="vestedType">Vested Type</label>
+                            <p-dropdown inputId="vestedType" [disabled]="mode == 'View'" [options]="vestedTypes"
+                            placeholder="Please select" formControlName="vestedType" optionLabel="name">
+                            </p-dropdown>
+                            <div *ngIf="submitted && f.vestedType.errors" class="text-error"><br>
+                                <div *ngIf="l.vestedType.errors.required">This field is required.</div>
+                            </div>
+                        </div>
+                        <div class="ui-g-4 ui-md-4">
+                            <label for="afs">AFS</label>
+                            <p-dropdown inputId="afs" [disabled]="mode == 'View'" [options]="aFSs"
+                            placeholder="Please select" formControlName="afs" optionLabel="name">
+                            </p-dropdown>
+                            <div *ngIf="submitted && f.afs.errors" class="text-error"><br>
+                                <div *ngIf="l.afs.errors.required">This field is required.</div>
+                            </div>
                         </div>
                         <div class="ui-g-4 ui-md-4">
                            
                         </div>
-                        <div class="ui-g-4 ui-md-4">
-                           
-                        </div>
-                    </div>-->
+                    </div>
                 </p-fieldset>
                 <p-fieldset legend="Geographical Location" [toggleable]="true">
                     <div class="ui-g-12 ui-md-12">
@@ -326,7 +338,7 @@
                         </div>
                         <div class="ui-g-4 ui-md-4">
                             <label for="class">Registration Date</label>
-                            <p-calendar formControlName="registrationDate" dateFormat="dd/mm/yy" showOtherMonths="true"
+                            <p-calendar [maxDate]="today" formControlName="registrationDate" dateFormat="dd/mm/yy" showOtherMonths="true"
                                 showButtonBar="true"></p-calendar>
                             <div *ngIf="submitted&& f.fileReferenceNumber.errors"
                                 class="text-error"><br>
