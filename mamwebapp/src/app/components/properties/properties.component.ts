@@ -12,6 +12,7 @@ export class PropertiesComponent implements OnInit {
   facilities: Facility[];
   selectedFacility: Facility;
   leasedPropertyCount: Number = 0;
+  activeIndex: number = 1;
   stateOwnedPropertyCount: Number = 0;
   showDialog: Boolean = false;
   showUAMP: Boolean = false;
@@ -56,5 +57,4 @@ export class PropertiesComponent implements OnInit {
   viewUAMP() {
     this.showUAMP = true;
   }
-
 }

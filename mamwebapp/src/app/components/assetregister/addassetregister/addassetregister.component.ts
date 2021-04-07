@@ -37,6 +37,7 @@ export class AddassetregisterComponent implements OnInit {
     type: ''
   };
   error = '';
+  today = new Date();
   subscription: Subscription;
   activeItem: MenuItem;
   loading = true;
@@ -68,6 +69,8 @@ export class AddassetregisterComponent implements OnInit {
   userDepartments: any[];
   landRemainders: any[];
   howAcquireds: any[];
+  vestedTypes: any[];
+  aFSs: any[];
   howAcquired: any = {
     name: undefined
   };
@@ -103,7 +106,7 @@ export class AddassetregisterComponent implements OnInit {
       this.currentUser = x;
     });
 
-    if (this.selectedAsset.facilityId != undefined) {
+    if (this.selectedAsset.facilityId != undefined) {      
       this.mode = this.selectedAsset.mode;
       if (this.mode == "Edit") {
         this.loading = false;
@@ -120,49 +123,48 @@ export class AddassetregisterComponent implements OnInit {
       }
 
     } else {
+      this.facility = {
+        id: 0,
+        name: 'Land T0IS00000000000700020',
+        fileReference: this.makeId(8),
+        type: 'Land',
+        clientCode: 'T0IS00000000000700020',
+        userId: this.currentUser.id,
+        status: "New",
+        createdBy: this.currentUser.id,
+        createdDate: new Date(),
+        modifiedBy: this.currentUser.id,
+        modifiedDate: new Date(),
+        land: {
+          id: 0,
+          geographicalLocation: {
+            id: 0
+          },
+          propertyDescription: {
+            id: 0
+          },
+          landUseManagementDetail: {
+            id: 0
+          },
+          leaseStatus: {
+            id: 0
+          }
+        },
+        finance: {
+          id: 0,
+          secondaryInformationNote: {
+            id: 0
+          },
+          valuation: {
+            id: 0
+          }
+        },
+        improvements: []
+      }
       this.buildForm();
       this.mode = this.selectedAsset.mode;
       this.loading = false;
-    }
-
-    this.facility = {
-      id: 0,
-      name: 'Land T0IS00000000000700020',
-      fileReference: this.makeId(8),
-      type: 'Land',
-      clientCode: 'T0IS00000000000700020',
-      userId: this.currentUser.id,
-      status: "New",
-      createdBy: this.currentUser.id,
-      createdDate: new Date(),
-      modifiedBy: this.currentUser.id,
-      modifiedDate: new Date(),
-      land: {
-        id: 0,
-        geographicalLocation: {
-          id: 0
-        },
-        propertyDescription: {
-          id: 0
-        },
-        landUseManagementDetail: {
-          id: 0
-        },
-        leaseStatus: {
-          id: 0
-        }
-      },
-      finance: {
-        id: 0,
-        secondaryInformationNote: {
-          id: 0
-        },
-        valuation: {
-          id: 0
-        }
-      },
-      improvements: []
-    }
+    }   
   }
 
   get l() { return this.landForm.controls; }
@@ -344,6 +346,8 @@ export class AddassetregisterComponent implements OnInit {
       if (this.facility.land != undefined && this.facility.land != null) {
         this.facility.clientCode = this.landForm.controls["clientCode"].value;
         this.facility.survey = this.landForm.controls["survey"].value != undefined ? this.landForm.controls["survey"].value.name : null,
+        this.facility.vestedType = this.landForm.controls["vestedType"].value != undefined ? this.landForm.controls["vestedType"].value.name : null,
+        this.facility.afs = this.landForm.controls["afs"].value != undefined ? this.landForm.controls["afs"].value.name : null,
         this.facility.land = {
           id: this.facility.land.id == 0 ? 0 : this.facility.land.id,
           deedsOffice: this.landForm.controls["deedsOffice"].value != undefined ? this.landForm.controls["deedsOffice"].value.name : null,
@@ -397,17 +401,17 @@ export class AddassetregisterComponent implements OnInit {
             id: this.facility.land.leaseStatus.id == 0 ? 0 : this.facility.land.leaseStatus.id,
             natureOfLease: this.landForm.controls["natureOfLease"].value ? this.landForm.controls["natureOfLease"].value.name : null,
             IDNumberCompanyRegistrationNumber: this.landForm.controls["IDNumberCompanyRegistrationNumber"].value,
-            POBox: this.landForm.controls["POBox"].value != "" ?  this.landForm.controls["POBox"].value.toString() : null,
+            POBox: this.landForm.controls["POBox"].value != null ?  this.landForm.controls["POBox"].value.toString() : null,
             contactNumber: this.landForm.controls["contactNumber"].value,
-            capacityofContactPerson: this.landForm.controls["capacityofContactPerson"].value != "" ? this.landForm.controls["capacityofContactPerson"].value.toString() : null,
-            contactPerson: this.landForm.controls["contactPerson"].value != "" ? this.landForm.controls["contactPerson"].value.toString() : null,
+            capacityofContactPerson: this.landForm.controls["capacityofContactPerson"].value != "" ? this.landForm.controls["capacityofContactPerson"].value : null,
+            contactPerson: this.landForm.controls["contactPerson"].value != "" ? this.landForm.controls["contactPerson"].value : null,
             postalCode: Number(this.landForm.controls["postalCode"].value),
             leaseStatusTown: this.landForm.controls["leaseStatusTown"].value,
             rentalAmount: this.landForm.controls["rentalAmount"].value != "" ? this.landForm.controls["rentalAmount"].value : null,
             terminationDate: this.landForm.controls["terminationDate"].value != "" ? this.landForm.controls["terminationDate"].value : null,
             startingDate: this.landForm.controls["startingDate"].value != "" ? this.landForm.controls["startingDate"].value : null,
             occupationDate: this.landForm.controls["occupationDate"].value != "" ? this.landForm.controls["occupationDate"].value : null,
-            escalation: this.landForm.controls["escalation"].value != "" ? this.landForm.controls["escalation"].value.toString() : null,
+            escalation: this.landForm.controls["escalation"].value != "" ? this.landForm.controls["escalation"].value : null,
             vat: this.landForm.controls["vat"].value != undefined ? this.landForm.controls["vat"].value.name : null,
             leaseNumber: this.landForm.controls["leaseNumber"].value != "" ? this.landForm.controls["leaseNumber"].value : null,
             otherCharges: this.landForm.controls["otherCharges"].value != "" ? this.landForm.controls["otherCharges"].value : null,
@@ -456,6 +460,8 @@ export class AddassetregisterComponent implements OnInit {
       clientCode:[''],
       deedsOffice: [''],
       class: [''],
+      afs: [''],
+      vestedType: [''],
       type: [''],
       province: [''],
       town: [''],
@@ -480,7 +486,7 @@ export class AddassetregisterComponent implements OnInit {
       acquired: [''],
       acquiredOther: [''],
       titleDeedNumber: [''],
-      registrationDate: [''],
+      registrationDate: [this.today],
       registeredOwner: [''],
       vestingDate: [''],
       conditionsOfTitle: [''],
@@ -649,8 +655,18 @@ export class AddassetregisterComponent implements OnInit {
     ];
 
     this.landRemainders = [
-      { name: 'Yes ', code: 'Y', factor: 1 },
+      { name: 'Yes', code: 'Y', factor: 1 },
       { name: 'No', code: 'N', factor: 2 },
+    ];
+
+    this.aFSs = [
+      { name: 'Yes', code: 'Y', factor: 1 },
+      { name: 'No', code: 'N', factor: 2 },
+    ];
+
+    this.vestedTypes = [
+      { name: 'Vested', code: 'V', factor: 1 },
+      { name: 'Non-Vested', code: 'NV', factor: 2 },
     ];
 
     this.vats = [
@@ -747,7 +763,8 @@ export class AddassetregisterComponent implements OnInit {
     let districtMunicipality = this.districtMunicipalities.filter(d => d.name.toLowerCase().trim() == (this.facility.land.geographicalLocation.districtMunicipality != undefined ? this.facility.land.geographicalLocation.districtMunicipality.toLowerCase().trim() : this.facility.land.geographicalLocation.districtMunicipality))[0];
 
     let survey = this.surveys.filter(d => d.name.toLowerCase().trim() == (this.facility.survey != undefined ? this.facility.survey.toLowerCase().trim() : this.facility.survey))[0];
-   
+    let afs = this.aFSs.filter(d => d.name.trim() == (this.facility.afs != undefined ? this.facility.afs.trim() : this.facility.afs))[0];
+    let vestedType = this.vestedTypes.filter(d => d.name.toLowerCase().trim() == (this.facility.vestedType != undefined ? this.facility.vestedType.toLowerCase().trim() : this.facility.vestedType))[0];
 
     let region = this.regions.filter(d => d.name.toLowerCase().trim() == (this.facility.land.region != undefined ? this.facility.land.region.toLowerCase().trim() : this.facility.land.region))[0];
     let registrationDivision = this.registrationDivisions.filter(d => d.name.toLowerCase().trim() == (this.facility.land.propertyDescription.registrationDivision != undefined ? this.facility.land.propertyDescription.registrationDivision.toLowerCase().trim() : this.facility.land.propertyDescription.registrationDivision))[0];
@@ -769,6 +786,8 @@ export class AddassetregisterComponent implements OnInit {
       clientCode:[this.facility.clientCode],
       deedsOffice: [deedsOffice],
       class: [assetClass],
+      afs: [afs],
+      vestedType: [vestedType],
       type: [type],
       province: [province],
       town: [this.facility.land.geographicalLocation.town],
