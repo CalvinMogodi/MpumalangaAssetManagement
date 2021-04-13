@@ -25,9 +25,10 @@ namespace MAM.BusinessLayer.Repositories
 
         public List<FacilityType> GetFacilityZonings()
         {
+            Facility facility = new Facility();
             List<FacilityType> facilityTypes = new List<FacilityType>();
 
-            using (var dataAccess = new DataAccess.Repositories.DwellingFacilityRepository(appSettings.ConnectionString))
+            using (var dataAccess = new DataAccess.Repositories.FacilityRepository(appSettings.ConnectionString))
             {
                 FacilityType facilityType = new FacilityType()
                 {
@@ -35,64 +36,16 @@ namespace MAM.BusinessLayer.Repositories
                     FacilityZonings = new List<FacilityZoning>()
                 };
 
-                var dwellingFacilities = dataAccess.GetDwellingFacilities();
-                var zonings = dwellingFacilities.Select(d => d.Zoning.ToLower().Trim()).Distinct();
+                var facilities = facility.ConvertToFacilities(dataAccess.GetFacilities()).Where(f => f.Land.LandUseManagementDetail.Zoning != null);
+                var zonings = facilities.Select(d => d.Land.LandUseManagementDetail.Zoning.ToLower().Trim()).Distinct();
                 foreach (var zoning in zonings)
                 {
                     FacilityZoning facilityZoning = new FacilityZoning()
                     {
                         Name = zoning,
-                        SignedOff = dwellingFacilities.Where(d => d.Zoning.ToLower().Trim() == zoning.ToLower().Trim() && d.Status == (int)FacilityStatus.Completed).Count(),
-                        Total = dwellingFacilities.Where(d => d.Zoning.ToLower().Trim() == zoning.ToLower().Trim()).Count(),
+                        SignedOff = facilities.Where(d => d.Land.LandUseManagementDetail.Zoning.ToLower().Trim() == zoning.ToLower().Trim() && d.Status == "Completed").Count(),
+                        Total = facilities.Where(d => d.Land.LandUseManagementDetail.Zoning.ToLower().Trim() == zoning.ToLower().Trim()).Count(),
                     };
-                    facilityType.FacilityZonings.Add(facilityZoning);
-                }
-                facilityTypes.Add(facilityType);
-            }
-
-            using (var dataAccess = new DataAccess.Repositories.LandFacilityRepository(appSettings.ConnectionString))
-            {
-                FacilityType facilityType = new FacilityType()
-                {
-                    Name = "Land",
-                    FacilityZonings = new List<FacilityZoning>()
-                };
-
-                var landFacilities = dataAccess.GetLandFacilities();
-                var zonings = landFacilities.Select(d => d.Zoning.ToLower().Trim()).Distinct();
-                foreach (var zoning in zonings)
-                {
-                    FacilityZoning facilityZoning = new FacilityZoning()
-                    {
-                        Name = zoning,
-                        SignedOff = landFacilities.Where(d => d.Zoning.ToLower().Trim() == zoning.ToLower().Trim() && d.Status == (int)FacilityStatus.Completed).Count(),
-                        Total = landFacilities.Where(d => d.Zoning.ToLower().Trim() == zoning.ToLower().Trim()).Count()
-                    };
-
-                    facilityType.FacilityZonings.Add(facilityZoning);
-                }
-                facilityTypes.Add(facilityType);
-            }
-
-            using (var dataAccess = new DataAccess.Repositories.NonResidentialFacilityRepository(appSettings.ConnectionString))
-            {
-                FacilityType facilityType = new FacilityType()
-                {
-                    Name = "Non Residential Buildings",
-                    FacilityZonings = new List<FacilityZoning>()
-                };
-
-                var nonResidentialFacilities = dataAccess.GetNonResidentialFacilities();
-                var zonings = nonResidentialFacilities.Select(d => d.Zoning).Distinct();
-                foreach (var zoning in zonings)
-                {
-                    FacilityZoning facilityZoning = new FacilityZoning()
-                    {
-                        Name = zoning,
-                        SignedOff = nonResidentialFacilities.Where(d => d.Zoning.ToLower().Trim() == zoning.ToLower().Trim() && d.Status == (int)FacilityStatus.Completed).Count(),
-                        Total = nonResidentialFacilities.Where(d => d.Zoning.ToLower().Trim() == zoning.ToLower().Trim()).Count()
-                    };
-
                     facilityType.FacilityZonings.Add(facilityZoning);
                 }
                 facilityTypes.Add(facilityType);
@@ -110,51 +63,34 @@ namespace MAM.BusinessLayer.Repositories
             dashboardWedges.Add("Non Residential Buildings");
             dashboardWedges.Add("Dwellings");
             dashboardWedges.Add("Land");
-            List<DataAccess.Tables.DwellingFacility> dwellingFacilities = new List<DataAccess.Tables.DwellingFacility>();
-            List<DataAccess.Tables.LandFacility> landFacilities = new List<DataAccess.Tables.LandFacility>();
-            List<DataAccess.Tables.NonResidentialFacility> nonResidentialFacilities = new List<DataAccess.Tables.NonResidentialFacility>();
 
-            using (var dataAccess = new DataAccess.Repositories.DwellingFacilityRepository(appSettings.ConnectionString))
+            using (var dataAccess = new DataAccess.Repositories.FacilityRepository(appSettings.ConnectionString))
             {
-                dwellingFacilities = dataAccess.GetDwellingFacilities();
-            }
+                var _facilities = dataAccess.GetFacilities();
 
-            using (var dataAccess = new DataAccess.Repositories.LandFacilityRepository(appSettings.ConnectionString))
-            {
-                landFacilities = dataAccess.GetLandFacilities();
-            }
-
-            using (var dataAccess = new DataAccess.Repositories.NonResidentialFacilityRepository(appSettings.ConnectionString))
-            {
-                nonResidentialFacilities = dataAccess.GetNonResidentialFacilities();
-            }
-
-            foreach (var wedge in dashboardWedges)
-            {
-                DashboardWedge dashboardWedge = new DashboardWedge();
-                dashboardWedge.Name = wedge;
-                if (dashboardWedge.Name == "Number of properties")
+                foreach (var wedge in dashboardWedges)
                 {
-                    dashboardWedge.Total = dwellingFacilities.Count();
-                    dashboardWedge.Total = dashboardWedge.Total + landFacilities.Count();
-                    dashboardWedge.Total = dashboardWedge.Total + nonResidentialFacilities.Count();
+                    DashboardWedge dashboardWedge = new DashboardWedge();
+                    dashboardWedge.Name = wedge;
+                    if (dashboardWedge.Name == "Number of properties")
+                    {
+                        dashboardWedge.Total = _facilities.Count();
+                    }
+                    if (dashboardWedge.Name == "Signed off properties")
+                    {
+                        dashboardWedge.Total = _facilities.Where(d => d.Status == "Completed").Count();
+                    }
+                    if (dashboardWedge.Name == "Non Residential Buildings")
+                        dashboardWedge.Total = _facilities.Where(d => d.Type == "").Count();
+
+                    if (dashboardWedge.Name == "Dwellings")
+                        dashboardWedge.Total = _facilities.Where(d => d.Type == "").Count();
+
+                    if (dashboardWedge.Name == "Land")
+                        dashboardWedge.Total = _facilities.Where(d => d.Type == "Farm").Count();
+
+                    list.Add(dashboardWedge);
                 }
-                if (dashboardWedge.Name == "Signed off properties")
-                {
-                    dashboardWedge.Total = dwellingFacilities.Where(d => d.Status == (int)FacilityStatus.Completed).Count();
-                    dashboardWedge.Total = dashboardWedge.Total + landFacilities.Where(d => d.Status == (int)FacilityStatus.Completed).Count();
-                    dashboardWedge.Total = dashboardWedge.Total + nonResidentialFacilities.Where(d => d.Status == (int)FacilityStatus.Completed).Count();
-                }
-                if (dashboardWedge.Name == "Non Residential Buildings")
-                    dashboardWedge.Total = dwellingFacilities.Count();
-
-                if (dashboardWedge.Name == "Dwellings")
-                    dashboardWedge.Total = landFacilities.Count();
-
-                if (dashboardWedge.Name == "Land")
-                    dashboardWedge.Total = nonResidentialFacilities.Count();
-
-                list.Add(dashboardWedge);
             }
             return list;
         }

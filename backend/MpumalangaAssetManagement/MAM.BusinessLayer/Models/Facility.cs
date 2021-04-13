@@ -66,7 +66,12 @@ namespace MAM.BusinessLayer.Models
                     PropertyDescription = f.Land.PropertyDescription != null ? pd.ConvertPropertyDescription(f.Land.PropertyDescription) : pd,
                     LandUseManagementDetail = f.Land.LandUseManagementDetail != null ? lumd.ConvertLandUseManagementDetail(f.Land.LandUseManagementDetail) : new LandUseManagementDetail(),
                     LeaseStatus = f.Land.LeaseStatus != null ? ls.ConvertLeaseStatus(f.Land.LeaseStatus) : new LeaseStatus(),
-                } : new Land(),
+                } : new Land() {
+                    GeographicalLocation = new GeographicalLocation(),
+                    PropertyDescription = new PropertyDescription(),
+                    LandUseManagementDetail = new LandUseManagementDetail(),
+                    LeaseStatus = new LeaseStatus()
+                },
                 Finance = f.Finance != null ? new Finance()
                 {
                     Id = f.Finance.Id,
@@ -76,7 +81,11 @@ namespace MAM.BusinessLayer.Models
                     ValuationId = f.Finance.ValuationId,
                     SecondaryInformationNote = f.Finance.SecondaryInformationNote != null ? sin.ConvertToSecondaryInformationNote(f.Finance.SecondaryInformationNote) : new SecondaryInformationNote(),
                     Valuation = f.Finance.Valuation != null ? v.ConvertToValuation(f.Finance.Valuation) : new Valuation(),
-                } : new Finance(),
+                } : new Finance()
+                {
+                    SecondaryInformationNote = new SecondaryInformationNote(),
+                    Valuation = new Valuation()
+                },
                 Improvements = f.Improvements != null ? i.ConvertToImprovements(f.Improvements) : new List<Improvement>()
             }).ToList();
         }
@@ -105,7 +114,7 @@ namespace MAM.BusinessLayer.Models
                 CreatedDate = facility.CreatedDate,
                 ModifiedBy = facility.ModifiedBy,
                 ModifiedDate = facility.ModifiedDate,
-                Land = new Land()
+                Land = facility.Land != null ? new Land()
                 {
                     Id = facility.Land.Id,
                     DeedsOffice = facility.Land.DeedsOffice,
@@ -119,6 +128,12 @@ namespace MAM.BusinessLayer.Models
                     PropertyDescription = facility.Land.PropertyDescription != null ? pd.ConvertPropertyDescription(facility.Land.PropertyDescription) : pd,
                     LandUseManagementDetail = facility.Land.LandUseManagementDetail != null ? lumd.ConvertLandUseManagementDetail(facility.Land.LandUseManagementDetail) : new LandUseManagementDetail(),
                     LeaseStatus = facility.Land.LeaseStatus != null ? ls.ConvertLeaseStatus(facility.Land.LeaseStatus) : new LeaseStatus(),
+                } : new Land()
+                {
+                    GeographicalLocation = new GeographicalLocation(),
+                    PropertyDescription = new PropertyDescription(),
+                    LandUseManagementDetail = new LandUseManagementDetail(),
+                    LeaseStatus = new LeaseStatus()
                 },
                 Finance = facility.Finance != null ? new Finance()
                 {
@@ -129,7 +144,10 @@ namespace MAM.BusinessLayer.Models
                     ValuationId = facility.Finance.ValuationId,
                     SecondaryInformationNote = facility.Finance.SecondaryInformationNote != null ? sin.ConvertToSecondaryInformationNote(facility.Finance.SecondaryInformationNote) : new SecondaryInformationNote(),
                     Valuation = facility.Finance.Valuation != null ? v.ConvertToValuation(facility.Finance.Valuation) : new Valuation(),
-                } : new Finance(),
+                } : new Finance() { 
+                SecondaryInformationNote = new SecondaryInformationNote(),
+                Valuation = new Valuation()
+                },
                 Improvements = facility.Improvements != null ? i.ConvertToImprovements(facility.Improvements) : new List<Improvement>()
             };
         }
