@@ -20,6 +20,7 @@ namespace MAM.BusinessLayer.Models
         public int UserId { get; set; }
         public int? LandId { get; set; }
         public int? FinanceId { get; set; }
+        public string VestedType { get; set; }
         public FacilityTypes FacilityTypes { get; set; }
         public FacilityStatus FacilityStatus { get; set; }
         public int CreatedBy { get; set; }
@@ -51,6 +52,7 @@ namespace MAM.BusinessLayer.Models
                 CreatedBy = f.CreatedBy,
                 CreatedDate = f.CreatedDate,
                 ModifiedBy = f.ModifiedBy,
+                VestedType = f.VestedType,
                 ModifiedDate = f.ModifiedDate,
                 Land = f.Land != null ? new Land()
                 {
@@ -110,6 +112,7 @@ namespace MAM.BusinessLayer.Models
                 ClientCode = facility.ClientCode,
                 UserId = facility.UserId,
                 Status = facility.Status,
+                VestedType = facility.VestedType,
                 CreatedBy = facility.CreatedBy,
                 CreatedDate = facility.CreatedDate,
                 ModifiedBy = facility.ModifiedBy,
@@ -166,6 +169,7 @@ namespace MAM.BusinessLayer.Models
                 FinanceId = facility.FinanceId,
                 UserId = facility.UserId,
                 Status = facility.Status,
+                VestedType = facility.VestedType,
                 CreatedBy = facility.CreatedBy,
                 CreatedDate = facility.CreatedDate,
                 ModifiedBy = facility.ModifiedBy,

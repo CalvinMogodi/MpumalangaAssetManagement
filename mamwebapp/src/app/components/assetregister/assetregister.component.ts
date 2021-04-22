@@ -37,6 +37,7 @@ export class AssetregisterComponent implements OnInit  {
     { label: 'Asset Register' }];
   cols = [
     { field: 'fileReference', header: 'File Reference' },
+    { field: 'type', header: 'Type' },
     { field: 'clientCode', header: 'Property Code' },
     { field: 'status', header: 'Status' }
   ];

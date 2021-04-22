@@ -78,16 +78,16 @@ namespace MAM.BusinessLayer.Repositories
                     }
                     if (dashboardWedge.Name == "Signed off properties")
                     {
-                        dashboardWedge.Total = _facilities.Where(d => d.Status == "Completed").Count();
+                        dashboardWedge.Total = _facilities.Where(d => d.Status == "Signed off").Count();
                     }
                     if (dashboardWedge.Name == "Non Residential Buildings")
-                        dashboardWedge.Total = _facilities.Where(d => d.Type == "").Count();
+                        dashboardWedge.Total = _facilities.Where(d => d.Type == "Non Residential").Count();
 
                     if (dashboardWedge.Name == "Dwellings")
-                        dashboardWedge.Total = _facilities.Where(d => d.Type == "").Count();
+                        dashboardWedge.Total = _facilities.Where(d => d.Type == "Dwelling").Count();
 
                     if (dashboardWedge.Name == "Land")
-                        dashboardWedge.Total = _facilities.Where(d => d.Type == "Farm").Count();
+                        dashboardWedge.Total = _facilities.Where(d => d.Type == "Land").Count();
 
                     list.Add(dashboardWedge);
                 }
@@ -391,7 +391,14 @@ namespace MAM.BusinessLayer.Repositories
                 foreach (var item in improvements)
                 {
                     item.FacilityId = facilityId;
-                    item.Id = dataAccess.AddImprovement(improvement.ConvertToImprovement(item));
+                    if (item.Id == 0)
+                    {
+                        item.Id = dataAccess.AddImprovement(improvement.ConvertToImprovement(item));
+                    }
+                    else {
+                        dataAccess.UpdateImprovement(improvement.ConvertToImprovement(item));
+                    }
+                    
                 }
             }
             return improvements;

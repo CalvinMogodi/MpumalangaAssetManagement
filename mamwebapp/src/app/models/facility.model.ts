@@ -123,6 +123,7 @@ export class Finance {
 }
 
 export class SecondaryInformationNote { 
+    openingBalance: number;
     additionCash: number;
     additionNonCash: number;
     addition: number;

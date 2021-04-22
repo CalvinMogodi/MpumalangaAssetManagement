@@ -23,6 +23,7 @@ namespace MAM.DataAccess.Tables
         public int? FinanceId { get; set; }
         public int CreatedBy { get; set; }
         public DateTime CreatedDate { get; set; }
+        public string VestedType { get; set; }
         public int? ModifiedBy { get; set; }
         public DateTime? ModifiedDate { get; set; }
         public virtual Land Land { get; set; }
