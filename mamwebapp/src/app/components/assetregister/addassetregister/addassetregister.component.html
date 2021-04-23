@@ -567,16 +567,14 @@
                     <div class="ui-g-12 ui-md-12"> 
                         <div class="ui-g-3 ui-md-3">
                             <label for="rentalAmount">Rental Amount</label>
-                            <input formControlName="rentalAmount" autocomplete="off" type="number" pInputText
-                               class="ui-inputtext ui-widget">
+                            <p-inputNumber formControlName="rentalAmount" mode="currency" currency="ZAR" locale="en-ZA"></p-inputNumber>                          
                             <div *ngIf="submitted && f.rentalAmount.errors" class="text-error"><br>
                                 <div *ngIf="l.rentalAmount.errors.required">This field is required.</div>
                             </div>
                         </div>
                         <div class="ui-g-3 ui-md-3">
                             <label for="otherCharges">Other charges</label>
-                            <input formControlName="otherCharges" autocomplete="off" type="number" pInputText
-                               class="ui-inputtext ui-widget">
+                            <p-inputNumber formControlName="otherCharges" mode="currency" currency="ZAR" locale="en-ZA"></p-inputNumber>                           
                             <div *ngIf="submitted && f.otherCharges.errors" class="text-error"><br>
                                 <div *ngIf="l.otherCharges.errors.required">This field is required.</div>
                             </div>
@@ -649,33 +647,28 @@
                     <div class="ui-g-12 ui-md-12">
                         <div class="ui-g-3 ui-md-3">
                             <label for="openingBalance">Opening Balance</label>
-                            <!--<p-inputNumber formControlName="openingBalance" mode="currency" currency="ZAR" locale="en-ZA"></p-inputNumber>-->
-                            <input formControlName="openingBalance" autocomplete="off" type="text" (blur)="transformAmount($event)" pInputText
-                                class="ui-inputtext ui-widget">
+                            <p-inputNumber formControlName="openingBalance" mode="currency" currency="ZAR" locale="en-ZA"></p-inputNumber>                         
                             <div *ngIf="submitted && f.openingBalance.errors" class="text-error"><br>
                                 <div *ngIf="f.openingBalance.errors.required">This field is required.</div>
                             </div>
                         </div>
                         <div class="ui-g-3 ui-md-3">
                             <label for="additionCash">Additions Cash</label>
-                            <input formControlName="additionCash" autocomplete="off" type="number" pInputText
-                                class="ui-inputtext ui-widget">
+                            <p-inputNumber formControlName="additionCash" mode="currency" currency="ZAR" locale="en-ZA"></p-inputNumber> 
                             <div *ngIf="submitted && f.additionCash.errors" class="text-error"><br>
                                 <div *ngIf="f.additionCash.errors.required">This field is required.</div>
                             </div>
                         </div>
                         <div class="ui-g-3 ui-md-3">
                             <label for="additionNonCash">Additions Non Cash</label>
-                            <input formControlName="additionNonCash" autocomplete="off" type="number" pInputText
-                                class="ui-inputtext ui-widget">
+                            <p-inputNumber formControlName="additionNonCash" mode="currency" currency="ZAR" locale="en-ZA"></p-inputNumber>                          
                             <div *ngIf="submitted && f.additionNonCash.errors" class="text-error"><br>
                                 <div *ngIf="f.additionNonCash.errors.required">This field is required.</div>
                             </div>
                         </div>
                         <div class="ui-g-3 ui-md-3">
                             <label for="class">Additions</label>
-                            <input formControlName="addition" autocomplete="off" type="number" pInputText
-                                class="ui-inputtext ui-widget">
+                            <p-inputNumber formControlName="addition" mode="currency" currency="ZAR" locale="en-ZA"></p-inputNumber>                            
                             <div *ngIf="submitted && f.addition.errors" class="text-error"><br>
                                 <div *ngIf="f.addition.errors.required">This field is required.</div>
                             </div>
@@ -684,16 +677,14 @@
                     <div class="ui-g-12 ui-md-12">
                         <div class="ui-g-3 ui-md-3">
                             <label for="disposal">Disposal</label>
-                            <input formControlName="disposal" autocomplete="off" type="number" pInputText
-                                class="ui-inputtext ui-widget">
+                            <p-inputNumber formControlName="disposal" mode="currency" currency="ZAR" locale="en-ZA"></p-inputNumber> 
                             <div *ngIf="submitted && f.disposal.errors" class="text-error"><br>
                                 <div *ngIf="f.disposal.errors.required">This field is required.</div>
                             </div>
                         </div>
                         <div class="ui-g-3 ui-md-3">
                             <label for="closingBalance">Closing Balance</label>
-                            <input formControlName="closingBalance" autocomplete="off" type="number" pInputText
-                                class="ui-inputtext ui-widget">
+                            <p-inputNumber formControlName="closingBalance" mode="currency" currency="ZAR" locale="en-ZA"></p-inputNumber>
                             <div *ngIf="submitted && f.closingBalance.errors" class="text-error"><br>
                                 <div *ngIf="f.closingBalance.errors.required">This field is required.</div>
                             </div>

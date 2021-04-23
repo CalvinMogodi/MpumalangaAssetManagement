@@ -8,7 +8,6 @@ import { FacilityService } from 'src/app/services/facility/facility.service';
 import { ConfirmationService } from 'primeng/api';
 import { User } from 'src/app/models/user.model';
 import { AuthenticationService } from 'src/app/services/authentication.service';
-import { CurrencyPipe} from '@angular/common';
 
 @Component({
   selector: 'app-addassetregister',
@@ -102,7 +101,7 @@ export class AddassetregisterComponent implements OnInit {
 
   formattedAmount;
  amount;
-  constructor(private authenticationService: AuthenticationService,private currencyPipe : CurrencyPipe, private confirmationService: ConfirmationService, public facilityService: FacilityService, private formBuilder: FormBuilder, private messageService: MessageService) { }
+  constructor(private authenticationService: AuthenticationService, private confirmationService: ConfirmationService, public facilityService: FacilityService, private formBuilder: FormBuilder, private messageService: MessageService) { }
 
   ngOnInit() {
     this.buildForm();
@@ -169,11 +168,6 @@ export class AddassetregisterComponent implements OnInit {
       this.mode = this.selectedAsset.mode;
       this.loading = false;
     }   
-  }
-
-  transformAmount(element){
-    this.formattedAmount = this.currencyPipe.transform(this.financialForm.controls["openingBalance"].value, 'R');
-    element.target.value = this.formattedAmount;
   }
 
   get l() { return this.landForm.controls; }
@@ -475,14 +469,14 @@ export class AddassetregisterComponent implements OnInit {
             contactPerson: this.landForm.controls["contactPerson"].value != "" ? this.landForm.controls["contactPerson"].value : null,
             postalCode: Number(this.landForm.controls["postalCode"].value),
             leaseStatusTown: this.landForm.controls["leaseStatusTown"].value,
-            rentalAmount: this.landForm.controls["rentalAmount"].value != "" ? this.landForm.controls["rentalAmount"].value : null,
+            rentalAmount: this.landForm.controls["rentalAmount"].value != "" ? this.landForm.controls["rentalAmount"].value : 0,
             terminationDate: this.landForm.controls["terminationDate"].value != "" ? this.landForm.controls["terminationDate"].value : null,
             startingDate: this.landForm.controls["startingDate"].value != "" ? this.landForm.controls["startingDate"].value : null,
             occupationDate: this.landForm.controls["occupationDate"].value != "" ? this.landForm.controls["occupationDate"].value : null,
             escalation: this.landForm.controls["escalation"].value != "" ? this.landForm.controls["escalation"].value : null,
             vat: this.landForm.controls["vat"].value != undefined ? this.landForm.controls["vat"].value.name : null,
             leaseNumber: this.landForm.controls["leaseNumber"].value != "" ? this.landForm.controls["leaseNumber"].value : null,
-            otherCharges: this.landForm.controls["otherCharges"].value != "" ? this.landForm.controls["otherCharges"].value : null,
+            otherCharges: this.landForm.controls["otherCharges"].value != "" ? this.landForm.controls["otherCharges"].value : 0,
           }
         };
       }
@@ -495,12 +489,12 @@ export class AddassetregisterComponent implements OnInit {
           natureofAsset: this.financialForm.controls["natureofAsset"].value,
           secondaryInformationNote: {
             id: this.facility.finance.secondaryInformationNote.id == 0 ? 0 : this.facility.finance.secondaryInformationNote.id,
-            additionCash: this.financialForm.controls["additionCash"].value != "" ? this.financialForm.controls["additionCash"].value : null,
-            additionNonCash: this.financialForm.controls["additionNonCash"].value != "" ? this.financialForm.controls["additionNonCash"].value : null,
-            addition: this.financialForm.controls["addition"].value != "" ? this.financialForm.controls["addition"].value : null,
-            disposal: this.financialForm.controls["disposal"].value != "" ? this.financialForm.controls["disposal"].value : null,
-            openingBalance: this.financialForm.controls["openingBalance"].value != "" ? Number(this.financialForm.controls["openingBalance"].value) : null,
-            closingBalance: this.financialForm.controls["closingBalance"].value != "" ? this.financialForm.controls["closingBalance"].value : null,
+            additionCash: this.financialForm.controls["additionCash"].value != "" ? this.financialForm.controls["additionCash"].value : 0,
+            additionNonCash: this.financialForm.controls["additionNonCash"].value != "" ? this.financialForm.controls["additionNonCash"].value : 0,
+            addition: this.financialForm.controls["addition"].value != "" ? this.financialForm.controls["addition"].value : 0,
+            disposal: this.financialForm.controls["disposal"].value != "" ? this.financialForm.controls["disposal"].value : 0,
+            openingBalance: this.financialForm.controls["openingBalance"].value != "" ? Number(this.financialForm.controls["openingBalance"].value) : 0,
+            closingBalance: this.financialForm.controls["closingBalance"].value != "" ? this.financialForm.controls["closingBalance"].value : 0,
           },
           valuation: {
             id: this.facility.finance.valuation.id == 0 ? 0 : this.facility.finance.valuation.id,
@@ -569,8 +563,8 @@ export class AddassetregisterComponent implements OnInit {
       incomeLeaseStatus: [''],
       vat: [''],
       leaseNumber: [''],
-      otherCharges: [''],
-      rentalAmount: [''],
+      otherCharges: [0],
+      rentalAmount: [0],
       terminationDate: [''],
       startingDate: [''],
       occupationDate: [''],
@@ -601,12 +595,12 @@ export class AddassetregisterComponent implements OnInit {
     this.financialForm = this.formBuilder.group({
       landUseClass: [''],
       natureofAsset: [''],
-      additionCash: [''],
-      additionNonCash: [''],
-      addition: [''],
-      disposal: [''],
-      openingBalance:[],
-      closingBalance: [''],
+      additionCash: [0],
+      additionNonCash: [0],
+      addition: [0],
+      disposal: [0],
+      openingBalance:[0],
+      closingBalance: [0],
       municipalValuationDate: [''],
       nonMunicipalValuationDate: [''],
       municipalValuation: [''],

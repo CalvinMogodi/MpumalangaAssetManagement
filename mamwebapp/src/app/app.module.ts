@@ -48,6 +48,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { FieldsetModule } from 'primeng/fieldset';
 import { FileUploadModule } from 'primeng/fileupload';
 import { InputTextareaModule}  from 'primeng/inputtextarea';
+import { InputNumberModule } from 'primeng/inputnumber';
 import { AddassetregisterComponent } from './components/assetregister/addassetregister/addassetregister.component';
 import { FinancialsComponent } from './components/assetregister/addassetregister/financials/financials.component';
 import { ImprovementsComponent } from './components/assetregister/addassetregister/improvements/improvements.component';
@@ -123,7 +124,8 @@ import { RepairRequirementsComponent } from './components/properties/repair-requ
     FileUploadModule,
     SplitButtonModule,
     InputTextareaModule,
-    NgxPrintModule
+    NgxPrintModule,
+    InputNumberModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
