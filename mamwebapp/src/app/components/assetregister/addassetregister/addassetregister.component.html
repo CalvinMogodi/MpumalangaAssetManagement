@@ -30,12 +30,13 @@
                             </div>                          
                         </div>
                         <div class="ui-g-3 ui-md-3">
+
                             <label for="survey">Type</label>
                             <p-dropdown inputId="facilityType" [disabled]="mode == 'View'" [options]="facilityTypes"
-                              placeholder="Please select" formControlName="type" optionLabel="name">
+                              placeholder="Please select" formControlName="facilityType" optionLabel="name">
                             </p-dropdown>
-                            <div *ngIf="submitted && f.type.errors" class="text-error"><br>
-                                <div *ngIf="l.type.errors.required">This field is required.</div>
+                            <div *ngIf="submitted && f.facilityType.errors" class="text-error"><br>
+                                <div *ngIf="l.facilityType.errors.required">This field is required.</div>
                             </div>
                         </div>                       
                         <div class="ui-g-3 ui-md-3">
@@ -648,6 +649,7 @@
                     <div class="ui-g-12 ui-md-12">
                         <div class="ui-g-3 ui-md-3">
                             <label for="openingBalance">Opening Balance</label>
+                            <!--<p-inputNumber formControlName="openingBalance" mode="currency" currency="ZAR" locale="en-ZA"></p-inputNumber>-->
                             <input formControlName="openingBalance" autocomplete="off" type="text" (blur)="transformAmount($event)" pInputText
                                 class="ui-inputtext ui-widget">
                             <div *ngIf="submitted && f.openingBalance.errors" class="text-error"><br>

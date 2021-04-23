@@ -413,7 +413,7 @@ export class AddassetregisterComponent implements OnInit {
       if (this.facility.land != undefined && this.facility.land != null) {
         this.facility.clientCode = this.landForm.controls["clientCode"].value;
         this.facility.survey = this.landForm.controls["survey"].value != undefined ? this.landForm.controls["survey"].value.name : null,
-        this.facility.facilityType = this.landForm.controls["facilityType"].value != undefined ? this.landForm.controls["facilityType"].value.name : null,
+        this.facility.type = this.landForm.controls["facilityType"].value != undefined ? this.landForm.controls["facilityType"].value.name : null,
         this.facility.vestedType = this.landForm.controls["vestedType"].value != undefined ? this.landForm.controls["vestedType"].value.name : null,
         this.facility.afs = this.landForm.controls["afs"].value != undefined ? this.landForm.controls["afs"].value.name : null,
         this.facility.land = {
@@ -499,7 +499,7 @@ export class AddassetregisterComponent implements OnInit {
             additionNonCash: this.financialForm.controls["additionNonCash"].value != "" ? this.financialForm.controls["additionNonCash"].value : null,
             addition: this.financialForm.controls["addition"].value != "" ? this.financialForm.controls["addition"].value : null,
             disposal: this.financialForm.controls["disposal"].value != "" ? this.financialForm.controls["disposal"].value : null,
-            openingBalance: this.financialForm.controls["openingBalance"].value != "" ? this.financialForm.controls["openingBalance"].value : null,
+            openingBalance: this.financialForm.controls["openingBalance"].value != "" ? Number(this.financialForm.controls["openingBalance"].value) : null,
             closingBalance: this.financialForm.controls["closingBalance"].value != "" ? this.financialForm.controls["closingBalance"].value : null,
           },
           valuation: {
@@ -780,7 +780,7 @@ export class AddassetregisterComponent implements OnInit {
 
     this.facilityTypes = [
       { name: 'Dwelling', code: 'D', factor: 1 },
-      { name: 'Land ', code: 'L', factor: 2 },
+      { name: 'Land', code: 'L', factor: 2 },
       { name: 'Non Residential', code: 'NR', factor: 3 },
       
     ];
@@ -844,7 +844,7 @@ export class AddassetregisterComponent implements OnInit {
     let survey = this.surveys.filter(d => d.name.toLowerCase().trim() == (this.facility.survey != undefined ? this.facility.survey.toLowerCase().trim() : this.facility.survey))[0];
     let afs = this.aFSs.filter(d => d.name.trim() == (this.facility.afs != undefined ? this.facility.afs.trim() : this.facility.afs))[0];
     let vestedType = this.vestedTypes.filter(d => d.name.toLowerCase().trim() == (this.facility.vestedType != undefined ? this.facility.vestedType.toLowerCase().trim() : this.facility.vestedType))[0];
-    let facilityType = this.facilityTypes.filter(d => d.name.toLowerCase().trim() == (this.facility.facilityType != undefined ? this.facility.facilityType.toLowerCase().trim() : this.facility.facilityType))[0];
+    let facilityType = this.facilityTypes.filter(d => d.name.toLowerCase().trim() == (this.facility.type != undefined ? this.facility.type.toLowerCase().trim() : this.facility.type))[0];
 
     let region = this.regions.filter(d => d.name.toLowerCase().trim() == (this.facility.land.region != undefined ? this.facility.land.region.toLowerCase().trim() : this.facility.land.region))[0];
     let registrationDivision = this.registrationDivisions.filter(d => d.name.toLowerCase().trim() == (this.facility.land.propertyDescription.registrationDivision != undefined ? this.facility.land.propertyDescription.registrationDivision.toLowerCase().trim() : this.facility.land.propertyDescription.registrationDivision))[0];

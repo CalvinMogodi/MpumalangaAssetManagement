@@ -8,6 +8,7 @@ namespace MAM.BusinessLayer.Models
     public class SecondaryInformationNote
     {
         public int Id { get; set; }
+        public decimal? OpeningBalance { get; set; }
         public decimal? AdditionCash { get; set; }
         public decimal? AdditionNonCash { get; set; }
         public decimal? Addition { get; set; }
@@ -19,6 +20,7 @@ namespace MAM.BusinessLayer.Models
             return secondaryInformationNotes.Select(s => new SecondaryInformationNote()
             {
                 Id = s.Id,
+                OpeningBalance = s.OpeningBalance,
                 AdditionCash = s.AdditionCash,
                 AdditionNonCash = s.AdditionNonCash,
                 Addition = s.Addition,
@@ -32,6 +34,7 @@ namespace MAM.BusinessLayer.Models
             return new SecondaryInformationNote()
             {
                 Id = sin.Id,
+                OpeningBalance = sin.OpeningBalance,
                 AdditionCash = sin.AdditionCash,
                 AdditionNonCash = sin.AdditionNonCash,
                 Addition = sin.Addition,
@@ -45,6 +48,7 @@ namespace MAM.BusinessLayer.Models
             return new DataAccess.Tables.SecondaryInformationNote()
             {
                 Id = sin.Id,
+                OpeningBalance = sin.OpeningBalance,
                 AdditionCash = sin.AdditionCash,
                 AdditionNonCash = sin.AdditionNonCash,
                 Addition = sin.Addition,

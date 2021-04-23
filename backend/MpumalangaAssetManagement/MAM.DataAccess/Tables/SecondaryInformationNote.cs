@@ -7,6 +7,7 @@ namespace MAM.DataAccess.Tables
     public class SecondaryInformationNote
     {
         public int Id { get; set; }
+        public decimal? OpeningBalance { get; set; }
         public decimal? AdditionCash { get; set; }
         public decimal? AdditionNonCash { get; set; }
         public decimal? Addition { get; set; }
