@@ -14,77 +14,17 @@
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-rowData>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+        <tr *ngFor="let repairRequirement of repairRequirments">
+            <td><textarea [(ngModel)]="repairRequirement.province" [rows]="6" [cols]="15" pInputTextarea></textarea></td>
+            <td><textarea [(ngModel)]="repairRequirement.town" [rows]="6" [cols]="15" pInputTextarea></textarea></td>
+            <td><textarea [(ngModel)]="repairRequirement.uniqueIdentifyingCode" [rows]="6" [cols]="15" pInputTextarea></textarea></td>
+            <td><textarea [(ngModel)]="repairRequirement.repairDescription" [rows]="6" [cols]="15" pInputTextarea></textarea></td>
+            <td><textarea [(ngModel)]="repairRequirement.budgetType" [rows]="6" [cols]="15" pInputTextarea></textarea></td>
+            <td><textarea [(ngModel)]="repairRequirement.status" [rows]="6" [cols]="15" pInputTextarea></textarea></td>
+            <td><textarea [(ngModel)]="repairRequirement.expenditureEstimate" [rows]="6" [cols]="15" pInputTextarea></textarea></td>
+            <td><textarea [(ngModel)]="repairRequirement.expenditureEstimateYear1" [rows]="6" [cols]="15" pInputTextarea></textarea></td>
+            <td><textarea [(ngModel)]="repairRequirement.expenditureEstimateYear2" [rows]="6" [cols]="15" pInputTextarea></textarea></td>
+            <td><textarea [(ngModel)]="repairRequirement.expenditureEstimateYear3" [rows]="6" [cols]="15" pInputTextarea></textarea></td>
         </tr>
     </ng-template>
 </p-table>

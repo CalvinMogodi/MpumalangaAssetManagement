@@ -16,32 +16,14 @@
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-rowData>
-        <tr>
-            <td>1. Administration</td>
-            <td>a. <textarea [rows]="5" pInputTextarea></textarea></td>
-            <td><textarea [rows]="6" pInputTextarea></textarea></td>
-            <td><textarea [rows]="6" pInputTextarea placeholder="e.g Service delivery node within 30 min per taxi"></textarea></td>
-            <td><textarea [rows]="6" pInputTextarea placeholder="e.g Head office in Pretoria for 1000 people"></textarea></td>
-            <td><textarea [rows]="6" pInputTextarea placeholder="e.g Staff complement of head office will increase from 900 to 1000"></textarea></td>
-            <td><textarea [rows]="6" pInputTextarea></textarea></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td>b. <textarea [rows]="5" pInputTextarea></textarea></td>
-            <td><textarea [rows]="6" pInputTextarea></textarea></td>
-            <td><textarea [rows]="6" pInputTextarea></textarea></td>
-            <td><textarea [rows]="6" pInputTextarea placeholder="e.g Service delivery support office in each province"></textarea></td>
-            <td><textarea [rows]="6" pInputTextarea placeholder="e.g 9 provincial facilities in the following localities: Bloemfontein"></textarea></td>
-            <td><textarea [rows]="6" pInputTextarea></textarea></td>
-        </tr>
-        <tr>
-            <td>2. Programme</td>
-            <td>a. <textarea [rows]="5" pInputTextarea></textarea></td>
-            <td><textarea [rows]="6" pInputTextarea></textarea></td>
-            <td><textarea [rows]="6" pInputTextarea></textarea></td>
-            <td><textarea [rows]="6" pInputTextarea></textarea></td>
-            <td><textarea [rows]="6" pInputTextarea></textarea></td>
-            <td><textarea [rows]="6" pInputTextarea></textarea></td>
+        <tr *ngFor="let programme of programmes">
+            <td><textarea [(ngModel)]="programme.name" [rows]="6" pInputTextarea placeholder="e.g Administration"></textarea></td>
+            <td><textarea [(ngModel)]="programme.plannedOutputs" [rows]="5" pInputTextarea></textarea></td>
+            <td><textarea [(ngModel)]="programme.requiredServiceLevel" [rows]="6" pInputTextarea></textarea></td>
+            <td><textarea [(ngModel)]="programme.possibleNonAssetSolutions" [rows]="6" pInputTextarea placeholder="e.g Service delivery node within 30 min per taxi"></textarea></td>
+            <td><textarea [(ngModel)]="programme.optimalAssetSolutions" [rows]="6" pInputTextarea placeholder="e.g Head office in Pretoria for 1000 people"></textarea></td>
+            <td><textarea [(ngModel)]="programme.motivation" [rows]="6" pInputTextarea placeholder="e.g Staff complement of head office will increase from 900 to 1000"></textarea></td>
+            <td><textarea [(ngModel)]="programme.rationaleForChosenSolution" [rows]="6" pInputTextarea></textarea></td>
         </tr>
     </ng-template>
 </p-table>
@@ -49,27 +31,7 @@
 <div>
     <span>
         <div style="text-align: end;padding: 20px;">
-            <button pButton type="button" label="Save" ></button>
+            <button pButton type="button" label="Add Programme" (click)="addProgram()" ></button>
         </div>
     </span>
 </div>
-
-  <!-- <div class="grid-container-2">
-    <div class="grid-item">Programme</div>
-    <div class="grid-item">Planned outputs</div>
-    <div class="grid-item"></div>
-    <div class="grid-item"></div>
-    <div class="grid-item">Optimal Asset Solution</div>
-    <div class="grid-item">Motivation</div>
-    <div class="grid-item"></div>
-  </div>
-
-  <div class="grid-container-2">
-    <div class="grid-item">1. Administration</div>
-    <div class="grid-item">a. <textarea pInputTextarea></textarea></div>
-    <div class="grid-item"></div>
-    <div class="grid-item"></div>
-    <div class="grid-item"></div>
-    <div class="grid-item"></div>
-    <div class="grid-item"></div>
-  </div> -->

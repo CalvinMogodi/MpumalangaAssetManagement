@@ -16,131 +16,27 @@
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-rowData>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+        <tr *ngFor="let assetPerformance of assetsFunctionalPerformances">
+            <td><textarea [(ngModel)]="assetPerformance.province" [rows]="6" [cols]="10" pInputTextarea></textarea></td>
+            <td><textarea [(ngModel)]="assetPerformance.town" [rows]="6" [cols]="10" pInputTextarea></textarea></td>
+            <td><textarea [(ngModel)]="assetPerformance.uniqueIdentifyingCode" [rows]="6" [cols]="10" pInputTextarea></textarea></td>
+            <td><textarea [(ngModel)]="assetPerformance.possibleNonAssetSolutions" [rows]="6" [cols]="10" pInputTextarea></textarea></td>
+            <td><textarea [(ngModel)]="assetPerformance.commonAssetDescription" [rows]="6" [cols]="10" pInputTextarea></textarea></td>
+            <td><textarea [(ngModel)]="assetPerformance.currentUse" [rows]="6" [cols]="10" pInputTextarea></textarea></td>
+            <td><textarea [(ngModel)]="assetPerformance.requiredPerformanceStandard" [rows]="6" [cols]="10" pInputTextarea></textarea></td>
+            <td><textarea [(ngModel)]="assetPerformance.accessabilityRating" [rows]="6" [cols]="10" pInputTextarea></textarea></td>
+            <td><textarea [(ngModel)]="assetPerformance.suitabilityIndex" [rows]="6" [cols]="10" pInputTextarea></textarea></td>
+            <td><textarea [(ngModel)]="assetPerformance.conditionRating" [rows]="6" [cols]="10" pInputTextarea></textarea></td>
+            <td><textarea [(ngModel)]="assetPerformance.operatingPerformanceIndex" [rows]="6" [cols]="10" pInputTextarea></textarea></td>
+            <td><textarea [(ngModel)]="assetPerformance.functionalPerformanceRating" [rows]="6" [cols]="10" pInputTextarea></textarea></td>
         </tr>
     </ng-template>
 </p-table>
+
+<div>
+    <span>
+        <div style="text-align: end;padding: 20px;">
+            <button pButton type="button" label="Add Asset Performance" (click)="addAssetFunctionalPerformance()" ></button>
+        </div>
+    </span>
+</div>

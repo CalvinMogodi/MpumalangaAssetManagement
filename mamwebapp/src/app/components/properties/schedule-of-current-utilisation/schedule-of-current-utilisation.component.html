@@ -8,30 +8,19 @@
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-rowData>
-        <tr>
-            <td style="text-align: center;font-weight: bolder;">Division</td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>Executive</td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>
-                <div>
-                    Senior Management
-                </div>
-                <div>
-                    (Post 1)
-                </div>
-            </td>
-            <td></td>
-            <td></td>
-            <td></td>
+        <tr *ngFor="let currentUtilisation of scheduleCurrentUtilisation">
+            <td><textarea [(ngModel)]="currentUtilisation.post" [rows]="6" [cols]="48" pInputTextarea></textarea></td>
+            <td><textarea [(ngModel)]="currentUtilisation.requiredSpace" [rows]="6" [cols]="48" pInputTextarea></textarea></td>
+            <td><textarea [(ngModel)]="currentUtilisation.allocatedSpace" [rows]="6" [cols]="48" pInputTextarea></textarea></td>
+            <td><textarea [(ngModel)]="currentUtilisation.percentageUtilised" [rows]="6" [cols]="48" pInputTextarea></textarea></td>
         </tr>
     </ng-template>
 </p-table>
+
+<div>
+    <span>
+        <div style="text-align: end;padding: 20px;">
+            <button pButton type="button" label="Add Utilisation" (click)="addUtilisation()" ></button>
+        </div>
+    </span>
+</div>

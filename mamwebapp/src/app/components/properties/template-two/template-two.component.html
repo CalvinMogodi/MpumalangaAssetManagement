@@ -31,33 +31,19 @@
             <td>12</td>
         </tr>
             <span style="font-size: smaller;">STATE-OWNED ASSETS</span>
-        <tr>
+        <tr *ngFor="let facility of facilities">
             <td></td>
-            <td>Limpopo</td>
-            <td>Polokwane</td>
-            <td>N/A</td>
-            <td>Mafuta Military Base</td>
-            <td>Training Centre</td>
-            <td>562.62</td>
-            <td>Portion of</td>
-            <td>1,4312</td>
-            <td>Permanent</td>
-            <td>N/A</td>
-            <td>123456</td>
-        </tr>
-        <tr>
+            <td>{{facility.land.geographicalLocation.province}}</td>
+            <td>{{facility.land.geographicalLocation.town}}</td>
+            <td>{{facility.land.geographicalLocation.streetName}}, {{facility.land.geographicalLocation.surburb}}</td>
             <td></td>
-            <td>Western Cape</td>
-            <td>Cape Town</td>
-            <td>890 High Street, Rondebosch</td>
-            <td>Central Police Station</td>
-            <td>Police Station</td>
-            <td>345,67</td>
-            <td>Erf 123</td>
-            <td>0.9751</td>
-            <td>Permanent</td>
-            <td>N/A</td>
-            <td>654321</td>
+            <td></td>
+            <td>{{facility.improvements.extentOfBuilding}}</td>
+            <td></td>
+            <td>{{facility.land.geographicalLocation.extent}}</td>
+            <td></td>
+            <td></td>
+            <td></td>
         </tr>
         <tr>
             <td></td>

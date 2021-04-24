@@ -25,6 +25,10 @@ export class PropertiesComponent implements OnInit {
     this.getProperties();
   }
 
+  getFacilities() {
+
+  }
+
   getProperties(){
     this.facilities = [];
     this.facilityService.getProperties().pipe(first()).subscribe(facilities => {

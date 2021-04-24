@@ -64,7 +64,7 @@
     [baseZIndex]="10000">
     <p-header> UAMP </p-header>
     <app-template-one *ngIf="activeIndex == 1"></app-template-one>
-    <app-template-two *ngIf="activeIndex == 2"></app-template-two>
+    <app-template-two [facilities]="facilities" *ngIf="activeIndex == 2"></app-template-two>
     <app-template-three *ngIf="activeIndex == 3"></app-template-three>
     <app-schedule-of-current-utilisation *ngIf="activeIndex == 4"></app-schedule-of-current-utilisation>
     <app-gap-analysis *ngIf="activeIndex == 5"></app-gap-analysis>
