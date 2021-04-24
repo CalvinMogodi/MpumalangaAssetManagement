@@ -12,7 +12,7 @@
                         </div>
                         <ul app-submenu="" class="ultima-menu ultima-main-menu clearfix ng-tns-c1-0" parentactive="true" root="true" visible="true">
                             <li class="ng-tns-c1-0 ng-star-inserted" *ngIf="!isDepartmantUser()">
-                                <a class="ripplelink active-menuitem-routerlink" href="#">
+                                <a class="ripplelink active-menuitem-routerlink" (click)="navigate('dashboard')">
                                     <i class="pi pi-home" pTooltip="Dashboard"></i>
                                 </a>
                             </li>
@@ -22,7 +22,7 @@
                                 </a>
                             </li>
 
-                            <li class="ng-tns-c1-0 ng-star-inserted">
+                            <li class="ng-tns-c1-0 ng-star-inserted" *ngIf="!isDepartmantUser() || isAdmin()">
                                 <a class="ripplelink" (click)="navigate('assetregister')">
                                     <i class="pi pi-table" pTooltip="Asset Register"></i>
                                 </a>
@@ -30,7 +30,7 @@
 
                             <li class="ng-tns-c1-0 ng-star-inserted">
                                 <a class="ripplelink" (click)="navigate('properties')">
-                                    <i class="pi pi-table" pTooltip="Properties"></i>
+                                    <i class="pi pi-desktop" pTooltip="Properties"></i>
                                 </a>
                             </li>
                         </ul>   

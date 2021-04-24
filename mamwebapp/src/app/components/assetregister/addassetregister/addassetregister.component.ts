@@ -42,6 +42,7 @@ export class AddassetregisterComponent implements OnInit {
   activeItem: MenuItem;
   loading = true;
   incomeLeaseStatuses: any[];
+  facilityTypes: any[];
   natureOfLeases: any[];
   showDialog: boolean = false;
   activeIndex: number = 0;
@@ -98,6 +99,8 @@ export class AddassetregisterComponent implements OnInit {
   improvement: {}
   currentUser: User;
 
+  formattedAmount;
+ amount;
   constructor(private authenticationService: AuthenticationService, private confirmationService: ConfirmationService, public facilityService: FacilityService, private formBuilder: FormBuilder, private messageService: MessageService) { }
 
   ngOnInit() {
@@ -177,36 +180,94 @@ export class AddassetregisterComponent implements OnInit {
     if (e != undefined) {
       if (e.value != undefined) {
         if (e.value.factor == 1) {
-          let list =  [
-            { name: 'Mbombela', code: 'M', factor: 1 },
-            { name: 'Nkomazi', code: 'N', factor: 2 },
-            { name: 'Thaba Chweu', code: 'TC', factor: 3 },
-            { name: 'Bushbuckridge', code: 'B', factor: 4 }
+          let _magisterialDistricts =  [    
+            { name: 'Barberton', code: 'B', factor: 1 },  
+            { name: 'Nelspruit', code: 'N', factor: 2 },
+            { name: 'Lydenburg', code: 'L', factor: 3 },
+            { name: 'Mhala', code: 'M', factor: 4 },
+            { name: 'Nsikazi', code: 'NS', factor: 5 },            
+            { name: 'Whiteriver', code: 'W', factor: 6 },         
           ];
-          this.magisterialDistricts = list;
-          this.localAuthorities = list;
+          let _localAuthorities = [
+            { name: 'Bushbuckridge', code: 'B', factor: 1 },
+            { name: 'Mbombela', code: 'M', factor: 2 },
+            { name: 'Nkomazi', code: 'N', factor: 3 },
+            { name: 'Thaba Chweu', code: 'TC', factor: 4},           
+          ];
+          this.magisterialDistricts = _magisterialDistricts;
+          this.localAuthorities = _localAuthorities;
         } else if (e.value.factor == 2) {
-          let list = [
-            { name: 'Emalahleni', code: 'E', factor: 1 },
-            { name: 'Emakahzeni', code: 'E', factor: 2 },
-            { name: 'DR JS Moroka', code: 'JSM', factor: 3 },
-            { name: 'Thembisile Hani', code: 'TH', factor: 4 },
-            { name: 'Victor Khanye', code: 'VK', factor: 5 }
+          let _magisterialDistricts = [
+            { name: 'Amersfoort', code: 'A', factor: 1 },
+            { name: 'Belfast', code: 'BE', factor: 2 },
+            { name: 'Balfour', code: 'BE', factor: 3 },
+            { name: 'Bethal', code: 'B', factor: 4 },
+            { name: 'Carolina', code: 'C', factor: 5 },
+            { name: 'Eerstehoek', code: 'E', factor: 6 },
+            { name: 'Ermelo', code: 'E', factor: 7 },   
+            { name: 'Highveld Ridge', code: 'HR', factor: 8 }, 
+            { name: 'Piet Retief', code: 'PR', factor: 9 },
+            { name: 'Standerton', code: 'S', factor: 10 },                     
+            { name: 'Standerton', code: 'ST', factor: 11 },             
+            { name: 'Volksrust', code: 'V', factor: 12 },                  
+            { name: 'Wakkerstroom', code: 'W', factor: 13 },
           ];
-          this.magisterialDistricts = list;
-          this.localAuthorities = list;
-        } else {
-          let list = [
-            { name: 'Goven Mbeki', code: 'GM', factor: 1 },
-            { name: 'Albert Luthuli', code: 'AL', factor: 2 },
-            { name: 'Lekwa', code: 'L', factor: 3 },
-            { name: 'Dipaleseng', code: 'D', factor: 4 },
-            { name: 'Pixley ka Seme', code: 'PKS', factor: 5 },
-            { name: 'Mkhondo', code: 'M', factor: 6 },
-            { name: 'Msukaligwa', code: 'MS', factor: 7 }
+          let _localAuthorities = [
+            { name: 'Albert Luthuli', code: 'AL', factor: 1 },
+            { name: 'Dipaleseng', code: 'D', factor: 2 },
+            { name: 'Govan Mbeki', code: 'GM', factor: 3 },
+            { name: 'Lekwa', code: 'L', factor: 7 },
+            { name: 'Mkhondo', code: 'M', factor: 4 },                     
+            { name: 'Msukaligwa', code: 'MS', factor: 5 },
+            { name: 'Mkhondo', code: 'MK', factor: 6 }, 
+            { name: 'Pixley Ka Seme', code: 'PKS', factor: 8 },  
           ];
-          this.magisterialDistricts = list;
-          this.localAuthorities = list;
+          this.magisterialDistricts = _magisterialDistricts;
+          this.localAuthorities = _localAuthorities;
+        } else if(e.value.factor == 3) {
+          let _magisterialDistricts = [
+            { name: 'Belfast', code: 'B', factor: 1 },
+            { name: 'Delmas', code: 'D', factor: 2 },
+            { name: 'Ermelo', code: 'E', factor: 3 },
+            { name: 'Hendrina', code: 'H', factor: 4 },  
+            { name: 'Kriel', code: 'K', factor: 5 },     
+            { name: 'Kwamhlanga', code: 'K', factor: 6 },                  
+            { name: 'Mbibana', code: 'MB', factor: 7 },
+            { name: 'Mdutjana', code: 'MD', factor: 8 },
+            { name: 'Middelburg', code: 'M', factor: 9 },
+            { name: 'Mkobola', code: 'MK', factor: 10 },           
+            { name: 'Waterval Boven', code: 'WB', factor: 11 },
+            { name: 'Witbank', code: 'W', factor: 12 },
+          ];
+          
+          let _localAuthorities = [
+            { name: 'Dr. J.S. Moroka', code: 'JSM', factor: 1 },
+            { name: 'eMalahleni', code: 'M', factor: 2 },
+            { name: 'eMakhazeni', code: 'MK', factor: 3},           
+            { name: 'Msukaligwa', code: 'MS', factor: 4 },
+            { name: 'Steve Tshwete', code: 'ST', factor: 5 },
+            { name: 'Thembisile Hani', code: 'TH', factor: 6 },
+            { name: 'Victor Khanye', code: 'VK', factor: 7 },            
+          ];
+
+          this.magisterialDistricts = _magisterialDistricts;
+          this.localAuthorities = _localAuthorities;
+        }
+        else {
+          let _magisterialDistricts = [     
+            { name: 'Bushbuckridge', code: 'B', factor: 1 },
+            { name: 'Lydenburg', code: 'L', factor: 2 },
+            { name: 'Mhala', code: 'M', factor: 3 },
+            { name: 'Pilgrims Rest 2', code: 'PR', factor: 4 },
+          ];
+
+          let _localAuthorities = [
+            { name: 'Bushbuckridge', code: 'B', factor: 1 },
+            { name: 'Thaba Chweu', code: 'TC', factor: 2 },            
+          ];          
+
+          this.magisterialDistricts = _magisterialDistricts;
+          this.localAuthorities = _localAuthorities;
         }
       }
     }
@@ -346,6 +407,7 @@ export class AddassetregisterComponent implements OnInit {
       if (this.facility.land != undefined && this.facility.land != null) {
         this.facility.clientCode = this.landForm.controls["clientCode"].value;
         this.facility.survey = this.landForm.controls["survey"].value != undefined ? this.landForm.controls["survey"].value.name : null,
+        this.facility.type = this.landForm.controls["facilityType"].value != undefined ? this.landForm.controls["facilityType"].value.name : null,
         this.facility.vestedType = this.landForm.controls["vestedType"].value != undefined ? this.landForm.controls["vestedType"].value.name : null,
         this.facility.afs = this.landForm.controls["afs"].value != undefined ? this.landForm.controls["afs"].value.name : null,
         this.facility.land = {
@@ -407,14 +469,14 @@ export class AddassetregisterComponent implements OnInit {
             contactPerson: this.landForm.controls["contactPerson"].value != "" ? this.landForm.controls["contactPerson"].value : null,
             postalCode: Number(this.landForm.controls["postalCode"].value),
             leaseStatusTown: this.landForm.controls["leaseStatusTown"].value,
-            rentalAmount: this.landForm.controls["rentalAmount"].value != "" ? this.landForm.controls["rentalAmount"].value : null,
+            rentalAmount: this.landForm.controls["rentalAmount"].value != "" ? this.landForm.controls["rentalAmount"].value : 0,
             terminationDate: this.landForm.controls["terminationDate"].value != "" ? this.landForm.controls["terminationDate"].value : null,
             startingDate: this.landForm.controls["startingDate"].value != "" ? this.landForm.controls["startingDate"].value : null,
             occupationDate: this.landForm.controls["occupationDate"].value != "" ? this.landForm.controls["occupationDate"].value : null,
             escalation: this.landForm.controls["escalation"].value != "" ? this.landForm.controls["escalation"].value : null,
             vat: this.landForm.controls["vat"].value != undefined ? this.landForm.controls["vat"].value.name : null,
             leaseNumber: this.landForm.controls["leaseNumber"].value != "" ? this.landForm.controls["leaseNumber"].value : null,
-            otherCharges: this.landForm.controls["otherCharges"].value != "" ? this.landForm.controls["otherCharges"].value : null,
+            otherCharges: this.landForm.controls["otherCharges"].value != "" ? this.landForm.controls["otherCharges"].value : 0,
           }
         };
       }
@@ -427,11 +489,12 @@ export class AddassetregisterComponent implements OnInit {
           natureofAsset: this.financialForm.controls["natureofAsset"].value,
           secondaryInformationNote: {
             id: this.facility.finance.secondaryInformationNote.id == 0 ? 0 : this.facility.finance.secondaryInformationNote.id,
-            additionCash: this.financialForm.controls["additionCash"].value != "" ? this.financialForm.controls["additionCash"].value : null,
-            additionNonCash: this.financialForm.controls["additionNonCash"].value != "" ? this.financialForm.controls["additionNonCash"].value : null,
-            addition: this.financialForm.controls["addition"].value != "" ? this.financialForm.controls["addition"].value : null,
-            disposal: this.financialForm.controls["disposal"].value != "" ? this.financialForm.controls["disposal"].value : null,
-            closingBalance: this.financialForm.controls["closingBalance"].value != "" ? this.financialForm.controls["closingBalance"].value : null,
+            additionCash: this.financialForm.controls["additionCash"].value != "" ? this.financialForm.controls["additionCash"].value : 0,
+            additionNonCash: this.financialForm.controls["additionNonCash"].value != "" ? this.financialForm.controls["additionNonCash"].value : 0,
+            addition: this.financialForm.controls["addition"].value != "" ? this.financialForm.controls["addition"].value : 0,
+            disposal: this.financialForm.controls["disposal"].value != "" ? this.financialForm.controls["disposal"].value : 0,
+            openingBalance: this.financialForm.controls["openingBalance"].value != "" ? Number(this.financialForm.controls["openingBalance"].value) : 0,
+            closingBalance: this.financialForm.controls["closingBalance"].value != "" ? this.financialForm.controls["closingBalance"].value : 0,
           },
           valuation: {
             id: this.facility.finance.valuation.id == 0 ? 0 : this.facility.finance.valuation.id,
@@ -457,6 +520,7 @@ export class AddassetregisterComponent implements OnInit {
   buildForm() {
     this.landForm = this.formBuilder.group({
       survey:[''],
+      facilityType:[''],
       clientCode:[''],
       deedsOffice: [''],
       class: [''],
@@ -499,8 +563,8 @@ export class AddassetregisterComponent implements OnInit {
       incomeLeaseStatus: [''],
       vat: [''],
       leaseNumber: [''],
-      otherCharges: [''],
-      rentalAmount: [''],
+      otherCharges: [0],
+      rentalAmount: [0],
       terminationDate: [''],
       startingDate: [''],
       occupationDate: [''],
@@ -531,11 +595,12 @@ export class AddassetregisterComponent implements OnInit {
     this.financialForm = this.formBuilder.group({
       landUseClass: [''],
       natureofAsset: [''],
-      additionCash: [''],
-      additionNonCash: [''],
-      addition: [''],
-      disposal: [''],
-      closingBalance: [''],
+      additionCash: [0],
+      additionNonCash: [0],
+      addition: [0],
+      disposal: [0],
+      openingBalance:[0],
+      closingBalance: [0],
       municipalValuationDate: [''],
       nonMunicipalValuationDate: [''],
       municipalValuation: [''],
@@ -592,7 +657,7 @@ export class AddassetregisterComponent implements OnInit {
       { name: 'Health', code: 'H', factor: 8 },
       { name: 'Human settlements', code: 'HS', factor: 9 },
       { name: 'Social development', code: 'SD', factor: 10 },
-      { name: 'Publick works, roads & transport', code: 'PWRT', factor: 11 },
+      { name: 'Public works, roads & transport', code: 'PWRT', factor: 11 },
     ];
     this.registrationDivisions = [
       { name: 'Bloemfontein', code: 'B', factor: 1 },
@@ -649,9 +714,10 @@ export class AddassetregisterComponent implements OnInit {
     ];
 
     this.districtMunicipalities = [
-      { name: 'Ehlanzeni District Municipality', code: 'E', factor: 1 },
-      { name: 'Gert Sibande District Municipality', code: 'G', factor: 2 },
-      { name: 'Nkangala District Municipality', code: 'N', factor: 3 }
+      { name: 'Ehlanzeni', code: 'E', factor: 1 },
+      { name: 'Gert Sibande', code: 'G', factor: 2 },
+      { name: 'Nkangala', code: 'N', factor: 3 },
+      { name: 'Bohlabela', code: 'B', factor: 4 }
     ];
 
     this.landRemainders = [
@@ -706,14 +772,21 @@ export class AddassetregisterComponent implements OnInit {
       { name: 'C5 (Very Poor)', code: 'C5', factor: 5 },
     ];
 
+    this.facilityTypes = [
+      { name: 'Dwelling', code: 'D', factor: 1 },
+      { name: 'Land', code: 'L', factor: 2 },
+      { name: 'Non Residential', code: 'NR', factor: 3 },
+      
+    ];
+
     this.surveys = [
       {name: 'Surveyed', code: 's', factor: 1},
       {name: 'Non-Surveyed', code: 'ns', factor: 1}
     ]; 
 
     this.incomeLeaseStatuses = [
-      { name: 'Yes', code: 'Y', factor: 1 },
-      { name: 'No', code: 'N', factor: 2 }
+      { name: 'No', code: 'N', factor: 1 },
+      { name: 'Yes', code: 'Y', factor: 2 }     
     ];
 
     this.natureOfLeases = [
@@ -765,6 +838,7 @@ export class AddassetregisterComponent implements OnInit {
     let survey = this.surveys.filter(d => d.name.toLowerCase().trim() == (this.facility.survey != undefined ? this.facility.survey.toLowerCase().trim() : this.facility.survey))[0];
     let afs = this.aFSs.filter(d => d.name.trim() == (this.facility.afs != undefined ? this.facility.afs.trim() : this.facility.afs))[0];
     let vestedType = this.vestedTypes.filter(d => d.name.toLowerCase().trim() == (this.facility.vestedType != undefined ? this.facility.vestedType.toLowerCase().trim() : this.facility.vestedType))[0];
+    let facilityType = this.facilityTypes.filter(d => d.name.toLowerCase().trim() == (this.facility.type != undefined ? this.facility.type.toLowerCase().trim() : this.facility.type))[0];
 
     let region = this.regions.filter(d => d.name.toLowerCase().trim() == (this.facility.land.region != undefined ? this.facility.land.region.toLowerCase().trim() : this.facility.land.region))[0];
     let registrationDivision = this.registrationDivisions.filter(d => d.name.toLowerCase().trim() == (this.facility.land.propertyDescription.registrationDivision != undefined ? this.facility.land.propertyDescription.registrationDivision.toLowerCase().trim() : this.facility.land.propertyDescription.registrationDivision))[0];
@@ -779,10 +853,13 @@ export class AddassetregisterComponent implements OnInit {
       value: districtMunicipality
     };
     this.setDistrictMunicipality(_districtMunicipality);
-    let localAuthority = undefined;// this.localAuthorities.filter(d => d.name.toLowerCase().trim() == (_districtMunicipality.value != undefined ? this.facility.land.geographicalLocation.localAuthority.toLowerCase().trim()  : this.facility.land.geographicalLocation.localAuthority))[0];
+    let localAuthority = this.localAuthorities.filter(d => d.name.toLowerCase().trim() == (_districtMunicipality.value != undefined ? this.facility.land.geographicalLocation.localAuthority.toLowerCase().trim()  : this.facility.land.geographicalLocation.localAuthority))[0];
+    
+    let magisterialDistrict = this.magisterialDistricts.filter(d => d.name.toLowerCase().trim() == (_districtMunicipality.value != undefined ? this.facility.land.geographicalLocation.magisterialDistrict.toLowerCase().trim()  : this.facility.land.geographicalLocation.magisterialDistrict))[0];
 
     this.landForm = this.formBuilder.group({
       survey:[survey],
+      facilityType:[facilityType],
       clientCode:[this.facility.clientCode],
       deedsOffice: [deedsOffice],
       class: [assetClass],
@@ -799,7 +876,7 @@ export class AddassetregisterComponent implements OnInit {
       localAuthority: [localAuthority],
       latitude: [this.facility.land.geographicalLocation.latitude],
       longitude: [this.facility.land.geographicalLocation.longitude],
-      magisterialDistrict: [this.facility.land.propertyDescription.magisterialDistrict],
+      magisterialDistrict: [magisterialDistrict],
       registrationDivision: [registrationDivision],
       townshipName: [this.facility.land.propertyDescription.townshipName],
       landParcel: [this.facility.land.propertyDescription.landParcel],
@@ -807,7 +884,7 @@ export class AddassetregisterComponent implements OnInit {
       oldDescription: [this.facility.land.propertyDescription.oldDescription],
       landRemainder: [landRemainder],
       farmName: [this.facility.land.propertyDescription.farmName],
-      SGDiagramNumber: [this.facility.land.propertyDescription.sGDiagramNumber],
+      SGDiagramNumber: [this.facility.land.propertyDescription.sgDiagramNumber],
       extent: [this.facility.land.propertyDescription.extent],
       LPICode: [this.facility.land.propertyDescription.lPICode],
       acquired: [acquired],
@@ -861,6 +938,7 @@ export class AddassetregisterComponent implements OnInit {
       additionNonCash: [this.facility.finance.secondaryInformationNote.additionNonCash],
       addition: [this.facility.finance.secondaryInformationNote.addition],
       disposal: [this.facility.finance.secondaryInformationNote.disposal],
+      openingBalance: [this.facility.finance.secondaryInformationNote.openingBalance],
       closingBalance: [this.facility.finance.secondaryInformationNote.closingBalance],
       municipalValuationDate: [this.facility.finance.valuation.municipalValuationDate != undefined ? new Date(this.facility.finance.valuation.municipalValuationDate) : new Date()],
       nonMunicipalValuationDate: [this.facility.finance.valuation.nonMunicipalValuationDate != undefined ? new Date(this.facility.finance.valuation.nonMunicipalValuationDate) : new Date()],
