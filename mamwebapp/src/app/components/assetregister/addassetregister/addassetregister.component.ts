@@ -642,7 +642,9 @@ export class AddassetregisterComponent implements OnInit {
 
     this.typeOfImprovements = [
       { name: 'Hotel', code: 'H', factor: 1 },
-      { name: 'House', code: 'HH', factor: 2 }];
+      { name: 'House', code: 'HH', factor: 2 },
+      { name: 'Farm', code: 'F', factor: 3 }
+      ];
 
     this.activeItem = this.steps[0];
 
@@ -970,6 +972,7 @@ export class AddassetregisterComponent implements OnInit {
       extentofBuilding: [this.selectedImprovement.extentofBuilding, [Validators.required]],
       conditionRating: [this.selectedImprovement.conditionRating, [Validators.required]],
       usableArea: [this.selectedImprovement.usableArea, [Validators.required]],
+      comment: [this.selectedImprovement.comment, [Validators.required]],
     });
   }
 
