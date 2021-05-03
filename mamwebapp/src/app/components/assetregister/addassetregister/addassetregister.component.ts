@@ -75,6 +75,7 @@ export class AddassetregisterComponent implements OnInit {
   howAcquired: any = {
     name: undefined
   };
+  facilityType: undefined;
   surveys: any[];
   provinces: any[];
   functionalPerformanceRatings: any[];
@@ -111,7 +112,7 @@ export class AddassetregisterComponent implements OnInit {
 
     if (this.selectedAsset.facilityId != undefined) {      
       this.mode = this.selectedAsset.mode;
-      if (this.mode == "Edit") {
+      if (this.mode == "Edit" || this.mode == "View") {
         this.loading = false;
         this.facility = this.selectedAsset.facility;
         this.getFiles(this.selectedAsset.facility.fileReference);
@@ -130,7 +131,7 @@ export class AddassetregisterComponent implements OnInit {
         id: 0,
         name: 'Land T0IS00000000000700020',
         fileReference: this.makeId(8),
-        type: 'Land',
+        type: undefined,
         clientCode: 'T0IS00000000000700020',
         userId: this.currentUser.id,
         status: "New",
@@ -611,7 +612,7 @@ export class AddassetregisterComponent implements OnInit {
       personInstitutionResposible: [''],
     });
 
-    this.buttonItems = [
+    this.buttonItems = [     
       {
         label: 'Update', icon: 'pi pi-pencil', command: () =>
           this.editImprovement()
@@ -1053,6 +1054,10 @@ export class AddassetregisterComponent implements OnInit {
   uploadFinanceFiles(){    
     this.facilityService.uploadFiles(this.uploadedFinanceFiles, 'Finance'+ this.facility.fileReference).pipe(first()).subscribe(uploaded => {    
     });
+  }
+
+  setFacilityType(e){
+    this.facility.type = e.value.name;
   }
 
   getFiles(fileReference:string){    
