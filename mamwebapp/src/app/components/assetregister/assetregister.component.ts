@@ -49,9 +49,15 @@ export class AssetregisterComponent implements OnInit  {
 
   ngOnInit() {
     this.buttonItems = [
+      {
+        label: 'View', icon: 'pi pi-eye', command: () =>
+          this.viewFacility()
+      },
+      { separator: true },
       {label: 'Print', icon: 'pi pi-print', command: () => 
           this.print()
       },
+      { separator: true },
       {label: 'Update', icon: 'pi pi-pencil', command: () => 
           this.update()
       },
@@ -103,6 +109,20 @@ export class AssetregisterComponent implements OnInit  {
       this.selectedAsset = this.facility
       this.showPrintDialog = true;
     }    
+  }
+
+  viewFacility(){
+    this.showDialog = false;
+    if(this.facility != undefined){
+      this.dialogHeader = this.facility.type + ' ' + this.facility.clientCode;
+      this.selectedAsset = {
+        mode : 'View',
+        facilityId: this.facility.id,
+        facilityType: this.facility.type,
+        facility: this.facility
+      };
+      this.showDialog = true;
+    }   
   }
 
   confirmDelete() {  
