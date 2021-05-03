@@ -4,6 +4,7 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { GoogleMapsModule } from '@angular/google-maps'
+import { CurrencyPipe} from '@angular/common';
 // for HttpClient import:
 import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
 
@@ -47,6 +48,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { FieldsetModule } from 'primeng/fieldset';
 import { FileUploadModule } from 'primeng/fileupload';
 import { InputTextareaModule}  from 'primeng/inputtextarea';
+import { InputNumberModule } from 'primeng/inputnumber';
 import { AddassetregisterComponent } from './components/assetregister/addassetregister/addassetregister.component';
 import { FinancialsComponent } from './components/assetregister/addassetregister/financials/financials.component';
 import { ImprovementsComponent } from './components/assetregister/addassetregister/improvements/improvements.component';
@@ -122,11 +124,13 @@ import { RepairRequirementsComponent } from './components/properties/repair-requ
     FileUploadModule,
     SplitButtonModule,
     InputTextareaModule,
-    NgxPrintModule
+    NgxPrintModule,
+    InputNumberModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    CurrencyPipe
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

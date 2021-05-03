@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { first } from 'rxjs/operators';
+import { UAMPService } from 'src/app/services/uamp/uamp.service';
 
 import { Programme } from '../../../models/programme.model';
 
@@ -10,7 +12,7 @@ import { Programme } from '../../../models/programme.model';
 export class TemplateOneComponent implements OnInit {
   programmes: Programme[];
 
-  constructor() { 
+  constructor(public uampService: UAMPService) { 
     this.programmes = [];
     this.programmes.push(new Programme());
   }
@@ -20,6 +22,12 @@ export class TemplateOneComponent implements OnInit {
 
   addProgram() {
     this.programmes.push(new Programme());
+  }
+
+  saveProgrammes() {
+    this.uampService.addProgrammes(this.programmes).pipe(first()).subscribe(result => {
+              
+    });
   }
 
 }
