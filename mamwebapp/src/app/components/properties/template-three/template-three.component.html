@@ -1,10 +1,11 @@
+<p-toast [style]="{marginTop: '90px'}" position="top-right"></p-toast>
 <p-table [value]="[{}]">
     <ng-template pTemplate="header">
         <tr>
             <th>Province</th>
             <th>Town</th>
-            <th>Unique Identifying Code</th>
-            <th>Possible non-asset solutions</th>
+            <th style="width: 200px;">Unique Identifying Code</th>
+            <!--<th>Possible non-asset solutions</th>-->
             <th>Common Asset Description</th>
             <th>Current Use</th>
             <th>Required Performance Standard</th>
@@ -17,11 +18,11 @@
     </ng-template>
     <ng-template pTemplate="body" let-rowData>
         <tr *ngFor="let assetPerformance of assetsFunctionalPerformances">
-            <td><textarea [(ngModel)]="assetPerformance.province" [rows]="6" [cols]="10" pInputTextarea></textarea></td>
-            <td><textarea [(ngModel)]="assetPerformance.town" [rows]="6" [cols]="10" pInputTextarea></textarea></td>
-            <td><textarea [(ngModel)]="assetPerformance.uniqueIdentifyingCode" [rows]="6" [cols]="10" pInputTextarea></textarea></td>
-            <td><textarea [(ngModel)]="assetPerformance.possibleNonAssetSolutions" [rows]="6" [cols]="10" pInputTextarea></textarea></td>
-            <td><textarea [(ngModel)]="assetPerformance.commonAssetDescription" [rows]="6" [cols]="10" pInputTextarea></textarea></td>
+            <td>{{assetPerformance.province}}</td>
+            <td>{{assetPerformance.town}}</td>
+            <td>{{assetPerformance.uniqueIdentifyingCode}}</td>
+           <!-- <td><textarea [(ngModel)]="assetPerformance.possibleNonAssetSolutions" [rows]="6" [cols]="10" pInputTextarea></textarea></td>-->
+            <td>{{assetPerformance.commonAssetDescription}}</td>
             <td><textarea [(ngModel)]="assetPerformance.currentUse" [rows]="6" [cols]="10" pInputTextarea></textarea></td>
             <td><textarea [(ngModel)]="assetPerformance.requiredPerformanceStandard" [rows]="6" [cols]="10" pInputTextarea></textarea></td>
             <td><textarea [(ngModel)]="assetPerformance.accessabilityRating" [rows]="6" [cols]="10" pInputTextarea></textarea></td>
@@ -35,5 +36,5 @@
 
 <div>
     <button pButton type="button" label="Save FunctionalPerformances" (click)="saveFunctionalPerformances()" style="float: right;margin-top: 10px;"></button>
-    <button pButton type="button" label="Add Functional Performance" (click)="addAssetFunctionalPerformance()" style="float: right;margin-right: 10px;margin-top: 10px;"></button>
+   <!--<button pButton type="button" label="Add Functional Performance" (click)="addAssetFunctionalPerformance()" style="float: right;margin-right: 10px;margin-top: 10px;"></button>--> 
 </div>

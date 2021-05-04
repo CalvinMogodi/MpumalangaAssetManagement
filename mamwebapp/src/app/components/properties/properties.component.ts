@@ -32,24 +32,21 @@ export class PropertiesComponent implements OnInit {
   getProperties(){
     this.facilities = [];
     this.facilityService.getProperties().pipe(first()).subscribe(facilities => {
+      
         facilities.forEach((facility) => {
           if(facility.status.toLowerCase().trim() == 'submitted'){
           if(facility.land != undefined && facility.finance != undefined){
             if(facility.land.leaseStatus != undefined && facility.land.propertyDescription != undefined 
               && facility.land.geographicalLocation != undefined && facility.land.landUseManagementDetail != undefined
-              && facility.finance.secondaryInformationNote != undefined && facility.finance.valuation != undefined ){
-              if (new Date(facility.land.leaseStatus.terminationDate).getTime() > new Date().getTime()) {
-                this.leasedPropertyCount = +this.leasedPropertyCount + 1;
-              }
-              else {
-                this.stateOwnedPropertyCount = +this.stateOwnedPropertyCount + 1
-              }              
+              && facility.finance.secondaryInformationNote != undefined && facility.finance.valuation != undefined ){                       
               this.facilities.push(facility);
               }              
             }
             
           }        
-      })
+      });
+      this.stateOwnedPropertyCount = this.facilities.filter(f => f.land.landUseManagementDetail.ownershipCategory == 'State-Owned').length;
+      this.leasedPropertyCount = this.facilities.filter(f => f.land.landUseManagementDetail.ownershipCategory == 'Non-State Owned').length;
     });
   }
 
