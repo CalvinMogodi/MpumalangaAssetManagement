@@ -341,7 +341,7 @@
                         </div>
                         <div class="ui-g-3 ui-md-3">
                             <label for="class">Registration Date</label>
-                            <p-calendar [maxDate]="today" formControlName="registrationDate" dateFormat="dd/mm/yy" showOtherMonths="true"
+                            <p-calendar [disabled]="mode == 'View'" [maxDate]="today" formControlName="registrationDate" dateFormat="dd/mm/yy" showOtherMonths="true"
                                 showButtonBar="true"></p-calendar>
                             <div *ngIf="submitted&& f.fileReferenceNumber.errors"
                                 class="text-error"><br>
@@ -359,7 +359,7 @@
                         </div>
                         <div class="ui-g-3 ui-md-3">
                             <label for="vestingDate">Vesting Date</label>
-                            <p-calendar formControlName="vestingDate" dateFormat="dd/mm/yy" showOtherMonths="true"
+                            <p-calendar [disabled]="mode == 'View'" formControlName="vestingDate" dateFormat="dd/mm/yy" showOtherMonths="true"
                                 showButtonBar="true"></p-calendar>
                             <div *ngIf="submitted && l.vestingDate.errors" class="text-error"><br>
                                 <div *ngIf="l.vestingDate.errors.required">This field is required.</div>
@@ -538,7 +538,7 @@
                         </div>
                         <div class="ui-g-3 ui-md-3">
                             <label for="occupationDate">Occupation Date</label>
-                            <p-calendar formControlName="occupationDate" dateFormat="dd/mm/yy" showOtherMonths="true"
+                            <p-calendar [disabled]="mode == 'View'" formControlName="occupationDate" dateFormat="dd/mm/yy" showOtherMonths="true"
                                 showButtonBar="true"></p-calendar>
                             <div *ngIf="submitted && f.occupationDate.errors" class="text-error">
                                 <br>
@@ -547,7 +547,7 @@
                         </div>
                         <div class="ui-g-3 ui-md-3">
                             <label for="startingDate">Starting Date</label>
-                            <p-calendar formControlName="startingDate" dateFormat="dd/mm/yy" showOtherMonths="true"
+                            <p-calendar [disabled]="mode == 'View'" formControlName="startingDate" dateFormat="dd/mm/yy" showOtherMonths="true"
                                 showButtonBar="true"></p-calendar>
                             <div *ngIf="submitted && f.startingDate.errors" class="text-error"><br>
                                 <div *ngIf="l.startingDate.errors.required">This field is required.</div>
@@ -555,7 +555,7 @@
                         </div>
                         <div class="ui-g-3 ui-md-3">
                             <label for="terminationDate">Termination Date</label>
-                            <p-calendar formControlName="terminationDate" dateFormat="dd/mm/yy" showOtherMonths="true"
+                            <p-calendar [disabled]="mode == 'View'" formControlName="terminationDate" dateFormat="dd/mm/yy" showOtherMonths="true"
                                 showButtonBar="true"></p-calendar>
                             <div *ngIf="submitted && f.terminationDate.errors" class="text-error">
                                 <br>
@@ -703,7 +703,7 @@
                         </div>
                         <div class="ui-g-3 ui-md-3">
                             <label for="municipalValuationDate">Date of Municipal Valuation</label>
-                            <p-calendar formControlName="municipalValuationDate" dateFormat="dd/mm/yy"
+                            <p-calendar [disabled]="mode == 'View'" formControlName="municipalValuationDate" dateFormat="dd/mm/yy"
                                 showOtherMonths="true" showButtonBar="true"></p-calendar>
                             <div *ngIf="submitted && f.municipalValuationDate.errors" class="text-error"><br>
                                 <div *ngIf="f.municipalValuationDate.errors.required">This field is required.</div>
@@ -729,7 +729,7 @@
                     <div class="ui-g-12 ui-md-12">                       
                         <div class="ui-g-3 ui-md-3">
                             <label for="nonMunicipalValuationDate">Date of Non Municipal Valuation</label>
-                            <p-calendar formControlName="nonMunicipalValuationDate" dateFormat="dd/mm/yy"
+                            <p-calendar [disabled]="mode == 'View'" formControlName="nonMunicipalValuationDate" dateFormat="dd/mm/yy"
                                 showOtherMonths="true" showButtonBar="true"></p-calendar>
                             <div *ngIf="submitted && f.nonMunicipalValuationDate.errors" class="text-error"><br>
                                 <div *ngIf="f.nonMunicipalValuationDate.errors.required">This field is required.</div>
