@@ -1,0 +1,4 @@
+﻿CREATE TABLE [dbo].[UAMP]
+(
+	[Id] INT NOT NULL PRIMARY KEY
+)

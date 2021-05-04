@@ -14,10 +14,11 @@ export class TemplateOneComponent implements OnInit {
 
   constructor(public uampService: UAMPService) { 
     this.programmes = [];
-    this.programmes.push(new Programme());
+    //this.programmes.push(new Programme());
   }
 
   ngOnInit() {
+    this.getProgrammes();
   }
 
   addProgram() {
@@ -26,7 +27,13 @@ export class TemplateOneComponent implements OnInit {
 
   saveProgrammes() {
     this.uampService.addProgrammes(this.programmes).pipe(first()).subscribe(result => {
-              
+              var tes = "";
+    });
+  }
+
+  getProgrammes() {
+    this.uampService.getProgrammes().pipe(first()).subscribe(programmes => {
+      this.programmes = programmes;
     });
   }
 

@@ -31,6 +31,9 @@ namespace MAM.DataAccess
         public DbSet<Finance> Finances { get; set; }
         public DbSet<SecondaryInformationNote> SecondaryInformationNotes { get; set; }
         public DbSet<Valuation> Valuations { get; set; }
+        public DbSet<Programme> Programme { get; set; }
+        public DbSet<FunctionalPerformance> FunctionalPerformance { get; set; }
+        public DbSet<Utilisation> Utilisation { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(_connectionString);

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { first } from 'rxjs/operators';
+import { UAMPService } from 'src/app/services/uamp/uamp.service';
 
 import { CurrentUtlisation } from '../../../models/current-utilisation.model';
 
@@ -10,15 +12,28 @@ import { CurrentUtlisation } from '../../../models/current-utilisation.model';
 export class ScheduleOfCurrentUtilisationComponent implements OnInit {
   scheduleCurrentUtilisation: CurrentUtlisation[] = [];
 
-  constructor() {
-    this.scheduleCurrentUtilisation.push(new CurrentUtlisation());
+  constructor(public uampService: UAMPService) {
+    //this.scheduleCurrentUtilisation.push(new CurrentUtlisation());
    }
 
   ngOnInit() {
+    this.getUtilisations();
   }
 
   addUtilisation() {
     this.scheduleCurrentUtilisation.push(new CurrentUtlisation());
+  }
+
+  saveUtilisations() {
+    this.uampService.addUtilisations(this.scheduleCurrentUtilisation).pipe(first()).subscribe(result => {
+      var tes = "";
+    });
+  }
+
+  getUtilisations() {
+    this.uampService.getUtilisations().pipe(first()).subscribe(scheduleCurrentUtilisation => {
+      this.scheduleCurrentUtilisation = scheduleCurrentUtilisation;
+    });
   }
 
 }

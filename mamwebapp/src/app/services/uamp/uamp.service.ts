@@ -8,6 +8,8 @@ import { facilitySummaryChart } from 'src/app/models/facility-summary-chart.mode
 import { MapCoordinate } from 'src/app/models/map-oordinate.model';
 import { Facility } from 'src/app/models/facility.model';
 import { Programme } from 'src/app/models/programme.model';
+import { AssetFunctionalPerformance } from 'src/app/models/asset-functional-performance.model';
+import { CurrentUtlisation } from 'src/app/models/current-utilisation.model';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +21,26 @@ export class UAMPService {
   constructor(private http: HttpClient) { }
 
   addProgrammes(programmes : Programme[]) {
-    return this.http.post<Facility>(`${environment.apiUrl}/api/uamp/addProgrammes`, programmes);
+    return this.http.post<Boolean>(`${environment.apiUrl}/api/uamp/addprogrammes`, programmes);
+  }
+
+  getProgrammes(){
+    return this.http.get<Array<Programme>>(`${environment.apiUrl}/api/uamp/programmes`);
+  }
+
+  addFunctionalPerformances(programmes : AssetFunctionalPerformance[]) {
+    return this.http.post<Boolean>(`${environment.apiUrl}/api/uamp/addfunctionalperformances`, programmes);
+  }
+
+  getFunctionalPerformances(){
+    return this.http.get<Array<AssetFunctionalPerformance>>(`${environment.apiUrl}/api/uamp/functionalperformances`);
+  }
+
+  addUtilisations(programmes : CurrentUtlisation[]) {
+    return this.http.post<Boolean>(`${environment.apiUrl}/api/uamp/addutilisations`, programmes);
+  }
+
+  getUtilisations(){
+    return this.http.get<Array<CurrentUtlisation>>(`${environment.apiUrl}/api/uamp/utilisations`);
   }
 }
