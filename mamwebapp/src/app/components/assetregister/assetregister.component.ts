@@ -7,6 +7,7 @@ import { AuthenticationService } from '../../services/authentication.service';
 import { ConfirmationService } from 'primeng/api';
 import { Facility, Land } from 'src/app/models/facility.model';
 import { Observable } from 'rxjs';
+import { User } from 'src/app/models/user.model';
 
 @Component({
   selector: 'app-assetregister',
@@ -44,10 +45,14 @@ export class AssetregisterComponent implements OnInit  {
   facilities = [];
   landTotal: number = 0;
   buildingTotal:number = 0;
+  currentUser: User;
   
-  constructor(private confirmationService: ConfirmationService,  public facilityService: FacilityService, private formBuilder: FormBuilder, private messageService: MessageService) { }
+  constructor(private authenticationService: AuthenticationService,private confirmationService: ConfirmationService,  public facilityService: FacilityService, private formBuilder: FormBuilder, private messageService: MessageService) { }
 
   ngOnInit() {
+    this.authenticationService.currentUser.pipe().subscribe(x => {
+      this.currentUser = x;
+    });
     this.buttonItems = [
       {
         label: 'View', icon: 'pi pi-eye', command: () =>

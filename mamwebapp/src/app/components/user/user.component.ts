@@ -72,8 +72,8 @@ export class UserComponent implements OnInit {
       { name: 'Viewer', code: 'V', factor: 1 },
       { name: 'Administrator', code: 'SA', factor: 2 },
       { name: 'Capturer', code: 'C', factor: 3 },
-      { name: 'Approver', code: 'A', factor: 4 },
-      { name: 'Verifier', code: 'DV', factor: 5 },
+      { name: 'Approver', code: 'A', factor: 5 },
+      { name: 'Verifier', code: 'DV', factor: 4 },
       { name: 'Manager', code: 'M', factor: 6 },
       { name: 'Department user', code: 'D', factor: 7 },
 

@@ -17,18 +17,24 @@ namespace MAM.BusinessLayer.Models
         public string Type { get; set; }
         public string ClientCode { get; set; }
         public string Status { get; set; }
-        public int UserId { get; set; }
         public int? LandId { get; set; }
         public int? FinanceId { get; set; }
+        public int? ApproverId { get; set; }
+        public DateTime? ApprovedDate { get; set; }
+        public int? VerifierId { get; set; }
+        public DateTime? SingedOffDate { get; set; }
         public FacilityTypes FacilityTypes { get; set; }
         public FacilityStatus FacilityStatus { get; set; }
-        public int CreatedBy { get; set; }
+        public int CapturerId { get; set; }
         public DateTime CreatedDate { get; set; }
-        public int? ModifiedBy { get; set; }
+        public int? ModifierId { get; set; }
         public DateTime? ModifiedDate { get; set; }
         public Land Land { get; set; }
         public Finance Finance { get; set; }
         public List<Improvement> Improvements { get; set; }
+        public virtual User Verifier { get; set; }
+        public virtual User Approver { get; set; }
+        public virtual User Capturer { get; set; }
 
         public List<Facility> ConvertToFacilities(List<DataAccess.Tables.Facility> facilities)
         {
@@ -46,11 +52,14 @@ namespace MAM.BusinessLayer.Models
                 Name = f.Name,
                 Type = f.Type,
                 ClientCode = f.ClientCode,
-                UserId = f.UserId,
+                CapturerId = f.CapturerId,
                 Status = f.Status,
-                CreatedBy = f.CreatedBy,
+                ApproverId = f.ApproverId,
+                VerifierId = f.VerifierId,
                 CreatedDate = f.CreatedDate,
-                ModifiedBy = f.ModifiedBy,
+                ModifierId = f.ModifierId,
+                ApprovedDate = f.ApprovedDate,
+                SingedOffDate = f.SingedOffDate,
                 ModifiedDate = f.ModifiedDate,
                 Land = f.Land != null ? new Land()
                 {
@@ -99,11 +108,14 @@ namespace MAM.BusinessLayer.Models
                 Name = facility.Name,
                 Type = facility.Type,
                 ClientCode = facility.ClientCode,
-                UserId = facility.UserId,
+                CapturerId = facility.CapturerId,
                 Status = facility.Status,
-                CreatedBy = facility.CreatedBy,
+                VerifierId = facility.VerifierId,
+                ApproverId = facility.ApproverId,
                 CreatedDate = facility.CreatedDate,
-                ModifiedBy = facility.ModifiedBy,
+                ApprovedDate = facility.ApprovedDate,
+                SingedOffDate = facility.SingedOffDate,
+                ModifierId = facility.ModifierId,
                 ModifiedDate = facility.ModifiedDate,
                 Land = new Land()
                 {
@@ -146,11 +158,14 @@ namespace MAM.BusinessLayer.Models
                 Survey = facility.Survey,
                 LandId = facility.LandId,
                 FinanceId = facility.FinanceId,
-                UserId = facility.UserId,
+                CapturerId = facility.CapturerId,
+                ApproverId = facility.ApproverId,
                 Status = facility.Status,
-                CreatedBy = facility.CreatedBy,
+                VerifierId = facility.VerifierId,
+                ApprovedDate = facility.ApprovedDate,
+                SingedOffDate = facility.SingedOffDate,
                 CreatedDate = facility.CreatedDate,
-                ModifiedBy = facility.ModifiedBy,
+                ModifierId = facility.ModifierId,
                 ModifiedDate = facility.ModifiedDate,
             };
         }

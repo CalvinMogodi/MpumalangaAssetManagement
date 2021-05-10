@@ -40,7 +40,8 @@ namespace MAM.BusinessLayer.Repositories
                 }
                 catch(Exception ex)
                 {
-                    return false;
+                    throw ex;
+                   // return false;
                 }
             }
         }

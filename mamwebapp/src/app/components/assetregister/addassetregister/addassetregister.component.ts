@@ -81,7 +81,8 @@ export class AddassetregisterComponent implements OnInit {
   functionalPerformanceRatings: any[];
   ownershipCategories: any;
   errorMsg: string;
-  mode: string;
+  mode: string = "Add";
+  isViewOnly: boolean = false;
   province: { name: 'Mpumalanga', code: 'MP', factor: 6 };
   registrationDivision: { name: 'Mpumalanga', code: 'M', factor: 4 };
   savingLand: boolean = false;
@@ -111,7 +112,7 @@ export class AddassetregisterComponent implements OnInit {
     });
 
     if (this.selectedAsset.facilityId != undefined) {      
-      this.mode = this.selectedAsset.mode;
+      this.mode = this.selectedAsset.mode;      
       if (this.mode == "Edit" || this.mode == "View") {
         this.loading = false;
         this.facility = this.selectedAsset.facility;
@@ -130,7 +131,7 @@ export class AddassetregisterComponent implements OnInit {
       this.facility = {
         id: 0,
         name: 'Land T0IS00000000000700020',
-        fileReference: this.makeId(8),
+        fileReference: undefined,
         type: undefined,
         clientCode: 'T0IS00000000000700020',
         userId: this.currentUser.id,
@@ -169,6 +170,13 @@ export class AddassetregisterComponent implements OnInit {
       this.mode = this.selectedAsset.mode;
       this.loading = false;
     }   
+    if(this.currentUser.roleId == 1 || this.currentUser.roleId == 5 || this.currentUser.roleId == 4)
+    {
+        this.mode == 'View';
+    }else{
+      this.isViewOnly = this.mode == 'View' ? true :  false;
+    }
+ 
   }
 
   get l() { return this.landForm.controls; }

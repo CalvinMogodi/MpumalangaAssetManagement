@@ -19,24 +19,7 @@ export class TemplateThreeComponent implements OnInit {
    }
 
   ngOnInit() {
-    //this.getFunctionalPerformances();
-    this.facilities.forEach( (element) => {
-      let assetFunctionalPerformance: AssetFunctionalPerformance = {
-        province: element.land.geographicalLocation.province,
-        town: element.land.geographicalLocation.province,
-        uniqueIdentifyingCode: element.clientCode,
-        possibleNonAssetSolutions: undefined,
-        commonAssetDescription: element.name,
-        currentUser: undefined,
-        requiredPerformanceStandard: undefined,
-        accessabilityRating: undefined,
-        suitabilityIndex: undefined,
-        conditionRating: undefined,
-        operatingPerformanceIndex:undefined,
-        functionalPerformanceRating: undefined,
-      };
-      this.assetsFunctionalPerformances.push(assetFunctionalPerformance);
-    });
+    this.getFunctionalPerformances();    
   }
 
   addAssetFunctionalPerformance() {
@@ -51,7 +34,27 @@ export class TemplateThreeComponent implements OnInit {
 
   getFunctionalPerformances() {
     this.uampService.getFunctionalPerformances().pipe(first()).subscribe(assetsFunctionalPerformances => {
-      this.assetsFunctionalPerformances = assetsFunctionalPerformances;
+      if(assetsFunctionalPerformances.length == 0){
+        this.facilities.forEach( (element) => {
+          let assetFunctionalPerformance: AssetFunctionalPerformance = {
+            province: element.land.geographicalLocation.province,
+            town: element.land.geographicalLocation.province,
+            uniqueIdentifyingCode: element.clientCode,
+            possibleNonAssetSolutions: undefined,
+            commonAssetDescription: element.name,
+            currentUser: undefined,
+            requiredPerformanceStandard: undefined,
+            accessabilityRating: undefined,
+            suitabilityIndex: undefined,
+            conditionRating: undefined,
+            operatingPerformanceIndex:undefined,
+            functionalPerformanceRating: undefined,
+          };
+          this.assetsFunctionalPerformances.push(assetFunctionalPerformance);
+        });
+      }else{
+        this.assetsFunctionalPerformances = assetsFunctionalPerformances;
+      }      
     });
   }
 

@@ -59,7 +59,7 @@
         <p-splitButton label="FOO for {{x}}" (onClick)="foo (x)" [model]="cmds (x)"></p-splitButton>
       </p>-->
 
-    <button style="float: right;" (click)="addFacility();showDialog=true; dialogHeader='Add New Asset'" pButton type="button" label="Add New"
+    <button *ngIf="currentUser.roleId == 2 || currentUser.roleId == 3" style="float: right;" (click)="addFacility();showDialog=true; dialogHeader='Add New Asset'" pButton type="button" label="Add New"
         class="ui-button-info"></button>
 </div>
 
@@ -113,6 +113,11 @@
     [baseZIndex]="10000">
     <p-header> {{printDialogHeader}} </p-header>
     <app-print-asset [selectedFacility]="selectedAsset"></app-print-asset>
+    <p-footer>
+       <div>
+           <p><span style="float: left;"> Created on {{selectedAsset.createdDate | date:"dd/MM/yy" }} by Admin Admin}</span> <span style="float: right;"> Approved on {{selectedAsset.approvedDate | date:"dd/MM/yy" }} by {{selectedAsset.approvedBy}}</span></p>
+       </div>
+    </p-footer>
 </p-dialog>
 
 <div *ngIf="showdelete" class="dialogBackgroud"></div>

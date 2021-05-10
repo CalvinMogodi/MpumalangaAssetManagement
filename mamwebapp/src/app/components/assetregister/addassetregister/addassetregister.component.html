@@ -17,51 +17,39 @@
                     <div class="ui-g-12 ui-md-12">
                         <div class="ui-g-3 ui-md-3">
                             <label for="fileReferenceNumber">File Reference Number</label>
-                            <input  [(ngModel)]="facility.fileReference" [ngModelOptions]="{standalone: true}" disabled="true" autocomplete="off" type="text" pInputText
+                            <input [(ngModel)]="facility.fileReference" [ngModelOptions]="{standalone: true}" [disabled]="isViewOnly" autocomplete="off" type="text" pInputText
                                class="ui-inputtext ui-widget"> 
                         </div>
                         <div class="ui-g-3 ui-md-3">
                             <label for="clientCode">Property Code</label>
-                            <input formControlName="clientCode" autocomplete="off" [attr.disabled]="mode == 'View'" type="text" pInputText
+                            <input formControlName="clientCode" autocomplete="off" [disabled]="isViewOnly" type="text" pInputText
                                class="ui-inputtext ui-widget">
                             <div *ngIf="submitted && f.clientCode.errors"
                                 class="text-error"><br>
                                 <div *ngIf="l.propertyCode.errors.required">This field is required.</div>
                             </div>                          
-                        </div>
+                        </div><div class="ui-g-3 ui-md-3">
+                            <label for="facilityName">Facility Name</label>
+                            <input [attr.disabled]="mode == 'View'" formControlName="facilityName" autocomplete="off" type="text" pInputText
+                                class="ui-inputtext ui-widget">
+                            <div *ngIf="submitted && f.facilityName.errors" class="text-error"><br>
+                                <div *ngIf="l.facilityName.errors.required">This field is required.</div>
+                            </div>
+                        </div>                        
                         <div class="ui-g-3 ui-md-3">
                             <label for="facilityType">Type</label>
-                            <p-dropdown inputId="facilityType" (onChange)="setFacilityType($event)" [disabled]="mode == 'View'" [options]="facilityTypes"
+                            <p-dropdown inputId="facilityType" (onChange)="setFacilityType($event)" [disabled]="isViewOnly" [options]="facilityTypes"
                               placeholder="Please select" formControlName="facilityType" optionLabel="name">
                             </p-dropdown>
                             <div *ngIf="submitted && f.facilityType.errors" class="text-error"><br>
                                 <div *ngIf="l.facilityType.errors.required">This field is required.</div>
                             </div>
-                        </div>                       
-                        <div class="ui-g-3 ui-md-3">
-                            <label for="class">Asset Class</label>
-                            <p-dropdown inputId="class" [disabled]="mode == 'View'" [options]="classes"
-                            placeholder="Please select" formControlName="class" (onChange)="setClass($event)" optionLabel="name">
-                            </p-dropdown>
-                            <div *ngIf="submitted && f.class.errors" class="text-error"><br>
-                                <div *ngIf="l.class.errors.required">This field is required.</div>
-                            </div>
-                        </div>
+                        </div>           
                     </div>
-                    <div class="ui-g-12 ui-md-12">                       
-                        <div class="ui-g-3 ui-md-3">
-                            <label for="afs">AFS</label>
-                            <p-dropdown inputId="afs" [disabled]="mode == 'View'" [options]="aFSs"
-                            placeholder="Please select" formControlName="afs" optionLabel="name">
-                            </p-dropdown>
-                            <div *ngIf="submitted && f.afs.errors" class="text-error"><br>
-                                <div *ngIf="l.afs.errors.required">This field is required.</div>
-                            </div>
-                        </div>
-                        
+                    <div class="ui-g-12 ui-md-12"> 
                         <div class="ui-g-3 ui-md-3">
                             <label for="survey">Survey</label>
-                            <p-dropdown inputId="survey" [disabled]="mode == 'View'" [options]="surveys"
+                            <p-dropdown inputId="survey" [disabled]="isViewOnly" [options]="surveys"
                               placeholder="Please select" formControlName="survey" optionLabel="name">
                             </p-dropdown>
                             <div *ngIf="submitted && f.survey.errors" class="text-error"><br>
@@ -70,7 +58,7 @@
                         </div>
                         <div class="ui-g-3 ui-md-3">
                             <label for="vestedType">Vested Type</label>
-                            <p-dropdown inputId="vestedType" [disabled]="mode == 'View'" [options]="vestedTypes"
+                            <p-dropdown inputId="vestedType" [disabled]="isViewOnly" [options]="vestedTypes"
                             placeholder="Please select" formControlName="vestedType" optionLabel="name">
                             </p-dropdown>
                             <div *ngIf="submitted && f.vestedType.errors" class="text-error"><br>
@@ -79,7 +67,7 @@
                         </div>
                         <div class="ui-g-3 ui-md-3">
                             <label for="type">Asset Type</label>
-                            <p-dropdown inputId="type" [disabled]="mode == 'View'" [options]="types"
+                            <p-dropdown inputId="type" [disabled]="isViewOnly" [options]="types"
                             placeholder="Please select" (onChange)="setType($event)" formControlName="type" optionLabel="name"></p-dropdown>
                             <div *ngIf="submitted && f.fileReferenceNumber.errors"
                                 class="text-error"><br>
@@ -88,10 +76,30 @@
                         </div>                       
                         <div class="ui-g-3 ui-md-3">
                             <label for="deedsOffice">Deeds Office</label>
-                            <p-dropdown [disabled]="mode == 'View'" inputId="deedsOffice" [options]="deedsOffices"
+                            <p-dropdown [disabled]="isViewOnly" inputId="deedsOffice" [options]="deedsOffices"
                             placeholder="Please select" formControlName="deedsOffice" (onChange)="setDeedsOffice($event)" optionLabel="name"></p-dropdown>
                             <div *ngIf="submitted && f.deedsOffices.errors" class="text-error"><br>
                                 <div *ngIf="l.deedsOffices.errors.required">This field is required.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ui-g-12 ui-md-12"> 
+                        <div class="ui-g-3 ui-md-3">
+                            <label for="class">Asset Class</label>
+                            <p-dropdown inputId="class" [disabled]="isViewOnly" [options]="classes"
+                            placeholder="Please select" formControlName="class" (onChange)="setClass($event)" optionLabel="name">
+                            </p-dropdown>
+                            <div *ngIf="submitted && f.class.errors" class="text-error"><br>
+                                <div *ngIf="l.class.errors.required">This field is required.</div>
+                            </div>
+                        </div>
+                        <div class="ui-g-3 ui-md-3">
+                            <label for="userDepartment">User Department</label>
+                            <p-multiSelect [disabled]="isViewOnly" placeholder="Please select" inputId="userDepartment" [options]="userDepartments"
+                                formControlName="userDepartment" optionLabel="name"></p-multiSelect>
+                            <div *ngIf="submitted && l.userDepartment.errors" class="text-error">
+                                <br>
+                                <div *ngIf="l.userDepartment.errors.required">This field is required.</div>
                             </div>
                         </div>
                     </div>
@@ -100,7 +108,7 @@
                     <div class="ui-g-12 ui-md-12">
                         <div class="ui-g-3 ui-md-3">
                             <label for="province">Province</label>
-                            <p-dropdown [disabled]="mode == 'View'" inputId="province" [(ngModel)]="province" [options]="provinces"
+                            <p-dropdown [disabled]="isViewOnly" inputId="province" [(ngModel)]="province" [options]="provinces"
                             formControlName="province" (onChange)="setProvince($event)" optionLabel="name">
                             </p-dropdown>
                             <div *ngIf="submitted && f.fileReferenceNumber.errors"
@@ -110,7 +118,7 @@
                         </div>
                         <div class="ui-g-3 ui-md-3">
                             <label for="districtMunicipality">District Municipality</label>
-                            <p-dropdown [disabled]="mode == 'View'" inputId="districtMunicipality" [options]="districtMunicipalities"
+                            <p-dropdown [disabled]="isViewOnly" inputId="districtMunicipality" [options]="districtMunicipalities"
                             placeholder="Please select" formControlName="districtMunicipality" (onChange)="setDistrictMunicipality($event)"
                                 optionLabel="name"></p-dropdown>
                             <div *ngIf="submitted && f.fileReferenceNumber.errors"
@@ -120,7 +128,7 @@
                         </div>
                         <div class="ui-g-3 ui-md-3">
                             <label for="magisterialDistrict">Magisterial District</label>
-                            <p-dropdown [disabled]="mode == 'View'" inputId="magisterialDistrict" [options]="magisterialDistricts"
+                            <p-dropdown [disabled]="isViewOnly" inputId="magisterialDistrict" [options]="magisterialDistricts"
                             placeholder="Please select" formControlName="magisterialDistrict" (onChange)="setMagisterialDistrict($event)"
                                 optionLabel="name"></p-dropdown>
                             <div *ngIf="submitted && f.fileReferenceNumber.errors"
@@ -130,7 +138,7 @@
                         </div>
                         <div class="ui-g-3 ui-md-3">
                             <label for="localAuthority">Local Authority</label>
-                            <p-dropdown [disabled]="mode == 'View'" inputId="localAuthority" [options]="localAuthorities"
+                            <p-dropdown [disabled]="isViewOnly" inputId="localAuthority" [options]="localAuthorities"
                             placeholder="Please select" formControlName="localAuthority" (onChange)="setLocalAuthorities($event)"
                                 optionLabel="name"></p-dropdown>
                             <div *ngIf="submitted && f.fileReferenceNumber.errors"
@@ -143,7 +151,7 @@
                     <div class="ui-g-12 ui-md-12">
                         <div class="ui-g-3 ui-md-3">
                             <label for="region">Region</label>
-                            <p-dropdown [disabled]="mode == 'View'" inputId="region" [options]="regions" formControlName="region"
+                            <p-dropdown [disabled]="isViewOnly" inputId="region" [options]="regions" formControlName="region"
                             placeholder="Please select" (onChange)="setProvince($event)" optionLabel="name">
                             </p-dropdown>
                             <div *ngIf="submitted && f.fileReferenceNumber.errors"
@@ -214,7 +222,7 @@
                     <div class="ui-g-12 ui-md-12">
                         <div class="ui-g-3 ui-md-3">
                             <label for="registrationDivision">Registration Division</label>
-                            <p-dropdown [disabled]="mode == 'View'" inputId="registrationDivision" [options]="registrationDivisions"
+                            <p-dropdown [disabled]="isViewOnly" inputId="registrationDivision" [options]="registrationDivisions"
                             placeholder="Please select" [(ngModel)]="registrationDivision" formControlName="registrationDivision"
                                 optionLabel="name"></p-dropdown>
                             <div *ngIf="submitted && f.registrationDivision.errors"
@@ -261,7 +269,7 @@
                         </div>
                         <div class="ui-g-3 ui-md-3">
                             <label for="landRemainder">Land Remainder</label>
-                            <p-dropdown [disabled]="mode == 'View'" inputId="landRemainder" [options]="landRemainders"
+                            <p-dropdown [disabled]="isViewOnly" inputId="landRemainder" [options]="landRemainders"
                                 formControlName="landRemainder" (onChange)="setProvince($event)" optionLabel="name"
                                 placeholder="Please select"></p-dropdown>
                             <div *ngIf="submitted && f.fileReferenceNumber.errors"
@@ -309,7 +317,7 @@
                         </div>
                         <div class="ui-g-3 ui-md-3">
                             <label for="howAcquired">How Acquired</label>
-                            <p-dropdown [disabled]="mode == 'View'" inputId="howAcquired" [options]="howAcquireds" [(ngModel)]="howAcquired"
+                            <p-dropdown [disabled]="isViewOnly" inputId="howAcquired" [options]="howAcquireds" [(ngModel)]="howAcquired"
                                 formControlName="acquired" (onChange)="setHowAcquired($event)" optionLabel="name"
                                 placeholder="Please select"></p-dropdown>
                             <div *ngIf="submitted && f.fileReferenceNumber.errors"
@@ -341,7 +349,7 @@
                         </div>
                         <div class="ui-g-3 ui-md-3">
                             <label for="class">Registration Date</label>
-                            <p-calendar [disabled]="mode == 'View'" [maxDate]="today" formControlName="registrationDate" dateFormat="dd/mm/yy" showOtherMonths="true"
+                            <p-calendar [disabled]="isViewOnly" [maxDate]="today" formControlName="registrationDate" dateFormat="dd/mm/yy" showOtherMonths="true"
                                 showButtonBar="true"></p-calendar>
                             <div *ngIf="submitted&& f.fileReferenceNumber.errors"
                                 class="text-error"><br>
@@ -359,7 +367,7 @@
                         </div>
                         <div class="ui-g-3 ui-md-3">
                             <label for="vestingDate">Vesting Date</label>
-                            <p-calendar [disabled]="mode == 'View'" formControlName="vestingDate" dateFormat="dd/mm/yy" showOtherMonths="true"
+                            <p-calendar [disabled]="isViewOnly" formControlName="vestingDate" dateFormat="dd/mm/yy" showOtherMonths="true"
                                 showButtonBar="true"></p-calendar>
                             <div *ngIf="submitted && l.vestingDate.errors" class="text-error"><br>
                                 <div *ngIf="l.vestingDate.errors.required">This field is required.</div>
@@ -379,7 +387,7 @@
                         </div>
                         <div class="ui-g-3 ui-md-3">
                             <label for="ownershipCategory">Ownership Category</label>
-                            <p-dropdown [disabled]="mode == 'View'" inputId="ownershipCategory" [options]="ownershipCategories"
+                            <p-dropdown [disabled]="isViewOnly" inputId="ownershipCategory" [options]="ownershipCategories"
                                 formControlName="ownershipCategory" optionLabel="name"
                                 placeholder="Please select"></p-dropdown>
                             <div *ngIf="submitted && f.ownershipCategory.errors"
@@ -414,31 +422,11 @@
                             <div *ngIf="submitted && f.zoning.errors" class="text-error"><br>
                                 <div *ngIf="l.zoning.errors.required">This field is required.</div>
                             </div>
-                        </div>
-                        <div class="ui-g-3 ui-md-3">
-                            <label for="userDepartment">User Department</label>
-                           <p-dropdown [disabled]="mode == 'View'" inputId="userDepartment" [options]="userDepartments"
-                                formControlName="userDepartment" optionLabel="name"
-                                placeholder="Please select"></p-dropdown>
-
-                           <!-- <input formControlName="userDepartment" autocomplete="off" type="text" pInputText
-                                class="ui-inputtext ui-widget">-->
-                            <div *ngIf="submitted && f.userDepartment.errors" class="text-error">
-                                <br>
-                                <div *ngIf="l.userDepartment.errors.required">This field is required.</div>
-                            </div>
-                        </div>
-                        <div class="ui-g-3 ui-md-3">
-                            <label for="facilityName">Facility Name</label>
-                            <input [attr.disabled]="mode == 'View'" formControlName="facilityName" autocomplete="off" type="text" pInputText
-                                class="ui-inputtext ui-widget">
-                            <div *ngIf="submitted && f.facilityName.errors" class="text-error"><br>
-                                <div *ngIf="l.facilityName.errors.required">This field is required.</div>
-                            </div>
-                        </div>
+                        </div>                       
+                        
                         <div class="ui-g-3 ui-md-3">
                             <label for="incomeLeaseStatus">Income Lease Status</label>
-                            <p-dropdown [disabled]="mode == 'View'" inputId="incomeLeaseStatus" [options]="incomeLeaseStatuses"
+                            <p-dropdown [disabled]="isViewOnly" inputId="incomeLeaseStatus" [options]="incomeLeaseStatuses"
                                 formControlName="incomeLeaseStatus" (onChange)="setProvince($event)" optionLabel="name"></p-dropdown>
                             <div *ngIf="submitted && f.incomeLeaseStatus.errors"
                                 class="text-error"><br>
@@ -452,7 +440,7 @@
                     <div class="ui-g-12 ui-md-12">
                         <div class="ui-g-3 ui-md-3">
                             <label for="natureOfLease">Nature of Lease</label>
-                            <p-dropdown [disabled]="mode == 'View'" inputId="natureOfLease" [options]="natureOfLeases"
+                            <p-dropdown [disabled]="isViewOnly" inputId="natureOfLease" [options]="natureOfLeases"
                                 formControlName="natureOfLease" (onChange)="setDeedsOffice($event)" optionLabel="name"
                                 placeholder="Please select"></p-dropdown>
                             <div *ngIf="submitted && f.natureOfLease.errors" class="text-error">
@@ -538,7 +526,7 @@
                         </div>
                         <div class="ui-g-3 ui-md-3">
                             <label for="occupationDate">Occupation Date</label>
-                            <p-calendar [disabled]="mode == 'View'" formControlName="occupationDate" dateFormat="dd/mm/yy" showOtherMonths="true"
+                            <p-calendar [disabled]="isViewOnly" formControlName="occupationDate" dateFormat="dd/mm/yy" showOtherMonths="true"
                                 showButtonBar="true"></p-calendar>
                             <div *ngIf="submitted && f.occupationDate.errors" class="text-error">
                                 <br>
@@ -547,7 +535,7 @@
                         </div>
                         <div class="ui-g-3 ui-md-3">
                             <label for="startingDate">Starting Date</label>
-                            <p-calendar [disabled]="mode == 'View'" formControlName="startingDate" dateFormat="dd/mm/yy" showOtherMonths="true"
+                            <p-calendar [disabled]="isViewOnly" formControlName="startingDate" dateFormat="dd/mm/yy" showOtherMonths="true"
                                 showButtonBar="true"></p-calendar>
                             <div *ngIf="submitted && f.startingDate.errors" class="text-error"><br>
                                 <div *ngIf="l.startingDate.errors.required">This field is required.</div>
@@ -555,7 +543,7 @@
                         </div>
                         <div class="ui-g-3 ui-md-3">
                             <label for="terminationDate">Termination Date</label>
-                            <p-calendar [disabled]="mode == 'View'" formControlName="terminationDate" dateFormat="dd/mm/yy" showOtherMonths="true"
+                            <p-calendar [disabled]="isViewOnly" formControlName="terminationDate" dateFormat="dd/mm/yy" showOtherMonths="true"
                                 showButtonBar="true"></p-calendar>
                             <div *ngIf="submitted && f.terminationDate.errors" class="text-error">
                                 <br>
@@ -566,14 +554,14 @@
                     <div class="ui-g-12 ui-md-12"> 
                         <div class="ui-g-3 ui-md-3">
                             <label for="rentalAmount">Rental Amount</label>
-                            <p-inputNumber [disabled]="mode == 'View'" formControlName="rentalAmount" mode="currency" currency="ZAR" locale="en-ZA"></p-inputNumber>                          
+                            <p-inputNumber [disabled]="isViewOnly" formControlName="rentalAmount" mode="currency" currency="ZAR" locale="en-ZA"></p-inputNumber>                          
                             <div *ngIf="submitted && f.rentalAmount.errors" class="text-error"><br>
                                 <div *ngIf="l.rentalAmount.errors.required">This field is required.</div>
                             </div>
                         </div>
                         <div class="ui-g-3 ui-md-3">
                             <label for="otherCharges">Other charges</label>
-                            <p-inputNumber [disabled]="mode == 'View'" formControlName="otherCharges" mode="currency" currency="ZAR" locale="en-ZA"></p-inputNumber>                           
+                            <p-inputNumber [disabled]="isViewOnly" formControlName="otherCharges" mode="currency" currency="ZAR" locale="en-ZA"></p-inputNumber>                           
                             <div *ngIf="submitted && f.otherCharges.errors" class="text-error"><br>
                                 <div *ngIf="l.otherCharges.errors.required">This field is required.</div>
                             </div>
@@ -588,7 +576,7 @@
                         </div>
                         <div class="ui-g-3 ui-md-3">
                             <label for="vat">Vat Number</label>
-                            <p-dropdown [disabled]="mode == 'View'" inputId="vat" [options]="vats" formControlName="vat" (onChange)="setVat($event)"
+                            <p-dropdown [disabled]="isViewOnly" inputId="vat" [options]="vats" formControlName="vat" (onChange)="setVat($event)"
                             placeholder="Please select" optionLabel="name"></p-dropdown>
                             <div *ngIf="submitted && f.vat.errors" class="text-error"><br>
                                 <div *ngIf="l.vat.errors.required">This field is required.</div>
@@ -602,7 +590,7 @@
                     (click)="showDialog=false" label="Cancel" class="ui-button-secondary"></button>
                 <button style="float: right; margin-top: 15px" type="button" (click)="activeIndex = 1" pButton
                     icon="pi pi-angle-right" label="Next"></button>
-                <button *ngIf="mode != 'View'" style="float: right; margin-top: 15px;margin-right: 10px" type="submit" pButton
+                <button *ngIf="mode != 'View' && (currentUser.roleId == 3 || currentUser.roleId == 2)" style="float: right; margin-top: 15px;margin-right: 10px" type="submit" pButton
                     icon="pi pi-check" label="Save"></button>
             </p-footer>
         </form>
@@ -622,7 +610,7 @@
                 </div>
                 <p-fieldset legend="General" [toggleable]="true">
                     <div class="ui-g-12 ui-md-12">
-                        <div class="ui-g-6 ui-md-6">
+                        <div class="ui-g-4 ui-md-4">
                             <label for="landUseClass">Land Use Class</label>
                             <input [attr.disabled]="mode == 'View'" formControlName="landUseClass" autocomplete="off" type="text" pInputText
                                 class="ui-inputtext ui-widget">
@@ -630,7 +618,7 @@
                                 <div *ngIf="f.landUseClass.errors.required">This field is required.</div>
                             </div>
                         </div>
-                        <div class="ui-g-6 ui-md-6">
+                        <div class="ui-g-4 ui-md-4">
                             <label for="class">Nature of Asset</label>
                             <input [attr.disabled]="mode == 'View'" formControlName="natureofAsset" autocomplete="off" type="text" pInputText
                                 class="ui-inputtext ui-widget">
@@ -639,58 +627,17 @@
                             </div>
                         </div>
 
-                    </div>
-                </p-fieldset>
-
-                <p-fieldset legend="Secondary Information Note" [toggleable]="true">
-                    <div class="ui-g-12 ui-md-12">
-                        <div class="ui-g-3 ui-md-3">
-                            <label for="openingBalance">Opening Balance</label>
-                            <p-inputNumber [disabled]="mode == 'View'" formControlName="openingBalance" mode="currency" currency="ZAR" locale="en-ZA"></p-inputNumber>                         
-                            <div *ngIf="submitted && f.openingBalance.errors" class="text-error"><br>
-                                <div *ngIf="f.openingBalance.errors.required">This field is required.</div>
-                            </div>
-                        </div>
-                        <div class="ui-g-3 ui-md-3">
-                            <label for="additionCash">Additions Cash</label>
-                            <p-inputNumber [disabled]="mode == 'View'" formControlName="additionCash" mode="currency" currency="ZAR" locale="en-ZA"></p-inputNumber> 
-                            <div *ngIf="submitted && f.additionCash.errors" class="text-error"><br>
-                                <div *ngIf="f.additionCash.errors.required">This field is required.</div>
-                            </div>
-                        </div>
-                        <div class="ui-g-3 ui-md-3">
-                            <label for="additionNonCash">Additions Non Cash</label>
-                            <p-inputNumber [disabled]="mode == 'View'" formControlName="additionNonCash" mode="currency" currency="ZAR" locale="en-ZA"></p-inputNumber>                          
-                            <div *ngIf="submitted && f.additionNonCash.errors" class="text-error"><br>
-                                <div *ngIf="f.additionNonCash.errors.required">This field is required.</div>
-                            </div>
-                        </div>
-                        <div class="ui-g-3 ui-md-3">
-                            <label for="class">Additions</label>
-                            <p-inputNumber [disabled]="mode == 'View'" formControlName="addition" mode="currency" currency="ZAR" locale="en-ZA"></p-inputNumber>                            
-                            <div *ngIf="submitted && f.addition.errors" class="text-error"><br>
-                                <div *ngIf="f.addition.errors.required">This field is required.</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="ui-g-12 ui-md-12">
-                        <div class="ui-g-3 ui-md-3">
-                            <label for="disposal">Disposal</label>
-                            <p-inputNumber [disabled]="mode == 'View'" formControlName="disposal" mode="currency" currency="ZAR" locale="en-ZA"></p-inputNumber> 
-                            <div *ngIf="submitted && f.disposal.errors" class="text-error"><br>
-                                <div *ngIf="f.disposal.errors.required">This field is required.</div>
-                            </div>
-                        </div>
-                        <div class="ui-g-3 ui-md-3">
-                            <label for="closingBalance">Closing Balance</label>
-                            <p-inputNumber [disabled]="mode == 'View'" formControlName="closingBalance" mode="currency" currency="ZAR" locale="en-ZA"></p-inputNumber>
-                            <div *ngIf="submitted && f.closingBalance.errors" class="text-error"><br>
-                                <div *ngIf="f.closingBalance.errors.required">This field is required.</div>
+                        <div class="ui-g-4 ui-md-4">
+                            <label for="afs">AFS</label>
+                            <p-dropdown inputId="afs" [disabled]="isViewOnly" [options]="aFSs"
+                            placeholder="Please select" formControlName="afs" optionLabel="name">
+                            </p-dropdown>
+                            <div *ngIf="submitted && f.afs.errors" class="text-error"><br>
+                                <div *ngIf="l.afs.errors.required">This field is required.</div>
                             </div>
                         </div>
                     </div>
                 </p-fieldset>
-
                 <p-fieldset legend="Valuations" [toggleable]="true">
                     <div class="ui-g-12 ui-md-12">
                         <div class="ui-g-3 ui-md-3">
@@ -703,12 +650,16 @@
                         </div>
                         <div class="ui-g-3 ui-md-3">
                             <label for="municipalValuationDate">Date of Municipal Valuation</label>
-                            <p-calendar [disabled]="mode == 'View'" formControlName="municipalValuationDate" dateFormat="dd/mm/yy"
+                            <p-calendar [disabled]="isViewOnly" formControlName="municipalValuationDate" dateFormat="dd/mm/yy"
                                 showOtherMonths="true" showButtonBar="true"></p-calendar>
                             <div *ngIf="submitted && f.municipalValuationDate.errors" class="text-error"><br>
                                 <div *ngIf="f.municipalValuationDate.errors.required">This field is required.</div>
                             </div>
                         </div>
+                       
+                        
+                    </div>
+                    <div class="ui-g-12 ui-md-12">   
                         <div class="ui-g-3 ui-md-3">
                             <label for="class">Non Municipal Valuation</label>
                             <input [attr.disabled]="mode == 'View'" formControlName="nonMunicipalValuation" autocomplete="off" type="text" pInputText
@@ -718,31 +669,24 @@
                             </div>
                         </div>
                         <div class="ui-g-3 ui-md-3">
-                            <label for="value">Value</label>
+                            <label for="value">Fair Value</label>
                             <input [attr.disabled]="mode == 'View'" formControlName="value" autocomplete="off" type="text" pInputText
                                  class="ui-inputtext ui-widget">
                             <div *ngIf="submitted && f.value.errors" class="text-error"><br>
                                 <div *ngIf="f.value.errors.required">This field is required.</div>
                             </div>
                         </div>
-                    </div>
-                    <div class="ui-g-12 ui-md-12">                       
                         <div class="ui-g-3 ui-md-3">
                             <label for="nonMunicipalValuationDate">Date of Non Municipal Valuation</label>
-                            <p-calendar [disabled]="mode == 'View'" formControlName="nonMunicipalValuationDate" dateFormat="dd/mm/yy"
+                            <p-calendar [disabled]="isViewOnly" formControlName="nonMunicipalValuationDate" dateFormat="dd/mm/yy"
                                 showOtherMonths="true" showButtonBar="true"></p-calendar>
                             <div *ngIf="submitted && f.nonMunicipalValuationDate.errors" class="text-error"><br>
                                 <div *ngIf="f.nonMunicipalValuationDate.errors.required">This field is required.</div>
                             </div>
-                        </div>
-                        <div class="ui-g-3 ui-md-3">
-                            <label for="propetyRatesAccount">Property Rates Account No</label>
-                            <input [attr.disabled]="mode == 'View'" formControlName="propetyRatesAccount" autocomplete="off" type="text" pInputText
-                                class="ui-inputtext ui-widget">
-                            <div *ngIf="submitted && f.propetyRatesAccount.errors" class="text-error"><br>
-                                <div *ngIf="f.propetyRatesAccount.errors.required">This field is required.</div>
-                            </div>
-                        </div>
+                        </div>                       
+                        
+                    </div>
+                    <div class="ui-g-12 ui-md-12"> 
                         <div class="ui-g-3 ui-md-3">
                             <label for="accountNoForService">Account no for Services</label>
                             <input [attr.disabled]="mode == 'View'" formControlName="accountNoForService" autocomplete="off" type="text" pInputText
@@ -760,15 +704,72 @@
                                 <div *ngIf="f.personInstitutionResposible.errors.required">This field is required.</div>
                             </div>
                         </div>
+                        
+                        <div class="ui-g-3 ui-md-3">
+                            <label for="propetyRatesAccount">Property Rates Account No</label>
+                            <input [attr.disabled]="mode == 'View'" formControlName="propetyRatesAccount" autocomplete="off" type="text" pInputText
+                                class="ui-inputtext ui-widget">
+                            <div *ngIf="submitted && f.propetyRatesAccount.errors" class="text-error"><br>
+                                <div *ngIf="f.propetyRatesAccount.errors.required">This field is required.</div>
+                            </div>
+                        </div>   
                     </div>
                 </p-fieldset>
+                <p-fieldset legend="Secondary Information Note" [toggleable]="true">
+                    <div class="ui-g-12 ui-md-12">
+                        <div class="ui-g-3 ui-md-3">
+                            <label for="openingBalance">Opening Balance</label>
+                            <p-inputNumber [disabled]="isViewOnly" formControlName="openingBalance" mode="currency" currency="ZAR" locale="en-ZA"></p-inputNumber>                         
+                            <div *ngIf="submitted && f.openingBalance.errors" class="text-error"><br>
+                                <div *ngIf="f.openingBalance.errors.required">This field is required.</div>
+                            </div>
+                        </div>
+                        <div class="ui-g-3 ui-md-3">
+                            <label for="additionCash">Additions Cash</label>
+                            <p-inputNumber [disabled]="isViewOnly" formControlName="additionCash" mode="currency" currency="ZAR" locale="en-ZA"></p-inputNumber> 
+                            <div *ngIf="submitted && f.additionCash.errors" class="text-error"><br>
+                                <div *ngIf="f.additionCash.errors.required">This field is required.</div>
+                            </div>
+                        </div>
+                        <div class="ui-g-3 ui-md-3">
+                            <label for="additionNonCash">Additions Non Cash</label>
+                            <p-inputNumber [disabled]="isViewOnly" formControlName="additionNonCash" mode="currency" currency="ZAR" locale="en-ZA"></p-inputNumber>                          
+                            <div *ngIf="submitted && f.additionNonCash.errors" class="text-error"><br>
+                                <div *ngIf="f.additionNonCash.errors.required">This field is required.</div>
+                            </div>
+                        </div>
+                        <div class="ui-g-3 ui-md-3">
+                            <label for="class">Additions</label>
+                            <p-inputNumber [disabled]="isViewOnly" formControlName="addition" mode="currency" currency="ZAR" locale="en-ZA"></p-inputNumber>                            
+                            <div *ngIf="submitted && f.addition.errors" class="text-error"><br>
+                                <div *ngIf="f.addition.errors.required">This field is required.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ui-g-12 ui-md-12">
+                        <div class="ui-g-3 ui-md-3">
+                            <label for="disposal">Disposal</label>
+                            <p-inputNumber [disabled]="isViewOnly" formControlName="disposal" mode="currency" currency="ZAR" locale="en-ZA"></p-inputNumber> 
+                            <div *ngIf="submitted && f.disposal.errors" class="text-error"><br>
+                                <div *ngIf="f.disposal.errors.required">This field is required.</div>
+                            </div>
+                        </div>
+                        <div class="ui-g-3 ui-md-3">
+                            <label for="closingBalance">Closing Balance</label>
+                            <p-inputNumber [disabled]="isViewOnly" formControlName="closingBalance" mode="currency" currency="ZAR" locale="en-ZA"></p-inputNumber>
+                            <div *ngIf="submitted && f.closingBalance.errors" class="text-error"><br>
+                                <div *ngIf="f.closingBalance.errors.required">This field is required.</div>
+                            </div>
+                        </div>
+                    </div>
+                </p-fieldset>                
             </div>
             <p-footer>
                 <button style="float: left; margin-top: 15px;" type="button" pButton icon="pi pi-angle-left"
                     (click)="activeIndex = 0" label="Back" class="ui-button-secondary"></button>
                 <button style="float: right; margin-top: 15px" type="button" pButton icon="pi pi-angle-right"
                     label="Next" (click)="activeIndex = 2"></button>
-                <button *ngIf="mode != 'View'" style="float: right; margin-top: 15px;margin-right: 10px" type="submit" pButton
+                <button *ngIf="mode != 'View' && (currentUser.roleId == 3 || currentUser.roleId == 2)" style="float: right; margin-top: 15px;margin-right: 10px" type="submit" pButton
                     icon="pi pi-check" label="Save"></button>
             </p-footer>
         </form>
@@ -799,7 +800,7 @@
                         </div>
                         <div class="ui-g-3 ui-md-3">
                             <label for="class">Type</label>
-                            <p-dropdown [disabled]="mode == 'View'" inputId="type" [options]="typeOfImprovements" formControlName="type"
+                            <p-dropdown [disabled]="isViewOnly" inputId="type" [options]="typeOfImprovements" formControlName="type"
                                 (onChange)="setClass($event)" optionLabel="name"
                                 placeholder="Please select" >
                             </p-dropdown>
@@ -817,7 +818,7 @@
                         </div>
                         <div class="ui-g-3 ui-md-3">
                             <label for="class">Potential Use</label>
-                            <p-dropdown [disabled]="mode == 'View'" inputId="potentialUse" [options]="potentialUseList"
+                            <p-dropdown [disabled]="isViewOnly" inputId="potentialUse" [options]="potentialUseList"
                             placeholder="Please select" formControlName="potentialUse" (onChange)="setClass($event)" optionLabel="name">
                             </p-dropdown>
                             <div *ngIf="submitted && I.potentialUse.errors" class="text-error"><br>
@@ -856,7 +857,7 @@
                         </div>
                         <div class="ui-g-3 ui-md-3">
                             <label for="class">Condition Rating</label>
-                            <p-dropdown [disabled]="mode == 'View'" inputId="conditionRating" [options]="conditionRatings"
+                            <p-dropdown [disabled]="isViewOnly" inputId="conditionRating" [options]="conditionRatings"
                                 formControlName="conditionRating" (onChange)="setConditionRating($event)"
                                 placeholder="Please select" optionLabel="name">
                             </p-dropdown>
@@ -877,7 +878,7 @@
                         </div>
                         <div class="ui-g-3 ui-md-3">
                             <label for="class">Functional Performance Rating</label>
-                            <p-dropdown [disabled]="mode == 'View'" inputId="functionalPerformanceRating" [options]="functionalPerformanceRatings"
+                            <p-dropdown [disabled]="isViewOnly" inputId="functionalPerformanceRating" [options]="functionalPerformanceRatings"
                                 formControlName="functionalPerformanceRating" (onChange)="setClass($event)"
                                 placeholder="Please select" optionLabel="name">
                             </p-dropdown>
@@ -946,12 +947,13 @@
                 <div>
                     <button style="float: left; margin-top: 15px;" type="button" pButton icon="pi pi-angle-left"
                     (click)="activeIndex = 1" label="Back" class="ui-button-secondary"></button>
-                <button *ngIf="mode != 'View'" style="float: right; margin-top: 15px" type="button" (click)="onSubmit()" pButton
+                <button *ngIf="mode != 'View' && (currentUser.roleId == 3 || currentUser.roleId == 2)" style="float: right; margin-top: 15px" type="button" (click)="onSubmit()" pButton
                     icon="pi pi-angle-right" label="Submit" (click)="activeIndex = 2"></button>
-                <button *ngIf="mode != 'View'" style="float: right; margin-top: 15px;margin-right: 10px" type="submit" pButton
-                    icon="pi pi-check" label="Save"></button>
-                </div>
-               
+                    <button *ngIf="mode != 'View' && currentUser.roleId == 4" style="float: right; margin-top: 15px" type="button" (click)="onSubmit()" pButton
+                    icon="pi pi-angle-right" label="Sign Off" (click)="activeIndex = 2"></button>
+                    <button *ngIf="mode != 'View' && currentUser.roleId == 5" style="float: right; margin-top: 15px" type="button" (click)="onSubmit()" pButton
+                    icon="pi pi-angle-right" label="Approve" (click)="activeIndex = 2"></button>
+                </div>               
             </p-footer>
         </form>
     </p-tabPanel>

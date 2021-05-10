@@ -15,9 +15,9 @@ export class AddUserComponent implements OnInit {
       { name: 'Administrator', code: 'SA', factor: 1 },
       { name: 'Approver', code: 'A', factor: 3 },
       { name: 'Capturer', code: 'C', factor: 2 },
-      { name: 'Manager', code: 'M', factor: 4 },
+      { name: 'Manager', code: 'M', factor: 5 },
       { name: 'Verifier', code: 'DV', factor: 4 },
-      { name: 'Viewer', code: 'V', factor: 4 },
+      { name: 'Viewer', code: 'V', factor: 6 },
     ];
   }
 

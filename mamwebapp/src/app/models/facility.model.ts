@@ -19,6 +19,10 @@ export class Facility {
     createdDate: Date;
     modifiedBy: string;
     modifiedDate: Date;
+    approvedBy: string;
+    approvedDate: Date;
+    singedOffBy: string;
+    singedOffDate: Date;
 }
 
 export class Land {

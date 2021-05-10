@@ -47,7 +47,7 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },  
   {
-    path: 'properties',
+    path: 'uamp',
     component: PropertiesComponent,
     canActivate: [AuthGuard],
   },
