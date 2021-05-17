@@ -1,40 +1,149 @@
 <p-toast [style]="{marginTop: '90px'}" position="top-right"></p-toast>
-<p-table [value]="[{}]">
-    <ng-template pTemplate="header">
-        <tr>
-            <th>Province</th>
-            <th>Town</th>
-            <th style="width: 200px;">Unique Identifying Code</th>
-            <!--<th>Possible non-asset solutions</th>-->
-            <th>Common Asset Description</th>
-            <th>Current Use</th>
-            <th>Required Performance Standard</th>
-            <th>Accessiblity Rating</th>
-            <th>Suitability Index</th>
-            <th>Condition Rating</th>
-            <th>Operating Performance Index</th>
-            <th>Functional Performance Rating</th>
-        </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-rowData>
-        <tr *ngFor="let assetPerformance of assetsFunctionalPerformances">
-            <td>{{assetPerformance.province}}</td>
-            <td>{{assetPerformance.town}}</td>
-            <td>{{assetPerformance.uniqueIdentifyingCode}}</td>
-           <!-- <td><textarea [(ngModel)]="assetPerformance.possibleNonAssetSolutions" [rows]="6" [cols]="10" pInputTextarea></textarea></td>-->
-            <td>{{assetPerformance.commonAssetDescription}}</td>
-            <td><textarea [(ngModel)]="assetPerformance.currentUse" [rows]="6" [cols]="10" pInputTextarea></textarea></td>
-            <td><textarea [(ngModel)]="assetPerformance.requiredPerformanceStandard" [rows]="6" [cols]="10" pInputTextarea></textarea></td>
-            <td><textarea [(ngModel)]="assetPerformance.accessabilityRating" [rows]="6" [cols]="10" pInputTextarea></textarea></td>
-            <td><textarea [(ngModel)]="assetPerformance.suitabilityIndex" [rows]="6" [cols]="10" pInputTextarea></textarea></td>
-            <td><textarea [(ngModel)]="assetPerformance.conditionRating" [rows]="6" [cols]="10" pInputTextarea></textarea></td>
-            <td><textarea [(ngModel)]="assetPerformance.operatingPerformanceIndex" [rows]="6" [cols]="10" pInputTextarea></textarea></td>
-            <td><textarea [(ngModel)]="assetPerformance.functionalPerformanceRating" [rows]="6" [cols]="10" pInputTextarea></textarea></td>
-        </tr>
-    </ng-template>
-</p-table>
+<div class="header">
+    <header>
+        STRATEGIC NEEDS ASSESSMENT: CURRENT UTILISATION/NEEDS ASSESSMENT OF ACCOMMODATION OCCUPIED
+    </header>
+</div>
+<br>
+<br>
+<div class="ui-g ui-fluid" style="overflow-y: auto; overflow-x: hidden; height: 500px;width: 100%">
+    <form [formGroup]="assessmentStrategicForm">
+        <div class="ui-g-12 ui-md-12">
+            <div class="ui-g-6 ui-md-6" style="margin-top: 25px;">
+                <div class="ui-g-6 ui-md-6">
+                    <small for="postDescriptionTitle">Post Description/ Title</small>
+                <input formControlName="postDescriptionTitle" autocomplete="off" type="text" pInputText
+                    class="ui-inputtext ui-widget">
+                <div *ngIf="submitted && a.mission.errors" class="text-error"><br>
+                    <div *ngIf="a.mission.errors.required">This field is required.</div>
+                </div>
+                </div>
+                <div class="ui-g-6 ui-md-6">
+                    <small for="postDescriptionTitle">Allocated Space</small>
+                    <input formControlName="postDescriptionTitle" autocomplete="off" type="text" pInputText
+                        class="ui-inputtext ui-widget">
+                        <small>As per usable office space</small>
+                    <div *ngIf="submitted && a.mission.errors" class="text-error"><br>
+                        <div *ngIf="a.mission.errors.required">This field is required.</div>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="ui-g-6 ui-md-6" >
+                <label style="float: left;">Space Utilisation</label>
+                <div class="ui-g-12 ui-md-12">
+                <div class="ui-g-6 ui-md-6">
+                    <small for="surplusShortageAccommodation"> Surplus (+) or Shortage (-) of Accommodation(m²)
+                    </small>
+                    <input formControlName="surplusShortageAccommodation" autocomplete="off" type="text" pInputText
+                        class="ui-inputtext ui-widget">
+                    <div *ngIf="submitted && a.mission.errors" class="text-error"><br>
+                        <div *ngIf="a.mission.errors.required">This field is required.</div>
+                    </div>
+                </div>
+                <div class="ui-g-6 ui-md-6">
+                    <small for="percentageUtilised">Percentage Utilised</small>
+                    <input formControlName="postDescriptionTitle" autocomplete="off" type="text" pInputText
+                        class="ui-inputtext ui-widget">
+                        <small>(↑Over Utilisation) (↓Under Utilisation) (%)</small>
+                    <div *ngIf="submitted && a.mission.errors" class="text-error"><br>
+                        <div *ngIf="a.mission.errors.required">This field is required.</div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
 
-<div>
-    <button pButton type="button" label="Save FunctionalPerformances" (click)="saveFunctionalPerformances()" style="float: right;margin-top: 10px;"></button>
-   <!--<button pButton type="button" label="Add Functional Performance" (click)="addAssetFunctionalPerformance()" style="float: right;margin-right: 10px;margin-top: 10px;"></button>--> 
+        <div class="ui-g-12 ui-md-12">
+            <div class="ui-g-6 ui-md-6">
+                <div>Requirements in Terms of filled & budgeted Posts</div>
+                <div>
+                    <div class="ui-g-3 ui-md-3">
+                        <small>Level</small>
+                        <p-inputNumber formControlName="level"></p-inputNumber>
+                    </div>
+                    <div class="ui-g-3 ui-md-3">
+                        <small>Quantity</small>
+                        <p-inputNumber formControlName="quantity"></p-inputNumber>
+                    </div>
+                    <div class="ui-g-3 ui-md-3">
+                        <small>Norm</small>
+                        <p-inputNumber formControlName="norm"></p-inputNumber>
+                    </div>
+                    <div class="ui-g-3 ui-md-3">
+                        <small>Requirement</small>
+                        <p-inputNumber formControlName="requirement"></p-inputNumber>
+                        <small>I.T.O. NORM (m²)</small>
+                    </div>
+                </div>
+            </div>
+            <div class="ui-g-6 ui-md-6">
+                <div>Requirements in Terms of Approved Organogram</div>
+                <div class="ui-g-12 ui-md-12">
+                    <div class="ui-g-3 ui-md-3">
+                        <small>Level</small>
+                        <p-inputNumber formControlName="level"></p-inputNumber>
+                    </div>
+                    <div class="ui-g-3 ui-md-3">
+                        <small>Quantity</small>
+                        <p-inputNumber formControlName="quantity"></p-inputNumber>
+                    </div>
+                    <div class="ui-g-3 ui-md-3">
+                        <small>Norm</small>
+                        <p-inputNumber formControlName="norm"></p-inputNumber>
+                    </div>
+                    <div class="ui-g-3 ui-md-3">
+                        <small>Requirement</small>
+                        <p-inputNumber formControlName="requirement"></p-inputNumber>
+                        <small>I.T.O. NORM (m²)</small>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <div class="ui-g-12 ui-md-12">
+            <button pButton type="button" label="Add Strategic Needs Assessment" (click)="addStrategicNeedsAssessment()"
+            style="float: right;width: fit-content;"></button>
+        </div>
+    </form>
+</div>
+
+<div style="margin-top: -150px;">
+    <p-table [value]="strategicNeedsAssessments" styleClass="p-datatable-striped">
+        <ng-template pTemplate="header">
+            <tr>
+                <th></th>
+                <th colspan="4">Requirements in Terms of Approved Organogram</th>
+                <th colspan="4">Requirements in Terms of filled & budgeted Posts</th>
+                <th></th>                
+                <th colspan="2">Space Utilisation</th>
+            </tr>
+            <tr>
+                <th style="width: 90px !important;">Post Description/ Title</th>
+                <th style="width: 50px !important;">Level</th>
+                <th style="width: 50px !important;">Quantity</th>
+                <th style="width: 50px !important;">Norm</th>
+                <th style="width: 50px !important;">Requirement</th>
+                <th style="width: 50px !important;">Level</th>
+                <th style="width: 50px !important;">Quantity</th>
+                <th style="width: 50px !important;">Norm</th>
+                <th style="width: 50px !important;">Requirement</th>
+                <th style="width: 90px !important;">Allocated Space</th>
+                <th>Surplus (+) or Shortage (-) of Accommodation(m²)</th>
+                <th>Percentage Utilised</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowData let-editing="editing" let-ri="rowIndex">
+            <tr [pEditableRow]="rowData">
+                <td *ngFor="let programme of programmes">
+                    {{rowData[col.field]}}
+                </td>
+                <td style="text-align: center;" *ngIf="programmes.length > 0">
+                    <p-splitButton label="More" *ngIf="mode != 'View'" [model]="buttonItems"
+                        (onDropdownClick)="selectImprovement(rowData)" styleClass="p-button-secondary">
+                    </p-splitButton>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
 </div>

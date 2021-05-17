@@ -16,7 +16,7 @@ namespace MAM.API.Services
         List<FacilitySummaryChart> GetFacilitySummaries();
         List<MapCoordinate> GetMapCoordinates();
         List<Facility> GetAllFacilities();
-        List<Facility> GetProperties();
+        List<Facility> GetProperties(string userDepartment);
         Facility GetFacilityById(int id, FacilityTypes facilityType);
         Facility SaveFacility(string step, Facility facility);
         bool UpdateFacility(string step, Facility facility);
@@ -70,11 +70,11 @@ namespace MAM.API.Services
             }
         }
 
-        public List<Facility> GetProperties()
+        public List<Facility> GetProperties(string userDepartment)
         {
             using (var _facilityRepository = new FacilityRepository(_appSettings))
             {
-                return _facilityRepository.GetProperties();
+                return _facilityRepository.GetProperties(userDepartment);
             }
         }
 

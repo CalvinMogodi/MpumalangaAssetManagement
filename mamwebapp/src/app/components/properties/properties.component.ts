@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { User } from 'mamwebapp/src/app/models/user.model';
 import { first } from 'rxjs/operators';
 import { Facility } from 'src/app/models/facility.model';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 import { FacilityService } from '../../services/facility/facility.service';
 
 @Component({
@@ -9,44 +11,43 @@ import { FacilityService } from '../../services/facility/facility.service';
   styleUrls: ['./properties.component.css']
 })
 export class PropertiesComponent implements OnInit {
-  facilities: Facility[];
+  properties: Facility[];
   selectedFacility: Facility;
   leasedPropertyCount: Number = 0;
-  activeIndex: number = 1;
+  activeIndex: number = 0;
   stateOwnedPropertyCount: Number = 0;
   showDialog: Boolean = false;
   showUAMP: Boolean = false;
+  currentUser: User; 
 
-  constructor(public facilityService: FacilityService) { 
+  constructor(public facilityService: FacilityService, private authenticationService: AuthenticationService) { 
     
   }
 
   ngOnInit() {
+    this.authenticationService.currentUser.pipe().subscribe(x => {
+      this.currentUser = x;
+    });
     this.getProperties();
   }
 
-  getFacilities() {
-
-  }
-
   getProperties(){
-    this.facilities = [];
-    this.facilityService.getProperties().pipe(first()).subscribe(facilities => {
-      
-        facilities.forEach((facility) => {
+    this.properties = [];
+    this.facilityService.getProperties(this.currentUser.department).pipe(first()).subscribe(properties => {      
+      properties.forEach((facility) => {
           if(facility.status.toLowerCase().trim() == 'submitted'){
           if(facility.land != undefined && facility.finance != undefined){
             if(facility.land.leaseStatus != undefined && facility.land.propertyDescription != undefined 
               && facility.land.geographicalLocation != undefined && facility.land.landUseManagementDetail != undefined
               && facility.finance.secondaryInformationNote != undefined && facility.finance.valuation != undefined ){                       
-              this.facilities.push(facility);
-              }              
+              this.properties.push(facility);
+              }               
             }
             
           }        
       });
-      this.stateOwnedPropertyCount = this.facilities.filter(f => f.land.landUseManagementDetail.ownershipCategory == 'State-Owned').length;
-      this.leasedPropertyCount = this.facilities.filter(f => f.land.landUseManagementDetail.ownershipCategory == 'Non-State Owned').length;
+      this.stateOwnedPropertyCount = this.properties.filter(f => f.land.landUseManagementDetail.ownershipCategory == 'State-Owned').length;
+      this.leasedPropertyCount = this.properties.filter(f => f.land.landUseManagementDetail.ownershipCategory == 'Non-State Owned').length;
     });
   }
 

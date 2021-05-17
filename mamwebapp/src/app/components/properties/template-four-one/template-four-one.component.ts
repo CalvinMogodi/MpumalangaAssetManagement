@@ -5,12 +5,12 @@ import { MessageService } from 'primeng/api';
 import { CurrentUtlisation } from '../../../models/current-utilisation.model';
 
 @Component({
-  selector: 'app-schedule-of-current-utilisation',
-  templateUrl: './schedule-of-current-utilisation.component.html',
-  styleUrls: ['./schedule-of-current-utilisation.component.css'],
+  selector: 'app-template-four-one',
+  templateUrl: './template-four-one.component.html',
+  styleUrls: ['./template-four-one.component.css'],
   providers: [MessageService]
 })
-export class ScheduleOfCurrentUtilisationComponent implements OnInit {
+export class TemplateFourOneComponent implements OnInit { 
   scheduleCurrentUtilisation: CurrentUtlisation[] = [];
 
   constructor(public uampService: UAMPService, private messageService: MessageService) {
@@ -36,5 +36,4 @@ export class ScheduleOfCurrentUtilisationComponent implements OnInit {
       this.scheduleCurrentUtilisation = scheduleCurrentUtilisation;
     });
   }
-
 }

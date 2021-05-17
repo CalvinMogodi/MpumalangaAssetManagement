@@ -1,0 +1,90 @@
+<div class="header">
+    <header>
+        ANNEXURE B: LEASED  ASSETS OCCUPIED BY/ ALLOCATED TO SCHEDULE OF CURRENT LEASED ACCOMMODATION 	
+    </header>
+</div>
+<br>
+
+<form [formGroup]="propertyForm">
+    <p-table [value]="tableRowArray.controls" [responsive]="true">
+        <ng-template pTemplate="header">
+            <tr>
+                <th style="width: 120px;">Serial No.</th>
+                <th style="width: 120px;">User Dept Code</th>
+                <th style="width: 120px;">File Reference No.</th>
+                <th style="width: 120px;">District</th>
+                <th>Town</th>
+                <th>Local Municipality</th>
+                <th>Asset Description</th>
+                <th>Old Street Address</th>
+                <th>Current Street Address</th>
+                <th>Property Description</th>
+                <th style="width: 130px;">Asset Type</th>
+                <th style="width: 100px;">No. OF Parking Bays Allocated</th>
+                <th style="width: 100px;">Lettable Space<br> <small>(M²) 0000.00</small></th>
+                <th style="width: 100px;">Extent of Land (HA) <br> <small>(M²) 0000.00</small></th>                
+                <th>Rental PM</th>
+                <th>Rental PA</th>
+                <th>Operational Cost</th>
+                <th>Lease Start Date</th>
+                <th >Lease End Date</th>
+                <th >Lease Term</th>       
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowData let-rowIndex="rowIndex">
+            <ng-container formArrayName="tableRowArray">
+                <tr [formGroupName]="rowIndex" *ngFor="let property of properties">
+                    <td>{{rowIndex}}</td>
+                    <td>{{property.land.propertyDescription.userDepartment}}</td>
+                    <td>{{property.fileReference}}</td>
+                    <td>{{property.land.geographicalLocation.districtMunicipality}}</td>
+                    <td>{{property.land.geographicalLocation.town}}</td>
+                   <td>{{property.land.geographicalLocation.localAuthority}}</td>
+                    <td>{{property.name}}</td>
+                    <td>{{property.land.geographicalLocation.streetNumber}}
+                        {{property.land.geographicalLocation.streetName}}</td>
+                    <td>{{property.land.geographicalLocation.streetNumber}}
+                            {{property.land.geographicalLocation.streetName}}</td>                 
+                    <td>{{property.land.propertyDescription.oldDescription}}</td>
+                    <td>{{property.type}}</td>
+                    <td>
+                        <input style="width: 70px;" formControlName="parkingBaysNumber" autocomplete="off" type="text"
+                            pInputText class="ui-inputtext ui-widget">
+                    </td>
+                    <td>
+                        <input style="width: 70px;" formControlName="lettableSpace" autocomplete="off"
+                            type="text" pInputText class="ui-inputtext ui-widget">
+                    </td>
+                    <td>{{property.land.propertyDescription.extent}}</td>
+                    <td>
+                        <p-inputNumber style="width: 120px !important;" formControlName="rentalAmountPM" mode="currency" currency="ZAR" locale="en-ZA"></p-inputNumber>  
+                     
+                    </td>
+                    <td>
+                        <p-inputNumber style="width: 120px !important;" formControlName="rentalAmountPA" mode="currency" currency="ZAR" locale="en-ZA"></p-inputNumber> 
+                       
+                    </td>
+                    <td>
+                        <p-inputNumber style="width: 120px !important;" formControlName="operationalCost" mode="currency" currency="ZAR" locale="en-ZA"></p-inputNumber>                      
+                        
+                    </td>
+                    <td>
+                        <p-calendar formControlName="leaseStartDate" dateFormat="dd/mm/yy"
+                                showOtherMonths="true" showButtonBar="true"></p-calendar>
+                      
+                    </td>
+                    <td>
+                        <p-calendar formControlName="leaseEndDate" dateFormat="dd/mm/yy"
+                                showOtherMonths="true" showButtonBar="true"></p-calendar>
+                       
+                    </td>
+                    <td>
+                        <input style="width: 130px;" formControlName="leaseTerm" autocomplete="off" type="text"
+                            pInputText class="ui-inputtext ui-widget">
+                       
+                    </td>                
+                </tr>
+            </ng-container>
+        </ng-template>
+    </p-table>
+</form>

@@ -9,6 +9,7 @@ namespace MAM.DataAccess.Tables
         public int Id { get; set; }
         public string LandUseClass { get; set; }
         public string NatureofAsset { get; set; }
+        public string AFS { get; set; }
         public int? SecondaryInformationNoteId { get; set; }
         public int? ValuationId { get; set; }
         public SecondaryInformationNote SecondaryInformationNote { get; set; }

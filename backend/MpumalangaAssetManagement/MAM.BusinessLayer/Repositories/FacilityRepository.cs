@@ -209,13 +209,13 @@ namespace MAM.BusinessLayer.Repositories
             return facilities;
         }
 
-        public List<Facility> GetProperties()
+        public List<Facility> GetProperties(string userDepartment)
         {
             List<Facility> facilities = new List<Facility>();
             Facility facility = new Facility();
             using (var dataAccess = new DataAccess.Repositories.FacilityRepository(appSettings.ConnectionString))
             {
-                var _facilities = facility.ConvertToFacilities(dataAccess.GetFacilities());
+                var _facilities = facility.ConvertToFacilities(dataAccess.GetProperties(userDepartment));
                 facilities.AddRange(_facilities);
             }
             return facilities;

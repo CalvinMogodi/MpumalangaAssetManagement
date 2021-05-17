@@ -12,6 +12,7 @@ namespace MAM.DataAccess.Tables
         public string Name { get; set; }
         public string FileReference { get; set; }
         public string Type { get; set; }
+        public string VestedType { get; set; }       
         public string Survey { get; set; }
         public string ClientCode { get; set; }
         [ForeignKey("Id")]
@@ -31,12 +32,9 @@ namespace MAM.DataAccess.Tables
         public DateTime? SingedOffDate { get; set; }
         [ForeignKey("Id")]
         public int? ModifierId { get; set; }
-        public DateTime? ModifiedDate { get; set; }
+        public DateTime? ModifiedDate { get; set; }      
         public virtual Land Land { get; set; }
         public virtual Finance Finance { get; set; }
-        public virtual List<Improvement> Improvements { get; set; }
-        public virtual User Verifier { get; set; }
-        public virtual User Approver { get; set; }
-        public virtual User Capturer { get; set; }
+        public virtual List<Improvement> Improvements { get; set; }       
     }
 }

@@ -16,5 +16,5 @@ export class User {
     modifiedDate?: Date;
     modifiedUserId?: number;
     token?: string;
-    department: string
+    department: string;
 }

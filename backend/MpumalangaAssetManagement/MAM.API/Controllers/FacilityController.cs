@@ -101,12 +101,12 @@ namespace MAM.API.Controllers
         }
 
         [HttpGet]
-        [Route("getproperties")]
-        public IActionResult GetProperties()
+        [Route("getproperties/{userDepartment}")]
+        public IActionResult GetProperties(string userDepartment)
         {
             try
             {
-                List<Facility> facilities = _facilityService.GetProperties();
+                List<Facility> facilities = _facilityService.GetProperties(userDepartment);
                 return Ok(facilities);
             }
             catch (Exception ex)

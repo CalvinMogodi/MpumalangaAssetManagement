@@ -3,12 +3,12 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Facility } from 'src/app/models/facility.model';
 
 @Component({
-  selector: 'app-template-two',
-  templateUrl: './template-two.component.html',
-  styleUrls: ['./template-two.component.css']
+  selector: 'app-template-five-two',
+  templateUrl: './template-five-two.component.html',
+  styleUrls: ['./template-five-two.component.css']
 })
-export class TemplateTwoComponent implements OnInit {
-  @Input() facilities: Facility[];
+export class TemplateFiveTwoComponent implements OnInit {
+  @Input() properties: Facility[];
   test: Number[];
   stateOwnedFacilities: Facility[];
   leasedFacilities: Facility[];
@@ -20,12 +20,12 @@ export class TemplateTwoComponent implements OnInit {
 
   ngOnInit() {
     this.sumExtent();
-    this.stateOwnedFacilities = this.facilities.filter(f => f.land.landUseManagementDetail.ownershipCategory == 'State-Owned');
-    this.leasedFacilities = this.facilities.filter(f => f.land.landUseManagementDetail.ownershipCategory == 'Non-State Owned');
+    this.stateOwnedFacilities = this.properties.filter(f => f.land.landUseManagementDetail.ownershipCategory == 'State-Owned');
+    this.leasedFacilities = this.properties.filter(f => f.land.landUseManagementDetail.ownershipCategory == 'Non-State Owned');
   }
 
   sumExtent(){    
-    this.facilities.forEach( (element) => {
+    this.properties.forEach( (element) => {
       if(element.land != null){
         if(element.land.propertyDescription != null){
           if(element.land.propertyDescription.extent != null){
@@ -33,8 +33,7 @@ export class TemplateTwoComponent implements OnInit {
               this.stateOwnedFacilitiesExtentTotal = this.stateOwnedFacilitiesExtentTotal + element.land.propertyDescription.extent;
             }else if(element.land.landUseManagementDetail.ownershipCategory == 'Non-State Owned'){
               this.leasedFacilitiesExtentTotal = this.leasedFacilitiesExtentTotal + element.land.propertyDescription.extent;
-            }
-            
+            }            
           }
         }
       }

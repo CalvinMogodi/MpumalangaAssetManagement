@@ -1,0 +1,12 @@
+header{
+    font-size: larger;
+    font-weight: normal;
+    padding: 15px;
+  }
+  
+  .header{
+    background-color: #9FA7AF;
+      border: 1px solid #007ad9;
+      color: white;
+      margin: -8px -15px 0px -15px;
+  }

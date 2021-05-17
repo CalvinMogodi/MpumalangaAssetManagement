@@ -1,34 +1,102 @@
 <p-toast [style]="{marginTop: '90px'}" position="top-right"></p-toast>
-<div>
-    <div>Summary:</div>
-    <textarea [cols]="180" pInputTextarea></textarea>
+<div class="header">
+    <header>SUMMARY OF ACCOMMODATION REQUIREMENTS PER BUDGET PROGRAMME
+    </header>
 </div>
-  <p-table [value]="[{}]">
-    <ng-template pTemplate="header">
-        <tr>
-            <th>Programme</th>
-            <th>Planned outputs</th>
-            <th>Required service level</th>
-            <th>Possible non-asset solutions</th>
-            <th>Optimal asset solution</th>
-            <th>Motivation</th>
-            <th>Rationale for chosen solution</th>
-        </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-rowData>
-        <tr *ngFor="let programme of programmes">
-            <td><textarea [(ngModel)]="programme.name" [rows]="6" pInputTextarea placeholder="e.g Administration"></textarea></td>
-            <td><textarea [(ngModel)]="programme.plannedOutputs" [rows]="5" pInputTextarea></textarea></td>
-            <td><textarea [(ngModel)]="programme.requiredServiceLevel" [rows]="6" pInputTextarea></textarea></td>
-            <td><textarea [(ngModel)]="programme.possibleNonAssetSolutions" [rows]="6" pInputTextarea placeholder="e.g Service delivery node within 30 min per taxi"></textarea></td>
-            <td><textarea [(ngModel)]="programme.optimalAssetSolutions" [rows]="6" pInputTextarea placeholder="e.g Head office in Pretoria for 1000 people"></textarea></td>
-            <td><textarea [(ngModel)]="programme.motivation" [rows]="6" pInputTextarea placeholder="e.g Staff complement of head office will increase from 900 to 1000"></textarea></td>
-            <td><textarea [(ngModel)]="programme.rationaleForChosenSolution" [rows]="6" pInputTextarea></textarea></td>
-        </tr>
-    </ng-template>
-</p-table>
 
-<div>
-    <button pButton type="button" label="Save Programmes" (click)="saveProgrammes()" style="float: right;margin-top: 10px;"></button>
-    <button pButton type="button" label="Add Programme" (click)="addProgram()" style="float: right;margin-right: 10px;margin-top: 10px;"></button>
+<div class="ui-g ui-fluid" style="overflow-y: auto; overflow-x: hidden; height: 500px;width: 100%">
+    <form [formGroup]="optimalSupportingAccommodationForm" style="width: inherit;margin-bottom: -100px;">
+        <div class="ui-g-12 ui-md-12">
+            <div class="ui-g-6 ui-md-6">
+                <label for="mission">Mission</label>
+                <input formControlName="mission" autocomplete="off" type="text" pInputText
+                    class="ui-inputtext ui-widget">
+                <div *ngIf="submitted && o.mission.errors" class="text-error"><br>
+                    <div *ngIf="o.mission.errors.required">This field is required.</div>
+                </div>
+            </div>
+            <div class="ui-g-6 ui-md-6">
+                <label for="optimalSupportingAccommodation">Optimal supporting accommodation</label>
+                <input formControlName="optimalSupportingAccommodation" autocomplete="off" type="text" pInputText
+                    class="ui-inputtext ui-widget">
+                <div *ngIf="submitted && o.optimalSupportingAccommodation.errors" class="text-error"><br>
+                    <div *ngIf="o.optimalSupportingAccommodation.errors.required">This field is required.</div>
+                </div>
+                <span style="font-size: xx-small;">(What are the optimal assets required to support this mission)</span>
+            </div>
+        </div>
+    </form>
+    <p-fieldset legend="Programme" [toggleable]="true" >
+        <form [formGroup]="programmeForm">
+            <div class="ui-g-12 ui-md-12">
+                <div class="ui-g-6 ui-md-6">
+                    <label for="corporateObjective">Corporate Objectives</label>
+                    <input formControlName="corporateObjective" autocomplete="off" type="text" pInputText
+                        class="ui-inputtext ui-widget">
+                    <div *ngIf="submitted && p.corporateObjective.errors" class="text-error"><br>
+                        <div *ngIf="p.corporateObjective.errors.required">This field is required.</div>
+                    </div>
+                </div>
+                <div class="ui-g-6 ui-md-6">
+                    <label for="outcomes">Outcomes/ Planned Outputs</label>
+                    <input formControlName="outcomes" type="text" pInputText class="ui-inputtext ui-widget">
+                    <div *ngIf="submitted && p.outcomes.errors" class="text-error"><br>
+                        <div *ngIf="p.outcomes.errors.required">This field is required.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="ui-g-12 ui-md-12">
+                <div class="ui-g-6 ui-md-6">
+                    <label for="optimalSupportingAccommodationSolution">Optimal Supporting Accommodation
+                        Solution</label>
+                    <input formControlName="optimalSupportingAccommodationSolution" autocomplete="off" type="text"
+                        pInputText class="ui-inputtext ui-widget">
+                    <div *ngIf="submitted && p.optimalSupportingAccommodationSolution.errors" class="text-error"><br>
+                        <div *ngIf="p.optimalSupportingAccommodationSolution.errors.required">This field is required.
+                        </div>
+                    </div>
+                    <span style="font-size: xx-small;">(Give a brief summary of the accommodation requirements, current
+                        usage and solutions for Head Office& Regions / Districts)</span>
+                </div>
+                <div class="ui-g-6 ui-md-6">
+                    <label for="rationaleChosenSolution">Rationale for Chosen Solution</label>
+                    <input formControlName="rationaleChosenSolution" autocomplete="off" type="text" pInputText
+                        class="ui-inputtext ui-widget">
+                    <div *ngIf="submitted && p.rationaleChosenSolution.errors" class="text-error"><br>
+                        <div *ngIf="p.rationaleChosenSolution.errors.required">This field is required.</div>
+                    </div>
+                    <span style="font-size: xx-small;">Provide a brief motivation for your solutions</span>
+                </div>
+            </div>
+            <div class="ui-g-12 ui-md-12">
+                <button pButton title="Add Programme" label="Add Programme" type="button" (click)="addProgram()"
+                    icon="pi pi-plus" style="float: right;width: auto;"></button>
+            </div>
+        </form>
+    </p-fieldset>
+</div>
+<div style="margin-top: -80px;">
+    <p-table [value]="programmes" styleClass="p-datatable-striped">
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Corporate Objectives</th>
+                <th>Outcomes/ Planned Outputs</th>
+                <th>Optimal Supporting Accommodation Solution</th>
+                <th>Rationale for Chosen Solution</th>
+                <th></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowData let-editing="editing" let-ri="rowIndex">
+            <tr [pEditableRow]="rowData">
+                <td *ngFor="let programme of programmes">
+                    {{rowData[col.field]}}
+                </td>
+                <td style="text-align: center;" *ngIf="programmes.length > 0">
+                    <p-splitButton label="More" *ngIf="mode != 'View'" [model]="buttonItems"
+                        (onDropdownClick)="selectImprovement(rowData)" styleClass="p-button-secondary">
+                    </p-splitButton>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
 </div>

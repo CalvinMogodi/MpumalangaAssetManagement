@@ -1,25 +1,25 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TemplateTwoComponent } from './template-two.component';
+import { TemplateTwoOneComponent } from './template-two-one.component';
 
 describe('TemplateTwoComponent', () => {
-  let component: TemplateTwoComponent;
-  let fixture: ComponentFixture<TemplateTwoComponent>;
+  let component: TemplateTwoOneComponent;
+  let fixture: ComponentFixture<TemplateTwoOneComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TemplateTwoComponent ]
+      declarations: [ TemplateTwoOneComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TemplateTwoComponent);
+    fixture = TestBed.createComponent(TemplateTwoOneComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(component).toBeTruthy(); 
   });
 });

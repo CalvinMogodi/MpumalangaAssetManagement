@@ -3,11 +3,11 @@ import { Component, OnInit } from '@angular/core';
 import { RepairRequirement } from '../../../models/repair-requirements.model';
 
 @Component({
-  selector: 'app-repair-requirements',
-  templateUrl: './repair-requirements.component.html',
-  styleUrls: ['./repair-requirements.component.css']
+  selector: 'app-template-seven',
+  templateUrl: './template-seven.component.html',
+  styleUrls: ['./template-seven.component.css']
 })
-export class RepairRequirementsComponent implements OnInit {
+export class TemplateSevenComponent implements OnInit {
   repairRequirments: RepairRequirement[] = [];
 
   constructor() { 

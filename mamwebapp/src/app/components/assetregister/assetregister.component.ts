@@ -171,7 +171,5 @@ export class AssetregisterComponent implements OnInit  {
     }else if(e.response = "isUpdatedSuccessful"){
       
     }
-  }
-  
-    
+  } 
 }

@@ -22,6 +22,17 @@ import { AddUserComponent } from './components/user/add-user/add-user.component'
 import { AssetregisterComponent } from './components/assetregister/assetregister.component'
 import { PropertiesComponent } from './components/properties/properties.component';
 import { ViewPropertyComponent } from './components/properties/view-property/view-property.component';
+import { TemplateOneComponent } from './components/properties/template-one/template-one.component';
+import { TemplateTwoTwoComponent } from './components/properties/template-two-two/template-two-two.component';
+import { TemplateTwoOneComponent } from './components/properties/template-two-one/template-two-one.component';
+import { TemplateThreeComponent } from './components/properties/template-three/template-three.component';
+import { TemplateFourOneComponent } from './components/properties/template-four-one/template-four-one.component';
+import { TemplateFourTwoComponent } from './components/properties/template-four-two/template-four-two.component';
+import { TemplateFiveOneComponent } from './components/properties/template-five-one/template-five-one.component';
+import { TemplateFiveThreeComponent } from './components/properties/template-five-three/template-five-three.component';
+import { TemplateFiveTwoComponent } from './components/properties/template-five-two/template-five-two.component';
+import { TemplateSevenComponent } from './components/properties/template-seven/template-seven.component';
+import { TemplateSixComponent } from './components/properties/template-six/template-six.component';
 import { NgxPrintModule } from 'ngx-print';
 
 //primeng
@@ -56,13 +67,6 @@ import { LandComponent } from './components/assetregister/addassetregister/land/
 import { CalendarModule } from 'primeng/calendar';
 import { SplitButtonModule } from 'primeng/splitbutton';
 import { PrintAssetComponent } from './components/assetregister/print-asset/print-asset.component';
-import { TemplateOneComponent } from './components/properties/template-one/template-one.component';
-import { TemplateTwoComponent } from './components/properties/template-two/template-two.component';
-import { TemplateThreeComponent } from './components/properties/template-three/template-three.component';
-import { ScheduleOfCurrentUtilisationComponent } from './components/properties/schedule-of-current-utilisation/schedule-of-current-utilisation.component';
-import { GapAnalysisComponent } from './components/properties/gap-analysis/gap-analysis.component';
-import { RefurbishmentReconfigurationComponent } from './components/properties/refurbishment-reconfiguration/refurbishment-reconfiguration.component';
-import { RepairRequirementsComponent } from './components/properties/repair-requirements/repair-requirements.component';
 
 @NgModule({
   declarations: [
@@ -83,12 +87,16 @@ import { RepairRequirementsComponent } from './components/properties/repair-requ
     ViewPropertyComponent,
     PrintAssetComponent,
     TemplateOneComponent,
-    TemplateTwoComponent,
+    TemplateTwoOneComponent,
+    TemplateTwoTwoComponent,
     TemplateThreeComponent,
-    ScheduleOfCurrentUtilisationComponent,
-    GapAnalysisComponent,
-    RefurbishmentReconfigurationComponent,
-    RepairRequirementsComponent
+    TemplateFourOneComponent,
+    TemplateFourTwoComponent,
+    TemplateFiveOneComponent,
+    TemplateFiveTwoComponent,
+    TemplateFiveThreeComponent,
+    TemplateSixComponent,
+    TemplateSevenComponent,
   ],
   imports: [
     BrowserModule,

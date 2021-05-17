@@ -250,3 +250,11 @@ p-fieldset {
 .ui-dropdown-label-container :focus{
 	border: none !important;
 }
+
+.ui-tabview-panels {
+    width: fit-content !important;
+  }
+
+.ui-multiselect .ui-multiselect-label {  
+    width: 125px;
+}

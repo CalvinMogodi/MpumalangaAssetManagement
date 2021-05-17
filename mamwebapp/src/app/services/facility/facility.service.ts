@@ -33,8 +33,8 @@ export class FacilityService {
     return this.http.get<Array<MapCoordinate>>(`${environment.apiUrl}/api/facility/getmapcoordinates`);
   }
 
-  getProperties(){
-    return this.http.get<Array<Facility>>(`${environment.apiUrl}/api/facility/getproperties`);
+  getProperties(userDepartment){
+    return this.http.get<Array<Facility>>(`${environment.apiUrl}/api/facility/getproperties/`+userDepartment);
   }
 
   getAllFacilities() {

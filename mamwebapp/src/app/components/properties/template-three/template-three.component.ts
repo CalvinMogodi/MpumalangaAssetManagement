@@ -4,6 +4,8 @@ import { UAMPService } from 'src/app/services/uamp/uamp.service';
 import { Facility } from 'src/app/models/facility.model';
 import { MessageService } from 'primeng/api';
 import { AssetFunctionalPerformance } from '../../../models/asset-functional-performance.model';
+import { FormGroup, FormBuilder } from '@angular/forms';
+import { StrategicNeedsAssessment } from 'src/app/models/strategic-needs-assessment';
 
 @Component({
   selector: 'app-template-three',
@@ -12,50 +14,23 @@ import { AssetFunctionalPerformance } from '../../../models/asset-functional-per
   providers: [MessageService]
 })
 export class TemplateThreeComponent implements OnInit {
-  assetsFunctionalPerformances: AssetFunctionalPerformance[] = [];
-  @Input() facilities: Facility[];
-  constructor(public uampService: UAMPService, private messageService: MessageService) {
+  strategicNeedsAssessments: any[] = [];
+  @Input() properties: Facility[];
+  assessmentStrategicForm: FormGroup;
+
+  constructor(public uampService: UAMPService, private formBuilder: FormBuilder, private messageService: MessageService) {
     
    }
 
   ngOnInit() {
-    this.getFunctionalPerformances();    
+    this.assessmentStrategicForm = this.formBuilder.group({
+      postDescriptionTitle:['']
+      
+    });   
   }
 
-  addAssetFunctionalPerformance() {
-    this.assetsFunctionalPerformances.push(new AssetFunctionalPerformance());
+  addStrategicNeedsAssessment() {
+    this.strategicNeedsAssessments.push(new StrategicNeedsAssessment());
   }
-
-  saveFunctionalPerformances() {
-    this.uampService.addFunctionalPerformances(this.assetsFunctionalPerformances).pipe(first()).subscribe(result => {
-      this.messageService.add({ severity: 'success', summary: 'Saving', detail: 'Functional performances are saved successful.' });
-    });
-  }
-
-  getFunctionalPerformances() {
-    this.uampService.getFunctionalPerformances().pipe(first()).subscribe(assetsFunctionalPerformances => {
-      if(assetsFunctionalPerformances.length == 0){
-        this.facilities.forEach( (element) => {
-          let assetFunctionalPerformance: AssetFunctionalPerformance = {
-            province: element.land.geographicalLocation.province,
-            town: element.land.geographicalLocation.province,
-            uniqueIdentifyingCode: element.clientCode,
-            possibleNonAssetSolutions: undefined,
-            commonAssetDescription: element.name,
-            currentUser: undefined,
-            requiredPerformanceStandard: undefined,
-            accessabilityRating: undefined,
-            suitabilityIndex: undefined,
-            conditionRating: undefined,
-            operatingPerformanceIndex:undefined,
-            functionalPerformanceRating: undefined,
-          };
-          this.assetsFunctionalPerformances.push(assetFunctionalPerformance);
-        });
-      }else{
-        this.assetsFunctionalPerformances = assetsFunctionalPerformances;
-      }      
-    });
-  }
-
+  
 }
