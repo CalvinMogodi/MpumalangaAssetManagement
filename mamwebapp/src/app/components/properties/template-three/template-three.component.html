@@ -12,43 +12,25 @@
             <div class="ui-g-6 ui-md-6" style="margin-top: 25px;">
                 <div class="ui-g-6 ui-md-6">
                     <small for="postDescriptionTitle">Post Description/ Title</small>
-                <input formControlName="postDescriptionTitle" autocomplete="off" type="text" pInputText
-                    class="ui-inputtext ui-widget">
-                <div *ngIf="submitted && a.mission.errors" class="text-error"><br>
-                    <div *ngIf="a.mission.errors.required">This field is required.</div>
-                </div>
+                    <input formControlName="postDescriptionTitle" autocomplete="off" type="text" pInputText class="ui-inputtext ui-widget">                
                 </div>
                 <div class="ui-g-6 ui-md-6">
-                    <small for="postDescriptionTitle">Allocated Space</small>
-                    <input formControlName="postDescriptionTitle" autocomplete="off" type="text" pInputText
-                        class="ui-inputtext ui-widget">
-                        <small>As per usable office space</small>
-                    <div *ngIf="submitted && a.mission.errors" class="text-error"><br>
-                        <div *ngIf="a.mission.errors.required">This field is required.</div>
-                    </div>
-                </div>
-                
+                    <small for="allocatedSpace">Allocated Space</small>
+                    <input formControlName="allocatedSpace" autocomplete="off" type="text" pInputText class="ui-inputtext ui-widget">
+                        <small>As per usable office space</small>                  
+                </div>                
             </div>
             <div class="ui-g-6 ui-md-6" >
                 <label style="float: left;">Space Utilisation</label>
                 <div class="ui-g-12 ui-md-12">
                 <div class="ui-g-6 ui-md-6">
-                    <small for="surplusShortageAccommodation"> Surplus (+) or Shortage (-) of Accommodation(m²)
-                    </small>
-                    <input formControlName="surplusShortageAccommodation" autocomplete="off" type="text" pInputText
-                        class="ui-inputtext ui-widget">
-                    <div *ngIf="submitted && a.mission.errors" class="text-error"><br>
-                        <div *ngIf="a.mission.errors.required">This field is required.</div>
-                    </div>
+                    <small for="surplusShortageAccommodation"> Surplus (+) or Shortage (-) of Accommodation(m²)</small>
+                    <input formControlName="surplusShortageAccommodation" autocomplete="off" type="text" pInputText class="ui-inputtext ui-widget">                    
                 </div>
                 <div class="ui-g-6 ui-md-6">
                     <small for="percentageUtilised">Percentage Utilised</small>
-                    <input formControlName="postDescriptionTitle" autocomplete="off" type="text" pInputText
-                        class="ui-inputtext ui-widget">
-                        <small>(↑Over Utilisation) (↓Under Utilisation) (%)</small>
-                    <div *ngIf="submitted && a.mission.errors" class="text-error"><br>
-                        <div *ngIf="a.mission.errors.required">This field is required.</div>
-                    </div>
+                    <input formControlName="percentageUtilised" autocomplete="off" type="text" pInputText class="ui-inputtext ui-widget">
+                    <small>(↑Over Utilisation) (↓Under Utilisation) (%)</small>                    
                 </div>
             </div>
             </div>
@@ -60,19 +42,19 @@
                 <div>
                     <div class="ui-g-3 ui-md-3">
                         <small>Level</small>
-                        <p-inputNumber formControlName="level"></p-inputNumber>
+                        <p-inputNumber formControlName="fbpLevel"></p-inputNumber>
                     </div>
                     <div class="ui-g-3 ui-md-3">
                         <small>Quantity</small>
-                        <p-inputNumber formControlName="quantity"></p-inputNumber>
+                        <p-inputNumber formControlName="fbpQuantity"></p-inputNumber>
                     </div>
                     <div class="ui-g-3 ui-md-3">
                         <small>Norm</small>
-                        <p-inputNumber formControlName="norm"></p-inputNumber>
+                        <p-inputNumber formControlName="fbpNorm"></p-inputNumber>
                     </div>
                     <div class="ui-g-3 ui-md-3">
                         <small>Requirement</small>
-                        <p-inputNumber formControlName="requirement"></p-inputNumber>
+                        <p-inputNumber formControlName="fbpRequirement"></p-inputNumber>
                         <small>I.T.O. NORM (m²)</small>
                     </div>
                 </div>
@@ -82,24 +64,23 @@
                 <div class="ui-g-12 ui-md-12">
                     <div class="ui-g-3 ui-md-3">
                         <small>Level</small>
-                        <p-inputNumber formControlName="level"></p-inputNumber>
+                        <p-inputNumber formControlName="aoLevel"></p-inputNumber>
                     </div>
                     <div class="ui-g-3 ui-md-3">
                         <small>Quantity</small>
-                        <p-inputNumber formControlName="quantity"></p-inputNumber>
+                        <p-inputNumber formControlName="aoQuantity"></p-inputNumber>
                     </div>
                     <div class="ui-g-3 ui-md-3">
                         <small>Norm</small>
-                        <p-inputNumber formControlName="norm"></p-inputNumber>
+                        <p-inputNumber formControlName="aoNorm"></p-inputNumber>
                     </div>
                     <div class="ui-g-3 ui-md-3">
                         <small>Requirement</small>
-                        <p-inputNumber formControlName="requirement"></p-inputNumber>
+                        <p-inputNumber formControlName="aoRequirement"></p-inputNumber>
                         <small>I.T.O. NORM (m²)</small>
                     </div>
                 </div>
-            </div>
-            
+            </div>            
         </div>
         <div class="ui-g-12 ui-md-12">
             <button pButton type="button" label="Add Strategic Needs Assessment" (click)="addStrategicNeedsAssessment()"

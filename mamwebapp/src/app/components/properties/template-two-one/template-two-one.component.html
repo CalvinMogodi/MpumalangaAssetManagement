@@ -4,22 +4,24 @@
     </header>
 </div>
 <br>
+
+<div class="ui-g ui-fluid">
 <form [formGroup]="propertyForm">
     <p-table [value]="tableRowArray.controls" [responsive]="true">
         <ng-template pTemplate="header">
             <tr>
-                <th style="width: 120px;">File Reference No.</th>
-                <th style="width: 120px;">Districts</th>
+                <th>File Reference No.</th>
+                <th>Districts</th>
                 <th>Town</th>
                 <th>Local Municipality</th>
                 <th>Asset Description</th>
                 <th>Old Street Address</th>
                 <th>Current Street Address</th>
                 <th>Property Description</th>
-                <th style="width: 90px;">Asset Type</th>
-                <th style="width: 100px;">No. of Parking Bays</th>
-                <th style="width: 100px;">Usable/ Allocated Space <br> <small>(M²) 0000.00</small></th>
-                <th style="width: 100px;">Extent of Land (HA) <br> <small>(M²) 0000.00</small></th>
+                <th>Asset Type</th>
+                <th>No. of Parking Bays</th>
+                <th>Usable/ Allocated Space <br> <small>(M²) 0000.00</small></th>
+                <th>Extent of Land (HA) <br> <small>(M²) 0000.00</small></th>
                 <th style="width: 200px;">Municipal/ Utility Services</th>
                 <th>Property Rates & Taxes</th>
                 <th style="width: 200px;">Operational Costs</th>
@@ -34,9 +36,7 @@
         </ng-template>
         <ng-template pTemplate="body" let-rowData let-rowIndex="rowIndex">
             <ng-container formArrayName="tableRowArray">
-
-                <tr [formGroupName]="rowIndex" *ngFor="let property of properties">
-                   
+                <tr [formGroupName]="rowIndex" *ngFor="let property of properties">                   
                     <td>{{property.fileReference}}</td>
                     <td>{{property.land.geographicalLocation.districtMunicipality}}</td>
                     <td>{{property.land.geographicalLocation.town}}</td>
@@ -48,14 +48,14 @@
                     <td>{{property.land.propertyDescription.oldDescription}}</td>
                     <td>{{property.type}}</td>
                     <td>
-                        <input style="width: 70px;" formControlName="parkingBaysNumber" autocomplete="off" type="text"
+                        <input formControlName="parkingBaysNumber" autocomplete="off" type="text"
                             pInputText class="ui-inputtext ui-widget">
                         <!--<div class="text-danger" *ngIf="rowData.get('parkingBaysNumber').errors"><br>
                     <div *ngIf="rowData.get('parkingBaysNumber').errors?.required">This field is required.</div>
                 </div>-->
                     </td>
                     <td>
-                        <input style="width: 70px;" formControlName="usableAllocatedSpace" autocomplete="off"
+                        <input formControlName="usableAllocatedSpace" autocomplete="off"
                             type="text" pInputText class="ui-inputtext ui-widget">
                         <!--<div *ngIf="submitted && p.usableAllocatedSpace.errors" class="text-error"><br>
                     <div *ngIf="p.usableAllocatedSpace.errors.required">This field is required.</div>
@@ -71,7 +71,7 @@
                 </div>-->
                     </td>
                     <td>
-                        <input style="width: 130px;" formControlName="propertyRatesTaxes" autocomplete="off" type="text"
+                        <input formControlName="propertyRatesTaxes" autocomplete="off" type="text"
                             pInputText class="ui-inputtext ui-widget">
                         <!--<div *ngIf="submitted && p.propertyRatesTaxes.errors" class="text-error"><br>
                     <div *ngIf="p.propertyRatesTaxes.errors.required">This field is required.</div>
@@ -85,14 +85,14 @@
                 </div>-->
                     </td>
                     <td>
-                        <input style="width: 130px;" formControlName="requiredPerfomanceStandard" autocomplete="off"
+                        <input formControlName="requiredPerfomanceStandard" autocomplete="off"
                             type="text" pInputText class="ui-inputtext ui-widget">
                         <!-- <div *ngIf="submitted && p.requiredPerfomanceStandard.errors" class="text-error"><br>
                     <div *ngIf="p.requiredPerfomanceStandard.errors.required">This field is required.</div>
                 </div>-->
                     </td>
                     <td>
-                        <input style="width: 130px;" formControlName="accessibility" autocomplete="off" type="text"
+                        <input formControlName="accessibility" autocomplete="off" type="text"
                             pInputText class="ui-inputtext ui-widget">
                         <!--<div *ngIf="submitted && p.accessibility.errors" class="text-error"><br>
                     <div *ngIf="p.accessibility.errors.required">This field is required.</div>
@@ -106,28 +106,28 @@
                 </div>-->
                     </td>
                     <td>
-                        <input style="width: 130px;" formControlName="suitabilityIndex" autocomplete="off" type="text"
+                        <input formControlName="suitabilityIndex" autocomplete="off" type="text"
                             pInputText class="ui-inputtext ui-widget">
                         <!--<div *ngIf="submitted && p.suitabilityIndex.errors" class="text-error"><br>
                     <div *ngIf="p.suitabilityIndex.errors.required">This field is required.</div>
                 </div>-->
                     </td>
                     <td>
-                        <input style="width: 130px;" formControlName="operationalPerformanceIndex" autocomplete="off"
+                        <input formControlName="operationalPerformanceIndex" autocomplete="off"
                             type="text" pInputText class="ui-inputtext ui-widget">
                         <!--<div *ngIf="submitted && p.operationalPerformanceIndex.errors" class="text-error"><br>
                     <div *ngIf="p.operationalPerformanceIndex.errors.required">This field is required.</div>
                 </div>-->
                     </td>
                     <td>
-                        <input style="width: 130px;" formControlName="functionalPerformanceIndex" autocomplete="off"
+                        <input formControlName="functionalPerformanceIndex" autocomplete="off"
                             type="text" pInputText class="ui-inputtext ui-widget">
                         <!-- <div *ngIf="submitted && p.functionalPerformanceIndex.errors" class="text-error"><br>
                     <div *ngIf="p.functionalPerformanceIndex.errors.required">This field is required.</div>
                 </div>-->
                     </td>
                     <td>
-                        <input style="width: 130px;" formControlName="comment" autocomplete="off" type="text" pInputText
+                        <input formControlName="comment" autocomplete="off" type="text" pInputText
                             class="ui-inputtext ui-widget">
                         <!-- <div *ngIf="submitted && p.comment.errors" class="text-error"><br>
                     <div *ngIf="p.comment.errors.required">This field is required.</div>
@@ -138,3 +138,4 @@
         </ng-template>
     </p-table>
 </form>
+</div>

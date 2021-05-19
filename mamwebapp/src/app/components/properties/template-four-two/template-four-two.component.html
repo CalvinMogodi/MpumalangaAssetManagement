@@ -5,102 +5,96 @@
 </div>
 <br>
 
+<div class="ui-g ui-fluid">
+    <form [formGroup]="acquisitionPlanForm">
+        <div class="ui-g-12 ui-md-12">
+            <div class="ui-g-3 ui-md-3">
+                <label for="region">District/ Region</label>
+                <p-dropdown placeholder="Please select" inputId="region" [options]="regions" formControlName="region" optionLabel="name"></p-dropdown>
+            </div>           
+            <div class="ui-g-3 ui-md-3">
+                <label for="status">Status</label>
+                <p-dropdown placeholder="Please select" inputId="status" [options]="statuses" formControlName="status" optionLabel="name"></p-dropdown>
+            </div>
+            <div class="ui-g-3 ui-md-3">
+                <label for="acquisitionType">Acquisition Type</label>
+                <p-dropdown placeholder="Please select" inputId="acquisitionType" [options]="acquisitionTypes" formControlName="acquisitionType" optionLabel="name"></p-dropdown>
+            </div>
+            <div class="ui-g-3 ui-md-3">
+                <label for="town">Town</label>
+                <input formControlName="town" autocomplete="off" type="text" pInputText class="ui-inputtext ui-widget">
+            </div>
+        </div>
+        <div class="ui-g-12 ui-md-12">           
+            <div class="ui-g-3 ui-md-3">
+                <label for="town">Service Description</label>
+                <input formControlName="serviceDescription" autocomplete="off" type="text" pInputText class="ui-inputtext ui-widget">
+            </div>
+            <div class="ui-g-3 ui-md-3">
+                <label for="town">Budget Type</label>
+                <input formControlName="budgetType" autocomplete="off" type="text" pInputText class="ui-inputtext ui-widget">
+            </div>
+            <div class="ui-g-3 ui-md-3">
+                <label for="town">Extent Required <small>(m²)</small></label>
+                <input formControlName="extent" autocomplete="off" type="text" pInputText class="ui-inputtext ui-widget">
+            </div>
+            <div class="ui-g-3 ui-md-3">
+                <label for="totalAmountQuired">Total Amount Quired</label>
+                <p-inputNumber formControlName="totalAmountQuired" mode="currency" currency="ZAR" locale="en-ZA"></p-inputNumber>
+            </div>
+        </div>
+        <div class="ui-g-12 ui-md-12">            
+            <div class="ui-g-3 ui-md-3">
+                <label for="cashFlowYear1">Cash Flow <small>(MTEF Year 1)</small></label>
+                <p-inputNumber formControlName="cashFlowYear1" mode="currency" currency="ZAR" locale="en-ZA"></p-inputNumber>
+            </div>
+            <div class="ui-g-3 ui-md-3">
+                <label for="cashFlowYear2">Cash Flow <small>(MTEF Year 2)</small></label>
+                <p-inputNumber formControlName="cashFlowYear2" mode="currency" currency="ZAR" locale="en-ZA"></p-inputNumber>
+            </div>
+            <div class="ui-g-3 ui-md-3">
+                <label for="cashFlowYear3">Cash Flow <small>(MTEF Year 3)</small></label>
+                <p-inputNumber formControlName="cashFlowYear3" mode="currency" currency="ZAR" locale="en-ZA"></p-inputNumber>
+            </div>
+            <div class="ui-g-3 ui-md-3">
+                <label for="cashFlowYear3">Cash Flow <small>(MTEF Year 4)</small></label>
+                <p-inputNumber formControlName="cashFlowYear3" mode="currency" currency="ZAR" locale="en-ZA"></p-inputNumber>
+            </div>
+        </div>
+        <div class="ui-g-12 ui-md-12">
+            <button pButton type="submit" label="Add Acquisition Plan" (click)="addAcquisitionPlan()"
+            style="float: right;width: fit-content;"></button>
+        </div>
+    </form>
+
 <p-table [value]="[{}]">
     <ng-template pTemplate="header">
         <tr>
-            <th style="width: 50px;">No</th>
-            <th>Province</th>
+            <th>District/ Region</th>          
+            <th>Status</th>
+            <th>Acquisition Type</th>
             <th>Town</th>
-            <th>Street Adress and Surburb (If Apllicable)</th>
-            <th>Common Asset Description</th>
-            <th>Asset Type</th>
-            <th>Extent of Improvement (M2)</th>
-            <th>Formal Property (Land Description)</th>
-            <th>Extent of Land (HA)</th>
-            <th>Permanent/ Tempy Accomm</th>
-            <th>Heritage Status</th>
-            <th style="width: 200px;">Custodian Unique Identifying Code</th>
+            <th>Service Description</th>
+            <th>Budget Type</th>
+            <th>Extent Required (m²)</th>
+            <th>Total Amount Quired</th>
+            <th>Cash Flow <small>(MTEF Year 1)</small></th>
+            <th>Cash Flow <small>(MTEF Year 2)</small></th>
+            <th>Cash Flow <small>(MTEF Year 3)</small></th>
+            <th>Cash Flow <small>(MTEF Year 4)</small></th>
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-rowData>
-        <tr style="background-color: #f4f4f4;">
-            <td>1</td>
-            <td>2</td>
-            <td>3</td>
-            <td>4</td>
-            <td>5</td>
-            <td>6</td>
-            <td>7</td>
-            <td>8</td>
-            <td>9</td>
-            <td>10</td>
-            <td>11</td>
-            <td>12</td>
-        </tr>
-        <tr>
-            <td colspan="12"> 
-                <span style="font-size: smaller;">STATE-OWNED ASSETS</span>
+        <tr *ngFor="let acquisitionPlan of acquisitionPlans">
+            <td>
+                {{rowData[col.field]}}
             </td>
-        </tr>
-            
-        <tr *ngFor="let facility of stateOwnedFacilities; let i = index">
-            <td>{{i + 1}}</td>
-            <td>{{facility.land.geographicalLocation.province}}</td>
-            <td>{{facility.land.geographicalLocation.town}}</td>
-            <td>{{facility.land.geographicalLocation.streetName}}, {{facility.land.geographicalLocation.surburb}}</td>
-            <td>{{facility.name}}</td>
-            <td>{{facility.type}}</td>
-            <td>{{facility.improvements.extentOfBuilding}}</td>
-            <td></td>
-            <td>{{facility.land.propertyDescription.extent}}</td>
-            <td></td>
-            <td></td>
-            <td style="word-wrap:break-word">{{facility.clientCode}}</td>
-        </tr>
-        <tr>
-            <td colspan="6" style="font-weight: bolder;text-align: right;">TOTAL</td>
-            <td>0</td>
-            <td style="font-weight: bolder;">Total</td>
-            <td>{{stateOwnedFacilitiesExtentTotal | number}}</td>
-            <td colspan="3" ></td>
-        </tr>
-        <tr>
-            <td colspan="12"> 
-                <span style="font-size: smaller;">LEASED ASSETS</span>
+            <td style="text-align: center;" *ngIf="acquisitionPlans.length > 0">
+                <p-splitButton label="More" *ngIf="mode != 'View'" [model]="buttonItems"
+                    (onDropdownClick)="selectImprovement(rowData)" styleClass="p-button-secondary">
+                </p-splitButton>
             </td>
-        </tr>
-        <tr *ngFor="let facility of leasedFacilities; let i = index">
-            <td>{{i + 1}}</td>
-            <td>{{facility.land.geographicalLocation.province}}</td>
-            <td>{{facility.land.geographicalLocation.town}}</td>
-            <td>{{facility.land.geographicalLocation.streetName}}, {{facility.land.geographicalLocation.surburb}}</td>
-            <td>{{facility.name}}</td>
-            <td>{{facility.type}}</td>
-            <td>{{facility.improvements.extentOfBuilding}}</td>
-            <td></td>
-            <td>{{facility.land.propertyDescription.extent}}</td>
-            <td></td>
-            <td></td>
-            <td style="word-wrap:break-word">{{facility.clientCode}}</td>
-        </tr>
-        <tr *ngIf="leasedFacilities.length == 0">
-            <td colspan="12" style="text-align: center;"> 
-                <span style="font-size: smaller;">No Record(s)</span>
-            </td>
-        </tr>
-        <tr>            
-            <td colspan="6" style="font-weight: bolder;text-align: right;">TOTAL</td>
-            <td>0</td>
-            <td style="font-weight: bolder;">Total</td>
-            <td>{{leasedFacilitiesExtentTotal | number}}</td>
-            <td colspan="3" ></td>           
-        </tr>
-        <tr style="background-color: #f4f4f4;">            
-            <td colspan="6" style="font-weight: bolder;text-align: right;">GRAND TOTAL</td>
-            <td>0</td>
-            <td style="font-weight: bolder;">GRAND Total</td>
-            <td>{{stateOwnedFacilitiesExtentTotal + leasedFacilitiesExtentTotal | number}}</td>
-            <td colspan="3" ></td>           
         </tr>
     </ng-template>
 </p-table>
+</div>

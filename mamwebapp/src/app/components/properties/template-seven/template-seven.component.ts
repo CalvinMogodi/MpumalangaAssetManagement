@@ -1,24 +1,22 @@
-import { Component, OnInit } from '@angular/core';
-
-import { RepairRequirement } from '../../../models/repair-requirements.model';
+import { Component, Input, OnInit } from '@angular/core';
+import { MessageService } from 'primeng/api';
+import { Facility } from 'src/app/models/facility.model';
 
 @Component({
   selector: 'app-template-seven',
   templateUrl: './template-seven.component.html',
-  styleUrls: ['./template-seven.component.css']
+  styleUrls: ['./template-seven.component.css'],
+  providers: [MessageService]
 })
 export class TemplateSevenComponent implements OnInit {
-  repairRequirments: RepairRequirement[] = [];
+  @Input() properties: Facility[];
+
 
   constructor() { 
-    this.repairRequirments.push(new RepairRequirement());
+    
   }
 
   ngOnInit() {
-  }
-
-  addRepairRequirement() {
-    this.repairRequirments.push(new RepairRequirement());
   }
 
 }

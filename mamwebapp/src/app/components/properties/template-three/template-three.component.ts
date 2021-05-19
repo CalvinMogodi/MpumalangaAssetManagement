@@ -24,8 +24,18 @@ export class TemplateThreeComponent implements OnInit {
 
   ngOnInit() {
     this.assessmentStrategicForm = this.formBuilder.group({
-      postDescriptionTitle:['']
-      
+      postDescriptionTitle: [''],
+      allocatedSpace: [''],
+      surplusShortageAccommodation: [''],
+      percentageUtilised: [''],
+      fbpLevel: [''],
+      fbpQuantity: [''],
+      fbpNorm: [''],
+      fbpRequirement: [''],
+      aoLevel: [''],
+      aoQuantity: [''],
+      aoNorm: [''],
+      aoRequirement: [''],
     });   
   }
 
