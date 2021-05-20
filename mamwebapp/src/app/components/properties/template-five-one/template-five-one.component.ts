@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { first } from 'rxjs/operators';
 import { UAMPService } from 'src/app/services/uamp/uamp.service';
-import { MessageService } from 'primeng/api';
+import { MenuItem, MessageService } from 'primeng/api';
 import { CurrentUtlisation } from '../../../models/current-utilisation.model';
 import { FormGroup, FormBuilder } from '@angular/forms';
 
@@ -19,7 +19,8 @@ export class TemplateFiveOneComponent implements OnInit {
   initialNeedYears: any[];
   statuses: any[];
   operationTypes: any[];
-  operationPlans: any[];
+  operationPlans: any[] = [];
+  buttonItems: MenuItem[];
 
   constructor(public uampService: UAMPService, private formBuilder: FormBuilder, private messageService: MessageService) {
     this.operationPlanForm = this.formBuilder.group({
@@ -27,11 +28,9 @@ export class TemplateFiveOneComponent implements OnInit {
       town: [''],
       serviceDescription: [''],
       budgetType: [''],
-      extent: [''],
       initialNeedYear: [''],
-      acquisitionType:[''],
       status:[''],
-      totalAmountQuired: [''],
+      totalAmountRequired: [''],
       cashFlowYear1: [''],
       cashFlowYear2: [''],
       cashFlowYear3: [''],
@@ -41,6 +40,15 @@ export class TemplateFiveOneComponent implements OnInit {
    }
 
   ngOnInit() {
+    this.buttonItems = [     
+      {label: 'Update', icon: 'pi pi-pencil', command: () => 
+          this.update()
+      },
+      {separator: true},
+      {label: 'Delete', icon: 'pi pi-trash', command: () => 
+          this.confirmDelete()
+      }
+    ]; 
     this.regions = [
       { name: 'Ehlanzeni ', code: 'U', factor: 1 },
       { name: 'Gert Sibande', code: 'R', factor: 2 },
@@ -78,7 +86,35 @@ export class TemplateFiveOneComponent implements OnInit {
     ];
   }
 
-  addAcquisitionPlan() {
-    this.operationPlans.push(new CurrentUtlisation());
+  update(){
+
+  }
+
+  confirmDelete(){
+
+  }
+
+  addOperationPlan() {
+    const acquisitionPlan = {
+      id: this.operationPlans.length + 1,
+      region: this.operationPlanForm.controls["region"].value.name,
+      town: this.operationPlanForm.controls["town"].value,
+      serviceDescription: this.operationPlanForm.controls["serviceDescription"].value,
+      budgetType: this.operationPlanForm.controls["budgetType"].value,
+      initialNeedYear: this.operationPlanForm.controls["initialNeedYear"].value.name,
+      status: this.operationPlanForm.controls["status"].value.name,
+      totalAmountRequired: this.operationPlanForm.controls["totalAmountRequired"].value,
+      cashFlowYear1: this.operationPlanForm.controls["cashFlowYear1"].value,
+      cashFlowYear2: this.operationPlanForm.controls["cashFlowYear2"].value,
+      cashFlowYear3: this.operationPlanForm.controls["cashFlowYear3"].value,
+      cashFlowYear4: this.operationPlanForm.controls["cashFlowYear4"].value,
+      cashFlowYear5: this.operationPlanForm.controls["cashFlowYear5"].value,
+    };
+    this.operationPlans.push(acquisitionPlan);
+    this.resetForm();
+  }
+
+  resetForm(){
+    this.operationPlanForm.reset();
   }
 }

@@ -37,13 +37,7 @@ export class TemplateSixComponent implements OnInit {
       currentStreetAddress: new FormControl(null, {
         validators: [Validators.required]
       }),
-      propertyDescription: new FormControl(null, {
-        validators: [Validators.required]
-      }),
       allocatedSpace: new FormControl(null, {
-        validators: [Validators.required]
-      }),
-      extent: new FormControl(null, {
         validators: [Validators.required]
       }),
       surrenderRationale: new FormControl(null, {

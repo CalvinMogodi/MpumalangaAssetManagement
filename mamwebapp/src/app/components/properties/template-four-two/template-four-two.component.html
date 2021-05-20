@@ -36,11 +36,11 @@
             </div>
             <div class="ui-g-3 ui-md-3">
                 <label for="town">Extent Required <small>(m²)</small></label>
-                <input formControlName="extent" autocomplete="off" type="text" pInputText class="ui-inputtext ui-widget">
+                <p-inputNumber formControlName="extent" mode="decimal"></p-inputNumber>
             </div>
             <div class="ui-g-3 ui-md-3">
-                <label for="totalAmountQuired">Total Amount Quired</label>
-                <p-inputNumber formControlName="totalAmountQuired" mode="currency" currency="ZAR" locale="en-ZA"></p-inputNumber>
+                <label for="totalAmountRequired">Total Amount Required</label>
+                <p-inputNumber formControlName="totalAmountRequired" mode="currency" currency="ZAR" locale="en-ZA"></p-inputNumber>
             </div>
         </div>
         <div class="ui-g-12 ui-md-12">            
@@ -57,8 +57,8 @@
                 <p-inputNumber formControlName="cashFlowYear3" mode="currency" currency="ZAR" locale="en-ZA"></p-inputNumber>
             </div>
             <div class="ui-g-3 ui-md-3">
-                <label for="cashFlowYear3">Cash Flow <small>(MTEF Year 4)</small></label>
-                <p-inputNumber formControlName="cashFlowYear3" mode="currency" currency="ZAR" locale="en-ZA"></p-inputNumber>
+                <label for="cashFlowYear4">Cash Flow <small>(MTEF Year 4)</small></label>
+                <p-inputNumber formControlName="cashFlowYear4" mode="currency" currency="ZAR" locale="en-ZA"></p-inputNumber>
             </div>
         </div>
         <div class="ui-g-12 ui-md-12">
@@ -67,28 +67,38 @@
         </div>
     </form>
 
-<p-table [value]="[{}]">
+<p-table styleClass="p-datatable-striped" [value]="acquisitionPlans" [responsive]="true">
     <ng-template pTemplate="header">
         <tr>
             <th>District/ Region</th>          
-            <th>Status</th>
-            <th>Acquisition Type</th>
-            <th>Town</th>
+            <th>Town</th>                       
             <th>Service Description</th>
             <th>Budget Type</th>
-            <th>Extent Required (m²)</th>
-            <th>Total Amount Quired</th>
+            <th>Extent Required (m²)</th>    
+            <th>Acquisition Type</th>         
+            <th>Status</th>
+            <th>Total Amount Required </th>
             <th>Cash Flow <small>(MTEF Year 1)</small></th>
             <th>Cash Flow <small>(MTEF Year 2)</small></th>
             <th>Cash Flow <small>(MTEF Year 3)</small></th>
             <th>Cash Flow <small>(MTEF Year 4)</small></th>
+            <th></th>
         </tr>
     </ng-template>
-    <ng-template pTemplate="body" let-rowData>
-        <tr *ngFor="let acquisitionPlan of acquisitionPlans">
-            <td>
-                {{rowData[col.field]}}
-            </td>
+    <ng-template pTemplate="body" let-acquisitionPlan>
+        <tr>
+            <td>{{acquisitionPlan.region}}</td>
+            <td>{{acquisitionPlan.town}}</td>
+            <td>{{acquisitionPlan.serviceDescription}}</td>
+            <td>{{acquisitionPlan.budgetType}}</td>
+            <td>{{acquisitionPlan.extent}}</td>
+            <td>{{acquisitionPlan.acquisitionType}}</td>
+            <td>{{acquisitionPlan.status}}</td>
+            <td>{{acquisitionPlan.totalAmountRequired | currency:'ZAR':'R'}}</td>
+            <td>{{acquisitionPlan.cashFlowYear1 | currency:'ZAR':'R'}}</td>
+            <td>{{acquisitionPlan.cashFlowYear2 | currency:'ZAR':'R'}}</td>
+            <td>{{acquisitionPlan.cashFlowYear3 | currency:'ZAR':'R'}}</td>
+            <td>{{acquisitionPlan.cashFlowYear4 | currency:'ZAR':'R'}}</td>
             <td style="text-align: center;" *ngIf="acquisitionPlans.length > 0">
                 <p-splitButton label="More" *ngIf="mode != 'View'" [model]="buttonItems"
                     (onDropdownClick)="selectImprovement(rowData)" styleClass="p-button-secondary">

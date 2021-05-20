@@ -50,9 +50,6 @@ export class TemplateFiveThreeComponent implements OnInit {
       constructionArea: new FormControl(null, {
         validators: [Validators.required]
       }),
-      extent: new FormControl(null, {
-        validators: [Validators.required]
-      }),
       leaseStartDate: new FormControl(null, {
         validators: [Validators.required]
       }),

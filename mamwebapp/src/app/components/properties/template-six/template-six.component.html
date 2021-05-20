@@ -31,11 +31,11 @@
                     <td>{{property.land.geographicalLocation.localAuthority}}</td>
                     <td>{{property.type}}</td>
                     <td><input formControlName="currentStreetAddress" autocomplete="off" type="text" pInputText class="ui-inputtext ui-widget"></td>
-                    <td><input formControlName="propertyDescription" autocomplete="off" type="text" pInputText class="ui-inputtext ui-widget"></td>
+                    <td>{{property.name}}</td>
                     <td><p-inputNumber formControlName="allocatedSpace"></p-inputNumber></td>
-                    <td><p-inputNumber formControlName="extent"></p-inputNumber></td>
+                    <td>{{property.land.propertyDescription.extent}}</td>
                     <td><input formControlName="surrenderRationale" autocomplete="off" type="text" pInputText class="ui-inputtext ui-widget"></td>
-                    <td><input formControlName="proposedHandOverDate" autocomplete="off" type="text" pInputText class="ui-inputtext ui-widget"></td>
+                    <td><p-calendar formControlName="proposedHandOverDate" dateFormat="dd/mm/yy" showOtherMonths="true" showButtonBar="true"></p-calendar></td>
                     <td><input formControlName="contractualObligations" autocomplete="off" type="text" pInputText class="ui-inputtext ui-widget"></td>
                 </tr>
             </ng-container>

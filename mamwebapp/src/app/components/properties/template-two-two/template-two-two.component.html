@@ -36,7 +36,7 @@
             <ng-container formArrayName="tableRowArray">
                 <tr [formGroupName]="rowIndex" *ngFor="let property of properties">
                     <td>{{rowIndex}}</td>
-                    <td>{{property.land.propertyDescription.userDepartment}}</td>
+                    <td>{{property.land.landUseManagementDetail.userDepartment}}</td>
                     <td>{{property.fileReference}}</td>
                     <td>{{property.land.geographicalLocation.districtMunicipality}}</td>
                     <td>{{property.land.geographicalLocation.town}}</td>
@@ -46,15 +46,13 @@
                         {{property.land.geographicalLocation.streetName}}</td>
                     <td>{{property.land.geographicalLocation.streetNumber}}
                             {{property.land.geographicalLocation.streetName}}</td>                 
-                    <td>{{property.land.propertyDescription.oldDescription}}</td>
+                    <td>{{property.name}}</td>
                     <td>{{property.type}}</td>
                     <td>
-                        <input style="width: 70px;" formControlName="parkingBaysNumber" autocomplete="off" type="text"
-                            pInputText class="ui-inputtext ui-widget">
+                        <p-inputNumber formControlName="parkingBaysNumber"></p-inputNumber>                       
                     </td>
                     <td>
-                        <input style="width: 70px;" formControlName="lettableSpace" autocomplete="off"
-                            type="text" pInputText class="ui-inputtext ui-widget">
+                        <p-inputNumber formControlName="lettableSpace" mode="decimal"></p-inputNumber>
                     </td>
                     <td>{{property.land.propertyDescription.extent}}</td>
                     <td>

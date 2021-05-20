@@ -258,3 +258,8 @@ p-fieldset {
 .ui-multiselect .ui-multiselect-label {  
     width: 125px;
 }
+
+.ui-calendar .ui-datepicker {
+    width: 400px;
+    top: auto !important;
+}

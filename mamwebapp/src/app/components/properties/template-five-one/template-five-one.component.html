@@ -35,8 +35,8 @@
                 <input formControlName="budgetType" autocomplete="off" type="text" pInputText class="ui-inputtext ui-widget">
             </div>            
             <div class="ui-g-3 ui-md-3">
-                <label for="totalAmountQuired">Total Amount Quired</label>
-                <p-inputNumber formControlName="totalAmountQuired" mode="currency" currency="ZAR" locale="en-ZA"></p-inputNumber>
+                <label for="totalAmountRequired">Total Amount Required</label>
+                <p-inputNumber formControlName="totalAmountRequired" mode="currency" currency="ZAR" locale="en-ZA"></p-inputNumber>
             </div>
             <div class="ui-g-3 ui-md-3">
                 <label for="cashFlowYear1">Cash Flow <small>(MTEF Year 1)</small></label>
@@ -62,33 +62,43 @@
             </div>
         </div>
         <div class="ui-g-12 ui-md-12">
-            <button pButton type="submit" label="Add Programme Plan" (click)="addAcquisitionPlan()"
+            <button pButton type="submit" label="Add Programme Plan" (click)="addOperationPlan()"
             style="float: right;width: fit-content;"></button>
         </div>
     </form>
 
-<p-table [value]="[{}]">
+<p-table styleClass="p-datatable-striped" [value]="operationPlans" [responsive]="true">
     <ng-template pTemplate="header">
         <tr>
-            <th>District/ Region</th>          
-            <th>Year <br><small>in which initial needs were submitted</small></th>
+            <th>District/ Region</th>   
             <th>Town</th>
             <th>Service Description</th>
             <th>Budget Type</th>
+            <th>Year <br><small>in which initial needs were submitted</small></th>
             <th>Status</th>
-            <th>Total Amount Quired</th>
+            <th>Total Amount Required</th>
             <th>Cash Flow <small>(MTEF Year 1)</small></th>
             <th>Cash Flow <small>(MTEF Year 2)</small></th>
             <th>Cash Flow <small>(MTEF Year 3)</small></th>
             <th>Cash Flow <small>(MTEF Year 4)</small></th>
             <th>Cash Flow <small>(MTEF Year 5)</small></th>
+            <th></th>
         </tr>
     </ng-template>
-    <ng-template pTemplate="body" let-rowData>
-        <tr *ngFor="let operationPlan of operationPlans">
-            <td>
-                {{rowData[col.field]}}
-            </td>
+    <ng-template pTemplate="body" let-operationPlan>
+        <tr>
+            <td>{{operationPlan.region}}</td>
+            <td>{{operationPlan.town}}</td>
+            <td>{{operationPlan.serviceDescription}}</td>
+            <td>{{operationPlan.budgetType}}</td>
+            <td>{{operationPlan.initialNeedYear}}</td>
+            <td>{{operationPlan.status}}</td>
+            <td>{{operationPlan.totalAmountRequired | currency:'ZAR':'R'}}</td>
+            <td>{{operationPlan.cashFlowYear1 | currency:'ZAR':'R'}}</td>
+            <td>{{operationPlan.cashFlowYear2 | currency:'ZAR':'R'}}</td>
+            <td>{{operationPlan.cashFlowYear3 | currency:'ZAR':'R'}}</td>
+            <td>{{operationPlan.cashFlowYear4 | currency:'ZAR':'R'}}</td>
+            <td>{{operationPlan.cashFlowYear5 | currency:'ZAR':'R'}}</td>
             <td style="text-align: center;" *ngIf="operationPlans.length > 0">
                 <p-splitButton label="More" *ngIf="mode != 'View'" [model]="buttonItems"
                     (onDropdownClick)="selectImprovement(rowData)" styleClass="p-button-secondary">

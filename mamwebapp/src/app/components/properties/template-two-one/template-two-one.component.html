@@ -19,9 +19,9 @@
                 <th>Current Street Address</th>
                 <th>Property Description</th>
                 <th>Asset Type</th>
-                <th>No. of Parking Bays</th>
-                <th>Usable/ Allocated Space <br> <small>(M²) 0000.00</small></th>
-                <th>Extent of Land (HA) <br> <small>(M²) 0000.00</small></th>
+                <th style="width: 100px;">No. of Parking Bays</th>
+                <th style="width: 100px;">Usable/ Allocated Space <br> <small>(M²) 0000.00</small></th>
+                <th style="width: 100px;">Extent of Land (HA) <br> <small>(M²) 0000.00</small></th>
                 <th style="width: 200px;">Municipal/ Utility Services</th>
                 <th>Property Rates & Taxes</th>
                 <th style="width: 200px;">Operational Costs</th>
@@ -44,42 +44,42 @@
                     <td>{{property.name}}</td>
                     <td>{{property.land.geographicalLocation.streetNumber}}
                         {{property.land.geographicalLocation.streetName}}</td>
-                    <td>{{property.land.districtMunicipality}}</td>
-                    <td>{{property.land.propertyDescription.oldDescription}}</td>
+                    <td>{{property.land.geographicalLocation.districtMunicipality}}</td>
+                    <td>{{property.name}}</td>
                     <td>{{property.type}}</td>
                     <td>
-                        <input formControlName="parkingBaysNumber" autocomplete="off" type="text"
-                            pInputText class="ui-inputtext ui-widget">
+                        <p-inputNumber formControlName="parkingBaysNumber"></p-inputNumber>
                         <!--<div class="text-danger" *ngIf="rowData.get('parkingBaysNumber').errors"><br>
                     <div *ngIf="rowData.get('parkingBaysNumber').errors?.required">This field is required.</div>
                 </div>-->
                     </td>
                     <td>
-                        <input formControlName="usableAllocatedSpace" autocomplete="off"
-                            type="text" pInputText class="ui-inputtext ui-widget">
+                        <p-inputNumber formControlName="usableAllocatedSpace" mode="decimal"></p-inputNumber>
+                       
                         <!--<div *ngIf="submitted && p.usableAllocatedSpace.errors" class="text-error"><br>
                     <div *ngIf="p.usableAllocatedSpace.errors.required">This field is required.</div>
                 </div>-->
                     </td>
                     <td>{{property.land.propertyDescription.extent}}</td>
                     <td>
-                        <p-dropdown placeholder="Please select" inputId="municipalUtilityServices"
+                        <p-multiSelect placeholder="Please select" inputId="municipalUtilityServices"
                             [options]="municipalUtilityServices" formControlName="municipalUtilityService"
-                            optionLabel="name"></p-dropdown>
+                            optionLabel="name"></p-multiSelect>
                         <!--<div *ngIf="submitted && p.municipalUtilityServices.errors" class="text-error"><br>
                     <div *ngIf="p.municipalUtilityServices.errors.required">This field is required.</div>
                 </div>-->
                     </td>
                     <td>
-                        <input formControlName="propertyRatesTaxes" autocomplete="off" type="text"
-                            pInputText class="ui-inputtext ui-widget">
+                        <p-inputNumber formControlName="propertyRatesTaxes" mode="currency" currency="ZAR" locale="en-ZA"></p-inputNumber>
+                      
                         <!--<div *ngIf="submitted && p.propertyRatesTaxes.errors" class="text-error"><br>
                     <div *ngIf="p.propertyRatesTaxes.errors.required">This field is required.</div>
                 </div>-->
                     </td>
                     <td>
-                        <p-dropdown placeholder="Please select" inputId="operationalCost" [options]="operationalCosts"
-                            formControlName="operationalCost" optionLabel="name"></p-dropdown>
+                        
+                        <p-multiSelect placeholder="Please select" inputId="operationalCost" [options]="operationalCosts"
+                            formControlName="operationalCost" optionLabel="name"></p-multiSelect>
                         <!--<div *ngIf="submitted && p.operationalCost.errors" class="text-error"><br>
                     <div *ngIf="p.operationalCost.errors.required">This field is required.</div>
                 </div>-->

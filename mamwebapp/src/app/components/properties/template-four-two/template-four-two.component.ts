@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { first } from 'rxjs/operators';
 import { UAMPService } from 'src/app/services/uamp/uamp.service';
-import { MessageService } from 'primeng/api';
+import { MenuItem, MessageService } from 'primeng/api';
 import { CurrentUtlisation } from '../../../models/current-utilisation.model';
 import { FormGroup, FormBuilder } from '@angular/forms';
 
@@ -18,7 +18,8 @@ export class TemplateFourTwoComponent implements OnInit {
   initialNeedYears: any[];
   statuses: any[];
   acquisitionTypes: any[];
-  acquisitionPlans: any[];
+  acquisitionPlans: any[] = [];
+  buttonItems: MenuItem[];
 
   constructor(public uampService: UAMPService, private formBuilder: FormBuilder, private messageService: MessageService) {
     this.acquisitionPlanForm = this.formBuilder.group({
@@ -29,7 +30,7 @@ export class TemplateFourTwoComponent implements OnInit {
       extent: [''],      
       acquisitionType:[''],
       status:[''],
-      totalAmountQuired: [''],
+      totalAmountRequired: [''],
       cashFlowYear1: [''],
       cashFlowYear2: [''],
       cashFlowYear3: [''],
@@ -38,6 +39,15 @@ export class TemplateFourTwoComponent implements OnInit {
    }
 
   ngOnInit() {
+    this.buttonItems = [     
+      {label: 'Update', icon: 'pi pi-pencil', command: () => 
+          this.update()
+      },
+      {separator: true},
+      {label: 'Delete', icon: 'pi pi-trash', command: () => 
+          this.confirmDelete()
+      }
+    ]; 
     this.regions = [
       { name: 'Ehlanzeni ', code: 'U', factor: 1 },
       { name: 'Gert Sibande', code: 'R', factor: 2 },
@@ -75,8 +85,36 @@ export class TemplateFourTwoComponent implements OnInit {
     ];
   }
 
+  update(){
+
+  }
+  
+  confirmDelete(){
+
+  }
+
   addAcquisitionPlan() {
-    this.acquisitionPlans.push({});
+    const acquisitionPlan = {
+      id: this.acquisitionPlans.length + 1,
+      region: this.acquisitionPlanForm.controls["region"].value.name,
+      town: this.acquisitionPlanForm.controls["town"].value,
+      serviceDescription: this.acquisitionPlanForm.controls["serviceDescription"].value,
+      budgetType: this.acquisitionPlanForm.controls["budgetType"].value,
+      extent: this.acquisitionPlanForm.controls["extent"].value,
+      acquisitionType: this.acquisitionPlanForm.controls["acquisitionType"].value.name,
+      status: this.acquisitionPlanForm.controls["status"].value.name,
+      totalAmountRequired: this.acquisitionPlanForm.controls["totalAmountRequired"].value,
+      cashFlowYear1: this.acquisitionPlanForm.controls["cashFlowYear1"].value,
+      cashFlowYear2: this.acquisitionPlanForm.controls["cashFlowYear2"].value,
+      cashFlowYear3: this.acquisitionPlanForm.controls["cashFlowYear3"].value,
+      cashFlowYear4: this.acquisitionPlanForm.controls["cashFlowYear4"].value,
+    };
+    this.acquisitionPlans.push(acquisitionPlan);
+    this.resetForm();
+  }
+
+  resetForm(){
+    this.acquisitionPlanForm.reset();
   }
 
 }
