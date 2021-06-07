@@ -4,6 +4,7 @@ import { FormArray, FormControl, Validators } from '@angular/forms';
 import { FormBuilder } from '@angular/forms';
 import { FormGroup } from '@angular/forms';
 import { Facility } from 'src/app/models/facility.model';
+import { FacilityService } from 'src/app/services/facility/facility.service';
 
 @Component({
   selector: 'app-template-two-two',
@@ -19,9 +20,16 @@ export class TemplateTwoTwoComponent implements OnInit {
   leasedFacilitiesExtentTotal = 0;
   submitted: boolean = false;
   propertyForm: FormGroup;
+  umap: any = {};
   
-  constructor(private formBuilder: FormBuilder) { 
-    this.test = [1,2,3];
+  constructor(private facilityService: FacilityService, private formBuilder: FormBuilder) { 
+    this.facilityService.umapTempleteChange.subscribe((value) => {
+      if(value)
+      {
+        this.umap = value;
+      }    
+      this.umap.templeteTwoPointTwo = this.properties;
+  })
   }
 
   ngOnInit() {

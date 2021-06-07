@@ -1,148 +1,352 @@
 <div class="header">
     <header>
-        BUDGET FOR MTEF PERIOD [3 YEARS]																
+        BUDGET FOR MTEF PERIOD [3 YEARS]
     </header>
 </div>
 <br>
 
 <div class="ui-g ui-fluid">
-    <form>        
+    <form>
         <p-table [value]="[{}]" [responsive]="true">
-        <ng-template pTemplate="header">
-            <tr>
-                <th style="width: 200px;"></th>
-                <th colspan="3">MTEF YEAR 1</th>
-                <th colspan="3">MTEF YEAR 2</th>
-                <th colspan="3">MTEF YEAR 3</th>
-                <th colspan="3">MTEF YEAR 4</th>
-                <th colspan="3">MTEF YEAR 5</th>
-            </tr>
-            <tr>
-                <th></th>               
-                <th>MTEF Allocation</th>
-                <th>Required Budget</th>
-                <th>Shortfall</th>
-                <th>MTEF Allocation</th>
-                <th>Required Budget</th>
-                <th>Shortfall</th>
-                <th>MTEF Allocation</th>
-                <th>Required Budget</th>
-                <th>Shortfall</th>
-                <th>MTEF Allocation</th>
-                <th>Required Budget</th>
-                <th>Shortfall</th>
-                <th>MTEF Allocation</th>
-                <th>Required Budget</th>
-                <th>Shortfall</th>
-            </tr>
-        </ng-template>
-        <ng-template pTemplate="body">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th style="width: 200px;"></th>
+                    <th colspan="3">MTEF YEAR 1</th>
+                    <th colspan="3">MTEF YEAR 2</th>
+                    <th colspan="3">MTEF YEAR 3</th>
+                    <th colspan="3">MTEF YEAR 4</th>
+                    <th colspan="3">MTEF YEAR 5</th>
+                </tr>
+                <tr>
+                    <th></th>
+                    <th>MTEF Allocation</th>
+                    <th>Required Budget</th>
+                    <th>Shortfall</th>
+                    <th>MTEF Allocation</th>
+                    <th>Required Budget</th>
+                    <th>Shortfall</th>
+                    <th>MTEF Allocation</th>
+                    <th>Required Budget</th>
+                    <th>Shortfall</th>
+                    <th>MTEF Allocation</th>
+                    <th>Required Budget</th>
+                    <th>Shortfall</th>
+                    <th>MTEF Allocation</th>
+                    <th>Required Budget</th>
+                    <th>Shortfall</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body">
                 <tr>
                     <td colspan="16"><strong>Capital Projects</strong></td>
                 </tr>
                 <tr>
-                    <td>New Capital Works  T4.1</td>
-                    <td></td><td></td><td></td><td></td><td></td>
-                    <td></td><td></td><td></td><td></td><td></td>
-                    <td></td><td></td><td></td><td></td><td></td>
+                    <td>New Capital Works T4.1</td>
+                    <td>{{mtefAllocatoion() | currency:'ZAR':'R'}}</td>
+                    <td>{{newCapitalWorksT41RequiredBudget() | currency:'ZAR':'R'}}</td>
+                    <td>{{mtefAllocatoion() | currency:'ZAR':'R'}}</td>
+                    <td>{{mtefAllocatoion() | currency:'ZAR':'R'}}</td>
+                    <td>{{mtefAllocatoion() | currency:'ZAR':'R'}}</td>
+                    <td>{{mtefAllocatoion() | currency:'ZAR':'R'}}</td>
+                    <td>{{mtefAllocatoion() | currency:'ZAR':'R'}}</td>
+                    <td></td>
+                    <td>{{mtefAllocatoion() | currency:'ZAR':'R'}}</td>
+                    <td>{{mtefAllocatoion() | currency:'ZAR':'R'}}</td>
+                    <td></td>
+                    <td>{{mtefAllocatoion() | currency:'ZAR':'R'}}</td>
+                    <td>{{mtefAllocatoion() | currency:'ZAR':'R'}}</td>
+                    <td></td>
+                    <td>{{mtefAllocatoion() | currency:'ZAR':'R'}}</td>
                 </tr>
                 <tr>
                     <td>Refurb., Re-config.& Additions) T5.1</td>
-                    <td></td><td></td><td></td><td></td><td></td>
-                    <td></td><td></td><td></td><td></td><td></td>
-                    <td></td><td></td><td></td><td></td><td></td>
+                    <td>{{mtefAllocatoionT51Y1() | currency:'ZAR':'R'}}</td>
+                    <td>{{amountRequiredT51Y1() | currency:'ZAR':'R'}}</td>
+                    <td>{{shortfallT51Y1() | currency:'ZAR':'R'}}</td>
+                    <td>{{rraMtefAllocatoionT51(2) | currency:'ZAR':'R'}}</td>
+                    <td>{{amountRequiredT51(2) | currency:'ZAR':'R'}}</td>
+                    <td>{{shortfallT51(2) | currency:'ZAR':'R'}}</td>
+                    <td>{{rraMtefAllocatoionT51(3) | currency:'ZAR':'R'}}</td>
+                    <td>{{amountRequiredT51(3) | currency:'ZAR':'R'}}</td>
+                    <td>{{shortfallT51(3) | currency:'ZAR':'R'}}</td>
+                    <td>{{rraMtefAllocatoionT51(4) | currency:'ZAR':'R'}}</td>
+                    <td>{{amountRequiredT51(4) | currency:'ZAR':'R'}}</td>
+                    <td>{{shortfallT51(4) | currency:'ZAR':'R'}}</td>
+                    <td>{{rraMtefAllocatoionT51(5) | currency:'ZAR':'R'}}</td>
+                    <td>{{amountRequiredT51(5) | currency:'ZAR':'R'}}</td>
+                    <td>{{shortfallT51(5) | currency:'ZAR':'R'}}</td>
                 </tr>
                 <tr>
                     <td><strong>Total Capital Costs</strong></td>
-                    <td></td><td></td><td></td><td></td><td></td>
-                    <td></td><td></td><td></td><td></td><td></td>
-                    <td></td><td></td><td></td><td></td><td></td>
+                    <td>{{rraMtefAllocatoionTotalCapitalCosts(1) | currency:'ZAR':'R'}}</td>
+                    <td>{{amountRequiredTotalCapitalCosts(1) | currency:'ZAR':'R'}}</td>
+                    <td>{{shortfallTotalCapitalCosts(1) | currency:'ZAR':'R'}}</td>
+                    <td>{{rraMtefAllocatoionTotalCapitalCosts(2) | currency:'ZAR':'R'}}</td>
+                    <td>{{amountRequiredTotalCapitalCosts(2) | currency:'ZAR':'R'}}</td>
+                    <td>{{shortfallTotalCapitalCosts(2) | currency:'ZAR':'R'}}</td>
+                    <td>{{rraMtefAllocatoionTotalCapitalCosts(3) | currency:'ZAR':'R'}}</td>
+                    <td>{{amountRequiredTotalCapitalCosts(3) | currency:'ZAR':'R'}}</td>
+                    <td>{{shortfallTotalCapitalCosts(3) | currency:'ZAR':'R'}}</td>
+                    <td>{{rraMtefAllocatoionTotalCapitalCosts(4) | currency:'ZAR':'R'}}</td>
+                    <td>{{amountRequiredTotalCapitalCosts(4) | currency:'ZAR':'R'}}</td>
+                    <td>{{shortfallTotalCapitalCosts(4) | currency:'ZAR':'R'}}</td>
+                    <td>{{rraMtefAllocatoionTotalCapitalCosts(5) | currency:'ZAR':'R'}}</td>
+                    <td>{{amountRequiredTotalCapitalCosts(5) | currency:'ZAR':'R'}}</td>
+                    <td>{{shortfallTotalCapitalCosts(5) | currency:'ZAR':'R'}}</td>
                 </tr>
                 <tr>
                     <td><strong>% Shortfall</strong></td>
-                    <td></td><td></td><td></td><td></td><td></td>
-                    <td></td><td></td><td></td><td></td><td></td>
-                    <td></td><td></td><td></td><td></td><td></td>
+                    <td style="background-color: lightgray;"></td>
+                    <td style="background-color: lightgray;"></td>
+                    <td>{{shortfallTotalCapitalCostsPercentage(1)}}%</td>
+                    <td style="background-color: lightgray;"></td>
+                    <td style="background-color: lightgray;"></td>
+                    <td>{{shortfallTotalCapitalCostsPercentage(2)}}%</td>
+                    <td style="background-color: lightgray;"></td>
+                    <td style="background-color: lightgray;"></td>
+                    <td>{{shortfallTotalCapitalCostsPercentage(3)}}%</td>
+                    <td style="background-color: lightgray;"></td>
+                    <td style="background-color: lightgray;"></td>
+                    <td>{{shortfallTotalCapitalCostsPercentage(4)}}%</td>
+                    <td style="background-color: lightgray;"></td>
+                    <td style="background-color: lightgray;"></td>
+                    <td>{{shortfallTotalCapitalCostsPercentage(5)}}%</td>
                 </tr>
                 <tr>
                     <td><strong>Current Expenditure</strong></td>
-                    <td></td><td></td><td></td><td></td><td></td>
-                    <td></td><td></td><td></td><td></td><td></td>
-                    <td></td><td></td><td></td><td></td><td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
                 </tr>
                 <tr>
                     <td>Existing Leases T2.2</td>
-                    <td></td><td></td><td></td><td></td><td></td>
-                    <td></td><td></td><td></td><td></td><td></td>
-                    <td></td><td></td><td></td><td></td><td></td>
+                    <td>{{mtefAllocatoionExistingLeasesT22(1) | currency:'ZAR':'R'}}</td>
+                    <td>{{amountRequiredExistingLeasesT22(1) | currency:'ZAR':'R'}}</td>
+                    <td>{{shortfallExistingLeasesT22(1) | currency:'ZAR':'R'}}</td>
+                    <td>{{mtefAllocatoionExistingLeasesT22(2) | currency:'ZAR':'R'}}</td>
+                    <td>{{amountRequiredExistingLeasesT22(2) | currency:'ZAR':'R'}}</td>
+                    <td>{{shortfallExistingLeasesT22(2) | currency:'ZAR':'R'}}</td>
+                    <td>{{mtefAllocatoionExistingLeasesT22(3) | currency:'ZAR':'R'}}</td>
+                    <td>{{amountRequiredExistingLeasesT22(3) | currency:'ZAR':'R'}}</td>
+                    <td>{{shortfallExistingLeasesT22(3) | currency:'ZAR':'R'}}</td>
+                    <td>{{mtefAllocatoionExistingLeasesT22(4) | currency:'ZAR':'R'}}</td>
+                    <td>{{amountRequiredExistingLeasesT22(4) | currency:'ZAR':'R'}}</td>
+                    <td>{{shortfallExistingLeasesT22(4) | currency:'ZAR':'R'}}</td>
+                    <td>{{mtefAllocatoionExistingLeasesT22(5) | currency:'ZAR':'R'}}</td>
+                    <td>{{amountRequiredExistingLeasesT22(5) | currency:'ZAR':'R'}}</td>
+                    <td>{{shortfallExistingLeasesT22(5) | currency:'ZAR':'R'}}</td>                   
                 </tr>
                 <tr>
                     <td>New leases T4.2</td>
-                    <td></td><td></td><td></td><td></td><td></td>
-                    <td></td><td></td><td></td><td></td><td></td>
-                    <td></td><td></td><td></td><td></td><td></td>
+                    <td>{{mtefAllocatoionNewleasesT42(1) | currency:'ZAR':'R'}}</td>
+                    <td>{{amountRequiredNewleasesT42(1) | currency:'ZAR':'R'}}</td>
+                    <td>{{shortfallNewleasesT42(1) | currency:'ZAR':'R'}}</td>
+                    <td>{{mtefAllocatoionNewleasesT42(2) | currency:'ZAR':'R'}}</td>
+                    <td>{{amountRequiredNewleasesT42(2) | currency:'ZAR':'R'}}</td>
+                    <td>{{shortfallNewleasesT42(2) | currency:'ZAR':'R'}}</td>
+                    <td>{{mtefAllocatoionNewleasesT42(3) | currency:'ZAR':'R'}}</td>
+                    <td>{{amountRequiredNewleasesT42(3) | currency:'ZAR':'R'}}</td>
+                    <td>{{shortfallNewleasesT42(3) | currency:'ZAR':'R'}}</td>
+                    <td>{{mtefAllocatoionNewleasesT42(4) | currency:'ZAR':'R'}}</td>
+                    <td>{{amountRequiredNewleasesT42(4) | currency:'ZAR':'R'}}</td>
+                    <td>{{shortfallNewleasesT42(4) | currency:'ZAR':'R'}}</td>
+                    <td>{{mtefAllocatoionNewleasesT42(5) | currency:'ZAR':'R'}}</td>
+                    <td>{{amountRequiredNewleasesT42(5) | currency:'ZAR':'R'}}</td>
+                    <td>{{shortfallNewleasesT42(5) | currency:'ZAR':'R'}}</td>
                 </tr>
                 <tr>
                     <td>Operational cost 1: Telephone Services</td>
-                    <td></td><td></td><td></td><td></td><td></td>
-                    <td></td><td></td><td></td><td></td><td></td>
-                    <td></td><td></td><td></td><td></td><td></td>
+                    <td>{{mtefAllocatoionOperationalCostTelephoneServices(1) | currency:'ZAR':'R'}}</td>
+                    <td>{{amountRequiredOperationalCostTelephoneServices(1) | currency:'ZAR':'R'}}</td>
+                    <td>{{shortfallOperationalCostTelephoneServices(1) | currency:'ZAR':'R'}}</td>
+                    <td>{{mtefAllocatoionOperationalCostTelephoneServices(2) | currency:'ZAR':'R'}}</td>
+                    <td>{{amountRequiredOperationalCostTelephoneServices(2) | currency:'ZAR':'R'}}</td>
+                    <td>{{shortfallOperationalCostTelephoneServices(2) | currency:'ZAR':'R'}}</td>
+                    <td>{{mtefAllocatoionOperationalCostTelephoneServices(3) | currency:'ZAR':'R'}}</td>
+                    <td>{{amountRequiredOperationalCostTelephoneServices(3) | currency:'ZAR':'R'}}</td>
+                    <td>{{shortfallOperationalCostTelephoneServices(3) | currency:'ZAR':'R'}}</td>
+                    <td>{{mtefAllocatoionOperationalCostTelephoneServices(4) | currency:'ZAR':'R'}}</td>
+                    <td>{{amountRequiredOperationalCostTelephoneServices(4) | currency:'ZAR':'R'}}</td>
+                    <td>{{shortfallOperationalCostTelephoneServices(4) | currency:'ZAR':'R'}}</td>
+                    <td>{{mtefAllocatoionOperationalCostTelephoneServices(5) | currency:'ZAR':'R'}}</td>
+                    <td>{{amountRequiredOperationalCostTelephoneServices(5) | currency:'ZAR':'R'}}</td>
+                    <td>{{shortfallOperationalCostTelephoneServices(5) | currency:'ZAR':'R'}}</td>
                 </tr>
                 <tr>
-                    <td>Operational Cost  2: Security</td>
-                    <td></td><td></td><td></td><td></td><td></td>
-                    <td></td><td></td><td></td><td></td><td></td>
-                    <td></td><td></td><td></td><td></td><td></td>
+                    <td>Operational Cost 2: Security</td>
+                    <td>{{mtefAllocatoionOperationalCostSecurity(1) | currency:'ZAR':'R'}}</td>
+                    <td>{{amountRequiredOperationalCostSecurity(1) | currency:'ZAR':'R'}}</td>
+                    <td>{{shortfallOperationalCostSecurity(1) | currency:'ZAR':'R'}}</td>
+                    <td>{{mtefAllocatoionOperationalCostSecurity(2) | currency:'ZAR':'R'}}</td>
+                    <td>{{amountRequiredOperationalCostSecurity(2) | currency:'ZAR':'R'}}</td>
+                    <td>{{shortfallOperationalCostSecurity(2) | currency:'ZAR':'R'}}</td>
+                    <td>{{mtefAllocatoionOperationalCostSecurity(3) | currency:'ZAR':'R'}}</td>
+                    <td>{{amountRequiredOperationalCostSecurity(3) | currency:'ZAR':'R'}}</td>
+                    <td>{{shortfallOperationalCostSecurity(3) | currency:'ZAR':'R'}}</td>
+                    <td>{{mtefAllocatoionOperationalCostSecurity(4) | currency:'ZAR':'R'}}</td>
+                    <td>{{amountRequiredOperationalCostSecurity(4) | currency:'ZAR':'R'}}</td>
+                    <td>{{shortfallOperationalCostSecurity(4) | currency:'ZAR':'R'}}</td>
+                    <td>{{mtefAllocatoionOperationalCostSecurity(5) | currency:'ZAR':'R'}}</td>
+                    <td>{{amountRequiredOperationalCostSecurity(5) | currency:'ZAR':'R'}}</td>
+                    <td>{{shortfallOperationalCostSecurity(5) | currency:'ZAR':'R'}}</td>
                 </tr>
                 <tr>
-                    <td>Operational Cost  3: Others</td>
-                    <td></td><td></td><td></td><td></td><td></td>
-                    <td></td><td></td><td></td><td></td><td></td>
-                    <td></td><td></td><td></td><td></td><td></td>
+                    <td>Operational Cost 3: Others</td>
+                    <td>{{mtefAllocatoionOperationalCostOthers(1) | currency:'ZAR':'R'}}</td>
+                    <td>{{amountRequiredOperationalCostOthers(1) | currency:'ZAR':'R'}}</td>
+                    <td>{{shortfallOperationalCostOthers(1) | currency:'ZAR':'R'}}</td>
+                    <td>{{mtefAllocatoionOperationalCostOthers(2) | currency:'ZAR':'R'}}</td>
+                    <td>{{amountRequiredOperationalCostOthers(2) | currency:'ZAR':'R'}}</td>
+                    <td>{{shortfallOperationalCostOthers(2) | currency:'ZAR':'R'}}</td>
+                    <td>{{mtefAllocatoionOperationalCostOthers(3) | currency:'ZAR':'R'}}</td>
+                    <td>{{amountRequiredOperationalCostOthers(3) | currency:'ZAR':'R'}}</td>
+                    <td>{{shortfallOperationalCostOthers(3) | currency:'ZAR':'R'}}</td>
+                    <td>{{mtefAllocatoionOperationalCostOthers(4) | currency:'ZAR':'R'}}</td>
+                    <td>{{amountRequiredOperationalCostOthers(4) | currency:'ZAR':'R'}}</td>
+                    <td>{{shortfallOperationalCostOthers(4) | currency:'ZAR':'R'}}</td>
+                    <td>{{mtefAllocatoionOperationalCostOthers(5) | currency:'ZAR':'R'}}</td>
+                    <td>{{amountRequiredOperationalCostOthers(5) | currency:'ZAR':'R'}}</td>
+                    <td>{{shortfallOperationalCostOthers(5) | currency:'ZAR':'R'}}</td>
                 </tr>
                 <tr>
                     <td>Municipal / Utility Services: State-owned (Electricity, water, sewer & refuse) T2.1</td>
-                    <td></td><td></td><td></td><td></td><td></td>
-                    <td></td><td></td><td></td><td></td><td></td>
-                    <td></td><td></td><td></td><td></td><td></td>
+                    <td>{{mtefAllocatoionMunicipalServicesStateOwnedT21(1) | currency:'ZAR':'R'}}</td>
+                    <td>{{amountRequiredMunicipalServicesStateOwnedT21(1) | currency:'ZAR':'R'}}</td>
+                    <td>{{shortfallMunicipalServicesStateOwnedT21(1) | currency:'ZAR':'R'}}</td>
+                    <td>{{mtefAllocatoionMunicipalServicesStateOwnedT21(2) | currency:'ZAR':'R'}}</td>
+                    <td>{{amountRequiredMunicipalServicesStateOwnedT21(2) | currency:'ZAR':'R'}}</td>
+                    <td>{{shortfallMunicipalServicesStateOwnedT21(2) | currency:'ZAR':'R'}}</td>
+                    <td>{{mtefAllocatoionMunicipalServicesStateOwnedT21(3) | currency:'ZAR':'R'}}</td>
+                    <td>{{amountRequiredMunicipalServicesStateOwnedT21(3) | currency:'ZAR':'R'}}</td>
+                    <td>{{shortfallMunicipalServicesStateOwnedT21(3) | currency:'ZAR':'R'}}</td>
+                    <td>{{mtefAllocatoionMunicipalServicesStateOwnedT21(4) | currency:'ZAR':'R'}}</td>
+                    <td>{{amountRequiredMunicipalServicesStateOwnedT21(4) | currency:'ZAR':'R'}}</td>
+                    <td>{{shortfallMunicipalServicesStateOwnedT21(4) | currency:'ZAR':'R'}}</td>
+                    <td>{{mtefAllocatoionMunicipalServicesStateOwnedT21(5) | currency:'ZAR':'R'}}</td>
+                    <td>{{amountRequiredMunicipalServicesStateOwnedT21(5) | currency:'ZAR':'R'}}</td>
+                    <td>{{shortfallMunicipalServicesStateOwnedT21(5) | currency:'ZAR':'R'}}</td>
                 </tr>
                 <tr>
                     <td>Municipal / Utility Services: Leased-in (Electricity, water, sewer & refuse)T2.2</td>
-                    <td></td><td></td><td></td><td></td><td></td>
-                    <td></td><td></td><td></td><td></td><td></td>
-                    <td></td><td></td><td></td><td></td><td></td>
+                    <td>{{mtefAllocatoionMunicipalUtilityServicesLeasedInT22(1) | currency:'ZAR':'R'}}</td>
+                    <td>{{amountRequiredMunicipalUtilityServicesLeasedInT22(1) | currency:'ZAR':'R'}}</td>
+                    <td>{{shortfallMunicipalUtilityServicesLeasedInT22(1) | currency:'ZAR':'R'}}</td>
+                    <td>{{mtefAllocatoionMunicipalUtilityServicesLeasedInT22(2) | currency:'ZAR':'R'}}</td>
+                    <td>{{amountRequiredMunicipalUtilityServicesLeasedInT22(2) | currency:'ZAR':'R'}}</td>
+                    <td>{{shortfallMunicipalUtilityServicesLeasedInT22(2) | currency:'ZAR':'R'}}</td>
+                    <td>{{mtefAllocatoionMunicipalUtilityServicesLeasedInT22(3) | currency:'ZAR':'R'}}</td>
+                    <td>{{amountRequiredMunicipalUtilityServicesLeasedInT22(3) | currency:'ZAR':'R'}}</td>
+                    <td>{{shortfallMunicipalUtilityServicesLeasedInT22(3) | currency:'ZAR':'R'}}</td>
+                    <td>{{mtefAllocatoionMunicipalUtilityServicesLeasedInT22(4) | currency:'ZAR':'R'}}</td>
+                    <td>{{amountRequiredMunicipalUtilityServicesLeasedInT22(4) | currency:'ZAR':'R'}}</td>
+                    <td>{{shortfallMunicipalUtilityServicesLeasedInT22(4) | currency:'ZAR':'R'}}</td>
+                    <td>{{mtefAllocatoionMunicipalUtilityServicesLeasedInT22(5) | currency:'ZAR':'R'}}</td>
+                    <td>{{amountRequiredMunicipalUtilityServicesLeasedInT22(5) | currency:'ZAR':'R'}}</td>
+                    <td>{{shortfallMunicipalUtilityServicesLeasedInT22(5) | currency:'ZAR':'R'}}</td>
                 </tr>
                 <tr>
                     <td>Property Rates & Taxes T2.1</td>
-                    <td></td><td></td><td></td><td></td><td></td>
-                    <td></td><td></td><td></td><td></td><td></td>
-                    <td></td><td></td><td></td><td></td><td></td>
+                    <td>{{mtefAllocatoionPropertyRatesTaxesT21(1) | currency:'ZAR':'R'}}</td>
+                    <td>{{amountRequiredPropertyRatesTaxesT21(1) | currency:'ZAR':'R'}}</td>
+                    <td>{{shortfallPropertyRatesTaxesT21(1) | currency:'ZAR':'R'}}</td>
+                    <td>{{mtefAllocatoionPropertyRatesTaxesT21(2) | currency:'ZAR':'R'}}</td>
+                    <td>{{amountRequiredPropertyRatesTaxesT21(2) | currency:'ZAR':'R'}}</td>
+                    <td>{{shortfallPropertyRatesTaxesT21(2) | currency:'ZAR':'R'}}</td>
+                    <td>{{mtefAllocatoionPropertyRatesTaxesT21(3) | currency:'ZAR':'R'}}</td>
+                    <td>{{amountRequiredPropertyRatesTaxesT21(3) | currency:'ZAR':'R'}}</td>
+                    <td>{{shortfallPropertyRatesTaxesT21(3) | currency:'ZAR':'R'}}</td>
+                    <td>{{mtefAllocatoionPropertyRatesTaxesT21(4) | currency:'ZAR':'R'}}</td>
+                    <td>{{amountRequiredPropertyRatesTaxesT21(4) | currency:'ZAR':'R'}}</td>
+                    <td>{{shortfallPropertyRatesTaxesT21(4) | currency:'ZAR':'R'}}</td>
+                    <td>{{mtefAllocatoionPropertyRatesTaxesT21(5) | currency:'ZAR':'R'}}</td>
+                    <td>{{amountRequiredPropertyRatesTaxesT21(5) | currency:'ZAR':'R'}}</td>
+                    <td>{{shortfallPropertyRatesTaxesT21(5) | currency:'ZAR':'R'}}</td>
                 </tr>
                 <tr>
                     <td>Maintenance Requirements (Repairs) T5.2</td>
-                    <td></td><td></td><td></td><td></td><td></td>
-                    <td></td><td></td><td></td><td></td><td></td>
-                    <td></td><td></td><td></td><td></td><td></td>
+                    <td>{{mtefAllocatoionMaintenanceRequirementsRepairsT52(1) | currency:'ZAR':'R'}}</td>
+                    <td>{{amountRequiredMaintenanceRequirementsRepairsT52(1) | currency:'ZAR':'R'}}</td>
+                    <td>{{shortfallMaintenanceRequirementsRepairsT52(1) | currency:'ZAR':'R'}}</td>
+                    <td>{{mtefAllocatoionMaintenanceRequirementsRepairsT52(2) | currency:'ZAR':'R'}}</td>
+                    <td>{{amountRequiredMaintenanceRequirementsRepairsT52(2) | currency:'ZAR':'R'}}</td>
+                    <td>{{shortfallMaintenanceRequirementsRepairsT52(2) | currency:'ZAR':'R'}}</td>
+                    <td>{{mtefAllocatoionMaintenanceRequirementsRepairsT52(3) | currency:'ZAR':'R'}}</td>
+                    <td>{{amountRequiredMaintenanceRequirementsRepairsT52(3) | currency:'ZAR':'R'}}</td>
+                    <td>{{shortfallMaintenanceRequirementsRepairsT52(3) | currency:'ZAR':'R'}}</td>
+                    <td>{{mtefAllocatoionMaintenanceRequirementsRepairsT52(4) | currency:'ZAR':'R'}}</td>
+                    <td>{{amountRequiredMaintenanceRequirementsRepairsT52(4) | currency:'ZAR':'R'}}</td>
+                    <td>{{shortfallMaintenanceRequirementsRepairsT52(4) | currency:'ZAR':'R'}}</td>
+                    <td>{{mtefAllocatoionMaintenanceRequirementsRepairsT52(5) | currency:'ZAR':'R'}}</td>
+                    <td>{{amountRequiredMaintenanceRequirementsRepairsT52(5) | currency:'ZAR':'R'}}</td>
+                    <td>{{shortfallMaintenanceRequirementsRepairsT52(5) | currency:'ZAR':'R'}}</td>
                 </tr>
                 <tr>
                     <td><strong>Total Current Costs</strong></td>
-                    <td></td><td></td><td></td><td></td><td></td>
-                    <td></td><td></td><td></td><td></td><td></td>
-                    <td></td><td></td><td></td><td></td><td></td>
+                    <td>{{mtefAllocatoionTotalCurrentCosts(1) | currency:'ZAR':'R'}}</td>
+                    <td>{{amountRequiredTotalCurrentCosts(1) | currency:'ZAR':'R'}}</td>
+                    <td>{{shortfallTotalCurrentCosts(1) | currency:'ZAR':'R'}}</td>
+                    <td>{{mtefAllocatoionTotalCurrentCosts(2) | currency:'ZAR':'R'}}</td>
+                    <td>{{amountRequiredTotalCurrentCosts(2) | currency:'ZAR':'R'}}</td>
+                    <td>{{shortfallTotalCurrentCosts(2) | currency:'ZAR':'R'}}</td>
+                    <td>{{mtefAllocatoionTotalCurrentCosts(3) | currency:'ZAR':'R'}}</td>
+                    <td>{{amountRequiredTotalCurrentCosts(3) | currency:'ZAR':'R'}}</td>
+                    <td>{{shortfallTotalCurrentCosts(3) | currency:'ZAR':'R'}}</td>
+                    <td>{{mtefAllocatoionTotalCurrentCosts(4) | currency:'ZAR':'R'}}</td>
+                    <td>{{amountRequiredTotalCurrentCosts(4) | currency:'ZAR':'R'}}</td>
+                    <td>{{shortfallTotalCurrentCosts(4) | currency:'ZAR':'R'}}</td>
+                    <td>{{mtefAllocatoionTotalCurrentCosts(5) | currency:'ZAR':'R'}}</td>
+                    <td>{{amountRequiredTotalCurrentCosts(5) | currency:'ZAR':'R'}}</td>
+                    <td>{{shortfallTotalCurrentCosts(5) | currency:'ZAR':'R'}}</td>
                 </tr>
                 <tr>
                     <td><strong>Total Capital Works & Recurrent Costs</strong></td>
-                    <td></td><td></td><td></td><td></td><td></td>
-                    <td></td><td></td><td></td><td></td><td></td>
-                    <td></td><td></td><td></td><td></td><td></td>
+                    <td>{{mtefAllocatoionTotalCapitalWorksRecurrentCosts(1) | currency:'ZAR':'R'}}</td>
+                    <td>{{amountRequiredTotalCapitalWorksRecurrentCosts(1) | currency:'ZAR':'R'}}</td>
+                    <td>{{shortfallTotalCapitalWorksRecurrentCosts(1) | currency:'ZAR':'R'}}</td>
+                    <td>{{mtefAllocatoionTotalCapitalWorksRecurrentCosts(2) | currency:'ZAR':'R'}}</td>
+                    <td>{{amountRequiredTotalCapitalWorksRecurrentCosts(2) | currency:'ZAR':'R'}}</td>
+                    <td>{{shortfallTotalCapitalWorksRecurrentCosts(2) | currency:'ZAR':'R'}}</td>
+                    <td>{{mtefAllocatoionTotalCapitalWorksRecurrentCosts(3) | currency:'ZAR':'R'}}</td>
+                    <td>{{amountRequiredTotalCapitalWorksRecurrentCosts(3) | currency:'ZAR':'R'}}</td>
+                    <td>{{shortfallTotalCapitalWorksRecurrentCosts(3) | currency:'ZAR':'R'}}</td>
+                    <td>{{mtefAllocatoionTotalCapitalWorksRecurrentCosts(4) | currency:'ZAR':'R'}}</td>
+                    <td>{{amountRequiredTotalCapitalWorksRecurrentCosts(4) | currency:'ZAR':'R'}}</td>
+                    <td>{{shortfallTotalCapitalWorksRecurrentCosts(4) | currency:'ZAR':'R'}}</td>
+                    <td>{{mtefAllocatoionTotalCapitalWorksRecurrentCosts(5) | currency:'ZAR':'R'}}</td>
+                    <td>{{amountRequiredTotalCapitalWorksRecurrentCosts(5) | currency:'ZAR':'R'}}</td>
+                    <td>{{shortfallTotalCapitalWorksRecurrentCosts(5) | currency:'ZAR':'R'}}</td>
                 </tr>
                 <tr>
                     <td><strong>% Shortfall</strong></td>
-                    <td></td><td></td><td></td><td></td><td></td>
-                    <td></td><td></td><td></td><td></td><td></td>
-                    <td></td><td></td><td></td><td></td><td></td>
+                    <td>{{mtefAllocatoionTotalShortfall(1) | currency:'ZAR':'R'}}</td>
+                    <td>{{amountRequiredTotalShortfall(1) | currency:'ZAR':'R'}}</td>
+                    <td>{{shortfallTotalShortfall(1) | currency:'ZAR':'R'}}</td>
+                    <td>{{mtefAllocatoionTotalShortfall(2) | currency:'ZAR':'R'}}</td>
+                    <td>{{amountRequiredTotalShortfall(2) | currency:'ZAR':'R'}}</td>
+                    <td>{{shortfallTotalShortfall(2) | currency:'ZAR':'R'}}</td>
+                    <td>{{mtefAllocatoionTotalShortfall(3) | currency:'ZAR':'R'}}</td>
+                    <td>{{amountRequiredTotalShortfall(3) | currency:'ZAR':'R'}}</td>
+                    <td>{{shortfallTotalShortfall(3) | currency:'ZAR':'R'}}</td>
+                    <td>{{mtefAllocatoionTotalShortfall(4) | currency:'ZAR':'R'}}</td>
+                    <td>{{amountRequiredTotalShortfall(4) | currency:'ZAR':'R'}}</td>
+                    <td>{{shortfallTotalShortfall(4) | currency:'ZAR':'R'}}</td>
+                    <td>{{mtefAllocatoionTotalShortfall(5) | currency:'ZAR':'R'}}</td>
+                    <td>{{amountRequiredTotalShortfall(5) | currency:'ZAR':'R'}}</td>
+                    <td>{{shortfallTotalShortfall(5) | currency:'ZAR':'R'}}</td>
                 </tr>
-        </ng-template>
-    </p-table>
-</form>
+            </ng-template>
+        </p-table>
+    </form>
 </div>

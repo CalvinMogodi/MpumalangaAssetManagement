@@ -62,24 +62,20 @@
                     </td>
                     <td>{{property.land.propertyDescription.extent}}</td>
                     <td>
-                        <p-multiSelect placeholder="Please select" inputId="municipalUtilityServices"
-                            [options]="municipalUtilityServices" formControlName="municipalUtilityService"
-                            optionLabel="name"></p-multiSelect>
+                        <p-inputNumber [(ngModel)]="property.municipalUtilityService" [ngModelOptions]="{standalone: true}" formControlName="municipalUtilityService" mode="currency" currency="ZAR" locale="en-ZA"></p-inputNumber>
                         <!--<div *ngIf="submitted && p.municipalUtilityServices.errors" class="text-error"><br>
                     <div *ngIf="p.municipalUtilityServices.errors.required">This field is required.</div>
                 </div>-->
                     </td>
                     <td>
-                        <p-inputNumber formControlName="propertyRatesTaxes" mode="currency" currency="ZAR" locale="en-ZA"></p-inputNumber>
+                        <p-inputNumber [(ngModel)]="property.propertyRatesTaxes" [ngModelOptions]="{standalone: true}" formControlName="propertyRatesTaxes" mode="currency" currency="ZAR" locale="en-ZA"></p-inputNumber>
                       
                         <!--<div *ngIf="submitted && p.propertyRatesTaxes.errors" class="text-error"><br>
                     <div *ngIf="p.propertyRatesTaxes.errors.required">This field is required.</div>
                 </div>-->
                     </td>
-                    <td>
-                        
-                        <p-multiSelect placeholder="Please select" inputId="operationalCost" [options]="operationalCosts"
-                            formControlName="operationalCost" optionLabel="name"></p-multiSelect>
+                    <td>                        
+                        <p-inputNumber [(ngModel)]="property.operationalCost" [ngModelOptions]="{standalone: true}" mode="currency" currency="ZAR" locale="en-ZA" formControlName="operationalCost"></p-inputNumber>
                         <!--<div *ngIf="submitted && p.operationalCost.errors" class="text-error"><br>
                     <div *ngIf="p.operationalCost.errors.required">This field is required.</div>
                 </div>-->

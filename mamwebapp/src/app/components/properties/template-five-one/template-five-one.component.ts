@@ -4,6 +4,7 @@ import { UAMPService } from 'src/app/services/uamp/uamp.service';
 import { MenuItem, MessageService } from 'primeng/api';
 import { CurrentUtlisation } from '../../../models/current-utilisation.model';
 import { FormGroup, FormBuilder } from '@angular/forms';
+import { FacilityService } from 'src/app/services/facility/facility.service';
 
 @Component({
   selector: 'app-template-five-one',
@@ -21,8 +22,18 @@ export class TemplateFiveOneComponent implements OnInit {
   operationTypes: any[];
   operationPlans: any[] = [];
   buttonItems: MenuItem[];
+  umap: any = {};
 
-  constructor(public uampService: UAMPService, private formBuilder: FormBuilder, private messageService: MessageService) {
+  constructor(private facilityService: FacilityService, public uampService: UAMPService, private formBuilder: FormBuilder, private messageService: MessageService) {
+    
+    this.facilityService.umapTempleteChange.subscribe((value) => {
+      if(value)
+      {
+        this.umap = value;
+      }    
+      this.umap.templeteFivePointOne = this.operationPlans;
+    });
+
     this.operationPlanForm = this.formBuilder.group({
       region: [''],
       town: [''],

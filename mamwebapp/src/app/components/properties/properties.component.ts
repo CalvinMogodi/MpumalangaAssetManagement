@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'mamwebapp/src/app/models/user.model';
+import { Subject } from 'rxjs/internal/Subject';
 import { first } from 'rxjs/operators';
 import { Facility } from 'src/app/models/facility.model';
 import { AuthenticationService } from 'src/app/services/authentication.service';
@@ -12,6 +13,7 @@ import { FacilityService } from '../../services/facility/facility.service';
 })
 export class PropertiesComponent implements OnInit {
   properties: Facility[];
+  umapTemplete: any[];
   selectedFacility: Facility;
   leasedPropertyCount: Number = 0;
   activeIndex: number = 0;
@@ -19,9 +21,12 @@ export class PropertiesComponent implements OnInit {
   showDialog: Boolean = false;
   showUAMP: Boolean = false;
   currentUser: User; 
+  umap: any;
 
   constructor(public facilityService: FacilityService, private authenticationService: AuthenticationService) { 
-    
+     this.facilityService.umapTempleteChange.subscribe((value) => {
+      this.umap = value
+  })
   }
 
   ngOnInit() {
@@ -59,4 +64,14 @@ export class PropertiesComponent implements OnInit {
   viewUAMP() {
     this.showUAMP = true;
   }
+  next(){
+    let umap : any = {};
+    if(this.umap){
+      umap = this.umap;
+    }
+    
+    this.facilityService.assignumapTemplete(umap);
+  }
+
+
 }

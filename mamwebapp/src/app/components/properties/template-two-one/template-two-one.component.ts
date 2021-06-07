@@ -19,9 +19,16 @@ export class TemplateTwoOneComponent implements OnInit {
   municipalUtilityServices: any[];
   operationalCosts: any[];
   conditionRatings: any[];
+  umap: any = {};
 
   constructor(private facilityService: FacilityService, private formBuilder: FormBuilder, private messageService: MessageService) {
-
+    this.facilityService.umapTempleteChange.subscribe((value) => {
+      if(value)
+      {
+        this.umap = value;
+      }    
+      this.umap.templeteTwoPointOne = this.properties;
+  })
   }
 
   ngOnInit() {

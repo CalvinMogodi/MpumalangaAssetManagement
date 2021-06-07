@@ -7,17 +7,29 @@ import { DashboardWedge } from '../../models/dashboard-wedge.model';
 import { facilitySummaryChart } from 'src/app/models/facility-summary-chart.model';
 import { MapCoordinate } from 'src/app/models/map-oordinate.model';
 import { Facility } from 'src/app/models/facility.model';
+import { Subject } from 'rxjs/internal/Subject';
+import { Observable } from 'rxjs';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class FacilityService {
+  umapTemplete: any[];
+
+  umapTempleteChange: Subject<any[]> = new Subject<any[]>();
   private httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
   constructor(private http: HttpClient) { }
 
-  getFacilityZonings() {
+  assignumapTemplete(umapTemplete: any[]) {
+    this.umapTemplete = umapTemplete
+    this.umapTempleteChange.next(this.umapTemplete);
+} 
+0
+
+  getFacilityZonings(): Observable<any[]> {
     return this.http.get<FacilityType[]>(`${environment.apiUrl}/api/facility/getfacilityzonings`);
   }
 

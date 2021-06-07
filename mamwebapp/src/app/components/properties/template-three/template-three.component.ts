@@ -3,6 +3,7 @@ import { UAMPService } from 'src/app/services/uamp/uamp.service';
 import { Facility } from 'src/app/models/facility.model';
 import { MenuItem, MessageService } from 'primeng/api';
 import { FormGroup, FormBuilder } from '@angular/forms';
+import { FacilityService } from 'src/app/services/facility/facility.service';
 
 @Component({
   selector: 'app-template-three',
@@ -15,9 +16,16 @@ export class TemplateThreeComponent implements OnInit {
   @Input() properties: Facility[];
   assessmentStrategicForm: FormGroup;
   buttonItems: MenuItem[];
+  umap: any = {};
 
-  constructor(public uampService: UAMPService, private formBuilder: FormBuilder, private messageService: MessageService) {
-
+  constructor(private facilityService: FacilityService, public uampService: UAMPService, private formBuilder: FormBuilder, private messageService: MessageService) {
+    this.facilityService.umapTempleteChange.subscribe((value) => {
+      if(value)
+      {
+        this.umap = value;
+      }    
+      this.umap.templeteThree = this.properties;
+  });
   }
 
   ngOnInit() {

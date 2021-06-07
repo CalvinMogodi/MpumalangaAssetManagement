@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { FormGroup, FormBuilder, FormArray, FormControl, Validators } from '@angular/forms';
 import { Facility } from 'src/app/models/facility.model';
+import { FacilityService } from 'src/app/services/facility/facility.service';
 
 @Component({
   selector: 'app-template-six',
@@ -12,8 +13,18 @@ import { Facility } from 'src/app/models/facility.model';
 export class TemplateSixComponent implements OnInit {
   @Input() properties: Facility[];
   operationPlanForm: FormGroup;
+  umap: any = {};
 
-  constructor(private formBuilder: FormBuilder, private messageService: MessageService) { }
+  constructor(private facilityService: FacilityService, private formBuilder: FormBuilder, private messageService: MessageService) { 
+    this.facilityService.umapTempleteChange.subscribe((value) => {
+      if(value)
+      {
+        this.umap = value;
+      }    
+      this.umap.templeteSix = this.properties;
+    });
+  }
+  
   ngOnInit() {
     this.createForm();
   }

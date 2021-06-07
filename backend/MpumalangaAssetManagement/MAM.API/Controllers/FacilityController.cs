@@ -254,3 +254,36 @@ namespace MAM.API.Controllers
         }
     }
 }
+
+public static class Counter
+{
+    private int count = 0;
+    private int increment;
+
+    public int Counter()
+    {
+        increment = increment;
+    }
+
+    protected int getAndIncrement()
+    {
+        this.count += this.increment;
+        return this.count;
+    }
+
+}
+
+public static class DocumentNameCreator
+{
+    private String prefix;
+
+    public static DocumentNameCreator(int increment, String prefix)
+    {
+        prefix = getNewDocumentName();
+    }
+
+    String static getNewDocumentName()
+    {
+        return prefix + getAndIncrement();
+    }
+}

@@ -4,6 +4,8 @@ import { first } from 'rxjs/operators';
 import { UAMPService } from 'src/app/services/uamp/uamp.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Programme } from '../../../models/programme.model';
+import { FacilityService } from 'src/app/services/facility/facility.service';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-template-one',
@@ -18,10 +20,19 @@ export class TemplateOneComponent implements OnInit {
   programmeForm: FormGroup;
   submitted: boolean = false;
   buttonItems: MenuItem[];
+  umap: any = {};
 
-  constructor(public uampService: UAMPService, private formBuilder: FormBuilder, private messageService: MessageService) {
+  constructor(public facilityService: FacilityService,public uampService: UAMPService, private formBuilder: FormBuilder, private messageService: MessageService) {
     this.programmes = [];
     //this.programmes.push(new Programme());
+    this.facilityService.umapTempleteChange.subscribe((value) => {
+      if(value)
+      {
+        this.umap = value;
+      }
+    
+      this.umap.templete1 = this.programmes;
+  })
   }
 
   ngOnInit() {
