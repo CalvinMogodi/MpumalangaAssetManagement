@@ -60,11 +60,11 @@
                      
                     </td>
                     <td>
-                        <p-inputNumber style="width: 120px !important;" formControlName="rentalAmountPA" mode="currency" currency="ZAR" locale="en-ZA"></p-inputNumber> 
+                        <p-inputNumber [(ngModel)]="property.rentalAmountPA" [ngModelOptions]="{standalone: true}" style="width: 120px !important;" formControlName="rentalAmountPA" mode="currency" currency="ZAR" locale="en-ZA"></p-inputNumber> 
                        
                     </td>
                     <td>
-                        <p-inputNumber style="width: 120px !important;" formControlName="operationalCost" mode="currency" currency="ZAR" locale="en-ZA"></p-inputNumber>                      
+                        <p-inputNumber [(ngModel)]="property.operationalCost" [ngModelOptions]="{standalone: true}" style="width: 120px !important;" formControlName="operationalCost" mode="currency" currency="ZAR" locale="en-ZA"></p-inputNumber>                      
                         
                     </td>
                     <td>

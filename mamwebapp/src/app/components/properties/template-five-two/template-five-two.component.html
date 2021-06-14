@@ -35,7 +35,7 @@
                     <td><input formControlName="repairDescription" autocomplete="off" type="text" pInputText class="ui-inputtext ui-widget"></td>
                     <td><p-inputNumber formControlName="initialNeedYear"></p-inputNumber></td>
                     <td><p-dropdown placeholder="Please select" inputId="prioity" [options]="prioities" formControlName="prioity" optionLabel="name"></p-dropdown></td>
-                    <td><p-inputNumber formControlName="totalAmountRequired" mode="currency" currency="ZAR" locale="en-ZA"></p-inputNumber></td>
+                    <td><p-inputNumber [(ngModel)]="property.totalAmountRequired" [ngModelOptions]="{standalone: true}" formControlName="totalAmountRequired" mode="currency" currency="ZAR" locale="en-ZA"></p-inputNumber></td>
                     <td><p-inputNumber formControlName="cashFlowYear1" mode="currency" currency="ZAR" locale="en-ZA"></p-inputNumber></td>
                     <td><p-inputNumber formControlName="cashFlowYear2" mode="currency" currency="ZAR" locale="en-ZA"></p-inputNumber></td>
                     <td><p-inputNumber formControlName="cashFlowYear3" mode="currency" currency="ZAR" locale="en-ZA"></p-inputNumber></td>
