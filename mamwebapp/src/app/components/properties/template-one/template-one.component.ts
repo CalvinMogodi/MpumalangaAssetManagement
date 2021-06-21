@@ -31,7 +31,7 @@ export class TemplateOneComponent implements OnInit {
         this.uamp = value;
       }
     
-      this.uamp.templete1 = this.programmes;
+      this.uamp.templeteOne = this.programmes;
   })
   }
 

@@ -100,7 +100,7 @@ namespace MAM.BusinessLayer.Repositories
 
             List<FacilitySummaryChart> facilitySummaryChartData = new List<FacilitySummaryChart>();
 
-            using (var dataAccess = new DataAccess.Repositories.FacilityStatementRepository(appSettings.ConnectionString))
+            /*using (var dataAccess = new DataAccess.Repositories.MtefBudgetPeriodRepository(appSettings.ConnectionString))
             {
                 var facilities = dataAccess.GetFacilityStatements();
                 int year = DateTime.Now.Year;
@@ -161,7 +161,7 @@ namespace MAM.BusinessLayer.Repositories
                     facilitySummaryChartData.Add(facilitySummaryChart);
                     year--;
                 }
-            }
+            }*/
             return facilitySummaryChartData;
         }
 

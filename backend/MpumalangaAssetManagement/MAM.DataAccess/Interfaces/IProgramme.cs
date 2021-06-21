@@ -5,9 +5,11 @@ using System.Text;
 
 namespace MAM.DataAccess.Interfaces
 {
-    public interface IProgramme
+    public interface IOperationPlanRepository
     {
-        void AddProgrammes(List<Programme> programmes);
-        List<Programme> GetProgrammes();
+        int AddOperationPlan(OperationPlan operationPlan);
+        bool UpdateOperationPlan(OperationPlan operationPlan);
+        bool DeleteOperationPlan(OperationPlan operationPlan);
+        List<OperationPlan> GetOperationPlans();
     }
 }

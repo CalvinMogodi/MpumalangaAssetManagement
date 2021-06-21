@@ -16,7 +16,7 @@ namespace MAM.API.Controllers
     {
         private static readonly ILog log = LogManager.GetLogger(typeof(UserController));
 
-        private IUAMPService _uampService;
+        private IUAMPService _uampService;       
 
         public UAMPController(IUAMPService uampService)
         {
@@ -40,30 +40,13 @@ namespace MAM.API.Controllers
         }
 
         [AllowAnonymous]
-        [HttpPost]
-        [Route("addprogrammes")]
-        public IActionResult AddProgrammes([FromBody] List<Programme> programmes)
+        [HttpGet]
+        [Route("getuamp")]
+        public IActionResult GetUAMP()
         {
             try
             {
-                var result = _uampService.AddProgrammes(programmes);
-                return Ok(result);
-            }
-            catch (Exception ex)
-            {
-                log.Error(ex);
-                throw ex;
-            }
-        }
-
-        [AllowAnonymous]
-        [HttpPost]
-        [Route("addfunctionalperformances")]
-        public IActionResult AddFunctionalPerformances([FromBody] List<FunctionalPerformance> functionalPerformances)
-        {
-            try
-            {
-                var result = _uampService.AddFunctionalPerformances(functionalPerformances);
+                var result = _uampService.GetUserImmovableAssetManagementPlans();
                 return Ok(result);
             }
             catch (Exception ex)
@@ -75,12 +58,12 @@ namespace MAM.API.Controllers
 
         [AllowAnonymous]
         [HttpPost]
-        [Route("addutilisations")]
-        public IActionResult AddUtilisations([FromBody] List<Utilisation> utilisations)
+        [Route("saveuserimmovableassetmanagementplan")]
+        public IActionResult SaveUserImmovableAssetManagementPlan([FromBody] UserImmovableAssetManagementPlan userImmovableAssetManagementPlan)
         {
             try
             {
-                var result = _uampService.AddUtilisations(utilisations);
+                var result = _uampService.SaveUserImmovableAssetManagementPlan(userImmovableAssetManagementPlan);
                 return Ok(result);
             }
             catch (Exception ex)
@@ -91,47 +74,13 @@ namespace MAM.API.Controllers
         }
 
         [AllowAnonymous]
-        [HttpGet]
-        [Route("programmes")]
-        public IActionResult GetProgrammes()
+        [HttpPost]
+        [Route("adduserimmovableassetmanagementplan")]
+        public IActionResult AddUserImmovableAssetManagementPlan([FromBody] UserImmovableAssetManagementPlan userImmovableAssetManagementPlan)
         {
             try
             {
-                var result = _uampService.GetProgrammes();
-                return Ok(result);
-            }
-            catch (Exception ex)
-            {
-                log.Error(ex);
-                throw ex;
-            }
-        }
-
-        [AllowAnonymous]
-        [HttpGet]
-        [Route("functionalperformances")]
-        public IActionResult GetFunctionalPerformances()
-        {
-            try
-            {
-                var result = _uampService.GetFunctionalPerformances();
-                return Ok(result);
-            }
-            catch (Exception ex)
-            {
-                log.Error(ex);
-                throw ex;
-            }
-        }
-
-        [AllowAnonymous]
-        [HttpGet]
-        [Route("utilisations")]
-        public IActionResult GetUtilisations()
-        {
-            try
-            {
-                var result = _uampService.GetUtilisations();
+                var result = _uampService.AddUserImmovableAssetManagementPlan(userImmovableAssetManagementPlan);
                 return Ok(result);
             }
             catch (Exception ex)

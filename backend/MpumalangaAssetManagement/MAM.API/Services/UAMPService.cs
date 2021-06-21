@@ -10,12 +10,9 @@ namespace MAM.API.Services
 {
     public interface IUAMPService
     {
-        bool AddProgrammes(List<Programme> programmes);
-        bool AddFunctionalPerformances(List<FunctionalPerformance> functionalPerformances);
-        bool AddUtilisations(List<Utilisation> utilisations);
-        List<Programme> GetProgrammes();
-        List<FunctionalPerformance> GetFunctionalPerformances();
-        List<Utilisation> GetUtilisations();
+        List<UserImmovableAssetManagementPlan> GetUserImmovableAssetManagementPlans();
+        UserImmovableAssetManagementPlan SaveUserImmovableAssetManagementPlan(UserImmovableAssetManagementPlan userImmovableAssetManagementPlan);
+        UserImmovableAssetManagementPlan AddUserImmovableAssetManagementPlan(UserImmovableAssetManagementPlan userImmovableAssetManagementPlan);   
     }
 
     public class UAMPService : IUAMPService
@@ -27,52 +24,24 @@ namespace MAM.API.Services
             _appSettings = appSettings.Value;
         }
 
-        public bool AddFunctionalPerformances(List<FunctionalPerformance> functionalPerformances)
-        {
-            using (var _functionalPerformanceRepository = new FunctionalPerformanceRepository(_appSettings))
+        public List<UserImmovableAssetManagementPlan> GetUserImmovableAssetManagementPlans() {
+            using (var _userImmovableAssetManagementPlan = new UserImmovableAssetManagementPlanRepository(_appSettings))
             {
-                return _functionalPerformanceRepository.AddFunctionalPerformances(functionalPerformances);
+                return _userImmovableAssetManagementPlan.GetUserImmovableAssetManagementPlans();
             }
         }
 
-        public bool AddProgrammes(List<Programme> programmes)
-        {
-            using (var _programmeRepository = new ProgrammeRepository(_appSettings))
+        public UserImmovableAssetManagementPlan SaveUserImmovableAssetManagementPlan(UserImmovableAssetManagementPlan userImmovableAssetManagementPlan) {
+            using (var _userImmovableAssetManagementPlan = new UserImmovableAssetManagementPlanRepository(_appSettings))
             {
-               return _programmeRepository.AddProgrammes(programmes);
+                return _userImmovableAssetManagementPlan.SaveUserImmovableAssetManagementPlan(userImmovableAssetManagementPlan);
             }
         }
-
-        public List<FunctionalPerformance> GetFunctionalPerformances()
-        {
-            using (var _functionalPerformanceRepository = new FunctionalPerformanceRepository(_appSettings))
+        public UserImmovableAssetManagementPlan AddUserImmovableAssetManagementPlan(UserImmovableAssetManagementPlan userImmovableAssetManagementPlan) {
+            using (var _userImmovableAssetManagementPlan = new UserImmovableAssetManagementPlanRepository(_appSettings))
             {
-                return _functionalPerformanceRepository.GetFunctionalPerformances();
+                return _userImmovableAssetManagementPlan.AddUserImmovableAssetManagementPlan(userImmovableAssetManagementPlan);
             }
-        }
-
-        public List<Programme> GetProgrammes()
-        {
-            using (var _programmeRepository = new ProgrammeRepository(_appSettings))
-            {
-                return _programmeRepository.GetProgrammes();
-            }
-        }
-
-        public bool AddUtilisations(List<Utilisation> utilisations)
-        {
-            using (var _utilisationRepository = new UtilisationRepository(_appSettings))
-            {
-                return _utilisationRepository.AddUtilisations(utilisations);
-            }
-        }
-
-        public List<Utilisation> GetUtilisations()
-        {
-            using (var _utilisationRepository = new UtilisationRepository(_appSettings))
-            {
-                return _utilisationRepository.GetUtilisations();
-            }
-        }
+        }       
     }
 }

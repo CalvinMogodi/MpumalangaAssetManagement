@@ -254,7 +254,7 @@ namespace MAM.API.Controllers
         }
     }
 }
-
+/*
 public static class Counter
 {
     private int count = 0;
@@ -286,4 +286,4 @@ public static class DocumentNameCreator
     {
         return prefix + getAndIncrement();
     }
-}
+}*/
