@@ -20,15 +20,15 @@ export class TemplateTwoTwoComponent implements OnInit {
   leasedFacilitiesExtentTotal = 0;
   submitted: boolean = false;
   propertyForm: FormGroup;
-  umap: any = {};
+  uamp: any = {};
   
   constructor(private facilityService: FacilityService, private formBuilder: FormBuilder) { 
-    this.facilityService.umapTempleteChange.subscribe((value) => {
+    this.facilityService.uampTempleteChange.subscribe((value) => {
       if(value)
       {
-        this.umap = value;
+        this.uamp = value;
       }    
-      this.umap.templeteTwoPointTwo = this.properties;
+      this.uamp.templeteTwoPointTwo = this.properties;
   })
   }
 

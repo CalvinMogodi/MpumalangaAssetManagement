@@ -15,17 +15,17 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class FacilityService {
-  umapTemplete: any[];
+  uampTemplete: any[];
 
-  umapTempleteChange: Subject<any[]> = new Subject<any[]>();
+  uampTempleteChange: Subject<any[]> = new Subject<any[]>();
   private httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
   constructor(private http: HttpClient) { }
 
-  assignumapTemplete(umapTemplete: any[]) {
-    this.umapTemplete = umapTemplete
-    this.umapTempleteChange.next(this.umapTemplete);
+  assignuampTemplete(umapTemplete: any[]) {
+    this.uampTemplete = umapTemplete
+    this.uampTempleteChange.next(this.uampTemplete);
 } 
 0
 

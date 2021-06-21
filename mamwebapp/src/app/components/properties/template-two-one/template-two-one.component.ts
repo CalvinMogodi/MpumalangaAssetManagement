@@ -3,14 +3,16 @@ import { Facility } from 'src/app/models/facility.model';
 import { FacilityService } from '../../../services/facility/facility.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
-import { FormControl } from '@angular/forms';
-import { FormArray } from '@angular/forms';
+import { FormControl, FormArray } from '@angular/forms';
+import { DialogService } from 'primeng/dynamicdialog';
+import { DynamicDialogRef } from 'primeng/dynamicdialog';
+import { AddMunicipalUtilityServicesComponent } from './add-municipal-utility-services/add-municipal-utility-services';
 
 @Component({
   selector: 'app-template-two-one',
   templateUrl: './template-two-one.component.html',
   styleUrls: ['./template-two-one.component.css'],
-  providers: [MessageService]
+  providers: [MessageService, DialogService, DynamicDialogRef]
 })
 export class TemplateTwoOneComponent implements OnInit {
   @Input() properties: Facility[];
@@ -19,16 +21,19 @@ export class TemplateTwoOneComponent implements OnInit {
   municipalUtilityServices: any[];
   operationalCosts: any[];
   conditionRatings: any[];
-  umap: any = {};
+  uamp: any = {};
 
-  constructor(private facilityService: FacilityService, private formBuilder: FormBuilder, private messageService: MessageService) {
-    this.facilityService.umapTempleteChange.subscribe((value) => {
+  constructor(private facilityService: FacilityService,
+              public ref: DynamicDialogRef,  
+              public dialogService: DialogService, 
+              private formBuilder: FormBuilder) {
+    this.facilityService.uampTempleteChange.subscribe((value) => {
       if(value)
       {
-        this.umap = value;
-      }    
-      this.umap.templeteTwoPointOne = this.properties;
-  })
+        this.uamp = value;
+      }   
+      this.uamp.templeteTwoPointOne = this.properties;       
+    });
   }
 
   ngOnInit() {
@@ -106,4 +111,20 @@ export class TemplateTwoOneComponent implements OnInit {
     });
   }
 
+  show(property:any) {
+    const ref = this.dialogService.open(AddMunicipalUtilityServicesComponent, {
+        header: 'Municipal Utility Service',
+        width: '40%',
+        contentStyle: {"max-height": "500px", "overflow": "auto"},
+        baseZIndex: 10000,
+        data: {property: property}
+    });
+
+    ref.onClose.subscribe(result => {
+      console.log(result);
+       if (property) {
+         property = property;
+      }
+    });
+  }
 }

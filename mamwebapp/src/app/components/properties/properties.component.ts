@@ -24,7 +24,7 @@ export class PropertiesComponent implements OnInit {
   umap: any;
 
   constructor(public facilityService: FacilityService, private authenticationService: AuthenticationService) { 
-     this.facilityService.umapTempleteChange.subscribe((value) => {
+     this.facilityService.uampTempleteChange.subscribe((value) => {
       this.umap = value
   })
   }
@@ -70,7 +70,16 @@ export class PropertiesComponent implements OnInit {
       umap = this.umap;
     }
     
-    this.facilityService.assignumapTemplete(umap);
+    this.facilityService.assignuampTemplete(umap);
+  }
+
+  onSave(){
+    this.next();
+  }
+
+  onSubmit(){
+    this.next();
+
   }
 
 

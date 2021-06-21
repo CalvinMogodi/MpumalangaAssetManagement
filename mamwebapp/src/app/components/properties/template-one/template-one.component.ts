@@ -20,18 +20,18 @@ export class TemplateOneComponent implements OnInit {
   programmeForm: FormGroup;
   submitted: boolean = false;
   buttonItems: MenuItem[];
-  umap: any = {};
+  uamp: any = {};
 
   constructor(public facilityService: FacilityService,public uampService: UAMPService, private formBuilder: FormBuilder, private messageService: MessageService) {
     this.programmes = [];
     //this.programmes.push(new Programme());
-    this.facilityService.umapTempleteChange.subscribe((value) => {
+    this.facilityService.uampTempleteChange.subscribe((value) => {
       if(value)
       {
-        this.umap = value;
+        this.uamp = value;
       }
     
-      this.umap.templete1 = this.programmes;
+      this.uamp.templete1 = this.programmes;
   })
   }
 

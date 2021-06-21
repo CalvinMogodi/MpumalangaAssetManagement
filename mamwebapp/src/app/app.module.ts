@@ -34,6 +34,7 @@ import { TemplateFiveTwoComponent } from './components/properties/template-five-
 import { TemplateSevenComponent } from './components/properties/template-seven/template-seven.component';
 import { TemplateSixComponent } from './components/properties/template-six/template-six.component';
 import { NgxPrintModule } from 'ngx-print';
+import { DynamicDialogModule } from 'primeng/dynamicdialog';
 
 //primeng
 import { SlideMenuModule } from 'primeng/slidemenu';
@@ -67,6 +68,7 @@ import { LandComponent } from './components/assetregister/addassetregister/land/
 import { CalendarModule } from 'primeng/calendar';
 import { SplitButtonModule } from 'primeng/splitbutton';
 import { PrintAssetComponent } from './components/assetregister/print-asset/print-asset.component';
+import { AddMunicipalUtilityServicesComponent } from './components/properties/template-two-one/add-municipal-utility-services/add-municipal-utility-services';
 
 @NgModule({
   declarations: [
@@ -85,7 +87,7 @@ import { PrintAssetComponent } from './components/assetregister/print-asset/prin
     FinancialsComponent,
     PropertiesComponent,
     ViewPropertyComponent,
-    PrintAssetComponent,
+    PrintAssetComponent,   
     TemplateOneComponent,
     TemplateTwoOneComponent,
     TemplateTwoTwoComponent,
@@ -97,6 +99,7 @@ import { PrintAssetComponent } from './components/assetregister/print-asset/prin
     TemplateFiveThreeComponent,
     TemplateSixComponent,
     TemplateSevenComponent,
+    AddMunicipalUtilityServicesComponent,
   ],
   imports: [
     BrowserModule,
@@ -133,14 +136,19 @@ import { PrintAssetComponent } from './components/assetregister/print-asset/prin
     SplitButtonModule,
     InputTextareaModule,
     NgxPrintModule,
-    InputNumberModule
+    InputNumberModule,
+    DynamicDialogModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-    CurrencyPipe
+    CurrencyPipe,
+    AddMunicipalUtilityServicesComponent
   ],
   bootstrap: [AppComponent],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  entryComponents: [
+    AddMunicipalUtilityServicesComponent,
+  ]
 })
 export class AppModule { }

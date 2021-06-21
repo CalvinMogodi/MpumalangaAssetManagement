@@ -14,15 +14,15 @@ export class TemplateFiveThreeComponent implements OnInit {
   @Input() properties: Facility[];
   operationPlanForm: FormGroup;
   prioities: any[];
-  umap: any = {};
+  uamp: any = {};
   
   constructor(private facilityService: FacilityService, private formBuilder: FormBuilder, private messageService: MessageService) { 
-    this.facilityService.umapTempleteChange.subscribe((value) => {
+    this.facilityService.uampTempleteChange.subscribe((value) => {
       if(value)
       {
-        this.umap = value;
+        this.uamp = value;
       }    
-      this.umap.templeteFivePointThree = this.properties;
+      this.uamp.templeteFivePointThree = this.properties;
     });
   }
 

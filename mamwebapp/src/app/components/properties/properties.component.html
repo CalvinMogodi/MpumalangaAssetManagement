@@ -109,8 +109,8 @@
         <button *ngIf="activeIndex !== 10" style="float: right; margin-top: 15px" type="button" (click)="next(); activeIndex = activeIndex + 1" pButton
             icon="pi pi-angle-right" label="Next"></button>
         <button  style="float: right; margin-top: 15px;margin-right: 10px" type="button" pButton
-            icon="pi pi-check" label="Save"></button>
-        <button *ngIf="activeIndex === 10" style="float: right; margin-top: 15px;margin-right: 10px" type="submit" pButton
+            icon="pi pi-check" label="Save" (click)="onSave()"></button>
+        <button *ngIf="activeIndex === 10" style="float: right; margin-top: 15px;margin-right: 10px" (click)="onSubmit()" type="submit" pButton
             icon="pi pi-check" label="Submit"></button>
     </p-footer>
 </p-dialog>

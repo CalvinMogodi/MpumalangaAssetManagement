@@ -13,15 +13,15 @@ import { FacilityService } from 'src/app/services/facility/facility.service';
 export class TemplateSixComponent implements OnInit {
   @Input() properties: Facility[];
   operationPlanForm: FormGroup;
-  umap: any = {};
+  uamp: any = {};
 
   constructor(private facilityService: FacilityService, private formBuilder: FormBuilder, private messageService: MessageService) { 
-    this.facilityService.umapTempleteChange.subscribe((value) => {
+    this.facilityService.uampTempleteChange.subscribe((value) => {
       if(value)
       {
-        this.umap = value;
+        this.uamp = value;
       }    
-      this.umap.templeteSix = this.properties;
+      this.uamp.templeteSix = this.properties;
     });
   }
   

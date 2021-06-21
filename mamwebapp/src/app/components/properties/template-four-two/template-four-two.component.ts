@@ -21,15 +21,15 @@ export class TemplateFourTwoComponent implements OnInit {
   acquisitionTypes: any[];
   acquisitionPlans: any[] = [];
   buttonItems: MenuItem[];
-  umap: any = {};
+  uamp: any = {};
 
   constructor(private facilityService: FacilityService, public uampService: UAMPService, private formBuilder: FormBuilder, private messageService: MessageService) {
-    this.facilityService.umapTempleteChange.subscribe((value) => {
+    this.facilityService.uampTempleteChange.subscribe((value) => {
       if(value)
       {
-        this.umap = value;
+        this.uamp = value;
       }    
-      this.umap.templeteFourPointTwo = this.acquisitionPlans;
+      this.uamp.templeteFourPointTwo = this.acquisitionPlans;
     });
     this.acquisitionPlanForm = this.formBuilder.group({
       region: [''],

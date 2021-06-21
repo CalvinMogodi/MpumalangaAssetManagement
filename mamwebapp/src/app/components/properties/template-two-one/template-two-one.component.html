@@ -62,7 +62,7 @@
                     </td>
                     <td>{{property.land.propertyDescription.extent}}</td>
                     <td>
-                        <p-inputNumber [(ngModel)]="property.municipalUtilityService" [ngModelOptions]="{standalone: true}" formControlName="municipalUtilityService" mode="currency" currency="ZAR" locale="en-ZA"></p-inputNumber>
+                        <p-inputNumber (onFocus)="show(property)" [(ngModel)]="property.municipalUtilityService" [ngModelOptions]="{standalone: true}" formControlName="municipalUtilityService" mode="currency" currency="ZAR" locale="en-ZA"></p-inputNumber>
                         <!--<div *ngIf="submitted && p.municipalUtilityServices.errors" class="text-error"><br>
                     <div *ngIf="p.municipalUtilityServices.errors.required">This field is required.</div>
                 </div>-->
