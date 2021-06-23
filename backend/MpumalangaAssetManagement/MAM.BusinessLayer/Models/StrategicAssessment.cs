@@ -6,7 +6,8 @@ namespace MAM.BusinessLayer.Models
 {
     public class StrategicAssessment
     {
-        public int MyProperty { get; set; }
+        public int Id { get; set; }
+        public int UserImmovableAssetManagementPlanId { get; set; }
         public string PostDescriptionTitle { get; set; }
         public string AllocatedSpace { get; set; }
         public string SurplusShortageAccommodation { get; set; }

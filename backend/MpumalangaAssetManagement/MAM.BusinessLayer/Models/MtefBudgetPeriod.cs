@@ -7,6 +7,7 @@ namespace MAM.BusinessLayer.Models
     public class MtefBudgetPeriod
     {
         public int Id { get; set; }
+        public int UserImmovableAssetManagementPlanId { get; set; }
         public int Name { get; set; }
         public MtefYear MtefYearOne { get; set; }
         public MtefYear MtefYearTwo { get; set; }

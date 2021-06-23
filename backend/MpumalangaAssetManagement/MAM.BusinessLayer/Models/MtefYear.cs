@@ -8,6 +8,7 @@ namespace MAM.BusinessLayer.Models
     public class MtefYear
     {
         public int Id { get; set; }
+        public int MtefBudgetPeriodId { get; set; }
         public ResultType ResultType { get; set; }
         public double? MtefAllocation { get; set; }
         public double? RequiredBudget { get; set; }

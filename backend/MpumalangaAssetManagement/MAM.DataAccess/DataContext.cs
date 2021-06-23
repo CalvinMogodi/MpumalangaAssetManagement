@@ -31,10 +31,19 @@ namespace MAM.DataAccess
         public DbSet<Finance> Finances { get; set; }
         public DbSet<SecondaryInformationNote> SecondaryInformationNotes { get; set; }
         public DbSet<Valuation> Valuations { get; set; }
-        public DbSet<Programme> Programme { get; set; }
+        public DbSet<Programme> Programmes { get; set; }
         public DbSet<FunctionalPerformance> FunctionalPerformance { get; set; }
         public DbSet<Utilisation> Utilisation { get; set; }
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        public DbSet<AcquisitionPlan> AcquisitionPlans { get; set; }
+        public DbSet<MtefBudgetPeriod> MtefBudgetPeriods { get; set; }
+        public DbSet<MtefYear> MtefYears { get; set; }
+        public DbSet<MunicipalUtilityService> MunicipalUtilityServices { get; set; }
+        public DbSet<OperationPlan> OperationPlans { get; set; }
+        public DbSet<Property> Properties { get; set; }
+        public DbSet<StrategicAssessment> StrategicAssessments { get; set; }
+        public DbSet<SurrenderPlan> SurrenderPlans { get; set; }
+        public DbSet<UserImmovableAssetManagementPlan> UserImmovableAssetManagementPlans { get; set; }
+protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(_connectionString);
         }

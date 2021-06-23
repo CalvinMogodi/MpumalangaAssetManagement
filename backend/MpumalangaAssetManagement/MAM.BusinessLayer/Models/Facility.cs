@@ -16,6 +16,7 @@ namespace MAM.BusinessLayer.Models
         public string Survey { get; set; }
         public string Type { get; set; }
         public string ClientCode { get; set; }
+        public string UserDepartment { get; set; }
         public string Status { get; set; }
         public int? LandId { get; set; }
         public int? FinanceId { get; set; }
@@ -54,6 +55,7 @@ namespace MAM.BusinessLayer.Models
                 ClientCode = f.ClientCode,
                 CapturerId = f.CapturerId,
                 Status = f.Status,
+                UserDepartment = f.UserDepartment,
                 ApproverId = f.ApproverId,
                 VerifierId = f.VerifierId,
                 CreatedDate = f.CreatedDate,

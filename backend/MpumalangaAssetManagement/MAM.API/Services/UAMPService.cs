@@ -10,7 +10,7 @@ namespace MAM.API.Services
 {
     public interface IUAMPService
     {
-        List<UserImmovableAssetManagementPlan> GetUserImmovableAssetManagementPlans();
+        List<UserImmovableAssetManagementPlan> GetUserImmovableAssetManagementPlans(string department);
         UserImmovableAssetManagementPlan SaveUserImmovableAssetManagementPlan(UserImmovableAssetManagementPlan userImmovableAssetManagementPlan);
         UserImmovableAssetManagementPlan AddUserImmovableAssetManagementPlan(UserImmovableAssetManagementPlan userImmovableAssetManagementPlan);   
     }
@@ -24,10 +24,10 @@ namespace MAM.API.Services
             _appSettings = appSettings.Value;
         }
 
-        public List<UserImmovableAssetManagementPlan> GetUserImmovableAssetManagementPlans() {
+        public List<UserImmovableAssetManagementPlan> GetUserImmovableAssetManagementPlans(string department) {
             using (var _userImmovableAssetManagementPlan = new UserImmovableAssetManagementPlanRepository(_appSettings))
             {
-                return _userImmovableAssetManagementPlan.GetUserImmovableAssetManagementPlans();
+                return _userImmovableAssetManagementPlan.GetUserImmovableAssetManagementPlans(department);
             }
         }
 

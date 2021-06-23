@@ -8,6 +8,7 @@ namespace MAM.BusinessLayer.Models
     public class Property
     {
         public int Id { get; set; }
+        public int UserImmovableAssetManagementPlanId { get; set; }
         public string FileReferenceNo { get; set; }
         public string SerialNo { get; set; }
         public string Districts { get; set; }

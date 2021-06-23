@@ -263,7 +263,24 @@ namespace MAM.BusinessLayer.Repositories
             }
             
             facility.Improvements = SaveImprovement(facility.Improvements, facility.Id);
-           
+
+            if (facility.Status.ToLower().Trim() == "signedoff") {
+                using (var dataAccess = new DataAccess.Repositories.UampRepository(appSettings.ConnectionString))
+                {
+                    DataAccess.Tables.UserImmovableAssetManagementPlan userImmovableAssetManagementPlan = new DataAccess.Tables.UserImmovableAssetManagementPlan() {
+                        Status = "New",
+                        FacilityId = facility.Id,
+                        FileReference = facility.FileReference,
+                        PropertyCode = facility.ClientCode,
+                        FacilityName = facility.Name,
+                        OptimalSupportingAccommodationId = null,
+                        Department = facility.UserDepartment,
+                        UserId = facility.ModifierId.Value,
+                        CreatedDate = DateTime.Now,
+                    };
+                    dataAccess.CreateUamp(userImmovableAssetManagementPlan);
+                }
+            }
             return facility;
         }
 

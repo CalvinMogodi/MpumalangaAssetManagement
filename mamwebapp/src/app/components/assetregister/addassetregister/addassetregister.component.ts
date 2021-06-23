@@ -136,9 +136,9 @@ export class AddassetregisterComponent implements OnInit {
         clientCode: 'T0IS00000000000700020',
         userId: this.currentUser.id,
         status: "New",
-        createdBy: this.currentUser.id,
+        capturerId: this.currentUser.id,
         createdDate: new Date(),
-        modifiedBy: this.currentUser.id,
+        modifierId: this.currentUser.id,
         modifiedDate: new Date(),
         land: {
           id: 0,
@@ -390,7 +390,9 @@ export class AddassetregisterComponent implements OnInit {
       return;
     }
     this.assignFacility(true, true, true);
-    this.facility.status = 'Submitted';
+    this.facility.status = 'SignedOff';
+    this.facility.modifierId = this.currentUser.id;
+    this.facility.modifiedDate = new Date();
     this.facilityService.saveFacility(this.facility, "facility").pipe(first()).subscribe(isSaved => {
       if (isSaved) {
         if(this.uploadedLandFiles.length > 0)
@@ -414,11 +416,20 @@ export class AddassetregisterComponent implements OnInit {
   assignFacility(isLandSave: boolean, isFinancialSave: boolean, isImprovementSave: boolean) {
     if (isLandSave) {
       if (this.facility.land != undefined && this.facility.land != null) {
+        let userDepartments = null;
+        let departments = this.landForm.controls["userDepartment"].value != undefined ? this.landForm.controls["userDepartment"].value : [];
+        departments.forEach(element => {
+          if(userDepartments == null)
+            userDepartments = element.name;
+          else
+            userDepartments = userDepartments + ' ,' + element.name;
+        });
         this.facility.clientCode = this.landForm.controls["clientCode"].value;
-        this.facility.survey = this.landForm.controls["survey"].value != undefined ? this.landForm.controls["survey"].value.name : null,
-        this.facility.type = this.landForm.controls["facilityType"].value != undefined ? this.landForm.controls["facilityType"].value.name : null,
-        this.facility.vestedType = this.landForm.controls["vestedType"].value != undefined ? this.landForm.controls["vestedType"].value.name : null,
-        this.facility.afs = this.landForm.controls["afs"].value != undefined ? this.landForm.controls["afs"].value.name : null,
+        this.facility.survey = this.landForm.controls["survey"].value != undefined ? this.landForm.controls["survey"].value.name : null;
+        this.facility.type = this.landForm.controls["facilityType"].value != undefined ? this.landForm.controls["facilityType"].value.name : null;
+        this.facility.vestedType = this.landForm.controls["vestedType"].value != undefined ? this.landForm.controls["vestedType"].value.name : null;
+        this.facility.afs = this.landForm.controls["afs"].value != undefined ? this.landForm.controls["afs"].value.name : null;
+        this.facility.userDepartment = userDepartments;
         this.facility.land = {
           id: this.facility.land.id == 0 ? 0 : this.facility.land.id,
           deedsOffice: this.landForm.controls["deedsOffice"].value != undefined ? this.landForm.controls["deedsOffice"].value.name : null,

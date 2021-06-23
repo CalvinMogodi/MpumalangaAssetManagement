@@ -8,6 +8,7 @@ namespace MAM.BusinessLayer.Models
     public class Programme
     {
         public int Id { get; set; }
+        public int UserImmovableAssetManagementPlanId { get; set; }
         public string CorporateObjective { get; set; }
         public string Outcomes { get; set; }
         public string OptimalSupportingAccommodationSolution { get; set; }

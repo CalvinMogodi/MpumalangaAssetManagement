@@ -1,8 +1,10 @@
 ﻿using MAM.DataAccess.Interfaces;
 using MAM.DataAccess.Tables;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Win32.SafeHandles;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 
@@ -22,24 +24,51 @@ namespace MAM.DataAccess.Repositories
             _connectionString = connectionString;
         }
 
-        public int AddUamp(UserImmovableAssetManagementPlan userImmovableAssetManagementPlan)
+        public int CreateUamp(UserImmovableAssetManagementPlan userImmovableAssetManagementPlan)
         {
-            throw new NotImplementedException();
+            using (var db = new DataContext(_connectionString))
+            {
+                db.UserImmovableAssetManagementPlans.Add(userImmovableAssetManagementPlan);
+                db.SaveChanges();
+                return userImmovableAssetManagementPlan.Id;
+            }
         }
 
-        public bool UpdateUamp(UserImmovableAssetManagementPlan userImmovableAssetManagementPlan)
+        public void UpdateUamp(UserImmovableAssetManagementPlan userImmovableAssetManagementPlan)
         {
-            throw new NotImplementedException();
+            using (var db = new DataContext(_connectionString))
+            {
+                db.UserImmovableAssetManagementPlans.Update(userImmovableAssetManagementPlan);
+                db.SaveChanges();
+            }
         }
 
-        public bool DeleteUamp(UserImmovableAssetManagementPlan userImmovableAssetManagementPlan)
+        public void DeleteUamp(UserImmovableAssetManagementPlan userImmovableAssetManagementPlan)
         {
-            throw new NotImplementedException();
+            using (var db = new DataContext(_connectionString))
+            {
+                userImmovableAssetManagementPlan.Status = "Deleted";
+                db.UserImmovableAssetManagementPlans.Update(userImmovableAssetManagementPlan);
+                db.SaveChanges();
+            }
         }
 
-        public List<UserImmovableAssetManagementPlan> GetUamps()
+        public List<UserImmovableAssetManagementPlan> GetUamps(string department)
         {
-            throw new NotImplementedException();
+            using (var db = new DataContext(_connectionString))
+            {
+                var list = db.UserImmovableAssetManagementPlans.Where(f => f.Status.ToLower() != "deleted" && f.Department.ToLower().Trim() == department.ToLower().Trim())
+                    .Include(u => u.User)
+                    //.Include(a => a.Properties)
+                    //.Include(f => f.OperationPlans)
+                    //.Include(a => a.AcquisitionPlans)
+                    //.Include(a => a.Programmes)
+                    //.Include(a => a.MtefBudgetPeriods)
+                    //.Include(a => a.SurrenderPlans)
+                    //.Include(a => a.StrategicAssessments)
+                    .ToList();
+                return list;
+            }
         }
 
         public void Dispose()
@@ -64,6 +93,6 @@ namespace MAM.DataAccess.Repositories
             }
 
             disposed = true;
-        }        
+        }
     }
 }

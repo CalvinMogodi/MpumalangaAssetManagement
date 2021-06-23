@@ -47,26 +47,26 @@ namespace MAM.DataAccess.Repositories
         {
             using (var db = new DataContext(_connectionString))
             {
-                 var list = db.Facilities.Where(f => f.Status != "Deleted" && f.Land.LandUseManagementDetail.UserDepartment.Trim().ToLower() == userDepartment.Trim().ToLower())
-                    .Include(a => a.Land)
-                    .Include(f => f.Land.PropertyDescription)
-                   .Include(a => a.Land.GeographicalLocation)
-                    .Include(a => a.Land.LandUseManagementDetail)
-                    .Include(a => a.Land.LeaseStatus)
-                   .Include(a => a.Improvements)
-                   .Include(a => a.Finance)
-                   .Include(f => f.Finance.Valuation)
-                    .Include(f => f.Finance.SecondaryInformationNote)
-                    .ToList();
+                var list = db.Facilities.Where(f => f.Status != "Deleted" && f.Land.LandUseManagementDetail.UserDepartment.Trim().ToLower() == "signedoff")
+                   .Include(a => a.Land)
+                   .Include(f => f.Land.PropertyDescription)
+                  .Include(a => a.Land.GeographicalLocation)
+                   .Include(a => a.Land.LandUseManagementDetail)
+                   .Include(a => a.Land.LeaseStatus)
+                  .Include(a => a.Improvements)
+                  .Include(a => a.Finance)
+                  .Include(f => f.Finance.Valuation)
+                   .Include(f => f.Finance.SecondaryInformationNote)
+                   .ToList();
                 return list;
-            }            
+            }
         }
 
         public List<Facility> GetFacilities()
         {
             using (var db = new DataContext(_connectionString))
             {
-                var list = db.Facilities.Where(f => f.Status.ToLower() != "deleted")
+                var list = db.Facilities.Where(f => f.Status.ToLower() != "deleted" && f.Status.ToLower() != "signedoff")
                    .Include(a => a.Land)
                    .Include(f => f.Land.PropertyDescription)
                   .Include(a => a.Land.GeographicalLocation)

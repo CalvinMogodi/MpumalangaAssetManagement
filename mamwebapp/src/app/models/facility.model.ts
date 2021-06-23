@@ -10,14 +10,15 @@ export class Facility {
     survey: string;
     afs: string;
     vestedType: string;
+    userDepartment: string;
     userId: number;
     status: string;    
     land: Land;
     finance: Finance;
     improvements: Improvement[];
-    createdBy: string;
+    capturerId: string;
     createdDate: Date;
-    modifiedBy: string;
+    modifierId: string;
     modifiedDate: Date;
     approvedBy: string;
     approvedDate: Date;

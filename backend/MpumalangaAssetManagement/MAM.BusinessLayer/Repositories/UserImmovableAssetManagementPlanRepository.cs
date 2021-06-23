@@ -20,10 +20,16 @@ namespace MAM.BusinessLayer.Repositories
             appSettings = settings;
         }
 
-        public List<UserImmovableAssetManagementPlan> GetUserImmovableAssetManagementPlans()
+        public List<UserImmovableAssetManagementPlan> GetUserImmovableAssetManagementPlans(string department)
         {
+            UserImmovableAssetManagementPlan uamp = new UserImmovableAssetManagementPlan();
             List<UserImmovableAssetManagementPlan> userImmovableAssetManagementPlans = new List<UserImmovableAssetManagementPlan>();
-            return userImmovableAssetManagementPlans;
+            using (var dataAccess = new DataAccess.Repositories.UampRepository(appSettings.ConnectionString))
+            {
+                var uamps = uamp.ConvertToUserImmovableAssetManagementPlans(dataAccess.GetUamps(department));
+                userImmovableAssetManagementPlans.AddRange(uamps);
+                return userImmovableAssetManagementPlans;
+            }
         }
 
         public UserImmovableAssetManagementPlan SaveUserImmovableAssetManagementPlan(UserImmovableAssetManagementPlan userImmovableAssetManagementPlan)

@@ -41,12 +41,12 @@ namespace MAM.API.Controllers
 
         [AllowAnonymous]
         [HttpGet]
-        [Route("getuamp")]
-        public IActionResult GetUAMP()
+        [Route("getuamps/{department}")]
+        public IActionResult GetUAMPs(string department)
         {
             try
             {
-                var result = _uampService.GetUserImmovableAssetManagementPlans();
+                var result = _uampService.GetUserImmovableAssetManagementPlans(department);
                 return Ok(result);
             }
             catch (Exception ex)

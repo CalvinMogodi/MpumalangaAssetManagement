@@ -7,7 +7,6 @@ import { DashboardWedge } from '../../models/dashboard-wedge.model';
 import { facilitySummaryChart } from 'src/app/models/facility-summary-chart.model';
 import { MapCoordinate } from 'src/app/models/map-oordinate.model';
 import { Facility } from 'src/app/models/facility.model';
-import { Subject } from 'rxjs/internal/Subject';
 import { Observable } from 'rxjs';
 
 
@@ -15,20 +14,12 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class FacilityService {
-  uampTemplete: any[];
 
-  uampTempleteChange: Subject<any[]> = new Subject<any[]>();
   private httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
   constructor(private http: HttpClient) { }
-
-  assignuampTemplete(umapTemplete: any[]) {
-    this.uampTemplete = umapTemplete
-    this.uampTempleteChange.next(this.uampTemplete);
-} 
-0
-
+  
   getFacilityZonings(): Observable<any[]> {
     return this.http.get<FacilityType[]>(`${environment.apiUrl}/api/facility/getfacilityzonings`);
   }
@@ -43,11 +34,7 @@ export class FacilityService {
   
   getMapCoordinates() {
     return this.http.get<Array<MapCoordinate>>(`${environment.apiUrl}/api/facility/getmapcoordinates`);
-  }
-
-  getProperties(userDepartment){
-    return this.http.get<Array<Facility>>(`${environment.apiUrl}/api/facility/getproperties/`+userDepartment);
-  }
+  } 
 
   getAllFacilities() {
     return this.http.get<Array<Facility>>(`${environment.apiUrl}/api/facility/getallfacilities`);

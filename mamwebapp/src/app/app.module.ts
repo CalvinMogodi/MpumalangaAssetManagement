@@ -20,19 +20,20 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { UserComponent } from './components/user/user.component';
 import { AddUserComponent } from './components/user/add-user/add-user.component';
 import { AssetregisterComponent } from './components/assetregister/assetregister.component'
-import { PropertiesComponent } from './components/properties/properties.component';
-import { ViewPropertyComponent } from './components/properties/view-property/view-property.component';
-import { TemplateOneComponent } from './components/properties/template-one/template-one.component';
-import { TemplateTwoTwoComponent } from './components/properties/template-two-two/template-two-two.component';
-import { TemplateTwoOneComponent } from './components/properties/template-two-one/template-two-one.component';
-import { TemplateThreeComponent } from './components/properties/template-three/template-three.component';
-import { TemplateFourOneComponent } from './components/properties/template-four-one/template-four-one.component';
-import { TemplateFourTwoComponent } from './components/properties/template-four-two/template-four-two.component';
-import { TemplateFiveOneComponent } from './components/properties/template-five-one/template-five-one.component';
-import { TemplateFiveThreeComponent } from './components/properties/template-five-three/template-five-three.component';
-import { TemplateFiveTwoComponent } from './components/properties/template-five-two/template-five-two.component';
-import { TemplateSevenComponent } from './components/properties/template-seven/template-seven.component';
-import { TemplateSixComponent } from './components/properties/template-six/template-six.component';
+import { UampComponent } from './components/uamp/uamp.component';
+import { ViewPropertyComponent } from './components/uamp/view-property/view-property.component';
+import { TemplateOneComponent } from './components/uamp/template-one/template-one.component';
+import { TemplateTwoTwoComponent } from './components/uamp/template-two-two/template-two-two.component';
+import { TemplateTwoOneComponent } from './components/uamp/template-two-one/template-two-one.component';
+import { TemplateThreeComponent } from './components/uamp/template-three/template-three.component';
+import { TemplateFourOneComponent } from './components/uamp/template-four-one/template-four-one.component';
+import { TemplateFourTwoComponent } from './components/uamp/template-four-two/template-four-two.component';
+import { TemplateFiveOneComponent } from './components/uamp/template-five-one/template-five-one.component';
+import { TemplateFiveThreeComponent } from './components/uamp/template-five-three/template-five-three.component';
+import { TemplateFiveTwoComponent } from './components/uamp/template-five-two/template-five-two.component';
+import { TemplateSevenComponent } from './components/uamp/template-seven/template-seven.component';
+import { TemplateSixComponent } from './components/uamp/template-six/template-six.component';
+import { AddMunicipalUtilityServicesComponent } from './components/uamp/template-two-one/add-municipal-utility-services/add-municipal-utility-services';
 import { NgxPrintModule } from 'ngx-print';
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
 
@@ -68,7 +69,6 @@ import { LandComponent } from './components/assetregister/addassetregister/land/
 import { CalendarModule } from 'primeng/calendar';
 import { SplitButtonModule } from 'primeng/splitbutton';
 import { PrintAssetComponent } from './components/assetregister/print-asset/print-asset.component';
-import { AddMunicipalUtilityServicesComponent } from './components/properties/template-two-one/add-municipal-utility-services/add-municipal-utility-services';
 
 @NgModule({
   declarations: [
@@ -85,7 +85,7 @@ import { AddMunicipalUtilityServicesComponent } from './components/properties/te
     LandComponent,
     ImprovementsComponent,
     FinancialsComponent,
-    PropertiesComponent,
+    UampComponent,
     ViewPropertyComponent,
     PrintAssetComponent,   
     TemplateOneComponent,

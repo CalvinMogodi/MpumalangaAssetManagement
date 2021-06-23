@@ -1,9 +1,8 @@
 export class Programme {
-    name: string;
-    plannedOutputs: string;
-    requiredServiceLevel: string;
-    possibleNonAssetSolution: string;
-    optimalAssetSolution: string;
-    motivation: string;
-    rationaleForChosenSolution: string;
+    id: Number;
+    userImmovableAssetManagementPlanId: Number;
+    corporateObjective: String;
+    outcomes: String;
+    optimalSupportingAccommodationSolution: String;
+    rationaleChosenSolution: String;
 }

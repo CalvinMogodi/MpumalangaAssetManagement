@@ -7,9 +7,9 @@ namespace MAM.DataAccess.Interfaces
 {
     public interface IUampRepository
     {
-        int AddUamp(UserImmovableAssetManagementPlan userImmovableAssetManagementPlan);
-        bool UpdateUamp(UserImmovableAssetManagementPlan userImmovableAssetManagementPlan);
-        bool DeleteUamp(UserImmovableAssetManagementPlan userImmovableAssetManagementPlan);
-        List<UserImmovableAssetManagementPlan> GetUamps();
+        int CreateUamp(UserImmovableAssetManagementPlan userImmovableAssetManagementPlan);
+        void UpdateUamp(UserImmovableAssetManagementPlan userImmovableAssetManagementPlan);
+        void DeleteUamp(UserImmovableAssetManagementPlan userImmovableAssetManagementPlan);
+        List<UserImmovableAssetManagementPlan> GetUamps(string department);
     }
 }

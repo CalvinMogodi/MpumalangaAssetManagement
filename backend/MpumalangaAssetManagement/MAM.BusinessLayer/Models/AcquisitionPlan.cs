@@ -7,6 +7,7 @@ namespace MAM.BusinessLayer.Models
     public class AcquisitionPlan
     {
         public int Id { get; set; }
+        public int UserImmovableAssetManagementPlanId { get; set; }
         public decimal TempleteNumber { get; set; }
         public string Region { get; set; }
         public string Town { get; set; }

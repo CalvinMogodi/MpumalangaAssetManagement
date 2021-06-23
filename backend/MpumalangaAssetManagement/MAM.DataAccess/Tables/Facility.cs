@@ -18,6 +18,7 @@ namespace MAM.DataAccess.Tables
         [ForeignKey("Id")]
         public int CapturerId { get; set; }
         public string Status { get; set; }
+        public string UserDepartment { get; set; }
         [ForeignKey("LandId")]
         public int? LandId { get; set; }
         [ForeignKey("FinanceId")]

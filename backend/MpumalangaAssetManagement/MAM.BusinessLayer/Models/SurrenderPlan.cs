@@ -7,6 +7,7 @@ namespace MAM.BusinessLayer.Models
     public class SurrenderPlan
     {
         public int Id { get; set; }
+        public int UserImmovableAssetManagementPlanId { get; set; }
         public string District { get; set; }
         public string Town { get; set; }
         public string LocalMunicipality { get; set; }
