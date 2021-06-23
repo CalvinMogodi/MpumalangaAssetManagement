@@ -269,10 +269,7 @@ namespace MAM.BusinessLayer.Repositories
                 {
                     DataAccess.Tables.UserImmovableAssetManagementPlan userImmovableAssetManagementPlan = new DataAccess.Tables.UserImmovableAssetManagementPlan() {
                         Status = "New",
-                        FacilityId = facility.Id,
                         FileReference = facility.FileReference,
-                        PropertyCode = facility.ClientCode,
-                        FacilityName = facility.Name,
                         OptimalSupportingAccommodationId = null,
                         Department = facility.UserDepartment,
                         UserId = facility.ModifierId.Value,

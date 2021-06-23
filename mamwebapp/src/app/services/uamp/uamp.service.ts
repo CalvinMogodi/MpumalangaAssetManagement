@@ -9,21 +9,29 @@ import { UAMP } from 'src/app/models/uamp.model';
   providedIn: 'root'
 })
 export class UampService {
-  uamp: any[];
+  uamp: UAMP;
 
-  uampChange: Subject<any[]> = new Subject<any[]>();
+  uampChange: Subject<UAMP> = new Subject<UAMP>();
 
   private httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
   constructor(private http: HttpClient) { }
 
-  assignUamp(umap: any[]) {
+  assignUamp(umap: UAMP) {
     this.uamp = umap
     this.uampChange.next(this.uamp);
 }
 
   getUamps(userDepartment){
     return this.http.get<Array<UAMP>>(`${environment.apiUrl}/api/uamp/getuamps/`+userDepartment);
+  }
+
+  createUamp(uamp: UAMP){
+    return this.http.post<UAMP>(`${environment.apiUrl}/api/uamp/saveuamp`,uamp);
+  }
+
+  startuamp(uamp: UAMP){
+    return this.http.post<UAMP>(`${environment.apiUrl}/api/uamp/startuamp`,uamp);
   }
 }

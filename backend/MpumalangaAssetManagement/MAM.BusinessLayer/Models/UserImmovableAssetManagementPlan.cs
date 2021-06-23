@@ -10,9 +10,6 @@ namespace MAM.BusinessLayer.Models
     public class UserImmovableAssetManagementPlan
     {
         public int Id { get; set; }
-        public int FacilityId { get; set; }
-        public string PropertyCode { get; set; }
-        public string FacilityName { get; set; }
         public string Status { get; set; }
         public string FileReference { get; set; }
         public int? OptimalSupportingAccommodationId { get; set; }
@@ -35,6 +32,8 @@ namespace MAM.BusinessLayer.Models
         public User User { get; set; }
 
         public List<UserImmovableAssetManagementPlan> ConvertToUserImmovableAssetManagementPlans(List<DataAccess.Tables.UserImmovableAssetManagementPlan> uamp) {
+            OptimalSupportingAccommodation optimalSupportingAccommodation = new OptimalSupportingAccommodation();
+            Programme programme = new Programme();
 
             List<Programme> Programmes = new List<Programme>();
             List<AcquisitionPlan> AcquisitionPlans = new List<AcquisitionPlan>();
@@ -49,9 +48,6 @@ namespace MAM.BusinessLayer.Models
             List<UserImmovableAssetManagementPlan> userImmovableAssetManagementPlans = uamp.Select(f => new UserImmovableAssetManagementPlan()
             {
                 Id = f.Id,
-                FacilityId = f.FacilityId,
-                PropertyCode = f.PropertyCode,
-                FacilityName = f.FacilityName,
                 Status = f.Status,
                 FileReference = f.FileReference,
                 OptimalSupportingAccommodationId = f.OptimalSupportingAccommodationId,
@@ -64,15 +60,29 @@ namespace MAM.BusinessLayer.Models
                     Name = f.User.Name,
                     Surname = f.User.Surname
                 },
-                //TempleteTwoPointOne = f.Programmes != null ? new TempleteTwoPointOne()
-                //{
-                //    Id = 0,
-                //    Properties = f.Properties.Count > 0 ? f.Properties.Where(p => p.TempleteNumber == 2).Select( p => new List<Property>() { 
-                    
-                //    },
-                //},
+                TempleteOne = new TempleteOne()
+                {
+                    Id = 0,
+                    OptimalSupportingAccommodation = optimalSupportingAccommodation.ConvertToOptimalSupportingAccommodation(f.OptimalSupportingAccommodation),
+                    Programmes = programme.ConvertToProgrammes(f.Programmes.Where(p => p.UserImmovableAssetManagementPlanId == f.Id).ToList())
+                },
                 }).ToList();
             return userImmovableAssetManagementPlans;
+        }
+
+        public DataAccess.Tables.UserImmovableAssetManagementPlan ConvertToDBUserImmovableAssetManagementPlans(UserImmovableAssetManagementPlan uamp) {
+            return new DataAccess.Tables.UserImmovableAssetManagementPlan()
+            {
+                Id = uamp.Id,
+                Status = uamp.Status,
+                FileReference = uamp.FileReference,
+                OptimalSupportingAccommodationId = uamp.OptimalSupportingAccommodationId,
+                Department = uamp.Department,
+                CreatedDate = uamp.CreatedDate,
+                UserId = uamp.UserId,
+                ModifiedDate = uamp.ModifiedDate,
+                ModifiedBy = uamp.ModifiedBy
+            };       
         }
     }
 }

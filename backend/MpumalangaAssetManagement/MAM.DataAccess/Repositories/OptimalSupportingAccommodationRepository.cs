@@ -1,6 +1,5 @@
 ﻿using MAM.DataAccess.Interfaces;
 using MAM.DataAccess.Tables;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Win32.SafeHandles;
 using System;
 using System.Collections.Generic;
@@ -10,7 +9,7 @@ using System.Text;
 
 namespace MAM.DataAccess.Repositories
 {
-    public class UampRepository : IUampRepository, IDisposable
+    public class OptimalSupportingAccommodationRepository : IOptimalSupportingAccommodationRepository, IDisposable
     {
         // Flag: Has Dispose already been called?
         bool disposed = false;
@@ -19,56 +18,43 @@ namespace MAM.DataAccess.Repositories
 
         private string _connectionString { get; set; }
 
-        public UampRepository(string connectionString)
+        public OptimalSupportingAccommodationRepository(string connectionString)
         {
             _connectionString = connectionString;
         }
-
-        public int CreateUamp(UserImmovableAssetManagementPlan userImmovableAssetManagementPlan)
+        public int AddOptimalSupportingAccommodation(OptimalSupportingAccommodation optimalSupportingAccommodation)
         {
             using (var db = new DataContext(_connectionString))
             {
-                db.UserImmovableAssetManagementPlans.Add(userImmovableAssetManagementPlan);
+                db.OptimalSupportingAccommodations.Add(optimalSupportingAccommodation);
                 db.SaveChanges();
-                return userImmovableAssetManagementPlan.Id;
+                return optimalSupportingAccommodation.Id;
             }
         }
 
-        public void UpdateUamp(UserImmovableAssetManagementPlan userImmovableAssetManagementPlan)
+        public void DeleteOptimalSupportingAccommodation(OptimalSupportingAccommodation optimalSupportingAccommodation)
         {
             using (var db = new DataContext(_connectionString))
             {
-                db.UserImmovableAssetManagementPlans.Update(userImmovableAssetManagementPlan);
-                db.SaveChanges();
-            }
-        }
-
-        public void DeleteUamp(UserImmovableAssetManagementPlan userImmovableAssetManagementPlan)
-        {
-            using (var db = new DataContext(_connectionString))
-            {
-                userImmovableAssetManagementPlan.Status = "Deleted";
-                db.UserImmovableAssetManagementPlans.Update(userImmovableAssetManagementPlan);
+                db.OptimalSupportingAccommodations.Remove(optimalSupportingAccommodation);
                 db.SaveChanges();
             }
         }
 
-        public List<UserImmovableAssetManagementPlan> GetUamps(string department)
+        public OptimalSupportingAccommodation GetOptimalSupportingAccommodation(int id)
         {
             using (var db = new DataContext(_connectionString))
             {
-                var list = db.UserImmovableAssetManagementPlans.Where(f => f.Status.ToLower() != "deleted" && f.Department.ToLower().Trim() == department.ToLower().Trim())
-                    .Include(u => u.User)
-                    //.Include(a => a.Properties)
-                    //.Include(f => f.OperationPlans)
-                    //.Include(a => a.AcquisitionPlans)
-                    .Include(u => u.Programmes)
-                    .Include(u => u.OptimalSupportingAccommodation)
-                    //.Include(a => a.MtefBudgetPeriods)
-                    //.Include(a => a.SurrenderPlans)
-                    //.Include(a => a.StrategicAssessments)
-                    .ToList();
-                return list;
+                return db.OptimalSupportingAccommodations.Find(id);
+            }
+        }
+
+        public void UpdateOptimalSupportingAccommodation(OptimalSupportingAccommodation optimalSupportingAccommodation)
+        {
+            using (var db = new DataContext(_connectionString))
+            {
+                db.OptimalSupportingAccommodations.Update(optimalSupportingAccommodation);
+                db.SaveChanges();
             }
         }
 

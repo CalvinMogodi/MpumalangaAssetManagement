@@ -12,7 +12,7 @@ namespace MAM.API.Services
     {
         List<UserImmovableAssetManagementPlan> GetUserImmovableAssetManagementPlans(string department);
         UserImmovableAssetManagementPlan SaveUserImmovableAssetManagementPlan(UserImmovableAssetManagementPlan userImmovableAssetManagementPlan);
-        UserImmovableAssetManagementPlan AddUserImmovableAssetManagementPlan(UserImmovableAssetManagementPlan userImmovableAssetManagementPlan);   
+        UserImmovableAssetManagementPlan StartUserImmovableAssetManagementPlan(UserImmovableAssetManagementPlan userImmovableAssetManagementPlan);   
     }
 
     public class UAMPService : IUAMPService
@@ -37,10 +37,10 @@ namespace MAM.API.Services
                 return _userImmovableAssetManagementPlan.SaveUserImmovableAssetManagementPlan(userImmovableAssetManagementPlan);
             }
         }
-        public UserImmovableAssetManagementPlan AddUserImmovableAssetManagementPlan(UserImmovableAssetManagementPlan userImmovableAssetManagementPlan) {
+        public UserImmovableAssetManagementPlan StartUserImmovableAssetManagementPlan(UserImmovableAssetManagementPlan userImmovableAssetManagementPlan) {
             using (var _userImmovableAssetManagementPlan = new UserImmovableAssetManagementPlanRepository(_appSettings))
             {
-                return _userImmovableAssetManagementPlan.AddUserImmovableAssetManagementPlan(userImmovableAssetManagementPlan);
+                return _userImmovableAssetManagementPlan.StartUserImmovableAssetManagementPlan(userImmovableAssetManagementPlan);
             }
         }       
     }

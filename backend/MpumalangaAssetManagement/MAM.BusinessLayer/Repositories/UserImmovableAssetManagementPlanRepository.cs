@@ -32,14 +32,56 @@ namespace MAM.BusinessLayer.Repositories
             }
         }
 
-        public UserImmovableAssetManagementPlan SaveUserImmovableAssetManagementPlan(UserImmovableAssetManagementPlan userImmovableAssetManagementPlan)
+        public UserImmovableAssetManagementPlan SaveUserImmovableAssetManagementPlan(UserImmovableAssetManagementPlan uamp)
         {
-            return userImmovableAssetManagementPlan;
+            using (var dataAccess = new DataAccess.Repositories.UampRepository(appSettings.ConnectionString))
+            {
+                if (uamp.TempleteOne != null)
+                {
+                    if (uamp.TempleteOne.Programmes != null)
+                        uamp.TempleteOne.Programmes = SaveProgramme(uamp.TempleteOne.Programmes);
+                    if (uamp.TempleteOne.OptimalSupportingAccommodation != null)
+                        uamp.OptimalSupportingAccommodationId = SaveOptimalSupportingAccommodationRepository(uamp.TempleteOne.OptimalSupportingAccommodation).Id;
+                }
+                
+                
+                dataAccess.UpdateUamp(uamp.ConvertToDBUserImmovableAssetManagementPlans(uamp));
+                return uamp;
+            }
         }
 
-        public UserImmovableAssetManagementPlan AddUserImmovableAssetManagementPlan(UserImmovableAssetManagementPlan userImmovableAssetManagementPlan)
+        public UserImmovableAssetManagementPlan StartUserImmovableAssetManagementPlan(UserImmovableAssetManagementPlan uamp)
         {
-            return userImmovableAssetManagementPlan;
+            using (var dataAccess = new DataAccess.Repositories.UampRepository(appSettings.ConnectionString))
+            {
+                uamp.Id = dataAccess.CreateUamp(uamp.ConvertToDBUserImmovableAssetManagementPlans(uamp));
+                return uamp;
+            }
+        }
+
+        public List<Programme> SaveProgramme(List<Programme> programmes) {
+            using (var dataAccess = new DataAccess.Repositories.ProgrammeRepository(appSettings.ConnectionString))
+            {
+                foreach (var programme in programmes)
+                {
+                    if(programme.Id == 0)
+                        programme.Id = dataAccess.AddProgramme(programme.ConvertToProgrammeTable(programme));
+                    else
+                        dataAccess.UpdateProgramme(programme.ConvertToProgrammeTable(programme));
+                }               
+                return programmes;
+            }            
+        }
+
+        public OptimalSupportingAccommodation SaveOptimalSupportingAccommodationRepository(OptimalSupportingAccommodation optimalSupportingAccommodation) {
+            using (var dataAccess = new DataAccess.Repositories.OptimalSupportingAccommodationRepository(appSettings.ConnectionString))
+            {
+                if (optimalSupportingAccommodation.Id == 0)
+                    optimalSupportingAccommodation.Id = dataAccess.AddOptimalSupportingAccommodation(optimalSupportingAccommodation.ConvertToOptimalSupportingAccommodationTable(optimalSupportingAccommodation));
+                    else
+                        dataAccess.UpdateOptimalSupportingAccommodation(optimalSupportingAccommodation.ConvertToOptimalSupportingAccommodationTable(optimalSupportingAccommodation));              
+                return optimalSupportingAccommodation;
+            }
         }
 
         public void Dispose()

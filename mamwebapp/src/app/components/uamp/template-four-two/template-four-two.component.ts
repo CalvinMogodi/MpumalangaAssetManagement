@@ -28,8 +28,10 @@ export class TemplateFourTwoComponent implements OnInit {
       if(value)
       {
         this.uamp = value;
-      }    
-      this.uamp.templeteFourPointTwo = this.acquisitionPlans;
+        this.uamp.templeteFourPointTwo = {
+          acquisitionPlans: this.acquisitionPlans,
+        }
+      }  
     });
     this.acquisitionPlanForm = this.formBuilder.group({
       region: [''],

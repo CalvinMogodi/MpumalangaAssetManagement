@@ -30,8 +30,10 @@ export class TemplateFiveOneComponent implements OnInit {
       if(value)
       {
         this.uamp = value;
-      }    
-      this.uamp.templeteFivePointOne = this.operationPlans;
+        this.uamp.templeteFivePointOne = {
+          operationPlans: this.operationPlans,
+        }
+      }          
     });
 
     this.operationPlanForm = this.formBuilder.group({

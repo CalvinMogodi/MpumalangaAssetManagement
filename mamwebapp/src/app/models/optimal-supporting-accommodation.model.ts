@@ -1,5 +1,5 @@
 export class OptimalSupportingAccommodation{
-    Id: Number;
+    id: Number;
     mission: String;
     supportingAccommodation: String;
 }

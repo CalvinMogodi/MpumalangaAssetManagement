@@ -27,8 +27,10 @@ export class TemplateFourOneComponent implements OnInit {
       if(value)
       {
         this.uamp = value;
-      }    
-      this.uamp.templeteFourPointOne = this.acquisitionPlans;
+        this.uamp.templeteFourPointOne = {
+          acquisitionPlans: this.acquisitionPlans
+        }
+      }          
     });
     this.acquisitionPlanForm = this.formBuilder.group({
       region: [''],

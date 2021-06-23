@@ -12,29 +12,25 @@ import { TempleteTwoPointOne } from "./templetes/templete-two-point-one.model";
 import { TempleteTwoPointTwo } from "./templetes/templete-two-point-two.model";
 
 export class UAMP {
-    id: Number;
-    facilityId : Number;
+    id: Number;    
     status: string;
     fileReference: string;
-    propertyCode: string;
-    facilityName: string;
     optimalSupportingAccommodationId?: Number;
     department: string;
     createdDate: Date;
-    createdBy: Number;
+    userId: Number;
     modifiedDate?: Date;
     modifiedBy?: Number;
     user?: User;
-    templeteOne: TempleteOne;
-    templeteTwoPointOne: TempleteTwoPointOne;
-    templeteTwoPointTwo: TempleteTwoPointTwo;
-    templeteThree: TempleteThree;
-    templeteFourPointOne: TempleteFourPointOne;
-    templeteFourPointTwo: TempleteFourPointTwo;
-    templeteFivePointOne: TempleteFivePointOne;
-    templeteFivePointTwo: TempleteFivePointTwo;
-    templeteFivePointThree: TempleteFivePointThree;
-    templeteSix: TempleteSix;
-    templeteSeven: TempleteSeven;
-
+    templeteOne?: TempleteOne;
+    templeteTwoPointOne?: TempleteTwoPointOne;
+    templeteTwoPointTwo?: TempleteTwoPointTwo;
+    templeteThree?: TempleteThree;
+    templeteFourPointOne?: TempleteFourPointOne;
+    templeteFourPointTwo?: TempleteFourPointTwo;
+    templeteFivePointOne?: TempleteFivePointOne;
+    templeteFivePointTwo?: TempleteFivePointTwo;
+    templeteFivePointThree?: TempleteFivePointThree;
+    templeteSix?: TempleteSix;
+    templeteSeven?: TempleteSeven;
 }

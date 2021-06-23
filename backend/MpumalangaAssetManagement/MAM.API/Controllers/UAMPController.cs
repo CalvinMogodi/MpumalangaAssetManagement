@@ -58,7 +58,7 @@ namespace MAM.API.Controllers
 
         [AllowAnonymous]
         [HttpPost]
-        [Route("saveuserimmovableassetmanagementplan")]
+        [Route("saveuamp")]
         public IActionResult SaveUserImmovableAssetManagementPlan([FromBody] UserImmovableAssetManagementPlan userImmovableAssetManagementPlan)
         {
             try
@@ -75,12 +75,12 @@ namespace MAM.API.Controllers
 
         [AllowAnonymous]
         [HttpPost]
-        [Route("adduserimmovableassetmanagementplan")]
-        public IActionResult AddUserImmovableAssetManagementPlan([FromBody] UserImmovableAssetManagementPlan userImmovableAssetManagementPlan)
+        [Route("startuamp")]
+        public IActionResult StartUserImmovableAssetManagementPlan([FromBody] UserImmovableAssetManagementPlan userImmovableAssetManagementPlan)
         {
             try
             {
-                var result = _uampService.AddUserImmovableAssetManagementPlan(userImmovableAssetManagementPlan);
+                var result = _uampService.StartUserImmovableAssetManagementPlan(userImmovableAssetManagementPlan);
                 return Ok(result);
             }
             catch (Exception ex)

@@ -19,6 +19,7 @@ namespace MAM.BusinessLayer.Models
             return new DataAccess.Tables.Programme()
             {
                 Id = programme.Id,
+                UserImmovableAssetManagementPlanId = programme.UserImmovableAssetManagementPlanId,
                 CorporateObjective = programme.CorporateObjective,
                 Outcomes = programme.Outcomes,
                 OptimalSupportingAccommodationSolution = programme.OptimalSupportingAccommodationSolution,

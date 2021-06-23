@@ -43,7 +43,8 @@ namespace MAM.DataAccess
         public DbSet<StrategicAssessment> StrategicAssessments { get; set; }
         public DbSet<SurrenderPlan> SurrenderPlans { get; set; }
         public DbSet<UserImmovableAssetManagementPlan> UserImmovableAssetManagementPlans { get; set; }
-protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        public DbSet<OptimalSupportingAccommodation> OptimalSupportingAccommodations { get; set; }
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(_connectionString);
         }

@@ -1,10 +1,10 @@
-<!--<div>
+<div>
     <span>
         <div style="text-align: end;padding: 20px;">
-            <button pButton type="button" label="Start UAMP" (click)="viewUAMP()"></button>
+            <button pButton type="button" label="Start UAMP" (click)="startUamp()"></button>
         </div>
     </span>
-</div>-->
+</div>
 <div class="grid">
     <div>
         <p-card>
@@ -32,9 +32,8 @@
 <p-table [value]="uamps">
     <ng-template pTemplate="header">
         <tr>
-            <th>File Reference</th> 
-            <th>Property Code</th>     
-            <th>Facility Name</th>   
+            <th>File Reference</th>
+            <th>Department</th>
             <th>Created Date</th>
             <th>Singed By</th>
             <th>Status</th>
@@ -44,15 +43,14 @@
     <ng-template pTemplate="body" let-uamp>
         <tr>
             <td>{{uamp.fileReference}}</td>
-            <td>{{uamp.propertyCode}}</td>
-            <td>{{uamp.facilityName}}</td>
+            <td>{{uamp.department}}</td>
             <td>{{uamp.createdDate | date}}</td>
             <td>{{uamp.user.name}} {{uamp.user.surname}}</td>
             <td>{{uamp.status}}</td>
             <td>
                 <div style="text-align: center;">
-                    <p-splitButton label="More" [model]="buttonItems" (onDropdownClick)="selectUamp(rowData)" styleClass="p-button-secondary">
-                    
+                    <p-splitButton label="More" [model]="buttonItems" (onDropdownClick)="selectUamp(rowData)"
+                        styleClass="p-button-secondary">
                     </p-splitButton>
                 </div>
             </td>
@@ -61,64 +59,68 @@
 </p-table>
 
 <div *ngIf="showDialog" class="dialogBackgroud"></div>
-<p-dialog [(visible)]="showDialog" *ngIf="showDialog" [style]="{width: '80vw'}"
-    [baseZIndex]="10000">
+<p-dialog [(visible)]="showDialog" *ngIf="showDialog" [style]="{width: '80vw'}" [baseZIndex]="10000">
     <p-header> Property </p-header>
     <app-view-property [selectedFacility]="selectedFacility"></app-view-property>
 </p-dialog>
 
+
+
 <div *ngIf="showUAMP" class="dialogBackgroud"></div>
-<p-dialog [(visible)]="showUAMP" *ngIf="showUAMP" [style]="{width: '95vw'}"
-    [baseZIndex]="10000">
+<p-dialog [(visible)]="showUAMP" *ngIf="showUAMP" [style]="{width: '95vw'}" [baseZIndex]="10000">
     <p-header> UAMP </p-header>
     <p-body>
-
+        <div class="card" *ngIf="generatingUamp">
+            <h5>Generating UAMP...</h5>
+            <p-progressBar [value]="value"></p-progressBar>
+        </div>
+        <p-tabView [(activeIndex)]="activeIndex" *ngIf="!generatingUamp">
+            <p-tabPanel header="Template 1" style="padding:0% !important;">
+                <app-template-one></app-template-one>
+            </p-tabPanel>
+            <p-tabPanel header="Template 2.1" style="width: fit-content;">
+                <app-template-two-one [properties]="properties"></app-template-two-one>
+            </p-tabPanel>
+            <p-tabPanel header="Template 2.2">
+                <app-template-two-two [properties]="properties"></app-template-two-two>
+            </p-tabPanel>
+            <p-tabPanel header="Template 3">
+                <app-template-three [properties]="properties"></app-template-three>
+            </p-tabPanel>
+            <p-tabPanel header="Template 4.1">
+                <app-template-four-one [properties]="properties"></app-template-four-one>
+            </p-tabPanel>
+            <p-tabPanel header="Template 4.2">
+                <app-template-four-two [properties]="properties"></app-template-four-two>
+            </p-tabPanel>
+            <p-tabPanel header="Template 5.1">
+                <app-template-five-one [properties]="properties"></app-template-five-one>
+            </p-tabPanel>
+            <p-tabPanel header="Template 5.2">
+                <app-template-five-two [properties]="properties"></app-template-five-two>
+            </p-tabPanel>
+            <p-tabPanel header="Template 5.3">
+                <app-template-five-three [properties]="properties"></app-template-five-three>
+            </p-tabPanel>
+            <p-tabPanel header="Template 6">
+                <app-template-six [properties]="properties"></app-template-six>
+            </p-tabPanel>
+            <p-tabPanel header="Template 7">
+                <app-template-seven></app-template-seven>
+            </p-tabPanel>
+        </p-tabView>
     </p-body>
-    <p-tabView [(activeIndex)]="activeIndex">
-        <p-tabPanel header="Template 1" style="padding:0% !important;">
-            <app-template-one></app-template-one>
-        </p-tabPanel>
-        <p-tabPanel header="Template 2.1" style="width: fit-content;">
-            <app-template-two-one [properties]="properties"></app-template-two-one>
-        </p-tabPanel>
-        <p-tabPanel header="Template 2.2">
-            <app-template-two-two [properties]="properties"></app-template-two-two>
-        </p-tabPanel>
-        <p-tabPanel header="Template 3">
-            <app-template-three [properties]="properties"></app-template-three>
-        </p-tabPanel>
-        <p-tabPanel header="Template 4.1">
-            <app-template-four-one [properties]="properties"></app-template-four-one>
-        </p-tabPanel>
-        <p-tabPanel header="Template 4.2">
-            <app-template-four-two [properties]="properties"></app-template-four-two>
-        </p-tabPanel>
-        <p-tabPanel header="Template 5.1">
-            <app-template-five-one [properties]="properties"></app-template-five-one>
-        </p-tabPanel>
-        <p-tabPanel header="Template 5.2">
-            <app-template-five-two [properties]="properties"></app-template-five-two>
-        </p-tabPanel>
-        <p-tabPanel header="Template 5.3">
-            <app-template-five-three [properties]="properties"></app-template-five-three>
-        </p-tabPanel>
-        <p-tabPanel header="Template 6">
-            <app-template-six [properties]="properties"></app-template-six>
-        </p-tabPanel>
-        <p-tabPanel header="Template 7">
-            <app-template-seven></app-template-seven>
-        </p-tabPanel>
-    </p-tabView> 
     <p-footer>
         <button *ngIf="activeIndex === 0" style="float: left; margin-top: 15px;" type="button" pButton
             (click)="cancel()" label="Cancel" class="ui-button-secondary"></button>
-        <button *ngIf="activeIndex !== 0" style="float: left; margin-top: 15px;" type="button" pButton icon="pi pi-angle-left"
-        (click)="activeIndex = activeIndex - 1" label="Back" class="ui-button-secondary"></button>
-        <button *ngIf="activeIndex !== 10" style="float: right; margin-top: 15px" type="button" (click)="next(); activeIndex = activeIndex + 1" pButton
-            icon="pi pi-angle-right" label="Next"></button>
-        <button  style="float: right; margin-top: 15px;margin-right: 10px" type="button" pButton
-            icon="pi pi-check" label="Save" (click)="onSave()"></button>
-        <button *ngIf="activeIndex === 10" style="float: right; margin-top: 15px;margin-right: 10px" (click)="onSubmit()" type="submit" pButton
-            icon="pi pi-check" label="Submit"></button>
+        <button *ngIf="activeIndex !== 0" style="float: left; margin-top: 15px;" type="button" pButton
+            icon="pi pi-angle-left" (click)="activeIndex = activeIndex - 1" label="Back"
+            class="ui-button-secondary"></button>
+        <button *ngIf="activeIndex !== 10" style="float: right; margin-top: 15px" type="button"
+            (click)="next(); activeIndex = activeIndex + 1" pButton icon="pi pi-angle-right" label="Next"></button>
+        <button style="float: right; margin-top: 15px;margin-right: 10px" type="button" pButton icon="pi pi-check"
+            label="Save" (click)="onSave()"></button>
+        <button *ngIf="activeIndex === 10" style="float: right; margin-top: 15px;margin-right: 10px"
+            (click)="onSubmit()" type="submit" pButton icon="pi pi-check" label="Submit"></button>
     </p-footer>
 </p-dialog>
