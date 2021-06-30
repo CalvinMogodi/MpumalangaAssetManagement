@@ -25,22 +25,39 @@ namespace MAM.DataAccess.Repositories
 
         public int AddAcquisitionPlan(AcquisitionPlan acquisitionPlan)
         {
-            throw new NotImplementedException();
+            using (var db = new DataContext(_connectionString))
+            {
+                db.AcquisitionPlans.Add(acquisitionPlan);
+                db.SaveChanges();
+                return acquisitionPlan.Id;
+            }
         }
 
-        public void UpdateFacility(AcquisitionPlan acquisitionPlan)
+        public void UpdateAcquisitionPlan(AcquisitionPlan acquisitionPlan)
         {
-            throw new NotImplementedException();
+            using (var db = new DataContext(_connectionString))
+            {
+                db.AcquisitionPlans.Update(acquisitionPlan);
+                db.SaveChanges();
+            }
         }
 
-        public void DeleteFacility(AcquisitionPlan acquisitionPlan)
+        public void DeleteUpdateAcquisitionPlan(AcquisitionPlan acquisitionPlan)
         {
-            throw new NotImplementedException();
+            using (var db = new DataContext(_connectionString))
+            {
+                db.AcquisitionPlans.Remove(acquisitionPlan);
+                db.SaveChanges();
+            }
         }
 
-        public List<AcquisitionPlan> GetAcquisitionPlans()
+        public List<AcquisitionPlan> GetAcquisitionPlans(int uampId)
         {
-            throw new NotImplementedException();
+            using (var db = new DataContext(_connectionString))
+            {
+                var list = db.AcquisitionPlans.Where(s => s.UserImmovableAssetManagementPlanId == uampId).ToList();
+                return list;
+            }
         }
 
         public void Dispose()

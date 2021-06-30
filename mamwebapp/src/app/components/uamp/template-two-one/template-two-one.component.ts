@@ -1,12 +1,14 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { Facility } from 'src/app/models/facility.model';
 import { UampService } from '../../../services/uamp/uamp.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormsModule } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { FormControl, FormArray } from '@angular/forms';
 import { DialogService } from 'primeng/dynamicdialog';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { AddMunicipalUtilityServicesComponent } from './add-municipal-utility-services/add-municipal-utility-services';
+import { TempleteTwoPointOne } from 'src/app/models/templetes/templete-two-point-one.model';
+import { Property } from 'src/app/models/property.model';
 
 @Component({
   selector: 'app-template-two-one',
@@ -15,7 +17,7 @@ import { AddMunicipalUtilityServicesComponent } from './add-municipal-utility-se
   providers: [MessageService, DialogService, DynamicDialogRef]
 })
 export class TemplateTwoOneComponent implements OnInit {
-  @Input() properties: Facility[];
+  properties = [];
   submitted: boolean = false;
   propertyForm: FormGroup;
   municipalUtilityServices: any[];
@@ -27,16 +29,22 @@ export class TemplateTwoOneComponent implements OnInit {
               public ref: DynamicDialogRef,  
               public dialogService: DialogService, 
               private formBuilder: FormBuilder) {
+    
     this.uampService.uampChange.subscribe((value) => {
       if(value)
       {
+        this.properties = [];
         this.uamp = value;
-      }   
-      this.uamp.templeteTwoPointOne = this.properties;       
+        
+        for (let i = 0; i < this.uamp.templeteTwoPointOne.properties.length; i++) {
+          this.properties.push(this.uamp.templeteTwoPointOne.properties[i]);
+        }          
+      } 
     });
   }
 
   ngOnInit() {
+    
     this.municipalUtilityServices = [
       { name: 'Electricity', code: 'E', factor: 1 },
       { name: 'Water', code: 'W', factor: 2 },
@@ -72,7 +80,7 @@ export class TemplateTwoOneComponent implements OnInit {
 
   private createTableRow(): FormGroup {
     return this.formBuilder.group({
-      parkingBaysNumber: new FormControl(null, {
+      noofParkingBays: new FormControl(null, {
         validators: [Validators.required]
       }),
       usableAllocatedSpace: new FormControl(null, {
@@ -102,13 +110,17 @@ export class TemplateTwoOneComponent implements OnInit {
       accessibility: new FormControl(null, {
         validators: [Validators.required]
       }),
-      requiredPerfomanceStandard: new FormControl(null, {
+      requiredPerformanceStandard: new FormControl(null, {
         validators: [Validators.required]
       }),
-      operationalCost: new FormControl(null, {
+      operationalCosts: new FormControl(null, {
         validators: [Validators.required]
       })
     });
+  }
+
+  conditionRatingCahnged(property, e){
+    property.conditionRating = e.value.factor;
   }
 
   show(property:any) {

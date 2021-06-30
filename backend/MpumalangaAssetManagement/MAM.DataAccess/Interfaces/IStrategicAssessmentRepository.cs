@@ -7,9 +7,9 @@ namespace MAM.DataAccess.Interfaces
 {
     public interface IStrategicAssessmentRepository
     {
-        int AddStrategicAssessment(StrategicAssessment StrategicAssessments);
-        bool UpdateStrategicAssessment(StrategicAssessment StrategicAssessments);
-        bool DeleteStrategicAssessment(StrategicAssessment StrategicAssessments);
-        List<StrategicAssessment> GetStrategicAssessments();
+        int AddStrategicAssessment(StrategicAssessment strategicAssessments);
+        void UpdateStrategicAssessment(StrategicAssessment strategicAssessments);
+        void DeleteStrategicAssessment(StrategicAssessment strategicAssessments);
+        List<StrategicAssessment> GetStrategicAssessments(int uampId);
     }
 }

@@ -27,7 +27,7 @@ export class UampService {
     return this.http.get<Array<UAMP>>(`${environment.apiUrl}/api/uamp/getuamps/`+userDepartment);
   }
 
-  createUamp(uamp: UAMP){
+  saveUamp(uamp: UAMP){
     return this.http.post<UAMP>(`${environment.apiUrl}/api/uamp/saveuamp`,uamp);
   }
 

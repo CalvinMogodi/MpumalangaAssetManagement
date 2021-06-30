@@ -22,7 +22,7 @@ export class TemplateFiveThreeComponent implements OnInit {
       {
         this.uamp = value;
       }    
-      this.uamp.templeteFivePointThree = this.properties;
+      this.uamp.templeteFivePointThree = this.uamp.templeteFivePointThree;
     });
   }
 

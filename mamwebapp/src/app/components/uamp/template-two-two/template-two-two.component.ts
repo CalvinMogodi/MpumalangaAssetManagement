@@ -26,9 +26,11 @@ export class TemplateTwoTwoComponent implements OnInit {
     this.uampService.uampChange.subscribe((value) => {
       if(value)
       {
+        this.properties = [];
         this.uamp = value;
+        
+        this.properties = this.uamp.templeteTwoPointOne.properties
       }    
-      this.uamp.templeteTwoPointTwo = this.properties;
   })
   }
 
@@ -51,7 +53,7 @@ export class TemplateTwoTwoComponent implements OnInit {
 
   private createTableRow(): FormGroup {
     return this.formBuilder.group({
-      parkingBaysNumber: new FormControl(null, {
+      noofParkingBays: new FormControl(null, {
         validators: [Validators.required]
       }),
       lettableSpace: new FormControl(null, {
@@ -63,7 +65,7 @@ export class TemplateTwoTwoComponent implements OnInit {
       rentalAmountPA: new FormControl(null, {
         validators: [Validators.required]
       }),
-      operationalCost: new FormControl(null, {
+      operationalCosts: new FormControl(null, {
         validators: [Validators.required]
       }),
       leaseStartDate: new FormControl(null, {

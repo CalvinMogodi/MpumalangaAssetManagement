@@ -37,32 +37,31 @@
         <ng-template pTemplate="body" let-rowData let-rowIndex="rowIndex">
             <ng-container formArrayName="tableRowArray">
                 <tr [formGroupName]="rowIndex" *ngFor="let property of properties">                   
-                    <td>{{property.fileReference}}</td>
-                    <td>{{property.land.geographicalLocation.districtMunicipality}}</td>
-                    <td>{{property.land.geographicalLocation.town}}</td>
-                    <td>{{property.land.geographicalLocation.localAuthority}}</td>
-                    <td>{{property.name}}</td>
-                    <td>{{property.land.geographicalLocation.streetNumber}}
-                        {{property.land.geographicalLocation.streetName}}</td>
-                    <td>{{property.land.geographicalLocation.districtMunicipality}}</td>
-                    <td>{{property.name}}</td>
-                    <td>{{property.type}}</td>
+                    <td>{{property.fileReferenceNo}}</td>
+                    <td>{{property.districtRegion}}</td>
+                    <td>{{property.town}}</td>
+                    <td>{{property.localAuthority}}</td>
+                    <td>{{property.assetDescription}}</td>
+                    <td>{{property.currentStreetAddress}}</td>
+                    <td>{{property.districtMunicipality}}</td>
+                    <td>{{property.propertyDescription}}</td>
+                    <td>{{property.assetType}}</td>
                     <td>
-                        <p-inputNumber formControlName="parkingBaysNumber"></p-inputNumber>
+                        <p-inputNumber [(ngModel)]="property.noofParkingBays" [ngModelOptions]="{standalone: true}" formControlName="noofParkingBays"></p-inputNumber>
                         <!--<div class="text-danger" *ngIf="rowData.get('parkingBaysNumber').errors"><br>
                     <div *ngIf="rowData.get('parkingBaysNumber').errors?.required">This field is required.</div>
                 </div>-->
                     </td>
                     <td>
-                        <p-inputNumber formControlName="usableAllocatedSpace" mode="decimal"></p-inputNumber>
+                        <p-inputNumber [(ngModel)]="property.usableAllocatedSpace" [ngModelOptions]="{standalone: true}" formControlName="usableAllocatedSpace" mode="decimal"></p-inputNumber>
                        
                         <!--<div *ngIf="submitted && p.usableAllocatedSpace.errors" class="text-error"><br>
                     <div *ngIf="p.usableAllocatedSpace.errors.required">This field is required.</div>
                 </div>-->
                     </td>
-                    <td>{{property.land.propertyDescription.extent}}</td>
+                    <td>{{property.extentofLand}}</td>
                     <td>
-                        <p-inputNumber (onFocus)="show(property)" [(ngModel)]="property.municipalUtilityService" [ngModelOptions]="{standalone: true}" formControlName="municipalUtilityService" mode="currency" currency="ZAR" locale="en-ZA"></p-inputNumber>
+                        <p-inputNumber (onFocus)="show(property)" [ngModelOptions]="{standalone: true}" formControlName="municipalUtilityService" mode="currency" currency="ZAR" locale="en-ZA"></p-inputNumber>
                         <!--<div *ngIf="submitted && p.municipalUtilityServices.errors" class="text-error"><br>
                     <div *ngIf="p.municipalUtilityServices.errors.required">This field is required.</div>
                 </div>-->
@@ -75,55 +74,55 @@
                 </div>-->
                     </td>
                     <td>                        
-                        <p-inputNumber [(ngModel)]="property.operationalCost" [ngModelOptions]="{standalone: true}" mode="currency" currency="ZAR" locale="en-ZA" formControlName="operationalCost"></p-inputNumber>
+                        <p-inputNumber [(ngModel)]="property.operationalCosts" [ngModelOptions]="{standalone: true}" mode="currency" currency="ZAR" locale="en-ZA" formControlName="operationalCosts"></p-inputNumber>
                         <!--<div *ngIf="submitted && p.operationalCost.errors" class="text-error"><br>
                     <div *ngIf="p.operationalCost.errors.required">This field is required.</div>
                 </div>-->
                     </td>
                     <td>
-                        <input formControlName="requiredPerfomanceStandard" autocomplete="off"
+                        <input [(ngModel)]="property.requiredPerformanceStandard" formControlName="requiredPerformanceStandard" autocomplete="off"
                             type="text" pInputText class="ui-inputtext ui-widget">
                         <!-- <div *ngIf="submitted && p.requiredPerfomanceStandard.errors" class="text-error"><br>
                     <div *ngIf="p.requiredPerfomanceStandard.errors.required">This field is required.</div>
                 </div>-->
                     </td>
                     <td>
-                        <input formControlName="accessibility" autocomplete="off" type="text"
+                        <input [(ngModel)]="property.accessibility" formControlName="accessibility" autocomplete="off" type="text"
                             pInputText class="ui-inputtext ui-widget">
                         <!--<div *ngIf="submitted && p.accessibility.errors" class="text-error"><br>
                     <div *ngIf="p.accessibility.errors.required">This field is required.</div>
                 </div>-->
                     </td>
                     <td>
-                        <p-dropdown inputId="conditionRating" [options]="conditionRatings" placeholder="Please select"
+                        <p-dropdown (onChange)="conditionRatingCahnged(property, $event)" inputId="conditionRating" [options]="conditionRatings" placeholder="Please select"
                             formControlName="conditionRating" optionLabel="name"></p-dropdown>
                         <!--<div *ngIf="submitted && p.conditionRatings.errors" class="text-error"><br>
                     <div *ngIf="p.conditionRatings.errors.required">This field is required.</div>
                 </div>-->
                     </td>
                     <td>
-                        <input formControlName="suitabilityIndex" autocomplete="off" type="text"
+                        <input [(ngModel)]="property.suitabilityIndex" formControlName="suitabilityIndex" autocomplete="off" type="text"
                             pInputText class="ui-inputtext ui-widget">
                         <!--<div *ngIf="submitted && p.suitabilityIndex.errors" class="text-error"><br>
                     <div *ngIf="p.suitabilityIndex.errors.required">This field is required.</div>
                 </div>-->
                     </td>
                     <td>
-                        <input formControlName="operationalPerformanceIndex" autocomplete="off"
+                        <input [(ngModel)]="property.operationalPerformanceIndex" formControlName="operationalPerformanceIndex" autocomplete="off"
                             type="text" pInputText class="ui-inputtext ui-widget">
                         <!--<div *ngIf="submitted && p.operationalPerformanceIndex.errors" class="text-error"><br>
                     <div *ngIf="p.operationalPerformanceIndex.errors.required">This field is required.</div>
                 </div>-->
                     </td>
                     <td>
-                        <input formControlName="functionalPerformanceIndex" autocomplete="off"
+                        <input [(ngModel)]="property.functionalPerformanceIndex" formControlName="functionalPerformanceIndex" autocomplete="off"
                             type="text" pInputText class="ui-inputtext ui-widget">
                         <!-- <div *ngIf="submitted && p.functionalPerformanceIndex.errors" class="text-error"><br>
                     <div *ngIf="p.functionalPerformanceIndex.errors.required">This field is required.</div>
                 </div>-->
                     </td>
                     <td>
-                        <input formControlName="comment" autocomplete="off" type="text" pInputText
+                        <input [(ngModel)]="property.comment" formControlName="comment" autocomplete="off" type="text" pInputText
                             class="ui-inputtext ui-widget">
                         <!-- <div *ngIf="submitted && p.comment.errors" class="text-error"><br>
                     <div *ngIf="p.comment.errors.required">This field is required.</div>

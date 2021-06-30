@@ -8,7 +8,8 @@ namespace MAM.DataAccess.Tables
     {
         public int Id { get; set; }
         public int UserImmovableAssetManagementPlanId { get; set; }
-        public string District { get; set; }
+        public double TempleteNumber { get; set; }
+        public string DistrictRegion { get; set; }
         public string Town { get; set; }
         public string ServiceDescription { get; set; }
         public string BudgetType { get; set; }
@@ -20,20 +21,20 @@ namespace MAM.DataAccess.Tables
         public string PropertyDescription { get; set; }
         public string LeaseType { get; set; }
         public int? NoofParkingBays { get; set; }
-        public decimal? UsableSpace { get; set; }
-        public decimal? ConstructionArea { get; set; }
-        public decimal? ExtentofLand { get; set; }
+        public double? UsableSpace { get; set; }
+        public double? ConstructionArea { get; set; }
+        public double? ExtentofLand { get; set; }
         public DateTime? LeaseStartDate { get; set; }
         public DateTime? LeaseStartEnd { get; set; }
         public decimal? RentalPM { get; set; }
         public decimal? RentalPA { get; set; }
         public string InitialNeedYear { get; set; }
         public string Status { get; set; }
-        public double? TotalAmountRequired { get; set; }
-        public double? CashFlowYear1 { get; set; }
-        public double? CashFlowYear2 { get; set; }
-        public double? CashFlowYear3 { get; set; }
-        public double? CashFlowYear4 { get; set; }
-        public double? CashFlowYear5 { get; set; }
+        public decimal? TotalAmountRequired { get; set; }
+        public decimal? CashFlowYear1 { get; set; }
+        public decimal? CashFlowYear2 { get; set; }
+        public decimal? CashFlowYear3 { get; set; }
+        public decimal? CashFlowYear4 { get; set; }
+        public decimal? CashFlowYear5 { get; set; }
     }
 }

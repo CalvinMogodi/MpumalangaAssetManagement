@@ -8,8 +8,8 @@ namespace MAM.DataAccess.Interfaces
     public interface IOperationPlanRepository
     {
         int AddOperationPlan(OperationPlan operationPlan);
-        bool UpdateOperationPlan(OperationPlan operationPlan);
-        bool DeleteOperationPlan(OperationPlan operationPlan);
-        List<OperationPlan> GetOperationPlans();
+        void UpdateOperationPlan(OperationPlan operationPlan);
+        void DeleteOperationPlan(OperationPlan operationPlan);
+        List<OperationPlan> GetOperationPlans(int uampId);
     }
 }

@@ -11,7 +11,7 @@ describe('TemplateOneComponent', () => {
       declarations: [ TemplateOneComponent ]
     })
     .compileComponents();
-  }));
+  })); 
 
   beforeEach(() => {
     fixture = TestBed.createComponent(TemplateOneComponent);

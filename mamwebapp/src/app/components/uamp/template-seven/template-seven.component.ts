@@ -24,8 +24,8 @@ export class TemplateSevenComponent implements OnInit {
         this.uamp = value;
         this.uamp.templeteSeven = {};
         if(this.uamp.templeteTwoPointOne){
-          if(this.uamp.templeteTwoPointOne)
-            this.municipalUtilityServices = this.getMunicipalUtilityServices(this.uamp.templeteTwoPointOne);
+          //if(this.uamp.templeteTwoPointOne)
+           // this.municipalUtilityServices = this.getMunicipalUtilityServices(this.uamp.templeteTwoPointOne);
         }
       }  
     });

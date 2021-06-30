@@ -8,6 +8,7 @@ export class Property{
     districts: string;
     town: string;
     localMunicipality: string;
+    localAuthority: string;
     assetDescription: string;
     oldStreetAddress: string;
     currentStreetAddress: string;
@@ -21,7 +22,7 @@ export class Property{
     rentalPM?: number;
     rentalPA?: number;
     municipalUtilityServices: Array<MunicipalUtilityService>
-    municipalUtilityServiceTotal?: Number;
+    MunicipalUtilityServiceTotal?: Number;
     propertyRatesTaxes?: Number;
     operationalCosts?: Number;
     requiredPerformanceStandard: string;
@@ -33,5 +34,5 @@ export class Property{
     leaseStartDate?: Date;
     leaseEndDate?: Date;
     leaseTerm: string;
-    comments: string;
+    comment: string;
 }

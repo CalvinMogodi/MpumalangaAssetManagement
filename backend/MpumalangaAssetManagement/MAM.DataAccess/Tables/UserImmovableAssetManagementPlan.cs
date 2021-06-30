@@ -12,7 +12,7 @@ namespace MAM.DataAccess.Tables
         public int? OptimalSupportingAccommodationId { get; set; }
         public string Department { get; set; }
         public virtual OptimalSupportingAccommodation OptimalSupportingAccommodation { get; set; }
-        //public virtual List<Property> Properties { get; set; }
+        public virtual List<Property> Properties { get; set; }
         //public virtual List<OperationPlan> OperationPlans { get; set; }
         //public virtual List<AcquisitionPlan> AcquisitionPlans { get; set; }       
         public virtual List<Programme> Programmes { get; set; }

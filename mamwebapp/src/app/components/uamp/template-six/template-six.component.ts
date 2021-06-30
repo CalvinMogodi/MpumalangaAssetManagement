@@ -21,7 +21,7 @@ export class TemplateSixComponent implements OnInit {
       {
         this.uamp = value;
       }    
-      this.uamp.templeteSix = this.properties;
+      this.uamp.templeteSix = this.uamp.templeteSix;
     });
   }
   

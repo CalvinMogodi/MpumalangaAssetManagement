@@ -8,8 +8,8 @@ namespace MAM.DataAccess.Interfaces
     public interface IAcquisitionPlanRepository
     {
         int AddAcquisitionPlan(AcquisitionPlan acquisitionPlan);
-        void UpdateFacility(AcquisitionPlan acquisitionPlan);
-        void DeleteFacility(AcquisitionPlan acquisitionPlan);
-        List<AcquisitionPlan> GetAcquisitionPlans();
+        void UpdateAcquisitionPlan(AcquisitionPlan acquisitionPlan);
+        void DeleteUpdateAcquisitionPlan(AcquisitionPlan acquisitionPlan);
+        List<AcquisitionPlan> GetAcquisitionPlans(int uampId);
     }
 }

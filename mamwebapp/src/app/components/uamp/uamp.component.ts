@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Input, ViewChild, AfterViewInit, ElementRef } from '@angular/core';
 import { User } from 'mamwebapp/src/app/models/user.model';
 import { Subject } from 'rxjs/internal/Subject';
 import { first } from 'rxjs/operators';
@@ -7,27 +7,34 @@ import { MenuItem, MessageService } from 'primeng/api';
 import { UAMP } from 'src/app/models/uamp.model';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { UampService } from '../../services/uamp/uamp.service';
+import { TempleteTwoPointOne } from 'src/app/models/templetes/templete-two-point-one.model';
+import { TemplateOneComponent } from './template-one/template-one.component';
 
 @Component({
   selector: 'app-uamp',
   templateUrl: './uamp.component.html',
-  styleUrls: ['./uamp.component.css'],
-  providers: [MessageService]
+  styleUrls: ['./uamp.component.css'],  
+  providers: [MessageService, TemplateOneComponent],
 })
-export class UampComponent implements OnInit {
+export class UampComponent implements OnInit, AfterViewInit {
+  templeteTwoPointOne: TempleteTwoPointOne;
+  properties: any[] = [];
   generatingUamp: boolean = true;
   value: number = 0;
   uamps: UAMP[];
   umapTemplete: any[];
-  selectedUamp: UAMP;
   leasedPropertyCount: Number = 0;
   activeIndex: number = 0;
   stateOwnedPropertyCount: Number = 0;
   showDialog: Boolean = false;
   showUAMP: Boolean = false;
   currentUser: User; 
-  umap: UAMP;
+  uamp: UAMP;
   buttonItems: MenuItem[];
+
+  @ViewChild(TemplateOneComponent, {static: false}) templateOneComponent : TemplateOneComponent;
+  @ViewChild('pRef', {static: true}) pRef: ElementRef;
+
 
   constructor(public messageService:MessageService, public uampService: UampService, private authenticationService: AuthenticationService) { 
     let interval = setInterval(() => {
@@ -37,24 +44,22 @@ export class UampComponent implements OnInit {
           clearInterval(interval);
       }
   }, 2000);
-    this.uampService.uampChange.subscribe((value) => {
-      if(value)
-      {
-        this.umap = value;
-      }
-    });
+ 
     this.buttonItems = [
       {
         label: 'View', icon: 'pi pi-eye', command: () =>
           this.viewUamp()
       },
       { separator: true },
-      {label: 'Start UAMP', icon: 'pi pi-print', command: () => 
-          this.startUamp()
+      {label: 'Update', icon: 'pi pi-print', command: () => 
+          this.updateUamp()
       }
   ];    
   }
 
+  ngAfterViewInit() {
+    //console.log(tem);
+  }
   ngOnInit() {
     this.authenticationService.currentUser.pipe().subscribe(x => {
       this.currentUser = x;
@@ -62,7 +67,7 @@ export class UampComponent implements OnInit {
     this.getUamps();
   }
   selectUamp(uamp){
-    this.selectedUamp = uamp;
+    this.uamp = uamp;    
   }
 
   viewUamp() {    
@@ -78,6 +83,10 @@ export class UampComponent implements OnInit {
 
   updateUamp(){
     this.showUAMP = true;
+    //this.templateOneComponent.uamp = this.uamp;
+    this.generatingUamp = false;     
+    //this.uampService.assignUamp(this.uampbv n); 
+   // this.templeteTwoPointOne = this.uamp.nativeElement.templeteTwoPointOne;   
   }
 
   startUamp() {
@@ -91,33 +100,53 @@ export class UampComponent implements OnInit {
       createdDate: new Date(),
       userId: this.currentUser.id,
     };
-    this.showUAMP = true;
+   
     this.uampService.startuamp(uamp).pipe(first()).subscribe(uamp => {     
       this.generatingUamp = false;     
-      this.selectedUamp = uamp;
-      this.uampService.assignUamp(this.selectedUamp);  
+      this.uamp = uamp;
+      //lk;ithis.uampService.assignUamp(this.uamp);  
+     // this.templeteTwoPointOne = this.uamp.templeteTwoPointOne;
       this.messageService.add({severity:'success', summary:'Generate UAMP', detail:'UAMP has been generated successful.'});   
+      this.showUAMP = true;
     });   
   }
-  next(){
-    let umap : any = {};
-    if(this.umap){
-      umap = this.umap;
+
+  back(){
+    let uamp : any = {};
+    if(this.uamp){
+      uamp = this.uamp;
     }
     
-    this.uampService.assignUamp(umap);
+    this.uampService.assignUamp(uamp);
+  }
+
+  next(){
+    let uamp : any = {};
+    if(this.uamp){
+      uamp = this.uamp;
+    }
+    uamp = this.templateOneComponent.uamp;
+    this.uampService.assignUamp(uamp);
+  }
+
+  updatedUamp(data:UAMP){
+    if(data){
+      //thjjkm his.uamp = data;
+    }
   }
 
   onSave(){
-    this.umap.status = "Saved"
-    this.uampService.createUamp(this.umap).pipe(first()).subscribe(umap => {
-      this.umap = umap;
-      this.uampService.assignUamp(umap);
+    
+    this.uamp.status = "Saved"
+    //this.uampService.assignUamp(this.uamp);
+    this.uampService.saveUamp(this.uamp).pipe(first()).subscribe(uamp => {
+      this.uamp = uamp;
+      this.uampService.assignUamp(uamp);
       this.messageService.add({severity:'success', summary:'Save UAMP', detail:'UAMP has been saved successful.'}); 
 
-      const foundUmap = this.uamps.filter(u => u.id == this.umap.id).length;
-      if(foundUmap == 0)
-        this.uamps.push(this.umap);
+      const foundUamp = this.uamps.filter(u => u.id == this.uamp.id).length;
+      if(foundUamp == 0)
+        this.uamps.push(this.uamp);
     });
   }
 

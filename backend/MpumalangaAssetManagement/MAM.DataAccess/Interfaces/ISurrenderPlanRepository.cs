@@ -8,8 +8,8 @@ namespace MAM.DataAccess.Interfaces
     public interface ISurrenderPlanRepository
     {
         int AddSurrenderPlan(SurrenderPlan surrenderPlan);
-        bool UpdateSurrenderPlan(SurrenderPlan surrenderPlan);
-        bool DeleteSurrenderPlan(SurrenderPlan surrenderPlan);
-        List<SurrenderPlan> GetSurrenderPlans();
+        void UpdateSurrenderPlan(SurrenderPlan surrenderPlan);
+        void DeleteSurrenderPlan(SurrenderPlan surrenderPlan);
+        List<SurrenderPlan> GetSurrenderPlans(int uampId);
     }
 }

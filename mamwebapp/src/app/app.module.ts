@@ -21,7 +21,7 @@ import { UserComponent } from './components/user/user.component';
 import { AddUserComponent } from './components/user/add-user/add-user.component';
 import { AssetregisterComponent } from './components/assetregister/assetregister.component'
 import { UampComponent } from './components/uamp/uamp.component';
-import { ViewPropertyComponent } from './components/uamp/view-property/view-property.component';
+import { ViewUampComponent } from './components/uamp/view-property/view-uamp.component'; 
 import { TemplateOneComponent } from './components/uamp/template-one/template-one.component';
 import { TemplateTwoTwoComponent } from './components/uamp/template-two-two/template-two-two.component';
 import { TemplateTwoOneComponent } from './components/uamp/template-two-one/template-two-one.component';
@@ -36,6 +36,7 @@ import { TemplateSixComponent } from './components/uamp/template-six/template-si
 import { AddMunicipalUtilityServicesComponent } from './components/uamp/template-two-one/add-municipal-utility-services/add-municipal-utility-services';
 import { NgxPrintModule } from 'ngx-print';
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
+import { PanelModule } from 'primeng/panel';
 
 //primeng
 import { SlideMenuModule } from 'primeng/slidemenu';
@@ -85,10 +86,10 @@ import { PrintAssetComponent } from './components/assetregister/print-asset/prin
     LandComponent,
     ImprovementsComponent,
     FinancialsComponent,
-    UampComponent,
-    ViewPropertyComponent,
-    PrintAssetComponent,   
     TemplateOneComponent,
+    ViewUampComponent,
+    UampComponent,  
+    PrintAssetComponent,    
     TemplateTwoOneComponent,
     TemplateTwoTwoComponent,
     TemplateThreeComponent,
@@ -103,10 +104,10 @@ import { PrintAssetComponent } from './components/assetregister/print-asset/prin
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,    
     HttpClientModule,
     LoadingBarHttpClientModule,
     MessageModule,
@@ -137,7 +138,8 @@ import { PrintAssetComponent } from './components/assetregister/print-asset/prin
     InputTextareaModule,
     NgxPrintModule,
     InputNumberModule,
-    DynamicDialogModule
+    DynamicDialogModule,
+    PanelModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

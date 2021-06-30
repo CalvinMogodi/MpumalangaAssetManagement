@@ -3,6 +3,7 @@ using MAM.DataAccess.Tables;
 using Microsoft.Win32.SafeHandles;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 
@@ -23,22 +24,39 @@ namespace MAM.DataAccess.Repositories
         }
         public int AddSurrenderPlan(SurrenderPlan surrenderPlan)
         {
-            throw new NotImplementedException();
+            using (var db = new DataContext(_connectionString))
+            {
+                db.SurrenderPlans.Add(surrenderPlan);
+                db.SaveChanges();
+                return surrenderPlan.Id;
+            }
         }
 
-        public bool UpdateSurrenderPlan(SurrenderPlan surrenderPlan)
+        public void UpdateSurrenderPlan(SurrenderPlan surrenderPlan)
         {
-            throw new NotImplementedException();
+            using (var db = new DataContext(_connectionString))
+            {
+                db.SurrenderPlans.Update(surrenderPlan);
+                db.SaveChanges();
+            }
         }
 
-        public bool DeleteSurrenderPlan(SurrenderPlan surrenderPlan)
+        public void DeleteSurrenderPlan(SurrenderPlan surrenderPlan)
         {
-            throw new NotImplementedException();
+            using (var db = new DataContext(_connectionString))
+            {
+                db.SurrenderPlans.Remove(surrenderPlan);
+                db.SaveChanges();
+            }
         }
 
-        public List<SurrenderPlan> GetSurrenderPlans()
+        public List<SurrenderPlan> GetSurrenderPlans(int uampId)
         {
-            throw new NotImplementedException();
+            using (var db = new DataContext(_connectionString))
+            {
+                var list = db.SurrenderPlans.Where(s => s.UserImmovableAssetManagementPlanId == uampId).ToList();
+                return list;
+            }
         }
 
         public void Dispose()

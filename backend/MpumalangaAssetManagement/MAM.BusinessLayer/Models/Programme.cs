@@ -35,7 +35,8 @@ namespace MAM.BusinessLayer.Models
                 CorporateObjective = p.CorporateObjective,
                 Outcomes = p.Outcomes,
                 OptimalSupportingAccommodationSolution = p.OptimalSupportingAccommodationSolution,
-                RationaleChosenSolution = p.RationaleChosenSolution
+                RationaleChosenSolution = p.RationaleChosenSolution,
+                UserImmovableAssetManagementPlanId = p.UserImmovableAssetManagementPlanId
             }).ToList();
         }
     }

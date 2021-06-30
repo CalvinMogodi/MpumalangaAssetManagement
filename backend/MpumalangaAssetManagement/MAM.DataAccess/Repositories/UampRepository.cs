@@ -59,7 +59,7 @@ namespace MAM.DataAccess.Repositories
             {
                 var list = db.UserImmovableAssetManagementPlans.Where(f => f.Status.ToLower() != "deleted" && f.Department.ToLower().Trim() == department.ToLower().Trim())
                     .Include(u => u.User)
-                    //.Include(a => a.Properties)
+                    .Include(a => a.Properties)
                     //.Include(f => f.OperationPlans)
                     //.Include(a => a.AcquisitionPlans)
                     .Include(u => u.Programmes)

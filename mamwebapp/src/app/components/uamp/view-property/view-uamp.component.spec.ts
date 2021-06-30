@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ViewPropertyComponent } from './view-property.component';
+import { ViewUampComponent } from './view-uamp.component';
 
-describe('ViewPropertyComponent', () => {
-  let component: ViewPropertyComponent;
-  let fixture: ComponentFixture<ViewPropertyComponent>;
+describe('ViewUampComponent', () => {
+  let component: ViewUampComponent;
+  let fixture: ComponentFixture<ViewUampComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ViewPropertyComponent ]
+      declarations: [ ViewUampComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ViewPropertyComponent);
+    fixture = TestBed.createComponent(ViewUampComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

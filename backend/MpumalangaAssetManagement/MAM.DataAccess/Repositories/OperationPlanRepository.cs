@@ -23,22 +23,39 @@ namespace MAM.DataAccess.Repositories
 
         public int AddOperationPlan(OperationPlan operationPlan)
         {
-            throw new NotImplementedException();
+            using (var db = new DataContext(_connectionString))
+            {
+                db.OperationPlans.Add(operationPlan);
+                db.SaveChanges();
+                return operationPlan.Id;
+            }
         }
 
-        public bool UpdateOperationPlan(OperationPlan operationPlan)
+        public void UpdateOperationPlan(OperationPlan operationPlan)
         {
-            throw new NotImplementedException();
+            using (var db = new DataContext(_connectionString))
+            {
+                db.OperationPlans.Update(operationPlan);
+                db.SaveChanges();
+            }
         }
 
-        public bool DeleteOperationPlan(OperationPlan operationPlan)
+        public void DeleteOperationPlan(OperationPlan operationPlan)
         {
-            throw new NotImplementedException();
+            using (var db = new DataContext(_connectionString))
+            {
+                db.OperationPlans.Remove(operationPlan);
+                db.SaveChanges();
+            }
         }
 
-        public List<OperationPlan> GetOperationPlans()
+        public List<OperationPlan> GetOperationPlans(int uampId)
         {
-            throw new NotImplementedException();
+            using (var db = new DataContext(_connectionString))
+            {
+                var list = db.OperationPlans.Where(s => s.UserImmovableAssetManagementPlanId == uampId).ToList();
+                return list;
+            }
         }
 
         public void Dispose()

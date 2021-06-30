@@ -8,11 +8,12 @@ namespace MAM.DataAccess.Tables
     {
         public int Id { get; set; }
         public int UserImmovableAssetManagementPlanId { get; set; }
-        public decimal TempleteNumber { get; set; }
+        public double TempleteNumber { get; set; }
         public string FileReferenceNo { get; set; }
         public string SerialNo { get; set; }
-        public string Districts { get; set; }
+        public string DistrictRegion { get; set; }
         public string Town { get; set; }
+        public string LocalAuthority { get; set; }
         public string LocalMunicipality { get; set; }
         public string AssetDescription { get; set; }
         public string OldStreetAddress { get; set; }
@@ -21,15 +22,15 @@ namespace MAM.DataAccess.Tables
         public string AssetType { get; set; }
         public int? NoofParkingBays { get; set; }
         public int? NoofParkingBaysAllocated { get; set; }
-        public decimal? UsableAllocatedSpace { get; set; }
-        public decimal? LettableSpace { get; set; }
-        public decimal? ExtentofLand { get; set; }
-        public double? RentalPM { get; set; }
-        public double? RentalPA { get; set; }
+        public double? UsableAllocatedSpace { get; set; }
+        public double? LettableSpace { get; set; }
+        public double? ExtentofLand { get; set; }
+        public decimal? RentalPM { get; set; }
+        public decimal? RentalPA { get; set; }
         public List<MunicipalUtilityService> MunicipalUtilityServices { get; set; }
-        public double MunicipalUtilityServiceTotal { get; set; }
-        public double PropertyRatesTaxes { get; set; }
-        public double OperationalCosts { get; set; }
+        public decimal? MunicipalUtilityServiceTotal { get; set; }
+        public decimal? PropertyRatesTaxes { get; set; }
+        public decimal? OperationalCosts { get; set; }
         public string RequiredPerformanceStandard { get; set; }
         public string Accessibility { get; set; }
         public string ConditionRating { get; set; }
@@ -39,6 +40,6 @@ namespace MAM.DataAccess.Tables
         public DateTime? LeaseStartDate { get; set; }
         public DateTime? LeaseEndDate { get; set; }
         public string LeaseTerm { get; set; }
-        public string Comments { get; set; }
+        public string Comment { get; set; }
     }
 }

@@ -34,6 +34,7 @@ namespace MAM.BusinessLayer.Models
         public List<UserImmovableAssetManagementPlan> ConvertToUserImmovableAssetManagementPlans(List<DataAccess.Tables.UserImmovableAssetManagementPlan> uamp) {
             OptimalSupportingAccommodation optimalSupportingAccommodation = new OptimalSupportingAccommodation();
             Programme programme = new Programme();
+            Property property = new Property();
 
             List<Programme> Programmes = new List<Programme>();
             List<AcquisitionPlan> AcquisitionPlans = new List<AcquisitionPlan>();
@@ -63,10 +64,19 @@ namespace MAM.BusinessLayer.Models
                 TempleteOne = new TempleteOne()
                 {
                     Id = 0,
-                    OptimalSupportingAccommodation = optimalSupportingAccommodation.ConvertToOptimalSupportingAccommodation(f.OptimalSupportingAccommodation),
-                    Programmes = programme.ConvertToProgrammes(f.Programmes.Where(p => p.UserImmovableAssetManagementPlanId == f.Id).ToList())
+                    OptimalSupportingAccommodation = f.OptimalSupportingAccommodation != null ? optimalSupportingAccommodation.ConvertToOptimalSupportingAccommodation(f.OptimalSupportingAccommodation) : null,
+                    Programmes = f.Programmes != null ? programme.ConvertToProgrammes(f.Programmes.Where(p => p.UserImmovableAssetManagementPlanId == f.Id).ToList()) : new List<Programme>(),
                 },
-                }).ToList();
+                TempleteTwoPointOne = new TempleteTwoPointOne() { 
+                    Id = 0,
+                    Properties = f.Properties != null ? property.ConvertToProperties(f.Properties.Where(p => p.UserImmovableAssetManagementPlanId == f.Id && p.TempleteNumber == 2.1).ToList()) : new List<Property>(),
+                },
+                TempleteTwoPointTwo = new TempleteTwoPointTwo()
+                {
+                    Id = 0,
+                    Properties = f.Properties != null ? property.ConvertToProperties(f.Properties.Where(p => p.UserImmovableAssetManagementPlanId == f.Id && p.TempleteNumber == 2.2).ToList()) : new List<Property>(),
+                }
+            }).ToList();
             return userImmovableAssetManagementPlans;
         }
 

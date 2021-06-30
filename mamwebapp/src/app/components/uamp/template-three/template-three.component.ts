@@ -24,7 +24,7 @@ export class TemplateThreeComponent implements OnInit {
       {
         this.uamp = value;
       }    
-      this.uamp.templeteThree = this.properties;
+      this.uamp.templeteThree = this.uamp.templeteThree;
   });
   }
 

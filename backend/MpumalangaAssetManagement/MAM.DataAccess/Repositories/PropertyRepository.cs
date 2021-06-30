@@ -9,51 +9,53 @@ using System.Text;
 
 namespace MAM.DataAccess.Repositories
 {
-    public class StrategicAssessmentRepository : IStrategicAssessmentRepository, IDisposable
+    public class PropertyRepository : IPropertyRepository, IDisposable
     {
+        // Flag: Has Dispose already been called?
         bool disposed = false;
+        // Instantiate a SafeHandle instance.
         SafeHandle handle = new SafeFileHandle(IntPtr.Zero, true);
+
         private string _connectionString { get; set; }
 
-        public StrategicAssessmentRepository(string connectionString)
+        public PropertyRepository(string connectionString)
         {
             _connectionString = connectionString;
         }
 
-        public List<StrategicAssessment> GetStrategicAssessments(int uampId)
+        public int AddProperty(Property property)
         {
             using (var db = new DataContext(_connectionString))
             {
-                var list = db.StrategicAssessments.Where(s => s.UserImmovableAssetManagementPlanId == uampId).ToList();
-                return list;
-            }
-        }
-
-        public int AddStrategicAssessment(StrategicAssessment strategicAssessments)
-        {
-            using (var db = new DataContext(_connectionString))
-            {
-                db.StrategicAssessments.Add(strategicAssessments);
+                db.Properties.Add(property);
                 db.SaveChanges();
-                return strategicAssessments.Id;
+                return property.Id;
             }
         }
 
-        public void UpdateStrategicAssessment(StrategicAssessment strategicAssessment)
+        public void UpdateProperty(Property property)
         {
             using (var db = new DataContext(_connectionString))
             {
-                db.StrategicAssessments.Update(strategicAssessment);
+                db.Properties.Update(property);
                 db.SaveChanges();
             }
         }
 
-        public void DeleteStrategicAssessment(StrategicAssessment strategicAssessments)
+        public void DeleteProperty(Property property)
         {
             using (var db = new DataContext(_connectionString))
             {
-                db.StrategicAssessments.Remove(strategicAssessments);
+                db.Properties.Remove(property);
                 db.SaveChanges();
+            }
+        }
+
+        public List<Property> GetProperties(int uampId)
+        {
+            using (var db = new DataContext(_connectionString))
+            {
+                return db.Properties.Where(p => p.UserImmovableAssetManagementPlanId == uampId).ToList();
             }
         }
 
@@ -79,6 +81,6 @@ namespace MAM.DataAccess.Repositories
             }
 
             disposed = true;
-        }       
+        }
     }
 }
