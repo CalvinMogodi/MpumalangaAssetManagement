@@ -183,7 +183,7 @@
             <p-menu #menu id="config_menu" [model]="items" [popup]="true"></p-menu>
         </ng-template>
         <!--strategicNeedsAssessments-->
-        <p-table [value]="uamp.templeteThree" styleClass="p-datatable-striped" [responsive]="true">
+        <p-table [value]="uamp.templeteThree.strategicAssessments" styleClass="p-datatable-striped" [responsive]="true">
             <ng-template pTemplate="header">
                 <tr>
                     <th></th>
@@ -191,7 +191,6 @@
                     <th colspan="4" style="width: 25%;">Requirements in Terms of filled & budgeted Posts</th>
                     <th></th>
                     <th colspan="2">Space Utilisation</th>
-                    <th></th>
                 </tr>
                 <tr>
                     <th>Post Description/ Title</th>
@@ -206,7 +205,6 @@
                     <th>Allocated Space</th>
                     <th>Surplus (+) or Shortage (-) of Accommodation(m²)</th>
                     <th>Percentage Utilised</th>
-                    <th></th>
                 </tr>
             </ng-template>
             <ng-template pTemplate="body" let-strategicNeedsAssessment>
@@ -222,12 +220,7 @@
                     <td>{{strategicNeedsAssessment.aoRequirement}}</td>
                     <td>{{strategicNeedsAssessment.allocatedSpace}}</td>
                     <td>{{strategicNeedsAssessment.surplusShortageAccommodation}}</td>
-                    <td>{{strategicNeedsAssessment.percentageUtilised}}%</td>
-                    <td style="text-align: center;" *ngIf="strategicNeedsAssessments.length > 0">
-                        <p-splitButton label="More" *ngIf="mode != 'View'" [model]="buttonItems"
-                            (onDropdownClick)="selectImprovement(rowData)" styleClass="p-button-secondary">
-                        </p-splitButton>
-                    </td>
+                    <td>{{strategicNeedsAssessment.percentageUtilised | number : '1.2-2'}}%</td>                    
                 </tr>
             </ng-template>
         </p-table>

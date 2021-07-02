@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { StrategicAssessment } from 'src/app/models/strategic-assessment.model';
 import { UAMP } from 'src/app/models/uamp.model';
 
 @Component({
@@ -13,6 +14,7 @@ export class ViewUampComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    let df = this.uamp;
   }
 
 }
