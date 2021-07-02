@@ -8,15 +8,16 @@ import { UAMP } from 'src/app/models/uamp.model';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { UampService } from '../../services/uamp/uamp.service';
 import { TempleteTwoPointOne } from 'src/app/models/templetes/templete-two-point-one.model';
-import { TemplateOneComponent } from './template-one/template-one.component';
+
 
 @Component({
   selector: 'app-uamp',
   templateUrl: './uamp.component.html',
   styleUrls: ['./uamp.component.css'],  
-  providers: [MessageService, TemplateOneComponent],
+  providers: [MessageService],
 })
 export class UampComponent implements OnInit, AfterViewInit {
+  
   templeteTwoPointOne: TempleteTwoPointOne;
   properties: any[] = [];
   generatingUamp: boolean = true;
@@ -31,10 +32,10 @@ export class UampComponent implements OnInit, AfterViewInit {
   currentUser: User; 
   uamp: UAMP;
   buttonItems: MenuItem[];
-
-  @ViewChild(TemplateOneComponent, {static: false}) templateOneComponent : TemplateOneComponent;
-  @ViewChild('pRef', {static: true}) pRef: ElementRef;
-
+  templateOne: any;
+  ///@ViewChildren(TemplateOneComponent) childrenComponent: QueryList<TemplateOneComponent>;
+  
+  //@ViewChild('uamp',{static:false} ) uamp: any;
 
   constructor(public messageService:MessageService, public uampService: UampService, private authenticationService: AuthenticationService) { 
     let interval = setInterval(() => {
@@ -57,8 +58,8 @@ export class UampComponent implements OnInit, AfterViewInit {
   ];    
   }
 
-  ngAfterViewInit() {
-    //console.log(tem);
+  public ngAfterViewInit(): void
+  {
   }
   ngOnInit() {
     this.authenticationService.currentUser.pipe().subscribe(x => {
@@ -83,7 +84,7 @@ export class UampComponent implements OnInit, AfterViewInit {
 
   updateUamp(){
     this.showUAMP = true;
-    //this.templateOneComponent.uamp = this.uamp;
+    let df = this.uamp;
     this.generatingUamp = false;     
     //this.uampService.assignUamp(this.uampbv n); 
    // this.templeteTwoPointOne = this.uamp.nativeElement.templeteTwoPointOne;   
@@ -125,7 +126,6 @@ export class UampComponent implements OnInit, AfterViewInit {
     if(this.uamp){
       uamp = this.uamp;
     }
-    uamp = this.templateOneComponent.uamp;
     this.uampService.assignUamp(uamp);
   }
 

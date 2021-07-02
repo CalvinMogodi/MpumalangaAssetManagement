@@ -74,6 +74,7 @@ import { PrintAssetComponent } from './components/assetregister/print-asset/prin
 @NgModule({
   declarations: [
     AppComponent,
+    TemplateOneComponent,
     FooterComponent,
     HeaderComponent,
     LoginComponent,
@@ -85,10 +86,8 @@ import { PrintAssetComponent } from './components/assetregister/print-asset/prin
     AddassetregisterComponent,
     LandComponent,
     ImprovementsComponent,
-    FinancialsComponent,
-    TemplateOneComponent,
+    FinancialsComponent,  
     ViewUampComponent,
-    UampComponent,  
     PrintAssetComponent,    
     TemplateTwoOneComponent,
     TemplateTwoTwoComponent,
@@ -101,6 +100,7 @@ import { PrintAssetComponent } from './components/assetregister/print-asset/prin
     TemplateSixComponent,
     TemplateSevenComponent,
     AddMunicipalUtilityServicesComponent,
+    UampComponent,  
   ],
   imports: [
     BrowserModule,

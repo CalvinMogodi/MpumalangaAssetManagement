@@ -4,6 +4,8 @@ import { Facility } from 'src/app/models/facility.model';
 import { MenuItem, MessageService } from 'primeng/api';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { FacilityService } from 'src/app/services/facility/facility.service';
+import { UAMP } from 'src/app/models/uamp.model';
+import { StrategicAssessment } from 'src/app/models/strategic-assessment.model';
 
 @Component({
   selector: 'app-template-three',
@@ -12,19 +14,21 @@ import { FacilityService } from 'src/app/services/facility/facility.service';
   providers: [MessageService]
 })
 export class TemplateThreeComponent implements OnInit {
-  strategicNeedsAssessments: any[] = [];
+  strategicAssessments: Array<StrategicAssessment> = [];
   @Input() properties: Facility[];
   assessmentStrategicForm: FormGroup;
   buttonItems: MenuItem[];
-  uamp: any = {};
+  uamp: UAMP;
 
   constructor(public uampService: UampService, private formBuilder: FormBuilder, private messageService: MessageService) {
+    
     this.uampService.uampChange.subscribe((value) => {
       if(value)
       {
         this.uamp = value;
       }    
-      this.uamp.templeteThree = this.uamp.templeteThree;
+      
+      this.strategicAssessments = this.uamp.templeteThree.strategicAssessments;
   });
   }
 
@@ -63,10 +67,11 @@ export class TemplateThreeComponent implements OnInit {
   addStrategicNeedsAssessment() {
     const allocatedSpace = this.assessmentStrategicForm.controls["allocatedSpace"].value;
     const aoRequirement = (this.assessmentStrategicForm.controls["aoNorm"].value * this.assessmentStrategicForm.controls["aoQuantity"].value);
-    const strategicNeedsAssessment = {
-      id: this.strategicNeedsAssessments.length + 1,
+    const strategicAssessment: StrategicAssessment = {
+      id: 0,
       postDescriptionTitle: this.assessmentStrategicForm.controls["postDescriptionTitle"].value,
       allocatedSpace: allocatedSpace,
+      userImmovableAssetManagementPlanId: this.uamp.id,
       surplusShortageAccommodation: (allocatedSpace - aoRequirement),
       percentageUtilised: (allocatedSpace / aoRequirement),
       fbpLevel: this.assessmentStrategicForm.controls["fbpLevel"].value,
@@ -78,7 +83,17 @@ export class TemplateThreeComponent implements OnInit {
       aoNorm: this.assessmentStrategicForm.controls["aoNorm"].value,
       aoRequirement: aoRequirement,
     };
-    this.strategicNeedsAssessments.push(strategicNeedsAssessment);
+    this.strategicAssessments.push(strategicAssessment);
+    if(this.uamp.templeteThree != null)
+    {
+      this.uamp.templeteThree.strategicAssessments = this.strategicAssessments
+    }else{
+      this.uamp.templeteThree = {
+        id: 0,
+        strategicAssessments: this.strategicAssessments
+      };
+    }
+    this.uampService.assignUamp(this.uamp);
     this.resetForm();
   }
 

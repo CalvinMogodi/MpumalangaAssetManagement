@@ -26,7 +26,8 @@ export class TemplateOneComponent implements OnInit {
   programmeForm: FormGroup;
   submitted: boolean = false;
   buttonItems: MenuItem[];
-  @Input() uamp: UAMP;
+  @Input() uamp: any;
+  @Output() updatedUamp = new EventEmitter();
 
   constructor(_ngZone: NgZone, public uampService: UampService, private formBuilder: FormBuilder, private messageService: MessageService) {
    
@@ -61,7 +62,9 @@ export class TemplateOneComponent implements OnInit {
   update() {
 
   }
-
+  updateUamp(){
+    this.updatedUamp.emit(this.uamp);
+  }
   confirmDelete() {
 
   }
@@ -82,7 +85,7 @@ export class TemplateOneComponent implements OnInit {
       optimalSupportingAccommodation: this.optimalSupportingAccommodation,
       programmes: this.programmes
     };
-    //this.updatedUamp.emit(this.uamp);
+    this.updatedUamp.emit(this.uamp);
     this.resetForm();
   }
 

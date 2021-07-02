@@ -9,7 +9,7 @@
         <div class="ui-g-12 ui-md-12">
             <div class="ui-g-6 ui-md-6">
                 <label for="mission">Mission</label>
-                <textarea [(ngModel)]="optimalSupportingAccommodation.mission" autocomplete="off" type="text" pInputText
+                <textarea [ngModelOptions]="{standalone: true}" (blur)="updateUamp()" [(ngModel)]="uamp.templeteOne.optimalSupportingAccommodation.mission" autocomplete="off" type="text" pInputText
                     class="ui-inputtext ui-widget"></textarea>
                 <div *ngIf="submitted && o.mission.errors" class="text-error"><br>
                     <div *ngIf="o.mission.errors.required">This field is required.</div>
@@ -17,7 +17,7 @@
             </div>
             <div class="ui-g-6 ui-md-6">
                 <label for="optimalSupportingAccommodation">Optimal supporting accommodation</label>
-                <textarea [(ngModel)]="optimalSupportingAccommodation.supportingAccommodation" autocomplete="off" type="text" pInputText
+                <textarea [ngModelOptions]="{standalone: true}" (blur)="updateUamp()" [(ngModel)]="uamp.templeteOne.optimalSupportingAccommodation.supportingAccommodation" autocomplete="off" type="text" pInputText
                     class="ui-inputtext ui-widget"></textarea>
                 <div *ngIf="submitted && o.optimalSupportingAccommodation.errors" class="text-error"><br>
                     <div *ngIf="o.optimalSupportingAccommodation.errors.required">This field is required.</div>

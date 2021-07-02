@@ -1,9 +1,9 @@
 export class StrategicAssessment{
     id: Number;
-    userImmovableAssetManagementPlanId: number
+    userImmovableAssetManagementPlanId: Number
     postDescriptionTitle: string;
-    allocatedSpace: string;
-    surplusShortageAccommodation: string;
+    allocatedSpace: Number;
+    surplusShortageAccommodation: Number;
     percentageUtilised: Number;
     fbpLevel: Number;
     fbpQuantity: Number;

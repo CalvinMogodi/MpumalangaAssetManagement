@@ -67,7 +67,7 @@
 
 
     <div>
-        <p-table [value]="strategicNeedsAssessments" styleClass="p-datatable-striped" [responsive]="true">
+        <p-table [value]="strategicAssessments" styleClass="p-datatable-striped" [responsive]="true">
             <ng-template pTemplate="header">
                 <tr>
                     <th></th>
@@ -107,7 +107,7 @@
                     <td>{{strategicNeedsAssessment.allocatedSpace}}</td>
                     <td>{{strategicNeedsAssessment.surplusShortageAccommodation}}</td>
                     <td>{{strategicNeedsAssessment.percentageUtilised}}%</td>
-                    <td style="text-align: center;" *ngIf="strategicNeedsAssessments.length > 0">
+                    <td style="text-align: center;" *ngIf="strategicAssessments.length > 0">
                         <p-splitButton label="More" *ngIf="mode != 'View'" [model]="buttonItems"
                             (onDropdownClick)="selectImprovement(rowData)" styleClass="p-button-secondary">
                         </p-splitButton>

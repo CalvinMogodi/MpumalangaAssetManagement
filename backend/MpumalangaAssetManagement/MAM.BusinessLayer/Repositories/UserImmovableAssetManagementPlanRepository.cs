@@ -79,8 +79,7 @@ namespace MAM.BusinessLayer.Repositories
         {
             using (var dataAccess = new DataAccess.Repositories.StrategicAssessmentRepository(appSettings.ConnectionString))
             {
-                List<StrategicAssessment> strategicAssessments  = uamp.TempleteThree.StrategicAssessments;
-                foreach (var strategicAssessment in strategicAssessments)
+                foreach (var strategicAssessment in uamp.TempleteThree.StrategicAssessments)
                 {
                     if (strategicAssessment.Id == 0)
                     {
@@ -379,9 +378,9 @@ namespace MAM.BusinessLayer.Repositories
             {
                 OptimalSupportingAccommodation optimalSupportingAccommodation = new OptimalSupportingAccommodation();
                 if (uamp.TempleteOne.OptimalSupportingAccommodation.Id == 0)
-                    uamp.TempleteOne.OptimalSupportingAccommodation.Id = dataAccess.AddOptimalSupportingAccommodation(optimalSupportingAccommodation.ConvertToOptimalSupportingAccommodationTable(optimalSupportingAccommodation));
+                    uamp.TempleteOne.OptimalSupportingAccommodation.Id = dataAccess.AddOptimalSupportingAccommodation(optimalSupportingAccommodation.ConvertToOptimalSupportingAccommodationTable(uamp.TempleteOne.OptimalSupportingAccommodation));
                 else
-                    dataAccess.UpdateOptimalSupportingAccommodation(optimalSupportingAccommodation.ConvertToOptimalSupportingAccommodationTable(optimalSupportingAccommodation));
+                    dataAccess.UpdateOptimalSupportingAccommodation(optimalSupportingAccommodation.ConvertToOptimalSupportingAccommodationTable(uamp.TempleteOne.OptimalSupportingAccommodation));
                 return uamp;
             }
         }

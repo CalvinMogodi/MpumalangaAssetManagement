@@ -76,7 +76,7 @@
         </div>
         <p-tabView [(activeIndex)]="activeIndex" *ngIf="!generatingUamp">
             <p-tabPanel [disabled]="true" header="Template 1" style="padding:0% !important;">
-                <app-template-one #pRef  *ngIf="showUAMP"></app-template-one>
+                <app-template-one [uamp]="uamp" (updatedUamp)="updatedUamp($event)" *ngIf="showUAMP"></app-template-one>
             </p-tabPanel>
             <p-tabPanel [disabled]="true" header="Template 2.1" style="width: fit-content;">
                 <app-template-two-one></app-template-two-one>

@@ -11,16 +11,16 @@ namespace MAM.BusinessLayer.Models
         public int UserImmovableAssetManagementPlanId { get; set; }
         public string PostDescriptionTitle { get; set; }
         public double? AllocatedSpace { get; set; }
-        public string SurplusShortageAccommodation { get; set; }
+        public double? SurplusShortageAccommodation { get; set; }
         public double? PercentageUtilised { get; set; }
-        public decimal? FbpLevel { get; set; }
-        public decimal? FbpQuantity { get; set; }
-        public decimal? FbpNorm { get; set; }
-        public decimal? FbpRequirement { get; set; }
-        public decimal? AoLevel { get; set; }
-        public decimal? AoQuantity { get; set; }
-        public decimal? AoNorm { get; set; }
-        public decimal? AoRequirement { get; set; }
+        public double? FbpLevel { get; set; }
+        public int? FbpQuantity { get; set; }
+        public double? FbpNorm { get; set; }
+        public double? FbpRequirement { get; set; }
+        public double? AoLevel { get; set; }
+        public int? AoQuantity { get; set; }
+        public double? AoNorm { get; set; }
+        public double? AoRequirement { get; set; }
 
         public DataAccess.Tables.StrategicAssessment ConvertToStrategicAssessmentTable(StrategicAssessment strategicAssessment) {
             return new DataAccess.Tables.StrategicAssessment() {

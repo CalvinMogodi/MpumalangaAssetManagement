@@ -35,6 +35,7 @@ namespace MAM.BusinessLayer.Models
             OptimalSupportingAccommodation optimalSupportingAccommodation = new OptimalSupportingAccommodation();
             Programme programme = new Programme();
             Property property = new Property();
+            StrategicAssessment strategicAssessment = new StrategicAssessment();
 
             List<Programme> Programmes = new List<Programme>();
             List<AcquisitionPlan> AcquisitionPlans = new List<AcquisitionPlan>();
@@ -75,6 +76,11 @@ namespace MAM.BusinessLayer.Models
                 {
                     Id = 0,
                     Properties = f.Properties != null ? property.ConvertToProperties(f.Properties.Where(p => p.UserImmovableAssetManagementPlanId == f.Id && p.TempleteNumber == 2.2).ToList()) : new List<Property>(),
+                },
+                TempleteThree = new TempleteThree()
+                {
+                    Id = 0,
+                    StrategicAssessments = f.StrategicAssessments != null ? strategicAssessment.ConvertToStrategicAssessments(f.StrategicAssessments.Where(p => p.UserImmovableAssetManagementPlanId == f.Id).ToList()) : new List<StrategicAssessment>(),
                 }
             }).ToList();
             return userImmovableAssetManagementPlans;
