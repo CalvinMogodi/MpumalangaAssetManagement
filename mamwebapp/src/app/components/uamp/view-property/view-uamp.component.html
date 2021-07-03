@@ -182,7 +182,6 @@
             </button>
             <p-menu #menu id="config_menu" [model]="items" [popup]="true"></p-menu>
         </ng-template>
-        <!--strategicNeedsAssessments-->
         <p-table [value]="uamp.templeteThree.strategicAssessments" styleClass="p-datatable-striped" [responsive]="true">
             <ng-template pTemplate="header">
                 <tr>
@@ -225,7 +224,7 @@
             </ng-template>
         </p-table>
     </p-panel>
-    <!--acquisitionPlans-->
+    
     <br>
     <p-panel header="Templete 4.1: ACQUISITION PLAN: NEW ACCOMMODATION REQUIREMENTS (CAPITAL PROJECTS)"
         [toggleable]="true">
@@ -235,7 +234,7 @@
             </button>
             <p-menu #menu id="config_menu" [model]="items" [popup]="true"></p-menu>
         </ng-template>
-        <p-table styleClass="p-datatable-striped" [value]="uamp.templeteFourPointOne" [responsive]="true">
+        <p-table styleClass="p-datatable-striped" [value]="uamp.templeteFourPointOne.acquisitionPlans" [responsive]="true">
             <ng-template pTemplate="header">
                 <tr>
                     <th>District/ Region</th>
@@ -250,12 +249,11 @@
                     <th>Cash Flow <small>(MTEF Year 1)</small></th>
                     <th>Cash Flow <small>(MTEF Year 2)</small></th>
                     <th>Cash Flow <small>(MTEF Year 3)</small></th>
-                    <th></th>
                 </tr>
             </ng-template>
             <ng-template pTemplate="body" let-acquisitionPlan>
                 <tr>
-                    <td>{{acquisitionPlan.region}}</td>
+                    <td>{{acquisitionPlan.districtRegion}}</td>
                     <td>{{acquisitionPlan.town}}</td>
                     <td>{{acquisitionPlan.serviceDescription}}</td>
                     <td>{{acquisitionPlan.budgetType}}</td>
@@ -271,7 +269,7 @@
             </ng-template>
         </p-table>
     </p-panel>
-    <!--acquisitionPlans-->
+    
     <br>
     <p-panel header="Templete 4.2: ACQUISITION PLAN: NEW LEASED ACCOMMODATION REQUIREMENTS" [toggleable]="true">
         <ng-template pTemplate="icons">
@@ -281,7 +279,7 @@
             <p-menu #menu id="config_menu" [model]="items" [popup]="true"></p-menu>
         </ng-template>
 
-        <p-table styleClass="p-datatable-striped" [value]="uamp.templeteFourPointTwo" [responsive]="true">
+        <p-table styleClass="p-datatable-striped" [value]="uamp.templeteFourPointTwo.acquisitionPlans" [responsive]="true">
             <ng-template pTemplate="header">
                 <tr>
                     <th>District/ Region</th>
@@ -296,12 +294,11 @@
                     <th>Cash Flow <small>(MTEF Year 2)</small></th>
                     <th>Cash Flow <small>(MTEF Year 3)</small></th>
                     <th>Cash Flow <small>(MTEF Year 4)</small></th>
-                    <th></th>
                 </tr>
             </ng-template>
             <ng-template pTemplate="body" let-acquisitionPlan>
                 <tr>
-                    <td>{{acquisitionPlan.region}}</td>
+                    <td>{{acquisitionPlan.districtRegion}}</td>
                     <td>{{acquisitionPlan.town}}</td>
                     <td>{{acquisitionPlan.serviceDescription}}</td>
                     <td>{{acquisitionPlan.budgetType}}</td>
@@ -318,7 +315,6 @@
         </p-table>
     </p-panel>
 
-    <!--operationPlans-->
     <br>
     <p-panel
         header="Templete 5.1: OPERATIONS PLAN: ADDITIONS, REFURBISHMENT AND / OR RECONFIGURATION TO EXISTING BUILDINGS"
@@ -329,7 +325,7 @@
             </button>
             <p-menu #menu id="config_menu" [model]="items" [popup]="true"></p-menu>
         </ng-template>
-        <p-table styleClass="p-datatable-striped" [value]="uamp.templeteFivePointOne" [responsive]="true">
+        <p-table styleClass="p-datatable-striped" [value]="this.uamp.templeteFivePointOne.operationPlans" [responsive]="true">
             <ng-template pTemplate="header">
                 <tr>
                     <th>District/ Region</th>
@@ -348,7 +344,7 @@
             </ng-template>
             <ng-template pTemplate="body" let-operationPlan>
                 <tr>
-                    <td>{{operationPlan.region}}</td>
+                    <td>{{operationPlan.districtRegion}}</td>
                     <td>{{operationPlan.town}}</td>
                     <td>{{operationPlan.serviceDescription}}</td>
                     <td>{{operationPlan.budgetType}}</td>
@@ -365,6 +361,7 @@
         </p-table>
     </p-panel>
     <br>
+
     <p-panel header="Templete 5.2: OPERATIONS PLAN: MAINTENANCE REQUIREMENTS" [toggleable]="true">
         <ng-template pTemplate="icons">
             <button pButton class="p-panel-header-icon p-link" (click)="menu.toggle($event)">
@@ -372,7 +369,7 @@
             </button>
             <p-menu #menu id="config_menu" [model]="items" [popup]="true"></p-menu>
         </ng-template>
-        <p-table styleClass="p-datatable-striped" [value]="uamp.templeteFivePointTwo" [responsive]="true">
+        <p-table styleClass="p-datatable-striped" [value]="uamp.templeteFivePointTwo.operationPlans" [responsive]="true">
             <ng-template pTemplate="header">
                 <tr>
                     <th>District</th>
@@ -392,7 +389,7 @@
             </ng-template>
             <ng-template pTemplate="body" let-operationPlan>
                 <tr>
-                    <td>{{operationPlan.name}}</td>
+                    <td>{{operationPlan.districtRegion}}</td>
                     <td>{{operationPlan.name}}</td>
                     <td>{{operationPlan.name}}</td>
                     <td>{{operationPlan.name}}</td>
@@ -409,6 +406,7 @@
         </p-table>
     </p-panel>
     <br>
+
     <p-panel header="Templete 5.3: OPERATIONS PLAN: ASSETS LEASED OUT / INVESTMENT PURPOSES ASSETS	"
         [toggleable]="true">
         <ng-template pTemplate="icons">
@@ -417,7 +415,7 @@
             </button>
             <p-menu #menu id="config_menu" [model]="items" [popup]="true"></p-menu>
         </ng-template>
-        <p-table styleClass="p-datatable-striped" [value]="uamp.templeteFivePointThree" [responsive]="true">
+        <p-table styleClass="p-datatable-striped" [value]="uamp.templeteFivePointThree.operationPlans" [responsive]="true">
             <ng-template pTemplate="header">
                 <tr>
                     <th>District</th>
@@ -439,7 +437,7 @@
             </ng-template>
             <ng-template pTemplate="body" let-operationPlan>
                 <tr>
-                    <td>{{operationPlan.name}}</td>
+                    <td>{{operationPlan.districtRegion}}</td>
                     <td>{{operationPlan.name}}</td>
                     <td>{{operationPlan.name}}</td>
                     <td>{{operationPlan.name}}</td>
@@ -468,7 +466,7 @@
             </button>
             <p-menu #menu id="config_menu" [model]="items" [popup]="true"></p-menu>
         </ng-template>
-        <p-table styleClass="p-datatable-striped" [value]="uamp.templeteSix" [responsive]="true">
+        <p-table styleClass="p-datatable-striped" [value]="uamp.templeteSix.surrenderPlans" [responsive]="true">
             <ng-template pTemplate="header">
                 <tr>
                     <th>District</th>
@@ -486,7 +484,7 @@
             </ng-template>
             <ng-template pTemplate="body" let-surrenderPlan>
                 <tr>
-                    <td>{{surrenderPlan.districtMunicipality}}</td>
+                    <td>{{surrenderPlan.districtRegion}}</td>
                     <td>{{surrenderPlan.town}}</td>
                     <td>{{surrenderPlan.localAuthority}}</td>
                     <td>{{surrenderPlan.type}}</td>
@@ -502,8 +500,6 @@
         </p-table>
     </p-panel>
 
-
-    <!--mtefBudgetPeriods-->
     <br>
     <p-panel header="Templete 7: BUDGET FOR MTEF PERIOD" [toggleable]="true">
         <ng-template pTemplate="icons">
@@ -512,7 +508,7 @@
             </button>
             <p-menu #menu id="config_menu" [model]="items" [popup]="true"></p-menu>
         </ng-template>
-        <p-table styleClass="p-datatable-striped" [value]="uamp.templeteSix" [responsive]="true">
+        <p-table styleClass="p-datatable-striped" [value]="uamp.templeteSeven.mtefBudgetPeriods" [responsive]="true">
             <ng-template pTemplate="header">
                 <tr>
                     <th style="width: 130px;"></th>

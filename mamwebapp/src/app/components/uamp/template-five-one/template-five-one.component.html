@@ -10,7 +10,7 @@
         <div class="ui-g-12 ui-md-12">
             <div class="ui-g-3 ui-md-3">
                 <label for="region">District/ Region</label>
-                <p-dropdown placeholder="Please select" inputId="region" [options]="regions" formControlName="region" optionLabel="name"></p-dropdown>
+                <p-dropdown placeholder="Please select" inputId="districtRegion" [options]="regions" formControlName="districtRegion" optionLabel="name"></p-dropdown>
             </div>           
             <div class="ui-g-3 ui-md-3">
                 <label for="status">Status</label>
@@ -87,7 +87,7 @@
     </ng-template>
     <ng-template pTemplate="body" let-operationPlan>
         <tr>
-            <td>{{operationPlan.region}}</td>
+            <td>{{operationPlan.districtRegion}}</td>
             <td>{{operationPlan.town}}</td>
             <td>{{operationPlan.serviceDescription}}</td>
             <td>{{operationPlan.budgetType}}</td>

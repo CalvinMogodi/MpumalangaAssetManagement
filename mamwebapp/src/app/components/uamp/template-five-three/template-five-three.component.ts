@@ -3,6 +3,8 @@ import { MessageService } from 'primeng/api';
 import { FormGroup, FormBuilder, FormArray, FormControl, Validators } from '@angular/forms';
 import { Facility } from 'src/app/models/facility.model';
 import { UampService } from 'src/app/services/uamp/uamp.service';
+import { OperationPlan } from 'src/app/models/operation-plan.model';
+import { UAMP } from 'src/app/models/uamp.model';
 
 @Component({
   selector: 'app-template-five-three',
@@ -11,10 +13,10 @@ import { UampService } from 'src/app/services/uamp/uamp.service';
   providers: [MessageService]
 })
 export class TemplateFiveThreeComponent implements OnInit {
-  @Input() properties: Facility[];
+  operationPlans: Array<OperationPlan> = [];
   operationPlanForm: FormGroup;
   prioities: any[];
-  uamp: any = {};
+  uamp: UAMP;
   
   constructor(private uampService: UampService, private formBuilder: FormBuilder, private messageService: MessageService) { 
     this.uampService.uampChange.subscribe((value) => {
@@ -22,7 +24,7 @@ export class TemplateFiveThreeComponent implements OnInit {
       {
         this.uamp = value;
       }    
-      this.uamp.templeteFivePointThree = this.uamp.templeteFivePointThree;
+      this.operationPlans = this.uamp.templeteFivePointThree.operationPlans;
     });
   }
 
@@ -49,7 +51,7 @@ export class TemplateFiveThreeComponent implements OnInit {
       leaseType: new FormControl(null, {
         validators: [Validators.required]
       }),
-      parkingBaysNo: new FormControl(null, {
+      noofParkingBays: new FormControl(null, {
         validators: [Validators.required]
       }),
       usableSpace: new FormControl(null, {

@@ -29,7 +29,7 @@ namespace MAM.BusinessLayer.Models
         public DateTime? LeaseStartEnd { get; set; }
         public decimal? RentalPM { get; set; }
         public decimal? RentalPA { get; set; }
-        public string InitialNeedYear { get; set; }
+        public int? InitialNeedYear { get; set; }
         public string Status { get; set; }
         public decimal? TotalAmountRequired { get; set; }
         public decimal? CashFlowYear1 { get; set; }

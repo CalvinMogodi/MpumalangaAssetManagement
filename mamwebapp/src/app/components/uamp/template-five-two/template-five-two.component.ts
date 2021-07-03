@@ -3,6 +3,8 @@ import { MessageService } from 'primeng/api';
 import { FormGroup, FormBuilder, FormArray, FormControl, Validators } from '@angular/forms';
 import { Facility } from 'src/app/models/facility.model';
 import { UampService } from 'src/app/services/uamp/uamp.service';
+import { OperationPlan } from 'src/app/models/operation-plan.model';
+import { UAMP } from 'src/app/models/uamp.model';
 
 @Component({
   selector: 'app-template-five-two',
@@ -11,10 +13,10 @@ import { UampService } from 'src/app/services/uamp/uamp.service';
   providers: [MessageService]
 })
 export class TemplateFiveTwoComponent implements OnInit {
-  @Input() properties: Facility[];
+  operationPlans: Array<OperationPlan> = [];
   operationPlanForm: FormGroup;
   prioities: any[];
-  uamp: any = {};
+  uamp: UAMP;
   
   constructor(private uampService: UampService, private formBuilder: FormBuilder, private messageService: MessageService) { 
     this.uampService.uampChange.subscribe((value) => {
@@ -22,7 +24,7 @@ export class TemplateFiveTwoComponent implements OnInit {
       {
         this.uamp = value;
       }    
-      this.uamp.templeteFivePointTwo = this.uamp.templeteFivePointTwo;
+      this.operationPlans = this.uamp.templeteFivePointTwo.operationPlans;
     });
   }
 
@@ -64,7 +66,7 @@ export class TemplateFiveTwoComponent implements OnInit {
       initialNeedYear: new FormControl(null, {
         validators: [Validators.required]
       }),
-      prioity: new FormControl(null, {
+      prioityServiceReanking: new FormControl(null, {
         validators: [Validators.required]
       }),
       totalAmountRequired: new FormControl(null, {

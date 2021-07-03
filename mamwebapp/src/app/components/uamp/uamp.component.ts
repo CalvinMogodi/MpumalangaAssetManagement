@@ -135,10 +135,8 @@ export class UampComponent implements OnInit, AfterViewInit {
     }
   }
 
-  onSave(){
-    
-    this.uamp.status = "Saved"
-    //this.uampService.assignUamp(this.uamp);
+  onSave(){    
+    this.uamp.status = "Saved";
     this.uampService.saveUamp(this.uamp).pipe(first()).subscribe(uamp => {
       this.uamp = uamp;
       this.uampService.assignUamp(uamp);

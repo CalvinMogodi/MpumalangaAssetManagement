@@ -5,6 +5,8 @@ import { MenuItem, MessageService } from 'primeng/api';
 import { CurrentUtlisation } from '../../../models/current-utilisation.model';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { FacilityService } from 'src/app/services/facility/facility.service';
+import { UAMP } from 'src/app/models/uamp.model';
+import { OperationPlan } from 'src/app/models/operation-plan.model';
 
 @Component({
   selector: 'app-template-five-one',
@@ -20,9 +22,9 @@ export class TemplateFiveOneComponent implements OnInit {
   initialNeedYears: any[];
   statuses: any[];
   operationTypes: any[];
-  operationPlans: any[] = [];
+  operationPlans: Array<OperationPlan> = [];
   buttonItems: MenuItem[];
-  uamp: any = {};
+  uamp: UAMP;
 
   constructor(private facilityService: FacilityService, public uampService: UampService, private formBuilder: FormBuilder, private messageService: MessageService) {
     
@@ -30,14 +32,12 @@ export class TemplateFiveOneComponent implements OnInit {
       if(value)
       {
         this.uamp = value;
-        this.uamp.templeteFivePointOne = {
-          operationPlans: this.operationPlans,
-        }
+        this.operationPlans = this.uamp.templeteFivePointOne.operationPlans;
       }          
     });
 
     this.operationPlanForm = this.formBuilder.group({
-      region: [''],
+      districtRegion: [''],
       town: [''],
       serviceDescription: [''],
       budgetType: [''],
@@ -108,13 +108,15 @@ export class TemplateFiveOneComponent implements OnInit {
   }
 
   addOperationPlan() {
-    const acquisitionPlan = {
-      id: this.operationPlans.length + 1,
-      region: this.operationPlanForm.controls["region"].value.name,
+    const operationPlan: OperationPlan = {
+      id: 0,
+      userImmovableAssetManagementPlanId: this.uamp.id,
+      templeteNumber: 5.1,
+      districtRegion: this.operationPlanForm.controls["districtRegion"].value.name,
       town: this.operationPlanForm.controls["town"].value,
       serviceDescription: this.operationPlanForm.controls["serviceDescription"].value,
       budgetType: this.operationPlanForm.controls["budgetType"].value,
-      initialNeedYear: this.operationPlanForm.controls["initialNeedYear"].value.name,
+      initialNeedYear: Number(this.operationPlanForm.controls["initialNeedYear"].value.name),
       status: this.operationPlanForm.controls["status"].value.name,
       totalAmountRequired: this.operationPlanForm.controls["totalAmountRequired"].value,
       cashFlowYear1: this.operationPlanForm.controls["cashFlowYear1"].value,
@@ -122,8 +124,33 @@ export class TemplateFiveOneComponent implements OnInit {
       cashFlowYear3: this.operationPlanForm.controls["cashFlowYear3"].value,
       cashFlowYear4: this.operationPlanForm.controls["cashFlowYear4"].value,
       cashFlowYear5: this.operationPlanForm.controls["cashFlowYear5"].value,
+      localMunicipality: null,
+      assetDescription:null,
+      repairDescription: null,
+      prioityServiceReanking: null,
+      streetDescription: null,
+      propertyDescription: null,
+      leaseType: null,
+      noofParkingBays: null,
+      usableSpace: null,
+      constructionArea: null,
+      extentofLand: null,
+      leaseStartDate : null,
+      leaseStartEnd: null,
+      rentalPM: null,
+      rentalPA: null
     };
-    this.operationPlans.push(acquisitionPlan);
+    this.operationPlans.push(operationPlan);
+    if(this.uamp.templeteFivePointOne != null)
+    {
+      this.uamp.templeteFivePointOne.operationPlans = this.operationPlans
+    }else{
+      this.uamp.templeteFivePointOne = {
+        id: 0,
+        operationPlans: this.operationPlans
+      };
+    }
+    this.uampService.assignUamp(this.uamp);
     this.resetForm();
   }
 

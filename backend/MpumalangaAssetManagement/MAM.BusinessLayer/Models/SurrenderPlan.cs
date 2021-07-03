@@ -9,7 +9,6 @@ namespace MAM.BusinessLayer.Models
     {
         public int Id { get; set; }
         public int UserImmovableAssetManagementPlanId { get; set; }
-        public double TempleteNumber { get; set; }
         public string DistrictRegion { get; set; }
         public string Town { get; set; }
         public string LocalMunicipality { get; set; }
@@ -28,7 +27,6 @@ namespace MAM.BusinessLayer.Models
             {
                 Id = surrenderPlan.Id,
                 UserImmovableAssetManagementPlanId = surrenderPlan.UserImmovableAssetManagementPlanId,
-                TempleteNumber = surrenderPlan.TempleteNumber,
                 DistrictRegion = surrenderPlan.DistrictRegion,
                 Town = surrenderPlan.Town,
                 LocalMunicipality = surrenderPlan.LocalMunicipality,
@@ -49,7 +47,6 @@ namespace MAM.BusinessLayer.Models
             {
                 Id = s.Id,
                 UserImmovableAssetManagementPlanId = s.UserImmovableAssetManagementPlanId,
-                TempleteNumber = s.TempleteNumber,
                 DistrictRegion = s.DistrictRegion,
                 Town = s.Town,
                 LocalMunicipality = s.LocalMunicipality,

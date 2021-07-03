@@ -41,13 +41,13 @@ namespace MAM.BusinessLayer.Repositories
                
                 if (uamp.TempleteOne.OptimalSupportingAccommodation != null)
                     uamp = SaveOptimalSupportingAccommodationRepository(uamp);
-                if (uamp.TempleteOne.Programmes != null)
+                if (uamp.TempleteOne.Programmes.Count > 0)
                     uamp.TempleteOne.Programmes = SaveProgramme(uamp.TempleteOne.Programmes);
                 if (uamp.TempleteTwoPointOne?.Properties != null)
                     uamp = SaveTempleteTwo(uamp);   
-                if (uamp.TempleteThree?.StrategicAssessments != null)
+                if (uamp.TempleteThree?.StrategicAssessments.Count > 0)
                     uamp = SaveTempleteThree(uamp);
-                if (uamp.TempleteFourPointOne?.AcquisitionPlans != null)
+                if (uamp.TempleteFourPointOne?.AcquisitionPlans.Count > 0 || uamp.TempleteFourPointTwo?.AcquisitionPlans.Count > 0)
                     uamp = SaveTempleteFour(uamp);
                 if (uamp.TempleteFivePointOne?.OperationPlans != null)
                     uamp = SaveTempleteFive(uamp);
@@ -296,7 +296,7 @@ namespace MAM.BusinessLayer.Repositories
                         {
                             Id = 0,
                             UserImmovableAssetManagementPlanId = uamp.Id,
-                            TempleteNumber = 2.2,
+                            TempleteNumber = 5.2,
                             DistrictRegion = f.Land.GeographicalLocation != null ? f.Land.GeographicalLocation.Region : null,
                             Town = f.Land.GeographicalLocation != null ? f.Land.GeographicalLocation.Town : null,
                             LocalMunicipality = f.Land.GeographicalLocation != null ? f.Land.GeographicalLocation.LocalAuthority : null,
@@ -313,7 +313,7 @@ namespace MAM.BusinessLayer.Repositories
                         {
                             Id = 0,
                             UserImmovableAssetManagementPlanId = uamp.Id,
-                            TempleteNumber = 2.2,
+                            TempleteNumber = 5.3,
                             DistrictRegion = f.Land.GeographicalLocation != null ? f.Land.GeographicalLocation.Region : null,
                             Town = f.Land.GeographicalLocation != null ? f.Land.GeographicalLocation.Town : null,
                             LocalMunicipality = f.Land.GeographicalLocation != null ? f.Land.GeographicalLocation.LocalAuthority : null,
@@ -330,7 +330,6 @@ namespace MAM.BusinessLayer.Repositories
                         {
                             Id = 0,
                             UserImmovableAssetManagementPlanId = uamp.Id,
-                            TempleteNumber = 2.2,
                             DistrictRegion = f.Land.GeographicalLocation != null ? f.Land.GeographicalLocation.Region : null,
                             Town = f.Land.GeographicalLocation != null ? f.Land.GeographicalLocation.Town : null,
                             LocalMunicipality = f.Land.GeographicalLocation != null ? f.Land.GeographicalLocation.LocalAuthority : null,

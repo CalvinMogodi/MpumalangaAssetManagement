@@ -3,6 +3,7 @@ import { UampService } from 'src/app/services/uamp/uamp.service';
 import { MenuItem, MessageService } from 'primeng/api';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { FacilityService } from 'src/app/services/facility/facility.service';
+import { AcquisitionPlan } from 'src/app/models/acquisition-plan.model';
 
 @Component({
   selector: 'app-template-four-one',
@@ -18,7 +19,7 @@ export class TemplateFourOneComponent implements OnInit {
   initialNeedYears: any[];
   statuses: any[];
   acquisitionTypes: any[];
-  acquisitionPlans: any[] = [];
+  acquisitionPlans: Array<AcquisitionPlan> = [];
   buttonItems: MenuItem[];
   uamp: any = {};
 
@@ -27,13 +28,11 @@ export class TemplateFourOneComponent implements OnInit {
       if(value)
       {
         this.uamp = value;
-        this.uamp.templeteFourPointOne = {
-          acquisitionPlans: this.acquisitionPlans
-        }
+        this.acquisitionPlans = this.uamp.templeteFourPointOne.acquisitionPlans;
       }          
     });
     this.acquisitionPlanForm = this.formBuilder.group({
-      region: [''],
+      districtRegion: [''],
       town: [''],
       serviceDescription: [''],
       budgetType: [''],
@@ -105,23 +104,34 @@ export class TemplateFourOneComponent implements OnInit {
   }
 
   addAcquisitionPlan() {
-    const acquisitionPlan = {
-      id: this.acquisitionPlans.length + 1,
-      region: this.acquisitionPlanForm.controls["region"].value.name,
+    const acquisitionPlan: AcquisitionPlan = {
+      id: 0,
+      userImmovableAssetManagementPlanId: this.uamp.id,
+      templeteNumber: 4.1,
+      districtRegion: this.acquisitionPlanForm.controls["districtRegion"].value.name,
       town: this.acquisitionPlanForm.controls["town"].value,
       serviceDescription: this.acquisitionPlanForm.controls["serviceDescription"].value,
       budgetType: this.acquisitionPlanForm.controls["budgetType"].value,
       extent: this.acquisitionPlanForm.controls["extent"].value,
-      initialNeedYear: this.acquisitionPlanForm.controls["initialNeedYear"].value.name,
+      initialNeedYear: Number(this.acquisitionPlanForm.controls["initialNeedYear"].value.name),
       acquisitionType: this.acquisitionPlanForm.controls["acquisitionType"].value.name,
       status: this.acquisitionPlanForm.controls["status"].value.name,
       totalAmountRequired: this.acquisitionPlanForm.controls["totalAmountRequired"].value,
       cashFlowYear1: this.acquisitionPlanForm.controls["cashFlowYear1"].value,
       cashFlowYear2: this.acquisitionPlanForm.controls["cashFlowYear2"].value,
       cashFlowYear3: this.acquisitionPlanForm.controls["cashFlowYear3"].value,
-      cashFlowYear4: this.acquisitionPlanForm.controls["cashFlowYear4"].value,
     };
     this.acquisitionPlans.push(acquisitionPlan);
+    if(this.uamp.templeteFourPointOne != null)
+    {
+      this.uamp.templeteFourPointOne.acquisitionPlans = this.acquisitionPlans
+    }else{
+      this.uamp.templeteFourPointOne = {
+        id: 0,
+        acquisitionPlans: this.acquisitionPlans
+      };
+    }
+    this.uampService.assignUamp(this.uamp);
     this.resetForm();
   }
 

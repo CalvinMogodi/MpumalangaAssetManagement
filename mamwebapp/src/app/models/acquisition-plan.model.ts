@@ -1,13 +1,13 @@
 export class AcquisitionPlan {
-    Id: Number;
+    id: Number;
     userImmovableAssetManagementPlanId: Number;
     templeteNumber: Number;
-    region: String;
+    districtRegion: String;
     town: String;
     serviceDescription: String;
     budgetType: String;
     extent?: Number;
-    initialNeedYear: Number;
+    initialNeedYear?: Number;
     acquisitionType: String;
     status: String;
     totalAmountRequired: Number;

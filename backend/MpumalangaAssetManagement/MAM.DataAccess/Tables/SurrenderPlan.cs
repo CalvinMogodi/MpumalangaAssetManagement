@@ -8,7 +8,6 @@ namespace MAM.DataAccess.Tables
     {
         public int Id { get; set; }
         public int UserImmovableAssetManagementPlanId { get; set; }
-        public double TempleteNumber { get; set; }
         public string DistrictRegion { get; set; }
         public string Town { get; set; }
         public string LocalMunicipality { get; set; }

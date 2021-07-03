@@ -14,7 +14,7 @@
         <div class="ui-g-12 ui-md-12">
             <div class="ui-g-3 ui-md-3">
                 <label for="region">District/ Region</label>
-                <p-dropdown placeholder="Please select" inputId="region" [options]="regions" formControlName="region" optionLabel="name"></p-dropdown>
+                <p-dropdown placeholder="Please select" inputId="districtRegion" [options]="regions" formControlName="districtRegion" optionLabel="name"></p-dropdown>
             </div>
             <div class="ui-g-3 ui-md-3">
                 <label for="initialNeedYear">Year in which initial needs were submitted</label>
@@ -91,7 +91,7 @@
     </ng-template>
     <ng-template pTemplate="body" let-acquisitionPlan>
         <tr>
-            <td>{{acquisitionPlan.region}}</td>
+            <td>{{acquisitionPlan.districtRegion}}</td>
             <td>{{acquisitionPlan.town}}</td>
             <td>{{acquisitionPlan.serviceDescription}}</td>
             <td>{{acquisitionPlan.budgetType}}</td>

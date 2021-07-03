@@ -32,20 +32,14 @@ namespace MAM.BusinessLayer.Models
         public User User { get; set; }
 
         public List<UserImmovableAssetManagementPlan> ConvertToUserImmovableAssetManagementPlans(List<DataAccess.Tables.UserImmovableAssetManagementPlan> uamp) {
-            OptimalSupportingAccommodation optimalSupportingAccommodation = new OptimalSupportingAccommodation();
-            Programme programme = new Programme();
-            Property property = new Property();
-            StrategicAssessment strategicAssessment = new StrategicAssessment();
-
-            List<Programme> Programmes = new List<Programme>();
-            List<AcquisitionPlan> AcquisitionPlans = new List<AcquisitionPlan>();
-            List<MtefBudgetPeriod> MtefBudgetPeriods = new List<MtefBudgetPeriod>();
-            List<MtefYear> MtefYears = new List<MtefYear>();
-            List<MunicipalUtilityService> MunicipalUtilityServices = new List<MunicipalUtilityService>();
-            List<OperationPlan> OperationPlans = new List<OperationPlan>();
-            List<Property> Properties = new List<Property>();
-            List<StrategicAssessment> StrategicAssessments = new List<StrategicAssessment>();
-            List<SurrenderPlan> SurrenderPlans = new List<SurrenderPlan>();
+            OptimalSupportingAccommodation OptimalSupportingAccommodation = new OptimalSupportingAccommodation();
+            Programme Programme = new Programme();
+            Property Property = new Property();
+            StrategicAssessment StrategicAssessment = new StrategicAssessment();
+            AcquisitionPlan AcquisitionPlan = new AcquisitionPlan();
+            OperationPlan OperationPlan = new OperationPlan();
+            MtefBudgetPeriod MtefBudgetPeriod = new MtefBudgetPeriod();
+            SurrenderPlan SurrenderPlan = new SurrenderPlan();
 
             List<UserImmovableAssetManagementPlan> userImmovableAssetManagementPlans = uamp.Select(f => new UserImmovableAssetManagementPlan()
             {
@@ -65,22 +59,57 @@ namespace MAM.BusinessLayer.Models
                 TempleteOne = new TempleteOne()
                 {
                     Id = 0,
-                    OptimalSupportingAccommodation = f.OptimalSupportingAccommodation != null ? optimalSupportingAccommodation.ConvertToOptimalSupportingAccommodation(f.OptimalSupportingAccommodation) : null,
-                    Programmes = f.Programmes != null ? programme.ConvertToProgrammes(f.Programmes.Where(p => p.UserImmovableAssetManagementPlanId == f.Id).ToList()) : new List<Programme>(),
+                    OptimalSupportingAccommodation = f.OptimalSupportingAccommodation != null ? OptimalSupportingAccommodation.ConvertToOptimalSupportingAccommodation(f.OptimalSupportingAccommodation) : null,
+                    Programmes = f.Programmes != null ? Programme.ConvertToProgrammes(f.Programmes.Where(p => p.UserImmovableAssetManagementPlanId == f.Id).ToList()) : new List<Programme>(),
                 },
                 TempleteTwoPointOne = new TempleteTwoPointOne() { 
                     Id = 0,
-                    Properties = f.Properties != null ? property.ConvertToProperties(f.Properties.Where(p => p.UserImmovableAssetManagementPlanId == f.Id && p.TempleteNumber == 2.1).ToList()) : new List<Property>(),
+                    Properties = f.Properties != null ? Property.ConvertToProperties(f.Properties.Where(p => p.UserImmovableAssetManagementPlanId == f.Id && p.TempleteNumber == 2.1).ToList()) : new List<Property>(),
                 },
                 TempleteTwoPointTwo = new TempleteTwoPointTwo()
                 {
                     Id = 0,
-                    Properties = f.Properties != null ? property.ConvertToProperties(f.Properties.Where(p => p.UserImmovableAssetManagementPlanId == f.Id && p.TempleteNumber == 2.2).ToList()) : new List<Property>(),
+                    Properties = f.Properties != null ? Property.ConvertToProperties(f.Properties.Where(p => p.UserImmovableAssetManagementPlanId == f.Id && p.TempleteNumber == 2.2).ToList()) : new List<Property>(),
                 },
                 TempleteThree = new TempleteThree()
                 {
                     Id = 0,
-                    StrategicAssessments = f.StrategicAssessments != null ? strategicAssessment.ConvertToStrategicAssessments(f.StrategicAssessments.Where(p => p.UserImmovableAssetManagementPlanId == f.Id).ToList()) : new List<StrategicAssessment>(),
+                    StrategicAssessments = f.StrategicAssessments != null ? StrategicAssessment.ConvertToStrategicAssessments(f.StrategicAssessments.Where(p => p.UserImmovableAssetManagementPlanId == f.Id).ToList()) : new List<StrategicAssessment>(),
+                },
+                TempleteFourPointOne = new TempleteFourPointOne()
+                {
+                    Id = 0,
+                    AcquisitionPlans = f.AcquisitionPlans != null ? AcquisitionPlan.ConvertToAcquisitionPlans(f.AcquisitionPlans.Where(p => p.UserImmovableAssetManagementPlanId == f.Id && p.TempleteNumber == 4.1).ToList()) : new List<AcquisitionPlan>(),
+                },
+                TempleteFourPointTwo = new TempleteFourPointTwo()
+                {
+                    Id = 0,
+                    AcquisitionPlans = f.AcquisitionPlans != null ? AcquisitionPlan.ConvertToAcquisitionPlans(f.AcquisitionPlans.Where(p => p.UserImmovableAssetManagementPlanId == f.Id && p.TempleteNumber == 4.2).ToList()) : new List<AcquisitionPlan>(),
+                },
+                TempleteFivePointOne = new TempleteFivePointOne()
+                {
+                    Id = 0,
+                    OperationPlans = f.OperationPlans.Count > 0 ? OperationPlan.ConvertToOperationPlans(f.OperationPlans.Where(p => p.UserImmovableAssetManagementPlanId == f.Id && p.TempleteNumber == 5.1).ToList()) : new List<OperationPlan>(),
+                },
+                TempleteFivePointTwo = new TempleteFivePointTwo()
+                {
+                    Id = 0,
+                    OperationPlans = f.OperationPlans.Count > 0 ? OperationPlan.ConvertToOperationPlans(f.OperationPlans.Where(p => p.UserImmovableAssetManagementPlanId == f.Id && p.TempleteNumber == 5.2).ToList()) : new List<OperationPlan>(),
+                },
+                TempleteFivePointThree = new TempleteFivePointThree()
+                {
+                    Id = 0,
+                    OperationPlans = f.OperationPlans.Count > 0 ? OperationPlan.ConvertToOperationPlans(f.OperationPlans.Where(p => p.UserImmovableAssetManagementPlanId == f.Id && p.TempleteNumber == 5.3).ToList()) : new List<OperationPlan>(),
+                },
+                TempleteSix = new TempleteSix()
+                {
+                    Id = 0,
+                    SurrenderPlans = f.OperationPlans.Count > 0 ? SurrenderPlan.ConvertToSurrenderPlans(f.SurrenderPlans.Where(p => p.UserImmovableAssetManagementPlanId == f.Id).ToList()) : new List<SurrenderPlan>(),
+                },
+                TempleteSeven = new TempleteSeven()
+                {
+                    Id = 0,
+                    MtefBudgetPeriods = f.OperationPlans.Count > 0 ? MtefBudgetPeriod.ConvertToMtefBudgetPeriods(f.MtefBudgetPeriods.Where(p => p.UserImmovableAssetManagementPlanId == f.Id).ToList()) : new List<MtefBudgetPeriod>(),
                 }
             }).ToList();
             return userImmovableAssetManagementPlans;

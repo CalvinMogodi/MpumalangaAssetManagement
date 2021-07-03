@@ -1,8 +1,8 @@
-export class OperationPlans {
+export class OperationPlan {
     id: Number;
     userImmovableAssetManagementPlanId: Number;
     templeteNumber: Number;
-    district: String;
+    districtRegion: String;
     town: String;
     serviceDescription: String;
     budgetType: String;
@@ -13,7 +13,7 @@ export class OperationPlans {
     streetDescription: String;
     propertyDescription: String;
     leaseType: String;
-    noofParkingBays: String;
+    noofParkingBays?: Number;
     usableSpace?: Number;
     constructionArea?: Number;
     extentofLand?: Number;
@@ -21,9 +21,9 @@ export class OperationPlans {
     leaseStartEnd?: Date
     rentalPM?: Number;
     rentalPA?: Number;
-    initialNeedYear: String;
+    initialNeedYear?: Number;
     status: String;
-    totalAmountRequired: String;
+    totalAmountRequired?: Number;
     cashFlowYear1?: Number;
     cashFlowYear2?: Number;
     cashFlowYear3?: Number;
