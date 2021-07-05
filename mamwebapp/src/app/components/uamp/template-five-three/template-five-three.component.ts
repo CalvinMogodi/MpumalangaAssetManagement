@@ -24,7 +24,13 @@ export class TemplateFiveThreeComponent implements OnInit {
       {
         this.uamp = value;
       }    
-      this.operationPlans = this.uamp.templeteFivePointThree.operationPlans;
+
+      this.operationPlans = [];
+      this.uamp.templeteFivePointThree.operationPlans.forEach(element => {          
+        element.leaseStartDate = element.leaseStartDate != null ? new Date(element.leaseStartDate) : undefined;
+        element.leaseEndDate = element.leaseEndDate != null ? new Date(element.leaseEndDate): undefined;
+        this.operationPlans.push(element);          
+      })      
     });
   }
 

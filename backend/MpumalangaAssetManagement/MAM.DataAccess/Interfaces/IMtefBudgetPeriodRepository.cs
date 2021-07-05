@@ -10,6 +10,6 @@ namespace MAM.DataAccess.Interfaces
         int AddMtefBudgetPeriod(MtefBudgetPeriod mtefBudgetPeriod);
         void DeleteMtefBudgetPeriod(MtefBudgetPeriod mtefBudgetPeriod);
         void UpdateMtefBudgetPeriod(MtefBudgetPeriod mtefBudgetPeriod);
-        List<MtefBudgetPeriod> GetFMtefBudgetPeriods();
+        List<MtefBudgetPeriod> GetMtefBudgetPeriods(int uampId);
     }
 }

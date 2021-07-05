@@ -57,6 +57,13 @@ namespace MAM.DataAccess.Repositories
             }
         }
 
+        public User GetUser(int id)
+        {
+            using (var db = new DataContext(_connectionString))
+            {
+                return db.Users.Find(id);
+            }
+        }
 
         public void Dispose()
         {

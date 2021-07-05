@@ -328,7 +328,7 @@
         <p-table styleClass="p-datatable-striped" [value]="this.uamp.templeteFivePointOne.operationPlans" [responsive]="true">
             <ng-template pTemplate="header">
                 <tr>
-                    <th>District/ Region</th>
+                    <th>District/ Region</th>   
                     <th>Town</th>
                     <th>Service Description</th>
                     <th>Budget Type</th>
@@ -355,7 +355,7 @@
                     <td>{{operationPlan.cashFlowYear2 | currency:'ZAR':'R'}}</td>
                     <td>{{operationPlan.cashFlowYear3 | currency:'ZAR':'R'}}</td>
                     <td>{{operationPlan.cashFlowYear4 | currency:'ZAR':'R'}}</td>
-                    <td>{{operationPlan.cashFlowYear5 | currency:'ZAR':'R'}}</td>
+                    <td>{{operationPlan.cashFlowYear5 | currency:'ZAR':'R'}}</td>                   
                 </tr>
             </ng-template>
         </p-table>
@@ -372,13 +372,13 @@
         <p-table styleClass="p-datatable-striped" [value]="uamp.templeteFivePointTwo.operationPlans" [responsive]="true">
             <ng-template pTemplate="header">
                 <tr>
-                    <th>District</th>
+                    <th>District</th>               
                     <th>Town</th>
                     <th>Local Municipality</th>
                     <th>Asset Description</th>
                     <th>Repair Description</th>
                     <th>YEAR <br> <small>in which initial request was submitted</small></th>
-                    <th>Prioity / Service Reanking</th>
+                    <th style="width: 200px;">Prioity / Service Reanking</th>
                     <th>Total Amount Required</th>
                     <th>Cash Flow <br><small>(MTEF YR 1)</small></th>
                     <th>Cash Flow <br><small>(MTEF YR 2)</small></th>
@@ -387,21 +387,22 @@
                     <th>Cash Flow <br><small>(MTEF YR 5)</small></th>
                 </tr>
             </ng-template>
-            <ng-template pTemplate="body" let-operationPlan>
-                <tr>
-                    <td>{{operationPlan.districtRegion}}</td>
-                    <td>{{operationPlan.name}}</td>
-                    <td>{{operationPlan.name}}</td>
-                    <td>{{operationPlan.name}}</td>
-                    <td>{{operationPlan.name}}</td>
-                    <td>{{operationPlan.name}}</td>
-                    <td>{{operationPlan.name}}</td>
-                    <td>{{operationPlan.name}}</td>
-                    <td>{{operationPlan.name}}</td>
-                    <td>{{operationPlan.name}}</td>
-                    <td>{{operationPlan.name}}</td>
-                    <td>{{operationPlan.name}}</td>
-                </tr>
+            <ng-template pTemplate="body" let-operationPlan let-rowIndex="rowIndex">
+                    <tr>
+                        <td>{{operationPlan.districtRegion}}</td>
+                        <td>{{operationPlan.town}}</td>
+                        <td>{{operationPlan.localAuthority}}</td>
+                        <td>{{operationPlan.assetDescription}}</td>
+                        <td>{{operationPlan.repairDescription}}</td>
+                        <td>{{operationPlan.initialNeedYear}}</td>
+                        <td>{{operationPlan.prioityServiceReanking}}</td>
+                        <td>{{operationPlan.totalAmountRequired</td>
+                        <td>{{operationPlan.cashFlowYear1}}</td>
+                        <td>{{operationPlan.cashFlowYear2}}</td>
+                        <td>{{operationPlan.cashFlowYear3}}</td>
+                        <td>{{operationPlan.cashFlowYear4}}</td>
+                        <td>{{operationPlan.cashFlowYear5}}</td>
+                    </tr>
             </ng-template>
         </p-table>
     </p-panel>
@@ -418,7 +419,7 @@
         <p-table styleClass="p-datatable-striped" [value]="uamp.templeteFivePointThree.operationPlans" [responsive]="true">
             <ng-template pTemplate="header">
                 <tr>
-                    <th>District</th>
+                    <th>District</th>               
                     <th>Town</th>
                     <th>Local Municipality</th>
                     <th>Asset Description</th>
@@ -435,23 +436,24 @@
                     <th>Comments</th>
                 </tr>
             </ng-template>
-            <ng-template pTemplate="body" let-operationPlan>
-                <tr>
-                    <td>{{operationPlan.districtRegion}}</td>
-                    <td>{{operationPlan.name}}</td>
-                    <td>{{operationPlan.name}}</td>
-                    <td>{{operationPlan.name}}</td>
-                    <td>{{operationPlan.name}}</td>
-                    <td>{{operationPlan.name}}</td>
-                    <td>{{operationPlan.name}}</td>
-                    <td>{{operationPlan.name}}</td>
-                    <td>{{operationPlan.name}}</td>
-                    <td>{{operationPlan.name}}</td>
-                    <td>{{operationPlan.name}}</td>
-                    <td>{{operationPlan.name}}</td>
-                    <td>{{operationPlan.name}}</td>
-                    <td>{{operationPlan.name}}</td>
-                </tr>
+            <ng-template pTemplate="body" let-operationPlan let-rowIndex="rowIndex">
+                    <tr>
+                        <td>{{operationPlan.districtRegion}}</td>
+                        <td>{{operationPlan.town}}</td>
+                        <td>{{operationPlan.localAuthority}}</td>
+                        <td>{{operationPlan.assetDescription}}</td>
+                        <td>{{operationPlan.streetDescription}}</td>
+                        <td>{{operationPlan.repairDescription}}</td>
+                        <td>{{operationPlan.leaseType}}</td>
+                        <td>{{operationPlan.noofParkingBays}}</td>
+                        <td>{{operationPlan.usableSpace}}</td>
+                        <td>{{operationPlan.constructionArea}}</td>
+                        <td>{{operationPlan.extent}}</td>
+                        <td>{{operationPlan.leaseStartDate}}</td>
+                        <td>{{operationPlan.leaseEndDate}}</td>
+                        <td>{{operationPlan.rentalPmPa}}</td>
+                        <td>{{operationPlan.comment}}</td>
+                    </tr>
             </ng-template>
         </p-table>
     </p-panel>

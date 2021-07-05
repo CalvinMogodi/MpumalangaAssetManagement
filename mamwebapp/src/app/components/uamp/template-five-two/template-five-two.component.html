@@ -33,7 +33,7 @@
                     <td>{{operationPlan.assetDescription}}</td>
                     <td><input [(ngModel)]="operationPlan.repairDescription" [ngModelOptions]="{standalone: true}" autocomplete="off" type="text" pInputText class="ui-inputtext ui-widget"></td>
                     <td><p-inputNumber [(ngModel)]="operationPlan.initialNeedYear" [ngModelOptions]="{standalone: true}"></p-inputNumber></td>
-                    <td><p-dropdown [(ngModel)]="operationPlan.prioityServiceReanking" [ngModelOptions]="{standalone: true}" placeholder="Please select" inputId="prioityServiceReanking" [options]="prioities" optionLabel="name"></p-dropdown></td>
+                    <td><p-dropdown [(ngModel)]="operationPlan.prioityServiceReankingObj" [ngModelOptions]="{standalone: true}" (onChange)="onPrioityServiceReankingChange(operationPlan, $event)" placeholder="Please select" inputId="prioityServiceReanking" [options]="prioities" optionLabel="name"></p-dropdown></td>
                     <td><p-inputNumber [(ngModel)]="operationPlan.totalAmountRequired" [ngModelOptions]="{standalone: true}" mode="currency" currency="ZAR" locale="en-ZA"></p-inputNumber></td>
                     <td><p-inputNumber [(ngModel)]="operationPlan.cashFlowYear1" [ngModelOptions]="{standalone: true}" mode="currency" currency="ZAR" locale="en-ZA"></p-inputNumber></td>
                     <td><p-inputNumber [(ngModel)]="operationPlan.cashFlowYear2" [ngModelOptions]="{standalone: true}" mode="currency" currency="ZAR" locale="en-ZA"></p-inputNumber></td>

@@ -6,8 +6,7 @@
 <br>
 
 <div class="ui-g ui-fluid">
-<form [formGroup]="propertyForm">
-    <p-table [value]="tableRowArray.controls" [responsive]="true">
+    <p-table styleClass="p-datatable-striped" [value]="properties" [responsive]="true">
         <ng-template pTemplate="header">
             <tr>
                 <th style="width: 120px;">Serial No.</th>
@@ -32,9 +31,8 @@
                 <th >Lease Term</th>       
             </tr>
         </ng-template>
-        <ng-template pTemplate="body" let-rowData let-rowIndex="rowIndex">
-            <ng-container formArrayName="tableRowArray">
-                <tr [formGroupName]="rowIndex" *ngFor="let property of properties">
+        <ng-template pTemplate="body" let-property let-rowIndex="rowIndex">
+                <tr>
                     <td>{{property.serialNo}}</td>
                     <td>{{property.userDepartment}}</td>
                     <td>{{property.fileReference}}</td>
@@ -47,42 +45,40 @@
                     <td>{{property.propertyDescription}}</td>
                     <td>{{property.assetType}}</td>
                     <td>
-                        <p-inputNumber [(ngModel)]="property.noofParkingBays" [ngModelOptions]="{standalone: true}" formControlName="noofParkingBays"></p-inputNumber>                       
+                        <p-inputNumber [(ngModel)]="property.noofParkingBays" [ngModelOptions]="{standalone: true}"></p-inputNumber>                       
                     </td>
                     <td>
-                        <p-inputNumber [(ngModel)]="property.lettableSpace" [ngModelOptions]="{standalone: true}"  formControlName="lettableSpace" mode="decimal"></p-inputNumber>
+                        <p-inputNumber [(ngModel)]="property.lettableSpace" [ngModelOptions]="{standalone: true}" mode="decimal"></p-inputNumber>
                     </td>
                     <td>{{property.extentofLand}}</td>
                     <td>
-                        <p-inputNumber [(ngModel)]="property.rentalAmountPM" [ngModelOptions]="{standalone: true}"  style="width: 120px !important;" formControlName="rentalAmountPM" mode="currency" currency="ZAR" locale="en-ZA"></p-inputNumber>  
+                        <p-inputNumber [(ngModel)]="property.rentalPM" [ngModelOptions]="{standalone: true}"  style="width: 120px !important;" mode="currency" currency="ZAR" locale="en-ZA"></p-inputNumber>  
                      
                     </td>
                     <td>
-                        <p-inputNumber [(ngModel)]="property.rentalAmountPA" [ngModelOptions]="{standalone: true}" style="width: 120px !important;" formControlName="rentalAmountPA" mode="currency" currency="ZAR" locale="en-ZA"></p-inputNumber> 
+                        <p-inputNumber [(ngModel)]="property.rentalPA" [ngModelOptions]="{standalone: true}" style="width: 120px !important;" mode="currency" currency="ZAR" locale="en-ZA"></p-inputNumber> 
                        
                     </td>
                     <td>
-                        <p-inputNumber [(ngModel)]="property.operationalCosts" [ngModelOptions]="{standalone: true}" style="width: 120px !important;" formControlName="operationalCosts" mode="currency" currency="ZAR" locale="en-ZA"></p-inputNumber>                      
+                        <p-inputNumber [(ngModel)]="property.operationalCosts" [ngModelOptions]="{standalone: true}" style="width: 120px !important;" mode="currency" currency="ZAR" locale="en-ZA"></p-inputNumber>                      
                         
                     </td>
                     <td>
-                        <p-calendar [(ngModel)]="property.leaseStartDate" [ngModelOptions]="{standalone: true}"  formControlName="leaseStartDate" dateFormat="dd/mm/yy"
+                        <p-calendar [(ngModel)]="property.leaseStartDate" [ngModelOptions]="{standalone: true}" dateFormat="dd/mm/yy"
                                 showOtherMonths="true" showButtonBar="true"></p-calendar>
                       
                     </td>
                     <td>
-                        <p-calendar [(ngModel)]="property.leaseEndDate" [ngModelOptions]="{standalone: true}"  formControlName="leaseEndDate" dateFormat="dd/mm/yy"
+                        <p-calendar [(ngModel)]="property.leaseEndDate" [ngModelOptions]="{standalone: true}" dateFormat="dd/mm/yy"
                                 showOtherMonths="true" showButtonBar="true"></p-calendar>
                        
                     </td>
                     <td>
-                        <input [(ngModel)]="property.leaseTerm" style="width: 130px;" formControlName="leaseTerm" autocomplete="off" type="text"
+                        <input [(ngModel)]="property.leaseTerm" style="width: 130px;" [ngModelOptions]="{standalone: true}" autocomplete="off" type="text"
                             pInputText class="ui-inputtext ui-widget">
                        
                     </td>                
                 </tr>
-            </ng-container>
         </ng-template>
     </p-table>
-</form>
 </div>

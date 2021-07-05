@@ -5,6 +5,7 @@ import { Facility } from 'src/app/models/facility.model';
 import { UampService } from 'src/app/services/uamp/uamp.service';
 import { OperationPlan } from 'src/app/models/operation-plan.model';
 import { UAMP } from 'src/app/models/uamp.model';
+import { element } from 'protractor';
 
 @Component({
   selector: 'app-template-five-two',
@@ -24,7 +25,12 @@ export class TemplateFiveTwoComponent implements OnInit {
       {
         this.uamp = value;
       }    
-      this.operationPlans = this.uamp.templeteFivePointTwo.operationPlans;
+      this.operationPlans = [];
+      this.uamp.templeteFivePointTwo.operationPlans.forEach( element => {
+        if(element.prioityServiceReanking)
+          element.prioityServiceReankingObj =  this.prioities.filter(p => p.name == element.prioityServiceReanking)[0];
+        this.operationPlans.push(element);
+      });
     });
   }
 
@@ -88,5 +94,9 @@ export class TemplateFiveTwoComponent implements OnInit {
         validators: [Validators.required]
       })    
     });
+  }
+
+  onPrioityServiceReankingChange(operationPlan: OperationPlan, e){
+    operationPlan.prioityServiceReanking = e.value.name;   
   }
 }

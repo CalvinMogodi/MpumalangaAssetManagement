@@ -22,22 +22,38 @@ namespace MAM.DataAccess.Repositories
 
         public int AddMtefYear(MtefYear mtefYear)
         {
-            throw new NotImplementedException();
+            using (var db = new DataContext(_connectionString))
+            {
+                db.MtefYears.Add(mtefYear);
+                db.SaveChanges();
+                return mtefYear.Id;
+            }
         }
 
-        public bool UpdateMtefYear(MtefYear mtefYear)
+        public void UpdateMtefYear(MtefYear mtefYear)
         {
-            throw new NotImplementedException();
+            using (var db = new DataContext(_connectionString))
+            {
+                db.MtefYears.Update(mtefYear);
+                db.SaveChanges();
+            }
         }
 
-        public bool DeleteMtefYear(MtefYear municipalUtilityService)
+        public void DeleteMtefYear(MtefYear mtefYear)
         {
-            throw new NotImplementedException();
+            using (var db = new DataContext(_connectionString))
+            {
+                db.MtefYears.Remove(mtefYear);
+                db.SaveChanges();
+            }
         }
 
-        public List<MtefYear> GetMtefYears()
+        public List<MtefYear> GetMtefYears(int mtefBudgetPeriodId)
         {
-            throw new NotImplementedException();
+            using (var db = new DataContext(_connectionString))
+            {
+                return db.MtefYears.Where(m => m.MtefBudgetPeriodId == mtefBudgetPeriodId).ToList();
+            }
         }
 
         public void Dispose()

@@ -3,6 +3,9 @@ import { MessageService } from 'primeng/api';
 import { FormGroup, FormBuilder, FormArray, FormControl, Validators } from '@angular/forms';
 import { Facility } from 'src/app/models/facility.model';
 import { UampService } from 'src/app/services/uamp/uamp.service';
+import { SurrenderPlan } from 'src/app/models/surrender-plan.model';
+import { UAMP } from 'src/app/models/uamp.model';
+import { element } from 'protractor';
 
 @Component({
   selector: 'app-template-six',
@@ -11,9 +14,9 @@ import { UampService } from 'src/app/services/uamp/uamp.service';
   providers: [MessageService]
 })
 export class TemplateSixComponent implements OnInit {
-  @Input() properties: Facility[];
+  surrenderPlans: Array<SurrenderPlan> = [];
   operationPlanForm: FormGroup;
-  uamp: any = {};
+  uamp: UAMP;
 
   constructor(private uampService: UampService, private formBuilder: FormBuilder, private messageService: MessageService) { 
     this.uampService.uampChange.subscribe((value) => {
@@ -21,7 +24,11 @@ export class TemplateSixComponent implements OnInit {
       {
         this.uamp = value;
       }    
-      this.uamp.templeteSix = this.uamp.templeteSix;
+      this.uamp.templeteSix.surrenderPlans.forEach(element => {
+        if(element.proposedHandOverDate)
+          element.proposedHandOverDate = new Date(element.proposedHandOverDate);
+        this.surrenderPlans.push(element);
+      });
     });
   }
   

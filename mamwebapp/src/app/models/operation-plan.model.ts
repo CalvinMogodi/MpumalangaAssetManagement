@@ -10,6 +10,7 @@ export class OperationPlan {
     assetDescription: String;
     repairDescription: String;
     prioityServiceReanking: String;
+    prioityServiceReankingObj: any;
     streetDescription: String;
     propertyDescription: String;
     leaseType: String;
@@ -18,7 +19,7 @@ export class OperationPlan {
     constructionArea?: Number;
     extentofLand?: Number;
     leaseStartDate? : Date;
-    leaseStartEnd?: Date
+    leaseEndDate?: Date
     rentalPM?: Number;
     rentalPA?: Number;
     initialNeedYear?: Number;
@@ -29,4 +30,5 @@ export class OperationPlan {
     cashFlowYear3?: Number;
     cashFlowYear4?: Number;
     cashFlowYear5?: Number;
+    comment: String;
 }

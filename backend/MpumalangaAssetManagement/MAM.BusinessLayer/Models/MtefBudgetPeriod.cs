@@ -11,26 +11,36 @@ namespace MAM.BusinessLayer.Models
         public int Id { get; set; }
         public int UserImmovableAssetManagementPlanId { get; set; }
         public string Name { get; set; }
-        public MtefYear MtefYearOne { get; set; }
-        public MtefYear MtefYearTwo { get; set; }
-        public MtefYear MtefYearThree { get; set; }
-        public MtefYear MtefYearFour { get; set; }
-        public MtefYear MtefYearFive { get; set; }
+        //public MtefYear MtefYearOne { get; set; }
+        //public MtefYear MtefYearTwo { get; set; }
+        //public MtefYear MtefYearThree { get; set; }
+        //public MtefYear MtefYearFour { get; set; }
+        //public MtefYear MtefYearFive { get; set; }
 
         public DataAccess.Tables.MtefBudgetPeriod ConvertToMtefBudgetPeriodTable(MtefBudgetPeriod mtefBudgetPeriod)
         {
             return new DataAccess.Tables.MtefBudgetPeriod()
             {
                 Id = mtefBudgetPeriod.Id,
+                Name = mtefBudgetPeriod.Name,
+                UserImmovableAssetManagementPlanId = mtefBudgetPeriod.UserImmovableAssetManagementPlanId,
             };
         }
 
 
         public List<MtefBudgetPeriod> ConvertToMtefBudgetPeriods(List<DataAccess.Tables.MtefBudgetPeriod> mtefBudgetPeriods)
         {
+            MtefYear mtefYear = new MtefYear();
             return mtefBudgetPeriods.Select(o => new MtefBudgetPeriod()
             {
                 Id = o.Id,
+                Name = o.Name,
+                UserImmovableAssetManagementPlanId = o.UserImmovableAssetManagementPlanId,
+                //MtefYearOne = new MtefYear(), //o.MtefYears.Count > 0 ? mtefYear.ConvertToMtefYear(o.MtefYears.FirstOrDefault(m => m.Year == 1)) : new MtefYear(),
+                //MtefYearTwo = new MtefYear(), //o.MtefYears.Count > 0 ? mtefYear.ConvertToMtefYear(o.MtefYears.FirstOrDefault(m => m.Year == 2)) : new MtefYear(),
+                //MtefYearThree = new MtefYear(), //o.MtefYears.Count > 0 ? mtefYear.ConvertToMtefYear(o.MtefYears.FirstOrDefault(m => m.Year == 3)) : new MtefYear(),
+                //MtefYearFour = new MtefYear(), //o.MtefYears.Count > 0 ? mtefYear.ConvertToMtefYear(o.MtefYears.FirstOrDefault(m => m.Year == 4)) : new MtefYear(),
+                //MtefYearFive = new MtefYear(), //o.MtefYears.Count > 0 ? mtefYear.ConvertToMtefYear(o.MtefYears.FirstOrDefault(m => m.Year == 5)) : new MtefYear(),
             }).ToList();
         }
 
@@ -40,6 +50,17 @@ namespace MAM.BusinessLayer.Models
             for (int i = 0; i < 14; i++)
             {
                 MtefBudgetPeriod mtefBudgetPeriod = new MtefBudgetPeriod();
+                mtefBudgetPeriod.UserImmovableAssetManagementPlanId = uampId;
+                MtefYear mtefYear = new MtefYear()
+                {
+                    Id = 0,
+                    MtefBudgetPeriodId = 0,
+                    MtefAllocation = 0,
+                    RequiredBudget = 0,
+                    Shortfall = 0,
+                    Year = 1,
+                    ResultTypeId = (int)ResultType.Money
+                };
                 switch (i)
                 {
                     case 0:
@@ -53,6 +74,7 @@ namespace MAM.BusinessLayer.Models
                         break;
                     case 3:
                         mtefBudgetPeriod.Name = "% Shortfall";
+                        mtefYear.ResultTypeId = (int)ResultType.Percentage;
                         break;
                     case 4:
                         mtefBudgetPeriod.Name = "Existing Leases T2.2";
@@ -79,26 +101,20 @@ namespace MAM.BusinessLayer.Models
                         mtefBudgetPeriod.Name = "Total Capital Works & Recurrent Costs";
                         break;
                     case 12:
-                        mtefBudgetPeriod.Name = "% Shortfall";                    
+                        mtefBudgetPeriod.Name = "% Shortfall";
+                        mtefYear.ResultTypeId = (int)ResultType.Percentage;
                         break;
                     default:
                         break;
                 }
-                mtefBudgetPeriod.UserImmovableAssetManagementPlanId = uampId;
-                MtefYear mtefYear = new MtefYear() {
-                    Id = 0,
-                    MtefBudgetPeriodId = 0,
-                    MtefAllocation = 0,
-                    RequiredBudget = 0,
-                    Shortfall = 0,
-                    ResultType = ResultType.Percentage
-                };
-                mtefBudgetPeriod.MtefYearOne = mtefYear;
-                mtefBudgetPeriod.MtefYearTwo = mtefYear;
-                mtefBudgetPeriod.MtefYearThree = mtefYear;
-                mtefBudgetPeriod.MtefYearFour = mtefYear;
-                mtefBudgetPeriod.MtefYearFive = mtefYear;
-                mtefBudgetPeriods.Add(mtefBudgetPeriod);
+               
+                //mtefBudgetPeriod.MtefYearOne = mtefYear;
+                //mtefBudgetPeriod.MtefYearTwo = mtefYear;
+                //mtefBudgetPeriod.MtefYearThree = mtefYear;
+                //mtefBudgetPeriod.MtefYearFour = mtefYear;
+                //mtefBudgetPeriod.MtefYearFive = mtefYear;
+                if(!string.IsNullOrEmpty(mtefBudgetPeriod.Name))
+                    mtefBudgetPeriods.Add(mtefBudgetPeriod);
             }
             return mtefBudgetPeriods;
         }

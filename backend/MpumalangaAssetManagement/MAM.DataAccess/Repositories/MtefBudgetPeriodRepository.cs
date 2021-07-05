@@ -24,22 +24,38 @@ namespace MAM.DataAccess.Repositories
 
         public int AddMtefBudgetPeriod(MtefBudgetPeriod mtefBudgetPeriod)
         {
-            throw new NotImplementedException();
+            using (var db = new DataContext(_connectionString))
+            {
+                db.MtefBudgetPeriods.Add(mtefBudgetPeriod);
+                db.SaveChanges();
+                return mtefBudgetPeriod.Id;
+            }
         }
 
         public void DeleteMtefBudgetPeriod(MtefBudgetPeriod mtefBudgetPeriod)
         {
-            throw new NotImplementedException();
+            using (var db = new DataContext(_connectionString))
+            {
+                db.MtefBudgetPeriods.Remove(mtefBudgetPeriod);
+                db.SaveChanges();
+            }
         }
 
         public void UpdateMtefBudgetPeriod(MtefBudgetPeriod mtefBudgetPeriod)
         {
-            throw new NotImplementedException();
+            using (var db = new DataContext(_connectionString))
+            {
+                db.MtefBudgetPeriods.Update(mtefBudgetPeriod);
+                db.SaveChanges();
+            }
         }
 
-        public List<MtefBudgetPeriod> GetFMtefBudgetPeriods()
+        public List<MtefBudgetPeriod> GetMtefBudgetPeriods(int uampId)
         {
-            throw new NotImplementedException();
+            using (var db = new DataContext(_connectionString))
+            {
+                return db.MtefBudgetPeriods.Where(m => m.UserImmovableAssetManagementPlanId == uampId).ToList();
+            }
         }
 
         public void Dispose()

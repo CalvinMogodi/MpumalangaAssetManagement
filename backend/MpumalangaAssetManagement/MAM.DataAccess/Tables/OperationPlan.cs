@@ -25,9 +25,8 @@ namespace MAM.DataAccess.Tables
         public double? ConstructionArea { get; set; }
         public double? ExtentofLand { get; set; }
         public DateTime? LeaseStartDate { get; set; }
-        public DateTime? LeaseStartEnd { get; set; }
-        public decimal? RentalPM { get; set; }
-        public decimal? RentalPA { get; set; }
+        public DateTime? LeaseEndDate { get; set; }
+        public decimal? RentalPmPa { get; set; }
         public int? InitialNeedYear { get; set; }
         public string Status { get; set; }
         public decimal? TotalAmountRequired { get; set; }
@@ -36,5 +35,7 @@ namespace MAM.DataAccess.Tables
         public decimal? CashFlowYear3 { get; set; }
         public decimal? CashFlowYear4 { get; set; }
         public decimal? CashFlowYear5 { get; set; }
+        public string Comment { get; set; }
+        
     }
 }

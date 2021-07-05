@@ -64,7 +64,7 @@ namespace MAM.DataAccess.Repositories
                     .Include(a => a.AcquisitionPlans)
                     .Include(u => u.Programmes)
                     .Include(u => u.OptimalSupportingAccommodation)
-                    .Include(a => a.MtefBudgetPeriods)
+                   // .Include(a => a.MtefBudgetPeriods)
                     .Include(a => a.SurrenderPlans)
                     .Include(a => a.StrategicAssessments)
                     .ToList();

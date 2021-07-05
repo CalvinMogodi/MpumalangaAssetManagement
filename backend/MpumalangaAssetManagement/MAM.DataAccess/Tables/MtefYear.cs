@@ -7,6 +7,7 @@ namespace MAM.DataAccess.Tables
     public class MtefYear
     {
         public int Id { get; set; }
+        public int MtefBudgetPeriodId { get; set; }
         public int ResultTypeId { get; set; }
         public int Year { get; set; }
         public double? MtefAllocation { get; set; }

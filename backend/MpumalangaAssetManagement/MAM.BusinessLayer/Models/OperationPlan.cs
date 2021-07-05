@@ -26,9 +26,8 @@ namespace MAM.BusinessLayer.Models
         public double? ConstructionArea { get; set; }
         public double? ExtentofLand { get; set; }
         public DateTime? LeaseStartDate { get; set; }
-        public DateTime? LeaseStartEnd { get; set; }
-        public decimal? RentalPM { get; set; }
-        public decimal? RentalPA { get; set; }
+        public DateTime? LeaseEndDate { get; set; }
+        public decimal? RentalPmPa { get; set; }
         public int? InitialNeedYear { get; set; }
         public string Status { get; set; }
         public decimal? TotalAmountRequired { get; set; }
@@ -37,6 +36,7 @@ namespace MAM.BusinessLayer.Models
         public decimal? CashFlowYear3 { get; set; }
         public decimal? CashFlowYear4 { get; set; }
         public decimal? CashFlowYear5 { get; set; }
+        public string Comment { get; set; }
 
         public DataAccess.Tables.OperationPlan ConvertToOperationPlanTable(OperationPlan operationPlan)
         {
@@ -61,9 +61,8 @@ namespace MAM.BusinessLayer.Models
                 ConstructionArea = operationPlan.ConstructionArea,
                 ExtentofLand = operationPlan.ExtentofLand,
                 LeaseStartDate = operationPlan.LeaseStartDate,
-                LeaseStartEnd = operationPlan.LeaseStartEnd,
-                RentalPM = operationPlan.RentalPM,
-                RentalPA = operationPlan.RentalPA,
+                LeaseEndDate = operationPlan.LeaseEndDate,
+                RentalPmPa = operationPlan.RentalPmPa,
                 InitialNeedYear = operationPlan.InitialNeedYear,
                 Status = operationPlan.Status,
                 TotalAmountRequired = operationPlan.TotalAmountRequired,
@@ -72,6 +71,7 @@ namespace MAM.BusinessLayer.Models
                 CashFlowYear3 = operationPlan.CashFlowYear3,
                 CashFlowYear4 = operationPlan.CashFlowYear4,
                 CashFlowYear5 = operationPlan.CashFlowYear5,
+                Comment = operationPlan.Comment,
             };
         }
 
@@ -98,9 +98,8 @@ namespace MAM.BusinessLayer.Models
                 ConstructionArea = o.ConstructionArea,
                 ExtentofLand = o.ExtentofLand,
                 LeaseStartDate = o.LeaseStartDate,
-                LeaseStartEnd = o.LeaseStartEnd,
-                RentalPM = o.RentalPM,
-                RentalPA = o.RentalPA,
+                LeaseEndDate = o.LeaseEndDate,
+                RentalPmPa = o.RentalPmPa,
                 InitialNeedYear = o.InitialNeedYear,
                 Status = o.Status,
                 TotalAmountRequired = o.TotalAmountRequired,
@@ -109,6 +108,7 @@ namespace MAM.BusinessLayer.Models
                 CashFlowYear3 = o.CashFlowYear3,
                 CashFlowYear4 = o.CashFlowYear4,
                 CashFlowYear5 = o.CashFlowYear5,
+                Comment = o.Comment
             }).ToList();
         }
     }

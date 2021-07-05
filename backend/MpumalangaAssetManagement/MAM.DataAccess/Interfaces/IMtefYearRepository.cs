@@ -8,8 +8,8 @@ namespace MAM.DataAccess.Interfaces
     public interface IMtefYearRepository
     {
         int AddMtefYear(MtefYear mtefYear);
-        bool UpdateMtefYear(MtefYear mtefYear);
-        bool DeleteMtefYear(MtefYear municipalUtilityService);
-        List<MtefYear> GetMtefYears();
+        void UpdateMtefYear(MtefYear mtefYear);
+        void DeleteMtefYear(MtefYear municipalUtilityService);
+        List<MtefYear> GetMtefYears(int mtefBudgetPeriodId);
     }
 }

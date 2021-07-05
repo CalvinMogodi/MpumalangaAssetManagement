@@ -95,7 +95,7 @@
                     <td>{{programme.rationaleChosenSolution}}</td>
                     <td style="text-align: center;" *ngIf="programmes.length > 0">
                         <p-splitButton label="More" *ngIf="mode != 'View'" [model]="buttonItems"
-                            (onDropdownClick)="selectImprovement(rowData)" styleClass="p-button-secondary">
+                            (onDropdownClick)="selectProgramme(programme)" styleClass="p-button-secondary">
                         </p-splitButton>
                     </td>
                 </tr>

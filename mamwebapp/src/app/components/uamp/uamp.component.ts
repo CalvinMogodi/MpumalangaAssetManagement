@@ -2,8 +2,7 @@ import { Component, OnInit,Input, ViewChild, AfterViewInit, ElementRef } from '@
 import { User } from 'mamwebapp/src/app/models/user.model';
 import { Subject } from 'rxjs/internal/Subject';
 import { first } from 'rxjs/operators';
-import { Facility } from 'src/app/models/facility.model';
-import { MenuItem, MessageService } from 'primeng/api';
+import { MenuItem, MessageService, Message} from 'primeng/api';
 import { UAMP } from 'src/app/models/uamp.model';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { UampService } from '../../services/uamp/uamp.service';
@@ -33,11 +32,9 @@ export class UampComponent implements OnInit, AfterViewInit {
   uamp: UAMP;
   buttonItems: MenuItem[];
   templateOne: any;
-  ///@ViewChildren(TemplateOneComponent) childrenComponent: QueryList<TemplateOneComponent>;
-  
-  //@ViewChild('uamp',{static:false} ) uamp: any;
+  msgs: Message[];
 
-  constructor(public messageService:MessageService, public uampService: UampService, private authenticationService: AuthenticationService) { 
+  constructor(public messageService: MessageService, public uampService: UampService, private authenticationService: AuthenticationService) { 
     let interval = setInterval(() => {
       this.value = this.value + Math.floor(Math.random() * 10) + 1;
       if (this.value >= 100) {
@@ -77,9 +74,13 @@ export class UampComponent implements OnInit, AfterViewInit {
 
   getUamps(){
     this.uamps = [];
+    this.messageService.add({severity:'warn', summary:'Error Occoured', detail:'Unable to get UAMPS for your department'});
     this.uampService.getUamps(this.currentUser.department).pipe(first()).subscribe(uamps => {          
       this.uamps = uamps
-    });
+    },
+    error => (error)
+    
+    );
   }
 
   updateUamp(){
@@ -131,7 +132,7 @@ export class UampComponent implements OnInit, AfterViewInit {
 
   updatedUamp(data:UAMP){
     if(data){
-      //thjjkm his.uamp = data;
+      this.uamp = data;
     }
   }
 

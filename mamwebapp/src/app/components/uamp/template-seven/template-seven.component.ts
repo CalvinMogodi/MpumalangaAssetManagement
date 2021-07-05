@@ -54,13 +54,13 @@ export class TemplateSevenComponent implements OnInit {
     let amount: number = 0;
 
     if(this.uamp[templete]){
-      this.uamp[templete].forEach(element=> {
+      /*this.uamp[templete].forEach(element=> {
         if(element[previousYearMtefAllocatoion]){
           if(year === 1){
             amount = amount + element[previousYearMtefAllocatoion];
           }         
         }        
-      }); 
+      });*/ 
       if(year !== 1){
         amount = (6 / 100 * this.uamp.templeteSeven[previousYearMtefAllocatoion]) + this.uamp.templeteSeven[previousYearMtefAllocatoion];
       } 

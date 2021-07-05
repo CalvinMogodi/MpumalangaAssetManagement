@@ -16,7 +16,7 @@ namespace MAM.DataAccess.Tables
         public virtual List<OperationPlan> OperationPlans { get; set; }
         public virtual List<AcquisitionPlan> AcquisitionPlans { get; set; }       
         public virtual List<Programme> Programmes { get; set; }
-        public virtual List<MtefBudgetPeriod> MtefBudgetPeriods { get; set; }
+        //public virtual List<MtefBudgetPeriod> MtefBudgetPeriods { get; set; }
         public virtual List<SurrenderPlan> SurrenderPlans { get; set; }
         public virtual List<StrategicAssessment> StrategicAssessments { get; set; }
         public virtual User User { get; set; }

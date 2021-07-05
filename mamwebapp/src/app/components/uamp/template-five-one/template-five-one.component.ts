@@ -128,6 +128,7 @@ export class TemplateFiveOneComponent implements OnInit {
       assetDescription:null,
       repairDescription: null,
       prioityServiceReanking: null,
+      prioityServiceReankingObj: null,
       streetDescription: null,
       propertyDescription: null,
       leaseType: null,
@@ -136,9 +137,10 @@ export class TemplateFiveOneComponent implements OnInit {
       constructionArea: null,
       extentofLand: null,
       leaseStartDate : null,
-      leaseStartEnd: null,
+      leaseEndDate: null,
       rentalPM: null,
-      rentalPA: null
+      rentalPA: null,
+      comment: null
     };
     this.operationPlans.push(operationPlan);
     if(this.uamp.templeteFivePointOne != null)

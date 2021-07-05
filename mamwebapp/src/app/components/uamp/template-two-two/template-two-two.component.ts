@@ -3,7 +3,10 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormArray, FormControl, Validators } from '@angular/forms';
 import { FormBuilder } from '@angular/forms';
 import { FormGroup } from '@angular/forms';
+import { element } from 'protractor';
 import { Facility } from 'src/app/models/facility.model';
+import { Property } from 'src/app/models/property.model';
+import { UAMP } from 'src/app/models/uamp.model';
 import { UampService } from 'src/app/services/uamp/uamp.service';
 
 @Component({
@@ -12,7 +15,7 @@ import { UampService } from 'src/app/services/uamp/uamp.service';
   styleUrls: ['./template-two-two.component.css']
 })
 export class TemplateTwoTwoComponent implements OnInit {
-  @Input() properties: Facility[];
+  properties: Property[] = [];
   test: Number[];
   stateOwnedFacilities: Facility[];
   leasedFacilities: Facility[];
@@ -20,7 +23,7 @@ export class TemplateTwoTwoComponent implements OnInit {
   leasedFacilitiesExtentTotal = 0;
   submitted: boolean = false;
   propertyForm: FormGroup;
-  uamp: any = {};
+  uamp: UAMP;
   
   constructor(private uampService: UampService, private formBuilder: FormBuilder) { 
     this.uampService.uampChange.subscribe((value) => {
@@ -28,8 +31,13 @@ export class TemplateTwoTwoComponent implements OnInit {
       {
         this.properties = [];
         this.uamp = value;
-        
-        this.properties = this.uamp.templeteTwoPointOne.properties
+        this.properties = [];
+        this.uamp.templeteTwoPointTwo.properties.forEach(element => {
+          
+          element.leaseStartDate = element.leaseStartDate != null ? new Date(element.leaseStartDate) : undefined;
+          element.leaseEndDate = element.leaseEndDate != null ? new Date(element.leaseEndDate): undefined;
+          this.properties.push(element);          
+        })
       }    
   })
   }

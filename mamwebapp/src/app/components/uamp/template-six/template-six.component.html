@@ -5,9 +5,8 @@
 </div>
 <br>
 
-<div class="ui-g ui-fluid">
-    <form [formGroup]="operationPlanForm">        
-        <p-table [value]="tableRowArray.controls" [responsive]="true">
+<div class="ui-g ui-fluid">      
+        <p-table styleClass="p-datatable-striped" [value]="surrenderPlans" [responsive]="true">
         <ng-template pTemplate="header">
             <tr>
                 <th>District</th>               
@@ -23,23 +22,20 @@
                 <th>Contractual Obligations</th>
             </tr>
         </ng-template>
-        <ng-template pTemplate="body" let-rowData let-rowIndex="rowIndex">
-            <ng-container formArrayName="tableRowArray">
-                <tr [formGroupName]="rowIndex" *ngFor="let property of properties; let i = index">
-                    <td>{{property.land.geographicalLocation.districtMunicipality}}</td>
-                    <td>{{property.land.geographicalLocation.town}}</td>
-                    <td>{{property.land.geographicalLocation.localAuthority}}</td>
-                    <td>{{property.type}}</td>
-                    <td><input formControlName="currentStreetAddress" autocomplete="off" type="text" pInputText class="ui-inputtext ui-widget"></td>
-                    <td>{{property.name}}</td>
-                    <td><p-inputNumber formControlName="allocatedSpace"></p-inputNumber></td>
-                    <td>{{property.land.propertyDescription.extent}}</td>
-                    <td><input formControlName="surrenderRationale" autocomplete="off" type="text" pInputText class="ui-inputtext ui-widget"></td>
-                    <td><p-calendar formControlName="proposedHandOverDate" dateFormat="dd/mm/yy" showOtherMonths="true" showButtonBar="true"></p-calendar></td>
-                    <td><input formControlName="contractualObligations" autocomplete="off" type="text" pInputText class="ui-inputtext ui-widget"></td>
+        <ng-template pTemplate="body" let-surrenderPlan let-rowIndex="rowIndex">
+                <tr>
+                    <td>{{surrenderPlan.districtMunicipality}}</td>
+                    <td>{{surrenderPlan.town}}</td>
+                    <td>{{surrenderPlan.localAuthority}}</td>
+                    <td>{{surrenderPlan.type}}</td>
+                    <td><input [(ngModel)]="surrenderPlan.currentStreetAddress" [ngModelOptions]="{standalone: true}" autocomplete="off" type="text" pInputText class="ui-inputtext ui-widget"></td>
+                    <td>{{surrenderPlan.name}}</td>
+                    <td><p-inputNumber [(ngModel)]="surrenderPlan.allocatedLettableSpace" [ngModelOptions]="{standalone: true}"></p-inputNumber></td>
+                    <td>{{surrenderPlan.extent}}</td>
+                    <td><input [(ngModel)]="surrenderPlan.surrenderRationale" [ngModelOptions]="{standalone: true}" autocomplete="off" type="text" pInputText class="ui-inputtext ui-widget"></td>
+                    <td><p-calendar [(ngModel)]="surrenderPlan.proposedHandOverDate" [ngModelOptions]="{standalone: true}" dateFormat="dd/mm/yy" showOtherMonths="true" showButtonBar="true"></p-calendar></td>
+                    <td><input [(ngModel)]="surrenderPlan.contractualObligations" [ngModelOptions]="{standalone: true}" autocomplete="off" type="text" pInputText class="ui-inputtext ui-widget"></td>
                 </tr>
-            </ng-container>
         </ng-template>
     </p-table>
-</form>
 </div>

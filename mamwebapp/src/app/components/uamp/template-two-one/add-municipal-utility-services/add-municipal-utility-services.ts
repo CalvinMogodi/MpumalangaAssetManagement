@@ -50,6 +50,7 @@ export class AddMunicipalUtilityServicesComponent implements OnInit {
 
     if(this.municipalUtilityServiceForm.valid){
         const municipalUtilityService = {
+            id: 0,
             name: this.municipalUtilityServiceForm.controls["name"].value.name,
             cost: this.municipalUtilityServiceForm.controls["cost"].value,
         };
@@ -73,7 +74,7 @@ export class AddMunicipalUtilityServicesComponent implements OnInit {
 
   onSubmit(){
     this.property.municipalUtilityServices = this.municipalUtilityServices;
-    this.property.municipalUtilityService = this.total;
+    this.property.municipalUtilityServiceTotal = this.total;
     this.dialogRef.close(this.property);
   }
 

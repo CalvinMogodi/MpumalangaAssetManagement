@@ -7,8 +7,8 @@ namespace MAM.BusinessLayer.Models
     public class MunicipalUtilityService
     {
         public int Id { get; set; }
-        public int PropertyId { get; set; }
-        public int Name { get; set; }
-        public double Cost { get; set; }
+        //public int PropertyId { get; set; }
+        public string Name { get; set; }
+        public decimal Cost { get; set; }
     }
 }

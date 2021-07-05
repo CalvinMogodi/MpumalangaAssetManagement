@@ -1,4 +1,5 @@
-﻿using MAM.BusinessLayer.Models;
+﻿using MAM.BusinessLayer.Model;
+using MAM.BusinessLayer.Models;
 using MAM.BusinessLayer.Models.Templetes;
 using Microsoft.Win32.SafeHandles;
 using System;
@@ -38,13 +39,12 @@ namespace MAM.BusinessLayer.Repositories
         {
             if (uamp.TempleteOne != null)
             {
-               
                 if (uamp.TempleteOne.OptimalSupportingAccommodation != null)
                     uamp = SaveOptimalSupportingAccommodationRepository(uamp);
                 if (uamp.TempleteOne.Programmes.Count > 0)
                     uamp.TempleteOne.Programmes = SaveProgramme(uamp.TempleteOne.Programmes);
                 if (uamp.TempleteTwoPointOne?.Properties != null)
-                    uamp = SaveTempleteTwo(uamp);   
+                    uamp = SaveTempleteTwo(uamp);
                 if (uamp.TempleteThree?.StrategicAssessments.Count > 0)
                     uamp = SaveTempleteThree(uamp);
                 if (uamp.TempleteFourPointOne?.AcquisitionPlans.Count > 0 || uamp.TempleteFourPointTwo?.AcquisitionPlans.Count > 0)
@@ -55,6 +55,10 @@ namespace MAM.BusinessLayer.Repositories
                     uamp = SaveTempleteSix(uamp);
                 if (uamp.TempleteSeven?.MtefBudgetPeriods != null)
                     uamp = SaveTempleteSeven(uamp);
+
+                uamp.OptimalSupportingAccommodationId = uamp.TempleteOne.OptimalSupportingAccommodation.Id;
+
+                uamp = SaveUamp(uamp);
             }
             return uamp;
         }
@@ -121,7 +125,7 @@ namespace MAM.BusinessLayer.Repositories
             using (var dataAccess = new DataAccess.Repositories.OperationPlanRepository(appSettings.ConnectionString))
             {
                 List<OperationPlan> operationPlans = new List<OperationPlan>();
-                if(uamp.TempleteFivePointOne.OperationPlans.Count > 0)
+                if (uamp.TempleteFivePointOne.OperationPlans.Count > 0)
                     operationPlans.AddRange(uamp.TempleteFivePointOne?.OperationPlans);
                 if (uamp.TempleteFivePointTwo != null)
                     operationPlans.AddRange(uamp.TempleteFivePointTwo?.OperationPlans);
@@ -167,7 +171,8 @@ namespace MAM.BusinessLayer.Repositories
         {
             using (var dataAccess = new DataAccess.Repositories.MtefBudgetPeriodRepository(appSettings.ConnectionString))
             {
-                List<MtefBudgetPeriod> mtefBudgetPeriods = uamp.TempleteSeven.MtefBudgetPeriods;
+                List<MtefBudgetPeriod> _mtefBudgetPeriods = new List<MtefBudgetPeriod>();
+                List<MtefBudgetPeriod> mtefBudgetPeriods = uamp.TempleteSeven.MtefBudgetPeriods.Where(m => m.Name != null).ToList();
                 foreach (var mtefBudgetPeriod in mtefBudgetPeriods)
                 {
                     if (mtefBudgetPeriod.Id == 0)
@@ -178,20 +183,125 @@ namespace MAM.BusinessLayer.Repositories
                     {
                         dataAccess.UpdateMtefBudgetPeriod(mtefBudgetPeriod.ConvertToMtefBudgetPeriodTable(mtefBudgetPeriod));
                     }
+
+                    _mtefBudgetPeriods.Add(SaveMtefYear(mtefBudgetPeriod));
                 }
+
+                uamp.TempleteSeven.MtefBudgetPeriods = _mtefBudgetPeriods;
                 return uamp;
             }
         }
 
-        public UserImmovableAssetManagementPlan SaveMtefYear(UserImmovableAssetManagementPlan uamp)
+        public MtefBudgetPeriod SaveMtefYear(MtefBudgetPeriod mtefBudgetPeriod)
         {
             using (var dataAccess = new DataAccess.Repositories.MtefYearRepository(appSettings.ConnectionString))
             {
-                return uamp;
+
+                /* DataAccess.Tables.MtefYear mtefYearOne = new DataAccess.Tables.MtefYear()
+                 {
+                     MtefBudgetPeriodId = mtefBudgetPeriod.Id,
+                     Year = 1,
+                     //Id = mtefBudgetPeriod.MtefYearOne.Id,
+                     //ResultTypeId = mtefBudgetPeriod.MtefYearOne.ResultTypeId,
+                     //MtefAllocation = mtefBudgetPeriod.MtefYearOne.MtefAllocation,
+                     //RequiredBudget = mtefBudgetPeriod.MtefYearOne.RequiredBudget,
+                     //Shortfall = mtefBudgetPeriod.MtefYearOne.Shortfall,
+                 };
+                 DataAccess.Tables.MtefYear mtefYearTwo = new DataAccess.Tables.MtefYear()
+                 {
+                     MtefBudgetPeriodId = mtefBudgetPeriod.Id,
+                     Year = 2,
+                     //Id = mtefBudgetPeriod.MtefYearOne.Id,
+                     //ResultTypeId = mtefBudgetPeriod.MtefYearOne.ResultTypeId,
+                     //MtefAllocation = mtefBudgetPeriod.MtefYearOne.MtefAllocation,
+                     //RequiredBudget = mtefBudgetPeriod.MtefYearOne.RequiredBudget,
+                     //Shortfall = mtefBudgetPeriod.MtefYearOne.Shortfall,
+                 };
+
+                 DataAccess.Tables.MtefYear mtefYearThree = new DataAccess.Tables.MtefYear()
+                 {
+                     MtefBudgetPeriodId = mtefBudgetPeriod.Id,
+                     Year = 3,
+                     //Id = mtefBudgetPeriod.MtefYearOne.Id,
+                     //ResultTypeId = mtefBudgetPeriod.MtefYearOne.ResultTypeId,
+                     //MtefAllocation = mtefBudgetPeriod.MtefYearOne.MtefAllocation,
+                     //RequiredBudget = mtefBudgetPeriod.MtefYearOne.RequiredBudget,
+                     //Shortfall = mtefBudgetPeriod.MtefYearOne.Shortfall,
+                 };
+
+                 DataAccess.Tables.MtefYear mtefYearFour = new DataAccess.Tables.MtefYear()
+                 {
+                     MtefBudgetPeriodId = mtefBudgetPeriod.Id,
+                     Year = 4,
+                     //Id = mtefBudgetPeriod.MtefYearOne.Id,
+                     //ResultTypeId = mtefBudgetPeriod.MtefYearOne.ResultTypeId,
+                     //MtefAllocation = mtefBudgetPeriod.MtefYearOne.MtefAllocation,
+                     //RequiredBudget = mtefBudgetPeriod.MtefYearOne.RequiredBudget,
+                     //Shortfall = mtefBudgetPeriod.MtefYearOne.Shortfall,
+                 };
+
+                 DataAccess.Tables.MtefYear mtefYearFive = new DataAccess.Tables.MtefYear()
+                 {
+                     MtefBudgetPeriodId = mtefBudgetPeriod.Id,
+                     Year = 5,
+                     //Id = mtefBudgetPeriod.MtefYearOne.Id,
+                     //ResultTypeId = mtefBudgetPeriod.MtefYearOne.ResultTypeId,
+                     //MtefAllocation = mtefBudgetPeriod.MtefYearOne.MtefAllocation,
+                     //RequiredBudget = mtefBudgetPeriod.MtefYearOne.RequiredBudget,
+                     //Shortfall = mtefBudgetPeriod.MtefYearOne.Shortfall,
+                 };
+
+                 if (mtefYearOne.Id == 0)
+                 {
+                     mtefBudgetPeriod.MtefYearOne.Id = dataAccess.AddMtefYear(mtefYearOne);
+                 }
+                 else
+                 {
+                     dataAccess.UpdateMtefYear(mtefYearOne);
+                 }
+
+                 if (mtefYearTwo.Id == 0)
+                 {
+                     mtefBudgetPeriod.MtefYearTwo.Id = dataAccess.AddMtefYear(mtefYearTwo);
+                 }
+                 else
+                 {
+                     dataAccess.UpdateMtefYear(mtefYearTwo);
+                 }
+
+                 if (mtefYearThree.Id == 0)
+                 {
+                     mtefBudgetPeriod.MtefYearThree.Id = dataAccess.AddMtefYear(mtefYearThree);
+                 }
+                 else
+                 {
+                     dataAccess.UpdateMtefYear(mtefYearThree);
+                 }
+
+                 if (mtefYearFour.Id == 0)
+                 {
+                     mtefBudgetPeriod.MtefYearFour.Id = dataAccess.AddMtefYear(mtefYearFour);
+                 }
+                 else
+                 {
+                     dataAccess.UpdateMtefYear(mtefYearFour);
+                 }
+
+                 if (mtefYearFive.Id == 0)
+                 {
+                     mtefBudgetPeriod.MtefYearFive.Id = dataAccess.AddMtefYear(mtefYearFive);
+                 }
+                 else
+                 {
+                     dataAccess.UpdateMtefYear(mtefYearFive);
+                 }*/
+
+                return mtefBudgetPeriod;
             }
         }
 
-        public UserImmovableAssetManagementPlan SaveTempleteTwo(UserImmovableAssetManagementPlan uamp) {
+        public UserImmovableAssetManagementPlan SaveTempleteTwo(UserImmovableAssetManagementPlan uamp)
+        {
             using (var dataAccess = new DataAccess.Repositories.PropertyRepository(appSettings.ConnectionString))
             {
                 List<Property> properties = new List<Property>();
@@ -207,7 +317,7 @@ namespace MAM.BusinessLayer.Repositories
                     {
                         dataAccess.UpdateProperty(property.ConvertToPropertyTable(property));
                     }
-                }                
+                }
                 return uamp;
             }
         }
@@ -218,133 +328,139 @@ namespace MAM.BusinessLayer.Repositories
             {
                 var facilities = fDataAccess.GetSignedOffFacilities();
                 uamp = SaveUamp(uamp);
-                foreach (var item in facilities)
+                MtefBudgetPeriod mtefBudgetPeriod = new MtefBudgetPeriod();
+
+                uamp.TempleteOne = new TempleteOne()
                 {
-                    uamp.TempleteTwoPointOne = new TempleteTwoPointOne
+                    Id = 0,
+                    Programmes = new List<Programme>(),
+                    OptimalSupportingAccommodation = new OptimalSupportingAccommodation()
+                };
+                uamp.TempleteTwoPointOne = new TempleteTwoPointOne
+                {
+                    Id = 0,
+                    Properties = facilities.Select(f => new Property()
                     {
                         Id = 0,
-                        Properties = facilities.Select(f => new Property()
-                        {
-                            Id = 0,
-                            UserImmovableAssetManagementPlanId = uamp.Id,
-                            TempleteNumber = 2.1,
-                            FileReferenceNo = f.FileReference,
-                            SerialNo = f.FileReference,
-                            DistrictRegion = f.Land.GeographicalLocation != null ? f.Land.GeographicalLocation.Region : null,
-                            Town = f.Land.GeographicalLocation != null ? f.Land.GeographicalLocation.Town : null,
-                            LocalAuthority = f.Land.GeographicalLocation != null ? f.Land.GeographicalLocation.LocalAuthority : null,
-                            AssetDescription = f.Land.GeographicalLocation != null ? f.Name : null,
-                            OldStreetAddress = f.Land.GeographicalLocation != null ? string.Format("{0} {1} {2} {3}", f.Land.GeographicalLocation.StreetNumber, f.Land.GeographicalLocation.StreetName, f.Land.GeographicalLocation.Suburb, f.Land.GeographicalLocation.Province) : null,
-                            CurrentStreetAddress = f.Land.GeographicalLocation != null ? string.Format("{0} {1} {2} {3}", f.Land.GeographicalLocation.StreetNumber, f.Land.GeographicalLocation.StreetName, f.Land.GeographicalLocation.Suburb, f.Land.GeographicalLocation.Province) : null,
-                            PropertyDescription = f.Land.PropertyDescription != null ? f.Land.PropertyDescription.OldDescription : null,
-                            AssetType = f.Type,
-                            ExtentofLand = f.Land.PropertyDescription != null ? f.Land.PropertyDescription.Extent : null,                          
-                            MunicipalUtilityServices = new List<MunicipalUtilityService>(),
-                        }).ToList(),
-                    };
+                        UserImmovableAssetManagementPlanId = uamp.Id,
+                        TempleteNumber = 2.1,
+                        FileReferenceNo = f.FileReference,
+                        SerialNo = f.FileReference,
+                        DistrictRegion = f.Land.GeographicalLocation != null ? f.Land.GeographicalLocation.Region : null,
+                        Town = f.Land.GeographicalLocation != null ? f.Land.GeographicalLocation.Town : null,
+                        LocalAuthority = f.Land.GeographicalLocation != null ? f.Land.GeographicalLocation.LocalAuthority : null,
+                        AssetDescription = f.Land.GeographicalLocation != null ? f.Name : null,
+                        OldStreetAddress = f.Land.GeographicalLocation != null ? string.Format("{0} {1} {2} {3}", f.Land.GeographicalLocation.StreetNumber, f.Land.GeographicalLocation.StreetName, f.Land.GeographicalLocation.Suburb, f.Land.GeographicalLocation.Province) : null,
+                        CurrentStreetAddress = f.Land.GeographicalLocation != null ? string.Format("{0} {1} {2} {3}", f.Land.GeographicalLocation.StreetNumber, f.Land.GeographicalLocation.StreetName, f.Land.GeographicalLocation.Suburb, f.Land.GeographicalLocation.Province) : null,
+                        PropertyDescription = f.Land.PropertyDescription != null ? f.Land.PropertyDescription.OldDescription : null,
+                        AssetType = f.Type,
+                        ExtentofLand = f.Land.PropertyDescription != null ? f.Land.PropertyDescription.Extent : null,
+                        MunicipalUtilityServices = new List<MunicipalUtilityService>(),
+                    }).ToList(),
+                };
 
-                    uamp.TempleteTwoPointTwo = new TempleteTwoPointTwo
+                uamp.TempleteTwoPointTwo = new TempleteTwoPointTwo
+                {
+                    Id = 0,
+                    Properties = facilities.Select(f => new Property()
                     {
                         Id = 0,
-                        Properties = facilities.Select(f => new Property()
-                        {
-                            Id = 0,
-                            UserImmovableAssetManagementPlanId = uamp.Id,
-                            TempleteNumber = 2.2,
-                            FileReferenceNo = f.FileReference,
-                            SerialNo = f.FileReference,
-                            AssetType = f.Type,
-                            DistrictRegion = f.Land.GeographicalLocation != null ? f.Land.GeographicalLocation.Region : null,
-                            Town = f.Land.GeographicalLocation != null ? f.Land.GeographicalLocation.Town : null,
-                            LocalAuthority = f.Land.GeographicalLocation != null ? f.Land.GeographicalLocation.LocalAuthority : null,
-                            AssetDescription = f.Land.GeographicalLocation != null ? f.Name : null,
-                            OldStreetAddress = f.Land.GeographicalLocation != null ? string.Format("{0} {1} {2} {3}", f.Land.GeographicalLocation.StreetNumber, f.Land.GeographicalLocation.StreetName, f.Land.GeographicalLocation.Suburb, f.Land.GeographicalLocation.Province) : null,
-                            CurrentStreetAddress = f.Land.GeographicalLocation != null ? string.Format("{0} {1} {2} {3}", f.Land.GeographicalLocation.StreetNumber, f.Land.GeographicalLocation.StreetName, f.Land.GeographicalLocation.Suburb, f.Land.GeographicalLocation.Province) : null,
-                            PropertyDescription = f.Land.PropertyDescription != null ? f.Land.PropertyDescription.OldDescription : null,                        
-                            ExtentofLand = f.Land.PropertyDescription != null ? f.Land.PropertyDescription.Extent : null,                           
-                            MunicipalUtilityServices = new List<MunicipalUtilityService>(),                          
-                        }).ToList(),
-                    };
+                        UserImmovableAssetManagementPlanId = uamp.Id,
+                        TempleteNumber = 2.2,
+                        FileReferenceNo = f.FileReference,
+                        SerialNo = f.FileReference,
+                        AssetType = f.Type,
+                        DistrictRegion = f.Land.GeographicalLocation != null ? f.Land.GeographicalLocation.Region : null,
+                        Town = f.Land.GeographicalLocation != null ? f.Land.GeographicalLocation.Town : null,
+                        LocalAuthority = f.Land.GeographicalLocation != null ? f.Land.GeographicalLocation.LocalAuthority : null,
+                        AssetDescription = f.Land.GeographicalLocation != null ? f.Name : null,
+                        OldStreetAddress = f.Land.GeographicalLocation != null ? string.Format("{0} {1} {2} {3}", f.Land.GeographicalLocation.StreetNumber, f.Land.GeographicalLocation.StreetName, f.Land.GeographicalLocation.Suburb, f.Land.GeographicalLocation.Province) : null,
+                        CurrentStreetAddress = f.Land.GeographicalLocation != null ? string.Format("{0} {1} {2} {3}", f.Land.GeographicalLocation.StreetNumber, f.Land.GeographicalLocation.StreetName, f.Land.GeographicalLocation.Suburb, f.Land.GeographicalLocation.Province) : null,
+                        PropertyDescription = f.Land.PropertyDescription != null ? f.Land.PropertyDescription.OldDescription : null,
+                        ExtentofLand = f.Land.PropertyDescription != null ? f.Land.PropertyDescription.Extent : null,
+                        MunicipalUtilityServices = new List<MunicipalUtilityService>(),
+                    }).ToList(),
+                };
 
-                    uamp.TempleteThree = new TempleteThree()
-                    {
-                        Id = 0,
-                        StrategicAssessments = new List<StrategicAssessment>()
-                    };
+                uamp.TempleteThree = new TempleteThree()
+                {
+                    Id = 0,
+                    StrategicAssessments = new List<StrategicAssessment>()
+                };
 
-                    uamp.TempleteFourPointOne = new TempleteFourPointOne()
-                    {
-                        Id = 0,
-                        AcquisitionPlans = new List<AcquisitionPlan>()
-                    };
+                uamp.TempleteFourPointOne = new TempleteFourPointOne()
+                {
+                    Id = 0,
+                    AcquisitionPlans = new List<AcquisitionPlan>()
+                };
 
-                    uamp.TempleteFourPointTwo = new TempleteFourPointTwo()
-                    {
-                        Id = 0,
-                        AcquisitionPlans = new List<AcquisitionPlan>()
-                    };
+                uamp.TempleteFourPointTwo = new TempleteFourPointTwo()
+                {
+                    Id = 0,
+                    AcquisitionPlans = new List<AcquisitionPlan>()
+                };
 
-                    uamp.TempleteFivePointOne = new TempleteFivePointOne()
+                uamp.TempleteFivePointOne = new TempleteFivePointOne()
+                {
+                    Id = 0,
+                    OperationPlans = new List<OperationPlan>()
+                };
+                uamp.TempleteFivePointTwo = new TempleteFivePointTwo()
+                {
+                    Id = 0,
+                    OperationPlans = facilities.Select(f => new OperationPlan()
                     {
                         Id = 0,
-                        OperationPlans = new List<OperationPlan>()
-                    };
-                    uamp.TempleteFivePointTwo = new TempleteFivePointTwo()
+                        UserImmovableAssetManagementPlanId = uamp.Id,
+                        TempleteNumber = 5.2,
+                        DistrictRegion = f.Land.GeographicalLocation != null ? f.Land.GeographicalLocation.Region : null,
+                        Town = f.Land.GeographicalLocation != null ? f.Land.GeographicalLocation.Town : null,
+                        LocalMunicipality = f.Land.GeographicalLocation != null ? f.Land.GeographicalLocation.LocalAuthority : null,
+                        AssetDescription = f.Land.GeographicalLocation != null ? f.Name : null,
+                        StreetDescription = f.Land.GeographicalLocation != null ? string.Format("{0} {1} {2} {3}", f.Land.GeographicalLocation.StreetNumber, f.Land.GeographicalLocation.StreetName, f.Land.GeographicalLocation.Suburb, f.Land.GeographicalLocation.Province) : null,
+                        PropertyDescription = f.Land.PropertyDescription != null ? f.Land.PropertyDescription.OldDescription : null,
+                        ExtentofLand = f.Land.PropertyDescription != null ? f.Land.PropertyDescription.Extent : null,
+                    }).ToList(),
+                };
+                uamp.TempleteFivePointThree = new TempleteFivePointThree()
+                {
+                    Id = 0,
+                    OperationPlans = facilities.Select(f => new OperationPlan()
                     {
                         Id = 0,
-                        OperationPlans = facilities.Select(f => new OperationPlan()
-                        {
-                            Id = 0,
-                            UserImmovableAssetManagementPlanId = uamp.Id,
-                            TempleteNumber = 5.2,
-                            DistrictRegion = f.Land.GeographicalLocation != null ? f.Land.GeographicalLocation.Region : null,
-                            Town = f.Land.GeographicalLocation != null ? f.Land.GeographicalLocation.Town : null,
-                            LocalMunicipality = f.Land.GeographicalLocation != null ? f.Land.GeographicalLocation.LocalAuthority : null,
-                            AssetDescription = f.Land.GeographicalLocation != null ? f.Name : null,
-                            StreetDescription = f.Land.GeographicalLocation != null ? string.Format("{0} {1} {2} {3}", f.Land.GeographicalLocation.StreetNumber, f.Land.GeographicalLocation.StreetName, f.Land.GeographicalLocation.Suburb, f.Land.GeographicalLocation.Province) : null,
-                            PropertyDescription = f.Land.PropertyDescription != null ? f.Land.PropertyDescription.OldDescription : null,
-                            ExtentofLand = f.Land.PropertyDescription != null ? f.Land.PropertyDescription.Extent : null,                           
-                        }).ToList(),
-                    };
-                    uamp.TempleteFivePointThree = new TempleteFivePointThree()
+                        UserImmovableAssetManagementPlanId = uamp.Id,
+                        TempleteNumber = 5.3,
+                        DistrictRegion = f.Land.GeographicalLocation != null ? f.Land.GeographicalLocation.Region : null,
+                        Town = f.Land.GeographicalLocation != null ? f.Land.GeographicalLocation.Town : null,
+                        LocalMunicipality = f.Land.GeographicalLocation != null ? f.Land.GeographicalLocation.LocalAuthority : null,
+                        AssetDescription = f.Land.GeographicalLocation != null ? f.Name : null,
+                        StreetDescription = f.Land.GeographicalLocation != null ? string.Format("{0} {1} {2} {3}", f.Land.GeographicalLocation.StreetNumber, f.Land.GeographicalLocation.StreetName, f.Land.GeographicalLocation.Suburb, f.Land.GeographicalLocation.Province) : null,
+                        PropertyDescription = f.Land.PropertyDescription != null ? f.Land.PropertyDescription.OldDescription : null,
+                        ExtentofLand = f.Land.PropertyDescription != null ? f.Land.PropertyDescription.Extent : null,
+                    }).ToList(),
+                };
+                uamp.TempleteSix = new TempleteSix()
+                {
+                    Id = 0,
+                    SurrenderPlans = facilities.Select(f => new SurrenderPlan()
                     {
                         Id = 0,
-                        OperationPlans = facilities.Select(f => new OperationPlan()
-                        {
-                            Id = 0,
-                            UserImmovableAssetManagementPlanId = uamp.Id,
-                            TempleteNumber = 5.3,
-                            DistrictRegion = f.Land.GeographicalLocation != null ? f.Land.GeographicalLocation.Region : null,
-                            Town = f.Land.GeographicalLocation != null ? f.Land.GeographicalLocation.Town : null,
-                            LocalMunicipality = f.Land.GeographicalLocation != null ? f.Land.GeographicalLocation.LocalAuthority : null,
-                            AssetDescription = f.Land.GeographicalLocation != null ? f.Name : null,
-                            StreetDescription = f.Land.GeographicalLocation != null ? string.Format("{0} {1} {2} {3}", f.Land.GeographicalLocation.StreetNumber, f.Land.GeographicalLocation.StreetName, f.Land.GeographicalLocation.Suburb, f.Land.GeographicalLocation.Province) : null,
-                            PropertyDescription = f.Land.PropertyDescription != null ? f.Land.PropertyDescription.OldDescription : null,
-                            ExtentofLand = f.Land.PropertyDescription != null ? f.Land.PropertyDescription.Extent : null,
-                        }).ToList(),
-                    };
-                    uamp.TempleteSix = new TempleteSix()
-                    {
-                        Id = 0,
-                        SurrenderPlans = facilities.Select(f => new SurrenderPlan()
-                        {
-                            Id = 0,
-                            UserImmovableAssetManagementPlanId = uamp.Id,
-                            DistrictRegion = f.Land.GeographicalLocation != null ? f.Land.GeographicalLocation.Region : null,
-                            Town = f.Land.GeographicalLocation != null ? f.Land.GeographicalLocation.Town : null,
-                            LocalMunicipality = f.Land.GeographicalLocation != null ? f.Land.GeographicalLocation.LocalAuthority : null,
-                            AssetType = f.Type,
-                            CurrentStreetAddress = f.Land.GeographicalLocation != null ? string.Format("{0} {1} {2} {3}", f.Land.GeographicalLocation.StreetNumber, f.Land.GeographicalLocation.StreetName, f.Land.GeographicalLocation.Suburb, f.Land.GeographicalLocation.Province) : null,
-                            PropertyDescription = f.Land.PropertyDescription != null ? f.Land.PropertyDescription.OldDescription : null,
-                            ExtentofLand = f.Land.PropertyDescription != null ? f.Land.PropertyDescription.Extent : null,
-                        }).ToList(),
-                    };
-                    uamp.TempleteSeven = new TempleteSeven()
-                    {
-                        Id = 0,
-                        MtefBudgetPeriods = new List<MtefBudgetPeriod>()
-                    };
-                }
+                        UserImmovableAssetManagementPlanId = uamp.Id,
+                        DistrictRegion = f.Land.GeographicalLocation != null ? f.Land.GeographicalLocation.Region : null,
+                        Town = f.Land.GeographicalLocation != null ? f.Land.GeographicalLocation.Town : null,
+                        LocalMunicipality = f.Land.GeographicalLocation != null ? f.Land.GeographicalLocation.LocalAuthority : null,
+                        AssetType = f.Type,
+                        CurrentStreetAddress = f.Land.GeographicalLocation != null ? string.Format("{0} {1} {2} {3}", f.Land.GeographicalLocation.StreetNumber, f.Land.GeographicalLocation.StreetName, f.Land.GeographicalLocation.Suburb, f.Land.GeographicalLocation.Province) : null,
+                        PropertyDescription = f.Land.PropertyDescription != null ? f.Land.PropertyDescription.OldDescription : null,
+                        ExtentofLand = f.Land.PropertyDescription != null ? f.Land.PropertyDescription.Extent : null,
+                    }).ToList(),
+                };
+                uamp.TempleteSeven = new TempleteSeven()
+                {
+                    Id = 0,
+                    MtefBudgetPeriods = mtefBudgetPeriod.BuildMtefBudgetPeriod(uamp.Id)
+                };
+
             }
             uamp = SaveTempleteTwo(uamp);
             uamp = SaveTempleteThree(uamp);
@@ -352,8 +468,24 @@ namespace MAM.BusinessLayer.Repositories
             uamp = SaveTempleteFive(uamp);
             uamp = SaveTempleteSix(uamp);
             uamp = SaveTempleteSeven(uamp);
-
+            uamp.User = GetUserById(uamp.UserId);
             return uamp;
+        }
+
+        public User GetUserById(int userId)
+        {
+            using (var dataAccess = new DataAccess.Repositories.UserRepository(appSettings.ConnectionString))
+            {
+                var userdb = dataAccess.GetUser(userId);
+                User user = new User()
+                {
+                    Id = userdb.Id,
+                    Name = userdb.Name,
+                    Surname = userdb.Surname,
+                    Email = userdb.Email
+                };
+                return user;
+            }
         }
 
         public List<Programme> SaveProgramme(List<Programme> programmes)

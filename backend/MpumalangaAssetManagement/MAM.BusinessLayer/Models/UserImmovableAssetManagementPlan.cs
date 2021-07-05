@@ -59,7 +59,7 @@ namespace MAM.BusinessLayer.Models
                 TempleteOne = new TempleteOne()
                 {
                     Id = 0,
-                    OptimalSupportingAccommodation = f.OptimalSupportingAccommodation != null ? OptimalSupportingAccommodation.ConvertToOptimalSupportingAccommodation(f.OptimalSupportingAccommodation) : null,
+                    OptimalSupportingAccommodation = f.OptimalSupportingAccommodation != null ? OptimalSupportingAccommodation.ConvertToOptimalSupportingAccommodation(f.OptimalSupportingAccommodation) : new OptimalSupportingAccommodation(),
                     Programmes = f.Programmes != null ? Programme.ConvertToProgrammes(f.Programmes.Where(p => p.UserImmovableAssetManagementPlanId == f.Id).ToList()) : new List<Programme>(),
                 },
                 TempleteTwoPointOne = new TempleteTwoPointOne() { 
@@ -109,7 +109,7 @@ namespace MAM.BusinessLayer.Models
                 TempleteSeven = new TempleteSeven()
                 {
                     Id = 0,
-                    MtefBudgetPeriods = f.OperationPlans.Count > 0 ? MtefBudgetPeriod.ConvertToMtefBudgetPeriods(f.MtefBudgetPeriods.Where(p => p.UserImmovableAssetManagementPlanId == f.Id).ToList()) : new List<MtefBudgetPeriod>(),
+                    MtefBudgetPeriods = new List<MtefBudgetPeriod>()// f.OperationPlans.Count > 0 ? MtefBudgetPeriod.ConvertToMtefBudgetPeriods(f.MtefBudgetPeriods.Where(p => p.UserImmovableAssetManagementPlanId == f.Id).ToList()) : new List<MtefBudgetPeriod>(),
                 }
             }).ToList();
             return userImmovableAssetManagementPlans;

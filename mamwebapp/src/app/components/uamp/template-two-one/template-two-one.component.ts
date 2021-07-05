@@ -9,6 +9,7 @@ import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { AddMunicipalUtilityServicesComponent } from './add-municipal-utility-services/add-municipal-utility-services';
 import { TempleteTwoPointOne } from 'src/app/models/templetes/templete-two-point-one.model';
 import { Property } from 'src/app/models/property.model';
+import { UAMP } from 'src/app/models/uamp.model';
 
 @Component({
   selector: 'app-template-two-one',
@@ -17,13 +18,13 @@ import { Property } from 'src/app/models/property.model';
   providers: [MessageService, DialogService, DynamicDialogRef]
 })
 export class TemplateTwoOneComponent implements OnInit {
-  properties = [];
+  properties: Array<Property> = [];
   submitted: boolean = false;
   propertyForm: FormGroup;
   municipalUtilityServices: any[];
   operationalCosts: any[];
   conditionRatings: any[];
-  uamp: any = {};
+  uamp: UAMP;
 
   constructor(private uampService: UampService,
               public ref: DynamicDialogRef,  
