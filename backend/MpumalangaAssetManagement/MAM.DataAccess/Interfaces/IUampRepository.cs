@@ -11,5 +11,6 @@ namespace MAM.DataAccess.Interfaces
         void UpdateUamp(UserImmovableAssetManagementPlan userImmovableAssetManagementPlan);
         void DeleteUamp(UserImmovableAssetManagementPlan userImmovableAssetManagementPlan);
         List<UserImmovableAssetManagementPlan> GetUamps(string department);
+        UserImmovableAssetManagementPlan GetUamp(int id);
     }
 }

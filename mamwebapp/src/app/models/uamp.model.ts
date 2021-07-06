@@ -1,4 +1,4 @@
-import { User } from "mamwebapp/src/app/models/user.model";
+import { User } from "src/app/models/user.model";
 import { TempleteFivePointOne } from "./templetes/templete-five-point-one.model";
 import { TempleteFivePointThree } from "./templetes/templete-five-point-three.model";
 import { TempleteFivePointTwo } from "./templetes/templete-five-point-two.model";

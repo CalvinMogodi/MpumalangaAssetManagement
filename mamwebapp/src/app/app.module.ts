@@ -143,7 +143,6 @@ import { PrintAssetComponent } from './components/assetregister/print-asset/prin
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     CurrencyPipe,
     AddMunicipalUtilityServicesComponent
   ],

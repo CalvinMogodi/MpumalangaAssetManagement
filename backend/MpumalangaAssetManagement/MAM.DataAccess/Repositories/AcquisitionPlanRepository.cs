@@ -42,7 +42,7 @@ namespace MAM.DataAccess.Repositories
             }
         }
 
-        public void DeleteUpdateAcquisitionPlan(AcquisitionPlan acquisitionPlan)
+        public void DeleteAcquisitionPlan(AcquisitionPlan acquisitionPlan)
         {
             using (var db = new DataContext(_connectionString))
             {

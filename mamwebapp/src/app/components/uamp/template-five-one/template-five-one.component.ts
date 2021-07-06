@@ -25,6 +25,9 @@ export class TemplateFiveOneComponent implements OnInit {
   operationPlans: Array<OperationPlan> = [];
   buttonItems: MenuItem[];
   uamp: UAMP;
+  showComfirmationDelete:boolean = false;
+  selectedOperationPlan: OperationPlan;
+  isEdit: boolean = false;
 
   constructor(private facilityService: FacilityService, public uampService: UampService, private formBuilder: FormBuilder, private messageService: MessageService) {
     
@@ -99,12 +102,96 @@ export class TemplateFiveOneComponent implements OnInit {
     ];
   }
 
-  update(){
+  update() {
+    const districtRegion = this.regions.filter(r => r.name == this.selectedOperationPlan.districtRegion)[0];
+    const initialNeedYear = this.initialNeedYears.filter(r => r.name == this.selectedOperationPlan.initialNeedYear)[0];
+    const status = this.statuses.filter(r => r.name == this.selectedOperationPlan.status)[0];
 
+    this.operationPlanForm = this.formBuilder.group({
+      districtRegion: [districtRegion],
+      town: [this.selectedOperationPlan.town],
+      serviceDescription: [this.selectedOperationPlan.serviceDescription],
+      budgetType: [this.selectedOperationPlan.budgetType],
+      initialNeedYear: [initialNeedYear],
+      status:[status],
+      totalAmountRequired: [this.selectedOperationPlan.totalAmountRequired],
+      cashFlowYear1: [this.selectedOperationPlan.cashFlowYear1],
+      cashFlowYear2: [this.selectedOperationPlan.cashFlowYear2],
+      cashFlowYear3: [this.selectedOperationPlan.cashFlowYear3],
+      cashFlowYear4: [this.selectedOperationPlan.cashFlowYear4],
+      cashFlowYear5: [this.selectedOperationPlan.cashFlowYear5],
+    });
+    this.isEdit = true;
   }
 
-  confirmDelete(){
+  onUpdate() {
+    const operationPlan: OperationPlan = {
+      id: this.selectedOperationPlan.id,
+      userImmovableAssetManagementPlanId: this.uamp.id,
+      templeteNumber: 5.1,
+      districtRegion: this.operationPlanForm.controls["districtRegion"].value.name,
+      town: this.operationPlanForm.controls["town"].value,
+      serviceDescription: this.operationPlanForm.controls["serviceDescription"].value,
+      budgetType: this.operationPlanForm.controls["budgetType"].value,
+      initialNeedYear: Number(this.operationPlanForm.controls["initialNeedYear"].value.name),
+      status: this.operationPlanForm.controls["status"].value.name,
+      totalAmountRequired: this.operationPlanForm.controls["totalAmountRequired"].value,
+      cashFlowYear1: this.operationPlanForm.controls["cashFlowYear1"].value,
+      cashFlowYear2: this.operationPlanForm.controls["cashFlowYear2"].value,
+      cashFlowYear3: this.operationPlanForm.controls["cashFlowYear3"].value,
+      cashFlowYear4: this.operationPlanForm.controls["cashFlowYear4"].value,
+      cashFlowYear5: this.operationPlanForm.controls["cashFlowYear5"].value,
+      localMunicipality: null,
+      assetDescription:null,
+      repairDescription: null,
+      prioityServiceReanking: null,
+      prioityServiceReankingObj: null,
+      streetDescription: null,
+      propertyDescription: null,
+      leaseType: null,
+      noofParkingBays: null,
+      usableSpace: null,
+      constructionArea: null,
+      extentofLand: null,
+      leaseStartDate : null,
+      leaseEndDate: null,
+      rentalPM: null,
+      rentalPA: null,
+      comment: null
+    };
 
+    var index = this.operationPlans.indexOf(this.selectedOperationPlan); 
+    this.operationPlans[index] = operationPlan;
+    this.isEdit = false;
+    this.uampService.assignUamp(this.uamp);
+    this.resetForm();
+  }
+
+  confirmDelete() {
+    this.showComfirmationDelete = true;
+  }
+
+  selectOperationPlan(operationPlan: OperationPlan){
+    this.selectedOperationPlan = operationPlan;
+  }
+
+  deleteOperationPlan(){
+    if(this.selectedOperationPlan.id == 0){
+      var index = this.operationPlans.indexOf(this.selectedOperationPlan);    
+      this.operationPlans.splice(index, 1);
+    }else{
+      this.uampService.deleteOperationPlan(this.selectedOperationPlan).pipe(first()).subscribe(isDeleted => {
+        if (isDeleted) {
+          this.messageService.add({ severity: 'warn', summary: 'Delete Operation Plan', detail: 'Operation plan has been deleted successful.' });   
+          var index = this.operationPlans.indexOf(this.selectedOperationPlan);    
+          this.operationPlans.splice(index, 1);
+        } else {
+          this.messageService.add({ severity: 'error', summary: 'Delete Operation Plan', detail: 'Operation plan is not deleted successful.' });
+        }
+      }, error => {
+        this.messageService.add({ severity: 'error', summary: 'Error Occurred', detail: 'An error occurred while processing your request. please try again!' });
+      });
+    }    
   }
 
   addOperationPlan() {

@@ -9,7 +9,7 @@ namespace MAM.DataAccess.Interfaces
     {
         int AddAcquisitionPlan(AcquisitionPlan acquisitionPlan);
         void UpdateAcquisitionPlan(AcquisitionPlan acquisitionPlan);
-        void DeleteUpdateAcquisitionPlan(AcquisitionPlan acquisitionPlan);
+        void DeleteAcquisitionPlan(AcquisitionPlan acquisitionPlan);
         List<AcquisitionPlan> GetAcquisitionPlans(int uampId);
     }
 }

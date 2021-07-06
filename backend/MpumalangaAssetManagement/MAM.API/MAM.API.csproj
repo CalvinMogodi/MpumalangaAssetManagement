@@ -17,6 +17,9 @@
 		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="2.2.0" />
 		<PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.1" />
 		<PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
+		<PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="6.1.4" />
+		<PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="6.1.4" />
+		<PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="6.1.4" />
 		<PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="5.6.0" />
 		<PackageReference Include="Microsoft.AspNetCore.App" />
 	</ItemGroup>
@@ -28,10 +31,11 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<Folder Include="Uploads\Facilities\" />
-		<Folder Include="Uploads\Land\" />
-		<Folder Include="Uploads\Finance\" />
-		<Folder Include="Uploads\Improvement\" />
+		<Folder Include="Uploads\Facilities\NewFolder\" />
+		<Folder Include="Uploads\Finance\NewFolder\" />
+		<Folder Include="Uploads\Improvement\NewFolder\" />
+		<Folder Include="Uploads\Land\NewFolder\" />
+		<Folder Include="Uploads\NewFolder\" />
 	</ItemGroup>
 
 	<ItemGroup>

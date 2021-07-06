@@ -35,6 +35,14 @@ namespace MAM.BusinessLayer.Repositories
             }
         }
 
+        public UserImmovableAssetManagementPlan GetUamp(int id) {
+            UserImmovableAssetManagementPlan uamp = new UserImmovableAssetManagementPlan();
+            using (var dataAccess = new DataAccess.Repositories.UampRepository(appSettings.ConnectionString))
+            {
+                return uamp.ConvertToUserImmovableAssetManagementPlan(dataAccess.GetUamp(id));
+            }
+        }
+
         public UserImmovableAssetManagementPlan SaveUserImmovableAssetManagementPlan(UserImmovableAssetManagementPlan uamp)
         {
             if (uamp.TempleteOne != null)
@@ -192,63 +200,117 @@ namespace MAM.BusinessLayer.Repositories
             }
         }
 
+        public bool DeleteOperationPlan(OperationPlan operationPlan)
+        {
+            using (var dataAccess = new DataAccess.Repositories.OperationPlanRepository(appSettings.ConnectionString))
+            {
+                dataAccess.DeleteOperationPlan(operationPlan.ConvertToOperationPlanTable(operationPlan));
+                return true;
+            }
+        }
+
+        public bool DeleteAcquisitionPlan(AcquisitionPlan acquisitionPlan)
+        {
+            using (var dataAccess = new DataAccess.Repositories.AcquisitionPlanRepository(appSettings.ConnectionString))
+            {
+                dataAccess.DeleteAcquisitionPlan(acquisitionPlan.ConvertToAcquisitionPlanTable(acquisitionPlan));
+                return true;
+            }
+        }
+
+        public bool DeleteProgramme(Programme programme)
+        {
+            using (var dataAccess = new DataAccess.Repositories.ProgrammeRepository(appSettings.ConnectionString))
+            {
+                dataAccess.DeleteProgramme(programme.ConvertToProgrammeTable(programme));
+                return true;
+            }
+        }
+
+        public bool DeleteProperty(Property property)
+        {
+            using (var dataAccess = new DataAccess.Repositories.PropertyRepository(appSettings.ConnectionString))
+            {
+                dataAccess.DeleteProperty(property.ConvertToPropertyTable(property));
+                return true;
+            }
+        }
+
+        public bool DeleteStrategicAssessment(StrategicAssessment strategicAssessment)
+        {
+            using (var dataAccess = new DataAccess.Repositories.StrategicAssessmentRepository(appSettings.ConnectionString))
+            {
+                dataAccess.DeleteStrategicAssessment(strategicAssessment.ConvertToStrategicAssessmentTable(strategicAssessment));
+                return true;
+            }
+        }
+
+        public bool DeleteSurrenderPlan(SurrenderPlan surrenderPlan)
+        {
+            using (var dataAccess = new DataAccess.Repositories.SurrenderPlanRepository(appSettings.ConnectionString))
+            {
+                dataAccess.DeleteSurrenderPlan(surrenderPlan.ConvertToSurrenderPlanTable(surrenderPlan));
+                return true;
+            }
+        }
+
         public MtefBudgetPeriod SaveMtefYear(MtefBudgetPeriod mtefBudgetPeriod)
         {
             using (var dataAccess = new DataAccess.Repositories.MtefYearRepository(appSettings.ConnectionString))
             {
 
-                /* DataAccess.Tables.MtefYear mtefYearOne = new DataAccess.Tables.MtefYear()
+                DataAccess.Tables.MtefYear mtefYearOne = new DataAccess.Tables.MtefYear()
                  {
                      MtefBudgetPeriodId = mtefBudgetPeriod.Id,
-                     Year = 1,
-                     //Id = mtefBudgetPeriod.MtefYearOne.Id,
-                     //ResultTypeId = mtefBudgetPeriod.MtefYearOne.ResultTypeId,
-                     //MtefAllocation = mtefBudgetPeriod.MtefYearOne.MtefAllocation,
-                     //RequiredBudget = mtefBudgetPeriod.MtefYearOne.RequiredBudget,
-                     //Shortfall = mtefBudgetPeriod.MtefYearOne.Shortfall,
-                 };
-                 DataAccess.Tables.MtefYear mtefYearTwo = new DataAccess.Tables.MtefYear()
-                 {
-                     MtefBudgetPeriodId = mtefBudgetPeriod.Id,
-                     Year = 2,
-                     //Id = mtefBudgetPeriod.MtefYearOne.Id,
-                     //ResultTypeId = mtefBudgetPeriod.MtefYearOne.ResultTypeId,
-                     //MtefAllocation = mtefBudgetPeriod.MtefYearOne.MtefAllocation,
-                     //RequiredBudget = mtefBudgetPeriod.MtefYearOne.RequiredBudget,
-                     //Shortfall = mtefBudgetPeriod.MtefYearOne.Shortfall,
-                 };
+                    Year = 1,
+                    Id = mtefBudgetPeriod.MtefYearOne.Id,
+                    ResultTypeId = mtefBudgetPeriod.MtefYearOne.ResultTypeId,
+                    MtefAllocation = mtefBudgetPeriod.MtefYearOne.MtefAllocation,
+                    RequiredBudget = mtefBudgetPeriod.MtefYearOne.RequiredBudget,
+                    Shortfall = mtefBudgetPeriod.MtefYearOne.Shortfall,
+                };
+                DataAccess.Tables.MtefYear mtefYearTwo = new DataAccess.Tables.MtefYear()
+                {
+                    MtefBudgetPeriodId = mtefBudgetPeriod.Id,
+                    Year = 2,
+                    Id = mtefBudgetPeriod.MtefYearOne.Id,
+                    ResultTypeId = mtefBudgetPeriod.MtefYearOne.ResultTypeId,
+                    MtefAllocation = mtefBudgetPeriod.MtefYearOne.MtefAllocation,
+                    RequiredBudget = mtefBudgetPeriod.MtefYearOne.RequiredBudget,
+                    Shortfall = mtefBudgetPeriod.MtefYearOne.Shortfall,
+                };
 
-                 DataAccess.Tables.MtefYear mtefYearThree = new DataAccess.Tables.MtefYear()
-                 {
-                     MtefBudgetPeriodId = mtefBudgetPeriod.Id,
-                     Year = 3,
-                     //Id = mtefBudgetPeriod.MtefYearOne.Id,
-                     //ResultTypeId = mtefBudgetPeriod.MtefYearOne.ResultTypeId,
-                     //MtefAllocation = mtefBudgetPeriod.MtefYearOne.MtefAllocation,
-                     //RequiredBudget = mtefBudgetPeriod.MtefYearOne.RequiredBudget,
-                     //Shortfall = mtefBudgetPeriod.MtefYearOne.Shortfall,
-                 };
+                DataAccess.Tables.MtefYear mtefYearThree = new DataAccess.Tables.MtefYear()
+                {
+                    MtefBudgetPeriodId = mtefBudgetPeriod.Id,
+                    Year = 3,
+                    Id = mtefBudgetPeriod.MtefYearOne.Id,
+                    ResultTypeId = mtefBudgetPeriod.MtefYearOne.ResultTypeId,
+                    MtefAllocation = mtefBudgetPeriod.MtefYearOne.MtefAllocation,
+                    RequiredBudget = mtefBudgetPeriod.MtefYearOne.RequiredBudget,
+                    Shortfall = mtefBudgetPeriod.MtefYearOne.Shortfall,
+                };
 
                  DataAccess.Tables.MtefYear mtefYearFour = new DataAccess.Tables.MtefYear()
                  {
                      MtefBudgetPeriodId = mtefBudgetPeriod.Id,
                      Year = 4,
-                     //Id = mtefBudgetPeriod.MtefYearOne.Id,
-                     //ResultTypeId = mtefBudgetPeriod.MtefYearOne.ResultTypeId,
-                     //MtefAllocation = mtefBudgetPeriod.MtefYearOne.MtefAllocation,
-                     //RequiredBudget = mtefBudgetPeriod.MtefYearOne.RequiredBudget,
-                     //Shortfall = mtefBudgetPeriod.MtefYearOne.Shortfall,
+                     Id = mtefBudgetPeriod.MtefYearOne.Id,
+                     ResultTypeId = mtefBudgetPeriod.MtefYearOne.ResultTypeId,
+                     MtefAllocation = mtefBudgetPeriod.MtefYearOne.MtefAllocation,
+                     RequiredBudget = mtefBudgetPeriod.MtefYearOne.RequiredBudget,
+                     Shortfall = mtefBudgetPeriod.MtefYearOne.Shortfall,
                  };
 
                  DataAccess.Tables.MtefYear mtefYearFive = new DataAccess.Tables.MtefYear()
                  {
                      MtefBudgetPeriodId = mtefBudgetPeriod.Id,
                      Year = 5,
-                     //Id = mtefBudgetPeriod.MtefYearOne.Id,
-                     //ResultTypeId = mtefBudgetPeriod.MtefYearOne.ResultTypeId,
-                     //MtefAllocation = mtefBudgetPeriod.MtefYearOne.MtefAllocation,
-                     //RequiredBudget = mtefBudgetPeriod.MtefYearOne.RequiredBudget,
-                     //Shortfall = mtefBudgetPeriod.MtefYearOne.Shortfall,
+                     Id = mtefBudgetPeriod.MtefYearOne.Id,
+                     ResultTypeId = mtefBudgetPeriod.MtefYearOne.ResultTypeId,
+                     MtefAllocation = mtefBudgetPeriod.MtefYearOne.MtefAllocation,
+                     RequiredBudget = mtefBudgetPeriod.MtefYearOne.RequiredBudget,
+                     Shortfall = mtefBudgetPeriod.MtefYearOne.Shortfall,
                  };
 
                  if (mtefYearOne.Id == 0)
@@ -294,7 +356,7 @@ namespace MAM.BusinessLayer.Repositories
                  else
                  {
                      dataAccess.UpdateMtefYear(mtefYearFive);
-                 }*/
+                 }
 
                 return mtefBudgetPeriod;
             }

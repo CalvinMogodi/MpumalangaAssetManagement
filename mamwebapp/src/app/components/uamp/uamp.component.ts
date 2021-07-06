@@ -1,5 +1,5 @@
 import { Component, OnInit,Input, ViewChild, AfterViewInit, ElementRef } from '@angular/core';
-import { User } from 'mamwebapp/src/app/models/user.model';
+import { User } from 'src/app/models/user.model';
 import { Subject } from 'rxjs/internal/Subject';
 import { first } from 'rxjs/operators';
 import { MenuItem, MessageService, Message} from 'primeng/api';
@@ -32,7 +32,7 @@ export class UampComponent implements OnInit, AfterViewInit {
   uamp: UAMP;
   buttonItems: MenuItem[];
   templateOne: any;
-  msgs: Message[];
+  erMsgs: Message[];
 
   constructor(public messageService: MessageService, public uampService: UampService, private authenticationService: AuthenticationService) { 
     let interval = setInterval(() => {
@@ -70,23 +70,51 @@ export class UampComponent implements OnInit, AfterViewInit {
 
   viewUamp() {    
     this.showDialog = true;
+    this.generatingUamp = true;
+    this.value = 10;
+    this.uampService.getUamp(this.uamp.id).subscribe(
+      (response) => {                    
+        this.uamp = response;
+        this.generatingUamp = false;
+      },
+      (error) => {                        
+        this.erMsgs = [{severity:'error', summary:'Error Occoured', detail:'Unable to get UAMP details'}];
+        this.generatingUamp = false;
+      }
+    );
+    
   }
 
   getUamps(){
-    this.uamps = [];
-    this.messageService.add({severity:'warn', summary:'Error Occoured', detail:'Unable to get UAMPS for your department'});
-    this.uampService.getUamps(this.currentUser.department).pipe(first()).subscribe(uamps => {          
-      this.uamps = uamps
-    },
-    error => (error)
-    
+    this.uamps = [];   
+    this.uampService.getUamps(this.currentUser.department).subscribe(
+      (response) => {                    
+        this.uamps = response
+      },
+      (error) => {                        
+        this.erMsgs = [{severity:'error', summary:'Error Occoured', detail:'Unable to get UAMPS for your department'}];
+      }
+    );
+  }
+
+  getUamp(id: Number){    
+    this.uampService.getUamp(id).subscribe(
+      (response) => {                    
+        this.uamp = response;
+        this.generatingUamp = false;
+      },
+      (error) => {                        
+        this.erMsgs = [{severity:'error', summary:'Error Occoured', detail:'Unable to get UAMP details'}];
+        this.generatingUamp = false;
+      }
     );
   }
 
   updateUamp(){
     this.showUAMP = true;
-    let df = this.uamp;
-    this.generatingUamp = false;     
+    this.generatingUamp = true;
+    this.value = 10;
+    this.getUamp(this.uamp.id)   
     //this.uampService.assignUamp(this.uampbv n); 
    // this.templeteTwoPointOne = this.uamp.nativeElement.templeteTwoPointOne;   
   }

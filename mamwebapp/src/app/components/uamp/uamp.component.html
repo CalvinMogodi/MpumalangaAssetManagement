@@ -1,4 +1,4 @@
-<!--<p-messages class="error"></p-messages>-->
+<p-messages closable="true" [(value)]="erMsgs" [styleClass]="error" [showTransitionOptions]="'1ms'" [hideTransitionOptions]="'1ms'"></p-messages>
 
 <div>
     <span>
@@ -63,7 +63,11 @@
 <div *ngIf="showDialog" class="dialogBackgroud"></div>
 <p-dialog [(visible)]="showDialog" *ngIf="showDialog" [style]="{width: '80vw'}" [baseZIndex]="10000">
     <p-header> UAMP </p-header>
-    <app-view-uamp [uamp]="uamp"></app-view-uamp>
+    <div class="card" *ngIf="generatingUamp">
+        <h5>Generating UAMP...</h5>
+        <p-progressBar [value]="value"></p-progressBar>
+    </div>
+    <app-view-uamp [uamp]="uamp" *ngIf="!generatingUamp"></app-view-uamp>
 </p-dialog>
 
 
@@ -112,7 +116,7 @@
             </p-tabPanel>
         </p-tabView>
     </p-body>
-    <p-footer>
+    <p-footer *ngIf="!generatingUamp">
         <button *ngIf="activeIndex === 0" style="float: left; margin-top: 15px;" type="button" pButton
             (click)="cancel()" label="Cancel" class="ui-button-secondary"></button>
         <button *ngIf="activeIndex !== 0" style="float: left; margin-top: 15px;" type="button" pButton

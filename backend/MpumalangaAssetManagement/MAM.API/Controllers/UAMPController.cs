@@ -57,6 +57,23 @@ namespace MAM.API.Controllers
         }
 
         [AllowAnonymous]
+        [HttpGet]
+        [Route("getampbyid/{id}")]
+        public IActionResult GetUamp(int id)
+        {
+            try
+            {
+                var result = _uampService.GetUamp(id);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex);
+                throw ex;
+            }
+        }        
+
+        [AllowAnonymous]
         [HttpPost]
         [Route("saveuamp")]
         public IActionResult SaveUserImmovableAssetManagementPlan([FromBody] UserImmovableAssetManagementPlan userImmovableAssetManagementPlan)
@@ -89,5 +106,110 @@ namespace MAM.API.Controllers
                 throw ex;
             }
         }
+        
+        [AllowAnonymous]
+        [HttpPost]
+        [Route("deleteacquisitionplan")]
+        public IActionResult DeleteAcquisitionPlan([FromBody] AcquisitionPlan acquisitionPlan)
+        {
+            try
+            {
+                var result = _uampService.DeleteAcquisitionPlan(acquisitionPlan);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex);
+                throw ex;
+            }
+        }
+
+        [AllowAnonymous]
+        [HttpPost]
+        [Route("deleteprogramme")]
+        public IActionResult DeleteProgramme([FromBody] Programme programme)
+        {
+            try
+            {
+                var result = _uampService.DeleteProgramme(programme);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex);
+                throw ex;
+            }
+        }
+
+        [AllowAnonymous]
+        [HttpPost]
+        [Route("deleteproperty")]
+        public IActionResult DeleteProperty([FromBody] Property property)
+        {
+            try
+            {
+                var result = _uampService.DeleteProperty(property);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex);
+                throw ex;
+            }
+        }
+
+        [AllowAnonymous]
+        [HttpPost]
+        [Route("deleteoperationplan")]
+        public IActionResult DeleteOperationPlan([FromBody] OperationPlan operationPlan)
+        {
+            try
+            {
+                var result = _uampService.DeleteOperationPlan(operationPlan);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex);
+                throw ex;
+            }
+        }
+
+        [AllowAnonymous]
+        [HttpPost]
+        [Route("deletestrategicassessment")]
+        public IActionResult DeleteStrategicAssessment([FromBody] StrategicAssessment strategicAssessment)
+        {
+            try
+            {
+                var result = _uampService.DeleteStrategicAssessment(strategicAssessment);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex);
+                throw ex;
+            }
+        }
+
+        [AllowAnonymous]
+        [HttpPost]
+        [Route("deletesurrenderplan")]
+        public IActionResult DeleteSurrenderPlan([FromBody] SurrenderPlan surrenderPlan)
+        {
+            try
+            {
+                var result = _uampService.DeleteSurrenderPlan(surrenderPlan);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex);
+                throw ex;
+            }
+        }
+
+
+
     }
 }

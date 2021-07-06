@@ -541,6 +541,22 @@
             </ng-template>
             <ng-template pTemplate="body" let-mtefBudgetPeriod>
                 <tr>
+                    <td>{{mtefBudgetPeriod.name}}</td>
+                    <td>{{mtefBudgetPeriod.mtefYearOne.mtefAllocation | currency:'ZAR':'R'}}</td>
+                    <td>{{mtefBudgetPeriod.mtefYearOne.requiredBudget | currency:'ZAR':'R'}}</td>
+                    <td>{{mtefBudgetPeriod.mtefYearOne.shortfall}}</td>
+                    <td>{{mtefBudgetPeriod.mtefYearTwo.mtefAllocation | currency:'ZAR':'R'}}</td>
+                    <td>{{mtefBudgetPeriod.mtefYearTwo.requiredBudget | currency:'ZAR':'R'}}</td>
+                    <td>{{mtefBudgetPeriod.mtefYearTwo.shortfall}}</td>
+                    <td>{{mtefBudgetPeriod.mtefYearThree.mtefAllocation | currency:'ZAR':'R'}}</td>
+                    <td>{{mtefBudgetPeriod.mtefYearThree.requiredBudget | currency:'ZAR':'R'}}</td>
+                    <td>{{mtefBudgetPeriod.mtefYearThree.shortfall}}</td>
+                    <td>{{mtefBudgetPeriod.mtefYearFour.mtefAllocation | currency:'ZAR':'R'}}</td>
+                    <td>{{mtefBudgetPeriod.mtefYearFour.requiredBudget | currency:'ZAR':'R'}}</td>
+                    <td>{{mtefBudgetPeriod.mtefYearFour.shortfall}}</td>
+                    <td>{{mtefBudgetPeriod.mtefYearFive.mtefAllocation | currency:'ZAR':'R'}}</td>
+                    <td>{{mtefBudgetPeriod.mtefYearFive.requiredBudget | currency:'ZAR':'R'}}</td>
+                    <td>{{mtefBudgetPeriod.mtefYearFive.shortfall}}</td>
                 </tr>
             </ng-template>
         </p-table>

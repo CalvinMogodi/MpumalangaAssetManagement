@@ -4,6 +4,8 @@ import { MenuItem, MessageService } from 'primeng/api';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { FacilityService } from 'src/app/services/facility/facility.service';
 import { AcquisitionPlan } from 'src/app/models/acquisition-plan.model';
+import { first } from 'rxjs/operators';
+import { UAMP } from 'src/app/models/uamp.model';
 
 @Component({
   selector: 'app-template-four-one',
@@ -21,7 +23,10 @@ export class TemplateFourOneComponent implements OnInit {
   acquisitionTypes: any[];
   acquisitionPlans: Array<AcquisitionPlan> = [];
   buttonItems: MenuItem[];
-  uamp: any = {};
+  uamp: UAMP;
+  showComfirmationDelete:boolean = false;
+  selectedAcquisitionPlan: AcquisitionPlan;
+  isEdit: boolean = false;
 
   constructor(public uampService: UampService, private formBuilder: FormBuilder, private messageService: MessageService) {
     this.uampService.uampChange.subscribe((value) => {
@@ -95,12 +100,81 @@ export class TemplateFourOneComponent implements OnInit {
     ];
   }
 
-  update(){
+  update() {
+    const districtRegion = this.regions.filter(r => r.name == this.selectedAcquisitionPlan.districtRegion)[0];
+    const initialNeedYear = this.initialNeedYears.filter(r => r.name == this.selectedAcquisitionPlan.initialNeedYear)[0];
+    const status = this.statuses.filter(r => r.name == this.selectedAcquisitionPlan.status)[0];
+    const acquisitionType = this.acquisitionTypes.filter(r => r.name == this.selectedAcquisitionPlan.acquisitionType)[0];
 
+    this.acquisitionPlanForm = this.formBuilder.group({
+      districtRegion: [districtRegion],
+      town: [this.selectedAcquisitionPlan.town],
+      serviceDescription: [this.selectedAcquisitionPlan.serviceDescription],
+      budgetType: [this.selectedAcquisitionPlan.budgetType],
+      extent: [this.selectedAcquisitionPlan.extent],
+      initialNeedYear: [initialNeedYear],
+      acquisitionType:[acquisitionType],
+      status:[status],
+      totalAmountRequired: [this.selectedAcquisitionPlan.totalAmountRequired],
+      cashFlowYear1: [this.selectedAcquisitionPlan.cashFlowYear1],
+      cashFlowYear2: [this.selectedAcquisitionPlan.cashFlowYear2],
+      cashFlowYear3: [this.selectedAcquisitionPlan.cashFlowYear3],
+      cashFlowYear4: [this.selectedAcquisitionPlan.cashFlowYear4],
+    });
+    this.isEdit = true;
   }
 
-  confirmDelete(){
-    
+  onUpdate() {
+    const acquisitionPlan: AcquisitionPlan = {
+      id: this.selectedAcquisitionPlan.id,
+      userImmovableAssetManagementPlanId: this.uamp.id,
+      templeteNumber: 4.1,
+      districtRegion: this.acquisitionPlanForm.controls["districtRegion"].value.name,
+      town: this.acquisitionPlanForm.controls["town"].value,
+      serviceDescription: this.acquisitionPlanForm.controls["serviceDescription"].value,
+      budgetType: this.acquisitionPlanForm.controls["budgetType"].value,
+      extent: this.acquisitionPlanForm.controls["extent"].value,
+      initialNeedYear: Number(this.acquisitionPlanForm.controls["initialNeedYear"].value.name),
+      acquisitionType: this.acquisitionPlanForm.controls["acquisitionType"].value.name,
+      status: this.acquisitionPlanForm.controls["status"].value.name,
+      totalAmountRequired: this.acquisitionPlanForm.controls["totalAmountRequired"].value,
+      cashFlowYear1: this.acquisitionPlanForm.controls["cashFlowYear1"].value,
+      cashFlowYear2: this.acquisitionPlanForm.controls["cashFlowYear2"].value,
+      cashFlowYear3: this.acquisitionPlanForm.controls["cashFlowYear3"].value,
+    };
+
+    var index = this.acquisitionPlans.indexOf(this.selectedAcquisitionPlan); 
+    this.acquisitionPlans[index] = acquisitionPlan;
+    this.isEdit = false;
+    this.uampService.assignUamp(this.uamp);
+    this.resetForm();
+  }
+
+  confirmDelete() {
+    this.showComfirmationDelete = true;
+  }
+
+  selectAcquisitionPlan(acquisitionPlan: AcquisitionPlan){
+    this.selectedAcquisitionPlan = acquisitionPlan;
+  }
+
+  deleteAcquisitionPlan(){
+    if(this.selectedAcquisitionPlan.id == 0){
+      var index = this.acquisitionPlans.indexOf(this.selectedAcquisitionPlan);    
+      this.acquisitionPlans.splice(index, 1);
+    }else{
+      this.uampService.deleteAcquisitionPlan(this.selectedAcquisitionPlan).pipe(first()).subscribe(isDeleted => {
+        if (isDeleted) {
+          this.messageService.add({ severity: 'warn', summary: 'Delete Acquisition Plan', detail: 'Acquisition plan has been deleted successful.' });   
+          var index = this.acquisitionPlans.indexOf(this.selectedAcquisitionPlan);    
+          this.acquisitionPlans.splice(index, 1);
+        } else {
+          this.messageService.add({ severity: 'error', summary: 'Delete Acquisition Plan', detail: 'Acquisition plan is not deleted successful.' });
+        }
+      }, error => {
+        this.messageService.add({ severity: 'error', summary: 'Error Occurred', detail: 'An error occurred while processing your request. please try again!' });
+      });
+    }    
   }
 
   addAcquisitionPlan() {
