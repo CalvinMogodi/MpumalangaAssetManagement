@@ -11,5 +11,6 @@ namespace MAM.DataAccess.Interfaces
         void UpdateFacility(Facility facility);
         List<Facility> GetFacilities();
         Facility GetFacilityById(int id);
+        List<Facility> GetAssetRegisterFacilities();
     }
 }

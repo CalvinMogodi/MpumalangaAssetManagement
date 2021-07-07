@@ -133,6 +133,22 @@ namespace MAM.API.Controllers
         }
 
         [HttpGet]
+        [Route("getassetregisterfacilities")]
+        public IActionResult GetAssetRegisterFacilities()
+        {
+            try
+            {
+                List<Facility> facilities = _facilityService.GetAssetRegisterFacilities();
+                return Ok(facilities);
+            }
+            catch (Exception ex)
+            {
+                log.Info("Error");
+                throw ex;
+            }
+        }
+
+        [HttpGet]
         [Route("getFacilityByCode/{id}/{facilityType}")]
         public IActionResult GetFacilityById(int id, FacilityTypes facilityType)
         {

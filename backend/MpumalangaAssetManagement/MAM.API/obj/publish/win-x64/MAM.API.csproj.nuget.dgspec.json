@@ -1,23 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Projects\\Asset Register MP\\backend\\MpumalangaAssetManagement\\MAM.API\\MAM.API.csproj": {}
+    "C:\\Projects\\MpumalangaAssetManagement\\MpumalangaAssetManagement\\backend\\MpumalangaAssetManagement\\MAM.API\\MAM.API.csproj": {}
   },
   "projects": {
-    "C:\\Projects\\Asset Register MP\\backend\\MpumalangaAssetManagement\\MAM.API\\MAM.API.csproj": {
+    "C:\\Projects\\MpumalangaAssetManagement\\MpumalangaAssetManagement\\backend\\MpumalangaAssetManagement\\MAM.API\\MAM.API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Projects\\Asset Register MP\\backend\\MpumalangaAssetManagement\\MAM.API\\MAM.API.csproj",
+        "projectUniqueName": "C:\\Projects\\MpumalangaAssetManagement\\MpumalangaAssetManagement\\backend\\MpumalangaAssetManagement\\MAM.API\\MAM.API.csproj",
         "projectName": "MAM.API",
-        "projectPath": "C:\\Projects\\Asset Register MP\\backend\\MpumalangaAssetManagement\\MAM.API\\MAM.API.csproj",
+        "projectPath": "C:\\Projects\\MpumalangaAssetManagement\\MpumalangaAssetManagement\\backend\\MpumalangaAssetManagement\\MAM.API\\MAM.API.csproj",
         "packagesPath": "C:\\Users\\cmogo\\.nuget\\packages\\",
-        "outputPath": "C:\\Projects\\Asset Register MP\\backend\\MpumalangaAssetManagement\\MAM.API\\obj\\publish\\win-x64\\",
+        "outputPath": "C:\\Projects\\MpumalangaAssetManagement\\MpumalangaAssetManagement\\backend\\MpumalangaAssetManagement\\MAM.API\\obj\\publish\\win-x64\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Microsoft\\Xamarin\\NuGet\\"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
         ],
         "configFilePaths": [
           "C:\\Users\\cmogo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
@@ -32,8 +34,8 @@
           "netcoreapp3.0": {
             "targetAlias": "netcoreapp3.0",
             "projectReferences": {
-              "C:\\Projects\\Asset Register MP\\backend\\MpumalangaAssetManagement\\MAM.BusinessLayer\\MAM.BusinessLayer.csproj": {
-                "projectPath": "C:\\Projects\\Asset Register MP\\backend\\MpumalangaAssetManagement\\MAM.BusinessLayer\\MAM.BusinessLayer.csproj"
+              "C:\\Projects\\MpumalangaAssetManagement\\MpumalangaAssetManagement\\backend\\MpumalangaAssetManagement\\MAM.BusinessLayer\\MAM.BusinessLayer.csproj": {
+                "projectPath": "C:\\Projects\\MpumalangaAssetManagement\\MpumalangaAssetManagement\\backend\\MpumalangaAssetManagement\\MAM.BusinessLayer\\MAM.BusinessLayer.csproj"
               }
             }
           }
@@ -63,6 +65,18 @@
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[5.6.3, )"
+            },
+            "Swashbuckle.AspNetCore.Swagger": {
+              "target": "Package",
+              "version": "[6.1.4, )"
+            },
+            "Swashbuckle.AspNetCore.SwaggerGen": {
+              "target": "Package",
+              "version": "[6.1.4, )"
+            },
+            "Swashbuckle.AspNetCore.SwaggerUI": {
+              "target": "Package",
+              "version": "[6.1.4, )"
             },
             "System.IdentityModel.Tokens.Jwt": {
               "target": "Package",
@@ -121,7 +135,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.103\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.301\\RuntimeIdentifierGraph.json"
         }
       },
       "runtimes": {
@@ -130,20 +144,22 @@
         }
       }
     },
-    "C:\\Projects\\Asset Register MP\\backend\\MpumalangaAssetManagement\\MAM.BusinessLayer\\MAM.BusinessLayer.csproj": {
+    "C:\\Projects\\MpumalangaAssetManagement\\MpumalangaAssetManagement\\backend\\MpumalangaAssetManagement\\MAM.BusinessLayer\\MAM.BusinessLayer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Projects\\Asset Register MP\\backend\\MpumalangaAssetManagement\\MAM.BusinessLayer\\MAM.BusinessLayer.csproj",
+        "projectUniqueName": "C:\\Projects\\MpumalangaAssetManagement\\MpumalangaAssetManagement\\backend\\MpumalangaAssetManagement\\MAM.BusinessLayer\\MAM.BusinessLayer.csproj",
         "projectName": "MAM.BusinessLayer",
-        "projectPath": "C:\\Projects\\Asset Register MP\\backend\\MpumalangaAssetManagement\\MAM.BusinessLayer\\MAM.BusinessLayer.csproj",
+        "projectPath": "C:\\Projects\\MpumalangaAssetManagement\\MpumalangaAssetManagement\\backend\\MpumalangaAssetManagement\\MAM.BusinessLayer\\MAM.BusinessLayer.csproj",
         "packagesPath": "C:\\Users\\cmogo\\.nuget\\packages\\",
-        "outputPath": "C:\\Projects\\Asset Register MP\\backend\\MpumalangaAssetManagement\\MAM.BusinessLayer\\obj\\",
+        "outputPath": "C:\\Projects\\MpumalangaAssetManagement\\MpumalangaAssetManagement\\backend\\MpumalangaAssetManagement\\MAM.BusinessLayer\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Microsoft\\Xamarin\\NuGet\\"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
         ],
         "configFilePaths": [
           "C:\\Users\\cmogo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
@@ -158,8 +174,8 @@
           "netstandard2.0": {
             "targetAlias": "netstandard2.0",
             "projectReferences": {
-              "C:\\Projects\\Asset Register MP\\backend\\MpumalangaAssetManagement\\MAM.DataAccess\\MAM.DataAccess.csproj": {
-                "projectPath": "C:\\Projects\\Asset Register MP\\backend\\MpumalangaAssetManagement\\MAM.DataAccess\\MAM.DataAccess.csproj"
+              "C:\\Projects\\MpumalangaAssetManagement\\MpumalangaAssetManagement\\backend\\MpumalangaAssetManagement\\MAM.DataAccess\\MAM.DataAccess.csproj": {
+                "projectPath": "C:\\Projects\\MpumalangaAssetManagement\\MpumalangaAssetManagement\\backend\\MpumalangaAssetManagement\\MAM.DataAccess\\MAM.DataAccess.csproj"
               }
             }
           }
@@ -195,7 +211,7 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.103\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.301\\RuntimeIdentifierGraph.json"
         }
       },
       "runtimes": {
@@ -204,20 +220,22 @@
         }
       }
     },
-    "C:\\Projects\\Asset Register MP\\backend\\MpumalangaAssetManagement\\MAM.DataAccess\\MAM.DataAccess.csproj": {
+    "C:\\Projects\\MpumalangaAssetManagement\\MpumalangaAssetManagement\\backend\\MpumalangaAssetManagement\\MAM.DataAccess\\MAM.DataAccess.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Projects\\Asset Register MP\\backend\\MpumalangaAssetManagement\\MAM.DataAccess\\MAM.DataAccess.csproj",
+        "projectUniqueName": "C:\\Projects\\MpumalangaAssetManagement\\MpumalangaAssetManagement\\backend\\MpumalangaAssetManagement\\MAM.DataAccess\\MAM.DataAccess.csproj",
         "projectName": "MAM.DataAccess",
-        "projectPath": "C:\\Projects\\Asset Register MP\\backend\\MpumalangaAssetManagement\\MAM.DataAccess\\MAM.DataAccess.csproj",
+        "projectPath": "C:\\Projects\\MpumalangaAssetManagement\\MpumalangaAssetManagement\\backend\\MpumalangaAssetManagement\\MAM.DataAccess\\MAM.DataAccess.csproj",
         "packagesPath": "C:\\Users\\cmogo\\.nuget\\packages\\",
-        "outputPath": "C:\\Projects\\Asset Register MP\\backend\\MpumalangaAssetManagement\\MAM.DataAccess\\obj\\",
+        "outputPath": "C:\\Projects\\MpumalangaAssetManagement\\MpumalangaAssetManagement\\backend\\MpumalangaAssetManagement\\MAM.DataAccess\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Microsoft\\Xamarin\\NuGet\\"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
         ],
         "configFilePaths": [
           "C:\\Users\\cmogo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
@@ -269,7 +287,7 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.103\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.301\\RuntimeIdentifierGraph.json"
         }
       },
       "runtimes": {

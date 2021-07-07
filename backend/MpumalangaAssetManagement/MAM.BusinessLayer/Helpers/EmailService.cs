@@ -56,24 +56,7 @@ namespace MAM.BusinessLayer.Helpers
                 client.Send(mail);
             }
             catch (Exception ex)
-            {
-                string[] lines_ = { "Error" + ex.Message, "Second line" + ex.InnerException, "Third line" };
-                System.IO.File.WriteAllLines(@"C:\Users\Public\WriteLines.txt", lines_);
-                string text_ = "A class is the most powerful data type in C#. Like a structure, " +
-                               "a class defines the data and behavior of the data type. ";
-                System.IO.File.WriteAllText(@"C:\Users\Public\WriteText.txt", text_);
-                using (System.IO.StreamWriter file =
-           new System.IO.StreamWriter(@"C:\Users\Public\WriteLines2.txt"))
-                {
-                    foreach (string line in lines)
-                    {
-                        // If the line doesn't contain the word 'Second', write the line to the file.
-                        if (!line.Contains("Second"))
-                        {
-                            file.WriteLine(line);
-                        }
-                    }
-                }
+            {               
                 throw ex;
             }
         }

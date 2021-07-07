@@ -21,7 +21,7 @@ import { UserComponent } from './components/user/user.component';
 import { AddUserComponent } from './components/user/add-user/add-user.component';
 import { AssetregisterComponent } from './components/assetregister/assetregister.component'
 import { UampComponent } from './components/uamp/uamp.component';
-import { ViewUampComponent } from './components/uamp/view-property/view-uamp.component'; 
+import { ViewUampComponent } from './components/uamp/view-uamp/view-uamp.component'; 
 import { TemplateOneComponent } from './components/uamp/template-one/template-one.component';
 import { TemplateTwoTwoComponent } from './components/uamp/template-two-two/template-two-two.component';
 import { TemplateTwoOneComponent } from './components/uamp/template-two-one/template-two-one.component';

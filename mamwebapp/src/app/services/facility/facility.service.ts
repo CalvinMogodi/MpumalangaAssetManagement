@@ -40,6 +40,10 @@ export class FacilityService {
     return this.http.get<Array<Facility>>(`${environment.apiUrl}/api/facility/getallfacilities`);
   }
 
+  getAssetRegisterfacilities() {
+    return this.http.get<Array<Facility>>(`${environment.apiUrl}/api/facility/getassetregisterfacilities`);
+  }
+
   getFacilityById(id: number, facilityType) {
     return this.http.get<Facility>(`${environment.apiUrl}/api/facility/getFacilityByCode/`+id+`/`+facilityType);
   }
@@ -73,5 +77,7 @@ export class FacilityService {
   getFiles(fileReference: string) {
     return this.http.get<any[]>(`${environment.apiUrl}/api/facility/getFiles/`+fileReference);
   }
+
+
 
 }

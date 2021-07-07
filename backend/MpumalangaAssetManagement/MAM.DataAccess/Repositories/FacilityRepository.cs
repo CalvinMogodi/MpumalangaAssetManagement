@@ -66,6 +66,25 @@ namespace MAM.DataAccess.Repositories
         {
             using (var db = new DataContext(_connectionString))
             {
+                var list = db.Facilities.Where(f => f.Status.ToLower() != "deleted")
+                   .Include(a => a.Land)
+                   .Include(f => f.Land.PropertyDescription)
+                  .Include(a => a.Land.GeographicalLocation)
+                   .Include(a => a.Land.LandUseManagementDetail)
+                   .Include(a => a.Land.LeaseStatus)
+                  .Include(a => a.Improvements)
+                  .Include(a => a.Finance)
+                  .Include(f => f.Finance.Valuation)
+                   .Include(f => f.Finance.SecondaryInformationNote)
+                   .ToList();
+                return list;
+            }
+        }
+
+        public List<Facility> GetAssetRegisterFacilities()
+        {
+            using (var db = new DataContext(_connectionString))
+            {
                 var list = db.Facilities.Where(f => f.Status.ToLower() == "submitted" || f.Status.ToLower() == "saved" || f.Status.ToLower() == "new")
                    .Include(a => a.Land)
                    .Include(f => f.Land.PropertyDescription)

@@ -208,6 +208,18 @@ namespace MAM.BusinessLayer.Repositories
             }
             return facilities;
         }
+                
+        public List<Facility> GetAssetRegisterFacilities()
+        {
+            List<Facility> facilities = new List<Facility>();
+            Facility facility = new Facility();
+            using (var dataAccess = new DataAccess.Repositories.FacilityRepository(appSettings.ConnectionString))
+            {
+                var _facilities = facility.ConvertToFacilities(dataAccess.GetAssetRegisterFacilities());
+                facilities.AddRange(_facilities);
+            }
+            return facilities;
+        }
 
         public List<Facility> GetProperties(string userDepartment)
         {

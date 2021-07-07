@@ -73,7 +73,7 @@
 
 
 <div *ngIf="showUAMP" class="dialogBackgroud"></div>
-<p-dialog [(visible)]="showUAMP" *ngIf="showUAMP" [style]="{width: '95vw'}" [baseZIndex]="10000">
+<p-dialog [(visible)]="showUAMP" resizable="true" style="width:auto;height:auto;" *ngIf="showUAMP" [style]="{width: '95vw'}" [baseZIndex]="10000">
     <p-header> UAMP </p-header>
     <p-body>
         <div class="card" *ngIf="generatingUamp">

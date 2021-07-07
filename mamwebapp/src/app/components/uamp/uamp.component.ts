@@ -78,7 +78,7 @@ export class UampComponent implements OnInit, AfterViewInit {
         this.generatingUamp = false;
       },
       (error) => {                        
-        this.erMsgs = [{severity:'error', summary:'Error Occoured', detail:'Unable to get UAMP details'}];
+        this.messageService.add({severity:'error', summary:'Error Occoured', detail:'Unable to get UAMP details'});
         this.generatingUamp = false;
       }
     );
@@ -104,7 +104,7 @@ export class UampComponent implements OnInit, AfterViewInit {
         this.generatingUamp = false;
       },
       (error) => {                        
-        this.erMsgs = [{severity:'error', summary:'Error Occoured', detail:'Unable to get UAMP details'}];
+        this.messageService.add({severity:'error', summary:'Error Occoured', detail:'Unable to get UAMP details'});
         this.generatingUamp = false;
       }
     );
@@ -138,6 +138,10 @@ export class UampComponent implements OnInit, AfterViewInit {
      // this.templeteTwoPointOne = this.uamp.templeteTwoPointOne;
       this.messageService.add({severity:'success', summary:'Generate UAMP', detail:'UAMP has been generated successful.'});   
       this.showUAMP = true;
+    },
+    (error) => {                        
+      this.messageService.add({severity:'error', summary:'Error Occoured', detail:'Unable to generate UAMP'});
+      this.generatingUamp = false;
     });   
   }
 
@@ -174,12 +178,29 @@ export class UampComponent implements OnInit, AfterViewInit {
       const foundUamp = this.uamps.filter(u => u.id == this.uamp.id).length;
       if(foundUamp == 0)
         this.uamps.push(this.uamp);
+    },
+    (error) => {                        
+      this.messageService.add({severity:'error', summary:'Error Occoured', detail:'Unable to save UAMP'});
     });
   }
 
   onSubmit(){
     this.next();
+    this.uamp.status = "Submitted";    
+    this.uampService.saveUamp(this.uamp).pipe(first()).subscribe(uamp => {
+      this.uamp = uamp;
+      this.uampService.assignUamp(uamp);
+      this.messageService.add({severity:'success', summary:'Submit UAMP', detail:'UAMP has been submited successful.'}); 
 
+      const foundUamp = this.uamps.filter(u => u.id == this.uamp.id).length;
+      if(foundUamp == 0)
+        this.uamps.push(this.uamp);
+
+      this.showUAMP = false;
+    },
+    (error) => {                        
+      this.messageService.add({severity:'error', summary:'Error Occoured', detail:'Unable to submit UAMP'});
+    });
   }
 
   makeId(length) {

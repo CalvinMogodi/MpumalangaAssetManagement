@@ -72,7 +72,7 @@ export class AssetregisterComponent implements OnInit  {
       }
   ];
     this.home = {icon: 'pi pi-home'};    
-    this.facilityService.getAllFacilities().pipe(first()).subscribe(facilities => {
+    this.facilityService.getAssetRegisterfacilities().pipe(first()).subscribe(facilities => {
       this.loading = false;
       this.facilities = facilities;
       this.landTotal = facilities.filter(f => f.type == "Land").length;
