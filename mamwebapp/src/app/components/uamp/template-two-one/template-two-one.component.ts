@@ -10,6 +10,7 @@ import { AddMunicipalUtilityServicesComponent } from './add-municipal-utility-se
 import { TempleteTwoPointOne } from 'src/app/models/templetes/templete-two-point-one.model';
 import { Property } from 'src/app/models/property.model';
 import { UAMP } from 'src/app/models/uamp.model';
+import { element } from 'protractor';
 
 @Component({
   selector: 'app-template-two-one',
@@ -24,6 +25,11 @@ export class TemplateTwoOneComponent implements OnInit {
   municipalUtilityServices: any[];
   operationalCosts: any[];
   conditionRatings: any[];
+  functionalPerformanceIndexs: any[];
+  operatingPerformanceIndexs: any[];
+  suitabilityIndexs: any[];
+  accessibilities: any[];
+  requiredPerformanceStandards: any[];
   uamp: UAMP;
 
   constructor(private uampService: UampService,
@@ -37,9 +43,28 @@ export class TemplateTwoOneComponent implements OnInit {
         this.properties = [];
         this.uamp = value;
         
-        for (let i = 0; i < this.uamp.templeteTwoPointOne.properties.length; i++) {
-          this.properties.push(this.uamp.templeteTwoPointOne.properties[i]);
-        }          
+        this.uamp.templeteTwoPointOne.properties.forEach( element => {
+          if(element.accessibility)
+            element.accessibilityObj = this.accessibilities.filter(a => a.name == element.accessibility)[0];
+
+          if(element.conditionRating)
+            element.conditionRatingObj = this.accessibilities.filter(a => a.name == element.conditionRating)[0];
+
+          if(element.suitabilityIndex)
+            element.suitabilityIndexObj = this.suitabilityIndexs.filter(a => a.name == element.suitabilityIndex)[0];
+          
+          if(element.operatingPerformanceIndex)
+            element.operatingPerformanceIndexObj = this.operatingPerformanceIndexs.filter(a => a.name == element.operatingPerformanceIndex)[0];
+          
+          if(element.functionalPerformanceIndex)
+            element.functionalPerformanceIndexObj = this.functionalPerformanceIndexs.filter(a => a.name == element.functionalPerformanceIndex)[0];
+
+          if(element.requiredPerformanceStandard)
+            element.requiredPerformanceStandardObj = this.requiredPerformanceStandards.filter(a => a.name == element.requiredPerformanceStandard)[0];
+
+          this.properties.push(element);
+        }
+        )        
       } 
     });
   }
@@ -54,13 +79,44 @@ export class TemplateTwoOneComponent implements OnInit {
       { name: 'Security', code: 'S', factor: 1 },
       { name: 'Telephone', code: 'T', factor: 2 },
       { name: 'Gardening', code: 'G', factor: 3 },
-      { name: 'Cleaning', code: 'C', factor: 4 }];
+      { name: 'Cleaning', code: 'C', factor: 4 }
+    ];
+
     this.conditionRatings = [
       { name: 'C1 (Excellent)', code: 'C1', factor: 1 },
       { name: 'C2 (Good)', code: 'C2', factor: 2 },
       { name: 'C3 (Fair)', code: 'C3', factor: 3 },
       { name: 'C4 (Poor)', code: 'C4', factor: 4 },
       { name: 'C5 (Very Poor)', code: 'C5', factor: 5 },
+    ];
+
+    this.functionalPerformanceIndexs = [
+      { name: 'B1', code: 'B1', factor: 1 },
+      { name: 'B2', code: 'B2', factor: 2 },
+      { name: 'B3', code: 'B3', factor: 3 }
+    ];
+
+    this.operatingPerformanceIndexs = [
+      { name: '1', code: '1', factor: 1 },
+      { name: '2', code: '2', factor: 2 },
+      { name: '3', code: '3', factor: 3 }
+    ];
+    this.suitabilityIndexs = [
+      { name: 'A', code: 'A', factor: 1 },
+      { name: 'B', code: 'B', factor: 2 },
+      { name: 'C', code: 'C', factor: 3 }
+    ];
+
+    this.accessibilities = [
+      { name: 'A1', code: 'A1', factor: 1 },
+      { name: 'A2', code: 'A2', factor: 2 },
+      { name: 'A3', code: 'A3', factor: 3 }
+    ];
+
+    this.requiredPerformanceStandards = [
+      { name: 'P1', code: 'P1', factor: 1 },
+      { name: 'P2', code: 'P2', factor: 2 },
+      { name: 'P3', code: 'P3', factor: 3 }
     ];
     this.createForm();
   }
@@ -120,8 +176,28 @@ export class TemplateTwoOneComponent implements OnInit {
     });
   }
 
-  conditionRatingCahnged(property, e){
+  conditionRatingCahnged(property: Property, e){
     property.conditionRating = e.value.factor;
+  }
+
+  onRequiredPerformanceStandardChange(property: Property, e){
+    property.requiredPerformanceStandard = e.value.name;
+  }
+
+  onAccessibilityChange(property: Property, e){
+    property.accessibility = e.value.name;
+  }
+
+  onSuitabilityIndexChange(property: Property, e){
+    property.suitabilityIndex = e.value.name;
+  }
+
+  onOperatingPerformanceIndexChange(property: Property, e){
+    property.operatingPerformanceIndex = e.value.name;
+  }
+
+  onFunctionalPerformanceChange(property: Property, e){
+    property.functionalPerformanceIndex = e.value.name;
   }
 
   show(property:any) {

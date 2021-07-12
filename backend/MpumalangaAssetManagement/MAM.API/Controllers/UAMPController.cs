@@ -67,6 +67,7 @@ namespace MAM.API.Controllers
                 return Ok(result);
             }
             catch (Exception ex)
+            
             {
                 log.Error(ex);
                 throw ex;

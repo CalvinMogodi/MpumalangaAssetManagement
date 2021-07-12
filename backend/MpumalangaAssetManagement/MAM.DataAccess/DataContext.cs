@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+
 using System.Text;
 
 namespace MAM.DataAccess
@@ -36,7 +37,6 @@ namespace MAM.DataAccess
         public DbSet<Utilisation> Utilisation { get; set; }
         public DbSet<AcquisitionPlan> AcquisitionPlans { get; set; }
         public DbSet<MtefBudgetPeriod> MtefBudgetPeriods { get; set; }
-        public DbSet<MtefYear> MtefYears { get; set; }
         public DbSet<MunicipalUtilityService> MunicipalUtilityServices { get; set; }
         public DbSet<OperationPlan> OperationPlans { get; set; }
         public DbSet<Property> Properties { get; set; }
@@ -46,7 +46,7 @@ namespace MAM.DataAccess
         public DbSet<OptimalSupportingAccommodation> OptimalSupportingAccommodations { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(_connectionString);
+            optionsBuilder.UseSqlServer(_connectionString, o => o.CommandTimeout(280));
         }
     }
 }

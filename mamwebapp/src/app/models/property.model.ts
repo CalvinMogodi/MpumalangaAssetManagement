@@ -35,4 +35,10 @@ export class Property{
     leaseEndDate?: Date;
     leaseTerm: string;
     comment: string;
+    accessibilityObj: any;
+    suitabilityIndexObj: any;
+    operatingPerformanceIndexObj: any;
+    functionalPerformanceIndexObj: any;
+    requiredPerformanceStandardObj: any;
+    conditionRatingObj: any;
 }

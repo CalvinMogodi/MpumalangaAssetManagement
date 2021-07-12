@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "3reIKsUPP/TNbvuVR7iYDrKczDeT7wfD52Gn0BVMLH4oJjnzdnhqOtAJfDlqJX822srn5vOCnTQqTZuFoFS8cg==",
+  "dgSpecHash": "jnIe0p3IKoeDm0TSmqkrxtommCf18sEqmRlCTnHsrzlJGB1JJXNMDPntXJ0M9sblLEOKnBK/hSud0hsn8Otnaw==",
   "success": true,
   "projectFilePath": "C:\\Projects\\MpumalangaAssetManagement\\MpumalangaAssetManagement\\backend\\MpumalangaAssetManagement\\MAM.DataAccess\\MAM.DataAccess.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\cmogo\\.nuget\\packages\\entityframework\\6.4.4\\entityframework.6.4.4.nupkg.sha512",
     "C:\\Users\\cmogo\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.0\\microsoft.bcl.asyncinterfaces.1.1.0.nupkg.sha512",
     "C:\\Users\\cmogo\\.nuget\\packages\\microsoft.bcl.hashcode\\1.1.0\\microsoft.bcl.hashcode.1.1.0.nupkg.sha512",
     "C:\\Users\\cmogo\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",

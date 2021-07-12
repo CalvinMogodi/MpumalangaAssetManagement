@@ -15,7 +15,7 @@
                 <th>Local Municipality</th>
                 <th>Asset Description</th>
                 <th>Repair Description</th>
-                <th>YEAR <br> <small>in which initial request was submitted</small></th>
+                <th style="width: 200px;">YEAR <br> <small>in which initial request was submitted</small></th>
                 <th style="width: 200px;">Prioity / Service Reanking</th>
                 <th>Total Amount Required</th>
                 <th>Cash Flow <br><small>(MTEF YR 1)</small></th>
@@ -32,7 +32,7 @@
                     <td>{{operationPlan.localAuthority}}</td>
                     <td>{{operationPlan.assetDescription}}</td>
                     <td><input [(ngModel)]="operationPlan.repairDescription" [ngModelOptions]="{standalone: true}" autocomplete="off" type="text" pInputText class="ui-inputtext ui-widget"></td>
-                    <td><p-inputNumber [(ngModel)]="operationPlan.initialNeedYear" [ngModelOptions]="{standalone: true}"></p-inputNumber></td>
+                    <td><p-dropdown placeholder="Please select" [(ngModel)]="operationPlan.initialNeedYearObj" [ngModelOptions]="{standalone: true}" (onChange)="onInitialNeedYearChange(operationPlan, $event)" [options]="initialNeedYears" optionLabel="name"></p-dropdown></td>
                     <td><p-dropdown [(ngModel)]="operationPlan.prioityServiceReankingObj" [ngModelOptions]="{standalone: true}" (onChange)="onPrioityServiceReankingChange(operationPlan, $event)" placeholder="Please select" inputId="prioityServiceReanking" [options]="prioities" optionLabel="name"></p-dropdown></td>
                     <td><p-inputNumber [(ngModel)]="operationPlan.totalAmountRequired" [ngModelOptions]="{standalone: true}" mode="currency" currency="ZAR" locale="en-ZA"></p-inputNumber></td>
                     <td><p-inputNumber [(ngModel)]="operationPlan.cashFlowYear1" [ngModelOptions]="{standalone: true}" mode="currency" currency="ZAR" locale="en-ZA"></p-inputNumber></td>

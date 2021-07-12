@@ -27,7 +27,6 @@ namespace MAM.DataAccess.Tables
         public double? ExtentofLand { get; set; }
         public decimal? RentalPM { get; set; }
         public decimal? RentalPA { get; set; }
-        public List<MunicipalUtilityService> MunicipalUtilityServices { get; set; }
         public decimal? MunicipalUtilityServiceTotal { get; set; }
         public decimal? PropertyRatesTaxes { get; set; }
         public decimal? OperationalCosts { get; set; }

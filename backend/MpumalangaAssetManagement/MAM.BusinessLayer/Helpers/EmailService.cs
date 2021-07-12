@@ -37,12 +37,13 @@ namespace MAM.BusinessLayer.Helpers
             SmtpClient client = new SmtpClient
             {
                 DeliveryMethod = SmtpDeliveryMethod.Network,
-                UseDefaultCredentials = false,
+                //UseDefaultCredentials = true,
                 Host = appSettings.EmailHost,
                 Timeout = 100000,
-                Port = appSettings.EmailPot,
-                Credentials = new NetworkCredential(appSettings.EmailUserName, appSettings.EmailPassword),
-                EnableSsl = true
+                //Port = appSettings.EmailPot,
+                Port = 25,
+                //Credentials = new NetworkCredential(appSettings.EmailUserName, appSettings.EmailPassword),
+                EnableSsl = false
             };
 
             MailMessage mail = new MailMessage(appSettings.FromEmailAddress, user.Email);

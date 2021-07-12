@@ -70,15 +70,15 @@ namespace MAM.DataAccess.Repositories
             {
                 var userImmovableAssetManagementPlan = db.UserImmovableAssetManagementPlans.Where(f => f.Id == id && f.Status.ToLower() != "deleted")
                     .Include(u => u.User)
-                    .Include(a => a.Properties)
-                    .Include(f => f.OperationPlans)
+                    //.Include(a => a.Properties)
+                    //.Include(f => f.OperationPlans)
                     .Include(a => a.AcquisitionPlans)
                     .Include(u => u.Programmes)
                     .Include(u => u.OptimalSupportingAccommodation)
                     .Include(a => a.MtefBudgetPeriods)
                     .Include(a => a.SurrenderPlans)
-                    .Include(a => a.StrategicAssessments).FirstOrDefault();
-                return userImmovableAssetManagementPlan;
+                    .Include(a => a.StrategicAssessments);
+                return userImmovableAssetManagementPlan.FirstOrDefault();
             }
         }
 

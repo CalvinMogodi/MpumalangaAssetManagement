@@ -10,6 +10,7 @@ export class OperationPlan {
     assetDescription: String;
     repairDescription: String;
     prioityServiceReanking: String;
+    initialNeedYearObj: any;
     prioityServiceReankingObj: any;
     streetDescription: String;
     propertyDescription: String;

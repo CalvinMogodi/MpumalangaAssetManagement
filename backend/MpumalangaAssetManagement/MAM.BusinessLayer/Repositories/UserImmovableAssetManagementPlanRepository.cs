@@ -180,7 +180,7 @@ namespace MAM.BusinessLayer.Repositories
             using (var dataAccess = new DataAccess.Repositories.MtefBudgetPeriodRepository(appSettings.ConnectionString))
             {
                 List<MtefBudgetPeriod> _mtefBudgetPeriods = new List<MtefBudgetPeriod>();
-                List<MtefBudgetPeriod> mtefBudgetPeriods = uamp.TempleteSeven.MtefBudgetPeriods.Where(m => m.Name != null).ToList();
+                List<MtefBudgetPeriod> mtefBudgetPeriods = uamp.TempleteSeven.MtefBudgetPeriods.ToList();
                 foreach (var mtefBudgetPeriod in mtefBudgetPeriods)
                 {
                     if (mtefBudgetPeriod.Id == 0)
@@ -191,8 +191,6 @@ namespace MAM.BusinessLayer.Repositories
                     {
                         dataAccess.UpdateMtefBudgetPeriod(mtefBudgetPeriod.ConvertToMtefBudgetPeriodTable(mtefBudgetPeriod));
                     }
-
-                    _mtefBudgetPeriods.Add(SaveMtefYear(mtefBudgetPeriod));
                 }
 
                 uamp.TempleteSeven.MtefBudgetPeriods = _mtefBudgetPeriods;
@@ -251,114 +249,6 @@ namespace MAM.BusinessLayer.Repositories
             {
                 dataAccess.DeleteSurrenderPlan(surrenderPlan.ConvertToSurrenderPlanTable(surrenderPlan));
                 return true;
-            }
-        }
-
-        public MtefBudgetPeriod SaveMtefYear(MtefBudgetPeriod mtefBudgetPeriod)
-        {
-            using (var dataAccess = new DataAccess.Repositories.MtefYearRepository(appSettings.ConnectionString))
-            {
-
-                DataAccess.Tables.MtefYear mtefYearOne = new DataAccess.Tables.MtefYear()
-                 {
-                     MtefBudgetPeriodId = mtefBudgetPeriod.Id,
-                    Year = 1,
-                    Id = mtefBudgetPeriod.MtefYearOne.Id,
-                    ResultTypeId = mtefBudgetPeriod.MtefYearOne.ResultTypeId,
-                    MtefAllocation = mtefBudgetPeriod.MtefYearOne.MtefAllocation,
-                    RequiredBudget = mtefBudgetPeriod.MtefYearOne.RequiredBudget,
-                    Shortfall = mtefBudgetPeriod.MtefYearOne.Shortfall,
-                };
-                DataAccess.Tables.MtefYear mtefYearTwo = new DataAccess.Tables.MtefYear()
-                {
-                    MtefBudgetPeriodId = mtefBudgetPeriod.Id,
-                    Year = 2,
-                    Id = mtefBudgetPeriod.MtefYearOne.Id,
-                    ResultTypeId = mtefBudgetPeriod.MtefYearOne.ResultTypeId,
-                    MtefAllocation = mtefBudgetPeriod.MtefYearOne.MtefAllocation,
-                    RequiredBudget = mtefBudgetPeriod.MtefYearOne.RequiredBudget,
-                    Shortfall = mtefBudgetPeriod.MtefYearOne.Shortfall,
-                };
-
-                DataAccess.Tables.MtefYear mtefYearThree = new DataAccess.Tables.MtefYear()
-                {
-                    MtefBudgetPeriodId = mtefBudgetPeriod.Id,
-                    Year = 3,
-                    Id = mtefBudgetPeriod.MtefYearOne.Id,
-                    ResultTypeId = mtefBudgetPeriod.MtefYearOne.ResultTypeId,
-                    MtefAllocation = mtefBudgetPeriod.MtefYearOne.MtefAllocation,
-                    RequiredBudget = mtefBudgetPeriod.MtefYearOne.RequiredBudget,
-                    Shortfall = mtefBudgetPeriod.MtefYearOne.Shortfall,
-                };
-
-                 DataAccess.Tables.MtefYear mtefYearFour = new DataAccess.Tables.MtefYear()
-                 {
-                     MtefBudgetPeriodId = mtefBudgetPeriod.Id,
-                     Year = 4,
-                     Id = mtefBudgetPeriod.MtefYearOne.Id,
-                     ResultTypeId = mtefBudgetPeriod.MtefYearOne.ResultTypeId,
-                     MtefAllocation = mtefBudgetPeriod.MtefYearOne.MtefAllocation,
-                     RequiredBudget = mtefBudgetPeriod.MtefYearOne.RequiredBudget,
-                     Shortfall = mtefBudgetPeriod.MtefYearOne.Shortfall,
-                 };
-
-                 DataAccess.Tables.MtefYear mtefYearFive = new DataAccess.Tables.MtefYear()
-                 {
-                     MtefBudgetPeriodId = mtefBudgetPeriod.Id,
-                     Year = 5,
-                     Id = mtefBudgetPeriod.MtefYearOne.Id,
-                     ResultTypeId = mtefBudgetPeriod.MtefYearOne.ResultTypeId,
-                     MtefAllocation = mtefBudgetPeriod.MtefYearOne.MtefAllocation,
-                     RequiredBudget = mtefBudgetPeriod.MtefYearOne.RequiredBudget,
-                     Shortfall = mtefBudgetPeriod.MtefYearOne.Shortfall,
-                 };
-
-                 if (mtefYearOne.Id == 0)
-                 {
-                     mtefBudgetPeriod.MtefYearOne.Id = dataAccess.AddMtefYear(mtefYearOne);
-                 }
-                 else
-                 {
-                     dataAccess.UpdateMtefYear(mtefYearOne);
-                 }
-
-                 if (mtefYearTwo.Id == 0)
-                 {
-                     mtefBudgetPeriod.MtefYearTwo.Id = dataAccess.AddMtefYear(mtefYearTwo);
-                 }
-                 else
-                 {
-                     dataAccess.UpdateMtefYear(mtefYearTwo);
-                 }
-
-                 if (mtefYearThree.Id == 0)
-                 {
-                     mtefBudgetPeriod.MtefYearThree.Id = dataAccess.AddMtefYear(mtefYearThree);
-                 }
-                 else
-                 {
-                     dataAccess.UpdateMtefYear(mtefYearThree);
-                 }
-
-                 if (mtefYearFour.Id == 0)
-                 {
-                     mtefBudgetPeriod.MtefYearFour.Id = dataAccess.AddMtefYear(mtefYearFour);
-                 }
-                 else
-                 {
-                     dataAccess.UpdateMtefYear(mtefYearFour);
-                 }
-
-                 if (mtefYearFive.Id == 0)
-                 {
-                     mtefBudgetPeriod.MtefYearFive.Id = dataAccess.AddMtefYear(mtefYearFive);
-                 }
-                 else
-                 {
-                     dataAccess.UpdateMtefYear(mtefYearFive);
-                 }
-
-                return mtefBudgetPeriod;
             }
         }
 

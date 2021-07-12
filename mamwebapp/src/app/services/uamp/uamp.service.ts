@@ -70,4 +70,10 @@ export class UampService {
   deleteAcquisitionPlan(acquisitionPlan: AcquisitionPlan){
     return this.http.post<boolean>(`${environment.apiUrl}/api/uamp/deleteacquisitionplan`,acquisitionPlan);
   }
+
+  templeteSevenCalclation(uamp: UAMP){
+
+    
+    return uamp;
+  }
 }

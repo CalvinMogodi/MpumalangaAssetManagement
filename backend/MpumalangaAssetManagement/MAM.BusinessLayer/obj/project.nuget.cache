@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "ydhaUCYmr2DMR7Pb9T5zyjHGxpAA0ILzTzqjmFjGf31czK1OA+ueqrhrk3gdjB/GvrGLDT0iHCMIq3mJicg8gw==",
+  "dgSpecHash": "ImQLO0TIEZwQClOnpdP2wcTnIxD+SODbck82Ng/qrzSZ7HMkYj8IYNmy1PKDRa/0LkETyiZdLsjg7puILXnkUA==",
   "success": true,
   "projectFilePath": "C:\\Projects\\MpumalangaAssetManagement\\MpumalangaAssetManagement\\backend\\MpumalangaAssetManagement\\MAM.BusinessLayer\\MAM.BusinessLayer.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\cmogo\\.nuget\\packages\\entityframework\\6.4.4\\entityframework.6.4.4.nupkg.sha512",
     "C:\\Users\\cmogo\\.nuget\\packages\\enums.net\\3.0.3\\enums.net.3.0.3.nupkg.sha512",
     "C:\\Users\\cmogo\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.0\\microsoft.bcl.asyncinterfaces.1.1.0.nupkg.sha512",
     "C:\\Users\\cmogo\\.nuget\\packages\\microsoft.bcl.hashcode\\1.1.0\\microsoft.bcl.hashcode.1.1.0.nupkg.sha512",

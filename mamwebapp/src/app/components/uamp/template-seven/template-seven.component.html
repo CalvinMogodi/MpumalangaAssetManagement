@@ -6,8 +6,8 @@
 <br>
 
 <div class="ui-g ui-fluid">
-    <form>
-        <p-table [value]="[{}]" [responsive]="true">
+    <!--[value]="uamp.templeteSeven.mtefBudgetPeriods"-->
+        <p-table [value]="[{}]" styleClass="p-datatable-striped" [responsive]="true">
             <ng-template pTemplate="header">
                 <tr>
                     <th style="width: 230px;"></th>
@@ -39,12 +39,28 @@
             <ng-template pTemplate="body">
                 <tr>
                     <td colspan="16"><strong>Capital Projects</strong></td>
-                </tr>
+                    <!--<td>{{mtefBudgetPeriod.name}}</td>
+                    <td>{{mtefBudgetPeriod.mtefAllocationY1}}</td>
+                    <td>{{mtefBudgetPeriod.requiredBudgetY1}}</td>
+                    <td>{{mtefBudgetPeriod.shortfallY1}}</td>
+                    <td>{{mtefBudgetPeriod.mtefAllocationY2}}</td>
+                    <td>{{mtefBudgetPeriod.requiredBudgetY2}}</td>
+                    <td>{{mtefBudgetPeriod.shortfallY2}}</td>
+                    <td>{{mtefBudgetPeriod.mtefAllocation}}</td>
+                    <td>{{mtefBudgetPeriod.requiredBudgetY3}}</td>
+                    <td>{{mtefBudgetPeriod.shortfallY3}}</td>
+                    <td>{{mtefBudgetPeriod.mtefAllocationY4}}</td>
+                    <td>{{mtefBudgetPeriod.requiredBudgetY4}}</td>
+                    <td>{{mtefBudgetPeriod.shortfallY4}}</td>
+                    <td>{{mtefBudgetPeriod.mtefAllocationY5}}</td>
+                    <td>{{mtefBudgetPeriod.requiredBudgetY5}}</td>
+                    <td>{{mtefBudgetPeriod.shortfallY5}}</td>
+                </tr>-->
                 <tr>
                     <td>New Capital Works T4.1</td>
                     <td>{{mtefAllocatoion(1, 'mtefAllocatoionT41Y1', 'totalAmountRequired', 'templeteFourPointOne') | currency:'ZAR':'R'}}</td>
                     <td>{{amountRequired(1, 'mtefAllocatoionT41Y1', 'amountRequiredT41Y1', 'templeteFourPointOne') | currency:'ZAR':'R'}}</td>
-                    <td>{{shortfall(1, 'mtefAllocatoionT41Y1', 'amountRequiredT51Y1', 'templeteFourPointOne') | currency:'ZAR':'R'}}</td>
+                    <td>{{shortfall(1, 'mtefAllocatoionT41Y1', 'amountRequiredT41Y1', 'templeteFourPointOne') | currency:'ZAR':'R'}}</td>
                     <td>{{mtefAllocatoion(2, 'mtefAllocatoionT41Y2', 'amountRequiredT41Y1', 'templeteFourPointOne') | currency:'ZAR':'R'}}</td>
                     <td>{{amountRequired(2, 'mtefAllocatoionT41Y2', 'amountRequiredT41Y2', 'templeteFourPointOne') | currency:'ZAR':'R'}}</td>
                     <td>{{shortfall(2, 'mtefAllocatoionT41Y2', 'amountRequiredT41Y2', 'templeteFourPointOne') | currency:'ZAR':'R'}}</td>
@@ -98,19 +114,19 @@
                     <td><strong>% Shortfall</strong></td>
                     <td style="background-color: lightgray;"></td>
                     <td style="background-color: lightgray;"></td>
-                    <td>{{0}}%</td>
+                    <td>{{shortfallCapitalCosts(1) | number : '1.2-2'}} %</td>
                     <td style="background-color: lightgray;"></td>
                     <td style="background-color: lightgray;"></td>
-                    <td>{{0}}%</td>
+                    <td>{{shortfallCapitalCosts(2) | number : '1.2-2'}} %</td>
                     <td style="background-color: lightgray;"></td>
                     <td style="background-color: lightgray;"></td>
-                    <td>{{0}}%</td>
+                    <td>{{shortfallCapitalCosts(3) | number : '1.2-2'}} %</td>
                     <td style="background-color: lightgray;"></td>
                     <td style="background-color: lightgray;"></td>
-                    <td>{{0}}%</td>
+                    <td>{{shortfallCapitalCosts(4) | number : '1.2-2'}} %</td>
                     <td style="background-color: lightgray;"></td>
                     <td style="background-color: lightgray;"></td>
-                    <td>{{0}}%</td>
+                    <td>{{shortfallCapitalCosts(5)| number : '1.2-2'}} %</td>
                 </tr>
                 <tr>
                     <td><strong>Current Expenditure</strong></td>
@@ -132,7 +148,7 @@
                 </tr>
                 <tr>
                     <td>Existing Leases T2.2</td>
-                    <td>{{mtefAllocatoion(1, 'mtefAllocatoionElT22Y1', 'rentalAmountPA', 'templeteTwoPointTwo') | currency:'ZAR':'R'}}</td>
+                    <td>{{mtefAllocatoion(1, 'mtefAllocatoionElT22Y1', 'rentalPA', 'templeteTwoPointTwo') | currency:'ZAR':'R'}}</td>
                     <td>{{amountRequired(1, 'mtefAllocatoionElT22Y1', 'amountRequiredElT22Y1', 'templeteTwoPointTwo') | currency:'ZAR':'R'}}</td>
                     <td>{{shortfall(1, 'mtefAllocatoionElT22Y1', 'amountRequiredElT22Y1', 'templeteTwoPointTwo') | currency:'ZAR':'R'}}</td>
                     <td>{{mtefAllocatoion(2, 'mtefAllocatoionElT22Y2', 'amountRequiredElT22Y1', 'templeteTwoPointTwo') | currency:'ZAR':'R'}}</td>
@@ -294,23 +310,22 @@
                 </tr>
                 <tr>
                     <td><strong>% Shortfall</strong></td>
-                    <td>{{0 | currency:'ZAR':'R'}}</td>
-                    <td>{{0 | currency:'ZAR':'R'}}</td>
-                    <td>{{0 | currency:'ZAR':'R'}}</td>
-                    <td>{{0 | currency:'ZAR':'R'}}</td>
-                    <td>{{0 | currency:'ZAR':'R'}}</td>
-                    <td>{{0 | currency:'ZAR':'R'}}</td>
-                    <td>{{0 | currency:'ZAR':'R'}}</td>
-                    <td>{{0 | currency:'ZAR':'R'}}</td>
-                    <td>{{0 | currency:'ZAR':'R'}}</td>
-                    <td>{{0 | currency:'ZAR':'R'}}</td>
-                    <td>{{0 | currency:'ZAR':'R'}}</td>
-                    <td>{{0 | currency:'ZAR':'R'}}</td>
-                    <td>{{0 | currency:'ZAR':'R'}}</td>
-                    <td>{{0 | currency:'ZAR':'R'}}</td>
-                    <td>{{0 | currency:'ZAR':'R'}}</td>
+                    <td style="background-color: lightgray;"></td>
+                    <td style="background-color: lightgray;"></td>
+                    <td>{{shorfallCapitalWorksAndRecurrentCosts(1) | number : '1.2-2'}} %</td>
+                    <td style="background-color: lightgray;"></td>
+                    <td style="background-color: lightgray;"></td>
+                    <td>{{shorfallCapitalWorksAndRecurrentCosts(2) | number : '1.2-2'}} %</td>
+                    <td style="background-color: lightgray;"></td>
+                    <td style="background-color: lightgray;"></td>
+                    <td>{{shorfallCapitalWorksAndRecurrentCosts(3) | number : '1.2-2'}} %</td>
+                    <td style="background-color: lightgray;"></td>
+                    <td style="background-color: lightgray;"></td>
+                    <td>{{shorfallCapitalWorksAndRecurrentCosts(4) | number : '1.2-2'}} %</td>
+                    <td style="background-color: lightgray;"></td>
+                    <td style="background-color: lightgray;"></td>
+                    <td>{{shorfallCapitalWorksAndRecurrentCosts(5) | number : '1.2-2'}} %</td>
                 </tr>
             </ng-template>
         </p-table>
-    </form>
 </div>
