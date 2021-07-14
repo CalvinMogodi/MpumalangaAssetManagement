@@ -184,7 +184,7 @@
                 </tr>
                 <tr *ngFor="let municipalUtilityService of municipalUtilityServices">
                     <td>Operational Cost: {{municipalUtilityService.name}}</td>
-                    <td>{{mtefAllocatoionMUS(1, 'mtefAllocatoion' + municipalUtilityService.name +'Y1', 'operationalCost', municipalUtilityService.totalCost) | currency:'ZAR':'R'}}</td>
+                    <td>{{mtefAllocatoionMUS(1, 'mtefAllocatoion' + municipalUtilityService.name +'Y1', 'municipalUtilityServiceTotal', municipalUtilityService.totalCost) | currency:'ZAR':'R'}}</td>
                     <td>{{amountRequiredMUS(1, 'mtefAllocatoion' + municipalUtilityService.name +'Y1', 'amountRequired' + municipalUtilityService.name +'Y1', municipalUtilityService.totalCost) | currency:'ZAR':'R'}}</td>
                     <td>{{shortfallMUS(1, 'mtefAllocatoion' + municipalUtilityService.name +'Y1', 'amountRequired' + municipalUtilityService.name +'Y1', municipalUtilityService.totalCost) | currency:'ZAR':'R'}}</td>
                     <td>{{mtefAllocatoionMUS(2, 'mtefAllocatoion' + municipalUtilityService.name +'Y2', 'amountRequired' + municipalUtilityService.name +'Y1', municipalUtilityService.totalCost) | currency:'ZAR':'R'}}</td>
@@ -202,7 +202,7 @@
                 </tr>                
                 <tr>
                     <td>Municipal / Utility Services: State-owned (Electricity, water, sewer & refuse) T2.1</td>
-                    <td>{{mtefAllocatoion(1, 'mtefAllocatoionMsso21Y1', 'municipalUtilityService', 'templeteTwoPointOne') | currency:'ZAR':'R'}}</td>
+                    <td>{{mtefAllocatoion(1, 'mtefAllocatoionMsso21Y1', 'operationalCosts', 'templeteTwoPointOne') | currency:'ZAR':'R'}}</td>
                     <td>{{amountRequired(1, 'mtefAllocatoionMsso21Y1', 'amountRequiredMsso21Y1', 'templeteTwoPointOne') | currency:'ZAR':'R'}}</td>
                     <td>{{shortfall(1, 'mtefAllocatoionMsso21Y1', 'amountRequiredMsso21Y1', 'templeteTwoPointOne') | currency:'ZAR':'R'}}</td>
                     <td>{{mtefAllocatoion(2, 'mtefAllocatoionMsso21Y2', 'amountRequiredMsso21Y1', 'templeteTwoPointOne') | currency:'ZAR':'R'}}</td>
@@ -220,7 +220,7 @@
                 </tr>
                 <tr>
                     <td>Municipal / Utility Services: Leased-in (Electricity, water, sewer & refuse)T2.2</td>
-                    <td>{{mtefAllocatoion(1, 'mtefAllocatoionMsso22Y1', 'operationalCost', 'templeteTwoPointTwo') | currency:'ZAR':'R'}}</td>
+                    <td>{{mtefAllocatoion(1, 'mtefAllocatoionMsso22Y1', 'operationalCosts', 'templeteTwoPointTwo') | currency:'ZAR':'R'}}</td>
                     <td>{{amountRequired(1, 'mtefAllocatoionMsso22Y1', 'amountRequiredMsso22Y1', 'templeteTwoPointTwo') | currency:'ZAR':'R'}}</td>
                     <td>{{shortfall(1, 'mtefAllocatoionMsso22Y1', 'amountRequiredMsso22Y1', 'templeteTwoPointTwo') | currency:'ZAR':'R'}}</td>
                     <td>{{mtefAllocatoion(2, 'mtefAllocatoionMsso22Y2', 'amountRequiredMsso22Y1', 'templeteTwoPointTwo') | currency:'ZAR':'R'}}</td>
