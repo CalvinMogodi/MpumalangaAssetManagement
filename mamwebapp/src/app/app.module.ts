@@ -21,6 +21,7 @@ import { UserComponent } from './components/user/user.component';
 import { AddUserComponent } from './components/user/add-user/add-user.component';
 import { AssetregisterComponent } from './components/assetregister/assetregister.component'
 import { UampComponent } from './components/uamp/uamp.component';
+import { CampComponent } from './components/camp/camp.component';
 import { ViewUampComponent } from './components/uamp/view-uamp/view-uamp.component'; 
 import { TemplateOneComponent } from './components/uamp/template-one/template-one.component';
 import { TemplateTwoTwoComponent } from './components/uamp/template-two-two/template-two-two.component';
@@ -33,6 +34,7 @@ import { TemplateFiveThreeComponent } from './components/uamp/template-five-thre
 import { TemplateFiveTwoComponent } from './components/uamp/template-five-two/template-five-two.component';
 import { TemplateSevenComponent } from './components/uamp/template-seven/template-seven.component';
 import { TemplateSixComponent } from './components/uamp/template-six/template-six.component';
+import { ToggleButtonModule } from 'primeng/togglebutton';
 import { AddMunicipalUtilityServicesComponent } from './components/uamp/template-two-one/add-municipal-utility-services/add-municipal-utility-services';
 import { NgxPrintModule } from 'ngx-print';
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
@@ -70,6 +72,17 @@ import { LandComponent } from './components/assetregister/addassetregister/land/
 import { CalendarModule } from 'primeng/calendar';
 import { SplitButtonModule } from 'primeng/splitbutton';
 import { PrintAssetComponent } from './components/assetregister/print-asset/print-asset.component';
+import { SelectButtonModule } from 'primeng/selectbutton';
+import { FilterService } from 'primeng/api';
+import { PrimeNGConfig } from 'primeng/api';
+import { PasswordModule } from 'primeng/password';
+import { InputSwitchModule } from 'primeng/inputswitch';
+
+
+import {SliderModule} from 'primeng/slider';
+import {ContextMenuModule} from 'primeng/contextmenu';
+import {ProgressBarModule} from 'primeng/progressbar';
+import {InputTextModule} from 'primeng/inputtext';
 
 @NgModule({
   declarations: [
@@ -101,6 +114,7 @@ import { PrintAssetComponent } from './components/assetregister/print-asset/prin
     TemplateSevenComponent,
     AddMunicipalUtilityServicesComponent,
     UampComponent,  
+    CampComponent
   ],
   imports: [
     BrowserModule,
@@ -139,11 +153,21 @@ import { PrintAssetComponent } from './components/assetregister/print-asset/prin
     NgxPrintModule,
     InputNumberModule,
     DynamicDialogModule,
-    PanelModule
+    PanelModule,
+		SliderModule,
+		DialogModule,
+		MultiSelectModule,
+		ContextMenuModule,		
+    InputTextModule,
+    ProgressBarModule,
+    PasswordModule,
+    SelectButtonModule,
+    ToggleButtonModule,
+    InputSwitchModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    CurrencyPipe,
+    CurrencyPipe,FilterService,PrimeNGConfig,
     AddMunicipalUtilityServicesComponent
   ],
   bootstrap: [AppComponent],

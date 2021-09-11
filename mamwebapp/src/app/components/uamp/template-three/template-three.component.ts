@@ -16,6 +16,8 @@ import { first } from 'rxjs/operators';
   providers: [MessageService]
 })
 export class TemplateThreeComponent implements OnInit {
+  showFields: boolean = false;
+  rowGroupMetadata: any;
   strategicAssessments: Array<StrategicAssessment> = [];
   @Input() properties: Facility[];
   assessmentStrategicForm: FormGroup;
@@ -39,6 +41,8 @@ export class TemplateThreeComponent implements OnInit {
 
   ngOnInit() {
     this.assessmentStrategicForm = this.formBuilder.group({
+      district: [''],
+      position: [''],
       postDescriptionTitle: [''],
       allocatedSpace: [''],
       fbpLevel: [''],
@@ -66,6 +70,7 @@ export class TemplateThreeComponent implements OnInit {
     const aoRequirement = (this.assessmentStrategicForm.controls["aoNorm"].value * this.assessmentStrategicForm.controls["aoQuantity"].value);
     const strategicAssessment: StrategicAssessment = {
       id: this.selectedStrategicAssessment.id,
+      district: this.assessmentStrategicForm.controls["district"].value,
       postDescriptionTitle: this.assessmentStrategicForm.controls["postDescriptionTitle"].value,
       allocatedSpace: allocatedSpace,
       userImmovableAssetManagementPlanId: this.uamp.id,
@@ -88,8 +93,16 @@ export class TemplateThreeComponent implements OnInit {
     this.resetForm();
   }
 
+  onBlurDistrict(){
+      const district = this.assessmentStrategicForm.controls["district"].value;
+      if(district){
+        this.showFields = district.length > 2 ? true : false;
+      }      
+  }
+
   update() {
     this.assessmentStrategicForm = this.formBuilder.group({
+      district: [this.selectedStrategicAssessment.district],
       postDescriptionTitle: [this.selectedStrategicAssessment.postDescriptionTitle],
       allocatedSpace: [this.selectedStrategicAssessment.allocatedSpace],
       fbpLevel: [this.selectedStrategicAssessment.fbpLevel],
@@ -132,9 +145,11 @@ export class TemplateThreeComponent implements OnInit {
   addStrategicNeedsAssessment() {
     const allocatedSpace = this.assessmentStrategicForm.controls["allocatedSpace"].value;
     const aoRequirement = (this.assessmentStrategicForm.controls["aoNorm"].value * this.assessmentStrategicForm.controls["aoQuantity"].value);
+    
     const strategicAssessment: StrategicAssessment = {
       id: 0,
       postDescriptionTitle: this.assessmentStrategicForm.controls["postDescriptionTitle"].value,
+      district: this.assessmentStrategicForm.controls["district"].value,
       allocatedSpace: allocatedSpace,
       userImmovableAssetManagementPlanId: this.uamp.id,
       surplusShortageAccommodation: (allocatedSpace - aoRequirement),
@@ -164,5 +179,30 @@ export class TemplateThreeComponent implements OnInit {
 
   resetForm() {
     this.assessmentStrategicForm.reset();
+  }
+
+  onSort() {
+    this.updateRowGroupMetaData();
+  }
+
+  updateRowGroupMetaData() {
+    this.rowGroupMetadata = {};
+    if (this.strategicAssessments) {
+        for (let i = 0; i < this.strategicAssessments.length; i++) {
+            let rowData = this.strategicAssessments[i];
+            let district = rowData.district;
+            if (i == 0) {
+                this.rowGroupMetadata[district] = { index: 0, size: 1 };
+            }
+            else {
+                let previousRowData = this.strategicAssessments[i - 1];
+                let previousRowGroup = previousRowData.district;
+                if (district === previousRowGroup)
+                    this.rowGroupMetadata[district].size++;
+                else
+                    this.rowGroupMetadata[district] = { index: i, size: 1 };
+            }
+        }
+    }
   }
 }

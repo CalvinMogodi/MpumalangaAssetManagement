@@ -23,3 +23,15 @@ header{
   th small{
     font-weight: normal;
   }
+
+  .red{
+    color: red;
+  }
+
+  .textColor{
+    color: #333333;
+  }
+
+  .inputtext{
+    border: 1px solid #a6a6a6 !important;
+  }

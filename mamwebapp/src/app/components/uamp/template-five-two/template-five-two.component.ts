@@ -16,6 +16,7 @@ import { element } from 'protractor';
 export class TemplateFiveTwoComponent implements OnInit {
   operationPlans: Array<OperationPlan> = [];
   operationPlanForm: FormGroup;
+  newOperationPlanForm: FormGroup;
   prioities: any[];
   initialNeedYears: any[];
   uamp: UAMP;
@@ -28,15 +29,31 @@ export class TemplateFiveTwoComponent implements OnInit {
       }    
       this.operationPlans = [];
       this.uamp.templeteFivePointTwo.operationPlans.forEach( element => {
-        if(element.prioityServiceReanking)
+        if(element.priorityServiceRanking)
           element.initialNeedYearObj =  this.initialNeedYears.filter(p => p.name == element.initialNeedYear)[0];
-          element.prioityServiceReankingObj =  this.prioities.filter(p => p.name == element.prioityServiceReanking)[0];
+          element.priorityServiceRankingObj =  this.prioities.filter(p => p.name == element.priorityServiceRanking)[0];
         this.operationPlans.push(element);
       });
     });
   }
 
   ngOnInit() {
+
+    this.newOperationPlanForm = this.formBuilder.group({
+      districtRegion: [''],
+      town: [''],
+      localMunicipality: [''],
+      assetDescription: [''],
+      repairDescription: [''],
+      priorityServiceRanking: [''],
+      initialNeedYear: [''],
+      cashFlowYear1: [''],
+      cashFlowYear2: [''],
+      cashFlowYear3: [''],
+      cashFlowYear4: [''],
+      cashFlowYear5: [''],
+      totalAmountRequired: ['']
+    });
     this.prioities = [
       { name: 'Extremely Critical 1', code: 'C1', factor: 1 },
       { name: '2', code: 'C2', factor: 2 },
@@ -119,9 +136,55 @@ export class TemplateFiveTwoComponent implements OnInit {
   }
 
   onPrioityServiceReankingChange(operationPlan: OperationPlan, e){
-    operationPlan.prioityServiceReanking = e.value.name;   
+    operationPlan.priorityServiceRanking = e.value.name;   
   }
   onInitialNeedYearChange(operationPlan: OperationPlan, e){
     operationPlan.initialNeedYear = Number(e.value.name); 
   }
+
+  calculateDbTotalAmountRequired(operationPlan: OperationPlan){
+    let total = 0;
+    let year1 = operationPlan.cashFlowYear1;
+    let year2 = operationPlan.cashFlowYear2;
+    let year3 = operationPlan.cashFlowYear3;
+    let year4 = operationPlan.cashFlowYear4;
+    let year5 = operationPlan.cashFlowYear5;
+
+    if(year1)
+      total = total + year1;
+      if(year2)
+      total = total + year2;
+      if(year3)
+      total = total + year3;
+      if(year4)
+      total = total + year4;
+      if(year5)
+      total = total + year5;
+
+      return total;
+
+  }
+
+  calculateTotalAmountRequired(){
+    const year1 = this.newOperationPlanForm.controls["cashFlowYear1"].value;
+    const year2 = this.newOperationPlanForm.controls["cashFlowYear2"].value;
+    const year3 = this.newOperationPlanForm.controls["cashFlowYear3"].value;
+    const year4 = this.newOperationPlanForm.controls["cashFlowYear4"].value;
+    const year5 = this.newOperationPlanForm.controls["cashFlowYear5"].value;
+    let total = 0;
+
+      if(year1)
+        total = total + year1;
+      if(year2)
+      total = total + year2;
+      if(year3)
+      total = total + year3;
+      if(year4)
+      total = total + year4;
+      if(year5)
+      total = total + year5;
+
+      this.newOperationPlanForm.controls["totalAmountRequired"].setValue(total);  
+  }
+
 }

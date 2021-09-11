@@ -15,8 +15,7 @@ import { TempleteTwoPointOne } from 'src/app/models/templetes/templete-two-point
   styleUrls: ['./uamp.component.css'],
   providers: [MessageService],
 })
-export class UampComponent implements OnInit {
-
+export class UampComponent implements OnInit { 
   templeteTwoPointOne: TempleteTwoPointOne;
   properties: any[] = [];
   generatingUamp: boolean = true;
@@ -61,7 +60,7 @@ export class UampComponent implements OnInit {
   }
 
 
-  ngOnInit() {
+  ngOnInit() {  
     this.authenticationService.currentUser.pipe().subscribe(x => {
       this.currentUser = x;
     });

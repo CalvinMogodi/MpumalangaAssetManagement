@@ -9,9 +9,9 @@ export class OperationPlan {
     localMunicipality: String;
     assetDescription: String;
     repairDescription: String;
-    prioityServiceReanking: String;
+    priorityServiceRanking: String;
     initialNeedYearObj: any;
-    prioityServiceReankingObj: any;
+    priorityServiceRankingObj: any;
     streetDescription: String;
     propertyDescription: String;
     leaseType: String;
@@ -25,11 +25,12 @@ export class OperationPlan {
     rentalPA?: Number;
     initialNeedYear?: Number;
     status: String;
-    totalAmountRequired?: Number;
-    cashFlowYear1?: Number;
-    cashFlowYear2?: Number;
-    cashFlowYear3?: Number;
-    cashFlowYear4?: Number;
-    cashFlowYear5?: Number;
+    totalAmountRequired?: number;
+    cashFlowYear1?: number;
+    cashFlowYear2?: number;
+    cashFlowYear3?: number;
+    cashFlowYear4?: number;
+    cashFlowYear5?: number;
     comment: String;
+    leased: boolean;
 }

@@ -305,7 +305,7 @@ namespace MAM.BusinessLayer.Repositories
                         OldStreetAddress = f.Land.GeographicalLocation != null ? string.Format("{0} {1} {2} {3}", f.Land.GeographicalLocation.StreetNumber, f.Land.GeographicalLocation.StreetName, f.Land.GeographicalLocation.Suburb, f.Land.GeographicalLocation.Province) : null,
                         CurrentStreetAddress = f.Land.GeographicalLocation != null ? string.Format("{0} {1} {2} {3}", f.Land.GeographicalLocation.StreetNumber, f.Land.GeographicalLocation.StreetName, f.Land.GeographicalLocation.Suburb, f.Land.GeographicalLocation.Province) : null,
                         PropertyDescription = f.Land.PropertyDescription != null ? f.Land.PropertyDescription.OldDescription : null,
-                        AssetType = f.Type,
+                        AssetType = f.Land.Type,
                         ExtentofLand = f.Land.PropertyDescription != null ? f.Land.PropertyDescription.Extent : null,
                         MunicipalUtilityServices = new List<MunicipalUtilityService>(),
                     }).ToList(),
@@ -314,14 +314,14 @@ namespace MAM.BusinessLayer.Repositories
                 uamp.TempleteTwoPointTwo = new TempleteTwoPointTwo
                 {
                     Id = 0,
-                    Properties = facilities.Select(f => new Property()
+                    Properties = facilities.Where(f => f.Land.LandUseManagementDetail.IncomeLeaseStatus == "Yes").Select(f => new Property()
                     {
                         Id = 0,
                         UserImmovableAssetManagementPlanId = uamp.Id,
                         TempleteNumber = 2.2,
                         FileReferenceNo = f.FileReference,
                         SerialNo = f.FileReference,
-                        AssetType = f.Type,
+                        AssetType = f.Land.Type,
                         DistrictRegion = f.Land.GeographicalLocation != null ? f.Land.GeographicalLocation.Region : null,
                         Town = f.Land.GeographicalLocation != null ? f.Land.GeographicalLocation.Town : null,
                         LocalAuthority = f.Land.GeographicalLocation != null ? f.Land.GeographicalLocation.LocalAuthority : null,
@@ -419,7 +419,7 @@ namespace MAM.BusinessLayer.Repositories
             uamp = SaveTempleteFour(uamp);
             uamp = SaveTempleteFive(uamp);
             uamp = SaveTempleteSix(uamp);
-            uamp = SaveTempleteSeven(uamp);
+            //uamp = SaveTempleteSeven(uamp);
             uamp.User = GetUserById(uamp.UserId);
             return uamp;
         }

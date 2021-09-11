@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { FormGroup, FormBuilder, FormArray, FormControl, Validators } from '@angular/forms';
-import { Facility } from 'src/app/models/facility.model';
 import { UampService } from 'src/app/services/uamp/uamp.service';
 import { OperationPlan } from 'src/app/models/operation-plan.model';
 import { UAMP } from 'src/app/models/uamp.model';
@@ -15,6 +14,7 @@ import { UAMP } from 'src/app/models/uamp.model';
 export class TemplateFiveThreeComponent implements OnInit {
   operationPlans: Array<OperationPlan> = [];
   operationPlanForm: FormGroup;
+  leaseTypes: any[];
   prioities: any[];
   uamp: UAMP;
   
@@ -35,7 +35,25 @@ export class TemplateFiveThreeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.createForm();
+    this.prioities = [
+      { name: 'Extremely Critical 1', code: 'C1', factor: 1 },
+      { name: '2', code: 'C2', factor: 2 },
+      { name: '3', code: 'C3', factor: 3 },
+      { name: '4', code: 'C4', factor: 4 },
+      { name: '5', code: 'C5', factor: 5 },
+      { name: '6', code: 'C2', factor: 6 },
+      { name: '7', code: 'C3', factor: 7 },
+      { name: '8', code: 'C4', factor: 8 },
+      { name: '9', code: 'C5', factor: 9 },
+      { name: 'Defer 10', code: 'C5', factor: 10 },
+    ];
+
+    this.leaseTypes = [
+      { name: 'Land', code: 'L', factor: 1 },
+      { name: 'Office', code: 'O', factor: 2 },
+      { name: 'Residential', code: 'R', factor: 3 },
+      { name: 'Packing', code: 'P', factor: 4 },
+    ];
   }
 
   private createForm(): void {

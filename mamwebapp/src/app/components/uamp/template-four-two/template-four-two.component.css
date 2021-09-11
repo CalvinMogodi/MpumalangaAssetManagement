@@ -10,3 +10,7 @@ header{
       color: white;
       margin: -8px -15px 0px -15px;
   }
+  
+  .ui-inputtext {
+    width: 90% !important;
+  }

@@ -1,3 +1,16 @@
+:host ::ng-deep .p-rowgroup-footer td {
+  font-weight: 700;
+}
+
+:host ::ng-deep .p-rowgroup-header .p-row-toggler{
+    vertical-align: middle;
+    margin-right: .25rem;      
+}
+
+:host ::ng-deep .p-rowgroup-header span {
+  font-weight: 700;
+}
+
 header{
     font-size: larger;
     font-weight: normal;
@@ -23,3 +36,20 @@ header{
   th small{
     font-weight: normal;
   }
+
+  .inputOnDataTable input
+{
+    width: 70px !important;   
+}
+
+.inputPeso input
+{
+    width: 20px !important;   
+    margin-left: 20px;
+    float: left;
+}
+
+.w-140{
+  width: 140px !important;
+}
+  

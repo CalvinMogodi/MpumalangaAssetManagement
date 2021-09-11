@@ -9,6 +9,7 @@ namespace MAM.BusinessLayer.Models
     {
         public int Id { get; set; }
         public int UserImmovableAssetManagementPlanId { get; set; }
+        public string District { get; set; }
         public string PostDescriptionTitle { get; set; }
         public double? AllocatedSpace { get; set; }
         public double? SurplusShortageAccommodation { get; set; }
@@ -46,6 +47,7 @@ namespace MAM.BusinessLayer.Models
             {
                 Id = s.Id,
                 UserImmovableAssetManagementPlanId = s.UserImmovableAssetManagementPlanId,
+                District = s.District,
                 PostDescriptionTitle = s.PostDescriptionTitle,
                 AllocatedSpace = s.AllocatedSpace,
                 SurplusShortageAccommodation = s.SurplusShortageAccommodation,

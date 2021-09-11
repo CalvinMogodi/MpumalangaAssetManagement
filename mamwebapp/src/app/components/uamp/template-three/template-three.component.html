@@ -7,69 +7,110 @@
 <br>
 <br>
 <div class="ui-g ui-fluid">
+    
     <form [formGroup]="assessmentStrategicForm">
-        <div class="ui-g-12 ui-md-12">
-            <div class="ui-g-6 ui-md-6" style="margin-top: 25px;">
-                <div class="ui-g-6 ui-md-6">
-                    <small for="postDescriptionTitle">Post Description/ Title</small>
-                    <input formControlName="postDescriptionTitle" autocomplete="off" type="text" pInputText
-                        class="ui-inputtext ui-widget">
-                </div>
-                <div class="ui-g-6 ui-md-6">
-                    <small for="allocatedSpace">Allocated Space</small>
-                    <p-inputNumber formControlName="allocatedSpace"></p-inputNumber>
-                    <small>As per usable office space</small>
-                </div>
+        <div class="formgrid grid">
+            <div class="field col-6">
+                <small for="district">District</small>
+                <input (keydown)="onBlurDistrict()" formControlName="district" autocomplete="off" type="text" pInputText
+                    class="ui-inputtext ui-widget w-full">
             </div>
         </div>
 
-        <div class="ui-g-12 ui-md-12">
-            <div class="ui-g-6 ui-md-6">
-                <div>Requirements in Terms of filled & budgeted Posts</div>
-                <div>
-                    <div class="ui-g-4 ui-md-4">
-                        <small>Level</small>
-                        <p-inputNumber formControlName="fbpLevel"></p-inputNumber>
-                    </div>
-                    <div class="ui-g-4 ui-md-4">
-                        <small>Quantity</small>
-                        <p-inputNumber formControlName="fbpQuantity"></p-inputNumber>
-                    </div>
-                    <div class="ui-g-4 ui-md-4">
-                        <small>Norm</small>
-                        <p-inputNumber formControlName="fbpNorm"></p-inputNumber>
-                    </div>
+        <p-fieldset legend="Add post" [hidden]="!showFields" [toggleable]="true">
+     
+        <div class="formgrid grid pt-5"> 
+            <div class="field col-6" >
+                <span class="p-float-label p-input-icon-left w-full">
+                    <input formControlName="postDescriptionTitle" autocomplete="off" type="text" pInputText
+                        class="ui-inputtext ui-widget w-full pr-3" >
+                    <label for="float-input">Post Description/ Title</label>
+                </span>
+            </div>
+
+            <div class="field col-6">
+                <label for="allocatedSpace" class="col-fixed">Allocated Space</label>
+                <p-inputNumber formControlName="allocatedSpace" [showButtons]="true" buttonLayout="horizontal"
+                    spinnerMode="horizontal" decrementButtonClass="p-button-danger"
+                    incrementButtonClass="p-button-success" incrementButtonIcon="pi pi-plus"
+                    decrementButtonIcon="pi pi-minus" class="inputtext"></p-inputNumber>         
+                    <br>         
+               <!--<small class="w-full" style="text-align: end;margin-left: 47%;">As per usable office space</small>--> 
+            </div>
+            
+        </div>
+
+        <div class="formgrid grid"> 
+            <div class="col-6 pr-5" >
+                <span class="mb-5">Requirements in Terms of filled & budgeted Posts</span>
+                <br>
+                <div class="formgrid grid">
+                <div class="field col-4">
+                    <label for="fbpLevel" class="col-fixed">Level</label>
+                    <p-inputNumber [inputStyle]="{'width':'6rem'}" formControlName="fbpLevel" [showButtons]="true" buttonLayout="horizontal"
+                        spinnerMode="horizontal" decrementButtonClass="p-button-danger"
+                        incrementButtonClass="p-button-success" incrementButtonIcon="pi pi-plus"
+                        decrementButtonIcon="pi pi-minus" class="inputtext"></p-inputNumber>                        
+                </div>
+                <div class="field col-4">
+                    <label for="fbpQuantity" class="col-fixed">Quantity</label>
+                        <p-inputNumber [inputStyle]="{'width':'6rem'}" formControlName="fbpQuantity" [showButtons]="true" buttonLayout="horizontal"
+                            spinnerMode="horizontal" decrementButtonClass="p-button-danger"
+                            incrementButtonClass="p-button-success" incrementButtonIcon="pi pi-plus"
+                            decrementButtonIcon="pi pi-minus" class="inputtext"></p-inputNumber>                        
+                </div>
+                <div class="field col-4">
+                    <label for="fbpNorm"  class="col-fixed">Norm</label>
+                        <p-inputNumber [inputStyle]="{'width':'6rem'}" formControlName="fbpNorm" [showButtons]="true" buttonLayout="horizontal"
+                            spinnerMode="horizontal" decrementButtonClass="p-button-danger"
+                            incrementButtonClass="p-button-success" incrementButtonIcon="pi pi-plus"
+                            decrementButtonIcon="pi pi-minus" class="inputtext"></p-inputNumber>                        
                 </div>
             </div>
-            <div class="ui-g-6 ui-md-6">
-                <div>Requirements in Terms of Approved Organogram</div>
-                <div class="ui-g-12 ui-md-12">
-                    <div class="ui-g-4 ui-md-4">
-                        <small>Level</small>
-                        <p-inputNumber formControlName="aoLevel"></p-inputNumber>
-                    </div>
-                    <div class="ui-g-4 ui-md-4">
-                        <small>Quantity</small>
-                        <p-inputNumber formControlName="aoQuantity"></p-inputNumber>
-                    </div>
-                    <div class="ui-g-4 ui-md-4">
-                        <small>Norm</small>
-                        <p-inputNumber formControlName="aoNorm"></p-inputNumber>
-                    </div>
+            </div>
+            <div class="col-6">
+                <span>Requirements in Terms of Approved Organogram</span><br>
+                <div class="formgrid grid">
+                <div class="field col-4">
+                    <label for="aoLevel" class="col-fixed">Level</label>
+                    <p-inputNumber [inputStyle]="{'width':'6rem'}" formControlName="aoLevel" [showButtons]="true" buttonLayout="horizontal"
+                        spinnerMode="horizontal" decrementButtonClass="p-button-danger"
+                        incrementButtonClass="p-button-success" incrementButtonIcon="pi pi-plus"
+                        decrementButtonIcon="pi pi-minus" class="inputtext"></p-inputNumber> 
+                </div>
+
+                <div class="field col-4">
+                        <label for="float-input" class="col-fixed w-4">Quantity</label>
+                        <p-inputNumber [inputStyle]="{'width':'6rem'}" formControlName="aoQuantity" [showButtons]="true" buttonLayout="horizontal"
+                            spinnerMode="horizontal" decrementButtonClass="p-button-danger"
+                            incrementButtonClass="p-button-success" incrementButtonIcon="pi pi-plus"
+                            decrementButtonIcon="pi pi-minus" class="inputtext"></p-inputNumber>   
+                </div>
+
+                <div class="field col-4">
+                        <label for="float-input" class="col-fixed w-4">Norm</label>
+                        <p-inputNumber [inputStyle]="{'width':'6rem'}" formControlName="aoNorm" [showButtons]="true" buttonLayout="horizontal"
+                            spinnerMode="horizontal" decrementButtonClass="p-button-danger"
+                            incrementButtonClass="p-button-success" incrementButtonIcon="pi pi-plus"
+                            decrementButtonIcon="pi pi-minus" class="inputtext"></p-inputNumber>       
                 </div>
             </div>
+            </div> 
         </div>
-        <div class="ui-g-12 ui-md-12">
-            <button *ngIf="!isEdit" pButton type="button" icon="pi pi-plus" label="Add Strategic Assessment" (click)="addStrategicNeedsAssessment()"
-                style="float: right;width: fit-content;"></button>
-            <button pButton *ngIf="isEdit" type="button" icon="pi pi-pencil" label="Update Strategic Assessment" (click)="onUpdate()"
-                style="float: right;width: fit-content;"></button>
+        <div class="formgrid grid" > 
+            <div class="ui-g-12 ui-md-12">
+                <button *ngIf="!isEdit" pButton type="button" icon="pi pi-plus" label="Add Strategic Assessment"
+                    (click)="addStrategicNeedsAssessment()" style="width: fit-content;"></button>
+                <button pButton *ngIf="isEdit" type="button" icon="pi pi-pencil" label="Update Strategic Assessment"
+                    (click)="onUpdate()" style="width: fit-content;"></button>
+            </div>
         </div>
+    </p-fieldset>
     </form>
 
     <div class="ui-g ui-fluid">
 
-        <p-table [value]="strategicAssessments" styleClass="p-datatable-striped" [responsive]="true">
+        <p-table [value]="strategicAssessments" styleClass="p-datatable-striped" [responsive]="true" sortField="district" sortMode="single" (onSort)="onSort()">
             <ng-template pTemplate="header">
                 <tr>
                     <th></th>
@@ -95,7 +136,12 @@
                     <th></th>
                 </tr>
             </ng-template>
-            <ng-template pTemplate="body" let-strategicNeedsAssessment>
+            <ng-template pTemplate="body" let-strategicNeedsAssessment let-rowIndex="rowIndex">
+                <tr class="ui-widget-header" *ngIf="rowGroupMetadata[strategicNeedsAssessment.district].index === rowIndex">
+                    <td colspan="13">
+                        <span style="font-weight:bold">{{strategicNeedsAssessment.district}}</span>
+                    </td>
+                </tr>
                 <tr>
                     <td>{{strategicNeedsAssessment.postDescriptionTitle}}</td>
                     <td>{{strategicNeedsAssessment.fbpLevel}}</td>
@@ -108,10 +154,12 @@
                     <td>{{strategicNeedsAssessment.aoRequirement}}</td>
                     <td>{{strategicNeedsAssessment.allocatedSpace}}</td>
                     <td>{{strategicNeedsAssessment.surplusShortageAccommodation}}</td>
-                    <td>{{strategicNeedsAssessment.percentageUtilised | number : '1.2-2'}}%</td>
+                    <td [ngClass]="strategicNeedsAssessment.percentageUtilised > 0 ? 'textColor' : 'red'">
+                        {{strategicNeedsAssessment.percentageUtilised | number : '1.2-2'}}%</td>
                     <td style="text-align: center;" *ngIf="strategicAssessments.length > 0">
                         <p-splitButton label="More" *ngIf="mode != 'View'" [model]="buttonItems"
-                            (onDropdownClick)="selectStrategicNeedsAssessment(strategicNeedsAssessment)" styleClass="p-button-secondary">
+                            (onDropdownClick)="selectStrategicNeedsAssessment(strategicNeedsAssessment)"
+                            styleClass="p-button-secondary">
                         </p-splitButton>
                     </td>
                 </tr>
@@ -122,11 +170,13 @@
 
 
 <div *ngIf="showComfirmationDelete" class="dialogBackgroud"></div>
-<p-dialog header="Confirmation" [(visible)]="showComfirmationDelete" [breakpoints]="{'960px': '75vw'}" [style]="{width: '25vw'}" [baseZIndex]="10000" 
-    [draggable]="false" [resizable]="false">
+<p-dialog header="Confirmation" [(visible)]="showComfirmationDelete" [breakpoints]="{'960px': '75vw'}"
+    [style]="{width: '25vw'}" [baseZIndex]="10000" [draggable]="false" [resizable]="false">
     <p>Are you sure that you want to delete this strategic assessment?</p>
     <p-footer>
-            <button style="float: left;" (click)="showComfirmationDelete=false" pButton type="button" label="No" class="ui-button-info"></button>
-            <button style="float: right;" (click)="showComfirmationDelete=false;deleteStrategicAssessment()" pButton type="button" label="Yes" class="ui-button-info"></button>
+        <button style="float: left;" (click)="showComfirmationDelete=false" pButton type="button" label="No"
+            class="ui-button-info"></button>
+        <button style="float: right;" (click)="showComfirmationDelete=false;deleteStrategicAssessment()" pButton
+            type="button" label="Yes" class="ui-button-info"></button>
     </p-footer>
 </p-dialog>

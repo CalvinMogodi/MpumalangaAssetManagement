@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  //apiUrl:'https://localhost:44391'
-  apiUrl: 'https://amethysthemisphere.dedicated.co.za:81'
+  apiUrl:'https://localhost:44391'
+  //apiUrl: 'https://amethysthemisphere.dedicated.co.za:81'
 };
 
 /*

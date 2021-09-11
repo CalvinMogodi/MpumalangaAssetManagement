@@ -89,12 +89,12 @@ namespace MAM.BusinessLayer.Models
                 TempleteTwoPointOne = new TempleteTwoPointOne()
                 {
                     Id = 0,
-                    Properties = new List<Property>()//  uamp.Properties != null ? Property.ConvertToProperties(uamp.Properties.Where(p => p.UserImmovableAssetManagementPlanId == uamp.Id && p.TempleteNumber == 2.1).ToList()) : new List<Property>(),
+                    Properties = uamp.Properties != null ? Property.ConvertToProperties(uamp.Properties.Where(p => p.UserImmovableAssetManagementPlanId == uamp.Id && p.TempleteNumber == 2.1).ToList()) : new List<Property>(),
                 },
                 TempleteTwoPointTwo = new TempleteTwoPointTwo()
                 {
                     Id = 0,
-                    Properties = new List<Property>()//uamp.Properties != null ? Property.ConvertToProperties(uamp.Properties.Where(p => p.UserImmovableAssetManagementPlanId == uamp.Id && p.TempleteNumber == 2.2).ToList()) : new List<Property>(),
+                    Properties = uamp.Properties != null ? Property.ConvertToProperties(uamp.Properties.Where(p => p.UserImmovableAssetManagementPlanId == uamp.Id && p.TempleteNumber == 2.2).ToList()) : new List<Property>(),
                 },
                 TempleteThree = new TempleteThree()
                 {
@@ -114,17 +114,17 @@ namespace MAM.BusinessLayer.Models
                 TempleteFivePointOne = new TempleteFivePointOne()
                 {
                     Id = 0,
-                    OperationPlans = new List<OperationPlan>()// uamp.OperationPlans.Count > 0 ? OperationPlan.ConvertToOperationPlans(uamp.OperationPlans.Where(p => p.UserImmovableAssetManagementPlanId == uamp.Id && p.TempleteNumber == 5.1).ToList()) : new List<OperationPlan>(),
+                    OperationPlans = uamp.OperationPlans.Count > 0 ? OperationPlan.ConvertToOperationPlans(uamp.OperationPlans.Where(p => p.UserImmovableAssetManagementPlanId == uamp.Id && p.TempleteNumber == 5.1).ToList()) : new List<OperationPlan>(),
                 },
                 TempleteFivePointTwo = new TempleteFivePointTwo()
                 {
                     Id = 0,
-                    OperationPlans = new List<OperationPlan>()// uamp.OperationPlans.Count > 0 ? OperationPlan.ConvertToOperationPlans(uamp.OperationPlans.Where(p => p.UserImmovableAssetManagementPlanId == uamp.Id && p.TempleteNumber == 5.2).ToList()) : new List<OperationPlan>(),
+                    OperationPlans = uamp.OperationPlans.Count > 0 ? OperationPlan.ConvertToOperationPlans(uamp.OperationPlans.Where(p => p.UserImmovableAssetManagementPlanId == uamp.Id && p.TempleteNumber == 5.2).ToList()) : new List<OperationPlan>(),
                 },
                 TempleteFivePointThree = new TempleteFivePointThree()
                 {
                     Id = 0,
-                    OperationPlans = new List<OperationPlan>()// uamp.OperationPlans.Count > 0 ? OperationPlan.ConvertToOperationPlans(uamp.OperationPlans.Where(p => p.UserImmovableAssetManagementPlanId == uamp.Id && p.TempleteNumber == 5.3).ToList()) : new List<OperationPlan>(),
+                    OperationPlans = uamp.OperationPlans.Count > 0 ? OperationPlan.ConvertToOperationPlans(uamp.OperationPlans.Where(p => p.UserImmovableAssetManagementPlanId == uamp.Id && p.TempleteNumber == 5.3).ToList()) : new List<OperationPlan>(),
                 },
                 TempleteSix = new TempleteSix()
                 {

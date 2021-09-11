@@ -41,6 +41,7 @@ export class HeaderComponent implements OnInit {
   error = '';
   currentUser: User;
   showSideMenu: boolean = true;
+  newPassword: string = '';
 
   constructor(private router: Router,
     private messageService: MessageService,

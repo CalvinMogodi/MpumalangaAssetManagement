@@ -1,6 +1,7 @@
 export class AcquisitionPlan {
     id: Number;
     userImmovableAssetManagementPlanId: Number;
+    prooertyId: Number;
     templeteNumber: Number;
     districtRegion: String;
     town: String;
@@ -11,8 +12,9 @@ export class AcquisitionPlan {
     acquisitionType: String;
     status: String;
     totalAmountRequired: Number;
-    cashFlowYear1?: Number;
-    cashFlowYear2?: Number;
-    cashFlowYear3?: Number;
-    cashFlowYear4?: Number;
+    cashFlowYear1?: number;
+    cashFlowYear2?: number;
+    cashFlowYear3?: number;
+    cashFlowYear4?: number;
+    cashFlowYear5?: number;
 }

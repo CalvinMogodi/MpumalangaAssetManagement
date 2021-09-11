@@ -1,5 +1,6 @@
 export class StrategicAssessment{
-    id: Number;
+    id: number;
+    district: string;
     userImmovableAssetManagementPlanId: Number
     postDescriptionTitle: string;
     allocatedSpace: Number;

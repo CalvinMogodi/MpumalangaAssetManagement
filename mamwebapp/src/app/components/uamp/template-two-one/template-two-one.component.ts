@@ -1,16 +1,15 @@
+import { element } from 'protractor';
+import { MessageService } from 'primeng/api';
 import { Component, OnInit} from '@angular/core';
-import { Facility } from 'src/app/models/facility.model';
+import { UAMP } from 'src/app/models/uamp.model';
+import { DialogService } from 'primeng/dynamicdialog';
+import { FormControl, FormArray } from '@angular/forms';
+import { DynamicDialogRef } from 'primeng/dynamicdialog';
+import { Property } from 'src/app/models/property.model';
 import { UampService } from '../../../services/uamp/uamp.service';
 import { FormBuilder, FormGroup, Validators, FormsModule } from '@angular/forms';
-import { MessageService } from 'primeng/api';
-import { FormControl, FormArray } from '@angular/forms';
-import { DialogService } from 'primeng/dynamicdialog';
-import { DynamicDialogRef } from 'primeng/dynamicdialog';
-import { AddMunicipalUtilityServicesComponent } from './add-municipal-utility-services/add-municipal-utility-services';
 import { TempleteTwoPointOne } from 'src/app/models/templetes/templete-two-point-one.model';
-import { Property } from 'src/app/models/property.model';
-import { UAMP } from 'src/app/models/uamp.model';
-import { element } from 'protractor';
+import { AddMunicipalUtilityServicesComponent } from './add-municipal-utility-services/add-municipal-utility-services';
 
 @Component({
   selector: 'app-template-two-one',
@@ -19,6 +18,7 @@ import { element } from 'protractor';
   providers: [MessageService, DialogService, DynamicDialogRef]
 })
 export class TemplateTwoOneComponent implements OnInit {
+  rowGroupMetadata: any;
   properties: Array<Property> = [];
   submitted: boolean = false;
   propertyForm: FormGroup;
@@ -118,63 +118,10 @@ export class TemplateTwoOneComponent implements OnInit {
       { name: 'P2', code: 'P2', factor: 2 },
       { name: 'P3', code: 'P3', factor: 3 }
     ];
-    this.createForm();
-  }
-
-  private createForm(): void {
-    this.propertyForm = this.formBuilder.group({
-      tableRowArray: this.formBuilder.array([
-        this.createTableRow()
-      ])
-    })
-  }
-
-  get tableRowArray(): FormArray {
-    return this.propertyForm.get('tableRowArray') as FormArray;
-  }
+    
+   }
 
   get p() { return this.propertyForm.controls; }
-
-  private createTableRow(): FormGroup {
-    return this.formBuilder.group({
-      noofParkingBays: new FormControl(null, {
-        validators: [Validators.required]
-      }),
-      usableAllocatedSpace: new FormControl(null, {
-        validators: [Validators.required]
-      }),
-      municipalUtilityService: new FormControl(null, {
-        validators: [Validators.required]
-      }),
-      propertyRatesTaxes: new FormControl(null, {
-        validators: [Validators.required]
-      }),
-      comment: new FormControl(null, {
-        validators: [Validators.required]
-      }),
-      functionalPerformanceIndex: new FormControl(null, {
-        validators: [Validators.required]
-      }),
-      operationalPerformanceIndex: new FormControl(null, {
-        validators: [Validators.required]
-      }),
-      suitabilityIndex: new FormControl(null, {
-        validators: [Validators.required]
-      }),
-      conditionRating: new FormControl(null, {
-        validators: [Validators.required]
-      }),
-      accessibility: new FormControl(null, {
-        validators: [Validators.required]
-      }),
-      requiredPerformanceStandard: new FormControl(null, {
-        validators: [Validators.required]
-      }),
-      operationalCosts: new FormControl(null, {
-        validators: [Validators.required]
-      })
-    });
-  }
 
   conditionRatingCahnged(property: Property, e){
     property.conditionRating = e.value.factor;
@@ -215,5 +162,30 @@ export class TemplateTwoOneComponent implements OnInit {
          property = property;
       }
     });
+  } 
+  
+  onSort() {
+    this.updateRowGroupMetaData();
+  }
+
+  updateRowGroupMetaData() {
+    this.rowGroupMetadata = {};
+    if (this.properties) {
+        for (let i = 0; i < this.properties.length; i++) {
+            let rowData = this.properties[i];
+            let brand = rowData.town;
+            if (i == 0) {
+                this.rowGroupMetadata[brand] = { index: 0, size: 1 };
+            }
+            else {
+                let previousRowData = this.properties[i - 1];
+                let previousRowGroup = previousRowData.town;
+                if (brand === previousRowGroup)
+                    this.rowGroupMetadata[brand].size++;
+                else
+                    this.rowGroupMetadata[brand] = { index: i, size: 1 };
+            }
+        }
+    }
   }
 }

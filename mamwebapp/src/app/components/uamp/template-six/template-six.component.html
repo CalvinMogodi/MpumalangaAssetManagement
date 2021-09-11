@@ -30,10 +30,10 @@
                     <td>{{surrenderPlan.type}}</td>
                     <td><input [(ngModel)]="surrenderPlan.currentStreetAddress" [ngModelOptions]="{standalone: true}" autocomplete="off" type="text" pInputText class="ui-inputtext ui-widget"></td>
                     <td>{{surrenderPlan.name}}</td>
-                    <td><p-inputNumber [(ngModel)]="surrenderPlan.allocatedLettableSpace" [ngModelOptions]="{standalone: true}"></p-inputNumber></td>
+                    <td><p-inputNumber class="ui-inputtext ui-widget" [(ngModel)]="surrenderPlan.allocatedLettableSpace" [ngModelOptions]="{standalone: true}"></p-inputNumber></td>
                     <td>{{surrenderPlan.extent}}</td>
                     <td><input [(ngModel)]="surrenderPlan.surrenderRationale" [ngModelOptions]="{standalone: true}" autocomplete="off" type="text" pInputText class="ui-inputtext ui-widget"></td>
-                    <td><p-calendar [(ngModel)]="surrenderPlan.proposedHandOverDate" [ngModelOptions]="{standalone: true}" dateFormat="dd/mm/yy" showOtherMonths="true" showButtonBar="true"></p-calendar></td>
+                    <td><p-calendar class="ui-inputtext ui-widget" [(ngModel)]="surrenderPlan.proposedHandOverDate" [ngModelOptions]="{standalone: true}" dateFormat="dd/mm/yy" showOtherMonths="true" showButtonBar="true"></p-calendar></td>
                     <td><input [(ngModel)]="surrenderPlan.contractualObligations" [ngModelOptions]="{standalone: true}" autocomplete="off" type="text" pInputText class="ui-inputtext ui-widget"></td>
                 </tr>
         </ng-template>

@@ -5,7 +5,7 @@ export class Property{
     userImmovableAssetManagementPlanId: number;
     fileReferenceNo: string;
     serialNo: string;
-    districts: string;
+    district: string;
     town: string;
     localMunicipality: string;
     localAuthority: string;

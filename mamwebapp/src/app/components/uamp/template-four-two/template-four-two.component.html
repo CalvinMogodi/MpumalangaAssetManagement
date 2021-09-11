@@ -6,63 +6,67 @@
 </div>
 <br>
 
-<div class="ui-g ui-fluid">
+<div class="p-fluid p-grid p-formgrid" >
     <form [formGroup]="acquisitionPlanForm">
-        <div class="ui-g-12 ui-md-12">
-            <div class="ui-g-3 ui-md-3">
+        <div class="formgrid grid">  
+            <div class="field grid col-3">
                 <label for="region">District/ Region</label>
-                <p-dropdown placeholder="Please select" inputId="districtRegion" [options]="regions" formControlName="districtRegion" optionLabel="name"></p-dropdown>
+                <p-dropdown placeholder="Please select" class="ui-inputtext ui-widget" inputId="districtRegion" [options]="regions" formControlName="districtRegion" optionLabel="name"></p-dropdown>
             </div>           
-            <div class="ui-g-3 ui-md-3">
+            <div class="field grid col-3">
                 <label for="status">Status</label>
-                <p-dropdown placeholder="Please select" inputId="status" [options]="statuses" formControlName="status" optionLabel="name"></p-dropdown>
+                <p-dropdown placeholder="Please select" class="ui-inputtext ui-widget" inputId="status" [options]="statuses" formControlName="status" optionLabel="name"></p-dropdown>
             </div>
-            <div class="ui-g-3 ui-md-3">
+            <div class="field grid col-3">
                 <label for="acquisitionType">Acquisition Type</label>
-                <p-dropdown placeholder="Please select" inputId="acquisitionType" [options]="acquisitionTypes" formControlName="acquisitionType" optionLabel="name"></p-dropdown>
+                <p-dropdown placeholder="Please select" class="ui-inputtext ui-widget" inputId="acquisitionType" [options]="acquisitionTypes" formControlName="acquisitionType" optionLabel="name"></p-dropdown>
             </div>
-            <div class="ui-g-3 ui-md-3">
+            <div class="field grid col-3">
                 <label for="town">Town</label>
                 <input formControlName="town" autocomplete="off" type="text" pInputText class="ui-inputtext ui-widget">
             </div>
         </div>
-        <div class="ui-g-12 ui-md-12">           
-            <div class="ui-g-3 ui-md-3">
+        <div class="formgrid grid">         
+            <div class="field grid col-3">
                 <label for="town">Service Description</label>
                 <input formControlName="serviceDescription" autocomplete="off" type="text" pInputText class="ui-inputtext ui-widget">
             </div>
-            <div class="ui-g-3 ui-md-3">
+            <div class="field grid col-3">
                 <label for="town">Budget Type</label>
                 <input formControlName="budgetType" autocomplete="off" type="text" pInputText class="ui-inputtext ui-widget">
             </div>
-            <div class="ui-g-3 ui-md-3">
+            <div class="field grid col-3">
                 <label for="town">Extent Required <small>(m²)</small></label>
-                <p-inputNumber formControlName="extent" mode="decimal"></p-inputNumber>
+                <p-inputNumber formControlName="extent" mode="decimal" class="ui-inputtext ui-widget"></p-inputNumber>
             </div>
-            <div class="ui-g-3 ui-md-3">
-                <label for="totalAmountRequired">Total Amount Required</label>
-                <p-inputNumber formControlName="totalAmountRequired" mode="currency" currency="ZAR" locale="en-ZA"></p-inputNumber>
-            </div>
-        </div>
-        <div class="ui-g-12 ui-md-12">            
-            <div class="ui-g-3 ui-md-3">
+            <div class="field grid col-3">
                 <label for="cashFlowYear1">Cash Flow <small>(MTEF Year 1)</small></label>
-                <p-inputNumber formControlName="cashFlowYear1" mode="currency" currency="ZAR" locale="en-ZA"></p-inputNumber>
-            </div>
-            <div class="ui-g-3 ui-md-3">
-                <label for="cashFlowYear2">Cash Flow <small>(MTEF Year 2)</small></label>
-                <p-inputNumber formControlName="cashFlowYear2" mode="currency" currency="ZAR" locale="en-ZA"></p-inputNumber>
-            </div>
-            <div class="ui-g-3 ui-md-3">
-                <label for="cashFlowYear3">Cash Flow <small>(MTEF Year 3)</small></label>
-                <p-inputNumber formControlName="cashFlowYear3" mode="currency" currency="ZAR" locale="en-ZA"></p-inputNumber>
-            </div>
-            <div class="ui-g-3 ui-md-3">
-                <label for="cashFlowYear4">Cash Flow <small>(MTEF Year 4)</small></label>
-                <p-inputNumber formControlName="cashFlowYear4" mode="currency" currency="ZAR" locale="en-ZA"></p-inputNumber>
+                <p-inputNumber (keydown)="calculateTotalAmountRequired()" formControlName="cashFlowYear1" mode="currency" currency="ZAR" locale="en-ZA" class="ui-inputtext ui-widget"></p-inputNumber>
             </div>
         </div>
-        <div class="ui-g-12 ui-md-12">
+        <div class="formgrid grid">                         
+            <div class="field grid col-3">
+                <label for="cashFlowYear2">Cash Flow <small>(MTEF Year 2)</small></label>
+                <p-inputNumber (keydown)="calculateTotalAmountRequired()" formControlName="cashFlowYear2" mode="currency" currency="ZAR" locale="en-ZA" class="ui-inputtext ui-widget"></p-inputNumber>
+            </div>
+            <div class="field grid col-3">
+                <label for="cashFlowYear3">Cash Flow <small>(MTEF Year 3)</small></label>
+                <p-inputNumber (keydown)="calculateTotalAmountRequired()" formControlName="cashFlowYear3" mode="currency" currency="ZAR" locale="en-ZA" class="ui-inputtext ui-widget"></p-inputNumber>
+            </div>
+            <div class="field grid col-3">
+                <label for="cashFlowYear4">Cash Flow <small>(MTEF Year 4)</small></label>
+                <p-inputNumber (keydown)="calculateTotalAmountRequired()" formControlName="cashFlowYear4" mode="currency" currency="ZAR" locale="en-ZA" class="ui-inputtext ui-widget"></p-inputNumber>
+            </div>
+            <div class="field grid col-3">
+                <label for="cashFlowYear5">Cash Flow <small>(MTEF Year 5)</small></label>
+                <p-inputNumber (keydown)="calculateTotalAmountRequired()" formControlName="cashFlowYear5" mode="currency" currency="ZAR" locale="en-ZA" class="ui-inputtext ui-widget"></p-inputNumber>
+            </div>    
+            <div class="field grid col-3">
+                <label for="totalAmountRequired">Total Amount Required</label>
+                <p-inputNumber disabled="true" formControlName="totalAmountRequired" mode="currency" class="ui-inputtext ui-widget" currency="ZAR" locale="en-ZA"></p-inputNumber>
+            </div>        
+        </div>
+        <div class="col-12">
             <button *ngIf="!isEdit" pButton type="submit" icon="pi pi-plus" label="Add Acquisition Plan" (click)="addAcquisitionPlan()"
             style="float: right;width: fit-content;"></button>
             <button *ngIf="isEdit" pButton type="submit" icon="pi pi-pencil" label="Update Acquisition Plan" (click)="onUpdate()"
@@ -79,13 +83,15 @@
             <th>Budget Type</th>
             <th>Extent Required (m²)</th>    
             <th>Acquisition Type</th>         
-            <th>Status</th>
-            <th>Total Amount Required </th>
+            <th>Status</th>            
             <th>Cash Flow <small>(MTEF Year 1)</small></th>
             <th>Cash Flow <small>(MTEF Year 2)</small></th>
             <th>Cash Flow <small>(MTEF Year 3)</small></th>
             <th>Cash Flow <small>(MTEF Year 4)</small></th>
-            <th></th>
+            <th>Cash Flow <small>(MTEF Year 5)</small></th>
+            <th>Total Amount Required </th>
+            <th style="width: 130px;">Required</th>
+            <th style="width: 110px;"></th>
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-acquisitionPlan>
@@ -96,12 +102,14 @@
             <td>{{acquisitionPlan.budgetType}}</td>
             <td>{{acquisitionPlan.extent}}</td>
             <td>{{acquisitionPlan.acquisitionType}}</td>
-            <td>{{acquisitionPlan.status}}</td>
-            <td>{{acquisitionPlan.totalAmountRequired | currency:'ZAR':'R'}}</td>
+            <td>{{acquisitionPlan.status}}</td>           
             <td>{{acquisitionPlan.cashFlowYear1 | currency:'ZAR':'R'}}</td>
             <td>{{acquisitionPlan.cashFlowYear2 | currency:'ZAR':'R'}}</td>
             <td>{{acquisitionPlan.cashFlowYear3 | currency:'ZAR':'R'}}</td>
             <td>{{acquisitionPlan.cashFlowYear4 | currency:'ZAR':'R'}}</td>
+            <td>{{acquisitionPlan.cashFlowYear5 | currency:'ZAR':'R'}}</td>
+            <td>{{calculateDbTotalAmountRequired(acquisitionPlan) | currency:'ZAR':'R'}}</td>
+            <td><p-selectButton (onChange)="onReqiured(acquisitionPlan, $event)" [options]="stateOptions" [(ngModel)]="value1" optionLabel="label" optionValue="value"></p-selectButton></td>
             <td style="text-align: center;" *ngIf="acquisitionPlans.length > 0">
                 <p-splitButton label="More" *ngIf="mode != 'View'" [model]="buttonItems"
                     (onDropdownClick)="selectAcquisitionPlan(acquisitionPlan)" styleClass="p-button-secondary">

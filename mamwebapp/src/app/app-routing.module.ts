@@ -10,7 +10,7 @@ import { FinancialsComponent } from './components/assetregister/addassetregister
 import { ImprovementsComponent } from './components/assetregister/addassetregister/improvements/improvements.component';
 import { LandComponent } from './components/assetregister/addassetregister/land/land.component';
 import { UampComponent } from './components/uamp/uamp.component';
-
+import { CampComponent } from './components/camp/camp.component';
 
 const routes: Routes = [
   {
@@ -44,6 +44,11 @@ const routes: Routes = [
   {
     path: 'addfinancial',
     component: FinancialsComponent,
+    canActivate: [AuthGuard],
+  },  
+  {
+    path: 'camp',
+    component: CampComponent,
     canActivate: [AuthGuard],
   },  
   {

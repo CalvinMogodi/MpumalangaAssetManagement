@@ -8,6 +8,7 @@ namespace MAM.DataAccess.Tables
     {
         public int Id { get; set; }
         public int UserImmovableAssetManagementPlanId { get; set; }
+        public string District { get; set; }
         public string PostDescriptionTitle { get; set; }
         public double? AllocatedSpace { get; set; }
         public double? SurplusShortageAccommodation { get; set; }

@@ -144,8 +144,8 @@ export class TemplateFiveOneComponent implements OnInit {
       localMunicipality: null,
       assetDescription:null,
       repairDescription: null,
-      prioityServiceReanking: null,
-      prioityServiceReankingObj: null,
+      priorityServiceRanking: null,
+      priorityServiceRankingObj: null,
       initialNeedYearObj: null,
       streetDescription: null,
       propertyDescription: null,
@@ -158,7 +158,8 @@ export class TemplateFiveOneComponent implements OnInit {
       leaseEndDate: null,
       rentalPM: null,
       rentalPA: null,
-      comment: null
+      comment: null,
+      leased: false
     };
 
     var index = this.operationPlans.indexOf(this.selectedOperationPlan); 
@@ -215,8 +216,8 @@ export class TemplateFiveOneComponent implements OnInit {
       localMunicipality: null,
       assetDescription:null,
       repairDescription: null,
-      prioityServiceReanking: null,
-      prioityServiceReankingObj: null,
+      priorityServiceRanking: null,
+      priorityServiceRankingObj: null,
       initialNeedYearObj: null,
       streetDescription: null,
       propertyDescription: null,
@@ -229,7 +230,8 @@ export class TemplateFiveOneComponent implements OnInit {
       leaseEndDate: null,
       rentalPM: null,
       rentalPA: null,
-      comment: null
+      comment: null,
+      leased: false
     };
     this.operationPlans.push(operationPlan);
     if(this.uamp.templeteFivePointOne != null)

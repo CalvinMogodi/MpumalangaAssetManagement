@@ -38,9 +38,9 @@ export class UserComponent implements OnInit {
   newUserError: string = '';
   errorMsg: string = 'error';
   departments: any[] = [];
-  selectedRole: Number;
+  selectedRole: Number = 0;
   buttonItems: MenuItem[];
-  header: string = 'Add';
+  header: string = 'Add User';
 
   constructor(private userService: UserService,
     private formBuilder: FormBuilder,
@@ -204,7 +204,7 @@ export class UserComponent implements OnInit {
       createdDate: new Date,
       createdUserId: this.currentUser.id
     }
-    if (this.header == 'Add') {
+    if (this.header == 'Add User') {
       this.addUser(user);
     } else {
       user.id = this.selectedUser.id;
@@ -288,7 +288,7 @@ export class UserComponent implements OnInit {
   }
 
   update() {
-    this.header = 'Edit';
+    this.header = 'Edit User';
     this.showDialog = true;
     this.selectedRole = this.selectedUser.roleId;
     let role = this.roles.filter(u => u.factor == this.selectedUser.roleId)[0];

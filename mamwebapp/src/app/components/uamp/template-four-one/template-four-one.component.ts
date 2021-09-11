@@ -50,6 +50,7 @@ export class TemplateFourOneComponent implements OnInit {
       cashFlowYear2: [''],
       cashFlowYear3: [''],
       cashFlowYear4: [''],
+      cashFlowYear5: [''],
     });
    }
 
@@ -88,9 +89,11 @@ export class TemplateFourOneComponent implements OnInit {
       { name: '2021', code: '21', factor: 17 },
     ];
 
-    this.acquisitionTypes = [
-      { name: 'Purchase ', code: 'P', factor: 1 },
-      { name: 'Construction', code: 'C', factor: 2 }
+    this.acquisitionTypes = [    
+      { name: 'Construction', code: 'C', factor: 1 },
+      { name: 'Donation', code: 'D', factor: 2 },
+      { name: 'Purchase ', code: 'P', factor: 3
+     }
     ];
 
     this.statuses = [
@@ -120,6 +123,7 @@ export class TemplateFourOneComponent implements OnInit {
       cashFlowYear2: [this.selectedAcquisitionPlan.cashFlowYear2],
       cashFlowYear3: [this.selectedAcquisitionPlan.cashFlowYear3],
       cashFlowYear4: [this.selectedAcquisitionPlan.cashFlowYear4],
+      cashFlowYear5: [this.selectedAcquisitionPlan.cashFlowYear5],
     });
     this.isEdit = true;
   }
@@ -128,6 +132,7 @@ export class TemplateFourOneComponent implements OnInit {
     const acquisitionPlan: AcquisitionPlan = {
       id: this.selectedAcquisitionPlan.id,
       userImmovableAssetManagementPlanId: this.uamp.id,
+      prooertyId:0,
       templeteNumber: 4.1,
       districtRegion: this.acquisitionPlanForm.controls["districtRegion"].value.name,
       town: this.acquisitionPlanForm.controls["town"].value,
@@ -141,6 +146,8 @@ export class TemplateFourOneComponent implements OnInit {
       cashFlowYear1: this.acquisitionPlanForm.controls["cashFlowYear1"].value,
       cashFlowYear2: this.acquisitionPlanForm.controls["cashFlowYear2"].value,
       cashFlowYear3: this.acquisitionPlanForm.controls["cashFlowYear3"].value,
+      cashFlowYear4: this.acquisitionPlanForm.controls["cashFlowYear4"].value,
+      cashFlowYear5: this.acquisitionPlanForm.controls["cashFlowYear5"].value,
     };
 
     var index = this.acquisitionPlans.indexOf(this.selectedAcquisitionPlan); 
@@ -181,6 +188,7 @@ export class TemplateFourOneComponent implements OnInit {
     const acquisitionPlan: AcquisitionPlan = {
       id: 0,
       userImmovableAssetManagementPlanId: this.uamp.id,
+      prooertyId:0,
       templeteNumber: 4.1,
       districtRegion: this.acquisitionPlanForm.controls["districtRegion"].value.name,
       town: this.acquisitionPlanForm.controls["town"].value,
@@ -194,6 +202,8 @@ export class TemplateFourOneComponent implements OnInit {
       cashFlowYear1: this.acquisitionPlanForm.controls["cashFlowYear1"].value,
       cashFlowYear2: this.acquisitionPlanForm.controls["cashFlowYear2"].value,
       cashFlowYear3: this.acquisitionPlanForm.controls["cashFlowYear3"].value,
+      cashFlowYear4: this.acquisitionPlanForm.controls["cashFlowYear4"].value,
+      cashFlowYear5: this.acquisitionPlanForm.controls["cashFlowYear5"].value,
     };
     this.acquisitionPlans.push(acquisitionPlan);
     if(this.uamp.templeteFourPointOne != null)
@@ -211,5 +221,50 @@ export class TemplateFourOneComponent implements OnInit {
 
   resetForm() {
     this.acquisitionPlanForm.reset();
+  }
+
+  calculateTotalAmountRequired(){
+    const year1 = this.acquisitionPlanForm.controls["cashFlowYear1"].value;
+    const year2 = this.acquisitionPlanForm.controls["cashFlowYear2"].value;
+    const year3 = this.acquisitionPlanForm.controls["cashFlowYear3"].value;
+    const year4 = this.acquisitionPlanForm.controls["cashFlowYear4"].value;
+    const year5 = this.acquisitionPlanForm.controls["cashFlowYear5"].value;
+    let total = 0;
+
+      if(year1)
+        total = total + year1;
+      if(year2)
+      total = total + year2;
+      if(year3)
+      total = total + year3;
+      if(year4)
+      total = total + year4;
+      if(year5)
+      total = total + year5;
+
+      this.acquisitionPlanForm.controls["totalAmountRequired"].setValue(total);  
+  }
+
+  calculateDbTotalAmountRequired(acquisitionPlan: AcquisitionPlan){
+    let total = 0;
+    
+    const year1 = acquisitionPlan.cashFlowYear1;
+    const year2 = acquisitionPlan.cashFlowYear2;
+    const year3 = acquisitionPlan.cashFlowYear3;
+    const year4 = acquisitionPlan.cashFlowYear4;
+    const year5 = acquisitionPlan.cashFlowYear5;   
+
+      if(year1)
+        total = total + year1;
+      if(year2)
+      total = total + year2;
+      if(year3)
+      total = total + year3;
+      if(year4)
+      total = total + year4;
+      if(year5)
+      total = total + year5;
+
+      return total;  
   }
 }

@@ -22,5 +22,6 @@ namespace MAM.DataAccess.Tables
         public decimal? CashFlowYear2 { get; set; }
         public decimal? CashFlowYear3 { get; set; }
         public decimal? CashFlowYear4 { get; set; }
+        public decimal? CashFlowYear5 { get; set; }
     }
 }

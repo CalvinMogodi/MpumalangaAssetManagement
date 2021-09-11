@@ -7,6 +7,7 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { FacilityService } from 'src/app/services/facility/facility.service';
 import { AcquisitionPlan } from 'src/app/models/acquisition-plan.model';
 import { UAMP } from 'src/app/models/uamp.model';
+import { Property } from 'src/app/models/property.model';
 
 @Component({
   selector: 'app-template-four-two',
@@ -27,6 +28,7 @@ export class TemplateFourTwoComponent implements OnInit {
   showComfirmationDelete:boolean = false;
   selectedAcquisitionPlan: AcquisitionPlan;
   isEdit: boolean = false;
+  stateOptions: any[];
 
   constructor(public uampService: UampService, private formBuilder: FormBuilder, private messageService: MessageService) {
     this.uampService.uampChange.subscribe((value) => {
@@ -34,6 +36,16 @@ export class TemplateFourTwoComponent implements OnInit {
       {
         this.uamp = value;
         this.acquisitionPlans = this.uamp.templeteFourPointTwo.acquisitionPlans;
+
+        
+        this.uamp.templeteTwoPointTwo.properties.forEach(element => {
+          const matchItem = this.acquisitionPlans.filter(p => p.prooertyId == element.id);
+
+          if(element.leaseEndDate < new Date() && matchItem.length == 0){
+            this.acquisitionPlans.push(this.create(element));
+          }
+        });
+        
       }  
     });
     this.acquisitionPlanForm = this.formBuilder.group({
@@ -49,6 +61,7 @@ export class TemplateFourTwoComponent implements OnInit {
       cashFlowYear2: [''],
       cashFlowYear3: [''],
       cashFlowYear4: [''],
+      cashFlowYear5: [''],
     });
    }
 
@@ -62,6 +75,7 @@ export class TemplateFourTwoComponent implements OnInit {
           this.confirmDelete()
       }
     ]; 
+    this.stateOptions = [{label: 'Yes', value: 'true'}, {label: 'No', value: 'false'}];
     this.regions = [
       { name: 'Ehlanzeni ', code: 'U', factor: 1 },
       { name: 'Gert Sibande', code: 'R', factor: 2 },
@@ -119,14 +133,24 @@ export class TemplateFourTwoComponent implements OnInit {
       cashFlowYear2: [this.selectedAcquisitionPlan.cashFlowYear2],
       cashFlowYear3: [this.selectedAcquisitionPlan.cashFlowYear3],
       cashFlowYear4: [this.selectedAcquisitionPlan.cashFlowYear4],
+      cashFlowYear5: [this.selectedAcquisitionPlan.cashFlowYear5],
     });
     this.isEdit = true;
+  }
+
+  onReqiured(acquisitionPlan, e){
+    if(e.value){
+      this.selectedAcquisitionPlan = acquisitionPlan;
+      this.update();
+    }
+
   }
 
   onUpdate() {
     const acquisitionPlan: AcquisitionPlan = {
       id: this.selectedAcquisitionPlan.id,
       userImmovableAssetManagementPlanId: this.uamp.id,
+      prooertyId:0,
       templeteNumber: 4.1,
       districtRegion: this.acquisitionPlanForm.controls["districtRegion"].value.name,
       town: this.acquisitionPlanForm.controls["town"].value,
@@ -140,6 +164,8 @@ export class TemplateFourTwoComponent implements OnInit {
       cashFlowYear1: this.acquisitionPlanForm.controls["cashFlowYear1"].value,
       cashFlowYear2: this.acquisitionPlanForm.controls["cashFlowYear2"].value,
       cashFlowYear3: this.acquisitionPlanForm.controls["cashFlowYear3"].value,
+      cashFlowYear4: this.acquisitionPlanForm.controls["cashFlowYear4"].value,
+      cashFlowYear5: this.acquisitionPlanForm.controls["cashFlowYear5"].value,
     };
 
     var index = this.acquisitionPlans.indexOf(this.selectedAcquisitionPlan); 
@@ -180,6 +206,7 @@ export class TemplateFourTwoComponent implements OnInit {
     const acquisitionPlan: AcquisitionPlan = {
       id: 0,
       userImmovableAssetManagementPlanId: this.uamp.id,
+      prooertyId: 0,
       templeteNumber: 4.2,
       districtRegion: this.acquisitionPlanForm.controls["districtRegion"].value.name,
       town: this.acquisitionPlanForm.controls["town"].value,
@@ -193,6 +220,7 @@ export class TemplateFourTwoComponent implements OnInit {
       cashFlowYear2: this.acquisitionPlanForm.controls["cashFlowYear2"].value,
       cashFlowYear3: this.acquisitionPlanForm.controls["cashFlowYear3"].value,
       cashFlowYear4: this.acquisitionPlanForm.controls["cashFlowYear4"].value,
+      cashFlowYear5: this.acquisitionPlanForm.controls["cashFlowYear5"].value,
     };
     this.acquisitionPlans.push(acquisitionPlan);
     if(this.uamp.templeteFourPointTwo != null)
@@ -210,6 +238,75 @@ export class TemplateFourTwoComponent implements OnInit {
 
   resetForm(){
     this.acquisitionPlanForm.reset();
+  }
+
+  calculateTotalAmountRequired(){
+    let total = 0;
+
+    const year1 = this.acquisitionPlanForm.controls["cashFlowYear1"].value;
+    const year2 = this.acquisitionPlanForm.controls["cashFlowYear2"].value;
+    const year3 = this.acquisitionPlanForm.controls["cashFlowYear3"].value;
+    const year4 = this.acquisitionPlanForm.controls["cashFlowYear4"].value;
+    const year5 = this.acquisitionPlanForm.controls["cashFlowYear5"].value;   
+
+      if(year1)
+        total = total + year1;
+      if(year2)
+      total = total + year2;
+      if(year3)
+      total = total + year3;
+      if(year4)
+      total = total + year4;
+      if(year5)
+      total = total + year5;
+
+      this.acquisitionPlanForm.controls["totalAmountRequired"].setValue(total);  
+  }
+
+  calculateDbTotalAmountRequired(acquisitionPlan: AcquisitionPlan){
+    let total = 0;
+    
+    const year1 = acquisitionPlan.cashFlowYear1;
+    const year2 = acquisitionPlan.cashFlowYear2;
+    const year3 = acquisitionPlan.cashFlowYear3;
+    const year4 = acquisitionPlan.cashFlowYear4;
+    const year5 = acquisitionPlan.cashFlowYear5;   
+
+      if(year1)
+        total = total + year1;
+      if(year2)
+      total = total + year2;
+      if(year3)
+      total = total + year3;
+      if(year4)
+      total = total + year4;
+      if(year5)
+      total = total + year5;
+
+     return total;   
+  }
+
+  create(property: Property){
+    const acquisitionPlan: AcquisitionPlan = {
+      id: 0,
+      userImmovableAssetManagementPlanId: this.uamp.id,
+      prooertyId: 0,
+      templeteNumber: 4.2,
+      districtRegion: property.district,
+      town: property.town,
+      serviceDescription: undefined,
+      budgetType: undefined,
+      extent: property.extentofLand,
+      acquisitionType: undefined,
+      status: undefined,
+      totalAmountRequired: 0,
+      cashFlowYear1: 0,
+      cashFlowYear2: 0,
+      cashFlowYear3: 0,
+      cashFlowYear4: 0,
+      cashFlowYear5: 0,
+    }
+    return acquisitionPlan;
   }
 
 }
