@@ -175,6 +175,7 @@ export class TemplateThreeComponent implements OnInit {
     }
     this.uampService.assignUamp(this.uamp);
     this.resetForm();
+    this.onSort();
   }
 
   resetForm() {

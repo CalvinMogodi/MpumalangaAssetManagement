@@ -52,4 +52,8 @@ header{
 .w-140{
   width: 140px !important;
 }
+
+.p-component{
+	width: fit-content;
+}
   

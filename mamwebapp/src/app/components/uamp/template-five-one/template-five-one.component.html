@@ -6,20 +6,20 @@
 </div>
 <br>
 
-<div class="ui-g ui-fluid">
+    <div class="ui-g ui-fluid">
     <form [formGroup]="operationPlanForm">
         <div class="formgrid grid">
             <div class="field grid col-3">
                 <label for="region">District/ Region</label>
-                <p-dropdown class="ui-inputtext ui-widget" placeholder="Please select" inputId="districtRegion" [options]="regions" formControlName="districtRegion" optionLabel="name"></p-dropdown>
+                <p-dropdown [style]="{'width':'100%'}" class="ui-inputtext ui-widget" placeholder="Please select" inputId="districtRegion" [options]="regions" formControlName="districtRegion" optionLabel="name"></p-dropdown>
             </div>           
             <div class="field grid col-3">
                 <label for="status">Status</label>
-                <p-dropdown class="ui-inputtext ui-widget" placeholder="Please select" inputId="status" [options]="statuses" formControlName="status" optionLabel="name"></p-dropdown>
+                <p-dropdown [style]="{'width':'100%'}" class="ui-inputtext ui-widget" placeholder="Please select" inputId="status" [options]="statuses" formControlName="status" optionLabel="name"></p-dropdown>
             </div>           
             <div class="field grid col-3">
                 <label for="initialNeedYear">Year in which initial needs were submitted</label>
-                <p-dropdown class="ui-inputtext ui-widget" placeholder="Please select" inputId="initialNeedYear" [options]="initialNeedYears" formControlName="initialNeedYear" optionLabel="name"></p-dropdown>
+                <p-dropdown [style]="{'width':'100%'}" class="ui-inputtext ui-widget" placeholder="Please select" inputId="initialNeedYear" [options]="initialNeedYears" formControlName="initialNeedYear" optionLabel="name"></p-dropdown>
             </div>
             <div class="field grid col-3">
                 <label for="town">Town</label>
@@ -34,39 +34,41 @@
             <div class="field grid col-3">
                 <label for="town">Budget Type</label>
                 <input formControlName="budgetType" autocomplete="off" type="text" pInputText class="ui-inputtext ui-widget">
-            </div>            
-            <div class="field grid col-3">
-                <label for="totalAmountRequired">Total Amount Required</label>
-                <p-inputNumber class="ui-inputtext ui-widget" formControlName="totalAmountRequired" mode="currency" currency="ZAR" locale="en-ZA"></p-inputNumber>
-            </div>
+            </div> 
             <div class="field grid col-3">
                 <label for="cashFlowYear1">Cash Flow <small>(MTEF Year 1)</small></label>
-                <p-inputNumber class="ui-inputtext ui-widget" formControlName="cashFlowYear1" mode="currency" currency="ZAR" locale="en-ZA"></p-inputNumber>
+                <p-inputNumber (keydown)="calculateTotalAmountRequired()" class="ui-inputtext ui-widget" formControlName="cashFlowYear1" mode="currency" currency="ZAR" locale="en-ZA"></p-inputNumber>
             </div>
-        </div>
-        <div class="formgrid grid">
             <div class="field grid col-3">
                 <label for="cashFlowYear2">Cash Flow <small>(MTEF Year 2)</small></label>
-                <p-inputNumber class="ui-inputtext ui-widget" formControlName="cashFlowYear2" mode="currency" currency="ZAR" locale="en-ZA"></p-inputNumber>
+                <p-inputNumber (keydown)="calculateTotalAmountRequired()" class="ui-inputtext ui-widget" formControlName="cashFlowYear2" mode="currency" currency="ZAR" locale="en-ZA"></p-inputNumber>
             </div>
+        </div>
+        <div class="formgrid grid">            
             <div class="field grid col-3">
                 <label for="cashFlowYear3">Cash Flow <small>(MTEF Year 3)</small></label>
-                <p-inputNumber class="ui-inputtext ui-widget" formControlName="cashFlowYear3" mode="currency" currency="ZAR" locale="en-ZA"></p-inputNumber>
+                <p-inputNumber (keydown)="calculateTotalAmountRequired()" class="ui-inputtext ui-widget" formControlName="cashFlowYear3" mode="currency" currency="ZAR" locale="en-ZA"></p-inputNumber>
             </div>
             <div class="field grid col-3">
                 <label for="cashFlowYear4">Cash Flow <small>(MTEF Year 4)</small></label>
-                <p-inputNumber class="ui-inputtext ui-widget" formControlName="cashFlowYear4" mode="currency" currency="ZAR" locale="en-ZA"></p-inputNumber>
+                <p-inputNumber (keydown)="calculateTotalAmountRequired()" class="ui-inputtext ui-widget" formControlName="cashFlowYear4" mode="currency" currency="ZAR" locale="en-ZA"></p-inputNumber>
             </div>
             <div class="field grid col-3">
                 <label for="cashFlowYear5">Cash Flow <small>(MTEF Year 5)</small></label>
-                <p-inputNumber class="ui-inputtext ui-widget" formControlName="cashFlowYear5" mode="currency" currency="ZAR" locale="en-ZA"></p-inputNumber>
+                <p-inputNumber (keydown)="calculateTotalAmountRequired()" class="ui-inputtext ui-widget" formControlName="cashFlowYear5" mode="currency" currency="ZAR" locale="en-ZA"></p-inputNumber>
+            </div>
+            <div class="field grid col-3">
+                <label for="totalAmountRequired">Total Amount Required</label>
+                <p-inputNumber disabled="true" class="ui-inputtext ui-widget" formControlName="totalAmountRequired" mode="currency" currency="ZAR" locale="en-ZA"></p-inputNumber>
             </div>
         </div>
-        <div class="ui-g-12 ui-md-12">
-            <button *ngIf="!isEdit" pButton type="submit" icon="pi pi-plus" label="Add Operation Plan" (click)="addOperationPlan()"
-            style="float: right;width: fit-content;"></button>
-            <button *ngIf="isEdit" pButton type="submit" icon="pi pi-pencil" label="Update Operation Plan" (click)="onUpdate()"
-            style="float: right;width: fit-content;"></button>
+        <div class="formgrid grid">  
+            <div class="field col-12">
+                <button *ngIf="!isEdit" pButton type="submit" icon="pi pi-plus" label="Add Operation Plan" (click)="addOperationPlan()"
+                style="float: right;width: fit-content;height: fit-content;margin-top: 1.7em;"></button>
+                <button *ngIf="isEdit" pButton type="submit" icon="pi pi-pencil" label="Update Operation Plan" (click)="onUpdate()"
+                style="float: right;width: fit-content;height: fit-content;margin-top: 1.7em;"></button>
+            </div>            
         </div>
     </form>
 

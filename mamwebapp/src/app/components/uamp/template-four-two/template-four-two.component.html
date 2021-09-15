@@ -11,15 +11,15 @@
         <div class="formgrid grid">  
             <div class="field grid col-3">
                 <label for="region">District/ Region</label>
-                <p-dropdown placeholder="Please select" class="ui-inputtext ui-widget" inputId="districtRegion" [options]="regions" formControlName="districtRegion" optionLabel="name"></p-dropdown>
+                <p-dropdown [style]="{'width':'100%'}" placeholder="Please select" class="ui-inputtext ui-widget" inputId="districtRegion" [options]="regions" formControlName="districtRegion" optionLabel="name"></p-dropdown>
             </div>           
             <div class="field grid col-3">
                 <label for="status">Status</label>
-                <p-dropdown placeholder="Please select" class="ui-inputtext ui-widget" inputId="status" [options]="statuses" formControlName="status" optionLabel="name"></p-dropdown>
+                <p-dropdown [style]="{'width':'100%'}" placeholder="Please select" class="ui-inputtext ui-widget" inputId="status" [options]="statuses" formControlName="status" optionLabel="name"></p-dropdown>
             </div>
             <div class="field grid col-3">
                 <label for="acquisitionType">Acquisition Type</label>
-                <p-dropdown placeholder="Please select" class="ui-inputtext ui-widget" inputId="acquisitionType" [options]="acquisitionTypes" formControlName="acquisitionType" optionLabel="name"></p-dropdown>
+                <p-dropdown [style]="{'width':'100%'}" placeholder="Please select" class="ui-inputtext ui-widget" inputId="acquisitionType" [options]="acquisitionTypes" formControlName="acquisitionType" optionLabel="name"></p-dropdown>
             </div>
             <div class="field grid col-3">
                 <label for="town">Town</label>
@@ -60,17 +60,21 @@
             <div class="field grid col-3">
                 <label for="cashFlowYear5">Cash Flow <small>(MTEF Year 5)</small></label>
                 <p-inputNumber (keydown)="calculateTotalAmountRequired()" formControlName="cashFlowYear5" mode="currency" currency="ZAR" locale="en-ZA" class="ui-inputtext ui-widget"></p-inputNumber>
-            </div>    
+            </div>          
+        </div>
+        <div class="formgrid grid">
             <div class="field grid col-3">
                 <label for="totalAmountRequired">Total Amount Required</label>
                 <p-inputNumber disabled="true" formControlName="totalAmountRequired" mode="currency" class="ui-inputtext ui-widget" currency="ZAR" locale="en-ZA"></p-inputNumber>
-            </div>        
-        </div>
-        <div class="col-12">
-            <button *ngIf="!isEdit" pButton type="submit" icon="pi pi-plus" label="Add Acquisition Plan" (click)="addAcquisitionPlan()"
-            style="float: right;width: fit-content;"></button>
-            <button *ngIf="isEdit" pButton type="submit" icon="pi pi-pencil" label="Update Acquisition Plan" (click)="onUpdate()"
-            style="float: right;width: fit-content;"></button>
+            </div> 
+            <div class="field grid col-3"></div>
+            <div class="field grid col-3"></div>
+            <div class="field grid col-3">
+                <button *ngIf="!isEdit" pButton type="submit" icon="pi pi-plus" label="Add Acquisition Plan" (click)="addAcquisitionPlan()"
+                style="float: right;width: fit-content;height: fit-content;margin-top: 1.7em;"></button>
+                <button *ngIf="isEdit" pButton type="submit" icon="pi pi-pencil" label="Update Acquisition Plan" (click)="onUpdate()"
+                style="float: right;width: fit-content;height: fit-content;margin-top: 1.7em;"></button>
+            </div>           
         </div>
     </form>
 
@@ -129,3 +133,5 @@
             <button style="float: right;" (click)="showComfirmationDelete=false;deleteAcquisitionPlan()" pButton type="button" label="Yes" class="ui-button-info"></button>
     </p-footer>
 </p-dialog>
+
+<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>

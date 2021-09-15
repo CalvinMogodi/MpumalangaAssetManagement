@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { MessageService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { FormGroup, FormBuilder, FormArray, FormControl, Validators } from '@angular/forms';
 import { UampService } from 'src/app/services/uamp/uamp.service';
 import { OperationPlan } from 'src/app/models/operation-plan.model';
@@ -18,7 +18,7 @@ export class TemplateFiveThreeComponent implements OnInit {
   prioities: any[];
   uamp: UAMP;
   
-  constructor(private uampService: UampService, private formBuilder: FormBuilder, private messageService: MessageService) { 
+  constructor(private confirmationService: ConfirmationService,private uampService: UampService, private formBuilder: FormBuilder, private messageService: MessageService) { 
     this.uampService.uampChange.subscribe((value) => {
       if(value)
       {
@@ -97,5 +97,21 @@ export class TemplateFiveThreeComponent implements OnInit {
         validators: [Validators.required]
       })    
     });
+  }
+
+  onLeased(operationPlan: OperationPlan, e){
+    if(e.checked){
+      this.confirmationService.confirm({
+        message: 'Are you sure that this property is leased?',
+        accept: () => {
+          operationPlan.leased = true;
+        },
+        reject:() =>{
+          operationPlan.leased = false;
+        }
+    });
+    }else{
+      operationPlan.leased = false;
+    }
   }
 }

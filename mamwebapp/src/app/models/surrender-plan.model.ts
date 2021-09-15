@@ -1,6 +1,8 @@
 export class SurrenderPlan{
     id: number;
     userImmovableAssetManagementPlanId: Number;
+    strategicAssessmentId?: number;
+    propertyId?: number;
     district: String;
     town: String;
     localMunicipality: String;
@@ -12,4 +14,5 @@ export class SurrenderPlan{
     surrenderRationale: String;
     proposedHandOverDate?: Date;
     contractualObligations: String;
+    relinquish: boolean;
 }

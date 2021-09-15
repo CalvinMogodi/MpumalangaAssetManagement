@@ -8,22 +8,23 @@ namespace MAM.DataAccess.Tables
     {
         public int Id { get; set; }
         public int UserImmovableAssetManagementPlanId { get; set; }
-        public string Name { get; set; }
-        public decimal? MtefAllocationY1 { get; set; }
-        public decimal? RequiredBudgetY1 { get; set; }
-        public double? ShortfallY1 { get; set; }
-        public decimal? MtefAllocationY2 { get; set; }
-        public decimal? RequiredBudgetY2 { get; set; }
-        public double? ShortfallY2 { get; set; }
-        public decimal? MtefAllocationY3 { get; set; }
-        public decimal? RequiredBudgetY3 { get; set; }
-        public double? ShortfallY3 { get; set; }
-        public decimal? MtefAllocationY4 { get; set; }
-        public decimal? RequiredBudgetY4 { get; set; }
-        public double? ShortfallY4 { get; set; }
-        public decimal? MtefAllocationY5 { get; set; }
-        public decimal? RequiredBudgetY5 { get; set; }
-        public double? ShortfallY5 { get; set; }
+        public string Group { get; set; }
+        public string Title { get; set; }
+        public decimal? Year1Allocation { get; set; }
+        public decimal? Year1RequiredBudget { get; set; }
+        public double? Year1Shortfall { get; set; }
+        public decimal? Year2Allocation { get; set; }
+        public decimal? Year2RequiredBudget { get; set; }
+        public double? Year2Shortfall { get; set; }
+        public decimal? Year3Allocation { get; set; }
+        public decimal? Year3RequiredBudget { get; set; }
+        public double? Year3Shortfall { get; set; }
+        public decimal? Year4Allocation { get; set; }
+        public decimal? Year4RequiredBudget { get; set; }
+        public double? Year4Shortfall { get; set; }
+        public decimal? Year5Allocation { get; set; }
+        public decimal? Year5RequiredBudget { get; set; }
+        public double? Year5Shortfall { get; set; }
         public bool IsHeader { get; set; }
         public bool IsPercentage { get; set; }
         public int Order { get; set; }

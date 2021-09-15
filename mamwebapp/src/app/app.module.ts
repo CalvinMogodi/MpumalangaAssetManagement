@@ -39,6 +39,7 @@ import { AddMunicipalUtilityServicesComponent } from './components/uamp/template
 import { NgxPrintModule } from 'ngx-print';
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
 import { PanelModule } from 'primeng/panel';
+import { ConfirmationService } from 'primeng/api';
 
 //primeng
 import { SlideMenuModule } from 'primeng/slidemenu';
@@ -164,10 +165,11 @@ import {InputTextModule} from 'primeng/inputtext';
     SelectButtonModule,
     ToggleButtonModule,
     InputSwitchModule
+    
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    CurrencyPipe,FilterService,PrimeNGConfig,
+    CurrencyPipe,FilterService,PrimeNGConfig,ConfirmationService,
     AddMunicipalUtilityServicesComponent
   ],
   bootstrap: [AppComponent],

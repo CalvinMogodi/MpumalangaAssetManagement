@@ -30,6 +30,7 @@ namespace MAM.BusinessLayer.Models
         public double? ExtentofLand { get; set; }
         public decimal? RentalPM { get; set; }
         public decimal? RentalPA { get; set; }
+        public decimal? RentalRate { get; set; }
         public List<MunicipalUtilityService> MunicipalUtilityServices { get; set; }
         public decimal? MunicipalUtilityServiceTotal { get; set; }
         public decimal? PropertyRatesTaxes { get; set; }

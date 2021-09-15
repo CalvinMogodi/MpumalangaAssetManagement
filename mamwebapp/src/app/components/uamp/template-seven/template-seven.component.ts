@@ -1,7 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { element } from 'protractor';
 import { Facility } from 'src/app/models/facility.model';
+import { MtefBudgetPeriod } from 'src/app/models/mtef-budget-period.model';
 import { UAMP } from 'src/app/models/uamp.model';
 import { UampService } from 'src/app/services/uamp/uamp.service';
 
@@ -15,26 +17,60 @@ export class TemplateSevenComponent implements OnInit {
   @Input() properties: Facility[];
   uamp: UAMP;
   municipalUtilityServices: any;
+  budgetPeriodForm: FormGroup;
+  showFields: boolean = false;
+  groups: any[];
+  mtefBudgetPeriods: MtefBudgetPeriod[];
+  rowGroupMetadata: any;
 
-  constructor(private uampService: UampService) {
+  constructor(private uampService: UampService, private formBuilder: FormBuilder) {
     this.uampService.uampChange.subscribe((value) => {
       if (value) {
-        this.uamp = this.uampService.templeteSevenCalclation(value);
-
-        if(this.uamp.templeteTwoPointTwo.properties){
-          this.getMunicipalUtilityServices(this.uamp.templeteTwoPointTwo.properties);
-        }
+        this.uamp = value;
+        this.mtefBudgetPeriods = this.uamp.templeteSeven.mtefBudgetPeriods
       }
     });
   }
 
   ngOnInit() {
+    this.budgetPeriodForm = this.formBuilder.group({     
+      group: [''],
+      title: [''],
+      year1Allocation: [''],
+      year1RequiredBudget: [''],
+      year1Shortfall: [''],
+      year2Allocation: [''],
+      year2RequiredBudget: [''],
+      year2Shortfall: [''],
+      year3Allocation: [''],
+      year3RequiredBudget: [''],
+      year3Shortfall: [''],
+      year4Allocation: [''],
+      year4RequiredBudget: [''],
+      year4Shortfall: [''],
+      year5Allocation: [''],
+      year5RequiredBudget: [''],
+      year5Shortfall: [''],
+    });
+
+    this.groups = [
+      { name: 'Capital Projects', code: 'CP', factor: 1 },
+      { name: 'Current Expenditure', code: 'CE', factor: 2 },
+    ];
   }
 
   umapTempleteValidate() {
     let isValid: boolean = true;
 
     return isValid;
+  }
+
+  addMtefBudgetPeriod(mtefBudgetPeriod: MtefBudgetPeriod){
+    this.mtefBudgetPeriods.push(mtefBudgetPeriod);
+  }
+
+  updateMtefBudgetPeriod(mtefBudgetPeriod: MtefBudgetPeriod, index: number){
+    this.mtefBudgetPeriods[index] = mtefBudgetPeriod;
   }
 
   newCapitalWorksT41RequiredBudget() {
@@ -234,6 +270,13 @@ export class TemplateSevenComponent implements OnInit {
     return municipalUtilityServices;
   }
 
+  onBlurDistrict(){
+    const district = this.budgetPeriodForm.controls["district"].value;
+    if(district){
+      this.showFields = district.length > 2 ? true : false;
+    }      
+}
+
   getTempleteDate(templete){
     let arraryList = []
     switch (templete) {
@@ -265,5 +308,75 @@ export class TemplateSevenComponent implements OnInit {
           break; 
     }
     return arraryList;
+  }
+
+  onSort() {
+    this.updateRowGroupMetaData();
+  }
+
+  updateRowGroupMetaData() {
+    this.rowGroupMetadata = {};
+    if (this.mtefBudgetPeriods) {
+        for (let i = 0; i < this.mtefBudgetPeriods.length; i++) {
+            let rowData = this.mtefBudgetPeriods[i];
+            let group = rowData.group;
+            if (i == 0) {
+                this.rowGroupMetadata[group] = { index: 0, size: 1 };
+            }
+            else {
+                let previousRowData = this.mtefBudgetPeriods[i - 1];
+                let previousRowGroup = previousRowData.group;
+                if (group === previousRowGroup)
+                    this.rowGroupMetadata[group].size++;
+                else
+                    this.rowGroupMetadata[group] = { index: i, size: 1 };
+            }
+        }
+    }
+  }
+
+  addBudgetforMtefPeriod(){
+    const mtefBudgetPeriod: MtefBudgetPeriod = {
+      id: 0,
+      userImmovableAssetManagementPlanId: this.uamp.id,
+      order: 0,
+      isHeader: false,
+      isPercentage: false,
+      title: this.budgetPeriodForm.controls["title"].value,
+      group: this.budgetPeriodForm.controls["group"].value.name,
+      year1Allocation: this.budgetPeriodForm.controls["year1Allocation"].value,
+      year1RequiredBudget: this.budgetPeriodForm.controls["year1RequiredBudget"].value,
+      year1Shortfall: this.budgetPeriodForm.controls["year1Shortfall"].value,
+      year2Allocation: this.budgetPeriodForm.controls["year2Allocation"].value,
+      year2RequiredBudget: this.budgetPeriodForm.controls["year2RequiredBudget"].value,
+      year2Shortfall: this.budgetPeriodForm.controls["year2Shortfall"].value,
+      year3Allocation: this.budgetPeriodForm.controls["year3Allocation"].value,
+      year3RequiredBudget: this.budgetPeriodForm.controls["year3RequiredBudget"].value,
+      year3Shortfall: this.budgetPeriodForm.controls["year3Shortfall"].value,
+      year4Allocation: this.budgetPeriodForm.controls["year4Allocation"].value,
+      year4RequiredBudget: this.budgetPeriodForm.controls["year4RequiredBudget"].value,
+      year4Shortfall: this.budgetPeriodForm.controls["year4Shortfall"].value,
+      year5Allocation: this.budgetPeriodForm.controls["year5Allocation"].value,
+      year5RequiredBudget: this.budgetPeriodForm.controls["year5RequiredBudget"].value,
+      year5Shortfall: this.budgetPeriodForm.controls["year5Shortfall"].value,
+    };
+
+    this.mtefBudgetPeriods.push(mtefBudgetPeriod);
+    if(this.uamp.templeteSeven != null)
+    {
+      this.uamp.templeteSeven.mtefBudgetPeriods = this.mtefBudgetPeriods
+    }else{
+      this.uamp.templeteSeven = {
+        id: 0,
+        mtefBudgetPeriods: this.mtefBudgetPeriods
+      };
+    }
+    this.uampService.assignUamp(this.uamp);
+    this.resetForm();
+    this.onSort();
+  }
+
+  resetForm(){
+    this.budgetPeriodForm.reset();
   }
 }

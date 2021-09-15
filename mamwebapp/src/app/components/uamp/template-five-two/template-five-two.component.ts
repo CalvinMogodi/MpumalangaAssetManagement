@@ -19,6 +19,8 @@ export class TemplateFiveTwoComponent implements OnInit {
   newOperationPlanForm: FormGroup;
   prioities: any[];
   initialNeedYears: any[];
+  regions: any[];
+  localMunicipalities: any[];
   uamp: UAMP;
   
   constructor(private uampService: UampService, private formBuilder: FormBuilder, private messageService: MessageService) { 
@@ -54,6 +56,7 @@ export class TemplateFiveTwoComponent implements OnInit {
       cashFlowYear5: [''],
       totalAmountRequired: ['']
     });
+    
     this.prioities = [
       { name: 'Extremely Critical 1', code: 'C1', factor: 1 },
       { name: '2', code: 'C2', factor: 2 },
@@ -65,6 +68,12 @@ export class TemplateFiveTwoComponent implements OnInit {
       { name: '8', code: 'C4', factor: 8 },
       { name: '9', code: 'C5', factor: 9 },
       { name: 'Defer 10', code: 'C5', factor: 10 },
+    ];
+
+    this.regions = [
+      { name: 'Ehlanzeni ', code: 'U', factor: 1 },
+      { name: 'Gert Sibande', code: 'R', factor: 2 },
+      { name: 'Nkangala', code: 'U', factor: 3 }
     ];
 
     this.initialNeedYears = [
@@ -187,4 +196,88 @@ export class TemplateFiveTwoComponent implements OnInit {
       this.newOperationPlanForm.controls["totalAmountRequired"].setValue(total);  
   }
 
+  setLocalMunicipalities(e) {
+    if (e != undefined) {
+      if (e.value != undefined) {
+        if (e.value.factor == 1) {
+          let _localMunicipalities = [
+            { name: 'Bushbuckridge', code: 'B', factor: 1 },
+            { name: 'Mbombela', code: 'M', factor: 2 },
+            { name: 'Nkomazi', code: 'N', factor: 3 },
+            { name: 'Thaba Chweu', code: 'TC', factor: 4},           
+          ];
+          this.localMunicipalities = _localMunicipalities;
+        } else if (e.value.factor == 2) {
+          let _localMunicipalities = [
+            { name: 'Albert Luthuli', code: 'AL', factor: 1 },
+            { name: 'Dipaleseng', code: 'D', factor: 2 },
+            { name: 'Govan Mbeki', code: 'GM', factor: 3 },
+            { name: 'Lekwa', code: 'L', factor: 7 },
+            { name: 'Mkhondo', code: 'M', factor: 4 },                     
+            { name: 'Msukaligwa', code: 'MS', factor: 5 },
+            { name: 'Mkhondo', code: 'MK', factor: 6 }, 
+            { name: 'Pixley Ka Seme', code: 'PKS', factor: 8 },  
+          ];
+          this.localMunicipalities = _localMunicipalities;
+        } else if(e.value.factor == 3) {          
+          let _localMunicipalities = [
+            { name: 'Dr. J.S. Moroka', code: 'JSM', factor: 1 },
+            { name: 'eMalahleni', code: 'M', factor: 2 },
+            { name: 'eMakhazeni', code: 'MK', factor: 3},           
+            { name: 'Msukaligwa', code: 'MS', factor: 4 },
+            { name: 'Steve Tshwete', code: 'ST', factor: 5 },
+            { name: 'Thembisile Hani', code: 'TH', factor: 6 },
+            { name: 'Victor Khanye', code: 'VK', factor: 7 },            
+          ];
+          this.localMunicipalities = _localMunicipalities;
+        }
+        else {
+          let _localMunicipalities = [
+            { name: 'Bushbuckridge', code: 'B', factor: 1 },
+            { name: 'Thaba Chweu', code: 'TC', factor: 2 },            
+          ];          
+          this.localMunicipalities = _localMunicipalities;
+        }
+      }
+    }
+  }
+
+  addOperationPlan(){
+    const operationPlan: OperationPlan = {
+      id: 0,
+      userImmovableAssetManagementPlanId: this.uamp.id,
+      templeteNumber: 5.1,
+      districtRegion: this.newOperationPlanForm.controls["districtRegion"].value.name,
+      town: this.newOperationPlanForm.controls["town"].value,
+      initialNeedYear: Number(this.newOperationPlanForm.controls["initialNeedYear"].value.name),
+      totalAmountRequired: this.newOperationPlanForm.controls["totalAmountRequired"].value,
+      cashFlowYear1: this.newOperationPlanForm.controls["cashFlowYear1"].value,
+      cashFlowYear2: this.newOperationPlanForm.controls["cashFlowYear2"].value,
+      cashFlowYear3: this.newOperationPlanForm.controls["cashFlowYear3"].value,
+      cashFlowYear4: this.newOperationPlanForm.controls["cashFlowYear4"].value,
+      cashFlowYear5: this.newOperationPlanForm.controls["cashFlowYear5"].value,
+      localMunicipality: this.newOperationPlanForm.controls["localMunicipality"].value.name,
+      assetDescription: this.newOperationPlanForm.controls["assetDescription"].value,
+      repairDescription: this.newOperationPlanForm.controls["repairDescription"].value,
+      priorityServiceRanking: this.newOperationPlanForm.controls["priorityServiceRanking"].value.name,
+      priorityServiceRankingObj: this.newOperationPlanForm.controls["priorityServiceRanking"].value,
+      initialNeedYearObj: this.newOperationPlanForm.controls["initialNeedYear"].value,
+    };
+    this.operationPlans.push(operationPlan);
+    if(this.uamp.templeteFivePointTwo != null)
+    {
+      this.uamp.templeteFivePointTwo.operationPlans = this.operationPlans
+    }else{
+      this.uamp.templeteFivePointTwo = {
+        id: 0,
+        operationPlans: this.operationPlans
+      };
+    }
+    this.uampService.assignUamp(this.uamp);
+    this.resetForm();
+  }
+
+  resetForm(){
+    this.operationPlanForm.reset();
+  }
 }

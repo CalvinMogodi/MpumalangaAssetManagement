@@ -250,4 +250,26 @@ export class TemplateFiveOneComponent implements OnInit {
   resetForm(){
     this.operationPlanForm.reset();
   }
+
+  calculateTotalAmountRequired(){
+    const year1 = this.operationPlanForm.controls["cashFlowYear1"].value;
+    const year2 = this.operationPlanForm.controls["cashFlowYear2"].value;
+    const year3 = this.operationPlanForm.controls["cashFlowYear3"].value;
+    const year4 = this.operationPlanForm.controls["cashFlowYear4"].value;
+    const year5 = this.operationPlanForm.controls["cashFlowYear5"].value;
+    let total = 0;
+
+      if(year1)
+        total = total + year1;
+      if(year2)
+      total = total + year2;
+      if(year3)
+      total = total + year3;
+      if(year4)
+      total = total + year4;
+      if(year5)
+      total = total + year5;
+
+      this.operationPlanForm.controls["totalAmountRequired"].setValue(total);  
+  }
 }

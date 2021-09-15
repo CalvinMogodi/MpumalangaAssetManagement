@@ -281,6 +281,7 @@ p-fieldset {
 
 .p-dropdown {
     border: unset !important;
+	background: transparent !important;
 }
 
 .dropdown-label{
@@ -302,3 +303,4 @@ p-fieldset {
     width: 3rem;
     height: 1.5rem !important;
 }
+

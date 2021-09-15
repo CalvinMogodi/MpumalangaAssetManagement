@@ -36,8 +36,9 @@ namespace MAM.BusinessLayer.Models
         public decimal? CashFlowYear3 { get; set; }
         public decimal? CashFlowYear4 { get; set; }
         public decimal? CashFlowYear5 { get; set; }
-        public string Comment { get; set; }
 
+        public string Comment { get; set; }
+        public bool IsRequired { get; set; }
         public DataAccess.Tables.OperationPlan ConvertToOperationPlanTable(OperationPlan operationPlan)
         {
             return new DataAccess.Tables.OperationPlan()

@@ -1,4 +1,5 @@
-<p-messages closable="true" [(value)]="erMsgs" [styleClass]="error" [showTransitionOptions]="'1ms'" [hideTransitionOptions]="'1ms'"></p-messages>
+<p-messages closable="true" [(value)]="erMsgs" [styleClass]="error" [showTransitionOptions]="'1ms'"
+    [hideTransitionOptions]="'1ms'"></p-messages>
 
 <div>
     <span>
@@ -32,14 +33,20 @@
     </div>
 </div>
 
-<p-table [value]="uamps" >
+<p-table [value]="uamps" [paginator]="true" [rows]="5" [showCurrentPageReport]="true" responsiveLayout="scroll"
+    [rowsPerPageOptions]="[5,10,15]">
     <ng-template pTemplate="header">
         <tr>
-            <th>File Reference</th>
-            <th>Department</th>
-            <th>Created Date</th>
-            <th>Creator</th>
-            <th>Status</th>
+            <th pSortableColumn="fileReference">File Reference <p-sortIcon field="fileReference"></p-sortIcon>
+            </th>
+            <th pSortableColumn="department">Department <p-sortIcon field="department"></p-sortIcon>
+            </th>
+            <th pSortableColumn="createdDate">Created Date <p-sortIcon field="createdDate"></p-sortIcon>
+            </th>
+            <th pSortableColumn="user.name">Creator <p-sortIcon field="user.name"></p-sortIcon>
+            </th>
+            <th pSortableColumn="status">Status <p-sortIcon field="status"></p-sortIcon>
+            </th>
             <th>Actions</th>
         </tr>
     </ng-template>
@@ -74,7 +81,8 @@
 
 
 <div *ngIf="showUAMP" class="dialogBackgroud"></div>
-<p-dialog [(visible)]="showUAMP" resizable="true" style="width:auto;height:auto;" *ngIf="showUAMP" [style]="{width: '95vw'}" [baseZIndex]="10000">
+<p-dialog [(visible)]="showUAMP" resizable="true" style="width:auto;height:auto;" *ngIf="showUAMP"
+    [style]="{width: '95vw'}" [baseZIndex]="10000">
     <p-header> UAMP </p-header>
     <p-body>
         <div class="card" *ngIf="generatingUamp">

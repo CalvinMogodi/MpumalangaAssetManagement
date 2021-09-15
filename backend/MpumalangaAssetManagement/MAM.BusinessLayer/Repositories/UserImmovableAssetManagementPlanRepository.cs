@@ -307,6 +307,15 @@ namespace MAM.BusinessLayer.Repositories
                         PropertyDescription = f.Land.PropertyDescription != null ? f.Land.PropertyDescription.OldDescription : null,
                         AssetType = f.Land.Type,
                         ExtentofLand = f.Land.PropertyDescription != null ? f.Land.PropertyDescription.Extent : null,
+                        PropertyRatesTaxes = null,
+                        OperationalCosts = null,
+                        NoofParkingBays = null,
+                        RequiredPerformanceStandard = null,
+                        Accessibility = null,
+                        ConditionRating = null,
+                        SuitabilityIndex = null,
+                        OperatingPerformanceIndex = null,
+                        FunctionalPerformanceIndex = null,
                         MunicipalUtilityServices = new List<MunicipalUtilityService>(),
                     }).ToList(),
                 };
@@ -329,8 +338,19 @@ namespace MAM.BusinessLayer.Repositories
                         OldStreetAddress = f.Land.GeographicalLocation != null ? string.Format("{0} {1} {2} {3}", f.Land.GeographicalLocation.StreetNumber, f.Land.GeographicalLocation.StreetName, f.Land.GeographicalLocation.Suburb, f.Land.GeographicalLocation.Province) : null,
                         CurrentStreetAddress = f.Land.GeographicalLocation != null ? string.Format("{0} {1} {2} {3}", f.Land.GeographicalLocation.StreetNumber, f.Land.GeographicalLocation.StreetName, f.Land.GeographicalLocation.Suburb, f.Land.GeographicalLocation.Province) : null,
                         PropertyDescription = f.Land.PropertyDescription != null ? f.Land.PropertyDescription.OldDescription : null,
-                        ExtentofLand = f.Land.PropertyDescription != null ? f.Land.PropertyDescription.Extent : null,
-                        MunicipalUtilityServices = new List<MunicipalUtilityService>(),
+                        ExtentofLand = f.Land.PropertyDescription != null ? f.Land.PropertyDescription.Extent : null,         
+                        NoofParkingBays = null,
+                        LettableSpace = null,
+                        LeaseEndDate = null,
+                        LeaseStartDate = null,
+                        RentalRate = null,
+                        RequiredPerformanceStandard = null,
+                        Accessibility = null,
+                        ConditionRating = null,
+                        SuitabilityIndex = null,
+                        OperatingPerformanceIndex = null,
+                        FunctionalPerformanceIndex = null,
+                        Comment = null
                     }).ToList(),
                 };
 
@@ -349,18 +369,66 @@ namespace MAM.BusinessLayer.Repositories
                 uamp.TempleteFourPointTwo = new TempleteFourPointTwo()
                 {
                     Id = 0,
-                    AcquisitionPlans = new List<AcquisitionPlan>()
+                    AcquisitionPlans = facilities.Where(f => f.Land.LeaseStatus.TerminationDate <= DateTime.Today).Select(f => new AcquisitionPlan()
+                    {
+                        Id = 0,
+                        UserImmovableAssetManagementPlanId = uamp.Id,
+                        TempleteNumber = 4.2,
+                        DistrictRegion = f.Land.GeographicalLocation != null ? f.Land.GeographicalLocation.Region : null,
+                        Town = f.Land.GeographicalLocation != null ? f.Land.GeographicalLocation.Town : null,
+                        BudgetType = null,
+                        Extent = f.Land.PropertyDescription != null ? f.Land.PropertyDescription.Extent : null,
+                        InitialNeedYear = null,
+                        AcquisitionType = null,
+                        Status = null,
+                        TotalAmountRequired = null,
+                        CashFlowYear1 = null,
+                        CashFlowYear2 = null,
+                        CashFlowYear3 = null,
+                        CashFlowYear4 = null,
+                        CashFlowYear5 = null,
+                    }).ToList()
                 };
 
                 uamp.TempleteFivePointOne = new TempleteFivePointOne()
                 {
                     Id = 0,
-                    OperationPlans = new List<OperationPlan>()
+                    OperationPlans = facilities.Select(f => new OperationPlan()
+                    {
+                        Id = 0,
+                        UserImmovableAssetManagementPlanId = uamp.Id,
+                        TempleteNumber = 5.1,                        
+                        DistrictRegion = f.Land.GeographicalLocation != null ? f.Land.GeographicalLocation.Region : null,
+                        Town = f.Land.GeographicalLocation != null ? f.Land.GeographicalLocation.Town : null,
+                        AssetDescription = f.Land.GeographicalLocation != null ? f.Name : null,
+                        PropertyDescription = f.Land.PropertyDescription != null ? f.Land.PropertyDescription.OldDescription : null,
+                        ExtentofLand = f.Land.PropertyDescription != null ? f.Land.PropertyDescription.Extent : null,
+                        NoofParkingBays = null,
+                        ServiceDescription = null,
+                        RepairDescription = null,
+                        PrioityServiceReanking = null,
+                        StreetDescription = null,
+                        LeaseType = null,
+                        UsableSpace = null,
+                        ConstructionArea = null,
+                        LeaseStartDate = f.Land.LeaseStatus != null ? f.Land.LeaseStatus.StartingDate : null,
+                        LeaseEndDate = f.Land.LeaseStatus != null ? f.Land.LeaseStatus.TerminationDate : null,
+                        RentalPmPa = null,
+                        InitialNeedYear = null,
+                        Status = null,
+                        TotalAmountRequired = null,
+                        CashFlowYear1 = null,
+                        CashFlowYear2 = null,
+                        CashFlowYear3 = null,
+                        CashFlowYear4 = null,
+                        CashFlowYear5 = null,
+                        Comment = null
+                    }).ToList(),
                 };
                 uamp.TempleteFivePointTwo = new TempleteFivePointTwo()
                 {
                     Id = 0,
-                    OperationPlans = facilities.Select(f => new OperationPlan()
+                    OperationPlans = facilities.Where(f => f.Land.LeaseStatus.TerminationDate <= DateTime.Today).Select(f => new OperationPlan()
                     {
                         Id = 0,
                         UserImmovableAssetManagementPlanId = uamp.Id,
@@ -394,7 +462,7 @@ namespace MAM.BusinessLayer.Repositories
                 uamp.TempleteSix = new TempleteSix()
                 {
                     Id = 0,
-                    SurrenderPlans = facilities.Select(f => new SurrenderPlan()
+                    SurrenderPlans = facilities.Where(f => f.Land.LeaseStatus.TerminationDate <= DateTime.Today).Select(f => new SurrenderPlan()
                     {
                         Id = 0,
                         UserImmovableAssetManagementPlanId = uamp.Id,
@@ -419,7 +487,7 @@ namespace MAM.BusinessLayer.Repositories
             uamp = SaveTempleteFour(uamp);
             uamp = SaveTempleteFive(uamp);
             uamp = SaveTempleteSix(uamp);
-            //uamp = SaveTempleteSeven(uamp);
+            uamp = SaveTempleteSeven(uamp);
             uamp.User = GetUserById(uamp.UserId);
             return uamp;
         }

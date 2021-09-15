@@ -7,7 +7,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
   <PropertyGroup>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
     <_PublishTargetUrl>C:\inetpub\MpumalangaAssetManagement</_PublishTargetUrl>
-    <History>True|2021-07-08T07:03:00.0397413Z;True|2021-07-07T00:11:01.6336924+02:00;</History>
+    <History>True|2021-09-15T00:44:08.6825240Z;True|2021-07-08T09:03:00.0397413+02:00;True|2021-07-07T00:11:01.6336924+02:00;</History>
   </PropertyGroup>
   <ItemGroup>
     <File Include="api-ms-win-core-console-l1-1-0.dll">

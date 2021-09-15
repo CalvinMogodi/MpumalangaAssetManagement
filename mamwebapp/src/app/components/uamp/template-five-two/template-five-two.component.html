@@ -5,39 +5,39 @@
 </div>
 <br>
 
-<div class="p-fluid p-grid p-formgrid" >
+<div class="ui-g ui-fluid">
     <form [formGroup]="newOperationPlanForm">
         <div class="formgrid grid">  
             <div class="field grid col-3">
                 <label for="districtRegion">District/ Region</label>
-                <p-dropdown [style]="{'width':'318px'}" class="ui-inputtext ui-widget" placeholder="Please select" inputId="districtRegion" [options]="regions" formControlName="districtRegion" optionLabel="name"></p-dropdown>
+                <p-dropdown (onChange)="setLocalMunicipalities($event)" [style]="{'width':'318px'}" class="ui-inputtext ui-widget" placeholder="Please select" inputId="districtRegion" [options]="regions" formControlName="districtRegion" optionLabel="name"></p-dropdown>
             </div>
             <div class="field grid col-3">
                 <label for="localMunicipality">Local Municipality</label>
                 <p-dropdown [style]="{'width':'318px'}" class="ui-inputtext ui-widget" placeholder="Please select" inputId="localMunicipality" [options]="localMunicipalities" formControlName="localMunicipality" optionLabel="name"></p-dropdown>
-            </div>
-            <div class="field grid col-3 pr-4">
-                <label for="town">Town</label>
-                <input formControlName="town" autocomplete="off" type="text" pInputText class="ui-inputtext ui-widget">
-            </div>
-            <div class="field grid col-3 pr-4">
-                <label for="assetDescription">Asset Description</label>
-                <input formControlName="assetDescription" autocomplete="off" type="text" pInputText class="ui-inputtext ui-widget">
-            </div>  
-        </div>
-        <div class="formgrid grid">  
-            <div class="field grid col-3">
-                <label for="repairDescription">Repair Description</label>
-                <input formControlName="repairDescription" autocomplete="off" type="text" pInputText class="ui-inputtext ui-widget">
             </div>
             <div class="field grid col-3">
                 <label for="priorityServiceRanking">Priority/ Service Ranking</label>
                 <p-dropdown [style]="{'width':'318px'}" class="ui-inputtext ui-widget" placeholder="Please select" inputId="priorityServiceRanking" [options]="prioities" formControlName="priorityServiceRanking" optionLabel="name"></p-dropdown>
             </div>
             <div class="field grid col-3 pr-4">
-                <label for="initialNeedYear">YEAR <br> <small>in which initial request was submitted</small></label>
-                <p-dropdown class="ui-inputtext ui-widget" placeholder="Please select" [ngModelOptions]="{standalone: true}" formControlName="initialNeedYear" (onChange)="onInitialNeedYearChange(operationPlan, $event)" [options]="initialNeedYears" optionLabel="name"></p-dropdown>
-            </div>
+                <label for="initialNeedYear">Year <small> in which initial request was submitted</small></label>
+                <p-dropdown [style]="{'width':'318px'}" class="ui-inputtext ui-widget" placeholder="Please select" [ngModelOptions]="{standalone: true}" formControlName="initialNeedYear" [options]="initialNeedYears" optionLabel="name"></p-dropdown>
+            </div>           
+        </div>
+        <div class="formgrid grid">  
+            <div class="field grid col-3">
+                <label for="assetDescription">Asset Description</label>
+                <input formControlName="assetDescription" autocomplete="off" type="text" pInputText class="ui-inputtext ui-widget">
+            </div>  
+            <div class="field grid col-3 pr-3">
+                <label for="town">Town</label>
+                <input formControlName="town" autocomplete="off" type="text" pInputText class="ui-inputtext ui-widget">
+            </div>          
+            <div class="field grid col-3">
+                <label for="repairDescription">Repair Description</label>
+                <input formControlName="repairDescription" autocomplete="off" type="text" pInputText class="ui-inputtext ui-widget">
+            </div>           
             <div class="field grid col-3">
                 <label for="cashFlowYear1">Cash Flow <small>(MTEF Year 1)</small></label>
                 <p-inputNumber (keydown)="calculateTotalAmountRequired()" formControlName="cashFlowYear1" mode="currency" currency="ZAR" locale="en-ZA" class="ui-inputtext ui-widget"></p-inputNumber>
@@ -73,14 +73,13 @@
             <div class="field grid col-3"></div>
             <div class="field grid col-3">
                 <button *ngIf="!isEdit" pButton type="submit" icon="pi pi-plus" label="Add Operation Plan" (click)="addOperationPlan()"
-                style="float: right;width: fit-content;height: fit-content"></button>
+                style="float: right;width: fit-content;height: fit-content;margin-top: 1.7em;"></button>
                 <button *ngIf="isEdit" pButton type="submit" icon="pi pi-pencil" label="Update Operation Plan" (click)="onOperationPlanUpdate()"
-                style="float: right;width: fit-content;height: fit-content"></button>
+                style="float: right;width: fit-content;height: fit-content;margin-top: 1.7em;"></button>
             </div>
         </div>
     </form>
 </div>
-
 
 <div class="ui-g ui-fluid">
     <form [formGroup]="operationPlanForm">        

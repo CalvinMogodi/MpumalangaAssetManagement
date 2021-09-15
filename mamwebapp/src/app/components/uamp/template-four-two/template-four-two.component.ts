@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { first } from 'rxjs/operators';
 import { UampService } from 'src/app/services/uamp/uamp.service';
-import { MenuItem, MessageService } from 'primeng/api';
+import { ConfirmationService, MenuItem, MessageService } from 'primeng/api';
 import { CurrentUtlisation } from '../../../models/current-utilisation.model';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { FacilityService } from 'src/app/services/facility/facility.service';
 import { AcquisitionPlan } from 'src/app/models/acquisition-plan.model';
 import { UAMP } from 'src/app/models/uamp.model';
 import { Property } from 'src/app/models/property.model';
+import { SurrenderPlan } from 'src/app/models/surrender-plan.model';
 
 @Component({
   selector: 'app-template-four-two',
@@ -30,7 +31,7 @@ export class TemplateFourTwoComponent implements OnInit {
   isEdit: boolean = false;
   stateOptions: any[];
 
-  constructor(public uampService: UampService, private formBuilder: FormBuilder, private messageService: MessageService) {
+  constructor(private confirmationService: ConfirmationService, public uampService: UampService, private formBuilder: FormBuilder, private messageService: MessageService) {
     this.uampService.uampChange.subscribe((value) => {
       if(value)
       {
@@ -102,8 +103,9 @@ export class TemplateFourTwoComponent implements OnInit {
     ];
 
     this.acquisitionTypes = [
-      { name: 'Purchase ', code: 'P', factor: 1 },
-      { name: 'Construction', code: 'C', factor: 2 }
+      { name: 'Construction', code: 'C', factor: 1 },
+      { name: 'Donation', code: 'D', factor: 2 },
+      { name: 'Purchase ', code: 'P', factor: 3}
     ];
 
     this.statuses = [
@@ -138,14 +140,6 @@ export class TemplateFourTwoComponent implements OnInit {
     this.isEdit = true;
   }
 
-  onReqiured(acquisitionPlan, e){
-    if(e.value){
-      this.selectedAcquisitionPlan = acquisitionPlan;
-      this.update();
-    }
-
-  }
-
   onUpdate() {
     const acquisitionPlan: AcquisitionPlan = {
       id: this.selectedAcquisitionPlan.id,
@@ -166,6 +160,7 @@ export class TemplateFourTwoComponent implements OnInit {
       cashFlowYear3: this.acquisitionPlanForm.controls["cashFlowYear3"].value,
       cashFlowYear4: this.acquisitionPlanForm.controls["cashFlowYear4"].value,
       cashFlowYear5: this.acquisitionPlanForm.controls["cashFlowYear5"].value,
+      reqiured: false
     };
 
     var index = this.acquisitionPlans.indexOf(this.selectedAcquisitionPlan); 
@@ -221,6 +216,7 @@ export class TemplateFourTwoComponent implements OnInit {
       cashFlowYear3: this.acquisitionPlanForm.controls["cashFlowYear3"].value,
       cashFlowYear4: this.acquisitionPlanForm.controls["cashFlowYear4"].value,
       cashFlowYear5: this.acquisitionPlanForm.controls["cashFlowYear5"].value,
+      reqiured: false
     };
     this.acquisitionPlans.push(acquisitionPlan);
     if(this.uamp.templeteFourPointTwo != null)
@@ -305,8 +301,25 @@ export class TemplateFourTwoComponent implements OnInit {
       cashFlowYear3: 0,
       cashFlowYear4: 0,
       cashFlowYear5: 0,
+      reqiured: false
     }
     return acquisitionPlan;
+  }  
+
+  onReqiured(acquisitionPlan: AcquisitionPlan, e){
+    if(e.value === 'true'){
+      this.confirmationService.confirm({
+        message: 'Are you sure that this property is still reqiured?',
+        accept: () => {
+          acquisitionPlan.reqiured = true;
+        },
+        reject:() =>{
+          acquisitionPlan.reqiured = false;
+        }
+    });
+    }else{
+      acquisitionPlan.reqiured = false;
+    }
   }
 
 }

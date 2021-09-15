@@ -30,6 +30,9 @@ export class TemplateTwoTwoComponent implements OnInit {
   suitabilityIndexs: any[];
   accessibilities: any[];
   requiredPerformanceStandards: any[];
+  regions: any[];
+  localMunicipalities: any[];
+  types: any[];
   
   constructor(private uampService: UampService, private formBuilder: FormBuilder) { 
     this.uampService.uampChange.subscribe((value) => {
@@ -68,6 +71,7 @@ export class TemplateTwoTwoComponent implements OnInit {
       extentofLand: [''],
       rentalPM: [''],
       rentalPA: [''],
+      rentalRate:[''],
       municipalUtilityServices: [''],
       MunicipalUtilityServiceTotal: [''],
       propertyRatesTaxes: [''],
@@ -83,6 +87,19 @@ export class TemplateTwoTwoComponent implements OnInit {
       leaseTerm: [''],
       comment: ['']
     });
+
+    this.regions = [
+      { name: 'Ehlanzeni ', code: 'U', factor: 1 },
+      { name: 'Gert Sibande', code: 'R', factor: 2 },
+      { name: 'Nkangala', code: 'U', factor: 3 }
+    ];
+
+    this.types = [
+      { name: 'Erf', code: 'E', factor: 1 },
+      { name: 'Farm', code: 'F', factor: 2 },
+      { name: 'Agricultural Holding', code: 'A', factor: 3 },
+      { name: 'Sectional Title', code: 'S', factor: 4 }
+    ];
     this.conditionRatings = [
       { name: 'C1 (Excellent)', code: 'C1', factor: 1 },
       { name: 'C2 (Good)', code: 'C2', factor: 2 },
@@ -128,4 +145,91 @@ export class TemplateTwoTwoComponent implements OnInit {
 
   get p() { return this.propertyForm.controls; }
 
+  setLocalMunicipalities(e) {
+    if (e != undefined) {
+      if (e.value != undefined) {
+        if (e.value.factor == 1) {
+          let _localMunicipalities = [
+            { name: 'Bushbuckridge', code: 'B', factor: 1 },
+            { name: 'Mbombela', code: 'M', factor: 2 },
+            { name: 'Nkomazi', code: 'N', factor: 3 },
+            { name: 'Thaba Chweu', code: 'TC', factor: 4},           
+          ];
+          this.localMunicipalities = _localMunicipalities;
+        } else if (e.value.factor == 2) {
+          let _localMunicipalities = [
+            { name: 'Albert Luthuli', code: 'AL', factor: 1 },
+            { name: 'Dipaleseng', code: 'D', factor: 2 },
+            { name: 'Govan Mbeki', code: 'GM', factor: 3 },
+            { name: 'Lekwa', code: 'L', factor: 7 },
+            { name: 'Mkhondo', code: 'M', factor: 4 },                     
+            { name: 'Msukaligwa', code: 'MS', factor: 5 },
+            { name: 'Mkhondo', code: 'MK', factor: 6 }, 
+            { name: 'Pixley Ka Seme', code: 'PKS', factor: 8 },  
+          ];
+          this.localMunicipalities = _localMunicipalities;
+        } else if(e.value.factor == 3) {          
+          let _localMunicipalities = [
+            { name: 'Dr. J.S. Moroka', code: 'JSM', factor: 1 },
+            { name: 'eMalahleni', code: 'M', factor: 2 },
+            { name: 'eMakhazeni', code: 'MK', factor: 3},           
+            { name: 'Msukaligwa', code: 'MS', factor: 4 },
+            { name: 'Steve Tshwete', code: 'ST', factor: 5 },
+            { name: 'Thembisile Hani', code: 'TH', factor: 6 },
+            { name: 'Victor Khanye', code: 'VK', factor: 7 },            
+          ];
+          this.localMunicipalities = _localMunicipalities;
+        }
+        else {
+          let _localMunicipalities = [
+            { name: 'Bushbuckridge', code: 'B', factor: 1 },
+            { name: 'Thaba Chweu', code: 'TC', factor: 2 },            
+          ];          
+          this.localMunicipalities = _localMunicipalities;
+        }
+      }
+    }
+  }
+
+  makeId(length) {
+    var result = '';
+    var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    var charactersLength = characters.length;
+    for (var i = 0; i < length; i++) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
+  }
+
+  addProperty(){
+    const property: Property = {
+      id: 0,
+    userImmovableAssetManagementPlanId: this.uamp.id,
+    fileReferenceNo: this.makeId(8),
+    serialNo: this.makeId(8),
+    district: this.propertyForm.controls["district"].value.name,
+    town: this.propertyForm.controls["town"].value,
+    localMunicipality: this.propertyForm.controls["localMunicipality"].value.name,
+    assetDescription: this.propertyForm.controls["assetDescription"].value,
+    oldStreetAddress: this.propertyForm.controls["oldStreetAddress"].value.name,
+    currentStreetAddress: this.propertyForm.controls["currentStreetAddress"].value.name,
+    propertyDescription: this.propertyForm.controls["propertyDescription"].value.name,
+    assetType: this.propertyForm.controls["assetType"].value.name,
+    noofParkingBaysAllocated: this.propertyForm.controls["noofParkingBaysAllocated"].value.name,
+    lettableSpace: this.propertyForm.controls["lettableSpace"].value.name,
+    extentofLand: this.propertyForm.controls["extentofLand"].value.name,
+    rentalRate: this.propertyForm.controls["rentalRate"].value,
+    requiredPerformanceStandard: this.propertyForm.controls["requiredPerformanceStandard"].value.name,
+    accessibility: this.propertyForm.controls["accessibility"].value.name,
+    conditionRating: this.propertyForm.controls["conditionRating"].value.name,
+    suitabilityIndex: this.propertyForm.controls["suitabilityIndex"].value.name,
+    operatingPerformanceIndex: this.propertyForm.controls["operatingPerformanceIndex"].value.name,
+    functionalPerformanceIndex: this.propertyForm.controls["functionalPerformanceIndex"].value.name,
+    leaseStartDate: this.propertyForm.controls["leaseStartDate"].value,
+    leaseEndDate: this.propertyForm.controls["leaseEndDate"].value,
+    comment: this.propertyForm.controls["comment"].value,   
+    }
+
+    this.properties.push(property);
+  }
 }

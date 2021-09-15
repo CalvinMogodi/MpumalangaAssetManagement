@@ -10,22 +10,23 @@ namespace MAM.BusinessLayer.Models
     {
         public int Id { get; set; }
         public int UserImmovableAssetManagementPlanId { get; set; }
-        public string Name { get; set; }
-        public decimal? MtefAllocationY1 { get; set; }
-        public decimal? RequiredBudgetY1 { get; set; }
-        public double? ShortfallY1 { get; set; }
-        public decimal? MtefAllocationY2 { get; set; }
-        public decimal? RequiredBudgetY2 { get; set; }
-        public double? ShortfallY2 { get; set; }
-        public decimal? MtefAllocationY3 { get; set; }
-        public decimal? RequiredBudgetY3 { get; set; }
-        public double? ShortfallY3 { get; set; }
-        public decimal? MtefAllocationY4 { get; set; }
-        public decimal? RequiredBudgetY4 { get; set; }
-        public double? ShortfallY4 { get; set; }
-        public decimal? MtefAllocationY5 { get; set; }
-        public decimal? RequiredBudgetY5 { get; set; }
-        public double? ShortfallY5 { get; set; }
+        public string Group { get; set; }
+        public string Title { get; set; }
+        public decimal? Year1Allocation { get; set; }
+        public decimal? Year1RequiredBudget { get; set; }
+        public double? Year1Shortfall { get; set; }
+        public decimal? Year2Allocation { get; set; }
+        public decimal? Year2RequiredBudget { get; set; }
+        public double? Year2Shortfall { get; set; }
+        public decimal? Year3Allocation { get; set; }
+        public decimal? Year3RequiredBudget { get; set; }
+        public double? Year3Shortfall { get; set; }
+        public decimal? Year4Allocation { get; set; }
+        public decimal? Year4RequiredBudget { get; set; }
+        public double? Year4Shortfall { get; set; }
+        public decimal? Year5Allocation { get; set; }
+        public decimal? Year5RequiredBudget { get; set; }
+        public double? Year5Shortfall { get; set; }
         public bool IsHeader { get; set; }
         public bool IsPercentage { get; set; }
         public int Order { get; set; }
@@ -34,23 +35,24 @@ namespace MAM.BusinessLayer.Models
             return new DataAccess.Tables.MtefBudgetPeriod()
             {
                 Id = mtefBudgetPeriod.Id,
-                Name = mtefBudgetPeriod.Name,
+                Title = mtefBudgetPeriod.Title,
+                Group = mtefBudgetPeriod.Group,
                 UserImmovableAssetManagementPlanId = mtefBudgetPeriod.UserImmovableAssetManagementPlanId,
-                MtefAllocationY1 = mtefBudgetPeriod.MtefAllocationY1,
-                RequiredBudgetY1 = mtefBudgetPeriod.RequiredBudgetY1,
-                ShortfallY1 = mtefBudgetPeriod.ShortfallY1,
-                MtefAllocationY2 = mtefBudgetPeriod.MtefAllocationY2,
-                RequiredBudgetY2 = mtefBudgetPeriod.RequiredBudgetY2,
-                ShortfallY2 = mtefBudgetPeriod.ShortfallY2,
-                MtefAllocationY3 = mtefBudgetPeriod.MtefAllocationY3,
-                RequiredBudgetY3 = mtefBudgetPeriod.RequiredBudgetY3,
-                ShortfallY3 = mtefBudgetPeriod.ShortfallY3,
-                MtefAllocationY4 = mtefBudgetPeriod.MtefAllocationY4,
-                RequiredBudgetY4 = mtefBudgetPeriod.RequiredBudgetY4,
-                ShortfallY4 = mtefBudgetPeriod.ShortfallY4,
-                MtefAllocationY5 = mtefBudgetPeriod.MtefAllocationY4,
-                RequiredBudgetY5 = mtefBudgetPeriod.RequiredBudgetY5,
-                ShortfallY5 = mtefBudgetPeriod.ShortfallY5,
+                Year1Allocation = mtefBudgetPeriod.Year1Allocation,
+                Year1RequiredBudget = mtefBudgetPeriod.Year1RequiredBudget,
+                Year1Shortfall = mtefBudgetPeriod.Year1Shortfall,
+                Year2Allocation = mtefBudgetPeriod.Year2Allocation,
+                Year2RequiredBudget = mtefBudgetPeriod.Year2RequiredBudget,
+                Year2Shortfall = mtefBudgetPeriod.Year2Shortfall,
+                Year3Allocation = mtefBudgetPeriod.Year3Allocation,
+                Year3RequiredBudget = mtefBudgetPeriod.Year3RequiredBudget,
+                Year3Shortfall = mtefBudgetPeriod.Year3Shortfall,
+                Year4Allocation = mtefBudgetPeriod.Year4Allocation,
+                Year4RequiredBudget = mtefBudgetPeriod.Year4RequiredBudget,
+                Year4Shortfall = mtefBudgetPeriod.Year4Shortfall,
+                Year5Allocation = mtefBudgetPeriod.Year5Allocation,
+                Year5RequiredBudget = mtefBudgetPeriod.Year5RequiredBudget,
+                Year5Shortfall = mtefBudgetPeriod.Year5Shortfall,
                 IsHeader = mtefBudgetPeriod.IsHeader,
                 IsPercentage = mtefBudgetPeriod.IsPercentage,
                 Order = mtefBudgetPeriod.Order
@@ -64,23 +66,24 @@ namespace MAM.BusinessLayer.Models
             return mtefBudgetPeriods.Select(o => new MtefBudgetPeriod()
             {
                 Id = o.Id,
-                Name = o.Name,
+                Title = o.Title,
+                Group = o.Group,
                 UserImmovableAssetManagementPlanId = o.UserImmovableAssetManagementPlanId,
-                MtefAllocationY1 = o.MtefAllocationY1,
-                RequiredBudgetY1 = o.RequiredBudgetY1,
-                ShortfallY1  = o.ShortfallY1,
-                MtefAllocationY2 = o.MtefAllocationY2,
-                RequiredBudgetY2 = o.RequiredBudgetY2,
-                ShortfallY2 = o.ShortfallY2,
-                MtefAllocationY3 = o.MtefAllocationY3,
-                RequiredBudgetY3 = o.RequiredBudgetY3,
-                ShortfallY3 = o.ShortfallY3,
-                MtefAllocationY4 = o.MtefAllocationY4,
-                RequiredBudgetY4 = o.RequiredBudgetY4,
-                ShortfallY4 = o.ShortfallY4,
-                MtefAllocationY5 = o.MtefAllocationY4,
-                RequiredBudgetY5 = o.RequiredBudgetY5,
-                ShortfallY5 = o.ShortfallY5,
+                Year1Allocation = o.Year1Allocation,
+                Year1RequiredBudget = o.Year1RequiredBudget,
+                Year1Shortfall = o.Year1Shortfall,
+                Year2Allocation = o.Year2Allocation,
+                Year2RequiredBudget = o.Year2RequiredBudget,
+                Year2Shortfall = o.Year2Shortfall,
+                Year3Allocation = o.Year3Allocation,
+                Year3RequiredBudget = o.Year3RequiredBudget,
+                Year3Shortfall = o.Year3Shortfall,
+                Year4Allocation = o.Year4Allocation,
+                Year4RequiredBudget = o.Year4RequiredBudget,
+                Year4Shortfall = o.Year4Shortfall,
+                Year5Allocation = o.Year5Allocation,
+                Year5RequiredBudget = o.Year5RequiredBudget,
+                Year5Shortfall = o.Year5Shortfall,
                 IsHeader = o.IsHeader,
                 IsPercentage = o.IsPercentage,
                 Order = o.Order
@@ -97,96 +100,96 @@ namespace MAM.BusinessLayer.Models
                     Order = 0,
                     IsHeader = false,
                     IsPercentage = false,
-                    MtefAllocationY1 = 0,
-                    RequiredBudgetY1 = 0,
-                    ShortfallY1 = 0,
-                    MtefAllocationY2 = 0,
-                    RequiredBudgetY2 = 0,
-                    ShortfallY2 = 0,
-                    MtefAllocationY3 = 0,
-                    RequiredBudgetY3 = 0,
-                    ShortfallY3 = 0,
-                    MtefAllocationY4 = 0,
-                    RequiredBudgetY4 = 0,
-                    ShortfallY4 = 0,
-                    MtefAllocationY5 = 0,
-                    RequiredBudgetY5 = 0,
-                    ShortfallY5 = 0
+                    Title = null,
+                    Group = null,
+                    Year1Allocation = 0,
+                    Year1RequiredBudget = null,
+                    Year1Shortfall = null,
+                    Year2Allocation = null,
+                    Year2RequiredBudget = null,
+                    Year2Shortfall = null,
+                    Year3Allocation = null,
+                    Year3RequiredBudget = null,
+                    Year3Shortfall = null,
+                    Year4Allocation = null,
+                    Year4RequiredBudget = null,
+                    Year4Shortfall = null,
+                    Year5Allocation = null,
+                    Year5RequiredBudget = null,
+                    Year5Shortfall = null,
                 };
                
                 
                 switch (i)
                 {
                     case 0:
-                        mtefBudgetPeriod.Name = "New Capital Works T4.1";
+                        mtefBudgetPeriod.Title = "New Capital Works T4.1";
+                        mtefBudgetPeriod.Group = "Capital Projects";
                         mtefBudgetPeriod.Order = 2;
                         break;
                     case 1:
-                        mtefBudgetPeriod.Name = "Refurb., Re-config.& Additions) T5.1";
+                        mtefBudgetPeriod.Title = "Refurb., Re-config.& Additions) T5.1";
+                        mtefBudgetPeriod.Group = "Capital Projects";
                         mtefBudgetPeriod.Order = 3;
                         break;
                     case 2:
-                        mtefBudgetPeriod.Name = "Total Capital Costs";
+                        mtefBudgetPeriod.Title = "Total Capital Costs";
+                        mtefBudgetPeriod.Group = "Capital Projects";
                         mtefBudgetPeriod.Order = 4;
                         break;
                     case 3:
-                        mtefBudgetPeriod.Name = "% Shortfall";
+                        mtefBudgetPeriod.Title = "% Shortfall";
                         mtefBudgetPeriod.IsPercentage = true;
+                        mtefBudgetPeriod.Group = "Capital Projects";
                         mtefBudgetPeriod.Order = 5;
                         break;
                     case 4:
-                        mtefBudgetPeriod.Name = "Existing Leases T2.2";
+                        mtefBudgetPeriod.Title = "Existing Leases T2.2";
+                        mtefBudgetPeriod.Group = "Current Expenditure";
                         mtefBudgetPeriod.Order = 7;
                         break;
                     case 5:
-                        mtefBudgetPeriod.Name = "New leases T4.2";
+                        mtefBudgetPeriod.Title = "New leases T4.2";
+                        mtefBudgetPeriod.Group = "Current Expenditure";
                         mtefBudgetPeriod.Order = 8;
                         break;
                     case 7:
-                        mtefBudgetPeriod.Name = "Municipal / Utility Services: Leased-in (Electricity, water, sewer & refuse) T2.2";
+                        mtefBudgetPeriod.Title = "Municipal / Utility Services: Leased-in (Electricity, water, sewer & refuse) T2.2";
+                        mtefBudgetPeriod.Group = "Current Expenditure";
                         mtefBudgetPeriod.Order = 9;
                         break;
                     case 9:
-                        mtefBudgetPeriod.Name = "Property Rates & Taxes T2.1";
+                        mtefBudgetPeriod.Title = "Property Rates & Taxes T2.1";
+                        mtefBudgetPeriod.Group = "Current Expenditure";
                         mtefBudgetPeriod.Order = 10;
                         break;
                     case 10:
-                        mtefBudgetPeriod.Name = "Maintenance Requirements (Repairs) T5.2";
+                        mtefBudgetPeriod.Title = "Maintenance Requirements (Repairs) T5.2";
+                        mtefBudgetPeriod.Group = "Current Expenditure";
                         mtefBudgetPeriod.Order = 11;
                         break;
                     case 11:
-                        mtefBudgetPeriod.Name = "Total Current Costs";
+                        mtefBudgetPeriod.Title = "Total Current Costs";
+                        mtefBudgetPeriod.Group = "Current Expenditure";
                         mtefBudgetPeriod.Order = 12;
                         break;
                     case 12:
-                        mtefBudgetPeriod.Name = "Total Capital Works & Recurrent Costs";
+                        mtefBudgetPeriod.Title = "Total Capital Works & Recurrent Costs";
+                        mtefBudgetPeriod.Group = "Current Expenditure";
                         mtefBudgetPeriod.Order = 13;
                         break;
                     case 13:
-                        mtefBudgetPeriod.Name = "% Shortfall";
+                        mtefBudgetPeriod.Title = "% Shortfall";
                         mtefBudgetPeriod.IsPercentage = true;
+                        mtefBudgetPeriod.Group = "Current Expenditure";
                         mtefBudgetPeriod.Order = 14;
-                        break;
-                    case 14:
-                        mtefBudgetPeriod.Name = "Capital Projects";
-                        mtefBudgetPeriod.IsHeader = true;
-                        mtefBudgetPeriod.Order = 1;
-                        break;
-                    case 15:
-                        mtefBudgetPeriod.Name = "Current Expenditure";
-                        mtefBudgetPeriod.IsHeader = true;
-                        mtefBudgetPeriod.Order = 6;
-                        break;
-                    case 16:
-                        mtefBudgetPeriod.Name = "Municipal / Utility Services";
-                        mtefBudgetPeriod.IsHeader = true;
-                        mtefBudgetPeriod.Order = 9;
-                        break;
+                        break;  
                     default:
                         break;
                 }
-
-                mtefBudgetPeriods.Add(mtefBudgetPeriod);
+                if (mtefBudgetPeriod.Title != null) {
+                    mtefBudgetPeriods.Add(mtefBudgetPeriod);
+                }                
             }
             return mtefBudgetPeriods;
         }

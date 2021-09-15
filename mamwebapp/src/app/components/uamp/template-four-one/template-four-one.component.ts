@@ -20,6 +20,7 @@ export class TemplateFourOneComponent implements OnInit {
   regions: any[];
   initialNeedYears: any[];
   statuses: any[];
+  localMunicipalities: any[];
   acquisitionTypes: any[];
   acquisitionPlans: Array<AcquisitionPlan> = [];
   buttonItems: MenuItem[];
@@ -148,6 +149,7 @@ export class TemplateFourOneComponent implements OnInit {
       cashFlowYear3: this.acquisitionPlanForm.controls["cashFlowYear3"].value,
       cashFlowYear4: this.acquisitionPlanForm.controls["cashFlowYear4"].value,
       cashFlowYear5: this.acquisitionPlanForm.controls["cashFlowYear5"].value,
+      reqiured: false
     };
 
     var index = this.acquisitionPlans.indexOf(this.selectedAcquisitionPlan); 
@@ -204,6 +206,7 @@ export class TemplateFourOneComponent implements OnInit {
       cashFlowYear3: this.acquisitionPlanForm.controls["cashFlowYear3"].value,
       cashFlowYear4: this.acquisitionPlanForm.controls["cashFlowYear4"].value,
       cashFlowYear5: this.acquisitionPlanForm.controls["cashFlowYear5"].value,
+      reqiured: false
     };
     this.acquisitionPlans.push(acquisitionPlan);
     if(this.uamp.templeteFourPointOne != null)
@@ -266,5 +269,51 @@ export class TemplateFourOneComponent implements OnInit {
       total = total + year5;
 
       return total;  
+  }
+
+  setLocalMunicipalities(e) {
+    if (e != undefined) {
+      if (e.value != undefined) {
+        if (e.value.factor == 1) {
+          let _localMunicipalities = [
+            { name: 'Bushbuckridge', code: 'B', factor: 1 },
+            { name: 'Mbombela', code: 'M', factor: 2 },
+            { name: 'Nkomazi', code: 'N', factor: 3 },
+            { name: 'Thaba Chweu', code: 'TC', factor: 4},           
+          ];
+          this.localMunicipalities = _localMunicipalities;
+        } else if (e.value.factor == 2) {
+          let _localMunicipalities = [
+            { name: 'Albert Luthuli', code: 'AL', factor: 1 },
+            { name: 'Dipaleseng', code: 'D', factor: 2 },
+            { name: 'Govan Mbeki', code: 'GM', factor: 3 },
+            { name: 'Lekwa', code: 'L', factor: 7 },
+            { name: 'Mkhondo', code: 'M', factor: 4 },                     
+            { name: 'Msukaligwa', code: 'MS', factor: 5 },
+            { name: 'Mkhondo', code: 'MK', factor: 6 }, 
+            { name: 'Pixley Ka Seme', code: 'PKS', factor: 8 },  
+          ];
+          this.localMunicipalities = _localMunicipalities;
+        } else if(e.value.factor == 3) {          
+          let _localMunicipalities = [
+            { name: 'Dr. J.S. Moroka', code: 'JSM', factor: 1 },
+            { name: 'eMalahleni', code: 'M', factor: 2 },
+            { name: 'eMakhazeni', code: 'MK', factor: 3},           
+            { name: 'Msukaligwa', code: 'MS', factor: 4 },
+            { name: 'Steve Tshwete', code: 'ST', factor: 5 },
+            { name: 'Thembisile Hani', code: 'TH', factor: 6 },
+            { name: 'Victor Khanye', code: 'VK', factor: 7 },            
+          ];
+          this.localMunicipalities = _localMunicipalities;
+        }
+        else {
+          let _localMunicipalities = [
+            { name: 'Bushbuckridge', code: 'B', factor: 1 },
+            { name: 'Thaba Chweu', code: 'TC', factor: 2 },            
+          ];          
+          this.localMunicipalities = _localMunicipalities;
+        }
+      }
+    }
   }
 }

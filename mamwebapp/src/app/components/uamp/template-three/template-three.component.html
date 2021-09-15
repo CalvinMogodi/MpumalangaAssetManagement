@@ -7,7 +7,6 @@
 <br>
 <br>
 <div class="ui-g ui-fluid">
-    
     <form [formGroup]="assessmentStrategicForm">
         <div class="formgrid grid">
             <div class="field col-6">
@@ -28,14 +27,10 @@
                 </span>
             </div>
 
-            <div class="field col-6">
+            <div class="field col-6" style="margin-top: -35px;">
                 <label for="allocatedSpace" class="col-fixed">Allocated Space</label>
-                <p-inputNumber formControlName="allocatedSpace" [showButtons]="true" buttonLayout="horizontal"
-                    spinnerMode="horizontal" decrementButtonClass="p-button-danger"
-                    incrementButtonClass="p-button-success" incrementButtonIcon="pi pi-plus"
-                    decrementButtonIcon="pi pi-minus" class="inputtext"></p-inputNumber>         
-                    <br>         
-               <!--<small class="w-full" style="text-align: end;margin-left: 47%;">As per usable office space</small>--> 
+                <p-inputNumber class="ui-inputtext ui-widget" formControlName="allocatedSpace"></p-inputNumber>  
+               <small>As per usable office space</small>
             </div>
             
         </div>
@@ -47,24 +42,15 @@
                 <div class="formgrid grid">
                 <div class="field col-4">
                     <label for="fbpLevel" class="col-fixed">Level</label>
-                    <p-inputNumber [inputStyle]="{'width':'6rem'}" formControlName="fbpLevel" [showButtons]="true" buttonLayout="horizontal"
-                        spinnerMode="horizontal" decrementButtonClass="p-button-danger"
-                        incrementButtonClass="p-button-success" incrementButtonIcon="pi pi-plus"
-                        decrementButtonIcon="pi pi-minus" class="inputtext"></p-inputNumber>                        
+                    <p-inputNumber formControlName="fbpLevel" class="ui-inputtext ui-widget"></p-inputNumber>                        
                 </div>
                 <div class="field col-4">
                     <label for="fbpQuantity" class="col-fixed">Quantity</label>
-                        <p-inputNumber [inputStyle]="{'width':'6rem'}" formControlName="fbpQuantity" [showButtons]="true" buttonLayout="horizontal"
-                            spinnerMode="horizontal" decrementButtonClass="p-button-danger"
-                            incrementButtonClass="p-button-success" incrementButtonIcon="pi pi-plus"
-                            decrementButtonIcon="pi pi-minus" class="inputtext"></p-inputNumber>                        
+                        <p-inputNumber class="ui-inputtext ui-widget" formControlName="fbpQuantity"></p-inputNumber>                        
                 </div>
                 <div class="field col-4">
                     <label for="fbpNorm"  class="col-fixed">Norm</label>
-                        <p-inputNumber [inputStyle]="{'width':'6rem'}" formControlName="fbpNorm" [showButtons]="true" buttonLayout="horizontal"
-                            spinnerMode="horizontal" decrementButtonClass="p-button-danger"
-                            incrementButtonClass="p-button-success" incrementButtonIcon="pi pi-plus"
-                            decrementButtonIcon="pi pi-minus" class="inputtext"></p-inputNumber>                        
+                        <p-inputNumber class="ui-inputtext ui-widget" formControlName="fbpNorm"></p-inputNumber>                        
                 </div>
             </div>
             </div>
@@ -73,44 +59,34 @@
                 <div class="formgrid grid">
                 <div class="field col-4">
                     <label for="aoLevel" class="col-fixed">Level</label>
-                    <p-inputNumber [inputStyle]="{'width':'6rem'}" formControlName="aoLevel" [showButtons]="true" buttonLayout="horizontal"
-                        spinnerMode="horizontal" decrementButtonClass="p-button-danger"
-                        incrementButtonClass="p-button-success" incrementButtonIcon="pi pi-plus"
-                        decrementButtonIcon="pi pi-minus" class="inputtext"></p-inputNumber> 
+                    <p-inputNumber class="ui-inputtext ui-widget" formControlName="aoLevel"></p-inputNumber> 
                 </div>
 
                 <div class="field col-4">
                         <label for="float-input" class="col-fixed w-4">Quantity</label>
-                        <p-inputNumber [inputStyle]="{'width':'6rem'}" formControlName="aoQuantity" [showButtons]="true" buttonLayout="horizontal"
-                            spinnerMode="horizontal" decrementButtonClass="p-button-danger"
-                            incrementButtonClass="p-button-success" incrementButtonIcon="pi pi-plus"
-                            decrementButtonIcon="pi pi-minus" class="inputtext"></p-inputNumber>   
+                        <p-inputNumber class="ui-inputtext ui-widget" formControlName="aoQuantity"></p-inputNumber>   
                 </div>
 
                 <div class="field col-4">
                         <label for="float-input" class="col-fixed w-4">Norm</label>
-                        <p-inputNumber [inputStyle]="{'width':'6rem'}" formControlName="aoNorm" [showButtons]="true" buttonLayout="horizontal"
-                            spinnerMode="horizontal" decrementButtonClass="p-button-danger"
-                            incrementButtonClass="p-button-success" incrementButtonIcon="pi pi-plus"
-                            decrementButtonIcon="pi pi-minus" class="inputtext"></p-inputNumber>       
+                        <p-inputNumber class="ui-inputtext ui-widget" formControlName="aoNorm"></p-inputNumber>       
                 </div>
             </div>
             </div> 
         </div>
-        <div class="formgrid grid" > 
-            <div class="ui-g-12 ui-md-12">
+        
+            <div class="col-12">
                 <button *ngIf="!isEdit" pButton type="button" icon="pi pi-plus" label="Add Strategic Assessment"
-                    (click)="addStrategicNeedsAssessment()" style="width: fit-content;"></button>
+                    (click)="addStrategicNeedsAssessment()" style="width: fit-content;float: right;"></button>
                 <button pButton *ngIf="isEdit" type="button" icon="pi pi-pencil" label="Update Strategic Assessment"
-                    (click)="onUpdate()" style="width: fit-content;"></button>
+                    (click)="onUpdate()" style="width: fit-content; float: right;"></button>
             </div>
-        </div>
     </p-fieldset>
     </form>
 
     <div class="ui-g ui-fluid">
 
-        <p-table [value]="strategicAssessments" styleClass="p-datatable-striped" [responsive]="true" sortField="district" sortMode="single" (onSort)="onSort()">
+        <p-table [value]="strategicAssessments" styleClass="p-datatable-striped" [responsive]="true">
             <ng-template pTemplate="header">
                 <tr>
                     <th></th>
@@ -136,29 +112,29 @@
                     <th></th>
                 </tr>
             </ng-template>
-            <ng-template pTemplate="body" let-strategicNeedsAssessment let-rowIndex="rowIndex">
-                <tr class="ui-widget-header" *ngIf="rowGroupMetadata[strategicNeedsAssessment.district].index === rowIndex">
+            <ng-template pTemplate="body" let-strategicAssessment let-rowIndex="rowIndex">
+                <tr class="ui-widget-header" *ngIf="rowGroupMetadata[strategicAssessment.district].index === rowIndex">
                     <td colspan="13">
-                        <span style="font-weight:bold">{{strategicNeedsAssessment.district}}</span>
+                        <span style="font-weight:bold">{{strategicAssessment.district}}</span>
                     </td>
                 </tr>
                 <tr>
-                    <td>{{strategicNeedsAssessment.postDescriptionTitle}}</td>
-                    <td>{{strategicNeedsAssessment.fbpLevel}}</td>
-                    <td>{{strategicNeedsAssessment.fbpQuantity}}</td>
-                    <td>{{strategicNeedsAssessment.fbpNorm}}</td>
-                    <td>{{strategicNeedsAssessment.fbpRequirement}}</td>
-                    <td>{{strategicNeedsAssessment.aoLevel}}</td>
-                    <td>{{strategicNeedsAssessment.aoQuantity}}</td>
-                    <td>{{strategicNeedsAssessment.aoNorm}}</td>
-                    <td>{{strategicNeedsAssessment.aoRequirement}}</td>
-                    <td>{{strategicNeedsAssessment.allocatedSpace}}</td>
-                    <td>{{strategicNeedsAssessment.surplusShortageAccommodation}}</td>
-                    <td [ngClass]="strategicNeedsAssessment.percentageUtilised > 0 ? 'textColor' : 'red'">
-                        {{strategicNeedsAssessment.percentageUtilised | number : '1.2-2'}}%</td>
+                    <td>{{strategicAssessment.postDescriptionTitle}}</td>
+                    <td>{{strategicAssessment.fbpLevel}}</td>
+                    <td>{{strategicAssessment.fbpQuantity}}</td>
+                    <td>{{strategicAssessment.fbpNorm}}</td>
+                    <td>{{strategicAssessment.fbpRequirement}}</td>
+                    <td>{{strategicAssessment.aoLevel}}</td>
+                    <td>{{strategicAssessment.aoQuantity}}</td>
+                    <td>{{strategicAssessment.aoNorm}}</td>
+                    <td>{{strategicAssessment.aoRequirement}}</td>
+                    <td>{{strategicAssessment.allocatedSpace}}</td>
+                    <td>{{strategicAssessment.surplusShortageAccommodation}}</td>
+                    <td [ngClass]="strategicAssessment.percentageUtilised < 0 ? 'red' : 'textColor'">
+                        {{strategicAssessment.percentageUtilised | number : '1.2-2'}}%</td>
                     <td style="text-align: center;" *ngIf="strategicAssessments.length > 0">
                         <p-splitButton label="More" *ngIf="mode != 'View'" [model]="buttonItems"
-                            (onDropdownClick)="selectStrategicNeedsAssessment(strategicNeedsAssessment)"
+                            (onDropdownClick)="selectStrategicNeedsAssessment(strategicAssessment)"
                             styleClass="p-button-secondary">
                         </p-splitButton>
                     </td>
