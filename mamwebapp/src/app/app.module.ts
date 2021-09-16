@@ -79,11 +79,11 @@ import { PrimeNGConfig } from 'primeng/api';
 import { PasswordModule } from 'primeng/password';
 import { InputSwitchModule } from 'primeng/inputswitch';
 
-
 import {SliderModule} from 'primeng/slider';
 import {ContextMenuModule} from 'primeng/contextmenu';
 import {ProgressBarModule} from 'primeng/progressbar';
 import {InputTextModule} from 'primeng/inputtext';
+import { UampDetailsComponent } from './components/uamp/uamp-details/uamp-details.component';
 
 @NgModule({
   declarations: [
@@ -115,7 +115,8 @@ import {InputTextModule} from 'primeng/inputtext';
     TemplateSevenComponent,
     AddMunicipalUtilityServicesComponent,
     UampComponent,  
-    CampComponent
+    CampComponent,
+    UampDetailsComponent
   ],
   imports: [
     BrowserModule,

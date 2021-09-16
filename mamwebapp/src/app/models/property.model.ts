@@ -1,8 +1,9 @@
 import { MunicipalUtilityService } from "./municipal-utility-service.model";
 
 export class Property{
-    id: number;
+    id: Number;
     userImmovableAssetManagementPlanId: Number;
+    userDepartmentCode?: string;
     fileReferenceNo: string;
     serialNo: string;
     district: string;
@@ -35,11 +36,13 @@ export class Property{
     leaseStartDate?: Date;
     leaseEndDate?: Date;
     leaseTerm?: string;
-    comment: string;
+    comment?: string;
     accessibilityObj?: any;
     suitabilityIndexObj?: any;
     operatingPerformanceIndexObj?: any;
     functionalPerformanceIndexObj?: any;
     requiredPerformanceStandardObj?: any;
     conditionRatingObj?: any;
+    localMunicipalityObj?: any;
+    districtObj?: any;
 }

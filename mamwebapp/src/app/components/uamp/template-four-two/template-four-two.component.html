@@ -1,12 +1,69 @@
-<p-toast [style]="{marginTop: '90px'}" position="top-right"></p-toast>
-<div class="header">
-    <header>
-        ACQUISITION PLAN: NEW LEASED ACCOMMODATION REQUIREMENTS						
-    </header>
+<div class="stepsdemo-content mt-5">
+    <p-card>
+        <ng-template pTemplate="subtitle">
+            Acquisition Plans: New leased accommodation requirements            
+        </ng-template>
+        <ng-template pTemplate="content">
+            <p-table styleClass="p-datatable-striped" [value]="acquisitionPlans" [responsive]="true" [paginator]="true" [rows]="5" [showCurrentPageReport]="true"
+            responsiveLayout="scroll" [rowsPerPageOptions]="[5,10,15]">
+            <ng-template pTemplate="caption">
+                <div class="p-d-flex right p-jc-between text-right">
+                    <p-button pTooltip="Add Acquisition Plan" type="button" icon="pi pi-plus"
+                        styleClass="p-button-text"
+                        (click)="displayDialog = true; dialogHeader = 'Add Acquisition Plan'"></p-button>
+                </div>
+            </ng-template>
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>District/ Region</th>          
+                        <th>Town</th>                       
+                        <th>Service Description</th>
+                        <th>Budget Type</th>
+                        <th>Extent Required (m²)</th>    
+                        <th>Acquisition Type</th>         
+                        <th>Status</th>            
+                        <th>Cash Flow <small>(MTEF Year 1)</small></th>
+                        <th>Cash Flow <small>(MTEF Year 2)</small></th>
+                        <th>Cash Flow <small>(MTEF Year 3)</small></th>
+                        <th>Cash Flow <small>(MTEF Year 4)</small></th>
+                        <th>Cash Flow <small>(MTEF Year 5)</small></th>
+                        <th>Total Amount Required </th>
+                        <th style="width: 130px;">Required</th>
+                        <th style="width: 110px;"></th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-acquisitionPlan>
+                    <tr>
+                        <td>{{acquisitionPlan.districtRegion}}</td>
+                        <td>{{acquisitionPlan.town}}</td>
+                        <td>{{acquisitionPlan.serviceDescription}}</td>
+                        <td>{{acquisitionPlan.budgetType}}</td>
+                        <td>{{acquisitionPlan.extent}}</td>
+                        <td>{{acquisitionPlan.acquisitionType}}</td>
+                        <td>{{acquisitionPlan.status}}</td>           
+                        <td>{{acquisitionPlan.cashFlowYear1 | currency:'ZAR':'R'}}</td>
+                        <td>{{acquisitionPlan.cashFlowYear2 | currency:'ZAR':'R'}}</td>
+                        <td>{{acquisitionPlan.cashFlowYear3 | currency:'ZAR':'R'}}</td>
+                        <td>{{acquisitionPlan.cashFlowYear4 | currency:'ZAR':'R'}}</td>
+                        <td>{{acquisitionPlan.cashFlowYear5 | currency:'ZAR':'R'}}</td>
+                        <td>{{calculateDbTotalAmountRequired(acquisitionPlan) | currency:'ZAR':'R'}}</td>
+                        <td><p-selectButton [(ngModel)]="acquisitionPlan.reqiured" (onChange)="onReqiured(acquisitionPlan, $event)" [options]="requiredOptions" optionLabel="label" optionValue="value"></p-selectButton></td>
+                        <td style="text-align: center;" *ngIf="acquisitionPlans.length > 0">
+                            <p-splitButton label="More" *ngIf="mode != 'View'" [model]="buttonItems"
+                                (onDropdownClick)="selectAcquisitionPlan(acquisitionPlan)" styleClass="p-button-secondary">
+                            </p-splitButton>
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </ng-template>
+    </p-card>
 </div>
-<br>
+            
 
-<div class="p-fluid p-grid p-formgrid" >
+<div *ngIf="displayDialog" class="dialogBackgroud"></div>
+<p-dialog header="{{dialogHeader}}" [(visible)]="displayDialog" [style]="{width: '80vw'}">
+    <p-body>
     <form [formGroup]="acquisitionPlanForm">
         <div class="formgrid grid">  
             <div class="field grid col-3">
@@ -66,63 +123,21 @@
             <div class="field grid col-3">
                 <label for="totalAmountRequired">Total Amount Required</label>
                 <p-inputNumber disabled="true" formControlName="totalAmountRequired" mode="currency" class="ui-inputtext ui-widget" currency="ZAR" locale="en-ZA"></p-inputNumber>
-            </div> 
-            <div class="field grid col-3"></div>
-            <div class="field grid col-3"></div>
-            <div class="field grid col-3">
-                <button *ngIf="!isEdit" pButton type="submit" icon="pi pi-plus" label="Add Acquisition Plan" (click)="addAcquisitionPlan()"
-                style="float: right;width: fit-content;height: fit-content;margin-top: 1.7em;"></button>
-                <button *ngIf="isEdit" pButton type="submit" icon="pi pi-pencil" label="Update Acquisition Plan" (click)="onUpdate()"
-                style="float: right;width: fit-content;height: fit-content;margin-top: 1.7em;"></button>
-            </div>           
+            </div>                  
         </div>
     </form>
-
-<p-table styleClass="p-datatable-striped" [value]="acquisitionPlans" [responsive]="true">
-    <ng-template pTemplate="header">
-        <tr>
-            <th>District/ Region</th>          
-            <th>Town</th>                       
-            <th>Service Description</th>
-            <th>Budget Type</th>
-            <th>Extent Required (m²)</th>    
-            <th>Acquisition Type</th>         
-            <th>Status</th>            
-            <th>Cash Flow <small>(MTEF Year 1)</small></th>
-            <th>Cash Flow <small>(MTEF Year 2)</small></th>
-            <th>Cash Flow <small>(MTEF Year 3)</small></th>
-            <th>Cash Flow <small>(MTEF Year 4)</small></th>
-            <th>Cash Flow <small>(MTEF Year 5)</small></th>
-            <th>Total Amount Required </th>
-            <th style="width: 130px;">Required</th>
-            <th style="width: 110px;"></th>
-        </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-acquisitionPlan>
-        <tr>
-            <td>{{acquisitionPlan.districtRegion}}</td>
-            <td>{{acquisitionPlan.town}}</td>
-            <td>{{acquisitionPlan.serviceDescription}}</td>
-            <td>{{acquisitionPlan.budgetType}}</td>
-            <td>{{acquisitionPlan.extent}}</td>
-            <td>{{acquisitionPlan.acquisitionType}}</td>
-            <td>{{acquisitionPlan.status}}</td>           
-            <td>{{acquisitionPlan.cashFlowYear1 | currency:'ZAR':'R'}}</td>
-            <td>{{acquisitionPlan.cashFlowYear2 | currency:'ZAR':'R'}}</td>
-            <td>{{acquisitionPlan.cashFlowYear3 | currency:'ZAR':'R'}}</td>
-            <td>{{acquisitionPlan.cashFlowYear4 | currency:'ZAR':'R'}}</td>
-            <td>{{acquisitionPlan.cashFlowYear5 | currency:'ZAR':'R'}}</td>
-            <td>{{calculateDbTotalAmountRequired(acquisitionPlan) | currency:'ZAR':'R'}}</td>
-            <td><p-selectButton (onChange)="onReqiured(acquisitionPlan, $event)" [options]="stateOptions" [(ngModel)]="value1" optionLabel="label" optionValue="value"></p-selectButton></td>
-            <td style="text-align: center;" *ngIf="acquisitionPlans.length > 0">
-                <p-splitButton label="More" *ngIf="mode != 'View'" [model]="buttonItems"
-                    (onDropdownClick)="selectAcquisitionPlan(acquisitionPlan)" styleClass="p-button-secondary">
-                </p-splitButton>
-            </td>
-        </tr>
-    </ng-template>
-</p-table>
-</div>
+    </p-body>
+    <p-footer>
+        <div class="p-grid p-nogutter p-justify-between">
+            <p-button [style]="{'float':'left'}" styleClass="p-button-secondary" label="Cancel" (onClick)="displayDialog = false"
+                icon="pi pi-times"></p-button>
+            <p-button *ngIf="!isEdit" [style]="{'float':'right'}" label="Add" (onClick)="addAcquisitionPlan()"
+                icon="pi pi-check" iconPos="right"></p-button>
+            <p-button *ngIf="isEdit" [style]="{'float':'right'}" label="Update"
+                (onClick)="updateStrategicNeedsAssessment()" icon="pi pi-check" iconPos="right"></p-button>
+        </div>
+    </p-footer>
+</p-dialog>
 
 <div *ngIf="showComfirmationDelete" class="dialogBackgroud"></div>
 <p-dialog header="Confirmation" [(visible)]="showComfirmationDelete" [breakpoints]="{'960px': '75vw'}" [style]="{width: '25vw'}" [baseZIndex]="10000" 
@@ -135,3 +150,12 @@
 </p-dialog>
 
 <p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+
+<div class="uamp-footer">
+    <div class="p-grid p-nogutter p-justify-between">
+        <p-button styleClass="p-button-secondary" label="Back" (onClick)="back()" icon="pi pi-angle-left">
+        </p-button>
+        <p-button [style]="{'float':'right'}" label="Next" (onClick)="nextPage()" icon="pi pi-angle-right"
+            iconPos="right"></p-button>
+    </div>
+</div>

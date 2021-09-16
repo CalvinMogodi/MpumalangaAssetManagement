@@ -1,8 +1,8 @@
 export class SurrenderPlan{
-    id: number;
+    id: Number;
     userImmovableAssetManagementPlanId: Number;
     strategicAssessmentId?: number;
-    propertyId?: number;
+    propertyId?: Number;
     district: String;
     town: String;
     localMunicipality: String;

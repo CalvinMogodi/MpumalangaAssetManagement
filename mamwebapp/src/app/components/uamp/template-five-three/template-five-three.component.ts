@@ -4,6 +4,8 @@ import { FormGroup, FormBuilder, FormArray, FormControl, Validators } from '@ang
 import { UampService } from 'src/app/services/uamp/uamp.service';
 import { OperationPlan } from 'src/app/models/operation-plan.model';
 import { UAMP } from 'src/app/models/uamp.model';
+import { SharedService } from 'src/app/services/shared.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-template-five-three',
@@ -18,7 +20,7 @@ export class TemplateFiveThreeComponent implements OnInit {
   prioities: any[];
   uamp: UAMP;
   
-  constructor(private confirmationService: ConfirmationService,private uampService: UampService, private formBuilder: FormBuilder, private messageService: MessageService) { 
+  constructor(private router: Router, private sharedService: SharedService,  private confirmationService: ConfirmationService,private uampService: UampService, private formBuilder: FormBuilder, private messageService: MessageService) { 
     this.uampService.uampChange.subscribe((value) => {
       if(value)
       {
@@ -35,69 +37,19 @@ export class TemplateFiveThreeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.prioities = [
-      { name: 'Extremely Critical 1', code: 'C1', factor: 1 },
-      { name: '2', code: 'C2', factor: 2 },
-      { name: '3', code: 'C3', factor: 3 },
-      { name: '4', code: 'C4', factor: 4 },
-      { name: '5', code: 'C5', factor: 5 },
-      { name: '6', code: 'C2', factor: 6 },
-      { name: '7', code: 'C3', factor: 7 },
-      { name: '8', code: 'C4', factor: 8 },
-      { name: '9', code: 'C5', factor: 9 },
-      { name: 'Defer 10', code: 'C5', factor: 10 },
-    ];
+    this.assginData();
+    this.prioities = this.sharedService.getPrioities();
 
-    this.leaseTypes = [
-      { name: 'Land', code: 'L', factor: 1 },
-      { name: 'Office', code: 'O', factor: 2 },
-      { name: 'Residential', code: 'R', factor: 3 },
-      { name: 'Packing', code: 'P', factor: 4 },
-    ];
+    this.leaseTypes = this.sharedService.getLeaseTypes();
   }
 
-  private createForm(): void {
-    this.operationPlanForm = this.formBuilder.group({
-      tableRowArray: this.formBuilder.array([
-        this.createTableRow()
-      ])
-    })
-  }
-
-  get tableRowArray(): FormArray {
-    return this.operationPlanForm.get('tableRowArray') as FormArray;
-  }
-
-  get p() { return this.operationPlanForm.controls; }
-
-  private createTableRow(): FormGroup {
-    return this.formBuilder.group({
-      leaseType: new FormControl(null, {
-        validators: [Validators.required]
-      }),
-      noofParkingBays: new FormControl(null, {
-        validators: [Validators.required]
-      }),
-      usableSpace: new FormControl(null, {
-        validators: [Validators.required]
-      }),
-      constructionArea: new FormControl(null, {
-        validators: [Validators.required]
-      }),
-      leaseStartDate: new FormControl(null, {
-        validators: [Validators.required]
-      }),
-      leaseEndDate: new FormControl(null, {
-        validators: [Validators.required]
-      }),
-      rentalPmPa: new FormControl(null, {
-        validators: [Validators.required]
-      }),
-      comment: new FormControl(null, {
-        validators: [Validators.required]
-      })    
-    });
-  }
+  assginData(){
+    this.uamp = this.uampService.uamp;
+    if(!this.uamp)
+      this.router.navigate(['uamp']);
+      
+    this.operationPlans = this.uamp.templeteFivePointThree.operationPlans;
+  } 
 
   onLeased(operationPlan: OperationPlan, e){
     if(e.checked){
@@ -113,5 +65,13 @@ export class TemplateFiveThreeComponent implements OnInit {
     }else{
       operationPlan.leased = false;
     }
+  }
+
+  nextPage(){
+    this.router.navigate(['uampDetails/uampTemp6']);
+  }
+
+  back(){
+    this.router.navigate(['uampDetails/uampTemp52']);
   }
 }

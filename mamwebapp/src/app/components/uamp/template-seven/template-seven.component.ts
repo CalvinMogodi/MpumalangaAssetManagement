@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { element } from 'protractor';
 import { Facility } from 'src/app/models/facility.model';
@@ -23,7 +24,7 @@ export class TemplateSevenComponent implements OnInit {
   mtefBudgetPeriods: MtefBudgetPeriod[];
   rowGroupMetadata: any;
 
-  constructor(private uampService: UampService, private formBuilder: FormBuilder) {
+  constructor(private router: Router, private uampService: UampService, private formBuilder: FormBuilder) {
     this.uampService.uampChange.subscribe((value) => {
       if (value) {
         this.uamp = value;
@@ -33,7 +34,8 @@ export class TemplateSevenComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.budgetPeriodForm = this.formBuilder.group({     
+    this.assginData();
+    this.budgetPeriodForm = this.formBuilder.group({
       group: [''],
       title: [''],
       year1Allocation: [''],
@@ -59,17 +61,25 @@ export class TemplateSevenComponent implements OnInit {
     ];
   }
 
+  assginData() {
+    this.uamp = this.uampService.uamp;
+    if (!this.uamp)
+      this.router.navigate(['uamp']);
+
+    this.mtefBudgetPeriods = this.uamp.templeteSeven.mtefBudgetPeriods;
+  }
+
   umapTempleteValidate() {
     let isValid: boolean = true;
 
     return isValid;
   }
 
-  addMtefBudgetPeriod(mtefBudgetPeriod: MtefBudgetPeriod){
+  addMtefBudgetPeriod(mtefBudgetPeriod: MtefBudgetPeriod) {
     this.mtefBudgetPeriods.push(mtefBudgetPeriod);
   }
 
-  updateMtefBudgetPeriod(mtefBudgetPeriod: MtefBudgetPeriod, index: number){
+  updateMtefBudgetPeriod(mtefBudgetPeriod: MtefBudgetPeriod, index: number) {
     this.mtefBudgetPeriods[index] = mtefBudgetPeriod;
   }
 
@@ -86,7 +96,7 @@ export class TemplateSevenComponent implements OnInit {
   mtefAllocatoion(year: number, mtefAllocatoion: string, previousYearMtefAllocatoion: string, templete: string) {
     let amount: number = 0;
     let arraryList = this.getTempleteDate(templete);
-   
+
     //if(this.uamp[templete]){
     arraryList.forEach(element => {
       if (element[previousYearMtefAllocatoion]) {
@@ -137,7 +147,7 @@ export class TemplateSevenComponent implements OnInit {
 
         let property = propertyName.endsWith(year.toString());
         if (_property && property) {
-          if(this.uamp.templeteSeven[propertyName] != NaN){
+          if (this.uamp.templeteSeven[propertyName] != NaN) {
             if (_property && containStr) {
               amount = amount + this.uamp.templeteSeven[propertyName];
             }
@@ -145,7 +155,7 @@ export class TemplateSevenComponent implements OnInit {
               amount = amount + this.uamp.templeteSeven[propertyName];
             }
           }
-         
+
         }
       }
     };
@@ -172,12 +182,11 @@ export class TemplateSevenComponent implements OnInit {
       if (propertyName && propertyName != 'undefined') {
         let _property = propertyName.startsWith(startWith);
         let property = propertyName.endsWith(year.toString());
-        if (_property && property)
-          {
-            if(this.uamp.templeteSeven[propertyName] != NaN){
-              amount = amount + this.uamp.templeteSeven[propertyName];
-            }
-          }         
+        if (_property && property) {
+          if (this.uamp.templeteSeven[propertyName] != NaN) {
+            amount = amount + this.uamp.templeteSeven[propertyName];
+          }
+        }
       }
 
     };
@@ -192,7 +201,7 @@ export class TemplateSevenComponent implements OnInit {
     const mtefAllocatoion = 'totalCapitalCostsAndRecurrentCostsmtefAllocatoion' + year;
     const shortfall = 'totalCapitalCostsAndRecurrentCostsshortfall' + year;
     amount = this.uamp.templeteSeven[shortfall] / this.uamp.templeteSeven[mtefAllocatoion];
-   
+
     const colName = 'shortfallCapitalCostsAndRecurrentCosts' + year
     this.uamp.templeteSeven[colName] = amount;
 
@@ -205,7 +214,7 @@ export class TemplateSevenComponent implements OnInit {
     const mtefAllocatoion = 'totalCapitalCostsmtefAllocatoion' + year;
     const shortfall = 'totalCapitalCostsshortfall' + year;
     amount = this.uamp.templeteSeven[shortfall] / this.uamp.templeteSeven[mtefAllocatoion];
-   
+
     const colName = 'shortfallCurrentCosts' + year
     this.uamp.templeteSeven[colName] = amount;
 
@@ -270,14 +279,14 @@ export class TemplateSevenComponent implements OnInit {
     return municipalUtilityServices;
   }
 
-  onBlurDistrict(){
+  onBlurDistrict() {
     const district = this.budgetPeriodForm.controls["district"].value;
-    if(district){
+    if (district) {
       this.showFields = district.length > 2 ? true : false;
-    }      
-}
+    }
+  }
 
-  getTempleteDate(templete){
+  getTempleteDate(templete) {
     let arraryList = []
     switch (templete) {
       case 'templeteFourPointOne':
@@ -291,21 +300,21 @@ export class TemplateSevenComponent implements OnInit {
         break;
       case 'templeteTwoPointTwo':
         arraryList = this.uamp.templeteTwoPointTwo.properties;
-        break;    
-        case 'templeteThree':
-          arraryList = this.uamp.templeteThree.strategicAssessments;
-          break;
-        case 'templeteFivePointOne':
-          arraryList = this.uamp.templeteFivePointOne.operationPlans;
-          break;
-        case 'templeteFivePointTwo':
-          arraryList = this.uamp.templeteFivePointTwo.operationPlans;
-          break;
-        case 'templeteFivePointThree':
-          arraryList = this.uamp.templeteFivePointThree.operationPlans;
-          case 'templeteSix':
-          arraryList = this.uamp.templeteSix.surrenderPlans;
-          break; 
+        break;
+      case 'templeteThree':
+        arraryList = this.uamp.templeteThree.strategicAssessments;
+        break;
+      case 'templeteFivePointOne':
+        arraryList = this.uamp.templeteFivePointOne.operationPlans;
+        break;
+      case 'templeteFivePointTwo':
+        arraryList = this.uamp.templeteFivePointTwo.operationPlans;
+        break;
+      case 'templeteFivePointThree':
+        arraryList = this.uamp.templeteFivePointThree.operationPlans;
+      case 'templeteSix':
+        arraryList = this.uamp.templeteSix.surrenderPlans;
+        break;
     }
     return arraryList;
   }
@@ -317,25 +326,25 @@ export class TemplateSevenComponent implements OnInit {
   updateRowGroupMetaData() {
     this.rowGroupMetadata = {};
     if (this.mtefBudgetPeriods) {
-        for (let i = 0; i < this.mtefBudgetPeriods.length; i++) {
-            let rowData = this.mtefBudgetPeriods[i];
-            let group = rowData.group;
-            if (i == 0) {
-                this.rowGroupMetadata[group] = { index: 0, size: 1 };
-            }
-            else {
-                let previousRowData = this.mtefBudgetPeriods[i - 1];
-                let previousRowGroup = previousRowData.group;
-                if (group === previousRowGroup)
-                    this.rowGroupMetadata[group].size++;
-                else
-                    this.rowGroupMetadata[group] = { index: i, size: 1 };
-            }
+      for (let i = 0; i < this.mtefBudgetPeriods.length; i++) {
+        let rowData = this.mtefBudgetPeriods[i];
+        let group = rowData.group;
+        if (i == 0) {
+          this.rowGroupMetadata[group] = { index: 0, size: 1 };
         }
+        else {
+          let previousRowData = this.mtefBudgetPeriods[i - 1];
+          let previousRowGroup = previousRowData.group;
+          if (group === previousRowGroup)
+            this.rowGroupMetadata[group].size++;
+          else
+            this.rowGroupMetadata[group] = { index: i, size: 1 };
+        }
+      }
     }
   }
 
-  addBudgetforMtefPeriod(){
+  addBudgetforMtefPeriod() {
     const mtefBudgetPeriod: MtefBudgetPeriod = {
       id: 0,
       userImmovableAssetManagementPlanId: this.uamp.id,
@@ -362,10 +371,9 @@ export class TemplateSevenComponent implements OnInit {
     };
 
     this.mtefBudgetPeriods.push(mtefBudgetPeriod);
-    if(this.uamp.templeteSeven != null)
-    {
+    if (this.uamp.templeteSeven != null) {
       this.uamp.templeteSeven.mtefBudgetPeriods = this.mtefBudgetPeriods
-    }else{
+    } else {
       this.uamp.templeteSeven = {
         id: 0,
         mtefBudgetPeriods: this.mtefBudgetPeriods
@@ -376,7 +384,11 @@ export class TemplateSevenComponent implements OnInit {
     this.onSort();
   }
 
-  resetForm(){
+  resetForm() {
     this.budgetPeriodForm.reset();
+  }
+
+  back() {
+    this.router.navigate(['uampDetails/uampTemp6']);
   }
 }

@@ -7,6 +7,7 @@ import { UAMP } from 'src/app/models/uamp.model';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { UampService } from '../../services/uamp/uamp.service';
 import { TempleteTwoPointOne } from 'src/app/models/templetes/templete-two-point-one.model';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -33,7 +34,7 @@ export class UampComponent implements OnInit {
   templateOne: any;
   erMsgs: Message[];
 
-  constructor(public messageService: MessageService, public uampService: UampService, private authenticationService: AuthenticationService) {
+  constructor(private router: Router, public messageService: MessageService, public uampService: UampService, private authenticationService: AuthenticationService) {
     this.startCounter();
     this.buttonItems = [
       {
@@ -104,6 +105,8 @@ export class UampComponent implements OnInit {
       (response) => {
         this.uamp = response;
         this.generatingUamp = false;
+        this.uampService.assignUamp(this.uamp);
+        this.router.navigate(['uampDetails/uampTemp1']);
       },
       (error) => {
         this.messageService.add({ severity: 'error', summary: 'Error Occoured', detail: 'Unable to get UAMP details' });
@@ -118,7 +121,7 @@ export class UampComponent implements OnInit {
     this.activeIndex = 0;
     this.value = 10;
     this.startCounter();
-    this.getUamp(this.uamp.id)
+    this.getUamp(this.uamp.id)   
     //this.uampService.assignUamp(this.uampbv n); 
     // this.templeteTwoPointOne = this.uamp.nativeElement.templeteTwoPointOne;   
   }

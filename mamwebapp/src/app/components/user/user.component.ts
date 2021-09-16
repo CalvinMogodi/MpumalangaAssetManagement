@@ -89,7 +89,7 @@ export class UserComponent implements OnInit {
       { name: 'Health', code: 'H', factor: 8 },
       { name: 'Human settlements', code: 'HS', factor: 9 },
       { name: 'Social development', code: 'SD', factor: 10 },
-      { name: 'Publick works, roads & transport', code: 'PWRT', factor: 11 },
+      { name: 'Public works, roads & transport', code: 'PWRT', factor: 11 },
     ];
 
     this.addUserForm = this.formBuilder.group({

@@ -8,6 +8,7 @@ import { UAMP } from 'src/app/models/uamp.model';
 import { StrategicAssessment } from 'src/app/models/strategic-assessment.model';
 import { StrategicNeedsAssessment } from 'src/app/models/strategic-needs-assessment';
 import { first } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-template-three',
@@ -26,8 +27,10 @@ export class TemplateThreeComponent implements OnInit {
   showComfirmationDelete: boolean = false;
   isEdit: boolean = false;
   selectedStrategicAssessment:StrategicAssessment;
+  displayDialog: boolean = false;
+  dialogHeader: string = '';
 
-  constructor(public uampService: UampService, private formBuilder: FormBuilder, private messageService: MessageService) {
+  constructor(private router: Router, public uampService: UampService, private formBuilder: FormBuilder, private messageService: MessageService) {
     
     this.uampService.uampChange.subscribe((value) => {
       if(value)
@@ -40,6 +43,7 @@ export class TemplateThreeComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.assginData();
     this.assessmentStrategicForm = this.formBuilder.group({
       district: [''],
       position: [''],
@@ -64,6 +68,14 @@ export class TemplateThreeComponent implements OnInit {
       }
     ];
   }
+
+  assginData(){
+    this.uamp = this.uampService.uamp;
+    if(!this.uamp)
+      this.router.navigate(['uamp']);
+      
+    this.strategicAssessments = this.uamp.templeteThree.strategicAssessments;
+  } 
 
   onUpdate() {
     const allocatedSpace = this.assessmentStrategicForm.controls["allocatedSpace"].value;
@@ -178,6 +190,10 @@ export class TemplateThreeComponent implements OnInit {
     this.onSort();
   }
 
+  cancel(){
+    this.displayDialog = false;
+  }
+
   resetForm() {
     this.assessmentStrategicForm.reset();
   }
@@ -205,5 +221,13 @@ export class TemplateThreeComponent implements OnInit {
             }
         }
     }
+  }
+
+  nextPage(){
+    this.router.navigate(['uampDetails/uampTemp41']);
+  }
+
+  back(){
+    this.router.navigate(['uampDetails/uampTemp22']);
   }
 }

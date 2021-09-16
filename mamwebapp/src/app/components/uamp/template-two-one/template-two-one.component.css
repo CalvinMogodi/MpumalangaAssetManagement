@@ -56,4 +56,8 @@ header{
 .p-component{
 	width: fit-content;
 }
+
+.p-datatable .p-datatable-thead > tr > th {
+font-size: 12px !important;
+}
   

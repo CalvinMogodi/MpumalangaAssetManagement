@@ -9,6 +9,8 @@ import { AcquisitionPlan } from 'src/app/models/acquisition-plan.model';
 import { UAMP } from 'src/app/models/uamp.model';
 import { Property } from 'src/app/models/property.model';
 import { SurrenderPlan } from 'src/app/models/surrender-plan.model';
+import { Router } from '@angular/router';
+import { SharedService } from 'src/app/services/shared.service';
 
 @Component({
   selector: 'app-template-four-two',
@@ -29,9 +31,9 @@ export class TemplateFourTwoComponent implements OnInit {
   showComfirmationDelete:boolean = false;
   selectedAcquisitionPlan: AcquisitionPlan;
   isEdit: boolean = false;
-  stateOptions: any[];
+  requiredOptions: any[];
 
-  constructor(private confirmationService: ConfirmationService, public uampService: UampService, private formBuilder: FormBuilder, private messageService: MessageService) {
+  constructor(private sharedService: SharedService, private router: Router, private confirmationService: ConfirmationService, public uampService: UampService, private formBuilder: FormBuilder, private messageService: MessageService) {
     this.uampService.uampChange.subscribe((value) => {
       if(value)
       {
@@ -67,6 +69,7 @@ export class TemplateFourTwoComponent implements OnInit {
    }
 
   ngOnInit() {
+    this.assginData();
     this.buttonItems = [     
       {label: 'Update', icon: 'pi pi-pencil', command: () => 
           this.update()
@@ -76,44 +79,24 @@ export class TemplateFourTwoComponent implements OnInit {
           this.confirmDelete()
       }
     ]; 
-    this.stateOptions = [{label: 'Yes', value: 'true'}, {label: 'No', value: 'false'}];
-    this.regions = [
-      { name: 'Ehlanzeni ', code: 'U', factor: 1 },
-      { name: 'Gert Sibande', code: 'R', factor: 2 },
-      { name: 'Nkangala', code: 'U', factor: 3 }
-    ];
-    this.initialNeedYears = [
-      { name: '2005', code: '5', factor: 1 },
-      { name: '2006', code: '6', factor: 2 },
-      { name: '2007', code: '7', factor: 3 },
-      { name: '2008', code: '8', factor: 4 },
-      { name: '2009', code: '9', factor: 5 },
-      { name: '2010', code: '10', factor: 6 },
-      { name: '2011', code: '11', factor: 7 },
-      { name: '2012', code: '12', factor: 8 },
-      { name: '2013', code: '13', factor: 9 },
-      { name: '2014', code: '14', factor: 10 },
-      { name: '2015', code: '15', factor: 11 },
-      { name: '2016', code: '16', factor: 12 },
-      { name: '2017', code: '17', factor: 13 },
-      { name: '2018', code: '18', factor: 14 },
-      { name: '2019', code: '19', factor: 15 },
-      { name: '2020', code: '20', factor: 16 },
-      { name: '2021', code: '21', factor: 17 },
-    ];
+    this.requiredOptions = [{label: 'Yes', value: 'true'}, {label: 'No', value: 'false'}];
 
-    this.acquisitionTypes = [
-      { name: 'Construction', code: 'C', factor: 1 },
-      { name: 'Donation', code: 'D', factor: 2 },
-      { name: 'Purchase ', code: 'P', factor: 3}
-    ];
+    this.regions = this.sharedService.getRegions();
 
-    this.statuses = [
-      { name: 'Planning ', code: 'PL', factor: 1 },
-      { name: 'Procurement', code: 'PR', factor: 2 },
-      { name: 'Construction', code: 'CO', factor: 3 }
-    ];
+    this.initialNeedYears = this.sharedService.getInitialNeedYears();
+
+    this.acquisitionTypes = this.sharedService.getAcquisitionTypes();
+
+    this.statuses = this.sharedService.getStatuses();
   }
+
+  assginData(){
+    this.uamp = this.uampService.uamp;
+    if(!this.uamp)
+      this.router.navigate(['uamp']);
+      
+    this.acquisitionPlans = this.uamp.templeteFourPointTwo.acquisitionPlans;
+  } 
 
   update() {
     const districtRegion = this.regions.filter(r => r.name == this.selectedAcquisitionPlan.districtRegion)[0];
@@ -160,7 +143,7 @@ export class TemplateFourTwoComponent implements OnInit {
       cashFlowYear3: this.acquisitionPlanForm.controls["cashFlowYear3"].value,
       cashFlowYear4: this.acquisitionPlanForm.controls["cashFlowYear4"].value,
       cashFlowYear5: this.acquisitionPlanForm.controls["cashFlowYear5"].value,
-      reqiured: false
+      reqiured: 'false'
     };
 
     var index = this.acquisitionPlans.indexOf(this.selectedAcquisitionPlan); 
@@ -216,7 +199,7 @@ export class TemplateFourTwoComponent implements OnInit {
       cashFlowYear3: this.acquisitionPlanForm.controls["cashFlowYear3"].value,
       cashFlowYear4: this.acquisitionPlanForm.controls["cashFlowYear4"].value,
       cashFlowYear5: this.acquisitionPlanForm.controls["cashFlowYear5"].value,
-      reqiured: false
+      reqiured: "true"
     };
     this.acquisitionPlans.push(acquisitionPlan);
     if(this.uamp.templeteFourPointTwo != null)
@@ -301,7 +284,7 @@ export class TemplateFourTwoComponent implements OnInit {
       cashFlowYear3: 0,
       cashFlowYear4: 0,
       cashFlowYear5: 0,
-      reqiured: false
+      reqiured: 'false'
     }
     return acquisitionPlan;
   }  
@@ -311,15 +294,23 @@ export class TemplateFourTwoComponent implements OnInit {
       this.confirmationService.confirm({
         message: 'Are you sure that this property is still reqiured?',
         accept: () => {
-          acquisitionPlan.reqiured = true;
+          acquisitionPlan.reqiured = 'true';
         },
         reject:() =>{
-          acquisitionPlan.reqiured = false;
+          acquisitionPlan.reqiured = 'false';
         }
     });
     }else{
-      acquisitionPlan.reqiured = false;
+      acquisitionPlan.reqiured = 'false';
     }
+  }
+
+  nextPage(){
+    this.router.navigate(['uampDetails/uampTemp51']);
+  }
+
+  back(){
+    this.router.navigate(['uampDetails/uampTemp41']);
   }
 
 }

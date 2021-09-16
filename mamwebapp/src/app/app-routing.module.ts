@@ -11,6 +11,18 @@ import { ImprovementsComponent } from './components/assetregister/addassetregist
 import { LandComponent } from './components/assetregister/addassetregister/land/land.component';
 import { UampComponent } from './components/uamp/uamp.component';
 import { CampComponent } from './components/camp/camp.component';
+import { UampDetailsComponent } from './components/uamp/uamp-details/uamp-details.component';
+import { TemplateOneComponent } from './components/uamp/template-one/template-one.component';
+import { TemplateFiveOneComponent } from './components/uamp/template-five-one/template-five-one.component';
+import { TemplateFiveThreeComponent } from './components/uamp/template-five-three/template-five-three.component';
+import { TemplateFiveTwoComponent } from './components/uamp/template-five-two/template-five-two.component';
+import { TemplateFourOneComponent } from './components/uamp/template-four-one/template-four-one.component';
+import { TemplateFourTwoComponent } from './components/uamp/template-four-two/template-four-two.component';
+import { TemplateSevenComponent } from './components/uamp/template-seven/template-seven.component';
+import { TemplateSixComponent } from './components/uamp/template-six/template-six.component';
+import { TemplateThreeComponent } from './components/uamp/template-three/template-three.component';
+import { TemplateTwoOneComponent } from './components/uamp/template-two-one/template-two-one.component';
+import { TemplateTwoTwoComponent } from './components/uamp/template-two-two/template-two-two.component';
 
 const routes: Routes = [
   {
@@ -56,6 +68,68 @@ const routes: Routes = [
     component: UampComponent,
     canActivate: [AuthGuard],
   },
+  {
+    path: 'uampDetails',
+    component: UampDetailsComponent,
+    canActivate: [AuthGuard],
+    children:[
+      {
+        path: 'uampTemp1',
+        component: TemplateOneComponent,
+        canActivate: [AuthGuard],
+        
+      },{
+        path: 'uampTemp21',
+        component: TemplateTwoOneComponent,
+        canActivate: [AuthGuard],
+        
+      },{
+        path: 'uampTemp22',
+        component: TemplateTwoTwoComponent,
+        canActivate: [AuthGuard],
+        
+      },{
+        path: 'uampTemp3',
+        component: TemplateThreeComponent,
+        canActivate: [AuthGuard],
+        
+      },{
+        path: 'uampTemp41',
+        component: TemplateFourOneComponent,
+        canActivate: [AuthGuard],
+        
+      },{
+        path: 'uampTemp42',
+        component: TemplateFourTwoComponent,
+        canActivate: [AuthGuard],
+        
+      },{
+        path: 'uampTemp51',
+        component: TemplateFiveOneComponent,
+        canActivate: [AuthGuard],
+        
+      },{
+        path: 'uampTemp52',
+        component: TemplateFiveTwoComponent,
+        canActivate: [AuthGuard],
+        
+      },{
+        path: 'uampTemp53',
+        component: TemplateFiveThreeComponent,
+        canActivate: [AuthGuard],
+        
+      },{
+        path: 'uampTemp6',
+        component: TemplateSixComponent,
+        canActivate: [AuthGuard],
+        
+      },{
+        path: 'uampTemp7',
+        component: TemplateSevenComponent,
+        canActivate: [AuthGuard],        
+      }
+    ]
+  },  
   {
     path: 'login',
     component: LoginComponent,    

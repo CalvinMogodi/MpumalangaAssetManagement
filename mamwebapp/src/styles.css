@@ -34,14 +34,13 @@ a { cursor: pointer }
 	color: #4c4c4c;
 }
 
-
 .dialogBackgroud{
 	background-color: gray;
     height: 100%;
     left: 0px;
     right: 0px;
     width: 100%;
-    z-index: 11000;
+    z-index: 99;
     bottom: 0px;
     position: absolute;
     top: 0px;
@@ -304,3 +303,33 @@ p-fieldset {
     height: 1.5rem !important;
 }
 
+.uamp-footer{
+	position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    color: white;
+    background: #ffffff;
+    padding-top: 10px;
+    padding-right: 0.5%;
+    padding-left: 7%;
+}
+
+.p-dropdown .p-dropdown-label.p-placeholder {
+    font-size: 12px !important;
+}
+
+.p-datatable .p-datatable-tbody > tr > td {
+    font-size: 12px !important;
+}
+.p-datatable .p-datatable-tbody > tr > td > .p-inputNumber{
+    font-size: 12px !important;	
+}
+
+.p-inputnumber-input {
+    font-size: 12px !important;
+}
+
+.p-datatable .p-datatable-thead > tr > th {
+	font-size: 12px !important;
+	}

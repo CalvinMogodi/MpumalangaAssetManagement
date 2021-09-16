@@ -12,13 +12,13 @@ import { TempleteTwoPointOne } from "./templetes/templete-two-point-one.model";
 import { TempleteTwoPointTwo } from "./templetes/templete-two-point-two.model";
 
 export class UAMP {
-    id: Number;    
-    status: string;
-    fileReference: string;
+    id?: Number;    
+    status?: string;
+    fileReference?: string;
     optimalSupportingAccommodationId?: Number;
-    department: string;
-    createdDate: Date;
-    userId: Number;
+    department?: string;
+    createdDate?: Date;
+    userId?: Number;
     modifiedDate?: Date;
     modifiedBy?: Number;
     user?: User;

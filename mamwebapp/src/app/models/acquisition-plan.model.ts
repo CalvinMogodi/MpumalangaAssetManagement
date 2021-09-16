@@ -17,5 +17,5 @@ export class AcquisitionPlan {
     cashFlowYear3?: number;
     cashFlowYear4?: number;
     cashFlowYear5?: number;
-    reqiured: boolean;
+    reqiured?: string;
 }

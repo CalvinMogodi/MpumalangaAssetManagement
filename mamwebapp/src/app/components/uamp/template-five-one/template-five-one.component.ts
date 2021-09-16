@@ -7,6 +7,8 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { FacilityService } from 'src/app/services/facility/facility.service';
 import { UAMP } from 'src/app/models/uamp.model';
 import { OperationPlan } from 'src/app/models/operation-plan.model';
+import { Router } from '@angular/router';
+import { SharedService } from 'src/app/services/shared.service';
 
 @Component({
   selector: 'app-template-five-one',
@@ -28,8 +30,9 @@ export class TemplateFiveOneComponent implements OnInit {
   showComfirmationDelete:boolean = false;
   selectedOperationPlan: OperationPlan;
   isEdit: boolean = false;
+  displayDialog: boolean = false;
 
-  constructor(private facilityService: FacilityService, public uampService: UampService, private formBuilder: FormBuilder, private messageService: MessageService) {
+  constructor(private sharedService: SharedService, private router: Router, private facilityService: FacilityService, public uampService: UampService, private formBuilder: FormBuilder, private messageService: MessageService) {
     
     this.uampService.uampChange.subscribe((value) => {
       if(value)
@@ -56,6 +59,10 @@ export class TemplateFiveOneComponent implements OnInit {
    }
 
   ngOnInit() {
+   
+
+    this.assginData();
+
     this.buttonItems = [     
       {label: 'Update', icon: 'pi pi-pencil', command: () => 
           this.update()
@@ -65,42 +72,22 @@ export class TemplateFiveOneComponent implements OnInit {
           this.confirmDelete()
       }
     ]; 
-    this.regions = [
-      { name: 'Ehlanzeni ', code: 'U', factor: 1 },
-      { name: 'Gert Sibande', code: 'R', factor: 2 },
-      { name: 'Nkangala', code: 'U', factor: 3 }
-    ];
-    this.initialNeedYears = [
-      { name: '2005', code: '5', factor: 1 },
-      { name: '2006', code: '6', factor: 2 },
-      { name: '2007', code: '7', factor: 3 },
-      { name: '2008', code: '8', factor: 4 },
-      { name: '2009', code: '9', factor: 5 },
-      { name: '2010', code: '10', factor: 6 },
-      { name: '2011', code: '11', factor: 7 },
-      { name: '2012', code: '12', factor: 8 },
-      { name: '2013', code: '13', factor: 9 },
-      { name: '2014', code: '14', factor: 10 },
-      { name: '2015', code: '15', factor: 11 },
-      { name: '2016', code: '16', factor: 12 },
-      { name: '2017', code: '17', factor: 13 },
-      { name: '2018', code: '18', factor: 14 },
-      { name: '2019', code: '19', factor: 15 },
-      { name: '2020', code: '20', factor: 16 },
-      { name: '2021', code: '21', factor: 17 },
-    ];
+    this.regions = this.sharedService.getRegions();
 
-    this.operationTypes = [
-      { name: 'Purchase ', code: 'P', factor: 1 },
-      { name: 'Construction', code: 'C', factor: 2 }
-    ];
+    this.initialNeedYears = this.sharedService.getInitialNeedYears();
 
-    this.statuses = [
-      { name: 'Planning ', code: 'PL', factor: 1 },
-      { name: 'Procurement', code: 'PR', factor: 2 },
-      { name: 'Construction', code: 'CO', factor: 3 }
-    ];
+    this.operationTypes =this.sharedService.getOperationTypes();
+
+    this.statuses = this.sharedService.getStatuses();
   }
+
+  assginData(){
+    this.uamp = this.uampService.uamp;
+    if(!this.uamp)
+      this.router.navigate(['uamp']);
+
+    this.operationPlans = this.uamp.templeteFivePointOne.operationPlans;
+  }  
 
   update() {
     const districtRegion = this.regions.filter(r => r.name == this.selectedOperationPlan.districtRegion)[0];
@@ -271,5 +258,13 @@ export class TemplateFiveOneComponent implements OnInit {
       total = total + year5;
 
       this.operationPlanForm.controls["totalAmountRequired"].setValue(total);  
+  }
+
+  nextPage(){
+    this.router.navigate(['uampDetails/uampTemp52']);
+  }
+
+  back(){
+    this.router.navigate(['uampDetails/uampTemp42']);
   }
 }
