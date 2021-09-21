@@ -51,7 +51,7 @@ export class TemplateFiveThreeComponent implements OnInit {
     this.operationPlans = this.uamp.templeteFivePointThree.operationPlans;
   } 
 
-  onLeased(operationPlan: OperationPlan, e){
+  onLeased(operationPlan: OperationPlan, e, index: number){
     if(e.checked){
       this.confirmationService.confirm({
         message: 'Are you sure that this property is leased?',

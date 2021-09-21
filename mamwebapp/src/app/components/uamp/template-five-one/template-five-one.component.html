@@ -28,7 +28,7 @@
                         <th>Cash Flow <small>(MTEF Year 3)</small></th>
                         <th>Cash Flow <small>(MTEF Year 4)</small></th>
                         <th>Cash Flow <small>(MTEF Year 5)</small></th>
-                        <th></th>
+                        <th style="width: 140px;"></th>
                     </tr>
                 </ng-template>
                 <ng-template pTemplate="body" let-operationPlan>
@@ -159,7 +159,9 @@
     <div class="p-grid p-nogutter p-justify-between">
         <p-button styleClass="p-button-secondary" label="Back" (onClick)="back()" icon="pi pi-angle-left">
         </p-button>
-        <p-button [style]="{'float':'right'}" label="Next" (onClick)="nextPage()" icon="pi pi-angle-right"
+        <p-button [style]="{'float':'right'}" label="Save" class="ml-1" (onClick)="save()" icon="pi pi-check"
+        iconPos="right"></p-button>
+        <p-button styleClass="btn-next" label="Next" (onClick)="nextPage()" icon="pi pi-angle-right"
             iconPos="right"></p-button>
     </div>
 </div>

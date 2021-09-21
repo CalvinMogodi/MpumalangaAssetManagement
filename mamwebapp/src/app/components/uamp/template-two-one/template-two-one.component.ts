@@ -144,13 +144,13 @@ export class TemplateTwoOneComponent implements OnInit {
     if (this.properties) {
       for (let i = 0; i < this.properties.length; i++) {
         let rowData = this.properties[i];
-        let brand = rowData.town;
+        let brand = rowData.assetDescription;
         if (i == 0) {
           this.rowGroupMetadata[brand] = { index: 0, size: 1 };
         }
         else {
           let previousRowData = this.properties[i - 1];
-          let previousRowGroup = previousRowData.town;
+          let previousRowGroup = previousRowData.assetDescription;
           if (brand === previousRowGroup)
             this.rowGroupMetadata[brand].size++;
           else

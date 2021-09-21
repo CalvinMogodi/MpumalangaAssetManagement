@@ -65,6 +65,7 @@ export class TemplateTwoTwoComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.assginData();
     this.propertyForm = this.formBuilder.group({
       fileReferenceNo: [''],
       serialNo: [''],

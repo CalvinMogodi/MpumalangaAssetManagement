@@ -11,7 +11,7 @@ export class AcquisitionPlan {
     initialNeedYear?: Number;
     acquisitionType: String;
     status: String;
-    totalAmountRequired: Number;
+    totalAmountRequired: number;
     cashFlowYear1?: number;
     cashFlowYear2?: number;
     cashFlowYear3?: number;

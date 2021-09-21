@@ -1,4 +1,7 @@
 import { Injectable } from '@angular/core';
+import { currentId } from 'async_hooks';
+import { MtefBudgetPeriod } from '../models/mtef-budget-period.model';
+import { UAMP } from '../models/uamp.model';
 
 @Injectable({
   providedIn: 'root'
@@ -60,8 +63,8 @@ export class SharedService {
     return result;
   }
 
-  getRandomNumber(length) {
-    var result = '';
+  getRandomNumber(length): number {
+    var result;
     var characters = '0123456789';
     var charactersLength = characters.length;
     for (var i = 0; i < length; i++) {
@@ -282,5 +285,150 @@ export class SharedService {
       { name: 'P3', code: 'P3', factor: 3 }
     ];
     return requiredPerformanceStandards;
+  }
+
+  calculateBudgetPeriods(uamp: UAMP): UAMP{ 
+    uamp.templeteSeven.mtefBudgetPeriods.forEach(element => {
+      switch(element.title){
+        case "New Capital Works T4.1":
+          const acquisitionPlansT41 = uamp.templeteFourPointOne.acquisitionPlans.filter(r => r.totalAmountRequired != undefined
+            || r.totalAmountRequired != null);
+          const year1RequiredBudgetT41 = acquisitionPlansT41.length > 0 ? acquisitionPlansT41.map(r => r.totalAmountRequired).reduce(function( a, b)
+          {
+            return a + b;
+          }) : 0;
+          element = this.calculateMtefBudgetPeriod(year1RequiredBudgetT41, element);
+          const index = uamp.templeteSeven.mtefBudgetPeriods.findIndex(b => b.title == element.title);
+          uamp.templeteSeven.mtefBudgetPeriods[index] = element;
+          break;
+        case "Refurb., Re-config.& Additions) T5.1" :
+          const acquisitionPlansT51 = uamp.templeteFivePointOne.operationPlans.filter(r => r.totalAmountRequired != undefined
+            || r.totalAmountRequired != null);
+          const year1RequiredBudgetT51 = acquisitionPlansT51.length > 0 ? acquisitionPlansT51.map(r => r.totalAmountRequired).reduce(function( a, b)
+          {
+            return a + b;
+          }) : 0;
+          element = this.calculateMtefBudgetPeriod(year1RequiredBudgetT51, element);
+          const indexT5 = uamp.templeteSeven.mtefBudgetPeriods.findIndex(b => b.title == element.title);
+          uamp.templeteSeven.mtefBudgetPeriods[indexT5] = element;
+          break;
+        case "Total Capital Costs" :          
+          element = this.calculateTotalCapitalCosts(uamp.templeteSeven.mtefBudgetPeriods, element);
+          const indexTT = uamp.templeteSeven.mtefBudgetPeriods.findIndex(b => b.title == element.title);
+          uamp.templeteSeven.mtefBudgetPeriods[indexTT] = element;
+          break;
+        case "% Shortfall" :  
+        if(element.group == 'Capital Projects') { 
+          element = this.calculateShortfallCapitalCosts(uamp.templeteSeven.mtefBudgetPeriods, element);
+          const indexs = uamp.templeteSeven.mtefBudgetPeriods.findIndex(b => b.title == element.title);
+          uamp.templeteSeven.mtefBudgetPeriods[indexs] = element;
+        }
+          break;
+      }
+    });
+
+    return uamp;
+  }
+
+  calculateMtefBudgetPeriod(year1RequiredBudget: number, mtefBudgetPeriod: MtefBudgetPeriod): MtefBudgetPeriod{
+    
+    const year2Allocation = (6 / 100 * year1RequiredBudget) + year1RequiredBudget;
+    const year2RequiredBudget = (4 / 100 * year2Allocation) + year2Allocation;
+
+    const year3Allocation = (6 / 100 * year2RequiredBudget) + year2RequiredBudget;
+    const year3RequiredBudget = (4 / 100 * year2Allocation) + year2Allocation;
+
+    const year4Allocation = (6 / 100 * year3RequiredBudget) + year3RequiredBudget;
+    const year4RequiredBudget = (4 / 100 * year3Allocation) + year3Allocation;
+
+    const year5Allocation = (6 / 100 * year4RequiredBudget) + year4RequiredBudget;
+    const year5RequiredBudget = (4 / 100 * year4Allocation) + year4Allocation;
+
+    var _mtefBudgetPeriod: MtefBudgetPeriod = {
+      id: mtefBudgetPeriod.id,
+      userImmovableAssetManagementPlanId: mtefBudgetPeriod.userImmovableAssetManagementPlanId,
+      order: mtefBudgetPeriod.order,
+      isHeader: mtefBudgetPeriod.isHeader,
+      isPercentage: mtefBudgetPeriod.isPercentage,
+      title: mtefBudgetPeriod.title,
+      group: mtefBudgetPeriod.group,
+      year1Allocation: mtefBudgetPeriod.year1Allocation == undefined ? 0 : mtefBudgetPeriod.year1Allocation,
+      year1RequiredBudget: year1RequiredBudget,
+      year1Shortfall: mtefBudgetPeriod.year1Allocation - year1RequiredBudget,
+      year2Allocation: year2Allocation,
+      year2RequiredBudget: year2RequiredBudget,
+      year2Shortfall: year2Allocation - year2RequiredBudget,
+      year3Allocation: year3Allocation,
+      year3RequiredBudget: year3RequiredBudget,
+      year3Shortfall: year3Allocation - year3RequiredBudget,
+      year4Allocation: year4Allocation,
+      year4RequiredBudget: year4RequiredBudget,
+      year4Shortfall: year4Allocation - year4RequiredBudget,
+      year5Allocation: year5Allocation,
+      year5RequiredBudget: year5RequiredBudget,
+      year5Shortfall: year5Allocation - year5RequiredBudget,
+    }
+    return _mtefBudgetPeriod;
+  }  
+
+  calculateTotalCapitalCosts(mtefBudgetPeriods: MtefBudgetPeriod[], mtefBudgetPeriod: MtefBudgetPeriod): MtefBudgetPeriod{
+    const _mtefBudgetPeriods =  mtefBudgetPeriods.filter(m => m.group == 'Capital Projects' 
+                                && !m.title.includes('Total') 
+                                && !m.title.includes('Shortfall') );  
+    var _mtefBudgetPeriod: MtefBudgetPeriod = {
+      id: mtefBudgetPeriod.id,
+      userImmovableAssetManagementPlanId: mtefBudgetPeriod.userImmovableAssetManagementPlanId,
+      order: mtefBudgetPeriod.order,
+      isHeader: mtefBudgetPeriod.isHeader,
+      isPercentage: mtefBudgetPeriod.isPercentage,
+      title: mtefBudgetPeriod.title,
+      group: mtefBudgetPeriod.group,
+      year1Allocation: _mtefBudgetPeriods.length > 0 ? _mtefBudgetPeriods.map(r => r.year1Allocation).reduce(function( a, b) {return a + b;}) : 0,
+      year1RequiredBudget: _mtefBudgetPeriods.length > 0 ? _mtefBudgetPeriods.map(r => r.year1RequiredBudget).reduce(function( a, b) {return a + b;}) : 0,
+      year1Shortfall: _mtefBudgetPeriods.length > 0 ? _mtefBudgetPeriods.map(r => r.year1Shortfall).reduce(function( a, b) {return a + b;}) : 0,
+      year2Allocation: _mtefBudgetPeriods.length > 0 ? _mtefBudgetPeriods.map(r => r.year2Allocation).reduce(function( a, b) {return a + b;}) : 0,
+      year2RequiredBudget: _mtefBudgetPeriods.length > 0 ? _mtefBudgetPeriods.map(r => r.year2RequiredBudget).reduce(function( a, b) {return a + b;}) : 0,
+      year2Shortfall: _mtefBudgetPeriods.length > 0 ? _mtefBudgetPeriods.map(r => r.year2Shortfall).reduce(function( a, b) {return a + b;}) : 0,
+      year3Allocation: _mtefBudgetPeriods.length > 0 ? _mtefBudgetPeriods.map(r => r.year3Allocation).reduce(function( a, b) {return a + b;}) : 0,
+      year3RequiredBudget: _mtefBudgetPeriods.length > 0 ? _mtefBudgetPeriods.map(r => r.year3RequiredBudget).reduce(function( a, b) {return a + b;}) : 0,
+      year3Shortfall: _mtefBudgetPeriods.length > 0 ? _mtefBudgetPeriods.map(r => r.year3Shortfall).reduce(function( a, b) {return a + b;}) : 0,
+      year4Allocation: _mtefBudgetPeriods.length > 0 ? _mtefBudgetPeriods.map(r => r.year4Allocation).reduce(function( a, b) {return a + b;}) : 0,
+      year4RequiredBudget: _mtefBudgetPeriods.length > 0 ? _mtefBudgetPeriods.map(r => r.year4RequiredBudget).reduce(function( a, b) {return a + b;}) : 0,
+      year4Shortfall: _mtefBudgetPeriods.length > 0 ? _mtefBudgetPeriods.map(r => r.year4Shortfall).reduce(function( a, b) {return a + b;}) : 0,
+      year5Allocation: _mtefBudgetPeriods.length > 0 ? _mtefBudgetPeriods.map(r => r.year5Allocation).reduce(function( a, b) {return a + b;}) : 0,
+      year5RequiredBudget: _mtefBudgetPeriods.length > 0 ? _mtefBudgetPeriods.map(r => r.year5RequiredBudget).reduce(function( a, b) {return a + b;}) : 0,
+      year5Shortfall: _mtefBudgetPeriods.length > 0 ? _mtefBudgetPeriods.map(r => r.year5Shortfall).reduce(function( a, b) {return a + b;}) : 0,
+    }
+    return _mtefBudgetPeriod;
+  }
+
+  calculateShortfallCapitalCosts(mtefBudgetPeriods: MtefBudgetPeriod[], mtefBudgetPeriod: MtefBudgetPeriod): MtefBudgetPeriod{
+    const _totalMtefBudgetPeriod =  mtefBudgetPeriods.filter(m => m.group == 'Capital Projects' 
+                                && m.title.includes('Shortfall'))[0];  
+    var _mtefBudgetPeriod: MtefBudgetPeriod = {
+      id: mtefBudgetPeriod.id,
+      userImmovableAssetManagementPlanId: mtefBudgetPeriod.userImmovableAssetManagementPlanId,
+      order: mtefBudgetPeriod.order,
+      isHeader: mtefBudgetPeriod.isHeader,
+      isPercentage: mtefBudgetPeriod.isPercentage,
+      title: mtefBudgetPeriod.title,
+      group: mtefBudgetPeriod.group,
+      year1Allocation: 0,
+      year1RequiredBudget: 0,
+      year1Shortfall: Number(_totalMtefBudgetPeriod.year1Shortfall / _totalMtefBudgetPeriod.year1Allocation),
+      year2Allocation:0,
+      year2RequiredBudget: 0,
+      year2Shortfall: Number(_totalMtefBudgetPeriod.year2Shortfall / _totalMtefBudgetPeriod.year2Allocation),
+      year3Allocation: 0,
+      year3RequiredBudget: 0,
+      year3Shortfall: Number(_totalMtefBudgetPeriod.year3Shortfall / _totalMtefBudgetPeriod.year3Allocation),
+      year4Allocation: 0,
+      year4RequiredBudget: 0,
+      year4Shortfall: Number(_totalMtefBudgetPeriod.year4Shortfall / _totalMtefBudgetPeriod.year4Allocation),
+      year5Allocation: 0,
+      year5RequiredBudget: 0,
+      year5Shortfall: Number(_totalMtefBudgetPeriod.year5Shortfall / _totalMtefBudgetPeriod.year5Allocation),
+    }
+    return _mtefBudgetPeriod;
   }
 }

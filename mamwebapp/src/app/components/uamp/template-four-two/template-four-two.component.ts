@@ -32,6 +32,8 @@ export class TemplateFourTwoComponent implements OnInit {
   selectedAcquisitionPlan: AcquisitionPlan;
   isEdit: boolean = false;
   requiredOptions: any[];
+  displayDialog: boolean = false;
+  index: number = 0;
 
   constructor(private sharedService: SharedService, private router: Router, private confirmationService: ConfirmationService, public uampService: UampService, private formBuilder: FormBuilder, private messageService: MessageService) {
     this.uampService.uampChange.subscribe((value) => {
@@ -123,7 +125,7 @@ export class TemplateFourTwoComponent implements OnInit {
     this.isEdit = true;
   }
 
-  onUpdate() {
+  updateAcquisitionPlan() {
     const acquisitionPlan: AcquisitionPlan = {
       id: this.selectedAcquisitionPlan.id,
       userImmovableAssetManagementPlanId: this.uamp.id,
@@ -134,7 +136,6 @@ export class TemplateFourTwoComponent implements OnInit {
       serviceDescription: this.acquisitionPlanForm.controls["serviceDescription"].value,
       budgetType: this.acquisitionPlanForm.controls["budgetType"].value,
       extent: this.acquisitionPlanForm.controls["extent"].value,
-      initialNeedYear: Number(this.acquisitionPlanForm.controls["initialNeedYear"].value.name),
       acquisitionType: this.acquisitionPlanForm.controls["acquisitionType"].value.name,
       status: this.acquisitionPlanForm.controls["status"].value.name,
       totalAmountRequired: this.acquisitionPlanForm.controls["totalAmountRequired"].value,
@@ -143,14 +144,15 @@ export class TemplateFourTwoComponent implements OnInit {
       cashFlowYear3: this.acquisitionPlanForm.controls["cashFlowYear3"].value,
       cashFlowYear4: this.acquisitionPlanForm.controls["cashFlowYear4"].value,
       cashFlowYear5: this.acquisitionPlanForm.controls["cashFlowYear5"].value,
-      reqiured: 'false'
+      reqiured: 'true'
     };
 
-    var index = this.acquisitionPlans.indexOf(this.selectedAcquisitionPlan); 
-    this.acquisitionPlans[index] = acquisitionPlan;
+    //var index = this.acquisitionPlans.indexOf(this.selectedAcquisitionPlan); 
+    this.acquisitionPlans[this.index] = acquisitionPlan;
     this.isEdit = false;
     this.uampService.assignUamp(this.uamp);
     this.resetForm();
+    this.displayDialog = false;
   }
   
   confirmDelete() {
@@ -213,6 +215,7 @@ export class TemplateFourTwoComponent implements OnInit {
     }
     this.uampService.assignUamp(this.uamp);
     this.resetForm();
+    this.displayDialog = false;
   }
 
   resetForm(){
@@ -289,11 +292,32 @@ export class TemplateFourTwoComponent implements OnInit {
     return acquisitionPlan;
   }  
 
-  onReqiured(acquisitionPlan: AcquisitionPlan, e){
+  onReqiured(acquisitionPlan: AcquisitionPlan, e, index: number){
+    this.index = index;
     if(e.value === 'true'){
       this.confirmationService.confirm({
         message: 'Are you sure that this property is still reqiured?',
         accept: () => {
+          this.isEdit = true;
+          this.displayDialog = true;
+          this.selectedAcquisitionPlan = acquisitionPlan;
+          const districtRegion = this.sharedService.getRegions().filter(r => r.name == acquisitionPlan.districtRegion)[0];
+          const acquisitionType = this.sharedService.getAcquisitionTypes().filter(r => r.name == acquisitionPlan.acquisitionType)[0];
+          const status = this.sharedService.getStatuses().filter(r => r.name == acquisitionPlan.status)[0];
+
+          this.acquisitionPlanForm.controls["districtRegion"].setValue(districtRegion); 
+          this.acquisitionPlanForm.controls["town"].setValue(acquisitionPlan.town); 
+          this.acquisitionPlanForm.controls["serviceDescription"].setValue(acquisitionPlan.serviceDescription); 
+          this.acquisitionPlanForm.controls["budgetType"].setValue(acquisitionPlan.budgetType); 
+          this.acquisitionPlanForm.controls["extent"].setValue(acquisitionPlan.extent); 
+          this.acquisitionPlanForm.controls["acquisitionType"].setValue(acquisitionType); 
+          this.acquisitionPlanForm.controls["status"].setValue(status); 
+          this.acquisitionPlanForm.controls["totalAmountRequired"].setValue(acquisitionPlan.totalAmountRequired); 
+          this.acquisitionPlanForm.controls["cashFlowYear1"].setValue(acquisitionPlan.cashFlowYear1); 
+          this.acquisitionPlanForm.controls["cashFlowYear2"].setValue(acquisitionPlan.cashFlowYear2); 
+          this.acquisitionPlanForm.controls["cashFlowYear3"].setValue(acquisitionPlan.cashFlowYear3); 
+          this.acquisitionPlanForm.controls["cashFlowYear4"].setValue(acquisitionPlan.cashFlowYear4); 
+          this.acquisitionPlanForm.controls["cashFlowYear5"].setValue(acquisitionPlan.cashFlowYear5); 
           acquisitionPlan.reqiured = 'true';
         },
         reject:() =>{

@@ -6,6 +6,7 @@ import { element } from 'protractor';
 import { Facility } from 'src/app/models/facility.model';
 import { MtefBudgetPeriod } from 'src/app/models/mtef-budget-period.model';
 import { UAMP } from 'src/app/models/uamp.model';
+import { SharedService } from 'src/app/services/shared.service';
 import { UampService } from 'src/app/services/uamp/uamp.service';
 
 @Component({
@@ -23,8 +24,10 @@ export class TemplateSevenComponent implements OnInit {
   groups: any[];
   mtefBudgetPeriods: MtefBudgetPeriod[];
   rowGroupMetadata: any;
+  displayDialog: boolean = false;
+  year1Allocation: number = 0;
 
-  constructor(private router: Router, private uampService: UampService, private formBuilder: FormBuilder) {
+  constructor(private sharedService: SharedService, private router: Router, private uampService: UampService, private formBuilder: FormBuilder) {
     this.uampService.uampChange.subscribe((value) => {
       if (value) {
         this.uamp = value;
@@ -63,24 +66,25 @@ export class TemplateSevenComponent implements OnInit {
 
   assginData() {
     this.uamp = this.uampService.uamp;
-    if (!this.uamp)
+    if (!this.uamp || this.uamp == undefined)
       this.router.navigate(['uamp']);
 
-    this.mtefBudgetPeriods = this.uamp.templeteSeven.mtefBudgetPeriods;
+    this.mtefBudgetPeriods =  this.sharedService.calculateBudgetPeriods(this.uamp).templeteSeven.mtefBudgetPeriods;
+  }
+
+  onKeydown(event,  mtefBudgetPeriod: MtefBudgetPeriod) {
+    if (!isNaN(event)) {
+      var index = this.mtefBudgetPeriods.findIndex(b => b.title == mtefBudgetPeriod.title);
+      this.uamp.templeteSeven.mtefBudgetPeriods[index].year1Allocation = Number(event);
+      this.mtefBudgetPeriods =  this.sharedService.calculateBudgetPeriods(this.uamp).templeteSeven.mtefBudgetPeriods;
+      this.onSort();
+    }
   }
 
   umapTempleteValidate() {
     let isValid: boolean = true;
 
     return isValid;
-  }
-
-  addMtefBudgetPeriod(mtefBudgetPeriod: MtefBudgetPeriod) {
-    this.mtefBudgetPeriods.push(mtefBudgetPeriod);
-  }
-
-  updateMtefBudgetPeriod(mtefBudgetPeriod: MtefBudgetPeriod, index: number) {
-    this.mtefBudgetPeriods[index] = mtefBudgetPeriod;
   }
 
   newCapitalWorksT41RequiredBudget() {
@@ -346,11 +350,8 @@ export class TemplateSevenComponent implements OnInit {
 
   addBudgetforMtefPeriod() {
     const mtefBudgetPeriod: MtefBudgetPeriod = {
-      id: 0,
-      userImmovableAssetManagementPlanId: this.uamp.id,
-      order: 0,
-      isHeader: false,
-      isPercentage: false,
+      id: this.sharedService.getRandomNumber(4),
+      userImmovableAssetManagementPlanId: this.uamp.id,      
       title: this.budgetPeriodForm.controls["title"].value,
       group: this.budgetPeriodForm.controls["group"].value.name,
       year1Allocation: this.budgetPeriodForm.controls["year1Allocation"].value,
@@ -368,6 +369,9 @@ export class TemplateSevenComponent implements OnInit {
       year5Allocation: this.budgetPeriodForm.controls["year5Allocation"].value,
       year5RequiredBudget: this.budgetPeriodForm.controls["year5RequiredBudget"].value,
       year5Shortfall: this.budgetPeriodForm.controls["year5Shortfall"].value,
+      order: this.sharedService.getRandomNumber(4),
+      isHeader: false,
+      isPercentage: false,
     };
 
     this.mtefBudgetPeriods.push(mtefBudgetPeriod);
@@ -382,6 +386,7 @@ export class TemplateSevenComponent implements OnInit {
     this.uampService.assignUamp(this.uamp);
     this.resetForm();
     this.onSort();
+    this.displayDialog = false;
   }
 
   resetForm() {

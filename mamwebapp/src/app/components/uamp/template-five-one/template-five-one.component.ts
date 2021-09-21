@@ -154,6 +154,7 @@ export class TemplateFiveOneComponent implements OnInit {
     this.isEdit = false;
     this.uampService.assignUamp(this.uamp);
     this.resetForm();
+    this.displayDialog = false;
   }
 
   confirmDelete() {

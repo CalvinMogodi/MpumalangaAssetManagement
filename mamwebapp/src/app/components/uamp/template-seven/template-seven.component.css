@@ -17,3 +17,7 @@ header{
   .ui-inputtext {
     width: 90% !important;
   }
+
+  .grayBackgroud{
+    background-color: #c8c8c8 !important;
+  }

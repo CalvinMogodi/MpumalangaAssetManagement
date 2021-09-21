@@ -333,3 +333,8 @@ p-fieldset {
 .p-datatable .p-datatable-thead > tr > th {
 	font-size: 12px !important;
 	}
+
+.btn-next{
+	float:right;
+	margin-right: 10px !important
+}

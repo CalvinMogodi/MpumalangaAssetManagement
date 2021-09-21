@@ -166,6 +166,7 @@ export class TemplateFiveTwoComponent implements OnInit {
     }
     this.uampService.assignUamp(this.uamp);
     this.resetForm();
+    this.displayDialog = false;
   }
 
   resetForm() {

@@ -84,17 +84,17 @@
         <form [formGroup]="programmeForm">
             <div class="formgrid grid">
                 <div class="field col-6">
-                    <textarea formControlName="corporateObjective" autocomplete="off" type="text" pInputTextarea
-                        class="ui-inputtext ui-widget"></textarea>
                     <label for="corporateObjective">Corporate Objectives</label>
+                    <textarea formControlName="corporateObjective" autocomplete="off" type="text" pInputTextarea
+                        class="ui-inputtext ui-widget"></textarea>                    
                     <div *ngIf="submitted && p.corporateObjective.errors" class="text-error"><br>
                         <div *ngIf="p.corporateObjective.errors.required">This field is required.</div>
                     </div>
                 </div>
                 <div class="field col-6">
-                    <textarea formControlName="outcomes" type="text" pInputText
-                        class="ui-inputtext ui-widget"></textarea>
                     <label for="outcomes">Outcomes/ Planned Outputs</label>
+                    <textarea formControlName="outcomes" type="text" pInputText
+                        class="ui-inputtext ui-widget"></textarea>               
                     <div *ngIf="submitted && p.outcomes.errors" class="text-error"><br>
                         <div *ngIf="p.outcomes.errors.required">This field is required.</div>
                     </div>
@@ -137,9 +137,11 @@
 
 <div class="uamp-footer">
     <div class="p-grid p-nogutter p-justify-between">
-        <p-button styleClass="p-button-secondary" label="Cancel" (onClick)="cancel()" icon="pi pi-times">
+        <p-button styleClass="p-button-secondary" label="Cancel" (onClick)="cancel()" icon="pi pi-angle-left">
         </p-button>
-        <p-button [style]="{'float':'right'}" label="Next" (onClick)="nextPage()" icon="pi pi-angle-right"
+        <p-button [style]="{'float':'right'}" label="Save" class="ml-1" (onClick)="save()" icon="pi pi-check"
+        iconPos="right"></p-button>
+        <p-button styleClass="btn-next" label="Next" (onClick)="nextPage()" icon="pi pi-angle-right"
             iconPos="right"></p-button>
     </div>
 </div>

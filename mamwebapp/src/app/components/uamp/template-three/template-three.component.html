@@ -79,12 +79,12 @@
             <div class="formgrid grid">
                 <div class="field col-6">
                     <small for="district">District</small>
-                    <input (keydown)="onBlurDistrict()" formControlName="district" autocomplete="off" type="text"
+                    <input formControlName="district" autocomplete="off" type="text"
                         pInputText class="ui-inputtext ui-widget w-full">
                 </div>
             </div>
 
-            <div [hidden]="!showFields">
+            <div>
 
                 <div class="formgrid grid pt-5">
                     <div class="field col-6">
@@ -177,7 +177,9 @@
     <div class="p-grid p-nogutter p-justify-between">
         <p-button styleClass="p-button-secondary" label="Back" (onClick)="back()" icon="pi pi-angle-left">
         </p-button>
-        <p-button [style]="{'float':'right'}" label="Next" (onClick)="nextPage()" icon="pi pi-angle-right"
+        <p-button [style]="{'float':'right'}" label="Save" class="ml-1" (onClick)="save()" icon="pi pi-check"
+        iconPos="right"></p-button>
+        <p-button styleClass="btn-next" label="Next" (onClick)="nextPage()" icon="pi pi-angle-right"
             iconPos="right"></p-button>
     </div>
 </div>

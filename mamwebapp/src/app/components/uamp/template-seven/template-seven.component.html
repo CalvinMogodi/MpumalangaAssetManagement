@@ -5,8 +5,8 @@
         </ng-template>
         <ng-template pTemplate="content">
             <p-table styleClass="p-datatable-striped" responsiveLayout="stack" [paginator]="true" [rows]="5"
-                [showCurrentPageReport]="true" responsiveLayout="scroll" [rowsPerPageOptions]="[5,10,15]"
-                [value]="mtefBudgetPeriods" [responsive]="true" sortField="town" sortMode="single" (onSort)="onSort()">
+                [showCurrentPageReport]="true" [rowsPerPageOptions]="[5,10,15]"
+                [value]="mtefBudgetPeriods" [responsive]="true" sortField="group" sortMode="single" (onSort)="onSort()">
                 <ng-template pTemplate="caption">
                     <div class="p-d-flex right p-jc-between text-right">
                         <p-button pTooltip="Add Budget for MTEF Period" type="button" icon="pi pi-plus"
@@ -50,24 +50,26 @@
                     </tr>
                     <tr>
                         <td>{{mtefBudgetPeriod.title}}</td>
-                        <td>
-                            <p-inputNumber class="ui-inputtext ui-widget" [(ngModel)]="mtefBudgetPeriod.year1Allocation"
-                                [ngModelOptions]="{standalone: true}"></p-inputNumber>
+                        <td  [ngClass]="{'grayBackgroud':mtefBudgetPeriod.title.includes('Shortfall')}" *ngIf="!mtefBudgetPeriod.title.includes('Total')">
+                            <p-inputNumber *ngIf="mtefBudgetPeriod.title !== '% Shortfall'" class="ui-inputtext ui-widget" (ngModelChange)="onKeydown($event, mtefBudgetPeriod)" [(ngModel)]="mtefBudgetPeriod.year1Allocation"
+                                ></p-inputNumber>
+                                
                         </td>
-                        <td>{{mtefBudgetPeriod.year1RequiredBudget}}</td>
-                        <td>{{mtefBudgetPeriod.year1Shortfall}}</td>
-                        <td>{{mtefBudgetPeriod.year2Allocation}}</td>
-                        <td>{{mtefBudgetPeriod.year2RequiredBudget}}</td>
-                        <td>{{mtefBudgetPeriod.year2Shortfall}}</td>
-                        <td>{{mtefBudgetPeriod.year3Allocation}}</td>
-                        <td>{{mtefBudgetPeriod.year3RequiredBudget}}</td>
-                        <td>{{mtefBudgetPeriod.year3Shortfall}}</td>
-                        <td>{{mtefBudgetPeriod.year4Allocation}}</td>
-                        <td>{{mtefBudgetPeriod.year4RequiredBudget}}</td>
-                        <td>{{mtefBudgetPeriod.year4Shortfall}}</td>
-                        <td>{{mtefBudgetPeriod.year5Allocation}}</td>
-                        <td>{{mtefBudgetPeriod.year5RequiredBudget}}</td>
-                        <td>{{mtefBudgetPeriod.year5Shortfall}}</td>
+                        <td *ngIf="mtefBudgetPeriod.title.includes('Total')">{{mtefBudgetPeriod.year1Allocation | currency:'ZAR':'R'}}</td>
+                        <td [ngClass]="{'grayBackgroud':mtefBudgetPeriod.title.includes('Shortfall')}"><span *ngIf="mtefBudgetPeriod.title !== '% Shortfall'">{{mtefBudgetPeriod.year1RequiredBudget | currency:'ZAR':'R'}}</span></td>
+                        <td>{{mtefBudgetPeriod.year1Shortfall | currency:'ZAR':'R'}}</td>
+                        <td>{{mtefBudgetPeriod.year2Allocation | currency:'ZAR':'R'}}</td>
+                        <td>{{mtefBudgetPeriod.year2RequiredBudget | currency:'ZAR':'R'}}</td>
+                        <td>{{mtefBudgetPeriod.year2Shortfall | currency:'ZAR':'R'}}</td>
+                        <td>{{mtefBudgetPeriod.year3Allocation | currency:'ZAR':'R'}}</td>
+                        <td>{{mtefBudgetPeriod.year3RequiredBudget | currency:'ZAR':'R'}}</td>
+                        <td>{{mtefBudgetPeriod.year3Shortfall | currency:'ZAR':'R'}}</td>
+                        <td>{{mtefBudgetPeriod.year4Allocation | currency:'ZAR':'R'}}</td>
+                        <td>{{mtefBudgetPeriod.year4RequiredBudget | currency:'ZAR':'R'}}</td>
+                        <td>{{mtefBudgetPeriod.year4Shortfall | currency:'ZAR':'R'}}</td>
+                        <td>{{mtefBudgetPeriod.year5Allocation | currency:'ZAR':'R'}}</td>
+                        <td>{{mtefBudgetPeriod.year5RequiredBudget | currency:'ZAR':'R'}}</td>
+                        <td>{{mtefBudgetPeriod.year5Shortfall | currency:'ZAR':'R'}}</td>
                     </tr>
                 </ng-template>
             </p-table>
@@ -83,13 +85,13 @@
             <div class="formgrid grid">
                 <div class="field col-6">
                     <label for="group">Group</label>
-                    <p-dropdown (onChange)="showFields = true" [style]="{'width':'100%'}" class="ui-inputtext ui-widget"
+                    <p-dropdown [style]="{'width':'100%'}" class="ui-inputtext ui-widget"
                         placeholder="Please select" inputId="group" [options]="groups" formControlName="group"
                         optionLabel="name"></p-dropdown>
                 </div>
             </div>
 
-            <div [hidden]="!showFields">
+            <div>
                 <div class="formgrid grid">
                     <div class="field col-6 mt-3">
                         <label for="title">Title</label>
@@ -221,9 +223,9 @@
     <div class="p-grid p-nogutter p-justify-between">
         <p-button styleClass="p-button-secondary" label="Back" (onClick)="back()" icon="pi pi-angle-left">
         </p-button>
-        <p-button [style]="{'float':'right'} " label="Save" class="ml-1" (onClick)="save()" icon="pi pi-angle-right"
+        <p-button styleClass="p-button-success" [style]="{'float':'right'}" label="Submit" class="ml-1" (onClick)="submit()" icon="pi pi-check"
+        iconPos="right"></p-button>
+        <p-button styleClass="btn-next" label="Next" (onClick)="nextPage()" icon="pi pi-angle-right"
             iconPos="right"></p-button>
-        <p-button [style]="{'float':'right'}" label="Submit" class="p-button-success" (onClick)="submit()"
-            icon="pi pi-angle-right" iconPos="right"></p-button>
     </div>
 </div>

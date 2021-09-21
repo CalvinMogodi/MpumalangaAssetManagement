@@ -30,6 +30,7 @@ export class TemplateFourOneComponent implements OnInit {
   showComfirmationDelete: boolean = false;
   selectedAcquisitionPlan: AcquisitionPlan;
   isEdit: boolean = false;
+  displayDialog: boolean = false;
 
   constructor(private sharedService: SharedService, private router: Router, public uampService: UampService, private formBuilder: FormBuilder, private messageService: MessageService) {
     this.uampService.uampChange.subscribe((value) => {
@@ -200,6 +201,7 @@ export class TemplateFourOneComponent implements OnInit {
     }
     this.uampService.assignUamp(this.uamp);
     this.resetForm();
+    this.displayDialog = false;
   }
 
   resetForm() {

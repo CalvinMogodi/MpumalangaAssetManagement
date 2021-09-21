@@ -43,7 +43,7 @@ export class TemplateOneComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.assginData();
+    //this.assginData();
     this.buttonItems = [
       {
         label: 'Update', icon: 'pi pi-pencil', command: () =>
@@ -169,5 +169,18 @@ export class TemplateOneComponent implements OnInit {
 
   cancel() {
     this.router.navigate(['uamp']);
+  }
+
+  save() {
+    this.uamp.status = "Saved";
+    this.uampService.saveUamp(this.uamp).pipe(first()).subscribe(uamp => {
+      this.uamp = uamp;
+      this.uampService.assignUamp(uamp);
+      this.messageService.add({ severity: 'success', summary: 'Save UAMP', detail: 'UAMP has been saved successful.' });
+      this.cancel();
+    },
+      (error) => {
+        this.messageService.add({ severity: 'error', summary: 'Error Occoured', detail: 'Unable to save UAMP' });
+      });
   }
 }

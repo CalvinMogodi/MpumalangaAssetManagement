@@ -25,6 +25,7 @@ export class TemplateSixComponent implements OnInit {
   regions: any[];
   newSurrenderPlanForm: FormGroup;
   uamp: UAMP;
+  displayDialog: boolean = false;
 
   constructor(private router: Router, private sharedService: SharedService, private confirmationService: ConfirmationService, private uampService: UampService, private formBuilder: FormBuilder, private messageService: MessageService) {
     this.uampService.uampChange.subscribe((value) => {
@@ -186,6 +187,7 @@ export class TemplateSixComponent implements OnInit {
     }
     this.uampService.assignUamp(this.uamp);
     this.resetForm();
+    this.displayDialog = false;
   }
 
   resetForm() {

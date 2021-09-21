@@ -28,11 +28,11 @@
                         <th>Cash Flow <small>(MTEF Year 4)</small></th>
                         <th>Cash Flow <small>(MTEF Year 5)</small></th>
                         <th>Total Amount Required </th>
-                        <th style="width: 130px;">Required</th>
-                        <th style="width: 110px;"></th>
+                        <th style="width: 140px;">Required</th>
+                        <th style="width: 140px;"></th>
                     </tr>
                 </ng-template>
-                <ng-template pTemplate="body" let-acquisitionPlan>
+                <ng-template pTemplate="body" let-acquisitionPlan let-rowIndex="rowIndex">
                     <tr>
                         <td>{{acquisitionPlan.districtRegion}}</td>
                         <td>{{acquisitionPlan.town}}</td>
@@ -47,7 +47,7 @@
                         <td>{{acquisitionPlan.cashFlowYear4 | currency:'ZAR':'R'}}</td>
                         <td>{{acquisitionPlan.cashFlowYear5 | currency:'ZAR':'R'}}</td>
                         <td>{{calculateDbTotalAmountRequired(acquisitionPlan) | currency:'ZAR':'R'}}</td>
-                        <td><p-selectButton [(ngModel)]="acquisitionPlan.reqiured" (onChange)="onReqiured(acquisitionPlan, $event)" [options]="requiredOptions" optionLabel="label" optionValue="value"></p-selectButton></td>
+                        <td><p-selectButton [(ngModel)]="acquisitionPlan.reqiured" (onChange)="onReqiured(acquisitionPlan, $event, rowIndex)" [options]="requiredOptions" optionLabel="label" optionValue="value"></p-selectButton></td>
                         <td style="text-align: center;" *ngIf="acquisitionPlans.length > 0">
                             <p-splitButton label="More" *ngIf="mode != 'View'" [model]="buttonItems"
                                 (onDropdownClick)="selectAcquisitionPlan(acquisitionPlan)" styleClass="p-button-secondary">
@@ -134,7 +134,7 @@
             <p-button *ngIf="!isEdit" [style]="{'float':'right'}" label="Add" (onClick)="addAcquisitionPlan()"
                 icon="pi pi-check" iconPos="right"></p-button>
             <p-button *ngIf="isEdit" [style]="{'float':'right'}" label="Update"
-                (onClick)="updateStrategicNeedsAssessment()" icon="pi pi-check" iconPos="right"></p-button>
+                (onClick)="updateAcquisitionPlan()" icon="pi pi-check" iconPos="right"></p-button>
         </div>
     </p-footer>
 </p-dialog>
@@ -155,7 +155,9 @@
     <div class="p-grid p-nogutter p-justify-between">
         <p-button styleClass="p-button-secondary" label="Back" (onClick)="back()" icon="pi pi-angle-left">
         </p-button>
-        <p-button [style]="{'float':'right'}" label="Next" (onClick)="nextPage()" icon="pi pi-angle-right"
+        <p-button [style]="{'float':'right'}" label="Save" class="ml-1" (onClick)="save()" icon="pi pi-check"
+        iconPos="right"></p-button>
+        <p-button styleClass="btn-next" label="Next" (onClick)="nextPage()" icon="pi pi-angle-right"
             iconPos="right"></p-button>
     </div>
 </div>

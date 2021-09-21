@@ -9,7 +9,7 @@
         <ng-template pTemplate="content">
             <p-table styleClass="p-datatable-striped" responsiveLayout="stack" breakpoint="680px" [paginator]="true" [rows]="5"
                 [showCurrentPageReport]="true" responsiveLayout="scroll" [rowsPerPageOptions]="[5,10,15]"
-                [value]="properties" [responsive]="true" sortField="town" sortMode="single" (onSort)="onSort()">
+                [value]="properties" [responsive]="true" sortField="assetDescription" sortMode="single" (onSort)="onSort()">
                 <ng-template pTemplate="header">
                     <tr>
 
@@ -17,7 +17,6 @@
                         <th>Districts</th>
                         <th>Town</th>
                         <th>Local Municipality</th>
-                        <th>Asset Description</th>
                         <th>Old Street Address</th>
                         <th>Current Street Address</th>
                         <th>Property Description</th>
@@ -38,9 +37,9 @@
                     </tr>
                 </ng-template>
                 <ng-template pTemplate="body" let-property let-rowIndex="rowIndex">
-                    <tr class="ui-widget-header" *ngIf="rowGroupMetadata[property.town].index === rowIndex">
+                    <tr class="ui-widget-header" *ngIf="rowGroupMetadata[property.assetDescription].index === rowIndex">
                         <td colspan="22">
-                            <span style="font-weight:bold">{{property.town}}</span>
+                            <span style="font-weight:bold">{{property.assetDescription}}</span>
                         </td>
                     </tr>
                     <tr>
@@ -48,7 +47,6 @@
                         <td><span class="p-column-title">District</span>{{property.districtRegion}}</td>
                         <td><span class="p-column-title">Town</span>{{property.town}}</td>
                         <td><span class="p-column-title">Local Authority</span>{{property.localAuthority}}</td>
-                        <td><span class="p-column-title">Asset Description</span>{{property.assetDescription}}</td>
                         <td><span class="p-column-title">Current Street Address</span>{{property.currentStreetAddress}}</td>
                         <td>{{property.districtMunicipality}}</td>
                         <td>{{property.propertyDescription}}</td>
@@ -175,12 +173,13 @@
     </p-card>
 </div>
 
-
 <div class="uamp-footer">
     <div class="p-grid p-nogutter p-justify-between">
         <p-button styleClass="p-button-secondary" label="Back" (onClick)="back()" icon="pi pi-angle-left">
         </p-button>
-        <p-button [style]="{'float':'right'}" label="Next" (onClick)="nextPage()" icon="pi pi-angle-right"
+        <p-button [style]="{'float':'right'}" label="Save" class="ml-1" (onClick)="save()" icon="pi pi-check"
+        iconPos="right"></p-button>
+        <p-button styleClass="btn-next" label="Next" (onClick)="nextPage()" icon="pi pi-angle-right"
             iconPos="right"></p-button>
     </div>
 </div>
