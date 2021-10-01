@@ -24,9 +24,9 @@ export class Property{
     rentalPM?: number;
     rentalPA?: number;
     municipalUtilityServices?: Array<MunicipalUtilityService>
-    MunicipalUtilityServiceTotal?: Number;
+    MunicipalUtilityServiceTotal?: number;
     propertyRatesTaxes?: Number;
-    operationalCosts?: Number;
+    operationalCosts?: number;
     requiredPerformanceStandard: string;
     accessibility: string;
     conditionRating: string;

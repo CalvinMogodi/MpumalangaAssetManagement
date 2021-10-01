@@ -143,6 +143,8 @@ export class UampComponent implements OnInit {
       this.uamp = uamp;
       this.messageService.add({ severity: 'success', summary: 'Generate UAMP', detail: 'UAMP has been generated successful.' });
       this.showUAMP = true;      
+      this.uampService.assignUamp(this.uamp);
+      this.router.navigate(['uampDetails/uampTemp1']);
     },
       (error) => {
         this.messageService.add({ severity: 'error', summary: 'Error Occoured', detail: 'Unable to generate UAMP' });

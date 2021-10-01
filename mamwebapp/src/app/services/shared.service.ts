@@ -287,42 +287,133 @@ export class SharedService {
     return requiredPerformanceStandards;
   }
 
-  calculateBudgetPeriods(uamp: UAMP): UAMP{ 
+  calculateBudgetPeriods(uamp: UAMP): UAMP {
     uamp.templeteSeven.mtefBudgetPeriods.forEach(element => {
-      switch(element.title){
+      switch (element.title) {
         case "New Capital Works T4.1":
           const acquisitionPlansT41 = uamp.templeteFourPointOne.acquisitionPlans.filter(r => r.totalAmountRequired != undefined
             || r.totalAmountRequired != null);
-          const year1RequiredBudgetT41 = acquisitionPlansT41.length > 0 ? acquisitionPlansT41.map(r => r.totalAmountRequired).reduce(function( a, b)
-          {
+          const year1RequiredBudgetT41 = acquisitionPlansT41.length > 0 ? acquisitionPlansT41.map(r => r.totalAmountRequired).reduce(function (a, b) {
             return a + b;
           }) : 0;
           element = this.calculateMtefBudgetPeriod(year1RequiredBudgetT41, element);
           const index = uamp.templeteSeven.mtefBudgetPeriods.findIndex(b => b.title == element.title);
           uamp.templeteSeven.mtefBudgetPeriods[index] = element;
           break;
-        case "Refurb., Re-config.& Additions) T5.1" :
+        case "Refurb., Re-config.& Additions) T5.1":
           const acquisitionPlansT51 = uamp.templeteFivePointOne.operationPlans.filter(r => r.totalAmountRequired != undefined
             || r.totalAmountRequired != null);
-          const year1RequiredBudgetT51 = acquisitionPlansT51.length > 0 ? acquisitionPlansT51.map(r => r.totalAmountRequired).reduce(function( a, b)
-          {
+          const year1RequiredBudgetT51 = acquisitionPlansT51.length > 0 ? acquisitionPlansT51.map(r => r.totalAmountRequired).reduce(function (a, b) {
             return a + b;
           }) : 0;
           element = this.calculateMtefBudgetPeriod(year1RequiredBudgetT51, element);
           const indexT5 = uamp.templeteSeven.mtefBudgetPeriods.findIndex(b => b.title == element.title);
           uamp.templeteSeven.mtefBudgetPeriods[indexT5] = element;
           break;
-        case "Total Capital Costs" :          
+        case "Total Capital Costs":
           element = this.calculateTotalCapitalCosts(uamp.templeteSeven.mtefBudgetPeriods, element);
           const indexTT = uamp.templeteSeven.mtefBudgetPeriods.findIndex(b => b.title == element.title);
           uamp.templeteSeven.mtefBudgetPeriods[indexTT] = element;
           break;
-        case "% Shortfall" :  
-        if(element.group == 'Capital Projects') { 
-          element = this.calculateShortfallCapitalCosts(uamp.templeteSeven.mtefBudgetPeriods, element);
-          const indexs = uamp.templeteSeven.mtefBudgetPeriods.findIndex(b => b.title == element.title);
-          uamp.templeteSeven.mtefBudgetPeriods[indexs] = element;
-        }
+        case "% Shortfall":
+          if (element.group == 'Capital Projects') {
+            element = this.calculateShortfallCapitalCosts(uamp.templeteSeven.mtefBudgetPeriods, element);
+            const indexs = uamp.templeteSeven.mtefBudgetPeriods.findIndex(b => b.title == element.title);
+            uamp.templeteSeven.mtefBudgetPeriods[indexs] = element;
+          }
+          break;
+        case "Existing Leases T2.2":
+          if (element.group == 'Current Expenditure') {
+            const propertiesT22 = uamp.templeteTwoPointTwo.properties.filter(r => r.rentalPA != undefined
+              || r.rentalPA != null);
+            const year1RequiredBudgetT22 = propertiesT22.length > 0 ? propertiesT22.map(r => r.rentalPA).reduce(function (a, b) {
+              return a + b;
+            }) : 0;
+            element = this.calculateMtefBudgetPeriod(year1RequiredBudgetT22, element);
+            const indexT22 = uamp.templeteSeven.mtefBudgetPeriods.findIndex(b => b.title == element.title);
+            uamp.templeteSeven.mtefBudgetPeriods[indexT22] = element;
+          }
+          break;
+        case "New leases T4.2":
+          if (element.group == 'Current Expenditure') {
+            const acquisitionPlansT42 = uamp.templeteFourPointTwo.acquisitionPlans.filter(r => r.totalAmountRequired != undefined
+              || r.totalAmountRequired != null);
+            const year1RequiredBudgetT42 = acquisitionPlansT42.length > 0 ? acquisitionPlansT42.map(r => r.totalAmountRequired).reduce(function (a, b) {
+              return a + b;
+            }) : 0;
+            element = this.calculateMtefBudgetPeriod(year1RequiredBudgetT42, element);
+            const indexT42 = uamp.templeteSeven.mtefBudgetPeriods.findIndex(b => b.title == element.title);
+            uamp.templeteSeven.mtefBudgetPeriods[indexT42] = element;
+          }
+          break;
+          case "Municipal / Utility Services: State-owned (Electricity, water, sewer & refuse) T2.1":
+          if (element.group == 'Current Expenditure') {
+            const propertiesT21 = uamp.templeteTwoPointOne.properties.filter(r => r.MunicipalUtilityServiceTotal != undefined
+              || r.MunicipalUtilityServiceTotal != null);
+            const year1RequiredBudgetT21 = propertiesT21.length > 0 ? propertiesT21.map(r => r.MunicipalUtilityServiceTotal).reduce(function (a, b) {
+              return a + b;
+            }) : 0;
+            element = this.calculateMtefBudgetPeriod(year1RequiredBudgetT21, element);
+            const indexT21 = uamp.templeteSeven.mtefBudgetPeriods.findIndex(b => b.title == element.title);
+            uamp.templeteSeven.mtefBudgetPeriods[indexT21] = element;
+          }
+          break;
+          case "Municipal / Utility Services: Leased-in (Electricity, water, sewer & refuse)T2.2":
+          if (element.group == 'Current Expenditure') {
+            const propertiesOCT22 = uamp.templeteTwoPointTwo.properties.filter(r => r.operationalCosts != undefined
+              || r.operationalCosts != null);
+            const year1RequiredBudgetOCT22 = propertiesOCT22.length > 0 ? propertiesOCT22.map(r => r.operationalCosts).reduce(function (a, b) {
+              return a + b;
+            }) : 0;
+            element = this.calculateMtefBudgetPeriod(year1RequiredBudgetOCT22, element);
+            const indexOCT22 = uamp.templeteSeven.mtefBudgetPeriods.findIndex(b => b.title == element.title);
+            uamp.templeteSeven.mtefBudgetPeriods[indexOCT22] = element;
+          }
+          break;
+          case "Property Rates & Taxes T2.1":
+            if (element.group == 'Current Expenditure') {
+              const propertiesPRT21 = uamp.templeteTwoPointOne.properties.filter(r => r.propertyRatesTaxes != undefined
+                || r.operationalCosts != null);
+              const year1RequiredBudgetPRTT21 = propertiesPRT21.length > 0 ? propertiesPRT21.map(r => r.operationalCosts).reduce(function (a, b) {
+                return a + b;
+              }) : 0;
+              element = this.calculateMtefBudgetPeriod(year1RequiredBudgetPRTT21, element);
+              const indexPRT22 = uamp.templeteSeven.mtefBudgetPeriods.findIndex(b => b.title == element.title);
+              uamp.templeteSeven.mtefBudgetPeriods[indexPRT22] = element;
+            }
+            break;
+            case "Maintenance Requirements (Repairs) T5.2":
+              if (element.group == 'Current Expenditure') {
+                const operationPlansT52 = uamp.templeteFivePointTwo.operationPlans.filter(r => r.totalAmountRequired != undefined
+                  || r.totalAmountRequired != null);
+                const year1RequiredBudgetART52 = operationPlansT52.length > 0 ? operationPlansT52.map(r => r.totalAmountRequired).reduce(function (a, b) {
+                  return a + b;
+                }) : 0;
+                element = this.calculateMtefBudgetPeriod(year1RequiredBudgetART52, element);
+                const indexART52 = uamp.templeteSeven.mtefBudgetPeriods.findIndex(b => b.title == element.title);
+                uamp.templeteSeven.mtefBudgetPeriods[indexART52] = element;
+              }
+              break;
+              case "Total Current Costs":
+                if (element.group == 'Current Expenditure') {
+                  element = this.calculateTotalCurrentCosts(uamp.templeteSeven.mtefBudgetPeriods, element);
+                  const indexTCC = uamp.templeteSeven.mtefBudgetPeriods.findIndex(b => b.title == element.title);
+                  uamp.templeteSeven.mtefBudgetPeriods[indexTCC] = element;
+                }
+                break;
+                case "Total Capital Works & Recurrent Costs":
+                  if (element.group == 'Current Expenditure') {
+                    element = this.calculateCapitalWorksRecurrentCosts(uamp.templeteSeven.mtefBudgetPeriods, element);
+                    const indexTCC = uamp.templeteSeven.mtefBudgetPeriods.findIndex(b => b.title == element.title);
+                    uamp.templeteSeven.mtefBudgetPeriods[indexTCC] = element;
+                  }
+                  break;
+        case "% Shortfall":
+          if (element.group == 'Current Expenditure') {
+            element = this.calculateShortfallCurrentExpenditure(uamp.templeteSeven.mtefBudgetPeriods, element);
+            const indexs = uamp.templeteSeven.mtefBudgetPeriods.findIndex(b => b.title == element.title);
+            uamp.templeteSeven.mtefBudgetPeriods[indexs] = element;
+          }
           break;
       }
     });
@@ -330,8 +421,8 @@ export class SharedService {
     return uamp;
   }
 
-  calculateMtefBudgetPeriod(year1RequiredBudget: number, mtefBudgetPeriod: MtefBudgetPeriod): MtefBudgetPeriod{
-    
+  calculateMtefBudgetPeriod(year1RequiredBudget: number, mtefBudgetPeriod: MtefBudgetPeriod): MtefBudgetPeriod {
+
     const year2Allocation = (6 / 100 * year1RequiredBudget) + year1RequiredBudget;
     const year2RequiredBudget = (4 / 100 * year2Allocation) + year2Allocation;
 
@@ -369,12 +460,12 @@ export class SharedService {
       year5Shortfall: year5Allocation - year5RequiredBudget,
     }
     return _mtefBudgetPeriod;
-  }  
+  }
 
-  calculateTotalCapitalCosts(mtefBudgetPeriods: MtefBudgetPeriod[], mtefBudgetPeriod: MtefBudgetPeriod): MtefBudgetPeriod{
-    const _mtefBudgetPeriods =  mtefBudgetPeriods.filter(m => m.group == 'Capital Projects' 
-                                && !m.title.includes('Total') 
-                                && !m.title.includes('Shortfall') );  
+  calculateTotalCapitalCosts(mtefBudgetPeriods: MtefBudgetPeriod[], mtefBudgetPeriod: MtefBudgetPeriod): MtefBudgetPeriod {
+    const _mtefBudgetPeriods = mtefBudgetPeriods.filter(m => m.group == 'Capital Projects'
+      && !m.title.includes('Total')
+      && !m.title.includes('Shortfall'));
     var _mtefBudgetPeriod: MtefBudgetPeriod = {
       id: mtefBudgetPeriod.id,
       userImmovableAssetManagementPlanId: mtefBudgetPeriod.userImmovableAssetManagementPlanId,
@@ -383,28 +474,89 @@ export class SharedService {
       isPercentage: mtefBudgetPeriod.isPercentage,
       title: mtefBudgetPeriod.title,
       group: mtefBudgetPeriod.group,
-      year1Allocation: _mtefBudgetPeriods.length > 0 ? _mtefBudgetPeriods.map(r => r.year1Allocation).reduce(function( a, b) {return a + b;}) : 0,
-      year1RequiredBudget: _mtefBudgetPeriods.length > 0 ? _mtefBudgetPeriods.map(r => r.year1RequiredBudget).reduce(function( a, b) {return a + b;}) : 0,
-      year1Shortfall: _mtefBudgetPeriods.length > 0 ? _mtefBudgetPeriods.map(r => r.year1Shortfall).reduce(function( a, b) {return a + b;}) : 0,
-      year2Allocation: _mtefBudgetPeriods.length > 0 ? _mtefBudgetPeriods.map(r => r.year2Allocation).reduce(function( a, b) {return a + b;}) : 0,
-      year2RequiredBudget: _mtefBudgetPeriods.length > 0 ? _mtefBudgetPeriods.map(r => r.year2RequiredBudget).reduce(function( a, b) {return a + b;}) : 0,
-      year2Shortfall: _mtefBudgetPeriods.length > 0 ? _mtefBudgetPeriods.map(r => r.year2Shortfall).reduce(function( a, b) {return a + b;}) : 0,
-      year3Allocation: _mtefBudgetPeriods.length > 0 ? _mtefBudgetPeriods.map(r => r.year3Allocation).reduce(function( a, b) {return a + b;}) : 0,
-      year3RequiredBudget: _mtefBudgetPeriods.length > 0 ? _mtefBudgetPeriods.map(r => r.year3RequiredBudget).reduce(function( a, b) {return a + b;}) : 0,
-      year3Shortfall: _mtefBudgetPeriods.length > 0 ? _mtefBudgetPeriods.map(r => r.year3Shortfall).reduce(function( a, b) {return a + b;}) : 0,
-      year4Allocation: _mtefBudgetPeriods.length > 0 ? _mtefBudgetPeriods.map(r => r.year4Allocation).reduce(function( a, b) {return a + b;}) : 0,
-      year4RequiredBudget: _mtefBudgetPeriods.length > 0 ? _mtefBudgetPeriods.map(r => r.year4RequiredBudget).reduce(function( a, b) {return a + b;}) : 0,
-      year4Shortfall: _mtefBudgetPeriods.length > 0 ? _mtefBudgetPeriods.map(r => r.year4Shortfall).reduce(function( a, b) {return a + b;}) : 0,
-      year5Allocation: _mtefBudgetPeriods.length > 0 ? _mtefBudgetPeriods.map(r => r.year5Allocation).reduce(function( a, b) {return a + b;}) : 0,
-      year5RequiredBudget: _mtefBudgetPeriods.length > 0 ? _mtefBudgetPeriods.map(r => r.year5RequiredBudget).reduce(function( a, b) {return a + b;}) : 0,
-      year5Shortfall: _mtefBudgetPeriods.length > 0 ? _mtefBudgetPeriods.map(r => r.year5Shortfall).reduce(function( a, b) {return a + b;}) : 0,
+      year1Allocation: _mtefBudgetPeriods.length > 0 ? _mtefBudgetPeriods.map(r => r.year1Allocation).reduce(function (a, b) { return a + b; }) : 0,
+      year1RequiredBudget: _mtefBudgetPeriods.length > 0 ? _mtefBudgetPeriods.map(r => r.year1RequiredBudget).reduce(function (a, b) { return a + b; }) : 0,
+      year1Shortfall: _mtefBudgetPeriods.length > 0 ? _mtefBudgetPeriods.map(r => r.year1Shortfall).reduce(function (a, b) { return a + b; }) : 0,
+      year2Allocation: _mtefBudgetPeriods.length > 0 ? _mtefBudgetPeriods.map(r => r.year2Allocation).reduce(function (a, b) { return a + b; }) : 0,
+      year2RequiredBudget: _mtefBudgetPeriods.length > 0 ? _mtefBudgetPeriods.map(r => r.year2RequiredBudget).reduce(function (a, b) { return a + b; }) : 0,
+      year2Shortfall: _mtefBudgetPeriods.length > 0 ? _mtefBudgetPeriods.map(r => r.year2Shortfall).reduce(function (a, b) { return a + b; }) : 0,
+      year3Allocation: _mtefBudgetPeriods.length > 0 ? _mtefBudgetPeriods.map(r => r.year3Allocation).reduce(function (a, b) { return a + b; }) : 0,
+      year3RequiredBudget: _mtefBudgetPeriods.length > 0 ? _mtefBudgetPeriods.map(r => r.year3RequiredBudget).reduce(function (a, b) { return a + b; }) : 0,
+      year3Shortfall: _mtefBudgetPeriods.length > 0 ? _mtefBudgetPeriods.map(r => r.year3Shortfall).reduce(function (a, b) { return a + b; }) : 0,
+      year4Allocation: _mtefBudgetPeriods.length > 0 ? _mtefBudgetPeriods.map(r => r.year4Allocation).reduce(function (a, b) { return a + b; }) : 0,
+      year4RequiredBudget: _mtefBudgetPeriods.length > 0 ? _mtefBudgetPeriods.map(r => r.year4RequiredBudget).reduce(function (a, b) { return a + b; }) : 0,
+      year4Shortfall: _mtefBudgetPeriods.length > 0 ? _mtefBudgetPeriods.map(r => r.year4Shortfall).reduce(function (a, b) { return a + b; }) : 0,
+      year5Allocation: _mtefBudgetPeriods.length > 0 ? _mtefBudgetPeriods.map(r => r.year5Allocation).reduce(function (a, b) { return a + b; }) : 0,
+      year5RequiredBudget: _mtefBudgetPeriods.length > 0 ? _mtefBudgetPeriods.map(r => r.year5RequiredBudget).reduce(function (a, b) { return a + b; }) : 0,
+      year5Shortfall: _mtefBudgetPeriods.length > 0 ? _mtefBudgetPeriods.map(r => r.year5Shortfall).reduce(function (a, b) { return a + b; }) : 0,
     }
     return _mtefBudgetPeriod;
   }
 
-  calculateShortfallCapitalCosts(mtefBudgetPeriods: MtefBudgetPeriod[], mtefBudgetPeriod: MtefBudgetPeriod): MtefBudgetPeriod{
-    const _totalMtefBudgetPeriod =  mtefBudgetPeriods.filter(m => m.group == 'Capital Projects' 
-                                && m.title.includes('Shortfall'))[0];  
+  calculateTotalCurrentCosts(mtefBudgetPeriods: MtefBudgetPeriod[], mtefBudgetPeriod: MtefBudgetPeriod): MtefBudgetPeriod {
+    const _mtefBudgetPeriods = mtefBudgetPeriods.filter(m => m.group == 'Current Expenditure'
+      && !m.title.includes('Total')
+      && !m.title.includes('Shortfall'));
+    var _mtefBudgetPeriod: MtefBudgetPeriod = {
+      id: mtefBudgetPeriod.id,
+      userImmovableAssetManagementPlanId: mtefBudgetPeriod.userImmovableAssetManagementPlanId,
+      order: mtefBudgetPeriod.order,
+      isHeader: mtefBudgetPeriod.isHeader,
+      isPercentage: mtefBudgetPeriod.isPercentage,
+      title: mtefBudgetPeriod.title,
+      group: mtefBudgetPeriod.group,
+      year1Allocation: _mtefBudgetPeriods.length > 0 ? _mtefBudgetPeriods.map(r => r.year1Allocation).reduce(function (a, b) { return a + b; }) : 0,
+      year1RequiredBudget: _mtefBudgetPeriods.length > 0 ? _mtefBudgetPeriods.map(r => r.year1RequiredBudget).reduce(function (a, b) { return a + b; }) : 0,
+      year1Shortfall: _mtefBudgetPeriods.length > 0 ? _mtefBudgetPeriods.map(r => r.year1Shortfall).reduce(function (a, b) { return a + b; }) : 0,
+      year2Allocation: _mtefBudgetPeriods.length > 0 ? _mtefBudgetPeriods.map(r => r.year2Allocation).reduce(function (a, b) { return a + b; }) : 0,
+      year2RequiredBudget: _mtefBudgetPeriods.length > 0 ? _mtefBudgetPeriods.map(r => r.year2RequiredBudget).reduce(function (a, b) { return a + b; }) : 0,
+      year2Shortfall: _mtefBudgetPeriods.length > 0 ? _mtefBudgetPeriods.map(r => r.year2Shortfall).reduce(function (a, b) { return a + b; }) : 0,
+      year3Allocation: _mtefBudgetPeriods.length > 0 ? _mtefBudgetPeriods.map(r => r.year3Allocation).reduce(function (a, b) { return a + b; }) : 0,
+      year3RequiredBudget: _mtefBudgetPeriods.length > 0 ? _mtefBudgetPeriods.map(r => r.year3RequiredBudget).reduce(function (a, b) { return a + b; }) : 0,
+      year3Shortfall: _mtefBudgetPeriods.length > 0 ? _mtefBudgetPeriods.map(r => r.year3Shortfall).reduce(function (a, b) { return a + b; }) : 0,
+      year4Allocation: _mtefBudgetPeriods.length > 0 ? _mtefBudgetPeriods.map(r => r.year4Allocation).reduce(function (a, b) { return a + b; }) : 0,
+      year4RequiredBudget: _mtefBudgetPeriods.length > 0 ? _mtefBudgetPeriods.map(r => r.year4RequiredBudget).reduce(function (a, b) { return a + b; }) : 0,
+      year4Shortfall: _mtefBudgetPeriods.length > 0 ? _mtefBudgetPeriods.map(r => r.year4Shortfall).reduce(function (a, b) { return a + b; }) : 0,
+      year5Allocation: _mtefBudgetPeriods.length > 0 ? _mtefBudgetPeriods.map(r => r.year5Allocation).reduce(function (a, b) { return a + b; }) : 0,
+      year5RequiredBudget: _mtefBudgetPeriods.length > 0 ? _mtefBudgetPeriods.map(r => r.year5RequiredBudget).reduce(function (a, b) { return a + b; }) : 0,
+      year5Shortfall: _mtefBudgetPeriods.length > 0 ? _mtefBudgetPeriods.map(r => r.year5Shortfall).reduce(function (a, b) { return a + b; }) : 0,
+    }
+    return _mtefBudgetPeriod;
+  }
+
+  calculateCapitalWorksRecurrentCosts(mtefBudgetPeriods: MtefBudgetPeriod[], mtefBudgetPeriod: MtefBudgetPeriod): MtefBudgetPeriod {
+    const _mtefBudgetPeriods = mtefBudgetPeriods.filter(m => !m.title.includes('Total')
+      && !m.title.includes('Shortfall'));
+    var _mtefBudgetPeriod: MtefBudgetPeriod = {
+      id: mtefBudgetPeriod.id,
+      userImmovableAssetManagementPlanId: mtefBudgetPeriod.userImmovableAssetManagementPlanId,
+      order: mtefBudgetPeriod.order,
+      isHeader: mtefBudgetPeriod.isHeader,
+      isPercentage: mtefBudgetPeriod.isPercentage,
+      title: mtefBudgetPeriod.title,
+      group: mtefBudgetPeriod.group,
+      year1Allocation: _mtefBudgetPeriods.length > 0 ? _mtefBudgetPeriods.map(r => r.year1Allocation).reduce(function (a, b) { return a + b; }) : 0,
+      year1RequiredBudget: _mtefBudgetPeriods.length > 0 ? _mtefBudgetPeriods.map(r => r.year1RequiredBudget).reduce(function (a, b) { return a + b; }) : 0,
+      year1Shortfall: _mtefBudgetPeriods.length > 0 ? _mtefBudgetPeriods.map(r => r.year1Shortfall).reduce(function (a, b) { return a + b; }) : 0,
+      year2Allocation: _mtefBudgetPeriods.length > 0 ? _mtefBudgetPeriods.map(r => r.year2Allocation).reduce(function (a, b) { return a + b; }) : 0,
+      year2RequiredBudget: _mtefBudgetPeriods.length > 0 ? _mtefBudgetPeriods.map(r => r.year2RequiredBudget).reduce(function (a, b) { return a + b; }) : 0,
+      year2Shortfall: _mtefBudgetPeriods.length > 0 ? _mtefBudgetPeriods.map(r => r.year2Shortfall).reduce(function (a, b) { return a + b; }) : 0,
+      year3Allocation: _mtefBudgetPeriods.length > 0 ? _mtefBudgetPeriods.map(r => r.year3Allocation).reduce(function (a, b) { return a + b; }) : 0,
+      year3RequiredBudget: _mtefBudgetPeriods.length > 0 ? _mtefBudgetPeriods.map(r => r.year3RequiredBudget).reduce(function (a, b) { return a + b; }) : 0,
+      year3Shortfall: _mtefBudgetPeriods.length > 0 ? _mtefBudgetPeriods.map(r => r.year3Shortfall).reduce(function (a, b) { return a + b; }) : 0,
+      year4Allocation: _mtefBudgetPeriods.length > 0 ? _mtefBudgetPeriods.map(r => r.year4Allocation).reduce(function (a, b) { return a + b; }) : 0,
+      year4RequiredBudget: _mtefBudgetPeriods.length > 0 ? _mtefBudgetPeriods.map(r => r.year4RequiredBudget).reduce(function (a, b) { return a + b; }) : 0,
+      year4Shortfall: _mtefBudgetPeriods.length > 0 ? _mtefBudgetPeriods.map(r => r.year4Shortfall).reduce(function (a, b) { return a + b; }) : 0,
+      year5Allocation: _mtefBudgetPeriods.length > 0 ? _mtefBudgetPeriods.map(r => r.year5Allocation).reduce(function (a, b) { return a + b; }) : 0,
+      year5RequiredBudget: _mtefBudgetPeriods.length > 0 ? _mtefBudgetPeriods.map(r => r.year5RequiredBudget).reduce(function (a, b) { return a + b; }) : 0,
+      year5Shortfall: _mtefBudgetPeriods.length > 0 ? _mtefBudgetPeriods.map(r => r.year5Shortfall).reduce(function (a, b) { return a + b; }) : 0,
+    }
+    return _mtefBudgetPeriod;
+  }
+
+  calculateShortfallCapitalCosts(mtefBudgetPeriods: MtefBudgetPeriod[], mtefBudgetPeriod: MtefBudgetPeriod): MtefBudgetPeriod {
+    const _totalMtefBudgetPeriod = mtefBudgetPeriods.filter(m => m.group == 'Capital Projects'
+      && m.title.includes('Shortfall'))[0];
     var _mtefBudgetPeriod: MtefBudgetPeriod = {
       id: mtefBudgetPeriod.id,
       userImmovableAssetManagementPlanId: mtefBudgetPeriod.userImmovableAssetManagementPlanId,
@@ -416,7 +568,38 @@ export class SharedService {
       year1Allocation: 0,
       year1RequiredBudget: 0,
       year1Shortfall: Number(_totalMtefBudgetPeriod.year1Shortfall / _totalMtefBudgetPeriod.year1Allocation),
-      year2Allocation:0,
+      year2Allocation: 0,
+      year2RequiredBudget: 0,
+      year2Shortfall: Number(_totalMtefBudgetPeriod.year2Shortfall / _totalMtefBudgetPeriod.year2Allocation),
+      year3Allocation: 0,
+      year3RequiredBudget: 0,
+      year3Shortfall: Number(_totalMtefBudgetPeriod.year3Shortfall / _totalMtefBudgetPeriod.year3Allocation),
+      year4Allocation: 0,
+      year4RequiredBudget: 0,
+      year4Shortfall: Number(_totalMtefBudgetPeriod.year4Shortfall / _totalMtefBudgetPeriod.year4Allocation),
+      year5Allocation: 0,
+      year5RequiredBudget: 0,
+      year5Shortfall: Number(_totalMtefBudgetPeriod.year5Shortfall / _totalMtefBudgetPeriod.year5Allocation),
+    }
+    return _mtefBudgetPeriod;
+  }
+
+  
+  calculateShortfallCurrentExpenditure(mtefBudgetPeriods: MtefBudgetPeriod[], mtefBudgetPeriod: MtefBudgetPeriod): MtefBudgetPeriod {
+    const _totalMtefBudgetPeriod = mtefBudgetPeriods.filter(m => m.group == 'Capital Projects'
+      && m.title.includes('Shortfall'))[0];
+    var _mtefBudgetPeriod: MtefBudgetPeriod = {
+      id: mtefBudgetPeriod.id,
+      userImmovableAssetManagementPlanId: mtefBudgetPeriod.userImmovableAssetManagementPlanId,
+      order: mtefBudgetPeriod.order,
+      isHeader: mtefBudgetPeriod.isHeader,
+      isPercentage: mtefBudgetPeriod.isPercentage,
+      title: mtefBudgetPeriod.title,
+      group: mtefBudgetPeriod.group,
+      year1Allocation: 0,
+      year1RequiredBudget: 0,
+      year1Shortfall: Number(_totalMtefBudgetPeriod.year1Shortfall / _totalMtefBudgetPeriod.year1Allocation),
+      year2Allocation: 0,
       year2RequiredBudget: 0,
       year2Shortfall: Number(_totalMtefBudgetPeriod.year2Shortfall / _totalMtefBudgetPeriod.year2Allocation),
       year3Allocation: 0,
