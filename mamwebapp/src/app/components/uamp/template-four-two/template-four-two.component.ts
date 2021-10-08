@@ -34,6 +34,7 @@ export class TemplateFourTwoComponent implements OnInit {
   requiredOptions: any[];
   displayDialog: boolean = false;
   index: number = 0;
+  isLoading: boolean = false;
 
   constructor(private sharedService: SharedService, private router: Router, private confirmationService: ConfirmationService, public uampService: UampService, private formBuilder: FormBuilder, private messageService: MessageService) {
     this.uampService.uampChange.subscribe((value) => {
@@ -330,11 +331,43 @@ export class TemplateFourTwoComponent implements OnInit {
   }
 
   nextPage(){
-    this.router.navigate(['uampDetails/uampTemp51']);
+    this.getDataForNextTemplate();
+  }
+
+  getDataForNextTemplate() {
+    this.isLoading = true;
+    this.uampService.getuamptemplate(this.uamp.id, 5.1).subscribe(
+      (templeteFivePointOne) => {
+        this.uamp.templeteFivePointOne = templeteFivePointOne;          
+        this.uampService.assignUamp(this.uamp);
+        this.isLoading = false;
+        this.router.navigate(['uampDetails/uampTemp51']);
+      },
+      (error) => {
+        this.messageService.add({ severity: 'error', summary: 'Error Occoured', detail: 'Unable to get template data' });
+        this.isLoading = false;
+      }
+    );
   }
 
   back(){
     this.router.navigate(['uampDetails/uampTemp41']);
   }
 
+  save() {
+    this.uamp.status = "Saved";
+    this.uampService.saveUamp(this.uamp).pipe(first()).subscribe(uamp => {
+      this.uamp = uamp;
+      this.uampService.assignUamp(uamp);
+      this.messageService.add({ severity: 'success', summary: 'Save UAMP', detail: 'UAMP has been saved successful.' });
+      this.cancel();
+    },
+      (error) => {
+        this.messageService.add({ severity: 'error', summary: 'Error Occoured', detail: 'Unable to save UAMP' });
+      });
+  }
+
+  cancel() {
+    this.router.navigate(['uamp']);
+  }
 }

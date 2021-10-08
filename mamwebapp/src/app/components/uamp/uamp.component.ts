@@ -19,7 +19,7 @@ import { Router } from '@angular/router';
 export class UampComponent implements OnInit { 
   templeteTwoPointOne: TempleteTwoPointOne;
   properties: any[] = [];
-  generatingUamp: boolean = true;
+  generatingUamp: boolean = false;
   value: number = 0;
   uamps: UAMP[];
   umapTemplete: any[];
@@ -101,7 +101,7 @@ export class UampComponent implements OnInit {
   }
 
   getUamp(id: Number) {
-    this.uampService.getUamp(id).subscribe(
+    this.uampService.getuampwithtemplateone(id).subscribe(
       (response) => {
         this.uamp = response;
         this.generatingUamp = false;
@@ -136,16 +136,18 @@ export class UampComponent implements OnInit {
       department: this.currentUser.department,
       createdDate: new Date(),
       userId: this.currentUser.id,
-    };
+    };   
+    this.openUAMP(uamp); 
+  }
 
-    this.uampService.startuamp(uamp).pipe(first()).subscribe(uamp => {
-      this.generatingUamp = false;
-      this.uamp = uamp;
-      this.messageService.add({ severity: 'success', summary: 'Generate UAMP', detail: 'UAMP has been generated successful.' });
-      this.showUAMP = true;      
-      this.uampService.assignUamp(this.uamp);
-      this.router.navigate(['uampDetails/uampTemp1']);
-    },
+  openUAMP(uamp){
+    this.uampService.startuamp(uamp).subscribe(
+      (response) => {
+        this.uamp = response;
+        this.generatingUamp = false;
+        this.uampService.assignUamp(this.uamp);
+        this.router.navigate(['uampDetails/uampTemp1']);
+      },
       (error) => {
         this.messageService.add({ severity: 'error', summary: 'Error Occoured', detail: 'Unable to generate UAMP' });
         this.generatingUamp = false;

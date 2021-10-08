@@ -37,7 +37,7 @@
                         <td>{{operationPlan.streetDescription}}</td>
                         <td>{{operationPlan.repairDescription}}</td>
                         <td>
-                            <p-dropdown [style]="{'width':'150px'}" [(ngModel)]="operationPlan.leaseType"
+                            <p-dropdown [style]="{'width':'150px'}" [(ngModel)]="operationPlan.leaseTypeObj"
                                 class="ui-inputtext ui-widget" placeholder="Please select"
                                 [ngModelOptions]="{standalone: true}"
                                 (onChange)="onLeaseTypeChange(operationPlan, $event)" [options]="leaseTypes"

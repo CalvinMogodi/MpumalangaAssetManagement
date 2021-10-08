@@ -32,6 +32,7 @@ export class TemplateOneComponent implements OnInit {
   dialogHeader: string = '';
   uamp: UAMP = { templeteOne: { id: 0, optimalSupportingAccommodation: this.optimalSupportingAccommodation, programmes: [] } };
   @Output() updatedUamp = new EventEmitter();
+  isLoading: boolean = false;
 
   constructor(private router: Router, private formBuilder: FormBuilder, private messageService: MessageService, private uampService: UampService) {
     this.uampService.uampChange.subscribe((value) => {
@@ -43,7 +44,7 @@ export class TemplateOneComponent implements OnInit {
   }
 
   ngOnInit() {
-    //this.assginData();
+    this.assginData();
     this.buttonItems = [
       {
         label: 'Update', icon: 'pi pi-pencil', command: () =>
@@ -75,6 +76,22 @@ export class TemplateOneComponent implements OnInit {
       this.router.navigate(['uamp']);
 
     this.programmes = this.uamp.templeteOne.programmes;
+  }
+
+  getDataForNextTemplate() {
+    this.isLoading = true;
+    this.uampService.getuamptemplate(this.uamp.id, 2.1).subscribe(
+      (templeteTwoPointOne) => {
+        this.uamp.templeteTwoPointOne = templeteTwoPointOne;          
+        this.uampService.assignUamp(this.uamp);
+        this.isLoading = false;
+        this.router.navigate(['uampDetails/uampTemp21']);
+      },
+      (error) => {
+        this.messageService.add({ severity: 'error', summary: 'Error Occoured', detail: 'Unable to get template data' });
+        this.isLoading = false;
+      }
+    );
   }
 
   update() {
@@ -156,10 +173,7 @@ export class TemplateOneComponent implements OnInit {
   }
 
   nextPage() {
-   // if (this.uamp.templeteOne.optimalSupportingAccommodation.supportingAccommodation && this.uamp.templeteOne.optimalSupportingAccommodation.mission) {
-      this.router.navigate(['uampDetails/uampTemp21']);      
-    //}
-    this.submitted = true;
+   this.getDataForNextTemplate(); 
   }
 
   openAddProgremme() {

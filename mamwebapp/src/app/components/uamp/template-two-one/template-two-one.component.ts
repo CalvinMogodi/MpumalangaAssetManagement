@@ -12,6 +12,7 @@ import { TempleteTwoPointOne } from 'src/app/models/templetes/templete-two-point
 import { AddMunicipalUtilityServicesComponent } from './add-municipal-utility-services/add-municipal-utility-services';
 import { Router } from '@angular/router';
 import { SharedService } from 'src/app/services/shared.service';
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-template-two-one',
@@ -33,8 +34,10 @@ export class TemplateTwoOneComponent implements OnInit {
   accessibilities: any[];
   requiredPerformanceStandards: any[];
   uamp: UAMP;
+  isLoading: boolean = false;
 
   constructor(private uampService: UampService,
+    private messageService: MessageService,
     private sharedService: SharedService,
     public ref: DynamicDialogRef,
     public dialogService: DialogService,
@@ -45,29 +48,31 @@ export class TemplateTwoOneComponent implements OnInit {
       if (value) {
         this.properties = [];
         this.uamp = value;
-
-
       }
     });
   }
 
-  ngOnInit() {
-    this.assginData();
+  ngOnInit() {    
     this.municipalUtilityServices = this.sharedService.getMunicipalUtilityServices();
     this.operationalCosts = this.sharedService.getOperationalCosts();
-    this.conditionRatings = this.sharedService.getRequiredPerformanceStandards();
-    this.functionalPerformanceIndexs = this.sharedService.getRequiredPerformanceStandards();
+    this.conditionRatings = this.sharedService.getConditionRatings();
+    this.functionalPerformanceIndexs = this.sharedService.getFunctionalPerformanceIndexs();
     this.operatingPerformanceIndexs = this.sharedService.getOperatingPerformanceIndexs();
     this.suitabilityIndexs = this.sharedService.getsuitabilityIndexs();
     this.accessibilities = this.sharedService.getAccessibilities();
     this.requiredPerformanceStandards = this.sharedService.getRequiredPerformanceStandards();
+    this.assginData();
   }
 
   assginData() {
     this.uamp = this.uampService.uamp;
     if (!this.uamp)
       this.router.navigate(['uamp']);
+      
+    this.buildHtml();
+  }
 
+  buildHtml(){
     this.uamp.templeteTwoPointOne.properties.forEach(element => {
       if (element.accessibility)
         element.accessibilityObj = this.accessibilities.filter(a => a.name == element.accessibility)[0];
@@ -90,6 +95,22 @@ export class TemplateTwoOneComponent implements OnInit {
       this.properties.push(element);
     }
     )
+  }
+
+  getDataForNextTemplate() {
+    this.isLoading = true;
+    this.uampService.getuamptemplate(this.uamp.id, 2.2).subscribe(
+      (templeteTwoPointTwo) => {
+        this.uamp.templeteTwoPointTwo = templeteTwoPointTwo;          
+        this.uampService.assignUamp(this.uamp);
+        this.isLoading = false;
+        this.router.navigate(['uampDetails/uampTemp22']); 
+      },
+      (error) => {
+        this.messageService.add({ severity: 'error', summary: 'Error Occoured', detail: 'Unable to get template data' });
+        this.isLoading = false;
+      }
+    );
   }
 
   get p() { return this.propertyForm.controls; }
@@ -161,15 +182,27 @@ export class TemplateTwoOneComponent implements OnInit {
   }
 
   nextPage() {
-    this.router.navigate(['uampDetails/uampTemp22']);
-    let uamp: any = {};
-    if (this.uamp) {
-      uamp = this.uamp;
-    }
-    this.uampService.assignUamp(uamp);
+    this.getDataForNextTemplate();    
   }
 
   back() {
     this.router.navigate(['uampDetails/uampTemp1']);
+  }
+
+  save() {
+    this.uamp.status = "Saved";
+    this.uampService.saveUamp(this.uamp).pipe(first()).subscribe(uamp => {
+      this.uamp = uamp;
+      this.uampService.assignUamp(uamp);
+      this.messageService.add({ severity: 'success', summary: 'Save UAMP', detail: 'UAMP has been saved successful.' });
+      this.cancel();
+    },
+      (error) => {
+        this.messageService.add({ severity: 'error', summary: 'Error Occoured', detail: 'Unable to save UAMP' });
+      });
+  }
+
+  cancel() {
+    this.router.navigate(['uamp']);
   }
 }

@@ -11,11 +11,14 @@ import { UampService } from 'src/app/services/uamp/uamp.service';
 import { SharedService } from 'src/app/services/shared.service';
 import { User } from 'src/app/models/user.model';
 import { Router } from '@angular/router';
+import { first } from 'rxjs/operators';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-template-two-two',
   templateUrl: './template-two-two.component.html',
-  styleUrls: ['./template-two-two.component.css']
+  styleUrls: ['./template-two-two.component.css'],
+  providers: [MessageService]
 })
 export class TemplateTwoTwoComponent implements OnInit {
   properties: Property[] = [];
@@ -39,8 +42,9 @@ export class TemplateTwoTwoComponent implements OnInit {
   currentUser: User;
   displayDialog: boolean = false;
   dialogHeader: string = '';
+  isLoading: boolean = false;
 
-  constructor(private router: Router, private uampService: UampService, private sharedService: SharedService, private formBuilder: FormBuilder, private authenticationService: AuthenticationService) {
+  constructor(private messageService: MessageService, private router: Router, private uampService: UampService, private sharedService: SharedService, private formBuilder: FormBuilder, private authenticationService: AuthenticationService) {
     this.uampService.uampChange.subscribe((value) => {
       if (value) {
         this.properties = [];
@@ -192,10 +196,47 @@ export class TemplateTwoTwoComponent implements OnInit {
   }
 
   nextPage() {
-    this.router.navigate(['uampDetails/uampTemp3']);
+    this.getDataForNextTemplate();
+  }
+  
+  getDataForNextTemplate() {
+    this.isLoading = true;
+    this.uampService.getuamptemplate(this.uamp.id, 3).subscribe(
+      (templeteThree) => {
+        this.uamp.templeteThree = templeteThree;          
+        this.uampService.assignUamp(this.uamp);
+        this.isLoading = false;
+        this.router.navigate(['uampDetails/uampTemp3']);
+      },
+      (error) => {
+        this.messageService.add({ severity: 'error', summary: 'Error Occoured', detail: 'Unable to get template data' });
+        this.isLoading = false;
+      }
+    );
   }
 
   back() {
     this.router.navigate(['uampDetails/uampTemp21']);
+  }
+
+  save() {
+    this.uamp.status = "Saved";
+    this.uampService.saveUamp(this.uamp).pipe(first()).subscribe(uamp => {
+      this.uamp = uamp;
+      this.uampService.assignUamp(uamp);
+      this.messageService.add({ severity: 'success', summary: 'Save UAMP', detail: 'UAMP has been saved successful.' });
+      this.cancel();
+    },
+      (error) => {
+        this.messageService.add({ severity: 'error', summary: 'Error Occoured', detail: 'Unable to save UAMP' });
+      });
+  }
+
+  cancel() {
+    this.router.navigate(['uamp']);
+  }
+
+  conditionRatingCahnged(property: Property, e) {
+    property.conditionRating = e.value.factor;
   }
 }

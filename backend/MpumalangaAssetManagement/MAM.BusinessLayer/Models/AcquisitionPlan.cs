@@ -24,6 +24,7 @@ namespace MAM.BusinessLayer.Models
         public decimal? CashFlowYear3 { get; set; }
         public decimal? CashFlowYear4 { get; set; }
         public decimal? CashFlowYear5 { get; set; }
+        public bool? IsRequired { get; set; }
 
         public DataAccess.Tables.AcquisitionPlan ConvertToAcquisitionPlanTable(AcquisitionPlan acquisitionPlan)
         {
@@ -46,6 +47,7 @@ namespace MAM.BusinessLayer.Models
                 CashFlowYear3 = acquisitionPlan.CashFlowYear3,
                 CashFlowYear4 = acquisitionPlan.CashFlowYear4,
                 CashFlowYear5 = acquisitionPlan.CashFlowYear5,
+                IsRequired = acquisitionPlan.IsRequired,
             };
         }
 
@@ -70,6 +72,7 @@ namespace MAM.BusinessLayer.Models
                 CashFlowYear3 = a.CashFlowYear3,
                 CashFlowYear4 = a.CashFlowYear4,
                 CashFlowYear5 = a.CashFlowYear5,
+                IsRequired = a.IsRequired,
             }).ToList();
         }
     }

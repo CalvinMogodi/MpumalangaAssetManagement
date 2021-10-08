@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { element } from 'protractor';
+import { first } from 'rxjs/operators';
 import { Facility } from 'src/app/models/facility.model';
 import { MtefBudgetPeriod } from 'src/app/models/mtef-budget-period.model';
 import { UAMP } from 'src/app/models/uamp.model';
@@ -27,7 +28,7 @@ export class TemplateSevenComponent implements OnInit {
   displayDialog: boolean = false;
   year1Allocation: number = 0;
 
-  constructor(private sharedService: SharedService, private router: Router, private uampService: UampService, private formBuilder: FormBuilder) {
+  constructor(private messageService: MessageService, private sharedService: SharedService, private router: Router, private uampService: UampService, private formBuilder: FormBuilder) {
     this.uampService.uampChange.subscribe((value) => {
       if (value) {
         this.uamp = value;
@@ -395,5 +396,35 @@ export class TemplateSevenComponent implements OnInit {
 
   back() {
     this.router.navigate(['uampDetails/uampTemp6']);
+  }
+
+  save() {
+    this.uamp.status = "Saved";
+    this.uampService.saveUamp(this.uamp).pipe(first()).subscribe(uamp => {
+      this.uamp = uamp;
+      this.uampService.assignUamp(uamp);
+      this.messageService.add({ severity: 'success', summary: 'Save UAMP', detail: 'UAMP has been saved successful.' });
+      this.cancel();
+    },
+      (error) => {
+        this.messageService.add({ severity: 'error', summary: 'Error Occoured', detail: 'Unable to save UAMP' });
+      });
+  }
+
+  submit() {
+    this.uamp.status = "Submitted";
+    this.uampService.saveUamp(this.uamp).pipe(first()).subscribe(uamp => {
+      this.uamp = uamp;
+      this.uampService.assignUamp(uamp);
+      this.messageService.add({ severity: 'success', summary: 'Submit UAMP', detail: 'UAMP has been submitted successful.' });
+      this.cancel();
+    },
+      (error) => {
+        this.messageService.add({ severity: 'error', summary: 'Error Occoured', detail: 'Unable to submit UAMP' });
+      });
+  }
+
+  cancel() {
+    this.router.navigate(['uamp']);
   }
 }

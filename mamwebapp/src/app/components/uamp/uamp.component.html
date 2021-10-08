@@ -68,8 +68,8 @@
     </ng-template>
 </p-table>
 
-<div *ngIf="showDialog" class="dialogBackgroud"></div>
-<p-dialog [(visible)]="showDialog" *ngIf="showDialog" [style]="{width: '80vw'}" [baseZIndex]="10000">
+<div *ngIf="generatingUamp" class="dialogBackgroud"></div>
+<p-dialog [(visible)]="generatingUamp" *ngIf="generatingUamp" [style]="{width: '80vw'}" [baseZIndex]="10000">
     <p-header> UAMP </p-header>
     <div class="card" *ngIf="generatingUamp">
         <h5>Generating UAMP...</h5>

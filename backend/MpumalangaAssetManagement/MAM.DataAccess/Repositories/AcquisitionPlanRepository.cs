@@ -60,6 +60,15 @@ namespace MAM.DataAccess.Repositories
             }
         }
 
+        public List<AcquisitionPlan> GetAcquisitionPlans(int uampId, double templateNumber)
+        {
+            using (var db = new DataContext(_connectionString))
+            {
+                var list = db.AcquisitionPlans.Where(s => s.UserImmovableAssetManagementPlanId == uampId && s.TempleteNumber == templateNumber).ToList();
+                return list;
+            }
+        }
+
         public void Dispose()
         {
             // Dispose of unmanaged resources.

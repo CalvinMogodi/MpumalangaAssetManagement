@@ -58,6 +58,45 @@ namespace MAM.API.Controllers
 
         [AllowAnonymous]
         [HttpGet]
+        [Route("getuamptemplate/{uampId}/{templateNumber}")]
+        public IActionResult GetUampTemplate(int uampId, double templateNumber)
+        {
+            try
+            {
+                if(templateNumber == 1)
+                    return Ok(_uampService.GetUAMPTempleteOne(uampId));
+                if (templateNumber == 2.1)
+                    return Ok(_uampService.GetUAMPTempleteTwoPointOne(uampId));
+                if (templateNumber == 2.2)
+                    return Ok(_uampService.GetUAMPTempleteTwoPointTwo(uampId));
+                if (templateNumber == 3)
+                    return Ok(_uampService.GetUAMPTempleteThree(uampId));
+                if (templateNumber == 4.1)
+                    return Ok(_uampService.GetUAMPTempleteFourPointOne(uampId));
+                if (templateNumber == 4.2)
+                    return Ok(_uampService.GetUAMPTempleteFourPointTwo(uampId));
+                if (templateNumber == 5.1)
+                    return Ok(_uampService.GetUAMPTempleteFivePointThree(uampId));
+                if (templateNumber == 5.2)
+                    return Ok(_uampService.GetUAMPTempleteFivePointTwo(uampId));
+                if (templateNumber == 5.3)
+                    return Ok(_uampService.GetUAMPTempleteFivePointOne(uampId));
+                if (templateNumber == 6)
+                    return Ok(_uampService.GetUAMPTempleteSix(uampId));
+                if (templateNumber == 7)
+                    return Ok(_uampService.GetUAMPTempleteSeven(uampId));
+
+                return Ok(null);
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex);
+                throw ex;
+            }
+        }
+
+        [AllowAnonymous]
+        [HttpGet]
         [Route("getampbyid/{id}")]
         public IActionResult GetUamp(int id)
         {
@@ -72,7 +111,25 @@ namespace MAM.API.Controllers
                 log.Error(ex);
                 throw ex;
             }
-        }        
+        }
+
+        [AllowAnonymous]
+        [HttpGet]
+        [Route("getuampwithtemplateone/{id}")]
+        public IActionResult GetUampWithTemplateOne(int id)
+        {
+            try
+            {
+                var result = _uampService.GetUampWithTemplateOne(id);
+                return Ok(result);
+            }
+            catch (Exception ex)
+
+            {
+                log.Error(ex);
+                throw ex;
+            }
+        }
 
         [AllowAnonymous]
         [HttpPost]
@@ -107,110 +164,6 @@ namespace MAM.API.Controllers
                 throw ex;
             }
         }
-        
-        [AllowAnonymous]
-        [HttpPost]
-        [Route("deleteacquisitionplan")]
-        public IActionResult DeleteAcquisitionPlan([FromBody] AcquisitionPlan acquisitionPlan)
-        {
-            try
-            {
-                var result = _uampService.DeleteAcquisitionPlan(acquisitionPlan);
-                return Ok(result);
-            }
-            catch (Exception ex)
-            {
-                log.Error(ex);
-                throw ex;
-            }
-        }
-
-        [AllowAnonymous]
-        [HttpPost]
-        [Route("deleteprogramme")]
-        public IActionResult DeleteProgramme([FromBody] Programme programme)
-        {
-            try
-            {
-                var result = _uampService.DeleteProgramme(programme);
-                return Ok(result);
-            }
-            catch (Exception ex)
-            {
-                log.Error(ex);
-                throw ex;
-            }
-        }
-
-        [AllowAnonymous]
-        [HttpPost]
-        [Route("deleteproperty")]
-        public IActionResult DeleteProperty([FromBody] Property property)
-        {
-            try
-            {
-                var result = _uampService.DeleteProperty(property);
-                return Ok(result);
-            }
-            catch (Exception ex)
-            {
-                log.Error(ex);
-                throw ex;
-            }
-        }
-
-        [AllowAnonymous]
-        [HttpPost]
-        [Route("deleteoperationplan")]
-        public IActionResult DeleteOperationPlan([FromBody] OperationPlan operationPlan)
-        {
-            try
-            {
-                var result = _uampService.DeleteOperationPlan(operationPlan);
-                return Ok(result);
-            }
-            catch (Exception ex)
-            {
-                log.Error(ex);
-                throw ex;
-            }
-        }
-
-        [AllowAnonymous]
-        [HttpPost]
-        [Route("deletestrategicassessment")]
-        public IActionResult DeleteStrategicAssessment([FromBody] StrategicAssessment strategicAssessment)
-        {
-            try
-            {
-                var result = _uampService.DeleteStrategicAssessment(strategicAssessment);
-                return Ok(result);
-            }
-            catch (Exception ex)
-            {
-                log.Error(ex);
-                throw ex;
-            }
-        }
-
-        [AllowAnonymous]
-        [HttpPost]
-        [Route("deletesurrenderplan")]
-        public IActionResult DeleteSurrenderPlan([FromBody] SurrenderPlan surrenderPlan)
-        {
-            try
-            {
-                var result = _uampService.DeleteSurrenderPlan(surrenderPlan);
-                return Ok(result);
-            }
-            catch (Exception ex)
-            {
-                log.Error(ex);
-                throw ex;
-            }
-        }
-
-
 
     }
 }

@@ -223,9 +223,9 @@
     <div class="p-grid p-nogutter p-justify-between">
         <p-button styleClass="p-button-secondary" label="Back" (onClick)="back()" icon="pi pi-angle-left">
         </p-button>
-        <p-button styleClass="p-button-success" [style]="{'float':'right'}" label="Submit" class="ml-1" (onClick)="submit()" icon="pi pi-check"
+        <p-button styleClass="p-button-success" [style]="{'float':'right'}" label="Submit" (onClick)="submit()" icon="pi pi-check"
         iconPos="right"></p-button>
-        <p-button styleClass="btn-next" label="Next" (onClick)="nextPage()" icon="pi pi-angle-right"
-            iconPos="right"></p-button>
+        <p-button [style]="{'float':'right'}" label="Save" class="ml-1" (onClick)="save()" icon="pi pi-check"
+        iconPos="right"></p-button>
     </div>
 </div>

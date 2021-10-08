@@ -31,6 +31,7 @@ export class TemplateFiveOneComponent implements OnInit {
   selectedOperationPlan: OperationPlan;
   isEdit: boolean = false;
   displayDialog: boolean = false;
+  isLoading: boolean = false;
 
   constructor(private sharedService: SharedService, private router: Router, private facilityService: FacilityService, public uampService: UampService, private formBuilder: FormBuilder, private messageService: MessageService) {
     
@@ -233,6 +234,7 @@ export class TemplateFiveOneComponent implements OnInit {
     }
     this.uampService.assignUamp(this.uamp);
     this.resetForm();
+    this.displayDialog = false;
   }
 
   resetForm(){
@@ -262,10 +264,43 @@ export class TemplateFiveOneComponent implements OnInit {
   }
 
   nextPage(){
-    this.router.navigate(['uampDetails/uampTemp52']);
+    this.getDataForNextTemplate();
+  }
+
+  getDataForNextTemplate() {
+    this.isLoading = true;
+    this.uampService.getuamptemplate(this.uamp.id, 5.2).subscribe(
+      (templeteFivePointTwo) => {
+        this.uamp.templeteFivePointTwo = templeteFivePointTwo;          
+        this.uampService.assignUamp(this.uamp);
+        this.isLoading = false;
+        this.router.navigate(['uampDetails/uampTemp52']);
+      },
+      (error) => {
+        this.messageService.add({ severity: 'error', summary: 'Error Occoured', detail: 'Unable to get template data' });
+        this.isLoading = false;
+      }
+    );
   }
 
   back(){
     this.router.navigate(['uampDetails/uampTemp42']);
+  }
+
+  save() {
+    this.uamp.status = "Saved";
+    this.uampService.saveUamp(this.uamp).pipe(first()).subscribe(uamp => {
+      this.uamp = uamp;
+      this.uampService.assignUamp(uamp);
+      this.messageService.add({ severity: 'success', summary: 'Save UAMP', detail: 'UAMP has been saved successful.' });
+      this.cancel();
+    },
+      (error) => {
+        this.messageService.add({ severity: 'error', summary: 'Error Occoured', detail: 'Unable to save UAMP' });
+      });
+  }
+
+  cancel() {
+    this.router.navigate(['uamp']);
   }
 }

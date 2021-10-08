@@ -64,6 +64,18 @@ namespace MAM.DataAccess.Repositories
             }
         }
 
+        public UserImmovableAssetManagementPlan GetUampWithTemplateOne(int id)
+        {
+            using (var db = new DataContext(_connectionString))
+            {
+                var userImmovableAssetManagementPlan = db.UserImmovableAssetManagementPlans.Where(f => f.Id == id && f.Status.ToLower() != "deleted")
+                    .Include(u => u.User)
+                    .Include(u => u.Programmes)
+                    .Include(u => u.OptimalSupportingAccommodation);
+                return userImmovableAssetManagementPlan.FirstOrDefault();
+            }
+        }
+
         public UserImmovableAssetManagementPlan GetUamp(int id)
         {
             using (var db = new DataContext(_connectionString))

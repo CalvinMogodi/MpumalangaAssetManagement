@@ -43,6 +43,15 @@ namespace MAM.BusinessLayer.Repositories
             }
         }
 
+        public UserImmovableAssetManagementPlan GetUampWithTemplateOne(int id)
+        {
+            UserImmovableAssetManagementPlan uamp = new UserImmovableAssetManagementPlan();
+            using (var dataAccess = new DataAccess.Repositories.UampRepository(appSettings.ConnectionString))
+            {
+                return uamp.ConvertToUserImmovableAssetManagementPlanWithTemplateOne(dataAccess.GetUampWithTemplateOne(id));
+            }
+        }        
+
         public UserImmovableAssetManagementPlan SaveUserImmovableAssetManagementPlan(UserImmovableAssetManagementPlan uamp)
         {
             if (uamp.TempleteOne != null)
@@ -534,6 +543,161 @@ namespace MAM.BusinessLayer.Repositories
                     dataAccess.UpdateOptimalSupportingAccommodation(optimalSupportingAccommodation.ConvertToOptimalSupportingAccommodationTable(uamp.TempleteOne.OptimalSupportingAccommodation));
                 return uamp;
             }
+        }
+
+        public TempleteOne GetUAMPTempleteOne(int uampId)
+        {
+            TempleteOne templeteOne = new TempleteOne();
+            DataAccess.Tables.OptimalSupportingAccommodation optimalSupportingAccommodation = new DataAccess.Tables.OptimalSupportingAccommodation();
+            List<DataAccess.Tables.Programme> programmes = new List<DataAccess.Tables.Programme>();
+            using (var dataAccess = new DataAccess.Repositories.ProgrammeRepository(appSettings.ConnectionString))
+            {
+                programmes = dataAccess.GetProgrammes(uampId);
+            }
+
+            using (var dataAccess = new DataAccess.Repositories.OptimalSupportingAccommodationRepository(appSettings.ConnectionString))
+            {
+                optimalSupportingAccommodation = dataAccess.GetOptimalSupportingAccommodation(uampId);
+            }
+
+            return templeteOne.ConvertToTempleteOne(programmes, optimalSupportingAccommodation);
+        }
+
+        public TempleteTwoPointOne GetUAMPTempleteTwoPointOne(int uampId)
+        {
+            TempleteTwoPointOne templeteTwoPointOne = new TempleteTwoPointOne();
+            List<DataAccess.Tables.Property> properties = new List<DataAccess.Tables.Property>();
+            using (var dataAccess = new DataAccess.Repositories.PropertyRepository(appSettings.ConnectionString))
+            {
+                double temNumber = 2.1;
+                properties = dataAccess.GetProperties(uampId, temNumber);
+            }
+            templeteTwoPointOne = templeteTwoPointOne.ConvertToTempleteTwoPointOne(properties);
+
+            return templeteTwoPointOne;
+        }
+
+        public TempleteTwoPointTwo GetUAMPTempleteTwoPointTwo(int uampId)
+        {
+            TempleteTwoPointTwo templeteTwoPointTwo = new TempleteTwoPointTwo();
+            List<DataAccess.Tables.Property> properties = new List<DataAccess.Tables.Property>();
+            using (var dataAccess = new DataAccess.Repositories.PropertyRepository(appSettings.ConnectionString))
+            {
+                double temNumber = 2.2;
+                properties = dataAccess.GetProperties(uampId, temNumber);
+            }
+            templeteTwoPointTwo = templeteTwoPointTwo.ConvertToTempleteTwoPointTwo(properties);
+
+            return templeteTwoPointTwo;
+        }
+
+        public TempleteThree GetUAMPTempleteThree(int uampId)
+        {
+            TempleteThree templeteThree = new TempleteThree();
+            List<DataAccess.Tables.StrategicAssessment> strategicAssessments = new List<DataAccess.Tables.StrategicAssessment>();
+            using (var dataAccess = new DataAccess.Repositories.StrategicAssessmentRepository(appSettings.ConnectionString))
+            {
+                strategicAssessments = dataAccess.GetStrategicAssessments(uampId);
+            }
+            templeteThree = templeteThree.ConvertToTempleteThree(strategicAssessments);
+
+            return templeteThree;
+        }
+
+        public TempleteFourPointOne GetUAMPTempleteFourPointOne(int uampId)
+        {
+            TempleteFourPointOne templeteFourPointOne = new TempleteFourPointOne();
+            List<DataAccess.Tables.AcquisitionPlan> acquisitionPlans = new List<DataAccess.Tables.AcquisitionPlan>();
+            using (var dataAccess = new DataAccess.Repositories.AcquisitionPlanRepository(appSettings.ConnectionString))
+            {
+                double temNumber = 4.1;
+                acquisitionPlans = dataAccess.GetAcquisitionPlans(uampId, temNumber);
+            }
+            templeteFourPointOne = templeteFourPointOne.ConvertToTempleteFourPointOne(acquisitionPlans);
+
+            return templeteFourPointOne;            
+        }
+
+        public TempleteFourPointTwo GetUAMPTempleteFourPointTwo(int uampId)
+        {
+            TempleteFourPointTwo templeteFourPointTwo = new TempleteFourPointTwo();
+            List<DataAccess.Tables.AcquisitionPlan> acquisitionPlans = new List<DataAccess.Tables.AcquisitionPlan>();
+            using (var dataAccess = new DataAccess.Repositories.AcquisitionPlanRepository(appSettings.ConnectionString))
+            {
+                double temNumber = 4.2;
+                acquisitionPlans = dataAccess.GetAcquisitionPlans(uampId, temNumber);
+            }
+            templeteFourPointTwo = templeteFourPointTwo.ConvertToTempleteFourPointTwo(acquisitionPlans);
+
+            return templeteFourPointTwo;
+        }
+
+        public TempleteFivePointOne GetUAMPTempleteFivePointOne(int uampId)
+        {
+            TempleteFivePointOne templeteFivePointOne = new TempleteFivePointOne();
+            List<DataAccess.Tables.OperationPlan> operationPlan = new List<DataAccess.Tables.OperationPlan>();
+            using (var dataAccess = new DataAccess.Repositories.OperationPlanRepository(appSettings.ConnectionString))
+            {
+                double temNumber = 5.1;
+                operationPlan = dataAccess.GetOperationPlans(uampId, temNumber);
+            }
+            templeteFivePointOne = templeteFivePointOne.ConvertToTempleteFivePointOne(operationPlan);
+
+            return templeteFivePointOne;
+        }
+
+        public TempleteFivePointTwo GetUAMPTempleteFivePointTwo(int uampId)
+        {
+            TempleteFivePointTwo templeteFivePointTwo = new TempleteFivePointTwo();
+            List<DataAccess.Tables.OperationPlan> operationPlan = new List<DataAccess.Tables.OperationPlan>();
+            using (var dataAccess = new DataAccess.Repositories.OperationPlanRepository(appSettings.ConnectionString))
+            {
+                double temNumber = 5.2;
+                operationPlan = dataAccess.GetOperationPlans(uampId, temNumber);
+            }
+            templeteFivePointTwo = templeteFivePointTwo.ConvertToTempleteFivePointTwo(operationPlan);
+
+            return templeteFivePointTwo;
+        }
+
+        public TempleteFivePointThree GetUAMPTempleteFivePointThree(int uampId)
+        {
+            TempleteFivePointThree templeteFivePointThree = new TempleteFivePointThree();
+            List<DataAccess.Tables.OperationPlan> operationPlan = new List<DataAccess.Tables.OperationPlan>();
+            using (var dataAccess = new DataAccess.Repositories.OperationPlanRepository(appSettings.ConnectionString))
+            {
+                double temNumber = 5.3;
+                operationPlan = dataAccess.GetOperationPlans(uampId, temNumber);
+            }
+            templeteFivePointThree = templeteFivePointThree.ConvertToTempleteFivePointThree(operationPlan);
+
+            return templeteFivePointThree;
+        }
+
+        public TempleteSix GetUAMPTempleteSix(int uampId)
+        {
+            TempleteSix templeteSix = new TempleteSix();
+            List<DataAccess.Tables.SurrenderPlan> surrenderPlans = new List<DataAccess.Tables.SurrenderPlan>();
+            using (var dataAccess = new DataAccess.Repositories.SurrenderPlanRepository(appSettings.ConnectionString))
+            {
+                surrenderPlans = dataAccess.GetSurrenderPlans(uampId);
+            }
+            templeteSix = templeteSix.ConvertToTempleteSix(surrenderPlans);
+
+            return templeteSix;
+        }
+
+        public TempleteSeven GetUAMPTempleteSeven(int uampId)
+        {
+            TempleteSeven templeteSeven = new TempleteSeven();
+            List<DataAccess.Tables.MtefBudgetPeriod> mtefBudgetPeriods = new List<DataAccess.Tables.MtefBudgetPeriod>();
+            using (var dataAccess = new DataAccess.Repositories.MtefBudgetPeriodRepository(appSettings.ConnectionString))
+            {
+                mtefBudgetPeriods = dataAccess.GetMtefBudgetPeriods(uampId);
+            }
+            templeteSeven = templeteSeven.ConvertToTempleteSeven(mtefBudgetPeriods);
+
+            return templeteSeven;
         }
 
         public void Dispose()

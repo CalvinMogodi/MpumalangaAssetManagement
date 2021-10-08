@@ -19,5 +19,6 @@ namespace MAM.DataAccess.Tables
         public string SurrenderRationale { get; set; }
         public DateTime? ProposedHandOverDate { get; set; }
         public string ContractualObligations { get; set; }
+        public bool? Relinquish { get; set; }
     }
 }

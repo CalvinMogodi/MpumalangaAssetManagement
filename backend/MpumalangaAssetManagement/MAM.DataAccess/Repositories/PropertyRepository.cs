@@ -59,6 +59,14 @@ namespace MAM.DataAccess.Repositories
             }
         }
 
+        public List<Property> GetProperties(int uampId,double templateNuber)
+        {
+            using (var db = new DataContext(_connectionString))
+            {
+                return db.Properties.Where(p => p.UserImmovableAssetManagementPlanId == uampId && p.TempleteNumber == templateNuber).ToList();
+            }
+        }
+
         public void Dispose()
         {
             // Dispose of unmanaged resources.

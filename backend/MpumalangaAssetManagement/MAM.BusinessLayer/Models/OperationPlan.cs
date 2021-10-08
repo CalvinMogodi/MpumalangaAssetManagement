@@ -38,7 +38,7 @@ namespace MAM.BusinessLayer.Models
         public decimal? CashFlowYear5 { get; set; }
 
         public string Comment { get; set; }
-        public bool IsRequired { get; set; }
+        public bool? Leased { get; set; }
         public DataAccess.Tables.OperationPlan ConvertToOperationPlanTable(OperationPlan operationPlan)
         {
             return new DataAccess.Tables.OperationPlan()
@@ -73,6 +73,7 @@ namespace MAM.BusinessLayer.Models
                 CashFlowYear4 = operationPlan.CashFlowYear4,
                 CashFlowYear5 = operationPlan.CashFlowYear5,
                 Comment = operationPlan.Comment,
+                Leased = operationPlan.Leased
             };
         }
 
@@ -109,7 +110,8 @@ namespace MAM.BusinessLayer.Models
                 CashFlowYear3 = o.CashFlowYear3,
                 CashFlowYear4 = o.CashFlowYear4,
                 CashFlowYear5 = o.CashFlowYear5,
-                Comment = o.Comment
+                Comment = o.Comment,
+                Leased = o.Leased
             }).ToList();
         }
     }

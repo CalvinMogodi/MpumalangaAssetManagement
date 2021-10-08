@@ -153,5 +153,45 @@ namespace MAM.BusinessLayer.Models
                 ModifiedBy = uamp.ModifiedBy
             };       
         }
+
+        public UserImmovableAssetManagementPlan ConvertToUserImmovableAssetManagementPlanWithTemplateOne(DataAccess.Tables.UserImmovableAssetManagementPlan uamp)
+        {
+            OptimalSupportingAccommodation OptimalSupportingAccommodation = new OptimalSupportingAccommodation();
+            Programme Programme = new Programme();
+
+            return new UserImmovableAssetManagementPlan()
+            {
+                Id = uamp.Id,
+                Status = uamp.Status,
+                FileReference = uamp.FileReference,
+                OptimalSupportingAccommodationId = uamp.OptimalSupportingAccommodationId,
+                Department = uamp.Department,
+                CreatedDate = uamp.CreatedDate,
+                UserId = uamp.UserId,
+                ModifiedDate = uamp.ModifiedDate,
+                ModifiedBy = uamp.ModifiedBy,
+                User = new User()
+                {
+                    Name = uamp.User.Name,
+                    Surname = uamp.User.Surname
+                },
+                TempleteOne = new TempleteOne()
+                {
+                    Id = 0,
+                    OptimalSupportingAccommodation = uamp.OptimalSupportingAccommodation != null ? OptimalSupportingAccommodation.ConvertToOptimalSupportingAccommodation(uamp.OptimalSupportingAccommodation) : new OptimalSupportingAccommodation(),
+                    Programmes = uamp.Programmes != null ? Programme.ConvertToProgrammes(uamp.Programmes.Where(p => p.UserImmovableAssetManagementPlanId == uamp.Id).ToList()) : new List<Programme>(),
+                },
+                TempleteTwoPointOne = new TempleteTwoPointOne(),
+                TempleteTwoPointTwo = new TempleteTwoPointTwo(),
+                TempleteThree = new TempleteThree(),
+                TempleteFourPointOne = new TempleteFourPointOne(),
+                TempleteFourPointTwo = new TempleteFourPointTwo(),
+                TempleteFivePointOne = new TempleteFivePointOne(),
+                TempleteFivePointTwo = new TempleteFivePointTwo(),
+                TempleteFivePointThree = new TempleteFivePointThree(),
+                TempleteSix = new TempleteSix(),
+                TempleteSeven = new TempleteSeven()
+            };
+        }
     }
 }

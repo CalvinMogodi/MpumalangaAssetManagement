@@ -39,11 +39,19 @@ export class UampService {
     return this.http.get<Array<UAMP>>(`${environment.apiUrl}/api/uamp/getampbyid/`+id);
   }
 
+  getuamptemplate(id: Number, templateNumber: Number): Observable<any>{
+    return this.http.get<any>(`${environment.apiUrl}/api/uamp/getuamptemplate/`+id + `/`+ templateNumber);
+  }
+
+  getuampwithtemplateone(id: Number): Observable<any>{
+    return this.http.get<UAMP>(`${environment.apiUrl}/api/uamp/getuampwithtemplateone/`+id);
+  }
+
   saveUamp(uamp: UAMP){
     return this.http.post<UAMP>(`${environment.apiUrl}/api/uamp/saveuamp`,uamp);
   }
 
-  startuamp(uamp: UAMP){
+  startuamp(uamp: UAMP): Observable<any>{
     return this.http.post<UAMP>(`${environment.apiUrl}/api/uamp/startuamp`,uamp);
   }
 

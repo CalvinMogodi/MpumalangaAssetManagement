@@ -21,12 +21,13 @@ namespace MAM.BusinessLayer.Models
         public double? AoLevel { get; set; }
         public int? AoQuantity { get; set; }
         public double? AoNorm { get; set; }
-        public double? AoRequirement { get; set; }
+        public double? AoRequirement { get; set; }        
 
         public DataAccess.Tables.StrategicAssessment ConvertToStrategicAssessmentTable(StrategicAssessment strategicAssessment) {
             return new DataAccess.Tables.StrategicAssessment() {
                 Id = strategicAssessment.Id,
                 UserImmovableAssetManagementPlanId = strategicAssessment.UserImmovableAssetManagementPlanId,
+                District = strategicAssessment.District,
                 PostDescriptionTitle = strategicAssessment.PostDescriptionTitle,
                 AllocatedSpace = strategicAssessment.AllocatedSpace,
                 SurplusShortageAccommodation = strategicAssessment.SurplusShortageAccommodation,

@@ -8,6 +8,7 @@ import { UAMP } from 'src/app/models/uamp.model';
 import { element } from 'protractor';
 import { Router } from '@angular/router';
 import { SharedService } from 'src/app/services/shared.service';
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-template-five-two',
@@ -25,6 +26,7 @@ export class TemplateFiveTwoComponent implements OnInit {
   localMunicipalities: any[];
   uamp: UAMP;
   displayDialog: boolean = false;
+  isLoading: boolean = false;
 
   constructor(private router: Router, private sharedService: SharedService, private uampService: UampService, private formBuilder: FormBuilder, private messageService: MessageService) {
     this.uampService.uampChange.subscribe((value) => {
@@ -170,14 +172,47 @@ export class TemplateFiveTwoComponent implements OnInit {
   }
 
   resetForm() {
-    this.operationPlanForm.reset();
+    this.newOperationPlanForm.reset();
   }
 
   nextPage() {
-    this.router.navigate(['uampDetails/uampTemp53']);
+    this.getDataForNextTemplate();
+  }
+
+  getDataForNextTemplate() {
+    this.isLoading = true;
+    this.uampService.getuamptemplate(this.uamp.id, 5.3).subscribe(
+      (templeteFivePointThree) => {
+        this.uamp.templeteFivePointThree = templeteFivePointThree;          
+        this.uampService.assignUamp(this.uamp);
+        this.isLoading = false;
+        this.router.navigate(['uampDetails/uampTemp53']);
+      },
+      (error) => {
+        this.messageService.add({ severity: 'error', summary: 'Error Occoured', detail: 'Unable to get template data' });
+        this.isLoading = false;
+      }
+    );
   }
 
   back() {
     this.router.navigate(['uampDetails/uampTemp51']);
+  }
+
+  save() {
+    this.uamp.status = "Saved";
+    this.uampService.saveUamp(this.uamp).pipe(first()).subscribe(uamp => {
+      this.uamp = uamp;
+      this.uampService.assignUamp(uamp);
+      this.messageService.add({ severity: 'success', summary: 'Save UAMP', detail: 'UAMP has been saved successful.' });
+      this.cancel();
+    },
+      (error) => {
+        this.messageService.add({ severity: 'error', summary: 'Error Occoured', detail: 'Unable to save UAMP' });
+      });
+  }
+
+  cancel() {
+    this.router.navigate(['uamp']);
   }
 }

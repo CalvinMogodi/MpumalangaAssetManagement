@@ -6,6 +6,7 @@ import { OperationPlan } from 'src/app/models/operation-plan.model';
 import { UAMP } from 'src/app/models/uamp.model';
 import { SharedService } from 'src/app/services/shared.service';
 import { Router } from '@angular/router';
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-template-five-three',
@@ -19,6 +20,7 @@ export class TemplateFiveThreeComponent implements OnInit {
   leaseTypes: any[];
   prioities: any[];
   uamp: UAMP;
+  isLoading: boolean = false;
   
   constructor(private router: Router, private sharedService: SharedService,  private confirmationService: ConfirmationService,private uampService: UampService, private formBuilder: FormBuilder, private messageService: MessageService) { 
     this.uampService.uampChange.subscribe((value) => {
@@ -68,10 +70,47 @@ export class TemplateFiveThreeComponent implements OnInit {
   }
 
   nextPage(){
-    this.router.navigate(['uampDetails/uampTemp6']);
+    this.getDataForNextTemplate();
+  }
+
+  getDataForNextTemplate() {
+    this.isLoading = true;
+    this.uampService.getuamptemplate(this.uamp.id, 6).subscribe(
+      (templeteSix) => {
+        this.uamp.templeteSix = templeteSix;          
+        this.uampService.assignUamp(this.uamp);
+        this.isLoading = false;
+        this.router.navigate(['uampDetails/uampTemp6']);
+      },
+      (error) => {
+        this.messageService.add({ severity: 'error', summary: 'Error Occoured', detail: 'Unable to get template data' });
+        this.isLoading = false;
+      }
+    );
   }
 
   back(){
     this.router.navigate(['uampDetails/uampTemp52']);
+  }
+
+  save() {
+    this.uamp.status = "Saved";
+    this.uampService.saveUamp(this.uamp).pipe(first()).subscribe(uamp => {
+      this.uamp = uamp;
+      this.uampService.assignUamp(uamp);
+      this.messageService.add({ severity: 'success', summary: 'Save UAMP', detail: 'UAMP has been saved successful.' });
+      this.cancel();
+    },
+      (error) => {
+        this.messageService.add({ severity: 'error', summary: 'Error Occoured', detail: 'Unable to save UAMP' });
+      });
+  }
+
+  cancel() {
+    this.router.navigate(['uamp']);
+  }
+
+  onAccessibilityChange(operationPlan: OperationPlan, e) {
+    operationPlan.leaseType = e.value.name;
   }
 }

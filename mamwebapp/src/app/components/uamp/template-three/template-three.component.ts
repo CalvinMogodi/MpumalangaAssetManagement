@@ -29,6 +29,7 @@ export class TemplateThreeComponent implements OnInit {
   selectedStrategicAssessment:StrategicAssessment;
   displayDialog: boolean = false;
   dialogHeader: string = '';
+  isLoading: boolean = false;
 
   constructor(private router: Router, public uampService: UampService, private formBuilder: FormBuilder, private messageService: MessageService) {
     
@@ -75,6 +76,7 @@ export class TemplateThreeComponent implements OnInit {
       this.router.navigate(['uamp']);
       
     this.strategicAssessments = this.uamp.templeteThree.strategicAssessments;
+    this.onSort();
   } 
 
   onUpdate() {
@@ -225,10 +227,44 @@ export class TemplateThreeComponent implements OnInit {
   }
 
   nextPage(){
-    this.router.navigate(['uampDetails/uampTemp41']);
+   this.getDataForNextTemplate();
   }
+
+  getDataForNextTemplate() {
+    this.isLoading = true;
+    this.uampService.getuamptemplate(this.uamp.id, 4.1).subscribe(
+      (templeteFourPointOne) => {
+        this.uamp.templeteFourPointOne = templeteFourPointOne;          
+        this.uampService.assignUamp(this.uamp);
+        this.isLoading = false;
+        this.router.navigate(['uampDetails/uampTemp41']);
+      },
+      (error) => {
+        this.messageService.add({ severity: 'error', summary: 'Error Occoured', detail: 'Unable to get template data' });
+        this.isLoading = false;
+      }
+    );
+  }
+
 
   back(){
     this.router.navigate(['uampDetails/uampTemp22']);
+  }
+
+  save() {
+    this.uamp.status = "Saved";
+    this.uampService.saveUamp(this.uamp).pipe(first()).subscribe(uamp => {
+      this.uamp = uamp;
+      this.uampService.assignUamp(uamp);
+      this.messageService.add({ severity: 'success', summary: 'Save UAMP', detail: 'UAMP has been saved successful.' });
+      this.cancelSave();
+    },
+      (error) => {
+        this.messageService.add({ severity: 'error', summary: 'Error Occoured', detail: 'Unable to save UAMP' });
+      });
+  }
+
+  cancelSave() {
+    this.router.navigate(['uamp']);
   }
 }

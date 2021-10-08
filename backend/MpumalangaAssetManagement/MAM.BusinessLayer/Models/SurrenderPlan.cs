@@ -20,6 +20,7 @@ namespace MAM.BusinessLayer.Models
         public string SurrenderRationale { get; set; }
         public DateTime? ProposedHandOverDate{ get; set; }
         public string ContractualObligations { get; set; }
+        public bool? Relinquish { get; set; }
 
         public DataAccess.Tables.SurrenderPlan ConvertToSurrenderPlanTable(SurrenderPlan surrenderPlan)
         {
@@ -38,6 +39,7 @@ namespace MAM.BusinessLayer.Models
                 SurrenderRationale = surrenderPlan.SurrenderRationale,
                 ProposedHandOverDate = surrenderPlan.ProposedHandOverDate,
                 ContractualObligations = surrenderPlan.ContractualObligations,
+                Relinquish = surrenderPlan.Relinquish,
             };
         }
 
@@ -58,6 +60,7 @@ namespace MAM.BusinessLayer.Models
                 SurrenderRationale = s.SurrenderRationale,
                 ProposedHandOverDate = s.ProposedHandOverDate,
                 ContractualObligations = s.ContractualObligations,
+                Relinquish = s.Relinquish,
             }).ToList();
         }
     }

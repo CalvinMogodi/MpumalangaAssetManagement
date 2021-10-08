@@ -36,6 +36,7 @@ namespace MAM.DataAccess.Tables
         public decimal? CashFlowYear4 { get; set; }
         public decimal? CashFlowYear5 { get; set; }
         public string Comment { get; set; }
+        public bool? Leased { get; set; }
         
     }
 }
