@@ -7,6 +7,7 @@ export class Property{
     fileReferenceNo: string;
     serialNo: string;
     district: string;
+    districtRegion: string;
     town: string;
     localMunicipality: string;
     localAuthority?: string;

@@ -1,0 +1,97 @@
+.custom-marker {
+    display: flex;
+    width: 2rem;
+    height: 2rem;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.card{
+    margin-bottom: 15px;
+    margin-top: -25px;
+}
+
+p-divider{
+    margin-top: 40px;
+}
+
+    .p-timeline-event-content,
+    .p-timeline-event-opposite {
+        line-height: 1;
+    }
+
+
+.rate{
+cursor: pointer;
+font-size: 1.5rem;
+color:gray;
+content: "\e936";
+}
+
+.rateInfo {
+    border: 1px solid #c8c8c8;
+    font-family: sans-serif;
+    background: orange;
+    z-index: 1;
+    color: darkred;
+    border-radius: 0px 5px 5px 5px;
+    margin-top: 95px;
+    border-top: 3px solid #c8c8c8;
+    position: absolute;
+    line-height: 0;
+    width: 90%;
+    line-height: 0;
+    font-size: 13px;
+    margin-top: 95px;
+    padding: 5px;
+}
+
+.red{
+    color: red !important;
+}
+
+.yellow{
+    color: yellow !important;
+}
+
+.green{
+    color: green !important;
+}
+
+.tooltip .ui-tooltip-text {
+    width: 100em !important; 
+  }
+
+.card {
+    margin-top: -40px;
+}
+
+.rateInfo-haeder{
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+@media screen and (max-width: 960px) {
+  
+            .p-timeline-event:nth-child(even) {
+                flex-direction: row !important;
+                
+              
+            }
+            .p-timeline-event-content {
+                text-align: left !important;
+            }
+
+            .p-timeline-event-opposite {
+                flex: 0;
+            }
+
+            .p-card {
+                margin-top: 1rem;
+            }
+        
+    
+}

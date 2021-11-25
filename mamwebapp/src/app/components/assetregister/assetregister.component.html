@@ -63,6 +63,10 @@
         class="ui-button-info"></button>
 </div>
 
+<div>     
+    <div pTooltip="<b>Enter </b> your username" [escape]="false" tooltipPosition="bottom">This is sample</div>
+
+</div>
 <div class="row">
     <p-table #dt [columns]="cols" [paginator]="true" [rows]="10" selectionMode="single" rowExpandMode="single"
         *ngIf="!loading" [value]="facilities" dataKey="id" editMode="row" styleClass="p-datatable-striped">
@@ -120,7 +124,7 @@
     </p-dialog-footer>
 </p-dialog>
 
-<div *ngIf="showdelete" class="dialogBackgroud"></div>
+<div *ngIf="showdelete || showConditionAssessment" class="dialogBackgroud"></div>
 <p-dialog header="Confirmation" [(visible)]="showdelete" [breakpoints]="{'960px': '75vw'}" [style]="{width: '25vw'}" [baseZIndex]="10000" 
     [draggable]="false" [resizable]="false">
     <p>Are you sure that you want to delete this asset?</p>
@@ -128,4 +132,12 @@
             <button style="float: left;" (click)="showdelete=false" pButton type="button" label="No" class="ui-button-info"></button>
             <button style="float: right;" (click)="showdelete=false;deleteFacility()" pButton type="button" label="Yes" class="ui-button-info"></button>
     </p-dialog-footer>
+</p-dialog>
+
+<p-dialog header="Condition Assessment" [(visible)]="showConditionAssessment" [breakpoints]="{'960px': '75vw'}" [style]="{width: '40vw'}" [baseZIndex]="10000" 
+    [draggable]="false" [resizable]="false">
+    <app-condition-assessment [selectedFacility]="selectedAsset"></app-condition-assessment>
+   <!-- <p-dialog-footer>
+            <button style="float: left;" (click)="showConditionAssessment=false" pButton type="button" label="Close" class="ui-button-info"></button>
+    </p-dialog-footer>-->
 </p-dialog>

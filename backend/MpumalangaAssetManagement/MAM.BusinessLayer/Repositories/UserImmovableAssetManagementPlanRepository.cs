@@ -62,10 +62,16 @@ namespace MAM.BusinessLayer.Repositories
                     uamp.TempleteOne.Programmes = SaveProgramme(uamp.TempleteOne.Programmes);
                 if (uamp.TempleteTwoPointOne?.Properties != null)
                     uamp = SaveTempleteTwo(uamp);
-                if (uamp.TempleteThree?.StrategicAssessments.Count > 0)
-                    uamp = SaveTempleteThree(uamp);
-                if (uamp.TempleteFourPointOne?.AcquisitionPlans.Count > 0 || uamp.TempleteFourPointTwo?.AcquisitionPlans.Count > 0)
-                    uamp = SaveTempleteFour(uamp);
+                if (uamp.TempleteThree?.StrategicAssessments != null)
+                {
+                    if (uamp.TempleteThree?.StrategicAssessments.Count > 0)
+                        uamp = SaveTempleteThree(uamp);
+                }
+                if (uamp.TempleteFourPointOne?.AcquisitionPlans != null)
+                {
+                    if (uamp.TempleteFourPointOne?.AcquisitionPlans.Count > 0 || uamp.TempleteFourPointTwo?.AcquisitionPlans.Count > 0)
+                        uamp = SaveTempleteFour(uamp);
+                }                   
                 if (uamp.TempleteFivePointOne?.OperationPlans != null)
                     uamp = SaveTempleteFive(uamp);
                 if (uamp.TempleteSix?.SurrenderPlans != null)

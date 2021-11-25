@@ -53,7 +53,7 @@
                         <td>{{acquisitionPlan.cashFlowYear4 | currency:'ZAR':'R'}}</td>
                         <td>{{acquisitionPlan.cashFlowYear5 | currency:'ZAR':'R'}}</td>
                         <td>{{calculateDbTotalAmountRequired(acquisitionPlan) | currency:'ZAR':'R'}}</td>
-                        <td style="text-align: center;" *ngIf="acquisitionPlans.length > 0">
+                        <td style="text-align: center;width: 82px;" *ngIf="acquisitionPlans.length > 0">
                             <p-splitButton label="More" *ngIf="mode != 'View'" [model]="buttonItems"
                                 (onDropdownClick)="selectAcquisitionPlan(acquisitionPlan)"
                                 styleClass="p-button-secondary">

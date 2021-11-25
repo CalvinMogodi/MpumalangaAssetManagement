@@ -73,6 +73,67 @@ export class SharedService {
     return result;
   }
 
+  getLocalMunicipalitiesByName(value) {
+    let localMunicipalities = [];
+    switch (value) {
+      case "Ehlanzeni": localMunicipalities = [
+        { name: 'Bushbuckridge', code: 'B', factor: 1 },
+        { name: 'Mbombela', code: 'M', factor: 2 },
+        { name: 'Nkomazi', code: 'N', factor: 3 },
+        { name: 'Thaba Chweu', code: 'TC', factor: 4 },
+      ];
+        break;
+      case "Gert Sibande": localMunicipalities = [
+        { name: 'Albert Luthuli', code: 'AL', factor: 1 },
+        { name: 'Dipaleseng', code: 'D', factor: 2 },
+        { name: 'Govan Mbeki', code: 'GM', factor: 3 },
+        { name: 'Lekwa', code: 'L', factor: 7 },
+        { name: 'Mkhondo', code: 'M', factor: 4 },
+        { name: 'Msukaligwa', code: 'MS', factor: 5 },
+        { name: 'Mkhondo', code: 'MK', factor: 6 },
+        { name: 'Pixley Ka Seme', code: 'PKS', factor: 8 },
+      ];
+        break;
+      case "Nkangala": localMunicipalities = [
+        { name: 'Dr. J.S. Moroka', code: 'JSM', factor: 1 },
+        { name: 'eMalahleni', code: 'M', factor: 2 },
+        { name: 'eMakhazeni', code: 'MK', factor: 3 },
+        { name: 'Msukaligwa', code: 'MS', factor: 4 },
+        { name: 'Steve Tshwete', code: 'ST', factor: 5 },
+        { name: 'Thembisile Hani', code: 'TH', factor: 6 },
+        { name: 'Victor Khanye', code: 'VK', factor: 7 },
+      ];
+    }
+    return localMunicipalities;
+  }
+
+  getLocalMunicipalityByName(value) {
+    let localMunicipalities = [
+        { name: 'Bushbuckridge', code: 'B', factor: 1 },
+        { name: 'Mbombela', code: 'M', factor: 2 },
+        { name: 'Nkomazi', code: 'N', factor: 3 },
+        { name: 'Thaba Chweu', code: 'TC', factor: 4 },
+        { name: 'Albert Luthuli', code: 'AL', factor: 1 },
+        { name: 'Dipaleseng', code: 'D', factor: 2 },
+        { name: 'Govan Mbeki', code: 'GM', factor: 3 },
+        { name: 'Lekwa', code: 'L', factor: 7 },
+        { name: 'Mkhondo', code: 'M', factor: 4 },
+        { name: 'Msukaligwa', code: 'MS', factor: 5 },
+        { name: 'Mkhondo', code: 'MK', factor: 6 },
+        { name: 'Pixley Ka Seme', code: 'PKS', factor: 8 },
+        { name: 'Dr. J.S. Moroka', code: 'JSM', factor: 1 },
+        { name: 'eMalahleni', code: 'M', factor: 2 },
+        { name: 'eMakhazeni', code: 'MK', factor: 3 },
+        { name: 'Msukaligwa', code: 'MS', factor: 4 },
+        { name: 'Steve Tshwete', code: 'ST', factor: 5 },
+        { name: 'Thembisile Hani', code: 'TH', factor: 6 },
+        { name: 'Victor Khanye', code: 'VK', factor: 7 },
+        { name: 'Bushbuckridge', code: 'B', factor: 1 },
+        { name: 'Thaba Chweu', code: 'TC', factor: 2 },
+      ];    
+    return localMunicipalities.filter(l => l.name == value)[0];
+  }
+
   getLocalMunicipalities(value) {
     let localMunicipalities = [];
     switch (value) {
@@ -143,6 +204,15 @@ export class SharedService {
       { name: 'Nkangala', code: 'U', factor: 3 }
     ];
     return regions;
+  }
+
+  getRegionByName(name) {
+    let regions = [
+      { name: 'Ehlanzeni ', code: 'U', factor: 1 },
+      { name: 'Gert Sibande', code: 'R', factor: 2 },
+      { name: 'Nkangala', code: 'U', factor: 3 }
+    ];
+    return regions.filter(r => r.name == name)[0];
   }
 
   getPrioities() {

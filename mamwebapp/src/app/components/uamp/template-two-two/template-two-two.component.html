@@ -51,14 +51,14 @@
                             <td>{{property.userDepartmentCode}}</td>
                             <td>{{property.fileReferenceNo}}</td>
                             <td>
-                                <p-dropdown class="ui-inputtext ui-widget w-140" [style]="{'width':'180px'}"
+                                <p-dropdown (onChange)="setLocalMunicipalities($event, property)" class="ui-inputtext ui-widget w-140" [style]="{'width':'180px'}"
                                     placeholder="Please select" [ngModelOptions]="{standalone: true}"
                                     [options]="regions" [(ngModel)]="property.districtObj" optionLabel="name">
                                 </p-dropdown>
                             </td>
                             <td>{{property.town}}</td>
                             <td>
-                                <p-dropdown class="ui-inputtext ui-widget w-140" [style]="{'width':'180px'}"
+                                <p-dropdown (onChange)="localMunicipalitiesChanged($event, property)" class="ui-inputtext ui-widget w-140" [style]="{'width':'180px'}"
                                     placeholder="Please select" [ngModelOptions]="{standalone: true}"
                                     [options]="localMunicipalities" [(ngModel)]="property.localMunicipalityObj"
                                     optionLabel="name">

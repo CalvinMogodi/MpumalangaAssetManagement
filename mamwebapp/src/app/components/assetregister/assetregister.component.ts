@@ -8,6 +8,7 @@ import { ConfirmationService } from 'primeng/api';
 import { Facility, Land } from 'src/app/models/facility.model';
 import { Observable } from 'rxjs';
 import { User } from 'src/app/models/user.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-assetregister',
@@ -30,6 +31,7 @@ export class AssetregisterComponent implements OnInit  {
   deleting = false;
   home: MenuItem;
   showDialog: boolean = false;
+  showConditionAssessment: boolean = false;
   errorMsg: string;
   mode: string = 'Add'; 
   error = '';
@@ -47,7 +49,7 @@ export class AssetregisterComponent implements OnInit  {
   buildingTotal:number = 0;
   currentUser: User;
   
-  constructor(private authenticationService: AuthenticationService,private confirmationService: ConfirmationService,  public facilityService: FacilityService, private formBuilder: FormBuilder, private messageService: MessageService) { }
+  constructor(private router: Router,private authenticationService: AuthenticationService,private confirmationService: ConfirmationService,  public facilityService: FacilityService, private formBuilder: FormBuilder, private messageService: MessageService) { }
 
   ngOnInit() {
     this.authenticationService.currentUser.pipe().subscribe(x => {
@@ -69,6 +71,10 @@ export class AssetregisterComponent implements OnInit  {
       {separator: true},
       {label: 'Delete', icon: 'pi pi-trash', command: () => 
           this.confirmDelete()
+      },
+      {separator: true},
+      {label: 'Condition Assessment', icon: 'pi pi-star', command: () => 
+          this.conditionAssessment()
       }
   ];
     this.home = {icon: 'pi pi-home'};    
@@ -172,4 +178,10 @@ export class AssetregisterComponent implements OnInit  {
       
     }
   } 
+
+  conditionAssessment(){
+  this.showConditionAssessment = true
+    //this.router.navigate(['conditionAssessment']);
+  }
+
 }

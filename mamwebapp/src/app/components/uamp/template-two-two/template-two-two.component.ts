@@ -66,6 +66,14 @@ export class TemplateTwoTwoComponent implements OnInit {
       this.router.navigate(['uamp']);
 
     this.properties = this.uamp.templeteTwoPointTwo.properties;
+    this.properties.forEach(element => {
+      if(element.districtRegion){
+        this.localMunicipalities = this.sharedService.getLocalMunicipalitiesByName(element.districtRegion);
+        element.districtObj = this.sharedService.getRegionByName(element.districtRegion);
+        element.localMunicipalityObj = this.sharedService.getLocalMunicipalityByName(element.localMunicipality);
+      }
+    });
+
   }
 
   ngOnInit() {
@@ -127,10 +135,11 @@ export class TemplateTwoTwoComponent implements OnInit {
 
   get p() { return this.propertyForm.controls; }
 
-  setLocalMunicipalities(e) {
+  setLocalMunicipalities(e, property: Property) {
     if (e != undefined) {
       if (e.value != undefined) {
         this.localMunicipalities = this.sharedService.getLocalMunicipalities(e.value.factor);
+        property.districtRegion = e.value.name;
       }
     }
   }
@@ -143,6 +152,7 @@ export class TemplateTwoTwoComponent implements OnInit {
       serialNo: 'IMP' + new Date().getFullYear() + this.sharedService.getRandomNumber(4),
       userDepartmentCode: this.sharedService.getDepartmentCode(this.currentUser.department),
       district: this.propertyForm.controls["district"].value.name,
+      districtRegion: this.propertyForm.controls["district"].value.name,
       town: this.propertyForm.controls["town"].value,
       localMunicipality: this.propertyForm.controls["localMunicipality"].value.name,
       assetDescription: this.propertyForm.controls["assetDescription"].value,
@@ -217,6 +227,15 @@ export class TemplateTwoTwoComponent implements OnInit {
 
   back() {
     this.router.navigate(['uampDetails/uampTemp21']);
+  }
+
+  localMunicipalitiesChanged(e, property: Property) {
+    if (e != undefined) {
+      if (e.value != undefined) {
+        this.localMunicipalities = this.sharedService.getLocalMunicipalities(e.value.factor);
+        property.localMunicipality = e.value.name;
+      }
+    }
   }
 
   save() {

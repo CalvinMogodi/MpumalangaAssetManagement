@@ -23,6 +23,7 @@ import { TemplateSixComponent } from './components/uamp/template-six/template-si
 import { TemplateThreeComponent } from './components/uamp/template-three/template-three.component';
 import { TemplateTwoOneComponent } from './components/uamp/template-two-one/template-two-one.component';
 import { TemplateTwoTwoComponent } from './components/uamp/template-two-two/template-two-two.component';
+import { ConditionAssessmentComponent } from './components/assetregister/conditionassessment/condition-assessment.component';
 
 const routes: Routes = [
   {
@@ -66,6 +67,11 @@ const routes: Routes = [
   {
     path: 'uamp',
     component: UampComponent,
+    canActivate: [AuthGuard],
+  }, 
+  {
+    path: 'conditionAssessment',
+    component: ConditionAssessmentComponent,
     canActivate: [AuthGuard],
   },
   {

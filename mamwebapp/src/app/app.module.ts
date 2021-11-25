@@ -41,8 +41,11 @@ import { DynamicDialogModule } from 'primeng/dynamicdialog';
 import { PanelModule } from 'primeng/panel';
 import { ConfirmationService } from 'primeng/api';
 
+//import { TooltipModule } from 'ng2-tooltip-directive';
+
 //primeng
 import { SlideMenuModule } from 'primeng/slidemenu';
+import { TimelineModule } from 'primeng/timeline';
 import { SidebarModule } from 'primeng/sidebar';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { ScrollPanelModule } from 'primeng/scrollpanel';
@@ -78,12 +81,14 @@ import { FilterService } from 'primeng/api';
 import { PrimeNGConfig } from 'primeng/api';
 import { PasswordModule } from 'primeng/password';
 import { InputSwitchModule } from 'primeng/inputswitch';
+import { DividerModule } from 'primeng/divider';
 
 import {SliderModule} from 'primeng/slider';
 import {ContextMenuModule} from 'primeng/contextmenu';
 import {ProgressBarModule} from 'primeng/progressbar';
 import {InputTextModule} from 'primeng/inputtext';
 import { UampDetailsComponent } from './components/uamp/uamp-details/uamp-details.component';
+import { ConditionAssessmentComponent } from './components/assetregister/conditionassessment/condition-assessment.component';
 
 @NgModule({
   declarations: [
@@ -102,6 +107,7 @@ import { UampDetailsComponent } from './components/uamp/uamp-details/uamp-detail
     ImprovementsComponent,
     FinancialsComponent,  
     ViewUampComponent,
+    ConditionAssessmentComponent,
     PrintAssetComponent,    
     TemplateTwoOneComponent,
     TemplateTwoTwoComponent,
@@ -165,8 +171,9 @@ import { UampDetailsComponent } from './components/uamp/uamp-details/uamp-detail
     PasswordModule,
     SelectButtonModule,
     ToggleButtonModule,
-    InputSwitchModule
-    
+    InputSwitchModule,
+    TimelineModule,
+    DividerModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

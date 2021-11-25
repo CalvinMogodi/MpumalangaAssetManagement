@@ -338,3 +338,12 @@ p-fieldset {
 	float:right;
 	margin-right: 10px !important
 }
+
+.p-splitbutton .p-menu {
+    left: -108.9px !important;
+    width: 217px !important;
+}
+
+.tooltip .ui-tooltip-text {
+    width: 10px !important; 
+  }
