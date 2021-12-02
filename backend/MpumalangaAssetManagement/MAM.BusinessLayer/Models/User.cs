@@ -79,6 +79,33 @@ namespace MAM.BusinessLayer.Model
             
         }
 
+        public User ConvertToUser(DataAccess.Tables.User user)
+        {
+            if (user != null)
+            {     
+                return new User()
+                {
+                    Id = user.Id,
+                    Name = user.Name,
+                    Surname = user.Surname,
+                    Username = user.Username,
+                    Password = user.Password,
+                    RoleId = user.RoleId,
+                    IsActive = user.IsActive,
+                    Email = user.Email,
+                    PasswordIsChanged = user.PasswordIsChanged,
+                    CreatedDate = user.CreatedDate,
+                    ModifiedDate = user.ModifiedDate,
+                    CreatedUserId = user.CreatedUserId,
+                    ModifiedUserId = user.ModifiedUserId,
+                    Department = user.Department,
+                };
+            }
+            else
+                return null;
+
+        }
+
         public List<User> ConvertToUsers(List<DataAccess.Tables.User> users)
         {
             return users.Select(u => new User()

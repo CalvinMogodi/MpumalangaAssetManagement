@@ -37,13 +37,14 @@ namespace MAM.DataAccess
         public DbSet<Utilisation> Utilisation { get; set; }
         public DbSet<AcquisitionPlan> AcquisitionPlans { get; set; }
         public DbSet<MtefBudgetPeriod> MtefBudgetPeriods { get; set; }
-        public DbSet<MunicipalUtilityService> MunicipalUtilityServices { get; set; }
+        public DbSet<MunicipalUtilityService> MunicipalUtilityServices { get; set; }    
         public DbSet<OperationPlan> OperationPlans { get; set; }
         public DbSet<Property> Properties { get; set; }
         public DbSet<StrategicAssessment> StrategicAssessments { get; set; }
         public DbSet<SurrenderPlan> SurrenderPlans { get; set; }
         public DbSet<UserImmovableAssetManagementPlan> UserImmovableAssetManagementPlans { get; set; }
         public DbSet<OptimalSupportingAccommodation> OptimalSupportingAccommodations { get; set; }
+        public DbSet<ConditionAssessment> ConditionAssessments { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(_connectionString, o => o.CommandTimeout(280));
