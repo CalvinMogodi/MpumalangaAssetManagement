@@ -20,6 +20,7 @@ export class ConditionAssessmentComponent implements OnInit {
   @Input() assetComponent: AssetregisterComponent;
   @Output("closeConditionAssessment") closeConditionAssessment = new EventEmitter<any>();
   @Output() stopSort= new EventEmitter<any>();
+  uploadedFiles: any[] = [];
   conditionAssessments: Array<ConditionAssessment> = [
     {
       id: undefined,
@@ -138,6 +139,16 @@ export class ConditionAssessmentComponent implements OnInit {
       }
       this.isBusy = false;
     });
+  }
+
+  onLandRemoveFile(evt: any){
+    var fileIndex = this.uploadedFiles.indexOf(evt.file)
+    this.uploadedFiles.slice(-1, fileIndex);
+  }
+
+  onLandSelectFile(evt: any) {
+    let uploadedFile = evt[0];
+    this.uploadedFiles.push(uploadedFile);    
   }
 
   setRate() {

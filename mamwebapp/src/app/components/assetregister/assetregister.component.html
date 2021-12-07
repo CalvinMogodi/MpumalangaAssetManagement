@@ -134,7 +134,7 @@
     </p-dialog-footer>
 </p-dialog>
 
-<p-dialog header="Condition Assessment" *ngIf="showConditionAssessment" [(visible)]="showConditionAssessment" [breakpoints]="{'960px': '75vw'}" [style]="{width: '40vw'}" [baseZIndex]="10000" 
+<p-dialog header="Condition Assessment" *ngIf="showConditionAssessment" [(visible)]="showConditionAssessment" [breakpoints]="{'960px': '75vw'}" [style]="{width: '55vw'}" [baseZIndex]="10000" 
     [draggable]="false" [resizable]="false">
     <app-condition-assessment [selectedFacility]="selectedAsset" (closeConditionAssessment)="closeConditionAssessment($event)"></app-condition-assessment>
    <!-- <p-dialog-footer>
