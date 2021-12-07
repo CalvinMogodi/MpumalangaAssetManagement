@@ -24,6 +24,7 @@ import { TemplateThreeComponent } from './components/uamp/template-three/templat
 import { TemplateTwoOneComponent } from './components/uamp/template-two-one/template-two-one.component';
 import { TemplateTwoTwoComponent } from './components/uamp/template-two-two/template-two-two.component';
 import { ConditionAssessmentComponent } from './components/assetregister/conditionassessment/condition-assessment.component';
+import { LeaseManagementComponent } from './components/leasemanagement/lease-management.component';
 
 const routes: Routes = [
   {
@@ -74,6 +75,11 @@ const routes: Routes = [
     component: ConditionAssessmentComponent,
     canActivate: [AuthGuard],
   },
+  {
+    path: 'leaseManagement',
+    component: LeaseManagementComponent,
+    canActivate: [AuthGuard],
+  },  
   {
     path: 'uampDetails',
     component: UampDetailsComponent,

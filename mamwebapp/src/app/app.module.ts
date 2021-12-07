@@ -89,6 +89,7 @@ import {ProgressBarModule} from 'primeng/progressbar';
 import {InputTextModule} from 'primeng/inputtext';
 import { UampDetailsComponent } from './components/uamp/uamp-details/uamp-details.component';
 import { ConditionAssessmentComponent } from './components/assetregister/conditionassessment/condition-assessment.component';
+import { LeaseManagementComponent } from './components/leasemanagement/lease-management.component';
 
 @NgModule({
   declarations: [
@@ -122,7 +123,8 @@ import { ConditionAssessmentComponent } from './components/assetregister/conditi
     AddMunicipalUtilityServicesComponent,
     UampComponent,  
     CampComponent,
-    UampDetailsComponent
+    UampDetailsComponent,
+    LeaseManagementComponent
   ],
   imports: [
     BrowserModule,

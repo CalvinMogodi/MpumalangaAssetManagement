@@ -63,10 +63,6 @@
         class="ui-button-info"></button>
 </div>
 
-<div>     
-    <div pTooltip="<b>Enter </b> your username" [escape]="false" tooltipPosition="bottom">This is sample</div>
-
-</div>
 <div class="row">
     <p-table #dt [columns]="cols" [paginator]="true" [rows]="10" selectionMode="single" rowExpandMode="single"
         *ngIf="!loading" [value]="facilities" dataKey="id" editMode="row" styleClass="p-datatable-striped">
