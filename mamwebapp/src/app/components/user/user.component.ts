@@ -100,17 +100,16 @@ export class UserComponent implements OnInit {
       department: new FormControl('')
     });
 
-    this.items = [
-      { label: 'Dashboard', url: 'dashboard' },
-      { label: 'Users' }];
-    this.home = { icon: 'pi pi-home' };
+    this.items = [{ icon: 'pi pi-home', url: 'dashboard' },
+    { label: 'Users' }];
+
     this.cols = [
       { field: 'name', header: 'Name' },
       { field: 'surname', header: 'Surname' },
       { field: 'email', header: 'Email' },
       { field: 'createdDate', header: 'Created Date' },
       { field: 'role', header: 'Role', element: true },
-      { field: 'department', header: 'Department', element: true },     
+      { field: 'department', header: 'Department', element: true },
     ];
 
     this.loading = true;
@@ -267,7 +266,7 @@ export class UserComponent implements OnInit {
   deleteUser() {
     this.userService.deleteUser(this.selectedUser).pipe(first()).subscribe(isDeleted => {
       if (isDeleted) {
-        this.messageService.add({ severity: 'warn', summary: 'Delete User', detail: 'User has been deleted successful.' });       
+        this.messageService.add({ severity: 'warn', summary: 'Delete User', detail: 'User has been deleted successful.' });
         this.users.splice(this.index, 1);
       } else {
         this.messageService.add({ severity: 'error', summary: 'Delete User', detail: 'User is not deleted successful.' });

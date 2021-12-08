@@ -15,6 +15,9 @@ export class CampComponent implements OnInit {
   loading:boolean = false;
   currentUser: User;
   camp: Camp;
+  items = [
+    { icon: 'pi pi-home',url: 'dashboard' },
+    { label: 'CAMP' }];
   generatingCamp: boolean = false;
   showDialog: boolean = false;
   camps: Array<Camp> = [];

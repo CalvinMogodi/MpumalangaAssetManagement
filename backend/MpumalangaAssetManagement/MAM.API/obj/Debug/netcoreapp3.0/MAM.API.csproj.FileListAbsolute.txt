@@ -234,6 +234,12 @@ C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.API\obj\Debu
 C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.API\obj\Debug\netcoreapp3.0\MAM.API.dll
 C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.API\obj\Debug\netcoreapp3.0\MAM.API.pdb
 C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.API\obj\Debug\netcoreapp3.0\MAM.API.genruntimeconfig.cache
+C:\Projects\MpumalangaAssetManagement\MpumalangaAssetManagement\backend\MpumalangaAssetManagement\MAM.API\obj\Debug\netcoreapp3.0\MAM.API.csproj.AssemblyReference.cache
+C:\Projects\MpumalangaAssetManagement\MpumalangaAssetManagement\backend\MpumalangaAssetManagement\MAM.API\obj\Debug\netcoreapp3.0\MAM.API.AssemblyInfoInputs.cache
+C:\Projects\MpumalangaAssetManagement\MpumalangaAssetManagement\backend\MpumalangaAssetManagement\MAM.API\obj\Debug\netcoreapp3.0\MAM.API.AssemblyInfo.cs
+C:\Projects\MpumalangaAssetManagement\MpumalangaAssetManagement\backend\MpumalangaAssetManagement\MAM.API\obj\Debug\netcoreapp3.0\MAM.API.csproj.CoreCompileInputs.cache
+C:\Projects\MpumalangaAssetManagement\MpumalangaAssetManagement\backend\MpumalangaAssetManagement\MAM.API\obj\Debug\netcoreapp3.0\MAM.API.MvcApplicationPartsAssemblyInfo.cs
+C:\Projects\MpumalangaAssetManagement\MpumalangaAssetManagement\backend\MpumalangaAssetManagement\MAM.API\obj\Debug\netcoreapp3.0\MAM.API.MvcApplicationPartsAssemblyInfo.cache
 C:\Projects\MpumalangaAssetManagement\MpumalangaAssetManagement\backend\MpumalangaAssetManagement\MAM.API\bin\Debug\netcoreapp3.0\appsettings.Development.json
 C:\Projects\MpumalangaAssetManagement\MpumalangaAssetManagement\backend\MpumalangaAssetManagement\MAM.API\bin\Debug\netcoreapp3.0\appsettings.json
 C:\Projects\MpumalangaAssetManagement\MpumalangaAssetManagement\backend\MpumalangaAssetManagement\MAM.API\bin\Debug\netcoreapp3.0\swagger\v1\swagger.json
@@ -324,12 +330,6 @@ C:\Projects\MpumalangaAssetManagement\MpumalangaAssetManagement\backend\Mpumalan
 C:\Projects\MpumalangaAssetManagement\MpumalangaAssetManagement\backend\MpumalangaAssetManagement\MAM.API\bin\Debug\netcoreapp3.0\MAM.DataAccess.dll
 C:\Projects\MpumalangaAssetManagement\MpumalangaAssetManagement\backend\MpumalangaAssetManagement\MAM.API\bin\Debug\netcoreapp3.0\MAM.BusinessLayer.pdb
 C:\Projects\MpumalangaAssetManagement\MpumalangaAssetManagement\backend\MpumalangaAssetManagement\MAM.API\bin\Debug\netcoreapp3.0\MAM.DataAccess.pdb
-C:\Projects\MpumalangaAssetManagement\MpumalangaAssetManagement\backend\MpumalangaAssetManagement\MAM.API\obj\Debug\netcoreapp3.0\MAM.API.csproj.AssemblyReference.cache
-C:\Projects\MpumalangaAssetManagement\MpumalangaAssetManagement\backend\MpumalangaAssetManagement\MAM.API\obj\Debug\netcoreapp3.0\MAM.API.AssemblyInfoInputs.cache
-C:\Projects\MpumalangaAssetManagement\MpumalangaAssetManagement\backend\MpumalangaAssetManagement\MAM.API\obj\Debug\netcoreapp3.0\MAM.API.AssemblyInfo.cs
-C:\Projects\MpumalangaAssetManagement\MpumalangaAssetManagement\backend\MpumalangaAssetManagement\MAM.API\obj\Debug\netcoreapp3.0\MAM.API.csproj.CoreCompileInputs.cache
-C:\Projects\MpumalangaAssetManagement\MpumalangaAssetManagement\backend\MpumalangaAssetManagement\MAM.API\obj\Debug\netcoreapp3.0\MAM.API.MvcApplicationPartsAssemblyInfo.cs
-C:\Projects\MpumalangaAssetManagement\MpumalangaAssetManagement\backend\MpumalangaAssetManagement\MAM.API\obj\Debug\netcoreapp3.0\MAM.API.MvcApplicationPartsAssemblyInfo.cache
 C:\Projects\MpumalangaAssetManagement\MpumalangaAssetManagement\backend\MpumalangaAssetManagement\MAM.API\obj\Debug\netcoreapp3.0\staticwebassets\MAM.API.StaticWebAssets.Manifest.cache
 C:\Projects\MpumalangaAssetManagement\MpumalangaAssetManagement\backend\MpumalangaAssetManagement\MAM.API\obj\Debug\netcoreapp3.0\staticwebassets\MAM.API.StaticWebAssets.xml
 C:\Projects\MpumalangaAssetManagement\MpumalangaAssetManagement\backend\MpumalangaAssetManagement\MAM.API\obj\Debug\netcoreapp3.0\scopedcss\bundle\MAM.API.styles.css

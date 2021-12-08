@@ -33,6 +33,9 @@ export class UampComponent implements OnInit {
   buttonItems: MenuItem[];
   templateOne: any;
   erMsgs: Message[];
+  items = [
+    { icon: 'pi pi-home',url: 'dashboard' },
+    { label: 'UAMP' }];
 
   constructor(private router: Router, public messageService: MessageService, public uampService: UampService, private authenticationService: AuthenticationService) {
     this.startCounter();

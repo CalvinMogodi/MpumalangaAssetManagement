@@ -17,9 +17,11 @@ export class LeaseManagementComponent implements OnInit {
   isBusy: boolean;
   errorMsg: string;
   error = '';
-  home: MenuItem;
   selectedLeasedProperty: LeasedProperty;
   buttonItems: MenuItem[];
+  items = [
+    { icon: 'pi pi-home',url: 'dashboard' },
+    { label: 'Lease Management' }];
   cols = [
     { field: 'fileReference', header: 'File Reference' },
     { field: 'type', header: 'Type' },
@@ -46,21 +48,11 @@ export class LeaseManagementComponent implements OnInit {
       {label: 'Handover document', icon: 'pi pi-file', command: () => 
           this.attachFinalHandoverDocument()
       }
-  ];
-    this.home = {icon: 'pi pi-home'};    
+  ];  
     this.getLeasedProperties();  
   }
 
   getLeasedProperties() {
-    const leasedProperties: Array<LeasedProperty> = [
-      { id:1, leaseStatusesId: 21, fileReference : 'MB012', type:'Land', propertyCode: '12354', facilityName: 'Facility 1', natureofLease:'Business', startingDate: new Date('01/01/2020'), terminationDate: new Date('01-01-2020') },
-      { id:2, leaseStatusesId: 22, fileReference : 'MB013', type:'Land', propertyCode: '1235454', facilityName: 'Facility 2', natureofLease:'Residential', startingDate: new Date('5/10/2020'), terminationDate: new Date('5/10/2020') },
-      { id:3, leaseStatusesId: 23, fileReference : 'MB014', type:'Land', propertyCode: '123544', facilityName: 'Facility 3', natureofLease:'Residential', startingDate: new Date('1/10/2020'), terminationDate: new Date('5/10/2020') },
-      { id:4, leaseStatusesId: 24, fileReference : 'MB015', type:'Land', propertyCode: '12354', facilityName: 'Facility 4', natureofLease:'Business', startingDate: new Date('1/10/2020'), terminationDate: new Date('5/10/2020') },
-    ];
-    this.leasedProperties = leasedProperties;    
-    this.dataIsLoaded = true;
-    return leasedProperties;
     this.leasedPropertiesService.getLeasedProperties().pipe(first()).subscribe(leasedProperties => {
       this.leasedProperties = leasedProperties;    
       this.dataIsLoaded = true;

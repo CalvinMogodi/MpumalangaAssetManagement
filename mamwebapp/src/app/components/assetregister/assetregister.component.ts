@@ -36,7 +36,7 @@ export class AssetregisterComponent implements OnInit  {
   mode: string = 'Add'; 
   error = '';
   items = [
-    { label: 'Dashboard', url: 'dashboard' },
+    { icon: 'pi pi-home',url: 'dashboard' },
     { label: 'Asset Register' }];
   cols = [
     { field: 'fileReference', header: 'File Reference' },

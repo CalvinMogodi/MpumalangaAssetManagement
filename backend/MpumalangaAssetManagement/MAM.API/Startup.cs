@@ -72,6 +72,7 @@ namespace MAM.API
             services.AddScoped<IFacilityService, FacilityService>();
             services.AddScoped<IUAMPService, UAMPService>();
             services.AddScoped < IConditionAssessmentService, ConditionAssessmentService>();
+            services.AddScoped<ILeaseManagementService, LeaseManagementService>();
             services.AddSwaggerGen();
 
             services.Configure<FormOptions>(f => {

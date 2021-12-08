@@ -1,5 +1,4 @@
 export class LeasedProperty {
-    id: number;
     leaseStatusesId: number
     fileReference: string;
     type: string;

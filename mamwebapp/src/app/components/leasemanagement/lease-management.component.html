@@ -1,3 +1,6 @@
+<p-breadcrumb [model]="items"></p-breadcrumb>
+<br/><br/>
+
 <div class="text-center" style="color: red;" *ngIf="error">
     <h5 class="mt-20">
         <li class="pi pi-exclamation-triangle" style="color: red;font-size: xx-large;"></li><span> An error has
@@ -13,7 +16,7 @@
         <tr>
             <th pSortableColumn="fileReference">File Reference <p-sortIcon field="fileReference"></p-sortIcon>
             </th>
-            <th pSortableColumn="type">Type <p-sortIcon field="type"></p-sortIcon>
+            <th style="width: 110px;" pSortableColumn="type">Type <p-sortIcon field="type"></p-sortIcon>
             </th>
             <th pSortableColumn="propertyCode">Property Code <p-sortIcon field="propertyCode"></p-sortIcon>
             </th>
