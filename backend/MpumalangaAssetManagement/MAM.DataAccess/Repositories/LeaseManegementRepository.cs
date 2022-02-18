@@ -31,17 +31,20 @@ namespace MAM.DataAccess.Repositories
                                   join l in db.Lands on ls.Id equals l.LeaseStatusId
                                   join f in db.Facilities on l.Id equals f.LandId
                                   join lumd in db.LandUseManagementDetails on l.LandUseManagementDetailId equals lumd.Id
+                                  join gl in db.GeographicalLocations on l.GeographicalLocationId equals gl.Id
                                   where lumd.IncomeLeaseStatus == "Yes"
                                   select new LeasedProperty
                                   {
                                       LeaseStatusesId = ls.Id,
                                       FileReference = f.FileReference,
+                                      District = gl.Region,
                                       Type = f.Type,
                                       PropertyCode = f.ClientCode,
                                       FacilityName = f.Name,
                                       NatureofLease = ls.NatureOfLease,
                                       StartingDate = ls.StartingDate,
-                                      TerminationDate = ls.TerminationDate
+                                      TerminationDate = ls.TerminationDate,
+                                      LandId = l.Id
                                   }).ToList();
 
                 return leasedProperties;

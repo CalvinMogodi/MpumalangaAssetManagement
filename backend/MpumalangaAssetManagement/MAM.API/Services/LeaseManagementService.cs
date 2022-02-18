@@ -11,6 +11,7 @@ namespace MAM.API.Services
     public interface ILeaseManagementService
     {
         List<LeasedProperty> GetLeasedProperties();
+        LeasedProperty GetLeasedPropertyDetails(LeasedProperty leasedProperty);
     }
 
     public class LeaseManagementService : ILeaseManagementService
@@ -28,5 +29,9 @@ namespace MAM.API.Services
             return _leaseManagementRepository.GetLeasedProperties();
         }
 
+        public LeasedProperty GetLeasedPropertyDetails(LeasedProperty leasedProperty) {
+            using var _leaseManagementRepository = new LeaseManagementRepository(_appSettings);
+            return _leaseManagementRepository.GetLeasedPropertyDetails(leasedProperty);
+        }
     }
 }

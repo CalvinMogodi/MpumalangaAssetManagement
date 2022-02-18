@@ -21,6 +21,69 @@ export class ConditionAssessmentComponent implements OnInit {
   @Output("closeConditionAssessment") closeConditionAssessment = new EventEmitter<any>();
   @Output() stopSort= new EventEmitter<any>();
   uploadedFiles: any[] = [];
+  ewwfCount: number = 0;
+  edCount: number = 0;
+  elements: any[] = [
+    {title: 'Building/ Structural Elements', subTitles:[
+      {name:'External walls & wall finishes', identifier: 'ewwfCount'},
+      {name:'External doors', identifier: 'edCount'},
+      {name:'External windows', identifier: 'edCount'},
+      {name:'External floors & finishes', identifier: 'effCount'},
+      {name:'External ceilings & ceilings finishes', identifier: 'eccfCount'},
+      {name:'Roofs', identifier: 'rCount'},
+      {name:'Internal walls & wall finishes', identifier: 'iwwfCount'},
+      {name:'Internal doors', identifier: 'idCount'},
+      {name:'Internal floors & floor finishes', identifier: 'ifffCount'},
+      {name:'Internal ceilings & ceiling finishes', identifier: 'iccfCount'},
+      {name:'Handwash basin', identifier: 'hbCount'},
+      {name:'Carpets', identifier: 'cCount'},
+      {name:'Tiles: floor', identifier: 'tfCount'},
+      {name:'Tiles: wall', identifier: 'twCount'},
+      {name:'Toilets', identifier: 'tCount'},
+      {name:'Gutters', identifier: 'guCount'},
+      {name:'Down pipes', identifier: 'dpCount'},
+      {name:'Paint: exterior', identifier: 'peCount'},
+      {name:'Paint: interior', identifier: 'piCount'},
+      {name:'Taps', identifier: 'tCount'},
+      {name:'Bath', identifier: 'bCount'},
+      {name:'Stairs', identifier: 'sCount'},
+      {name:'Water storage tanks', identifier: 'wstCount'},
+      {name:'Geysers', identifier: 'gCount'},
+    ]},
+    {title: 'Electrical Elements', 
+      subTitles:[
+        {name:'General lighting', identifier: 'eeglCount'},
+        {name:'Power distribution', identifier: 'eepdCount'},
+        {name:'Main distribution box (DB)', identifier: 'eemdbCount'},
+        {name:'Lifts', identifier: 'eelCount'},
+        {name:'Escalators', identifier: 'eeeCount'},
+        {name:'Lift motors', identifier: 'eelmCount'},
+        {name:'Generators', identifier: 'eegCount'},
+        {name:'Roof fan', identifier: 'eerfCount'},
+        {name:'Wiring', identifier: 'eewCount'},
+        {name:'Bulbs', identifier: 'eebCount'},
+        {name:'Switches', identifier: 'eegCount'},
+        {name:'Backup generator', identifier: 'eebgCount'},
+        {name:'Plugs', identifier: 'eepCount'},
+      ]},
+      {title: 'Civil Elements', 
+      subTitles:[
+        {name:'Sewage', identifier: 'cesCount'},
+        {name:'Taps pipes', identifier: 'cetpCount'},
+        {name:'Water pump/reticulation', identifier: 'cewprCount'},
+        {name:'Water supply', identifier: 'cewsCount'},
+        {name:'Storm water drainage', identifier: 'ceswdCount'},
+        {name:'Parking/carports', identifier: 'cepcCount'},
+        {name:'Drainage', identifier: 'cedCount'}
+      ]},
+      {title: 'Mechenical Elements', 
+      subTitles:[
+        {name:'Boilers', identifier: 'mebCount'},
+        {name:'Centralised Air conditioning installations', identifier: 'caciCount'},
+        {name:'Fresh air installations', identifier: 'faiCount'},
+        {name:'Room type air conditioners', identifier: 'rtacCount'}
+      ]}
+  ];
   conditionAssessments: Array<ConditionAssessment> = [
     {
       id: undefined,
@@ -59,8 +122,18 @@ export class ConditionAssessmentComponent implements OnInit {
   dataIsLoaded: boolean = false;
   isBusy: boolean;
   currentUser: User;
+  stateOptions: any[];
+  paymentOptions: any[];
 
-  constructor(private authenticationService: AuthenticationService, public conditionAssessmentService: ConditionAssessmentService, private messageService: MessageService) { }
+  constructor(private authenticationService: AuthenticationService, public conditionAssessmentService: ConditionAssessmentService, private messageService: MessageService) {
+    this.stateOptions = [{label: 'Available', value: 'available'}, {label: 'Not Available', value: 'notAvailable'}];
+
+    this.paymentOptions = [
+        {name: 'Bad', value: 1},
+        {name: 'Fair', value: 2},
+        {name: 'Good', value: 3}
+    ];
+   }
 
   ngOnInit() {
     this.authenticationService.currentUser.subscribe(x => {

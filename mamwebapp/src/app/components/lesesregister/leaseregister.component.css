@@ -1,0 +1,9 @@
+.dropdown-top-label{
+    font-size: 12px;
+    left: 1.858rem;
+    position: inherit;
+    pointer-events: none;
+    transition-property: all;
+    transition-timing-function: ease;
+    line-height: 1;
+}

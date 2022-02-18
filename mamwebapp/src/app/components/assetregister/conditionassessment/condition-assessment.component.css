@@ -74,6 +74,14 @@ content: "\e936";
     margin-bottom: 5px;
 }
 
+.marginBottom{
+    margin-bottom: 10px !important;
+}
+.marginLeft-10{
+    margin-left: -10px;
+    margin-bottom: 10px;
+}
+
 @media screen and (max-width: 960px) {
   
             .p-timeline-event:nth-child(even) {

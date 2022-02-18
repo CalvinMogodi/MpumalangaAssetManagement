@@ -30,6 +30,18 @@ namespace MAM.BusinessLayer.Repositories
             }
         }
 
+        public LeasedProperty GetLeasedPropertyDetails(LeasedProperty leasedProperty) {
+            using (var dataAccess = new DataAccess.Repositories.LandRepository(appSettings.ConnectionString))
+            {
+                LandUseManagementDetail landUseManagementDetail = new LandUseManagementDetail();
+                LeaseStatus leaseStatus = new LeaseStatus();
+                var land = dataAccess.GetLeasedPropertyOnLandById(leasedProperty.LandId);
+                leasedProperty.LandUseManagementDetail = landUseManagementDetail.ConvertLandUseManagementDetail(land.LandUseManagementDetail);
+                leasedProperty.LeaseStatus = leaseStatus.ConvertLeaseStatus(land.LeaseStatus);
+                return leasedProperty;
+            }
+        }
+
         public void Dispose()
         {
             // Dispose of unmanaged resources.

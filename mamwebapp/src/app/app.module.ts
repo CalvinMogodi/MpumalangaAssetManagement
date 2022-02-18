@@ -90,6 +90,9 @@ import {InputTextModule} from 'primeng/inputtext';
 import { UampDetailsComponent } from './components/uamp/uamp-details/uamp-details.component';
 import { ConditionAssessmentComponent } from './components/assetregister/conditionassessment/condition-assessment.component';
 import { LeaseManagementComponent } from './components/leasemanagement/lease-management.component';
+import { LeasedPropertyComponent } from './components/leasemanagement/leasedproperty/leased-property.component';
+import { HiringComponent } from './components/hiring/hiring.component';
+import { LeaseRegisterComponent } from './components/lesesregister/leaseregister.component';
 
 @NgModule({
   declarations: [
@@ -124,7 +127,10 @@ import { LeaseManagementComponent } from './components/leasemanagement/lease-man
     UampComponent,  
     CampComponent,
     UampDetailsComponent,
-    LeaseManagementComponent
+    LeaseManagementComponent,
+    LeasedPropertyComponent,
+    HiringComponent,
+    LeaseRegisterComponent
   ],
   imports: [
     BrowserModule,

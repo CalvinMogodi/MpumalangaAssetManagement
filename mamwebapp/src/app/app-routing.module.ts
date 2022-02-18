@@ -25,6 +25,8 @@ import { TemplateTwoOneComponent } from './components/uamp/template-two-one/temp
 import { TemplateTwoTwoComponent } from './components/uamp/template-two-two/template-two-two.component';
 import { ConditionAssessmentComponent } from './components/assetregister/conditionassessment/condition-assessment.component';
 import { LeaseManagementComponent } from './components/leasemanagement/lease-management.component';
+import { HiringComponent } from './components/hiring/hiring.component';
+import { LeaseRegisterComponent } from './components/lesesregister/leaseregister.component';
 
 const routes: Routes = [
   {
@@ -68,6 +70,16 @@ const routes: Routes = [
   {
     path: 'uamp',
     component: UampComponent,
+    canActivate: [AuthGuard],
+  }, 
+  {
+    path: 'hiring',
+    component: HiringComponent,
+    canActivate: [AuthGuard],
+  }, 
+  {
+    path: 'leaseRegister',
+    component: LeaseRegisterComponent,
     canActivate: [AuthGuard],
   }, 
   {

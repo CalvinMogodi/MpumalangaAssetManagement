@@ -176,7 +176,6 @@ export class AddassetregisterComponent implements OnInit {
     }else{
       this.isViewOnly = this.mode == 'View' ? true :  false;
     }
- 
   }
 
   get l() { return this.landForm.controls; }
@@ -412,18 +411,26 @@ export class AddassetregisterComponent implements OnInit {
     });
 
   }
+  isArray(obj){
+    return !!obj && obj.constructor === Array;
+  }
 
   assignFacility(isLandSave: boolean, isFinancialSave: boolean, isImprovementSave: boolean) {
     if (isLandSave) {
       if (this.facility.land != undefined && this.facility.land != null) {
         let userDepartments = null;
         let departments = this.landForm.controls["userDepartment"].value != undefined ? this.landForm.controls["userDepartment"].value : [];
-        departments.forEach(element => {
-          if(userDepartments == null)
-            userDepartments = element.name;
-          else
-            userDepartments = userDepartments + ' ,' + element.name;
-        });
+        if(this.isArray(departments)){
+          departments.forEach(element => {
+            if(userDepartments == null)
+              userDepartments = element.name;
+            else
+              userDepartments = userDepartments + ' ,' + element.name;
+          });
+        }else{
+          userDepartments = departments.name;
+        }
+       
         this.facility.clientCode = this.landForm.controls["clientCode"].value;
         this.facility.survey = this.landForm.controls["survey"].value != undefined ? this.landForm.controls["survey"].value.name : null;
         this.facility.type = this.landForm.controls["facilityType"].value != undefined ? this.landForm.controls["facilityType"].value.name : null;
@@ -543,8 +550,7 @@ export class AddassetregisterComponent implements OnInit {
       facilityType:[''],
       clientCode:[''],
       deedsOffice: [''],
-      class: [''],
-      afs: [''],
+      class: [''],     
       vestedType: [''],
       type: [''],
       province: [''],
@@ -614,6 +620,7 @@ export class AddassetregisterComponent implements OnInit {
     });
     this.financialForm = this.formBuilder.group({
       landUseClass: [''],
+      afs: [''],
       natureofAsset: [''],
       additionCash: [0],
       additionNonCash: [0],
@@ -956,6 +963,7 @@ export class AddassetregisterComponent implements OnInit {
     this.financialForm = this.formBuilder.group({
       landUseClass: [this.facility.finance.landUseClass],
       natureofAsset: [this.facility.finance.natureofAsset],
+      afs: [this.facility.finance.afs],
       additionCash: [this.facility.finance.secondaryInformationNote.additionCash],
       additionNonCash: [this.facility.finance.secondaryInformationNote.additionNonCash],
       addition: [this.facility.finance.secondaryInformationNote.addition],

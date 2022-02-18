@@ -1,5 +1,6 @@
 ﻿using MAM.DataAccess.Interfaces;
 using MAM.DataAccess.Tables;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Win32.SafeHandles;
 using System;
 using System.Collections.Generic;
@@ -58,7 +59,21 @@ namespace MAM.DataAccess.Repositories
                 db.SaveChanges();
             }
         }
-#endregion
+
+
+
+        public Land GetLeasedPropertyOnLandById(int id)
+        {
+            using (var db = new DataContext(_connectionString))
+            {
+                return db.Lands
+                    .Include(a => a.LandUseManagementDetail)
+                    .Include(a => a.LeaseStatus)
+                    .FirstOrDefault(b => b.Id == id);
+            }
+        }
+
+        #endregion
 
         #region Geographical Location
         public int AddGeographicalLocation(GeographicalLocation geographicalLocation)

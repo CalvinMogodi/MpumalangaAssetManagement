@@ -1,0 +1,17 @@
+.smaller-font{
+    font-size: smaller;
+}
+
+.padding-left-15{
+    padding-left: 15px;
+}
+
+.padding-15{
+    padding: 15px;
+}
+
+.sub-header{
+    background-color: lightgray;
+    padding: 15px;
+    margin-top: -16px;
+}

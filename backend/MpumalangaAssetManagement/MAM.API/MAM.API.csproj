@@ -35,6 +35,8 @@
 		<Folder Include="Uploads\Finance\NewFolder\" />
 		<Folder Include="Uploads\Improvement\NewFolder\" />
 		<Folder Include="Uploads\Land\NewFolder\" />
+		<Folder Include="Uploads\HandoverDocuments\" />
+		<Folder Include="Uploads\SnagList\" />
 		<Folder Include="Uploads\NewFolder\" />
 	</ItemGroup>
 

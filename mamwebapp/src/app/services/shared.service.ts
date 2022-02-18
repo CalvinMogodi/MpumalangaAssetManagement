@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { currentId } from 'async_hooks';
+import { LeasedProperty } from '../models/leased-property.model';
 import { MtefBudgetPeriod } from '../models/mtef-budget-period.model';
 import { UAMP } from '../models/uamp.model';
 
@@ -105,6 +106,22 @@ export class SharedService {
       ];
     }
     return localMunicipalities;
+  }
+
+  getDepartments(){
+    return [
+      { name: 'Agriculture, rural development, land & environmental affairs', code: 'ARALEA', factor: 1 },
+      { name: 'Economic development & tourism', code: 'EDT', factor: 2 },
+      { name: 'Co-operative governance & traditional affairs', code: 'CGTA', factor: 3 },
+      { name: 'Community safety, security & liason', code: 'CSSL', factor: 4 },
+      { name: 'Culture, sport & recreation', code: 'CSR', factor: 5 },
+      { name: 'Education', code: 'E', factor: 6 },
+      { name: 'Provincial treasury', code: 'PT', factor: 7 },
+      { name: 'Health', code: 'H', factor: 8 },
+      { name: 'Human settlements', code: 'HS', factor: 9 },
+      { name: 'Social development', code: 'SD', factor: 10 },
+      { name: 'Public works, roads & transport', code: 'PWRT', factor: 11 },
+    ];
   }
 
   getLocalMunicipalityByName(value) {
@@ -653,7 +670,6 @@ export class SharedService {
     }
     return _mtefBudgetPeriod;
   }
-
   
   calculateShortfallCurrentExpenditure(mtefBudgetPeriods: MtefBudgetPeriod[], mtefBudgetPeriod: MtefBudgetPeriod): MtefBudgetPeriod {
     const _totalMtefBudgetPeriod = mtefBudgetPeriods.filter(m => m.group == 'Capital Projects'
@@ -683,5 +699,54 @@ export class SharedService {
       year5Shortfall: Number(_totalMtefBudgetPeriod.year5Shortfall / _totalMtefBudgetPeriod.year5Allocation),
     }
     return _mtefBudgetPeriod;
+  }
+
+  initLeasedProperty(){
+    const leasedProperty: LeasedProperty = {
+      leaseStatusesId: 0,
+      fileReference: undefined,
+      district: undefined,
+      type: undefined,
+      propertyCode: undefined,
+      facilityName: undefined,
+      natureofLease: undefined,
+      startingDate: undefined,
+      terminationDate: undefined,
+      landId: undefined,
+      landUseManagementDetail: {
+        id: 0,
+        titleDeedNumber: undefined,
+        registrationDate: undefined,
+        registeredOwner: undefined,
+        vestingDate: undefined,
+        conditionsOfTitle: undefined,
+        ownershipCategory: undefined,
+        stateOwnedPercentage: undefined,
+        landUse: undefined,
+        zoning: undefined,
+        userDepartment: undefined,
+        facilityName: undefined,
+        incomeLeaseStatus: undefined
+      },
+      leaseStatus: {id: 0,    
+        natureOfLease: undefined,
+        iDNumberCompanyRegistrationNumber: undefined,
+        pOBox: undefined,
+        contactNumber: undefined,
+        capacityofContactPerson: undefined,
+        contactPerson: undefined,
+        postalCode: undefined,
+        leaseStatusTown: undefined,
+        rentalAmount: undefined,
+        terminationDate: undefined,
+        startingDate: undefined,
+        occupationDate: undefined,
+        escalation: undefined,
+        vat: undefined,
+        leaseNumber: undefined,
+        otherCharges:undefined
+      }
+    }
+    return leasedProperty;
   }
 }

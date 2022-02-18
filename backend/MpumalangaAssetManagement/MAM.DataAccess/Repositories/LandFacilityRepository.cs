@@ -1,5 +1,6 @@
 ﻿using MAM.DataAccess.Interfaces;
 using MAM.DataAccess.Tables;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Win32.SafeHandles;
 using System;
 using System.Collections.Generic;
