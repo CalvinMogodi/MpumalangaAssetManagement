@@ -50,7 +50,7 @@
                         <div class="field grid col-3">
                             <span class="p-input-icon-left p-1">
                                 <label for="facilityType">Type</label>
-                                <p-dropdown class="ui-inputtext ui-widget" inputId="facilityType"
+                                <p-dropdown class="ui-inputtext ui-widget" inputId="facilityType" [style]="{'width':'570px'}"
                                     (onChange)="setFacilityType($event)" [disabled]="isViewOnly"
                                     [options]="facilityTypes" placeholder="Please select" formControlName="facilityType"
                                     optionLabel="name">
@@ -65,7 +65,7 @@
                         <div class="field grid col-3">
                             <span class="p-input-icon-left p-1">
                                 <label for="survey">Survey</label>
-                                <p-dropdown class="ui-inputtext ui-widget" inputId="survey" [disabled]="isViewOnly"
+                                <p-dropdown class="ui-inputtext ui-widget" inputId="survey" [disabled]="isViewOnly" [style]="{'width':'570px'}"
                                     [options]="surveys" placeholder="Please select" formControlName="survey"
                                     optionLabel="name">
                                 </p-dropdown>                                
@@ -77,7 +77,7 @@
                         <div class="field grid col-3">
                             <span class="p-input-icon-left p-1">
                                 <label for="vestedType">Vested Type</label>
-                                <p-dropdown class="ui-inputtext ui-widget" inputId="vestedType" [disabled]="isViewOnly"
+                                <p-dropdown class="ui-inputtext ui-widget" inputId="vestedType" [disabled]="isViewOnly" [style]="{'width':'570px'}"
                                     [options]="vestedTypes" placeholder="Please select" formControlName="vestedType"
                                     optionLabel="name">
                                 </p-dropdown>                               
@@ -89,7 +89,7 @@
                         <div class="field grid col-3">
                             <span class="p-input-icon-left p-1">
                                 <label for="type">Asset Type</label>
-                                <p-dropdown class="ui-inputtext ui-widget" inputId="type" [disabled]="isViewOnly"
+                                <p-dropdown class="ui-inputtext ui-widget" inputId="type" [disabled]="isViewOnly"  [style]="{'width':'570px'}"
                                     [options]="types" placeholder="Please select" (onChange)="setType($event)"
                                     formControlName="type" optionLabel="name"></p-dropdown>                                
                                 <div *ngIf="submitted && f.fileReferenceNumber.errors" class="text-error"><br>
@@ -100,7 +100,7 @@
                         <div class="field grid col-3">
                             <span class="p-input-icon-left p-1">
                                 <label for="deedsOffice">Deeds Office</label>
-                                <p-dropdown class="ui-inputtext ui-widget" [disabled]="isViewOnly" inputId="deedsOffice"
+                                <p-dropdown class="ui-inputtext ui-widget" [disabled]="isViewOnly" inputId="deedsOffice"  [style]="{'width':'570px'}"
                                     [options]="deedsOffices" placeholder="Please select" formControlName="deedsOffice"
                                     (onChange)="setDeedsOffice($event)" optionLabel="name"></p-dropdown>                               
                                 <div *ngIf="submitted && f.deedsOffices.errors" class="text-error"><br>
@@ -113,7 +113,7 @@
                         <div class="field grid col-3">
                             <span class="p-input-icon-left p-1">
                                 <label for="class">Asset Class</label>
-                                <p-dropdown class="ui-inputtext ui-widget" inputId="class" [disabled]="isViewOnly"
+                                <p-dropdown class="ui-inputtext ui-widget" inputId="class" [disabled]="isViewOnly" [style]="{'width':'570px'}"
                                     [options]="classes" placeholder="Please select" formControlName="class"
                                     (onChange)="setClass($event)" optionLabel="name">
                                 </p-dropdown>
@@ -125,7 +125,7 @@
                         <div class="field grid col-3">
                             <span class="p-input-icon-left p-1">
                                 <label for="userDepartment">User Department</label>
-                                <p-multiSelect class="ui-inputtext ui-widget" [disabled]="isViewOnly"
+                                <p-multiSelect class="ui-inputtext ui-widget" [disabled]="isViewOnly" [style]="{'width':'570px'}"
                                     placeholder="Please select" inputId="userDepartment" [options]="userDepartments"
                                     formControlName="userDepartment" optionLabel="name"></p-multiSelect>
                                 <div *ngIf="submitted && l.userDepartment.errors" class="text-error">
@@ -142,7 +142,7 @@
                         <div class="field grid col-3">
                         <span class="p-input-icon-left p-1">
                             <label for="float-input">Province</label>
-                            <p-dropdown class="ui-inputtext ui-widget" [disabled]="isViewOnly" inputId="province"
+                            <p-dropdown class="ui-inputtext ui-widget" [disabled]="isViewOnly" inputId="province" [style]="{'width':'570px'}"
                                 [(ngModel)]="province" [options]="provinces" formControlName="province"
                                 (onChange)="setProvince($event)" optionLabel="name">
                             </p-dropdown>
@@ -154,7 +154,7 @@
                         <div class="field grid col-3">
                         <span class="p-input-icon-left p-1">
                             <label for="float-input">District Municipality</label>
-                            <p-dropdown class="ui-inputtext ui-widget" [disabled]="isViewOnly"
+                            <p-dropdown class="ui-inputtext ui-widget" [disabled]="isViewOnly" [style]="{'width':'570px'}"
                                 inputId="districtMunicipality" [options]="districtMunicipalities"
                                 placeholder="Please select" formControlName="districtMunicipality"
                                 (onChange)="setDistrictMunicipality($event)" optionLabel="name"></p-dropdown>
@@ -166,7 +166,7 @@
                         <div class="field grid col-3">
                         <span class="p-input-icon-left p-1">
                             <label for="float-input">Magisterial District</label>
-                            <p-dropdown class="ui-inputtext ui-widget" [disabled]="isViewOnly"
+                            <p-dropdown class="ui-inputtext ui-widget" [disabled]="isViewOnly" [style]="{'width':'570px'}"
                                 inputId="magisterialDistrict" [options]="magisterialDistricts"
                                 placeholder="Please select" formControlName="magisterialDistrict"
                                 (onChange)="setMagisterialDistrict($event)" optionLabel="name"></p-dropdown>
@@ -179,7 +179,7 @@
                         <span class="p-input-icon-left p-1">
                             <label for="float-input">Local Authority</label>
                             <p-dropdown class="ui-inputtext ui-widget" [disabled]="isViewOnly" inputId="localAuthority"
-                                [options]="localAuthorities" placeholder="Please select"
+                                [options]="localAuthorities" placeholder="Please select" [style]="{'width':'570px'}"
                                 formControlName="localAuthority" (onChange)="setLocalAuthorities($event)"
                                 optionLabel="name"></p-dropdown>
                             <div *ngIf="submitted && f.fileReferenceNumber.errors" class="text-error"><br>
@@ -192,7 +192,7 @@
                         <div class="field grid col-3">
                         <span class="p-input-icon-left p-1">
                             <label for="float-input">Region</label>
-                            <p-dropdown class="ui-inputtext ui-widget" [disabled]="isViewOnly" inputId="region"
+                            <p-dropdown class="ui-inputtext ui-widget" [disabled]="isViewOnly" inputId="region" [style]="{'width':'570px'}"
                                 [options]="regions" formControlName="region" placeholder="Please select"
                                 (onChange)="setProvince($event)" optionLabel="name">
                             </p-dropdown>
@@ -274,7 +274,7 @@
                         <div class="field grid col-3">
                         <span class="p-input-icon-left p-1">
                             <label for="float-input">Registration Division</label>
-                            <p-dropdown class="ui-inputtext ui-widget" [disabled]="isViewOnly"
+                            <p-dropdown class="ui-inputtext ui-widget" [disabled]="isViewOnly" [style]="{'width':'570px'}"
                                 inputId="registrationDivision" [options]="registrationDivisions"
                                 placeholder="Please select" [(ngModel)]="registrationDivision"
                                 formControlName="registrationDivision" optionLabel="name"></p-dropdown>
@@ -328,7 +328,7 @@
                         <div class="field grid col-3">
                         <span class="p-input-icon-left p-1">
                             <label for="float-input">Land Remainder</label>
-                            <p-dropdown class="ui-inputtext ui-widget" [disabled]="isViewOnly" inputId="landRemainder"
+                            <p-dropdown class="ui-inputtext ui-widget" [disabled]="isViewOnly" inputId="landRemainder" [style]="{'width':'570px'}"
                                 [options]="landRemainders" formControlName="landRemainder"
                                 (onChange)="setProvince($event)" optionLabel="name" placeholder="Please select">
                             </p-dropdown>
@@ -383,7 +383,7 @@
                         <span class="p-input-icon-left p-1">
                             <label for="howAcquired">How Acquired</label>
                             <p-dropdown class="ui-inputtext ui-widget" [disabled]="isViewOnly" inputId="howAcquired"
-                                [options]="howAcquireds" [(ngModel)]="howAcquired" formControlName="acquired"
+                                [options]="howAcquireds" [(ngModel)]="howAcquired" formControlName="acquired" [style]="{'width':'570px'}"
                                 (onChange)="setHowAcquired($event)" optionLabel="name" placeholder="Please select">
                             </p-dropdown>
                             <div *ngIf="submitted && f.fileReferenceNumber.errors" class="text-error"><br>
@@ -467,8 +467,8 @@
                         <div class="field grid col-3">
                         <span class="p-input-icon-left p-1">
                             <label for="ownershipCategory">Ownership Category</label>
-                            <p-dropdown class="ui-inputtext ui-widget" [disabled]="isViewOnly"
-                                inputId="ownershipCategory" [options]="ownershipCategories"
+                            <p-dropdown class="ui-inputtext ui-widget" [disabled]="isViewOnly" 
+                                inputId="ownershipCategory" [options]="ownershipCategories" [style]="{'width':'570px'}"
                                 formControlName="ownershipCategory" optionLabel="name" placeholder="Please select">
                             </p-dropdown>
                             <div *ngIf="submitted && f.ownershipCategory.errors" class="text-error"><br>
@@ -512,7 +512,7 @@
                         <div class="field grid col-3">
                         <span class="p-input-icon-left p-1">
                             <label for="incomeLeaseStatus">Income Lease Status</label>
-                            <p-dropdown class="ui-inputtext ui-widget" [disabled]="isViewOnly"
+                            <p-dropdown class="ui-inputtext ui-widget" [disabled]="isViewOnly" [style]="{'width':'570px'}"
                                 inputId="incomeLeaseStatus" [options]="incomeLeaseStatuses"
                                 formControlName="incomeLeaseStatus" (onChange)="setProvince($event)" optionLabel="name">
                             </p-dropdown>
@@ -530,7 +530,7 @@
                         <span class="p-input-icon-left p-1">
                             <label for="natureOfLease">Nature of Lease</label>
                             <p-dropdown class="ui-inputtext ui-widget" [disabled]="isViewOnly" inputId="natureOfLease"
-                                [options]="natureOfLeases" formControlName="natureOfLease"
+                                [options]="natureOfLeases" formControlName="natureOfLease" [style]="{'width':'570px'}"
                                 (onChange)="setDeedsOffice($event)" optionLabel="name" placeholder="Please select">
                             </p-dropdown>
                             <div *ngIf="submitted && f.natureOfLease.errors" class="text-error">
@@ -702,7 +702,7 @@
                         <div class="field grid col-3">
                         <span class="p-input-icon-left p-1">
                             <label for="vat">Vat Number</label>
-                            <p-dropdown class="ui-inputtext ui-widget" [disabled]="isViewOnly" inputId="vat"
+                            <p-dropdown class="ui-inputtext ui-widget" [disabled]="isViewOnly" inputId="vat" [style]="{'width':'570px'}"
                                 [options]="vats" formControlName="vat" (onChange)="setVat($event)"
                                 placeholder="Please select" optionLabel="name"></p-dropdown>
                             <div *ngIf="submitted && f.vat.errors" class="text-error"><br>
@@ -765,7 +765,7 @@
                         <div class="field grid col-4">
                         <span class="p-input-icon-left p-1 w-full">
                             <label for="afs">AFS</label>
-                            <p-dropdown class="ui-inputtext ui-widget w-full" inputId="afs" [disabled]="isViewOnly"
+                            <p-dropdown class="ui-inputtext ui-widget w-full" inputId="afs" [disabled]="isViewOnly" [style]="{'width':'570px'}"
                                 [options]="aFSs" placeholder="Please select" formControlName="afs" optionLabel="name">
                             </p-dropdown>
                             <div *ngIf="submitted && f.afs.errors" class="text-error"><br>
@@ -1026,7 +1026,7 @@
                     <div class="field grid col-3">       
                         <span class="p-input-icon-left p-1 w-full">
                             <label for="class">Potential Use</label>
-                            <p-dropdown class="ui-inputtext ui-widget w-full" [disabled]="isViewOnly" inputId="potentialUse"
+                            <p-dropdown class="ui-inputtext ui-widget w-full" [disabled]="isViewOnly" inputId="potentialUse" [style]="{'width':'570px'}"
                                 [options]="potentialUseList" placeholder="Please select" formControlName="potentialUse"
                                 (onChange)="setClass($event)" optionLabel="name">
                             </p-dropdown>
@@ -1039,7 +1039,7 @@
                         <div class="field grid col-3">
                             <span class="p-input-icon-left p-1 w-full">
                                 <label for="class">Type</label>
-                                <p-dropdown class="ui-inputtext ui-widget w-full" [disabled]="isViewOnly" inputId="type"
+                                <p-dropdown class="ui-inputtext ui-widget w-full" [disabled]="isViewOnly" inputId="type" [style]="{'width':'570px'}"
                                     [options]="typeOfImprovements" formControlName="type" (onChange)="setClass($event)"
                                     optionLabel="name" placeholder="Please select">
                                 </p-dropdown>
@@ -1053,7 +1053,7 @@
                         <div class="field grid col-3">
                             <span class="p-input-icon-left p-1 w-full">
                                 <label for="class">Condition Rating</label>
-                                <p-dropdown class="ui-inputtext ui-widget w-full" [disabled]="isViewOnly" inputId="conditionRating"
+                                <p-dropdown class="ui-inputtext ui-widget w-full" [disabled]="isViewOnly" inputId="conditionRating" [style]="{'width':'570px'}"
                                     [options]="conditionRatings" formControlName="conditionRating"
                                     (onChange)="setConditionRating($event)" placeholder="Please select" optionLabel="name">
                                 </p-dropdown>
@@ -1066,7 +1066,7 @@
                         <div class="field grid col-3">
                             <span class="p-input-icon-left p-1 w-full">
                                 <label for="class">Functional Performance Rating</label>
-                                <p-dropdown class="ui-inputtext ui-widget w-full" [disabled]="isViewOnly"
+                                <p-dropdown class="ui-inputtext ui-widget w-full" [disabled]="isViewOnly" [style]="{'width':'570px'}"
                                     inputId="functionalPerformanceRating" [options]="functionalPerformanceRatings"
                                     formControlName="functionalPerformanceRating" (onChange)="setClass($event)"
                                     placeholder="Please select" optionLabel="name">

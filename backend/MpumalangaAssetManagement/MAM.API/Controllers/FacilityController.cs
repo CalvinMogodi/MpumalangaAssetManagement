@@ -24,7 +24,7 @@ namespace MAM.API.Controllers
 {
     [Route("api/facility")]
     [ApiController]
-    public class FacilityController : Controller
+    public class FacilityController : BaseController
     {
         private static readonly ILog log = LogManager.GetLogger(typeof(UserController));
 
@@ -260,13 +260,6 @@ namespace MAM.API.Controllers
           
             isUploaded = true;
             return Ok(isUploaded);
-        }
-
-        private static void SetLog4NetConfiguration()
-        {
-            XmlDocument log4netConfig = new XmlDocument();
-            log4netConfig.Load(System.IO.File.OpenRead("log4net.config"));
-            log4net.Config.XmlConfigurator.Configure(log4net.LogManager.GetRepository(Assembly.GetEntryAssembly()), log4netConfig["log4net"]);
         }
     }
 }

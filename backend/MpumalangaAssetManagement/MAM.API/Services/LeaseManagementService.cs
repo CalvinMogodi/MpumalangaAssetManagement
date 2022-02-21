@@ -10,8 +10,9 @@ namespace MAM.API.Services
 {
     public interface ILeaseManagementService
     {
-        List<LeasedProperty> GetLeasedProperties();
+        List<LeasedProperty> GetLeasedProperties();        
         LeasedProperty GetLeasedPropertyDetails(LeasedProperty leasedProperty);
+        bool DeleteLeasedProperty(int id);
     }
 
     public class LeaseManagementService : ILeaseManagementService
@@ -32,6 +33,11 @@ namespace MAM.API.Services
         public LeasedProperty GetLeasedPropertyDetails(LeasedProperty leasedProperty) {
             using var _leaseManagementRepository = new LeaseManagementRepository(_appSettings);
             return _leaseManagementRepository.GetLeasedPropertyDetails(leasedProperty);
+        }
+
+        public bool DeleteLeasedProperty(LeasedProperty leasedProperty) {
+            using var _leaseManagementRepository = new LeaseManagementRepository(_appSettings);
+            return _leaseManagementRepository.DeleteLeasedProperty(leasedProperty);
         }
     }
 }

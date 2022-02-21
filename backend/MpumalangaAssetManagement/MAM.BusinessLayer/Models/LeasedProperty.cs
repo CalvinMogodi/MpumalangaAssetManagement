@@ -36,5 +36,22 @@ namespace MAM.BusinessLayer.Models
                 LandId = conditionAssessment.LandId,
             }).ToList();
         }
+
+        public DataAccess.Tables.LeasedProperty ConvertToLeasedPropertyTable(LeasedProperty leasedProperty)
+        {
+            return new DataAccess.Tables.LeasedProperty()
+            {
+                LeaseStatusesId = leasedProperty.LeaseStatusesId,
+                FileReference = leasedProperty.FileReference,
+                District = leasedProperty.District,
+                Type = leasedProperty.Type,
+                PropertyCode = leasedProperty.PropertyCode,
+                FacilityName = leasedProperty.FacilityName,
+                NatureofLease = leasedProperty.NatureofLease,
+                StartingDate = leasedProperty.StartingDate,
+                TerminationDate = leasedProperty.TerminationDate,
+                LandId = leasedProperty.LandId,
+            };
+        }
     }
 }

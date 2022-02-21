@@ -8,7 +8,7 @@ using System.Text;
 
 namespace MAM.BusinessLayer.Repositories
 {
-    public class ConditionAssessmentRepository : ConditionAssessmentInterface, IDisposable
+    public class ConditionAssessmentRepository : IConditionAssessmentRepository, IDisposable
     {
         private AppSettings appSettings { get; set; }
         // Flag: Has Dispose already been called?

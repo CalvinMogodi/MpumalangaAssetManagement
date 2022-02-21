@@ -8,6 +8,7 @@ import { FacilityService } from 'src/app/services/facility/facility.service';
 import { ConfirmationService } from 'primeng/api';
 import { User } from 'src/app/models/user.model';
 import { AuthenticationService } from 'src/app/services/authentication.service';
+import { SharedService } from 'src/app/services/shared.service';
 
 @Component({
   selector: 'app-addassetregister',
@@ -103,7 +104,7 @@ export class AddassetregisterComponent implements OnInit {
 
   formattedAmount;
  amount;
-  constructor(private authenticationService: AuthenticationService, private confirmationService: ConfirmationService, public facilityService: FacilityService, private formBuilder: FormBuilder, private messageService: MessageService) { }
+  constructor(private sharedService: SharedService, private authenticationService: AuthenticationService, private confirmationService: ConfirmationService, public facilityService: FacilityService, private formBuilder: FormBuilder, private messageService: MessageService) { }
 
   ngOnInit() {
     this.buildForm();
@@ -675,19 +676,7 @@ export class AddassetregisterComponent implements OnInit {
 
     this.activeItem = this.steps[0];
 
-    this.userDepartments = [
-      { name: 'Agriculture, rural development, land & environmental affairs', code: 'ARALEA', factor: 1 },
-      { name: 'Economic development & tourism', code: 'EDT', factor: 2 },
-      { name: 'Co-operative governance & traditional affairs', code: 'CGTA', factor: 3 },
-      { name: 'Community safety, security & liason', code: 'CSSL', factor: 4 },
-      { name: 'Culture, sport & recreation', code: 'CSR', factor: 5 },
-      { name: 'Education', code: 'E', factor: 6 },
-      { name: 'Provincial treasury', code: 'PT', factor: 7 },
-      { name: 'Health', code: 'H', factor: 8 },
-      { name: 'Human settlements', code: 'HS', factor: 9 },
-      { name: 'Social development', code: 'SD', factor: 10 },
-      { name: 'Public works, roads & transport', code: 'PWRT', factor: 11 },
-    ];
+    this.userDepartments = this.sharedService.getDepartments();
     this.registrationDivisions = [
       { name: 'Bloemfontein', code: 'B', factor: 1 },
       { name: 'Johannesburg', code: 'J', factor: 2 },
@@ -710,12 +699,9 @@ export class AddassetregisterComponent implements OnInit {
       { name: 'Urban', code: 'U', factor: 1 },
       { name: 'Rural', code: 'R', factor: 2 },
     ];
-    this.types = [
-      { name: 'Erf', code: 'E', factor: 1 },
-      { name: 'Farm', code: 'F', factor: 2 },
-      { name: 'Agricultural Holding', code: 'A', factor: 3 },
-      { name: 'Sectional Title', code: 'S', factor: 4 }
-    ];
+    
+    this.types = this.sharedService.getAssetTypes();
+
     this.deedsOffices = [
       { name: 'Head Office', code: 'H', factor: 1 },
       { name: 'Bloemfontein', code: 'B', factor: 2 },
@@ -742,12 +728,7 @@ export class AddassetregisterComponent implements OnInit {
       { name: 'Western Cape', code: 'WC', factor: 9 }
     ];
 
-    this.districtMunicipalities = [
-      { name: 'Ehlanzeni', code: 'E', factor: 1 },
-      { name: 'Gert Sibande', code: 'G', factor: 2 },
-      { name: 'Nkangala', code: 'N', factor: 3 },
-      { name: 'Bohlabela', code: 'B', factor: 4 }
-    ];
+    this.districtMunicipalities = this.sharedService.getDistricts();
 
     this.landRemainders = [
       { name: 'Yes', code: 'Y', factor: 1 },
@@ -804,8 +785,7 @@ export class AddassetregisterComponent implements OnInit {
     this.facilityTypes = [
       { name: 'Dwelling', code: 'D', factor: 1 },
       { name: 'Land', code: 'L', factor: 2 },
-      { name: 'Non Residential', code: 'NR', factor: 3 },
-      
+      { name: 'Non Residential', code: 'NR', factor: 3 },      
     ];
 
     this.surveys = [

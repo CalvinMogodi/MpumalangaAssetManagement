@@ -10,7 +10,7 @@ using System.Text;
 
 namespace MAM.BusinessLayer.Repositories
 {
-    public class FacilityRepository : FacilityInterface, IDisposable
+    public class FacilityRepository : IFacilityRepository, IDisposable
     {
         private AppSettings appSettings { get; set; }
         // Flag: Has Dispose already been called?

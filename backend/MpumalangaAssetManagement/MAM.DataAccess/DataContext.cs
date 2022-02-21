@@ -45,6 +45,7 @@ namespace MAM.DataAccess
         public DbSet<UserImmovableAssetManagementPlan> UserImmovableAssetManagementPlans { get; set; }
         public DbSet<OptimalSupportingAccommodation> OptimalSupportingAccommodations { get; set; }
         public DbSet<ConditionAssessment> ConditionAssessments { get; set; }
+        public DbSet<HiredProperty> HiredProperties { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(_connectionString, o => o.CommandTimeout(280));

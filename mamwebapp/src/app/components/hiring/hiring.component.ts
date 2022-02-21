@@ -7,6 +7,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from '../../services/authentication.service';
 import { ConfirmationService } from 'primeng/api';
 import { FormControl } from '@angular/forms';
+import { SharedService } from 'src/app/services/shared.service';
+import { type } from 'os';
+import { HiredProperty } from 'src/app/models/hired-property';
 
 @Component({
   selector: 'app-hiring',
@@ -17,6 +20,15 @@ import { FormControl } from '@angular/forms';
 export class HiringComponent implements OnInit {
   loading = false;
   isAdding = false;
+  hiringForm: FormGroup;
+  types: any = [];
+  userDepartments: any[] = [];
+  statuses: any[] = [];
+  districts: any[] = [];
+  buildingConditions: any[] = [];
+  hiredProperty: HiredProperty;
+  currentUser: User;
+
   showComfirmaDelete = false;
   showResetPasswordComfirmation: boolean = false;
   users: User[] = [];
@@ -24,11 +36,10 @@ export class HiringComponent implements OnInit {
   cols: any[];
   items: MenuItem[];
   home: MenuItem;
-  addUserForm: FormGroup;
   submitted = false;
   error = '';
   emailExsist: boolean = false;
-  currentUser: User;
+
   resetUser: User;
   selectedUser: User;
   index: any;
@@ -47,10 +58,11 @@ export class HiringComponent implements OnInit {
     private confirmationService: ConfirmationService,
     private authenticationService: AuthenticationService,
     private messageService: MessageService,
-    private changeDetectionRef: ChangeDetectorRef) { }
+    private sharedService: SharedService) { }
   roles: any[];
 
   ngOnInit() {
+
     this.showToast('Update User', 'User has been updated successful.');
     this.authenticationService.currentUser.subscribe(x => {
       this.currentUser = x;
@@ -58,46 +70,34 @@ export class HiringComponent implements OnInit {
 
     this.buttonItems = [
       {
-        label: 'Update', icon: 'pi pi-pencil', command: () =>
-          this.update()
-      },
-      { separator: true },
-      {
-        label: 'Delete', icon: 'pi pi-trash', command: () =>
-          this.confirmDelete()
+        label: 'View', icon: 'pi pi-eye', command: () =>
+          this.viewProperty()
       }
     ];
 
-    this.roles = [
-      { name: 'Viewer', code: 'V', factor: 1 },
-      { name: 'Administrator', code: 'SA', factor: 2 },
-      { name: 'Capturer', code: 'C', factor: 3 },
-      { name: 'Approver', code: 'A', factor: 5 },
-      { name: 'Verifier', code: 'DV', factor: 4 },
-      { name: 'Manager', code: 'M', factor: 6 },
-      { name: 'Department user', code: 'D', factor: 7 },
+    this.types = this.sharedService.getPropertyTypes();
+    this.userDepartments = this.sharedService.getDepartments();
+    this.statuses = this.sharedService.getHiringPropertyStatuses();
+    this.districts = this.sharedService.getDistricts();
+    this.buildingConditions = this.sharedService.getConditionRatings();
+    
+    this.hiringForm = this.formBuilder.group({
+      district: new FormControl('', Validators.compose([Validators.required])),
+      type: new FormControl('', Validators.compose([Validators.required])),
+      propertyCode: new FormControl('', Validators.compose([Validators.required])),
+      town: new FormControl('', Validators.compose([Validators.required])),
+      rentalAmount: new FormControl('', Validators.compose([Validators.required])),
+      startDate: new FormControl('', Validators.compose([Validators.required])),
+      terminationDate: new FormControl('', Validators.compose([Validators.required])),
+      address: new FormControl('', Validators.compose([Validators.required])),
+      userDepartment: new FormControl('', Validators.compose([Validators.required])),
+      status: new FormControl('', Validators.compose([Validators.required])),
+      stuffNumber: new FormControl('', Validators.compose([Validators.required])),
+      area: new FormControl('', Validators.compose([Validators.required])),
+      escalationRate: new FormControl('', Validators.compose([Validators.required])),
+      buildingCondition: new FormControl('', Validators.compose([Validators.required])),
 
-    ];
-    this.departments = [
-      { name: 'Agriculture, rural development, land & environmental affairs', code: 'ARALEA', factor: 1 },
-      { name: 'Economic development & tourism', code: 'EDT', factor: 2 },
-      { name: 'Co-operative governance & traditional affairs', code: 'CGTA', factor: 3 },
-      { name: 'Community safety, security & liason', code: 'CSSL', factor: 4 },
-      { name: 'Culture, sport & recreation', code: 'CSR', factor: 5 },
-      { name: 'Education', code: 'E', factor: 6 },
-      { name: 'Provincial treasury', code: 'PT', factor: 7 },
-      { name: 'Health', code: 'H', factor: 8 },
-      { name: 'Human settlements', code: 'HS', factor: 9 },
-      { name: 'Social development', code: 'SD', factor: 10 },
-      { name: 'Public works, roads & transport', code: 'PWRT', factor: 11 },
-    ];
-
-    this.addUserForm = this.formBuilder.group({
-      name: new FormControl('', Validators.compose([Validators.required])),
-      surname: new FormControl('', Validators.compose([Validators.required])),
-      email: new FormControl('', Validators.compose([Validators.required, Validators.email])),
-      role: new FormControl('', Validators.compose([Validators.required])),
-      department: new FormControl('')
+      
     });
 
     this.items = [{ icon: 'pi pi-home', url: 'dashboard' },
@@ -113,11 +113,41 @@ export class HiringComponent implements OnInit {
       { field: 'status', header: 'Status' }    
     ];
 
-    this.loading = false;
+    this.loading = false;   
   
   }
 
-  get f() { return this.addUserForm.controls; }
+  viewProperty(){
+
+  }
+
+  get f() { return this.hiringForm.controls; }
+
+  onSubmit(){
+
+    const hiredProperty = {
+      id: 0,
+    type: this.hiringForm.controls["type"].value != undefined ? this.hiringForm.controls["type"].value.name : null,
+    district: this.hiringForm.controls["district"].value != undefined ? this.hiringForm.controls["district"].value.name : null,
+    propertyCode: this.hiringForm.controls["propertyCode"].value,
+    startingDate: this.hiringForm.controls["startingDate"].value,
+    terminationDate: this.hiringForm.controls["terminationDate"].value,
+    monthlyRental: this.hiringForm.controls["monthlyRental"].value, 
+    town: this.hiringForm.controls["town"].value,
+    status: this.hiringForm.controls["status"].value != undefined ? this.hiringForm.controls["status"].value.name : null,
+    userDepartment: this.hiringForm.controls["userDepartment"].value != undefined ? this.hiringForm.controls["userDepartment"].value.name : null,
+    buildingCondition: this.hiringForm.controls["buildingCondition"].value != undefined ? this.hiringForm.controls["buildingCondition"].value.name : null,
+    landlandAgentName: this.hiringForm.controls["landlandAgentName"].value,
+    numberofStuff: this.hiringForm.controls["numberofStuff"].value,
+    escalationRate: this.hiringForm.controls["escalationRate"].value,
+    area: this.hiringForm.controls["area"].value,
+    address: this.hiringForm.controls["address"].value,
+    createdByUser: this.currentUser,
+    createdUserId: this.currentUser.id,
+    createdDate: new Date()
+    }   
+    
+  }
 
   onRowEditSave(user: User) {
     if (user.name === undefined || user.name === '') {
@@ -173,40 +203,6 @@ export class HiringComponent implements OnInit {
   }
 
   onRowEditInit(e) { }
-
-  onSubmit() {
-    this.submitted = true;
-    this.isAdding = false;
-
-    // stop here if form is invalid
-    if (this.addUserForm.invalid) {
-      return;
-    }
-    var randomstring = Math.random().toString(36).slice(-8);
-
-    this.isAdding = true;
-    var user: User = {
-      id: undefined,
-      username: this.f.email.value,
-      password: randomstring,
-      name: this.f.name.value,
-      surname: this.f.surname.value,
-      roleId: this.addUserForm.controls["role"].value.factor,
-      role: this.addUserForm.controls["role"].value,
-      department: this.addUserForm.controls["department"].value != undefined ? this.addUserForm.controls["department"].value.name : null,
-      isActive: true,
-      email: this.f.email.value,
-      passwordIsChanged: false,
-      createdDate: new Date,
-      createdUserId: this.currentUser.id
-    }
-    if (this.header == 'Add User') {
-      this.addUser(user);
-    } else {
-      user.id = this.selectedUser.id;
-      this.editUser(user);
-    }
-  }
 
   editUser(user: User) {
     this.userService.updateUser(user).pipe().subscribe(newUser => {
@@ -289,7 +285,7 @@ export class HiringComponent implements OnInit {
     this.selectedRole = this.selectedUser.roleId;
     let role = this.roles.filter(u => u.factor == this.selectedUser.roleId)[0];
     let department = this.departments.filter(u => u.name == this.selectedUser.department)[0];
-    this.addUserForm = this.formBuilder.group({
+    this.hiringForm = this.formBuilder.group({
       name: new FormControl(this.selectedUser.name, Validators.compose([Validators.required])),
       surname: new FormControl(this.selectedUser.surname, Validators.compose([Validators.required])),
       email: new FormControl(this.selectedUser.email, Validators.compose([Validators.required, Validators.email])),

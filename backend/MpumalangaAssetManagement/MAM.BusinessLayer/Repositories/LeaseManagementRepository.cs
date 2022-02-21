@@ -8,7 +8,7 @@ using System.Text;
 
 namespace MAM.BusinessLayer.Repositories
 {
-    public class LeaseManagementRepository : ILeaseManagementInterface, IDisposable
+    public class LeaseManagementRepository : ILeaseManagementRepository, IDisposable
     {
         private AppSettings appSettings { get; set; }
         // Flag: Has Dispose already been called?
@@ -28,6 +28,15 @@ namespace MAM.BusinessLayer.Repositories
             {
                 return leasedProperty.ConvertToLeasedProperties(dataAccess.GetLeasedProperties());
             }
+        }
+
+        public bool DeleteLeasedProperty(LeasedProperty leasedProperty)
+        {
+            using (var dataAccess = new DataAccess.Repositories.LeaseManegementRepository(appSettings.ConnectionString))
+            {
+                dataAccess.DeleteHiredProperty(leasedProperty.ConvertToLeasedPropertyTable(leasedProperty));
+                return true;
+            };
         }
 
         public LeasedProperty GetLeasedPropertyDetails(LeasedProperty leasedProperty) {

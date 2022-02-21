@@ -68,58 +68,44 @@ namespace MAM.API.Services
 
         public List<User> GetAll()
         {
-            using (var _userRepository = new UserRepository(_appSettings))
-            {
-                return _userRepository.GetUsers();
-            }
+            using var _userRepository = new UserRepository(_appSettings);
+            return _userRepository.GetUsers();
         }
 
         public bool ChangePassword(string username, string newPassword, string oldPassword)
         {
-            using (var _userRepository = new UserRepository(_appSettings))
-            {
-                return _userRepository.ChangePassword(username, newPassword, oldPassword);
-            }
+            using var _userRepository = new UserRepository(_appSettings);
+            return _userRepository.ChangePassword(username, newPassword, oldPassword);
         }
 
         public bool ResetPassword(string username, string newPassword)
         {
-            using (var _userRepository = new UserRepository(_appSettings))
-            {
-                return _userRepository.ResetPassword(username, newPassword);
-            }
+            using var _userRepository = new UserRepository(_appSettings);
+            return _userRepository.ResetPassword(username, newPassword);
         }
 
         public bool ForgotPassword(string username, string newPassword)
         {
-            using (var _userRepository = new UserRepository(_appSettings))
-            {
-                return _userRepository.ForgotPassword(username, newPassword);
-            }
+            using var _userRepository = new UserRepository(_appSettings);
+            return _userRepository.ForgotPassword(username, newPassword);
         }
 
         public bool UpdateUser(User user)
         {
-            using (var _userRepository = new UserRepository(_appSettings))
-            {
-                return _userRepository.UpdateUser(user);
-            }
+            using var _userRepository = new UserRepository(_appSettings);
+            return _userRepository.UpdateUser(user);
         }
 
         public bool DeleteUser(User user)
         {
-            using (var _userRepository = new UserRepository(_appSettings))
-            {
-                return _userRepository.DeleteUser(user);
-            }
+            using var _userRepository = new UserRepository(_appSettings);
+            return _userRepository.DeleteUser(user);
         }
 
         public User AddUser(User user)
         {
-            using (var _userRepository = new UserRepository(_appSettings))
-            {
-                return _userRepository.AddUser(user);
-            }
+            using var _userRepository = new UserRepository(_appSettings);
+            return _userRepository.AddUser(user);
         }
 
     }

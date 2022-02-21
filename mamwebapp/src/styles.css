@@ -347,3 +347,7 @@ p-fieldset {
 .tooltip .ui-tooltip-text {
     width: 10px !important; 
   }
+
+  .p-datepicker { 
+    top: -334px !important;
+  }

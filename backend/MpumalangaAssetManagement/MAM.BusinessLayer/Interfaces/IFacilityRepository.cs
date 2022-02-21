@@ -6,7 +6,7 @@ using System.Text;
 
 namespace MAM.BusinessLayer.Interfaces
 {
-    public interface FacilityInterface
+    public interface IFacilityRepository
     {
         List<FacilityType> GetFacilityZonings();
         List<DashboardWedge> GetDashboardWedges();

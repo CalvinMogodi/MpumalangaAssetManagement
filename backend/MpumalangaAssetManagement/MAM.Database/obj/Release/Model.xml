@@ -12,7 +12,7 @@
 		</CustomData>
 		<CustomData Category="Reference" Type="Assembly">
 			<Metadata Name="LogicalName" Value="MAM.Database.dll" />
-			<Metadata Name="FileName" Value="C:\PROJECTS\ASSET REGISTER MP\BACKEND\MPUMALANGAASSETMANAGEMENT\MAM.DATABASE\OBJ\RELEASE\MAM.DATABASE.DLL" />
+			<Metadata Name="FileName" Value="C:\PROJECTS\MPUMALANGAASSETMANAGEMENT\MPUMALANGAASSETMANAGEMENT\BACKEND\MPUMALANGAASSETMANAGEMENT\MAM.DATABASE\OBJ\RELEASE\MAM.DATABASE.DLL" />
 			<Metadata Name="AssemblyName" Value="MAM.Database" />
 			<Metadata Name="PermissionSet" Value="SAFE" />
 			<Metadata Name="Owner" Value="" />
@@ -20,7 +20,7 @@
 			<Metadata Name="IsVisible" Value="True" />
 			<Metadata Name="IsModelAware" Value="True" />
 			<Metadata Name="SkipCreationIfEmpty" Value="True" />
-			<Metadata Name="AssemblySymbolsName" Value="C:\Projects\Asset Register MP\backend\MpumalangaAssetManagement\MAM.Database\obj\Release\MAM.Database.pdb" />
+			<Metadata Name="AssemblySymbolsName" Value="C:\Projects\MpumalangaAssetManagement\MpumalangaAssetManagement\backend\MpumalangaAssetManagement\MAM.Database\obj\Release\MAM.Database.pdb" />
 		</CustomData>
 		<CustomData Category="SqlCmdVariables" Type="SqlCmdVariable" />
 	</Header>

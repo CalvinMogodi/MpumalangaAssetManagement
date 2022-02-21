@@ -19,6 +19,10 @@ export class LeasedPropertiesService {
         return this.http.post<any>(`${environment.apiUrl}/api/leasemanagement/getleasedpropertydetails`, leasedProperty);
       }
 
+      deleteLeasedProperty(leasedProperty: LeasedProperty){
+        return this.http.post<boolean>(`${environment.apiUrl}/api/leasemanagement/deleteLeasedProperty`,leasedProperty);
+      }
+
       uploadHandoverDocuments(files : any, fileName: string) {
         const formData: FormData = new FormData();
         files.forEach(file => {

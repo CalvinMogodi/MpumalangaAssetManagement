@@ -49,7 +49,7 @@ namespace MAM.DataAccess.Repositories
 
                 return leasedProperties;
             }
-        }
+        }       
 
         public void Dispose()
         {

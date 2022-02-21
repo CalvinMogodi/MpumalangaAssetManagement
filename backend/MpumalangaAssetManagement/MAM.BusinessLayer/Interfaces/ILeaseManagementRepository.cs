@@ -5,8 +5,9 @@ using System.Text;
 
 namespace MAM.BusinessLayer.Interfaces
 {
-    public interface ILeaseManagementInterface
+    public interface ILeaseManagementRepository
     {
         List<LeasedProperty> GetLeasedProperties();
+        bool DeleteLeasedProperty(LeasedProperty leasedProperty);
     }
 }

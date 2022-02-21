@@ -5,7 +5,7 @@ using MAM.BusinessLayer.Models;
 
 namespace MAM.BusinessLayer.Interfaces
 {
-    public interface ConditionAssessmentInterface
+    public interface IConditionAssessmentRepository
     {
         int AddConditionAssessment(ConditionAssessment conditionAssessment);
         bool DeleteConditionAssessment(int id);
