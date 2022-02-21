@@ -32,9 +32,9 @@ namespace MAM.BusinessLayer.Repositories
 
         public bool DeleteLeasedProperty(LeasedProperty leasedProperty)
         {
-            using (var dataAccess = new DataAccess.Repositories.LeaseManegementRepository(appSettings.ConnectionString))
+            using (var dataAccess = new DataAccess.Repositories.LandUseManagementDetailRepository(appSettings.ConnectionString))
             {
-                dataAccess.DeleteHiredProperty(leasedProperty.ConvertToLeasedPropertyTable(leasedProperty));
+                dataAccess.SetLandUseManagementDetailIncomeLeaseStatus(leasedProperty.LandUseManagementDetail.ConvertLandUseManagementDetail(leasedProperty.LandUseManagementDetail));
                 return true;
             };
         }

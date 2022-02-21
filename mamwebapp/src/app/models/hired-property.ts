@@ -22,5 +22,6 @@ export class HiredProperty {
     createdDate: Date;
     modifiedByUser?: User;
     modifiedUserId?: number;
+    isDeleted: boolean;
     modifiedDate?: Date;
 }

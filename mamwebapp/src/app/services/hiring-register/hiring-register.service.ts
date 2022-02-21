@@ -13,17 +13,17 @@ import { environment } from "src/environments/environment";
         constructor(private http: HttpClient) { }
         
         getHiredProperties(): Observable<any>{
-            return this.http.get<Array<HiredProperty>>(`${environment.apiUrl}/api/hiringregister/getHiredProperties`);
+            return this.http.get<Array<HiredProperty>>(`${environment.apiUrl}/api/hiringregister/gethiredproperties`);
         }
 
         addHiredProperty(hiredProperty: HiredProperty) {
-          return this.http.post<number>(`${environment.apiUrl}/api/hiringregister/adduser`,hiredProperty);
+          return this.http.post<number>(`${environment.apiUrl}/api/hiringregister/addhiredproperty`,hiredProperty);
         }
       
         updateHiredProperty(hiredProperty: HiredProperty) {
-          return this.http.post<boolean>(`${environment.apiUrl}/api/hiringregister/updateuser`,hiredProperty);
+          return this.http.post<boolean>(`${environment.apiUrl}/api/hiringregister/updatehiredproperty`,hiredProperty);
         }
         deleteHiredProperty(hiredProperty: HiredProperty){
-          return this.http.post<boolean>(`${environment.apiUrl}/api/hiringregister/deleteuser`,hiredProperty);
+          return this.http.post<boolean>(`${environment.apiUrl}/api/hiringregister/deletehiredproperty`,hiredProperty);
         }
 }

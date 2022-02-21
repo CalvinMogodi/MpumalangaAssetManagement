@@ -120,16 +120,7 @@ export class SharedService {
   getHiringPropertyStatuses(){
     return [
       { name: 'Good Standing', code: 'GS', factor: 1 },
-      { name: 'Economic development & tourism', code: 'EDT', factor: 2 },
-      { name: 'Co-operative governance & traditional affairs', code: 'CGTA', factor: 3 },
-      { name: 'Community safety, security & liason', code: 'CSSL', factor: 4 },
-      { name: 'Culture, sport & recreation', code: 'CSR', factor: 5 },
-      { name: 'Education', code: 'E', factor: 6 },
-      { name: 'Provincial treasury', code: 'PT', factor: 7 },
-      { name: 'Health', code: 'H', factor: 8 },
-      { name: 'Human settlements', code: 'HS', factor: 9 },
-      { name: 'Social development', code: 'SD', factor: 10 },
-      { name: 'Public works, roads & transport', code: 'PWRT', factor: 11 },
+      { name: 'Month to Month', code: 'MM', factor: 2 }      
     ];
   }
 

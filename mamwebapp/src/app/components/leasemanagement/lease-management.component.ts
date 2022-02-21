@@ -14,7 +14,7 @@ import { SharedService } from 'src/app/services/shared.service';
 })
 export class LeaseManagementComponent implements OnInit {
   @Input() leasedProperties: Array<LeasedProperty>;
-  @ViewChild('exportLP',{ static: false }) myDiv: ElementRef<HTMLElement>;
+  @ViewChild('exportLP', { static: false }) myDiv: ElementRef<HTMLElement>;
   showLMDDialog: boolean = false;
   loading: boolean;
   dataIsLoaded: boolean = false;
@@ -24,10 +24,10 @@ export class LeaseManagementComponent implements OnInit {
   errorMsg: string;
   error = '';
   selectedLeasedProperty: LeasedProperty;
-  buttonItems: MenuItem[];  
+  buttonItems: MenuItem[];
   printItems: MenuItem[];
   items = [
-    { icon: 'pi pi-home',url: 'dashboard' },
+    { icon: 'pi pi-home', url: 'dashboard' },
     { label: 'Lease Management' }];
   cols = [
     { field: 'fileReference', header: 'File Reference' },
@@ -42,7 +42,7 @@ export class LeaseManagementComponent implements OnInit {
 
   constructor(private leasedPropertiesService: LeasedPropertiesService, private sharedService: SharedService, private messageService: MessageService,) {
     this.selectedLeasedProperty = this.sharedService.initLeasedProperty();
-   }
+  }
 
   ngOnInit() {
     this.buttonItems = [
@@ -53,92 +53,103 @@ export class LeaseManagementComponent implements OnInit {
         label: 'Delete', icon: 'pi pi-trash', command: () =>
           this.showComfirmaDeleteProperty()
       }
-  ]; 
-  this.printItems = [
-    {
-      label: 'PDF', icon: 'pi pi-file-pdf', command: () =>
-        this.exportPdf()
-    }, {
-      label: 'Excel', icon: 'pi pi-file-excel', command: () =>
-        this.exportExcel()
-    }
-]; 
-    this.getLeasedProperties();  
-   
+    ];
+    this.printItems = [
+      {
+        label: 'PDF', icon: 'pi pi-file-pdf', command: () =>
+          this.exportPdf()
+      }, {
+        label: 'Excel', icon: 'pi pi-file-excel', command: () =>
+          this.exportExcel()
+      }
+    ];
+    this.getLeasedProperties();
+
   }
 
   getLeasedProperties() {
     this.leasedPropertiesService.getLeasedProperties().pipe(first()).subscribe(leasedProperties => {
-      this.leasedProperties = leasedProperties;    
+      this.leasedProperties = leasedProperties;
       this.dataIsLoaded = true;
-    });   
+    });
   }
 
-  viewLeasedProperty(){
+  viewLeasedProperty() {
     this.leasedPropertiesService.getLeasedPropertyDetails(this.selectedLeasedProperty).pipe(first()).subscribe(leasedProperty => {
-      this.selectedLeasedProperty = leasedProperty;    
+      this.selectedLeasedProperty = leasedProperty;
       this.showLMDDialog = true;
-    });    
+    });
   }
 
-  showComfirmaDeleteProperty(){
+  showComfirmaDeleteProperty() {
     this.showComfirmaDelete = true;
   }
 
-  deleteLeasedProperty(){
-    const index = this.leasedProperties.indexOf(this.selectedLeasedProperty);
-    this.leasedProperties.splice(index, 1);
-    this.messageService.add({ severity: 'warn', summary: ' Property', detail: 'Property has been deleted successful.' });
+  deleteLeasedProperty() {
+    this.leasedPropertiesService.getLeasedPropertyDetails(this.selectedLeasedProperty).pipe(first()).subscribe(leasedProperty => {
+      this.leasedPropertiesService.deleteLeasedProperty(leasedProperty).pipe(first()).subscribe(isDeleted => {
+        if (isDeleted) {
+          this.messageService.add({ severity: 'warn', summary: 'Delete Property', detail: 'Property has been deleted successful.' });
+          const index = this.leasedProperties.indexOf(this.selectedLeasedProperty);
+          this.leasedProperties.splice(index, 1);
+        } else {
+          this.messageService.add({ severity: 'error', summary: 'Delete Property', detail: 'Property is not deleted successful.' });
+        }
+        this.loading = false;
+      }, error => {
+        this.messageService.add({ severity: 'error', summary: 'Error Occurred', detail: 'An error occurred while processing your request. please try again!' });
+      });
+    });
   }
 
   exportPdf() {
     import("jspdf").then(jsPDF => {
-        import("jspdf-autotable").then(x => {
-            const doc = new jsPDF.default();
-            //doc.autoPrint(this.cols, this.leasedProperties);
-            doc.save('Leased Properties.pdf');
-        })
+      import("jspdf-autotable").then(x => {
+        const doc = new jsPDF.default();
+        //doc.autoPrint(this.cols, this.leasedProperties);
+        doc.save('Leased Properties.pdf');
+      })
     })
-}
+  }
 
-exportExcel() {
+  exportExcel() {
     import("xlsx").then(xlsx => {
-        const worksheet = xlsx.utils.json_to_sheet(this.leasedProperties);
-        const workbook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
-        const excelBuffer: any = xlsx.write(workbook, { bookType: 'xlsx', type: 'array' });
-        this.saveAsExcelFile(excelBuffer, "products");
+      const worksheet = xlsx.utils.json_to_sheet(this.leasedProperties);
+      const workbook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
+      const excelBuffer: any = xlsx.write(workbook, { bookType: 'xlsx', type: 'array' });
+      this.saveAsExcelFile(excelBuffer, "products");
     });
-}
+  }
 
-saveAsExcelFile(buffer: any, fileName: string): void {
-  import('file-saver').then(FileSaver => {
+  saveAsExcelFile(buffer: any, fileName: string): void {
+    import('file-saver').then(FileSaver => {
       let EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
       let EXCEL_EXTENSION = '.xlsx';
       const data: Blob = new Blob([buffer], {
-          type: EXCEL_TYPE
+        type: EXCEL_TYPE
       });
-      FileSaver.saveAs(data, 'Leased Properties' + new Date().getDate() + "-" + new Date().getMonth() + "-" + new Date().getFullYear()  + EXCEL_EXTENSION);
-  });
-}
+      FileSaver.saveAs(data, 'Leased Properties' + new Date().getDate() + "-" + new Date().getMonth() + "-" + new Date().getFullYear() + EXCEL_EXTENSION);
+    });
+  }
 
-  attachSnagList(){
+  attachSnagList() {
 
   }
 
-  attachFinalHandoverDocument(){
+  attachFinalHandoverDocument() {
 
   }
 
-  selectLeasedProperty(leasedProperty: LeasedProperty){
+  selectLeasedProperty(leasedProperty: LeasedProperty) {
     this.selectedLeasedProperty = leasedProperty;
   }
-  exportLeasedProperty(){
+  exportLeasedProperty() {
     this.leasedPropertiesService.getLeasedPropertyDetails(this.selectedLeasedProperty).pipe(first()).subscribe(leasedProperty => {
-      this.selectedLeasedProperty = leasedProperty;    
+      this.selectedLeasedProperty = leasedProperty;
       this.doExport = true;
       let el: HTMLElement = this.myDiv.nativeElement;
       el.click();
-    });     
+    });
   }
 
 }

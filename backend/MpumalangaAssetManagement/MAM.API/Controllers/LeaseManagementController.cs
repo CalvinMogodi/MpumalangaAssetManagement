@@ -102,13 +102,13 @@ namespace MAM.API.Controllers
             return Ok(isUploaded);
         }
 
-        [HttpDelete]
-        [Route("deleteLeasedProperty/{id}")]
-        public IActionResult DeleteLeasedProperty(int id)
+        [HttpPost]
+        [Route("deleteLeasedProperty")]
+        public IActionResult DeleteLeasedProperty([FromBody]LeasedProperty leasedProperty)
         {
             try
             {
-                bool isUpdated = _leaseManagementService.DeleteLeasedProperty(id);
+                bool isUpdated = _leaseManagementService.DeleteLeasedProperty(leasedProperty);
                 return Ok(isUpdated);
             }
             catch (Exception ex)

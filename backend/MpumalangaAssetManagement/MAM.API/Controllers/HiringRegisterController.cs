@@ -22,9 +22,9 @@ namespace MAM.API.Controllers
 
         private IHiringRegisterService _hiringRegisterService;
 
-        public HiringRegisterController(IHiringRegisterService leaseManagementService)
+        public HiringRegisterController(IHiringRegisterService hiringRegisterService)
         {
-            _hiringRegisterService = leaseManagementService;
+            _hiringRegisterService = hiringRegisterService;
             SetLog4NetConfiguration();
         }
 
@@ -76,9 +76,9 @@ namespace MAM.API.Controllers
             }
         }
 
-        [HttpDelete]
+        [HttpPost]
         [Route("deletehiredproperty")]
-        public IActionResult DeletHiredProperty(HiredProperty hiredProperty)
+        public IActionResult DeletHiredProperty([FromBody]HiredProperty hiredProperty)
         {
             try
             {

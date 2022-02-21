@@ -4,7 +4,7 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { GoogleMapsModule } from '@angular/google-maps'
-import { CurrencyPipe} from '@angular/common';
+import { CurrencyPipe, DatePipe} from '@angular/common';
 // for HttpClient import:
 import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
 
@@ -186,7 +186,7 @@ import { LeaseRegisterComponent } from './components/lesesregister/leaseregister
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     CurrencyPipe,FilterService,PrimeNGConfig,ConfirmationService,
-    AddMunicipalUtilityServicesComponent
+    AddMunicipalUtilityServicesComponent,DatePipe
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

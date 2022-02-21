@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { first } from 'rxjs/operators';
 import { User } from '../../models/user.model';
-import { UserService } from '../../services/user/user.service';
+import { HiringRegisterService } from '../../services/hiring-register/hiring-register.service';
 import { MenuItem, MessageService } from 'primeng/api';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from '../../services/authentication.service';
@@ -10,6 +10,7 @@ import { FormControl } from '@angular/forms';
 import { SharedService } from 'src/app/services/shared.service';
 import { type } from 'os';
 import { HiredProperty } from 'src/app/models/hired-property';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-hiring',
@@ -28,20 +29,22 @@ export class HiringComponent implements OnInit {
   buildingConditions: any[] = [];
   hiredProperty: HiredProperty;
   currentUser: User;
+  hiredProperties: HiredProperty[] = [];
+  isView: boolean = false;
 
   showComfirmaDelete = false;
   showResetPasswordComfirmation: boolean = false;
-  users: User[] = [];
-  clonedUsers: User[] = [];
+  clonedHiredProperties: HiredProperty[] = [];
+
   cols: any[];
   items: MenuItem[];
   home: MenuItem;
   submitted = false;
   error = '';
   emailExsist: boolean = false;
+  selectedHiredProperty: HiredProperty;
 
-  resetUser: User;
-  selectedUser: User;
+
   index: any;
   showDialog: boolean = false;
   showConfirmResetPassword: boolean = false;
@@ -53,17 +56,28 @@ export class HiringComponent implements OnInit {
   buttonItems: MenuItem[];
   header: string = 'Add Candidate';
 
-  constructor(private userService: UserService,
+  constructor(private hiringRegisterService: HiringRegisterService,
     private formBuilder: FormBuilder,
     private confirmationService: ConfirmationService,
     private authenticationService: AuthenticationService,
+    private datePipe: DatePipe,
     private messageService: MessageService,
     private sharedService: SharedService) { }
   roles: any[];
 
   ngOnInit() {
+    this.hiringRegisterService.getHiredProperties().pipe(first()).subscribe(properties => {
+      properties.forEach(element => {
+        element.createdDate = this.datePipe.transform(element.createdDate, "yyyy-MM-dd");
+        element.modifiedDate = this.datePipe.transform(element.modifiedDate, "yyyy-MM-dd");
+        element.startingDate = this.datePipe.transform(element.startingDate, "EEEE, d MMMM, y");
+        element.terminationDate = this.datePipe.transform(element.terminationDate, "EEEE, d MMMM, y");
+      });
+      this.loading = false;
+      this.hiredProperties = properties;
+      this.clonedHiredProperties = properties;
+    });
 
-    this.showToast('Update User', 'User has been updated successful.');
     this.authenticationService.currentUser.subscribe(x => {
       this.currentUser = x;
     });
@@ -72,6 +86,13 @@ export class HiringComponent implements OnInit {
       {
         label: 'View', icon: 'pi pi-eye', command: () =>
           this.viewProperty()
+      },
+      {
+        label: 'Update', icon: 'pi pi-pencil', command: () =>
+          this.editProperty()
+      }, {
+        label: 'Delete', icon: 'pi pi-trash', command: () =>
+          this.confirmDelete()
       }
     ];
 
@@ -80,7 +101,27 @@ export class HiringComponent implements OnInit {
     this.statuses = this.sharedService.getHiringPropertyStatuses();
     this.districts = this.sharedService.getDistricts();
     this.buildingConditions = this.sharedService.getConditionRatings();
-    
+
+   
+
+    this.items = [{ icon: 'pi pi-home', url: 'dashboard' },
+    { label: 'Hiring Register' }];
+
+    this.cols = [
+      { field: 'propertyCode', header: 'Property code' },
+      { field: 'type', header: 'Type' },
+      { field: 'district', header: 'District' },
+      { field: 'userDepartment', header: 'User Department' },
+      { field: 'startingDate', header: 'Start Date of Lease' },
+      { field: 'terminationDate', header: 'Termination Date of Lease' },
+      { field: 'status', header: 'Status' }
+    ];
+
+    this.loading = false;
+    this.initForm();
+  }
+
+  initForm(){
     this.hiringForm = this.formBuilder.group({
       district: new FormControl('', Validators.compose([Validators.required])),
       type: new FormControl('', Validators.compose([Validators.required])),
@@ -96,99 +137,159 @@ export class HiringComponent implements OnInit {
       area: new FormControl('', Validators.compose([Validators.required])),
       escalationRate: new FormControl('', Validators.compose([Validators.required])),
       buildingCondition: new FormControl('', Validators.compose([Validators.required])),
-
-      
+      landlandAgentName: new FormControl('', Validators.compose([Validators.required])),
     });
-
-    this.items = [{ icon: 'pi pi-home', url: 'dashboard' },
-    { label: 'Hiring Register' }];
-
-    this.cols = [
-      { field: 'propertyCode', header: 'Property code' },
-      { field: 'typeofLeasedProperty', header: 'Type' },     
-      { field: 'district', header: 'District' },
-      { field: 'userDepartment', header: 'User Department' },
-      { field: 'startDateofLease', header: 'Start Date of Lease' },
-      { field: 'terminationDateofLease', header: 'Termination Date of Lease' },
-      { field: 'status', header: 'Status' }    
-    ];
-
-    this.loading = false;   
-  
   }
 
-  viewProperty(){
+  setProperty(){
+    this.showDialog = true;
+    const district = this.districts.filter(d => d.name == this.selectedHiredProperty.district)[0];
+    const type = this.types.filter(d => d.name == this.selectedHiredProperty.type)[0];
+    const userDepartment = this.userDepartments.filter(d => d.name == this.selectedHiredProperty.userDepartment)[0];
+    const status = this.statuses.filter(d => d.name == this.selectedHiredProperty.status)[0];
+    const buildingCondition = this.buildingConditions.filter(d => d.name == this.selectedHiredProperty.buildingCondition)[0];
+    this.hiringForm = this.formBuilder.group({
+      district: new FormControl(district, Validators.compose([Validators.required])),
+      type: new FormControl(type, Validators.compose([Validators.required])),
+      propertyCode: new FormControl(this.selectedHiredProperty.propertyCode, Validators.compose([Validators.required])),
+      town: new FormControl(this.selectedHiredProperty.town, Validators.compose([Validators.required])),
+      rentalAmount: new FormControl(this.selectedHiredProperty.monthlyRental, Validators.compose([Validators.required])),
+      startDate: new FormControl(new Date(this.selectedHiredProperty.startingDate), Validators.compose([Validators.required])),
+      terminationDate: new FormControl(new Date(this.selectedHiredProperty.terminationDate), Validators.compose([Validators.required])),
+      address: new FormControl(this.selectedHiredProperty.address, Validators.compose([Validators.required])),
+      userDepartment: new FormControl(userDepartment, Validators.compose([Validators.required])),
+      status: new FormControl(status, Validators.compose([Validators.required])),
+      stuffNumber: new FormControl(this.selectedHiredProperty.numberofStuff, Validators.compose([Validators.required])),
+      area: new FormControl(this.selectedHiredProperty.area, Validators.compose([Validators.required])),
+      escalationRate: new FormControl(this.selectedHiredProperty.escalationRate, Validators.compose([Validators.required])),
+      buildingCondition: new FormControl(buildingCondition, Validators.compose([Validators.required])),
+      landlandAgentName: new FormControl(this.selectedHiredProperty.landlandAgentName, Validators.compose([Validators.required])),
+    });
+  }
 
+  editProperty(){
+    this.isView = false; 
+    this.header = "Edit Property";
+    this.setProperty();   
+  }
+
+  viewProperty() {   
+    this.isView = true; 
+    this.header = this.selectedHiredProperty.propertyCode;
+    this.setProperty();
   }
 
   get f() { return this.hiringForm.controls; }
 
-  onSubmit(){
+  onSubmit() {
 
-    const hiredProperty = {
-      id: 0,
-    type: this.hiringForm.controls["type"].value != undefined ? this.hiringForm.controls["type"].value.name : null,
-    district: this.hiringForm.controls["district"].value != undefined ? this.hiringForm.controls["district"].value.name : null,
-    propertyCode: this.hiringForm.controls["propertyCode"].value,
-    startingDate: this.hiringForm.controls["startingDate"].value,
-    terminationDate: this.hiringForm.controls["terminationDate"].value,
-    monthlyRental: this.hiringForm.controls["monthlyRental"].value, 
-    town: this.hiringForm.controls["town"].value,
-    status: this.hiringForm.controls["status"].value != undefined ? this.hiringForm.controls["status"].value.name : null,
-    userDepartment: this.hiringForm.controls["userDepartment"].value != undefined ? this.hiringForm.controls["userDepartment"].value.name : null,
-    buildingCondition: this.hiringForm.controls["buildingCondition"].value != undefined ? this.hiringForm.controls["buildingCondition"].value.name : null,
-    landlandAgentName: this.hiringForm.controls["landlandAgentName"].value,
-    numberofStuff: this.hiringForm.controls["numberofStuff"].value,
-    escalationRate: this.hiringForm.controls["escalationRate"].value,
-    area: this.hiringForm.controls["area"].value,
-    address: this.hiringForm.controls["address"].value,
-    createdByUser: this.currentUser,
-    createdUserId: this.currentUser.id,
-    createdDate: new Date()
-    }   
-    
+    const hiredProperty = new HiredProperty();//{
+    hiredProperty.id = 0,
+      hiredProperty.type = this.hiringForm.controls["type"].value != undefined ? this.hiringForm.controls["type"].value.name : null;
+    hiredProperty.district = this.hiringForm.controls["district"].value != undefined ? this.hiringForm.controls["district"].value.name : null;
+    hiredProperty.propertyCode = this.hiringForm.controls["propertyCode"].value;
+    hiredProperty.startingDate = this.hiringForm.controls["startDate"].value;
+    hiredProperty.terminationDate = this.hiringForm.controls["terminationDate"].value;
+    hiredProperty.monthlyRental = this.hiringForm.controls["rentalAmount"].value;
+    hiredProperty.town = this.hiringForm.controls["town"].value;
+    hiredProperty.status = this.hiringForm.controls["status"].value != undefined ? this.hiringForm.controls["status"].value.name : null;
+    hiredProperty.userDepartment = this.hiringForm.controls["userDepartment"].value != undefined ? this.hiringForm.controls["userDepartment"].value.name : null;
+    hiredProperty.buildingCondition = this.hiringForm.controls["buildingCondition"].value != undefined ? this.hiringForm.controls["buildingCondition"].value.name : null;
+    hiredProperty.landlandAgentName = this.hiringForm.controls["landlandAgentName"].value;
+    hiredProperty.numberofStuff = this.hiringForm.controls["stuffNumber"].value;
+    hiredProperty.escalationRate = this.hiringForm.controls["escalationRate"].value;
+    hiredProperty.area = this.hiringForm.controls["area"].value;
+    hiredProperty.address = this.hiringForm.controls["address"].value;
+    hiredProperty.createdByUser = this.currentUser;
+    hiredProperty.createdUserId = this.currentUser.id;
+    hiredProperty.createdDate = new Date();
+    hiredProperty.isDeleted = false;
+
+    this.addHiredProperty(hiredProperty);
   }
 
-  onRowEditSave(user: User) {
-    if (user.name === undefined || user.name === '') {
-      return;
-    }
+  onUpdate(){
+    const hiredProperty = new HiredProperty();//{
+    hiredProperty.id = this.selectedHiredProperty.id,
+      hiredProperty.type = this.hiringForm.controls["type"].value != undefined ? this.hiringForm.controls["type"].value.name : null;
+    hiredProperty.district = this.hiringForm.controls["district"].value != undefined ? this.hiringForm.controls["district"].value.name : null;
+    hiredProperty.propertyCode = this.hiringForm.controls["propertyCode"].value;
+    hiredProperty.startingDate = this.hiringForm.controls["startDate"].value;
+    hiredProperty.terminationDate = this.hiringForm.controls["terminationDate"].value;
+    hiredProperty.monthlyRental = this.hiringForm.controls["rentalAmount"].value;
+    hiredProperty.town = this.hiringForm.controls["town"].value;
+    hiredProperty.status = this.hiringForm.controls["status"].value != undefined ? this.hiringForm.controls["status"].value.name : null;
+    hiredProperty.userDepartment = this.hiringForm.controls["userDepartment"].value != undefined ? this.hiringForm.controls["userDepartment"].value.name : null;
+    hiredProperty.buildingCondition = this.hiringForm.controls["buildingCondition"].value != undefined ? this.hiringForm.controls["buildingCondition"].value.name : null;
+    hiredProperty.landlandAgentName = this.hiringForm.controls["landlandAgentName"].value;
+    hiredProperty.numberofStuff = this.hiringForm.controls["stuffNumber"].value;
+    hiredProperty.escalationRate = this.hiringForm.controls["escalationRate"].value;
+    hiredProperty.area = this.hiringForm.controls["area"].value;
+    hiredProperty.address = this.hiringForm.controls["address"].value;
+    hiredProperty.createdByUser = this.currentUser;
+    hiredProperty.createdUserId = this.currentUser.id;
+    hiredProperty.createdDate = new Date();
+    hiredProperty.isDeleted = false;
+    hiredProperty.modifiedDate = new Date();
+    hiredProperty.modifiedByUser = this.currentUser;
+    hiredProperty.modifiedUserId = this.currentUser.id;
 
-    if (user.surname === undefined || user.surname === '') {
-      return;
-    }
+    this.updateHiredProperty(hiredProperty);
+  }
 
-    if (this.validEmail(user.email, user.id)) {
-      return;
-    }
-
-    this.userService.updateUser(user).pipe(first()).subscribe(isUpdated => {
-      if (isUpdated) {
-        this.showToast('Update User', 'User has been updated successful.');
-        this.loading = false;
+  addHiredProperty(hiredProperty: HiredProperty) {
+    this.hiringRegisterService.addHiredProperty(hiredProperty).pipe().subscribe(id => {
+      if (id != 0) {
+        hiredProperty.id = id;
+        const _hiredProperty:any = hiredProperty;
+        _hiredProperty.createdDate = this.datePipe.transform(hiredProperty.createdDate, "yyyy-MM-dd");
+        _hiredProperty.modifiedDate = this.datePipe.transform(hiredProperty.modifiedDate, "yyyy-MM-dd");
+        _hiredProperty.startingDate = this.datePipe.transform(hiredProperty.startingDate, "EEEE, d MMMM, y");
+        _hiredProperty.terminationDate = this.datePipe.transform(hiredProperty.terminationDate, "EEEE, d MMMM, y");
+        this.hiredProperties.push(_hiredProperty);
+        this.showToast('Add Property', 'Property has been added successful');
       } else {
-        this.showErrorToast('Update User', 'User has not been updated successful.');
+        this.messageService.add({ severity: 'error', summary: 'Add Property', detail: 'Property is not added successful.' });
+      }
+      this.showDialog = false;
+      this.isAdding = false;
+    },
+      error => {
+        this.messageService.add({ severity: 'error', summary: 'Error Occurred', detail: 'An error occurred while processing your request. please try again!' });
+        this.error = error;
+        this.isAdding = false;
+      });
+  }
+
+  updateHiredProperty(hiredProperty: HiredProperty) {
+    this.hiringRegisterService.updateHiredProperty(hiredProperty).pipe(first()).subscribe(isUpdated => {
+      if (isUpdated) {
+        this.showToast('Update Property', 'Property has been updated successful.');
+        this.loading = false;
+        const _hiredProperty:any = hiredProperty;
+        _hiredProperty.createdDate = this.datePipe.transform(hiredProperty.createdDate, "yyyy-MM-dd");
+        _hiredProperty.modifiedDate = this.datePipe.transform(hiredProperty.modifiedDate, "yyyy-MM-dd");
+        _hiredProperty.startingDate = this.datePipe.transform(hiredProperty.startingDate, "EEEE, d MMMM, y");
+        _hiredProperty.terminationDate = this.datePipe.transform(hiredProperty.terminationDate, "EEEE, d MMMM, y");
+        this.hiredProperties[this.index] = hiredProperty;
+        this.showDialog = false;
+      } else {
+        this.showErrorToast('Update Property', 'Property has not been updated successful.');
         this.loading = false;
       }
     });
   }
 
-  validEmail(str: string, id: number) {
-    var email = str == undefined ? this.f.email.value : str;
+  validProperty(propertyCode: string, id: number) {
+    var _propertyCode = propertyCode == undefined ? this.f.email.value : propertyCode;
     if (id != undefined) {//for edit
-      if (str === undefined || str === '')
+      if (propertyCode === undefined || propertyCode === '')
         return false
       else
-        return this.users.filter(u => u.email.toLowerCase() == email.toLowerCase() && u.id != id).length > 0;
+        return this.hiredProperties.filter(u => u.propertyCode.toLowerCase() == _propertyCode.toLowerCase() && u.id != id).length > 0;
     } else { //for add      
-      return this.users.filter(u => u.email.toLowerCase() == email.toLowerCase()).length > 0 ? this.emailExsist = true : this.emailExsist = false;
+      return this.hiredProperties.filter(u => u.propertyCode.toLowerCase() == _propertyCode.toLowerCase()).length > 0 ? this.emailExsist = true : this.emailExsist = false;
     }
-  }
-
-  onRowEditCancel() {
-    let user = this.selectedUser;
-    let index = this.index;
-    this.users[index] = this.clonedUsers[user.id];
   }
 
   showToast(summary: string, detail: string) {
@@ -204,99 +305,31 @@ export class HiringComponent implements OnInit {
 
   onRowEditInit(e) { }
 
-  editUser(user: User) {
-    this.userService.updateUser(user).pipe().subscribe(newUser => {
-      if (newUser) {
-        this.users[this.index] = user;
-        this.messageService.add({ severity: 'success', summary: 'Update User', detail: 'User has been updated successful.' });
-      } else {
-        this.messageService.add({ severity: 'error', summary: 'Update User', detail: 'User has been updated successful' });
-      }
-      this.showDialog = false;
-      this.isAdding = false;
-    },
-      error => {
-        this.messageService.add({ severity: 'error', summary: 'Error Occurred', detail: 'An error occurred while processing your request. please try again!' });
-        this.error = error;
-        this.isAdding = false;
-      });
-  }
 
-  addUser(user: User) {
-    this.userService.addUser(user).pipe().subscribe(newUser => {
-      if (newUser.id != 0) {
-        this.users.push(newUser);
-        this.showToast('Add User', 'User has been added successful');
-      } else {
-        this.messageService.add({ severity: 'error', summary: 'Add User', detail: 'User is not added successful.' });
-      }
-      this.showDialog = false;
-      this.isAdding = false;
-    },
-      error => {
-        this.messageService.add({ severity: 'error', summary: 'Error Occurred', detail: 'An error occurred while processing your request. please try again!' });
-        this.error = error;
-        this.isAdding = false;
-      });
-  }
-
-  resetPassword() {
-    var randomstring = Math.random().toString(36).slice(-8);
-    this.userService.resetPassword(this.resetUser.username, randomstring).pipe(first()).subscribe(isUpdated => {
-      if (isUpdated) {
-        this.showToast('Reset Password', 'Please check your email to reset your password');
-        this.loading = false;
-      } else {
-        this.messageService.add({ severity: 'error', summary: 'Reset Password', detail: 'Failed to reset your password.' });
-        this.loading = false;
-      }
-    }, error => {
-      this.messageService.add({ severity: 'error', summary: 'Error Occurred', detail: 'An error occurred while processing your request. please try again!' });
-      this.loading = false;
-    });
-  }
-
-  deleteUser() {
-    this.userService.deleteUser(this.selectedUser).pipe(first()).subscribe(isDeleted => {
+  deleteHiredProperty() {
+    this.selectedHiredProperty.createdDate = new Date(this.selectedHiredProperty.createdDate);
+    this.selectedHiredProperty.modifiedDate = new Date(this.selectedHiredProperty.modifiedDate);
+    this.selectedHiredProperty.startingDate = new Date(this.selectedHiredProperty.startingDate);
+    this.selectedHiredProperty.terminationDate = new Date(this.selectedHiredProperty.terminationDate);
+    this.hiringRegisterService.deleteHiredProperty(this.selectedHiredProperty).pipe(first()).subscribe(isDeleted => {
       if (isDeleted) {
-        this.messageService.add({ severity: 'warn', summary: 'Delete User', detail: 'User has been deleted successful.' });
-        this.users.splice(this.index, 1);
+        this.messageService.add({ severity: 'warn', summary: 'Delete Property', detail: 'Property has been deleted successful.' });
+        this.hiredProperties.splice(this.index, 1);
       } else {
-        this.messageService.add({ severity: 'error', summary: 'Delete User', detail: 'User is not deleted successful.' });
+        this.messageService.add({ severity: 'error', summary: 'Delete Property', detail: 'Property is not deleted successful.' });
       }
       this.loading = false;
     }, error => {
       this.messageService.add({ severity: 'error', summary: 'Error Occurred', detail: 'An error occurred while processing your request. please try again!' });
     });
-  }
-
-  confirmResetPassword(user) {
-    this.resetUser = user;
-    this.showResetPasswordComfirmation = true;
   }
 
   confirmDelete() {
     this.showComfirmaDelete = true;
   }
 
-  update() {
-    this.header = 'Edit User';
-    this.showDialog = true;
-    this.selectedRole = this.selectedUser.roleId;
-    let role = this.roles.filter(u => u.factor == this.selectedUser.roleId)[0];
-    let department = this.departments.filter(u => u.name == this.selectedUser.department)[0];
-    this.hiringForm = this.formBuilder.group({
-      name: new FormControl(this.selectedUser.name, Validators.compose([Validators.required])),
-      surname: new FormControl(this.selectedUser.surname, Validators.compose([Validators.required])),
-      email: new FormControl(this.selectedUser.email, Validators.compose([Validators.required, Validators.email])),
-      role: new FormControl(role, Validators.compose([Validators.required])),
-      department: new FormControl(department)
-    });
-  }
-
-  selectUser(user: User, index: Number) {
-
-    this.selectedUser = user;
+  selectProperty(hiredProperty: HiredProperty, index: Number) {
+    this.selectedHiredProperty = hiredProperty;
     this.index = index;
   }
 }

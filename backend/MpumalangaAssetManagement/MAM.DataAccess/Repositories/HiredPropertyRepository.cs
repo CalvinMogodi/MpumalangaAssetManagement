@@ -46,7 +46,8 @@ namespace MAM.DataAccess.Repositories
         {
             using (var db = new DataContext(_connectionString))
             {
-                db.HiredProperties.Remove(hiredProperty);
+                hiredProperty.IsDeteted = true;
+                db.HiredProperties.Update(hiredProperty);
                 db.SaveChanges();
             }
         }

@@ -12,7 +12,7 @@ namespace MAM.API.Services
     {
         List<LeasedProperty> GetLeasedProperties();        
         LeasedProperty GetLeasedPropertyDetails(LeasedProperty leasedProperty);
-        bool DeleteLeasedProperty(int id);
+        bool DeleteLeasedProperty(LeasedProperty leasedProperty);
     }
 
     public class LeaseManagementService : ILeaseManagementService
