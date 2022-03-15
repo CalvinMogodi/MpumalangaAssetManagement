@@ -47,7 +47,9 @@ namespace MAM.DataAccess.Repositories
                                       LandId = l.Id
                                   }).ToList();
 
-                return leasedProperties;
+                var list = leasedProperties.GroupBy(x => x.LeaseStatusesId).Select(g => g.First()).ToList();
+
+                return list;
             }
         }       
 

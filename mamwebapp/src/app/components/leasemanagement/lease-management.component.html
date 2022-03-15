@@ -24,44 +24,27 @@
         </ng-template>
         <ng-template pTemplate="header">
             <tr>
-                <th pSortableColumn="fileReference">File Reference <p-sortIcon field="fileReference"></p-sortIcon>
-                </th>
-                <th style="width: 110px;" pSortableColumn="type">District <p-sortIcon field="district"></p-sortIcon>
-                </th>
-                <th style="width: 110px;" pSortableColumn="type">Type <p-sortIcon field="type"></p-sortIcon>
-                </th>
-                <th pSortableColumn="propertyCode">Property Code <p-sortIcon field="propertyCode"></p-sortIcon>
-                </th>
-                <th pSortableColumn="facilityName">Facility Name <p-sortIcon field="facilityName"></p-sortIcon>
-                </th>
-                <th pSortableColumn="natureofLease">Nature of Lease <p-sortIcon field="natureofLease"></p-sortIcon>
-                </th>
-                <th pSortableColumn="startingDate">Starting Date <p-sortIcon field="startingDate"></p-sortIcon>
-                </th>
-                <th pSortableColumn="terminationDate">Termination Date <p-sortIcon field="terminationDate"></p-sortIcon>
+                <th *ngFor="let col of cols" [pSortableColumn]="col.field" [style.width]="col.field == 'status' ? '100px' : 'unset'">
+                    {{col.header}}<p-sortIcon [field]="col.field" ariaLabel="Activate to sort"
+                    ariaLabelDesc="Activate to sort in descending order"
+                    ariaLabelAsc="Activate to sort in ascending order"></p-sortIcon>
                 </th>
                 <th>Actions</th>
             </tr>
         </ng-template>
-        <ng-template pTemplate="body" let-property>
-            <tr>
-                <td>{{property.fileReference}}</td>
-                <td>{{property.district}}</td>
-                <td>{{property.type}}</td>
-                <td>{{property.propertyCode}}</td>
-                <td>{{property.facilityName}}</td>
-                <td>{{property.natureofLease}}</td>
-                <td>{{property.startingDate | date}}</td>
-                <td>{{property.terminationDate | date}}</td>
-                <td>
-                    <div style="text-align: center;">
-                        <p-splitButton label="More" [model]="buttonItems"
-                            (onDropdownClick)="selectLeasedProperty(property)" styleClass="p-button-secondary">
-                        </p-splitButton>
-                    </div>
+        <ng-template pTemplate="body" let-rowData let-editing="editing" let-ri="rowIndex">
+            <tr [pEditableRow]="rowData">
+                <td *ngFor="let col of cols">
+                    <i *ngIf="col.field == 'status'" class="pi pi-circle-on" style="font-size: 2rem"
+                        [style.color]="rowData[col.field]"></i>
+                    <label *ngIf="col.field != 'status'">{{rowData[col.field]}}</label>
+                </td>
+                <td style="text-align:center">
+                    <p-splitButton label="More" [model]="buttonItems" (onDropdownClick)="selectProperty(rowData, ri)"
+                        styleClass="p-button-secondary"></p-splitButton>
                 </td>
             </tr>
-        </ng-template>       
+        </ng-template>      
     </p-table>
     <div class="p-d-flex" style="text-align: end;">
         <p-splitButton label="Export" [model]="printItems" icon="pi pi-save">

@@ -13,7 +13,7 @@ export class LeaseRegisterComponent implements OnInit {
 
   ngOnInit() {
     this.items = [{ icon: 'pi pi-home', url: 'dashboard' },
-    { label: 'Hiring Register' }];
+    { label: 'Hiring' }];
   }
 
 }

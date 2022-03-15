@@ -3,6 +3,8 @@ import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { MenuItem, MessageService } from 'primeng/api';
 import { first } from 'rxjs/operators';
 import { LeasedProperty } from 'src/app/models/leased-property.model';
+import { User } from 'src/app/models/user.model';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 import { LeasedPropertiesService } from 'src/app/services/leased-property/leased-property.service';
 import { SharedService } from 'src/app/services/shared.service';
 
@@ -26,22 +28,27 @@ export class LeaseManagementComponent implements OnInit {
   selectedLeasedProperty: LeasedProperty;
   buttonItems: MenuItem[];
   printItems: MenuItem[];
+  currentUser: User;
   items = [
     { icon: 'pi pi-home', url: 'dashboard' },
-    { label: 'Lease Management' }];
-  cols = [
-    { field: 'fileReference', header: 'File Reference' },
-    { field: 'district', header: 'District' },
-    { field: 'type', header: 'Type' },
-    { field: 'propertyCode', header: 'Property Code' },
-    { field: 'facilityName', header: 'Facility Name' },
-    { field: 'natureofLease', header: 'Nature of Lease' },
-    { field: 'startingDate', header: 'Starting Date' },
-    { field: 'terminationDate', header: 'Termination Date' }
-  ];
+    { label: 'Letting' }];
+  cols = [      
+      { field: 'fileReference', header: 'File Reference' },
+      { field: 'propertyCode', header: 'Property code' },      
+      { field: 'district', header: 'District' },
+      { field: 'type', header: 'Type' },      
+      { field: 'startingDate', header: 'Start Date' },
+      { field: 'terminationDate', header: 'Termination Date' },
+      { field: 'userDepartment', header: 'User Department' },
+      { field: 'status', header: 'Status' }
+    ];
 
-  constructor(private leasedPropertiesService: LeasedPropertiesService, private sharedService: SharedService, private messageService: MessageService,) {
+  constructor(private leasedPropertiesService: LeasedPropertiesService, private sharedService: SharedService, 
+    private authenticationService: AuthenticationService, private datePipe: DatePipe,private messageService: MessageService,) {
     this.selectedLeasedProperty = this.sharedService.initLeasedProperty();
+    this.authenticationService.currentUser.subscribe(x => {
+      this.currentUser = x;
+    });
   }
 
   ngOnInit() {
@@ -68,10 +75,27 @@ export class LeaseManagementComponent implements OnInit {
   }
 
   getLeasedProperties() {
-    this.leasedPropertiesService.getLeasedProperties().pipe(first()).subscribe(leasedProperties => {
-      this.leasedProperties = leasedProperties;
+    this.leasedPropertiesService.getLeasedProperties().pipe(first()).subscribe(properties => {
+      properties.forEach(element => {
+        const terminationDateCheck = this.monthDiff(new Date(element.terminationDate), new Date());
+        element.status = new Date(element.terminationDate) < new Date() ? "red" : terminationDateCheck <= -6 ? "green" : terminationDateCheck > -6 ? "yellow" : "";
+        element.createdDate = this.datePipe.transform(element.createdDate, "yyyy-MM-dd");
+        element.modifiedDate = this.datePipe.transform(element.modifiedDate, "yyyy-MM-dd");
+        element.startingDate = this.datePipe.transform(element.startingDate, "EEEE, d MMMM, y");
+        element.terminationDate = this.datePipe.transform(element.terminationDate, "EEEE, d MMMM, y");
+        element.userDepartment = this.currentUser.department;
+      });
+      this.leasedProperties = properties;
       this.dataIsLoaded = true;
     });
+  }
+
+  monthDiff(d1: Date, d2: Date) {
+    var months;
+    months = (d2.getFullYear() - d1.getFullYear()) * 12;
+    months -= d1.getMonth();
+    months += d2.getMonth();
+    return months;
   }
 
   viewLeasedProperty() {

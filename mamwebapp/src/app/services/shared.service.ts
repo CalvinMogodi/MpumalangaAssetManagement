@@ -209,10 +209,16 @@ export class SharedService {
 
   getPropertyTypes(){
     return [
-      { name: 'Erf', code: 'E', factor: 1 },
-      { name: 'Farm', code: 'F', factor: 2 },
-      { name: 'Agricultural Holding', code: 'A', factor: 3 },
-      { name: 'Sectional Title', code: 'S', factor: 4 }
+      { name: 'Agricultural Holding', code: 'A', factor: 1 },
+      { name: 'Clinic', code: 'A', factor: 2 },
+      { name: 'Erf', code: 'E', factor: 3 },
+      { name: 'Farm', code: 'F', factor: 4 },      
+      { name: 'Office', code: 'O', factor: 5 },
+      { name: 'Residential', code: 'Res', factor: 6 },
+      { name: 'Retail', code: 'R', factor: 7 },
+      { name: 'Sectional Title', code: 'S', factor: 8 },
+      { name: 'Warehouse', code: 'warehouse', factor: 9 },
+      { name: 'Other', code: 'Other', factor: 10 }
     ];
   }
 
@@ -343,11 +349,11 @@ export class SharedService {
 
   getConditionRatings() {
     const conditionRatings = [
-      { name: 'C1 (Excellent)', code: 'C1', factor: 1 },
-      { name: 'C2 (Good)', code: 'C2', factor: 2 },
-      { name: 'C3 (Fair)', code: 'C3', factor: 3 },
-      { name: 'C4 (Poor)', code: 'C4', factor: 4 },
-      { name: 'C5 (Very Poor)', code: 'C5', factor: 5 },
+      { name: 'C1 (Excellent)', code: 'Excellent', factor: 1 },
+      { name: 'C2 (Good)', code: 'Good', factor: 2 },
+      { name: 'C3 (Fair)', code: 'Fair', factor: 3 },
+      { name: 'C4 (Poor)', code: 'Poor', factor: 4 },
+      { name: 'C5 (Very Poor)', code: 'Very poor', factor: 5 },
     ];
 
     return conditionRatings;

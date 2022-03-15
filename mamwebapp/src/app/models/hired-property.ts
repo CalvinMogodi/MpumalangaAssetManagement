@@ -9,12 +9,15 @@ export class HiredProperty {
     startingDate: Date;
     terminationDate: Date;
     monthlyRental: number;   
+    startRentalAmount: number; 
     town: string;
     status: string;
     userDepartment: string;
     landlandAgentName: string;
-    numberofStuff: number;
+    landlandAgentContactDetails: string;
+    numberofStaff: number;
     escalationRate: number;
+    escalationDate: Date;
     area: number;
     address: string;
     createdByUser: User;
