@@ -1,6 +1,5 @@
 <p-toast [style]="{marginTop: '80px'}" position="top-right"></p-toast>
 <p-breadcrumb [model]="items"></p-breadcrumb>
-<br /><br />
 
 <div class="text-center" style="color: red;" *ngIf="error">
     <h5 class="mt-20">
@@ -11,6 +10,16 @@
 </div>
 
 <div class="row">
+    <div style="width:100%;height:400px">
+        <google-map height="400px" width="100%" [zoom]="zoom" [center]="center" [options]="options">
+            <map-marker (mapClick)="openInfo(marker)" *ngFor="let marker of markers"
+                [position]="marker.position" [label]="marker.label" [title]="marker.title"
+                [options]="marker.options">
+            </map-marker>
+            <map-info-window>{{ dialogHeader }}</map-info-window>
+        </google-map>
+    </div>
+
     <p-table id="lpComponentID" #lp [value]="leasedProperties" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
         responsiveLayout="scroll" [rowsPerPageOptions]="[5,10,15]" dataKey="leaseStatusesId" selectionMode="single"
         rowExpandMode="single"

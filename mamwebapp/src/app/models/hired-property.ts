@@ -27,4 +27,6 @@ export class HiredProperty {
     modifiedUserId?: number;
     isDeleted: boolean;
     modifiedDate?: Date;
+    latitude: string;
+    longitude: string
 }

@@ -14,6 +14,8 @@ namespace MAM.DataAccess.Tables
         public string FacilityName { get; set; }
         public int LandId { get; set; }
         public string NatureofLease { get; set; }
+        public string Latitude { get; set; }
+        public string Longitude { get; set; }
         public DateTime? StartingDate { get; set; }
         public DateTime? TerminationDate { get; set; }
         public LandUseManagementDetail LandUseManagementDetail { get; set; }

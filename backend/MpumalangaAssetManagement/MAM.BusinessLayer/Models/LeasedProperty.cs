@@ -15,6 +15,8 @@ namespace MAM.BusinessLayer.Models
         public string FacilityName { get; set; }
         public int LandId { get; set; }
         public string NatureofLease { get; set; }
+        public string Latitude { get; set; }
+        public string Longitude { get; set; }
         public LandUseManagementDetail LandUseManagementDetail { get; set; }
         public LeaseStatus LeaseStatus { get; set; }
         public DateTime? StartingDate { get; set; }
@@ -22,18 +24,20 @@ namespace MAM.BusinessLayer.Models
 
         public List<LeasedProperty> ConvertToLeasedProperties(List<DataAccess.Tables.LeasedProperty> leasedProperties)
         {
-            return leasedProperties.Select(conditionAssessment => new LeasedProperty()
+            return leasedProperties.Select(leasedProperty => new LeasedProperty()
             {
-                LeaseStatusesId = conditionAssessment.LeaseStatusesId,
-                FileReference = conditionAssessment.FileReference,
-                District = conditionAssessment.District,
-                Type = conditionAssessment.Type,
-                PropertyCode = conditionAssessment.PropertyCode,
-                FacilityName = conditionAssessment.FacilityName,
-                NatureofLease = conditionAssessment.NatureofLease,
-                StartingDate = conditionAssessment.StartingDate,
-                TerminationDate = conditionAssessment.TerminationDate,
-                LandId = conditionAssessment.LandId,
+                LeaseStatusesId = leasedProperty.LeaseStatusesId,
+                FileReference = leasedProperty.FileReference,
+                District = leasedProperty.District,
+                Type = leasedProperty.Type,
+                PropertyCode = leasedProperty.PropertyCode,
+                FacilityName = leasedProperty.FacilityName,
+                NatureofLease = leasedProperty.NatureofLease,
+                StartingDate = leasedProperty.StartingDate,
+                TerminationDate = leasedProperty.TerminationDate,
+                Latitude = leasedProperty.Latitude,
+                Longitude = leasedProperty.Longitude,
+                LandId = leasedProperty.LandId,
             }).ToList();
         }
 

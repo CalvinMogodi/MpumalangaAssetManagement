@@ -5,6 +5,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { GoogleMapsModule } from '@angular/google-maps'
 import { CurrencyPipe, DatePipe} from '@angular/common';
+import { AutocompleteComponent } from './google-places.component';
 // for HttpClient import:
 import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
 
@@ -93,10 +94,12 @@ import { LeaseManagementComponent } from './components/leasemanagement/lease-man
 import { LeasedPropertyComponent } from './components/leasemanagement/leasedproperty/leased-property.component';
 import { HiringComponent } from './components/hiring/hiring.component';
 import { LeaseRegisterComponent } from './components/lesesregister/leaseregister.component';
+import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
 
 @NgModule({
   declarations: [
     AppComponent,
+    AutocompleteComponent,
     TemplateOneComponent,
     FooterComponent,
     HeaderComponent,
@@ -181,7 +184,8 @@ import { LeaseRegisterComponent } from './components/lesesregister/leaseregister
     ToggleButtonModule,
     InputSwitchModule,
     TimelineModule,
-    DividerModule
+    DividerModule,
+    GooglePlaceModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

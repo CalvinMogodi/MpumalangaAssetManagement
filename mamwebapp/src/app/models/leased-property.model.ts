@@ -8,8 +8,8 @@ export class LeasedProperty {
     propertyCode: string;
     facilityName: string;
     natureofLease: string;
-    startingDate: Date;
-    terminationDate: Date;
+    startingDate?: Date;
+    terminationDate?: Date;
     landId: number;
     landUseManagementDetail: LandUseManagementDetail;
     leaseStatus: LeaseStatus;

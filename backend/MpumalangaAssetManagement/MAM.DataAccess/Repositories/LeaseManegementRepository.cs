@@ -44,7 +44,9 @@ namespace MAM.DataAccess.Repositories
                                       NatureofLease = ls.NatureOfLease,
                                       StartingDate = ls.StartingDate,
                                       TerminationDate = ls.TerminationDate,
-                                      LandId = l.Id
+                                      LandId = l.Id,
+                                      Latitude = gl.Latitude,
+                                      Longitude = gl.Longitude
                                   }).ToList();
 
                 var list = leasedProperties.GroupBy(x => x.LeaseStatusesId).Select(g => g.First()).ToList();

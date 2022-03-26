@@ -23,10 +23,14 @@ export class LeaseManagementComponent implements OnInit {
   showComfirmaDelete: boolean = false;
   doExport: boolean = false;
   isBusy: boolean;
-  errorMsg: string;
+  errorMsg: string; 
   error = '';
+  center: google.maps.LatLngLiteral;
+  markers = [];
+  zoom = 8;
   selectedLeasedProperty: LeasedProperty;
   buttonItems: MenuItem[];
+  index: any;
   printItems: MenuItem[];
   currentUser: User;
   items = [
@@ -71,12 +75,44 @@ export class LeaseManagementComponent implements OnInit {
       }
     ];
     this.getLeasedProperties();
-
   }
 
+  codeAddress(address) {
+    const geocoder = new google.maps.Geocoder()
+    geocoder.geocode({ 'address': address }, function (results, status) {
+        console.log(results);
+        var latLng = {lat: results[0].geometry.location.lat (), lng: results[0].geometry.location.lng ()};
+        console.log (latLng);
+        if (status == 'OK') {
+            var marker = new google.maps.Marker({
+                position: latLng,
+                //map: map
+            });
+            //console.log (map);
+        } else {
+            alert('Geocode was not successful for the following reason: ' + status);
+        }
+    });
+}
+
   getLeasedProperties() {
+    this.center = {
+      lat: -26.0722042,
+      lng: 30.0752488,
+    };
+    this.markers.push( this.center );
     this.leasedPropertiesService.getLeasedProperties().pipe(first()).subscribe(properties => {
       properties.forEach(element => {
+       
+        let maker = {
+          position: {
+            lat: Number(element.latitude),
+            lng: Number(element.longitude),
+          },
+          title: element.propertyCode + ": " + element.facilityName,
+          //options: { animation: google.maps.Animation.BOUNCE },
+        };
+        this.markers.push(maker);
         const terminationDateCheck = this.monthDiff(new Date(element.terminationDate), new Date());
         element.status = new Date(element.terminationDate) < new Date() ? "red" : terminationDateCheck <= -6 ? "green" : terminationDateCheck > -6 ? "yellow" : "";
         element.createdDate = this.datePipe.transform(element.createdDate, "yyyy-MM-dd");
@@ -99,6 +135,8 @@ export class LeaseManagementComponent implements OnInit {
   }
 
   viewLeasedProperty() {
+    this.selectedLeasedProperty.startingDate = null;
+    this.selectedLeasedProperty.terminationDate = null;
     this.leasedPropertiesService.getLeasedPropertyDetails(this.selectedLeasedProperty).pipe(first()).subscribe(leasedProperty => {
       this.selectedLeasedProperty = leasedProperty;
       this.showLMDDialog = true;
@@ -107,6 +145,10 @@ export class LeaseManagementComponent implements OnInit {
 
   showComfirmaDeleteProperty() {
     this.showComfirmaDelete = true;
+  }
+  selectProperty(leasedProperty: LeasedProperty, index: Number) {
+    this.selectedLeasedProperty = leasedProperty;
+    this.index = index;
   }
 
   deleteLeasedProperty() {
@@ -176,4 +218,19 @@ export class LeaseManagementComponent implements OnInit {
     });
   }
 
+  getAddress(address: string){
+      var bounds = new google.maps.LatLngBounds();
+      // This is making the Geocode request
+      var geocoder = new google.maps.Geocoder();
+      //geocoder.geocode({ 'latLng': latlng },  (results, status) =>{
+          if (status !== google.maps.GeocoderStatus.OK) {
+              alert(status);
+          }
+          // This is checking to see if the Geoeode Status is OK before proceeding
+          if (status == google.maps.GeocoderStatus.OK) {
+         //     console.log(results);
+        //      var address = (results[0].formatted_address);
+          }
+      //});
+  }
 }

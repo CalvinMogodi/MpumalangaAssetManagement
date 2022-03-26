@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, ViewChild, ElementRef, Output, AfterViewInit, EventEmitter, Input, NgZone } from '@angular/core';
 import { first } from 'rxjs/operators';
 import { User } from '../../models/user.model';
 import { HiringRegisterService } from '../../services/hiring-register/hiring-register.service';
@@ -18,7 +18,13 @@ import { DatePipe } from '@angular/common';
   styleUrls: ['./hiring.component.css'],
   providers: [MessageService, ConfirmationService]
 })
+
 export class HiringComponent implements OnInit {
+  address: any = {};
+  formattedAddress: string;
+  formattedEstablishmentAddress: string;
+
+
   loading = false;
   isAdding = false;
   hiringForm: FormGroup;
@@ -31,10 +37,13 @@ export class HiringComponent implements OnInit {
   hiredProperties: HiredProperty[] = [];
   isView: boolean = false;
   files: any[] = [];
-
+  center: google.maps.LatLngLiteral;
+  markers = [];
+  zoom = 8;
   showComfirmaDelete = false;
   showResetPasswordComfirmation: boolean = false;
   clonedHiredProperties: HiredProperty[] = [];
+  printItems: MenuItem[];
 
   cols: any[];
   items: MenuItem[];
@@ -62,13 +71,58 @@ export class HiringComponent implements OnInit {
     private authenticationService: AuthenticationService,
     private datePipe: DatePipe,
     private messageService: MessageService,
-    private sharedService: SharedService) { }
+    private sharedService: SharedService,
+    public zone: NgZone) { }
   roles: any[];
 
   ngOnInit() {
-    this.hiringRegisterService.getHiredProperties().pipe(first()).subscribe(properties => {
+    const center = { lat: 50.064192, lng: -130.605469 };
+    // Create a bounding box with sides ~10km away from the center point
+    const defaultBounds = {
+      north: center.lat + 0.1,
+      south: center.lat - 0.1,
+      east: center.lng + 0.1,
+      west: center.lng - 0.1,
+    };
 
+    this.printItems = [
+      {
+        label: 'PDF', icon: 'pi pi-file-pdf', command: () =>
+          this.exportPdf()
+      }, {
+        label: 'Excel', icon: 'pi pi-file-excel', command: () =>
+          this.exportExcel()
+      }
+    ];
+    this.center = {
+      lat: -26.0722042,
+      lng: 30.0752488,
+    };
+    this.markers.push(this.center);
+    this.hiringRegisterService.getHiredProperties().pipe(first()).subscribe(properties => {
+      this.markers = [];
       properties.forEach(element => {
+        if (element.address && element.address != '') {
+          var service = new google.maps.places.PlacesService(document.createElement('div'));
+          var request = {
+            query: element.address,
+            fields: ['name', 'geometry'],
+          };
+          service.findPlaceFromQuery(request, (results, status) => {
+            if (status == google.maps.places.PlacesServiceStatus.OK) {
+              if (results[0].geometry) {
+                let maker = {
+                  position: {
+                    lat: Number(results[0].geometry.location.lat()),
+                    lng: Number(results[0].geometry.location.lng()),
+                  },
+                  title: element.propertyCode + ": " +element.address,
+                };
+                this.markers.push(maker);
+              }
+            }
+          });
+        }
         const terminationDateCheck = this.monthDiff(new Date(element.terminationDate), new Date());
         element.status = new Date(element.terminationDate) < new Date() ? "red" : terminationDateCheck <= -6 ? "green" : terminationDateCheck > -6 ? "yellow" : "";
         element.createdDate = this.datePipe.transform(element.createdDate, "yyyy-MM-dd");
@@ -109,11 +163,11 @@ export class HiringComponent implements OnInit {
     this.items = [{ icon: 'pi pi-home', url: 'dashboard' },
     { label: 'Hiring' }];
 
-    this.cols = [      
+    this.cols = [
       { field: 'id', header: 'File Reference' },
-      { field: 'propertyCode', header: 'Property code' },      
+      { field: 'propertyCode', header: 'Property code' },
       { field: 'district', header: 'District' },
-      { field: 'type', header: 'Type' },      
+      { field: 'type', header: 'Type' },
       { field: 'startingDate', header: 'Start Date' },
       { field: 'terminationDate', header: 'Termination Date' },
       { field: 'userDepartment', header: 'User Department' },
@@ -124,12 +178,48 @@ export class HiringComponent implements OnInit {
     this.initForm();
   }
 
+  handleAddressChange(address: any) {
+    this.address.fullAddress = address.name
+    this.address.latitude = address.geometry.location.lat()
+    this.address.longitude = address.geometry.location.lng()
+  }
+
   monthDiff(d1: Date, d2: Date) {
     var months;
     months = (d2.getFullYear() - d1.getFullYear()) * 12;
     months -= d1.getMonth();
     months += d2.getMonth();
     return months;
+  }
+
+  exportPdf() {
+    import("jspdf").then(jsPDF => {
+      import("jspdf-autotable").then(x => {
+        const doc = new jsPDF.default();
+        //doc.autoPrint(this.cols, this.leasedProperties);
+        doc.save('Leased Properties.pdf');
+      })
+    })
+  }
+
+  exportExcel() {
+    import("xlsx").then(xlsx => {
+      const worksheet = xlsx.utils.json_to_sheet(this.hiredProperties);
+      const workbook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
+      const excelBuffer: any = xlsx.write(workbook, { bookType: 'xlsx', type: 'array' });
+      this.saveAsExcelFile(excelBuffer);
+    });
+  }
+
+  saveAsExcelFile(buffer: any): void {
+    import('file-saver').then(FileSaver => {
+      let EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
+      let EXCEL_EXTENSION = '.xlsx';
+      const data: Blob = new Blob([buffer], {
+        type: EXCEL_TYPE
+      });
+      FileSaver.saveAs(data, 'Hired Properties' + new Date().getDate() + "-" + new Date().getMonth() + "-" + new Date().getFullYear() + EXCEL_EXTENSION);
+    });
   }
 
   initForm() {
@@ -215,7 +305,7 @@ export class HiringComponent implements OnInit {
     hiredProperty.escalationRate = this.hiringForm.controls["escalationRate"].value;
     hiredProperty.escalationDate = this.hiringForm.controls["escalationDate"].value;
     hiredProperty.area = this.hiringForm.controls["area"].value;
-    hiredProperty.address = this.hiringForm.controls["address"].value;
+    hiredProperty.address = this.address.fullAddress;
     hiredProperty.createdByUser = this.currentUser;
     hiredProperty.createdUserId = this.currentUser.id;
     hiredProperty.createdDate = new Date();
@@ -245,7 +335,7 @@ export class HiringComponent implements OnInit {
     hiredProperty.escalationRate = this.hiringForm.controls["escalationRate"].value;
     hiredProperty.escalationDate = this.hiringForm.controls["escalationDate"].value;
     hiredProperty.area = this.hiringForm.controls["area"].value;
-    hiredProperty.address = this.hiringForm.controls["address"].value;
+    hiredProperty.address = this.address.fullAddress;
     hiredProperty.createdByUser = this.currentUser;
     hiredProperty.createdUserId = this.currentUser.id;
     hiredProperty.createdDate = new Date();
