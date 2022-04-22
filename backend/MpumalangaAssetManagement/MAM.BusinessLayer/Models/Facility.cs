@@ -15,6 +15,7 @@ namespace MAM.BusinessLayer.Models
         public string FileReference { get; set; }
         public string Survey { get; set; }
         public string Type { get; set; }
+        public string VestedType { get; set; }
         public string ClientCode { get; set; }
         public string UserDepartment { get; set; }
         public string Status { get; set; }
@@ -52,6 +53,7 @@ namespace MAM.BusinessLayer.Models
                 FileReference = f.FileReference,
                 Name = f.Name,
                 Type = f.Type,
+                VestedType = f.VestedType,
                 ClientCode = f.ClientCode,
                 CapturerId = f.CapturerId,
                 Status = f.Status,
@@ -109,6 +111,7 @@ namespace MAM.BusinessLayer.Models
                 Survey = facility.Survey,
                 Name = facility.Name,
                 Type = facility.Type,
+                VestedType = facility.VestedType,
                 ClientCode = facility.ClientCode,
                 CapturerId = facility.CapturerId,
                 Status = facility.Status,
@@ -156,6 +159,7 @@ namespace MAM.BusinessLayer.Models
                 FileReference = facility.FileReference,
                 Name = facility.Name,
                 Type = facility.Type,
+                VestedType= facility.VestedType,
                 ClientCode = facility.ClientCode,
                 Survey = facility.Survey,
                 LandId = facility.LandId,

@@ -13,6 +13,7 @@ namespace MAM.BusinessLayer.Models
         public decimal? Addition { get; set; }
         public decimal? Disposal { get; set; }
         public decimal? ClosingBalance { get; set; }
+        public decimal? OpeningBalance { get; set; }
 
         public List<SecondaryInformationNote> ConvertToSecondaryInformationNotes(List<DataAccess.Tables.SecondaryInformationNote> secondaryInformationNotes)
         {
@@ -24,6 +25,7 @@ namespace MAM.BusinessLayer.Models
                 Addition = s.Addition,
                 Disposal = s.Disposal,
                 ClosingBalance = s.ClosingBalance,
+                OpeningBalance = s.OpeningBalance,
             }).ToList();
         }
 
@@ -37,6 +39,7 @@ namespace MAM.BusinessLayer.Models
                 Addition = sin.Addition,
                 Disposal = sin.Disposal,
                 ClosingBalance = sin.ClosingBalance,
+                OpeningBalance = sin.OpeningBalance,
             };
         }
 
@@ -50,6 +53,7 @@ namespace MAM.BusinessLayer.Models
                 Addition = sin.Addition,
                 Disposal = sin.Disposal,
                 ClosingBalance = sin.ClosingBalance,
+                OpeningBalance = sin.OpeningBalance,
             };
         }
     }

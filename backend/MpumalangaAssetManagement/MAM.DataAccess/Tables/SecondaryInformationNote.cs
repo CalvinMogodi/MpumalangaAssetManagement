@@ -12,5 +12,6 @@ namespace MAM.DataAccess.Tables
         public decimal? Addition { get; set; }
         public decimal? Disposal { get; set; }
         public decimal? ClosingBalance { get; set; }
+        public decimal? OpeningBalance { get; set; }
     }
 }

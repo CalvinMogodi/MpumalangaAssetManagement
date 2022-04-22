@@ -72,6 +72,7 @@ export class AddassetregisterComponent implements OnInit {
   landRemainders: any[];
   howAcquireds: any[];
   vestedTypes: any[];
+  value5: string = 'Disabled';
   aFSs: any[];
   howAcquired: any = {
     name: undefined
@@ -689,11 +690,21 @@ export class AddassetregisterComponent implements OnInit {
       { name: 'Pietermaritzburg', code: 'P', factor: 9 },
       { name: 'Umtata', code: 'U', factor: 10 },
       { name: 'Vryburg', code: 'V', factor: 11 },
+      { name: 'HS', code: 'HS', factor: 12 },
+      { name: 'HT', code: 'HT', factor: 13 }, 
+      { name: 'IR', code: 'IR', factor: 14 },
+      { name: 'IS', code: 'IS', factor: 15 },
+      { name: 'IT', code: 'IT', factor: 16 },     
+      { name: 'JS', code: 'JS', factor: 17 },
+      { name: 'JT', code: 'JT', factor: 18 },
+      { name: 'JU', code: 'JU', factor: 19 },
+      { name: 'KT', code: 'VKT', factor: 20 },    
+      
     ];
 
     this.ownershipCategories = [
-      { name: 'State-Owned', code: 'SO', factor: 1 },
-      { name: 'Non-State Owned', code: 'NSO', factor: 2 },
+      { name: 'State Owned', code: 'SO', factor: 1 },
+      { name: 'Non State Owned', code: 'NSO', factor: 2 },
     ];
     this.classes = [
       { name: 'Urban', code: 'U', factor: 1 },
@@ -743,6 +754,8 @@ export class AddassetregisterComponent implements OnInit {
     this.vestedTypes = [
       { name: 'Vested', code: 'V', factor: 1 },
       { name: 'Non-Vested', code: 'NV', factor: 2 },
+      { name: 'Application submitted', code: 'AS', factor: 3 },
+      { name: 'Certificate Issued ', code: 'CI', factor: 3 }           
     ];
 
     this.vats = [
@@ -784,8 +797,8 @@ export class AddassetregisterComponent implements OnInit {
 
     this.facilityTypes = [
       { name: 'Dwelling', code: 'D', factor: 1 },
-      { name: 'Land', code: 'L', factor: 2 },
-      { name: 'Non Residential', code: 'NR', factor: 3 },      
+      { name: 'Vacant Land', code: 'VL', factor: 2 },
+      { name: 'Non Residential', code: 'NR', factor: 3 },
     ];
 
     this.surveys = [
@@ -807,6 +820,8 @@ export class AddassetregisterComponent implements OnInit {
   showToast(summary: string, detail: string) {
     this.messageService.add({ severity: 'success', summary: summary, detail: detail });
   }
+
+  onOptionClick(e, f){}
 
   initFacility() {
     this.improvements = this.facility.improvements;
@@ -844,7 +859,6 @@ export class AddassetregisterComponent implements OnInit {
     let province = this.provinces.filter(d => d.name.toLowerCase().trim() == (this.facility.land.geographicalLocation.province != undefined ? this.facility.land.geographicalLocation.province.toLowerCase().trim() : this.facility.land.geographicalLocation.province))[0];
     let districtMunicipality = this.districtMunicipalities.filter(d => d.name.toLowerCase().trim() == (this.facility.land.geographicalLocation.districtMunicipality != undefined ? this.facility.land.geographicalLocation.districtMunicipality.toLowerCase().trim() : this.facility.land.geographicalLocation.districtMunicipality))[0];
 
-    let survey = this.surveys.filter(d => d.name.toLowerCase().trim() == (this.facility.survey != undefined ? this.facility.survey.toLowerCase().trim() : this.facility.survey))[0];
     let afs = this.aFSs.filter(d => d.name.trim() == (this.facility.afs != undefined ? this.facility.afs.trim() : this.facility.afs))[0];
     let vestedType = this.vestedTypes.filter(d => d.name.toLowerCase().trim() == (this.facility.vestedType != undefined ? this.facility.vestedType.toLowerCase().trim() : this.facility.vestedType))[0];
     let facilityType = this.facilityTypes.filter(d => d.name.toLowerCase().trim() == (this.facility.type != undefined ? this.facility.type.toLowerCase().trim() : this.facility.type))[0];
@@ -854,7 +868,7 @@ export class AddassetregisterComponent implements OnInit {
     let landRemainder = this.landRemainders.filter(d => d.name == (this.facility.land.propertyDescription.landRemainder == false ? 'No' : 'Yes'))[0];
     let acquired = this.howAcquireds.filter(d => d.name.toLowerCase().trim() == (this.facility.land.propertyDescription.acquired != undefined ? this.facility.land.propertyDescription.acquired.toLowerCase().trim() : this.facility.land.propertyDescription.acquired))[0];
     let ownershipCategory = this.ownershipCategories.filter(d => d.name.toLowerCase().trim() == (this.facility.land.landUseManagementDetail.ownershipCategory != undefined ? this.facility.land.landUseManagementDetail.ownershipCategory.toLowerCase().trim() : this.facility.land.landUseManagementDetail.ownershipCategory))[0];
-    let userDepartment = this.userDepartments.filter(d => d.name.toLowerCase().trim() == (this.facility.land.landUseManagementDetail.userDepartment != undefined ? this.facility.land.landUseManagementDetail.userDepartment.toLowerCase().trim() : this.facility.land.landUseManagementDetail.userDepartment))[0];
+    let userDepartment = this.userDepartments.filter(d => d.name.toLowerCase().trim() == (this.facility.land.landUseManagementDetail.userDepartment != undefined ? this.facility.land.landUseManagementDetail.userDepartment.toLowerCase().trim() : this.facility.land.landUseManagementDetail.userDepartment));
     let incomeLeaseStatus = this.incomeLeaseStatuses.filter(d => d.name.toLowerCase().trim() == (this.facility.land.landUseManagementDetail.incomeLeaseStatus != undefined ? this.facility.land.landUseManagementDetail.incomeLeaseStatus.toLowerCase().trim() : this.facility.land.landUseManagementDetail.incomeLeaseStatus))[0];
     let natureOfLease = this.natureOfLeases.filter(d => d.name.toLowerCase().trim() == (this.facility.land.leaseStatus.natureOfLease != undefined ? this.facility.land.leaseStatus.natureOfLease.toLowerCase().trim() : this.facility.land.leaseStatus.natureOfLease))[0];
     let vat = this.vats.filter(d => d.name == this.facility.land.leaseStatus.vat)[0];
@@ -866,6 +880,11 @@ export class AddassetregisterComponent implements OnInit {
     
     let magisterialDistrict = this.magisterialDistricts.filter(d => d.name.toLowerCase().trim() == (_districtMunicipality.value != undefined ? this.facility.land.geographicalLocation.magisterialDistrict.toLowerCase().trim()  : this.facility.land.geographicalLocation.magisterialDistrict))[0];
 
+    let survey = this.surveys.filter(d => d.name.toLowerCase().trim() == (this.facility.survey != undefined ? this.facility.survey.toLowerCase().trim() : this.facility.survey))[0];
+    
+    if(this.facility.land.propertyDescription.sgDiagramNumber){
+      survey = this.surveys[0];
+    }
     this.landForm = this.formBuilder.group({
       survey:[survey],
       facilityType:[facilityType],

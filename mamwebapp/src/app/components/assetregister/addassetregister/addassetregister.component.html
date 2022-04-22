@@ -30,7 +30,7 @@
                         <div class="field grid col-3">
                             <span class="p-input-icon-left p-1">
                                 <label for="clientCode">Property Code</label>
-                                <input formControlName="clientCode" autocomplete="off" [disabled]="isViewOnly"
+                                <input formControlName="clientCode" autocomplete="off" [ngClass]="{'disabled': isViewOnly}" [readonly]="isViewOnly"
                                     type="text" pInputText class="ui-inputtext ui-widget">                               
                                 <div *ngIf="submitted && f.clientCode.errors" class="text-error"><br>
                                     <div *ngIf="l.propertyCode.errors.required">This field is required.</div>
@@ -40,7 +40,7 @@
                         <div class="field grid col-3">
                             <span class="p-input-icon-left p-1">
                                 <label for="facilityName">Facility Name</label>
-                                <input [attr.disabled]="mode == 'View'" formControlName="facilityName"
+                                <input [ngClass]="{'disabled': isViewOnly}" [readonly]="isViewOnly" formControlName="facilityName"
                                     autocomplete="off" type="text" pInputText class="ui-inputtext ui-widget">                                
                                 <div *ngIf="submitted && f.facilityName.errors" class="text-error"><br>
                                     <div *ngIf="l.facilityName.errors.required">This field is required.</div>
@@ -52,7 +52,7 @@
                                 <label for="facilityType">Type</label>
                                 <p-dropdown class="ui-inputtext ui-widget" inputId="facilityType" [style]="{'width':'570px'}"
                                     (onChange)="setFacilityType($event)" [disabled]="isViewOnly"
-                                    [options]="facilityTypes" placeholder="Please select" formControlName="facilityType"
+                                    [options]="facilityTypes" placeholder="Please Select" formControlName="facilityType"
                                     optionLabel="name">
                                 </p-dropdown>                                
                                 <div *ngIf="submitted && f.facilityType.errors" class="text-error"><br>
@@ -61,24 +61,12 @@
                             </span>
                         </div>
                     </div>
-                    <div class="formgrid grid">
-                        <div class="field grid col-3">
-                            <span class="p-input-icon-left p-1">
-                                <label for="survey">Survey</label>
-                                <p-dropdown class="ui-inputtext ui-widget" inputId="survey" [disabled]="isViewOnly" [style]="{'width':'570px'}"
-                                    [options]="surveys" placeholder="Please select" formControlName="survey"
-                                    optionLabel="name">
-                                </p-dropdown>                                
-                                <div *ngIf="submitted && f.survey.errors" class="text-error"><br>
-                                    <div *ngIf="l.survey.errors.required">This field is required.</div>
-                                </div>
-                            </span>
-                        </div>
+                    <div class="formgrid grid">                        
                         <div class="field grid col-3">
                             <span class="p-input-icon-left p-1">
                                 <label for="vestedType">Vested Type</label>
                                 <p-dropdown class="ui-inputtext ui-widget" inputId="vestedType" [disabled]="isViewOnly" [style]="{'width':'570px'}"
-                                    [options]="vestedTypes" placeholder="Please select" formControlName="vestedType"
+                                    [options]="vestedTypes" placeholder="Please Select" formControlName="vestedType"
                                     optionLabel="name">
                                 </p-dropdown>                               
                                 <div *ngIf="submitted && f.vestedType.errors" class="text-error"><br>
@@ -90,7 +78,7 @@
                             <span class="p-input-icon-left p-1">
                                 <label for="type">Asset Type</label>
                                 <p-dropdown class="ui-inputtext ui-widget" inputId="type" [disabled]="isViewOnly"  [style]="{'width':'570px'}"
-                                    [options]="types" placeholder="Please select" (onChange)="setType($event)"
+                                    [options]="types" placeholder="Please Select" (onChange)="setType($event)"
                                     formControlName="type" optionLabel="name"></p-dropdown>                                
                                 <div *ngIf="submitted && f.fileReferenceNumber.errors" class="text-error"><br>
                                     <div *ngIf="l.fileReferenceNumber.errors.required">This field is required.</div>
@@ -101,20 +89,18 @@
                             <span class="p-input-icon-left p-1">
                                 <label for="deedsOffice">Deeds Office</label>
                                 <p-dropdown class="ui-inputtext ui-widget" [disabled]="isViewOnly" inputId="deedsOffice"  [style]="{'width':'570px'}"
-                                    [options]="deedsOffices" placeholder="Please select" formControlName="deedsOffice"
+                                    [options]="deedsOffices" placeholder="Please Select" formControlName="deedsOffice"
                                     (onChange)="setDeedsOffice($event)" optionLabel="name"></p-dropdown>                               
                                 <div *ngIf="submitted && f.deedsOffices.errors" class="text-error"><br>
                                     <div *ngIf="l.deedsOffices.errors.required">This field is required.</div>
                                 </div>
                             </span>
                         </div>
-                    </div>
-                    <div class="formgrid grid">
                         <div class="field grid col-3">
                             <span class="p-input-icon-left p-1">
                                 <label for="class">Asset Class</label>
                                 <p-dropdown class="ui-inputtext ui-widget" inputId="class" [disabled]="isViewOnly" [style]="{'width':'570px'}"
-                                    [options]="classes" placeholder="Please select" formControlName="class"
+                                    [options]="classes" placeholder="Please Select" formControlName="class"
                                     (onChange)="setClass($event)" optionLabel="name">
                                 </p-dropdown>
                                 <div *ngIf="submitted && f.class.errors" class="text-error"><br>
@@ -122,11 +108,13 @@
                                 </div>
                             </span>
                         </div>
+                    </div>
+                    <div class="formgrid grid">                       
                         <div class="field grid col-3">
                             <span class="p-input-icon-left p-1">
                                 <label for="userDepartment">User Department</label>
-                                <p-multiSelect class="ui-inputtext ui-widget" [disabled]="isViewOnly" [style]="{'width':'570px'}"
-                                    placeholder="Please select" inputId="userDepartment" [options]="userDepartments"
+                                <p-multiSelect class="ui-inputtext ui-widget" (onClick)="onOptionClick($event, option)" [styleClass]="multi-select" [disabled]="isViewOnly" [style]="{'width':'570px'}"
+                                    placeholder="Please Select" inputId="userDepartment" [options]="userDepartments"
                                     formControlName="userDepartment" optionLabel="name"></p-multiSelect>
                                 <div *ngIf="submitted && l.userDepartment.errors" class="text-error">
                                     <br>
@@ -156,7 +144,7 @@
                             <label for="float-input">District Municipality</label>
                             <p-dropdown class="ui-inputtext ui-widget" [disabled]="isViewOnly" [style]="{'width':'570px'}"
                                 inputId="districtMunicipality" [options]="districtMunicipalities"
-                                placeholder="Please select" formControlName="districtMunicipality"
+                                placeholder="Please Select" formControlName="districtMunicipality"
                                 (onChange)="setDistrictMunicipality($event)" optionLabel="name"></p-dropdown>
                             <div *ngIf="submitted && f.fileReferenceNumber.errors" class="text-error"><br>
                                 <div *ngIf="l.fileReferenceNumber.errors.required">This field is required.</div>
@@ -168,7 +156,7 @@
                             <label for="float-input">Magisterial District</label>
                             <p-dropdown class="ui-inputtext ui-widget" [disabled]="isViewOnly" [style]="{'width':'570px'}"
                                 inputId="magisterialDistrict" [options]="magisterialDistricts"
-                                placeholder="Please select" formControlName="magisterialDistrict"
+                                placeholder="Please Select" formControlName="magisterialDistrict"
                                 (onChange)="setMagisterialDistrict($event)" optionLabel="name"></p-dropdown>
                             <div *ngIf="submitted && f.fileReferenceNumber.errors" class="text-error"><br>
                                 <div *ngIf="l.fileReferenceNumber.errors.required">This field is required.</div>
@@ -179,7 +167,7 @@
                         <span class="p-input-icon-left p-1">
                             <label for="float-input">Local Authority</label>
                             <p-dropdown class="ui-inputtext ui-widget" [disabled]="isViewOnly" inputId="localAuthority"
-                                [options]="localAuthorities" placeholder="Please select" [style]="{'width':'570px'}"
+                                [options]="localAuthorities" placeholder="Please Select" [style]="{'width':'570px'}"
                                 formControlName="localAuthority" (onChange)="setLocalAuthorities($event)"
                                 optionLabel="name"></p-dropdown>
                             <div *ngIf="submitted && f.fileReferenceNumber.errors" class="text-error"><br>
@@ -193,7 +181,7 @@
                         <span class="p-input-icon-left p-1">
                             <label for="float-input">Region</label>
                             <p-dropdown class="ui-inputtext ui-widget" [disabled]="isViewOnly" inputId="region" [style]="{'width':'570px'}"
-                                [options]="regions" formControlName="region" placeholder="Please select"
+                                [options]="regions" formControlName="region" placeholder="Please Select"
                                 (onChange)="setProvince($event)" optionLabel="name">
                             </p-dropdown>
                             <div *ngIf="submitted && f.fileReferenceNumber.errors" class="text-error"><br>
@@ -204,7 +192,7 @@
                         <div class="field grid col-3">
                         <span class="p-input-icon-left p-1">
                             <label for="float-input">Town</label>
-                            <input [attr.disabled]="mode == 'View'" formControlName="town" autocomplete="off"
+                            <input [ngClass]="{'disabled': isViewOnly}" [readonly]="isViewOnly" formControlName="town" autocomplete="off"
                                 type="text" pInputText class="ui-inputtext ui-widget">
                             <div *ngIf="submitted && f.fileReferenceNumber.errors" class="text-error"><br>
                                 <div *ngIf="l.fileReferenceNumber.errors.required">This field is required.</div>
@@ -214,7 +202,7 @@
                     <div class="field grid col-3">
                         <span class="p-input-icon-left p-1">
                             <label for="float-input">Suburb</label>
-                            <input [attr.disabled]="mode == 'View'" formControlName="suburb" autocomplete="off"
+                            <input [ngClass]="{'disabled': isViewOnly}" [readonly]="isViewOnly" formControlName="suburb" autocomplete="off"
                                 type="text" pInputText class="ui-inputtext ui-widget">
                             <div *ngIf="submitted && f.fileReferenceNumber.errors" class="text-error"><br>
                                 <div *ngIf="l.fileReferenceNumber.errors.required">This field is required.</div>
@@ -224,7 +212,7 @@
                         <div class="field grid col-3">
                         <span class="p-input-icon-left p-1">
                             <label for="float-input">Street Name </label>
-                            <input [attr.disabled]="mode == 'View'" formControlName="streetName" autocomplete="off"
+                            <input [ngClass]="{'disabled': isViewOnly}" [readonly]="isViewOnly" formControlName="streetName" autocomplete="off"
                                 type="text" pInputText class="ui-inputtext ui-widget">
                             <div *ngIf="submitted && f.fileReferenceNumber.errors" class="text-error"><br>
                                 <div *ngIf="l.fileReferenceNumber.errors.required">This field is required.</div>
@@ -236,7 +224,7 @@
                         <div class="field grid col-3">
                         <span class="p-input-icon-left p-1">
                             <label for="float-input">Street Number</label>
-                            <input [attr.disabled]="mode == 'View'" formControlName="streetNumber" autocomplete="off"
+                            <input [ngClass]="{'disabled': isViewOnly}" [readonly]="isViewOnly" formControlName="streetNumber" autocomplete="off"
                                 type="number" pInputText class="ui-inputtext ui-widget">
                             <div *ngIf="submitted && f.fileReferenceNumber.errors" class="text-error"><br>
                                 <div *ngIf="l.fileReferenceNumber.errors.required">This field is required.</div>
@@ -246,7 +234,7 @@
                         <div class="field grid col-3">
                         <span class="p-input-icon-left p-1">
                             <label for="float-input">GPS Coordinates Longitude</label>
-                            <input [attr.disabled]="mode == 'View'" formControlName="longitude"
+                            <input [ngClass]="{'disabled': isViewOnly}" [readonly]="isViewOnly" formControlName="longitude"
                                 ng-pattern="/^[-+]?[0-9]{1,7}(\.[0-9]+)?$/" autocomplete="off" type="text" pInputText
                                 class="ui-inputtext ui-widget">
                             <div *ngIf="submitted && f.fileReferenceNumber.errors" class="text-error"><br>
@@ -257,7 +245,7 @@
                         <div class="field grid col-3">
                         <span class="p-input-icon-left p-1">
                             <label for="float-input">GPS Coordinates Latitude</label>
-                            <input [attr.disabled]="mode == 'View'" formControlName="latitude" autocomplete="off"
+                            <input [ngClass]="{'disabled': isViewOnly}" [readonly]="isViewOnly" formControlName="latitude" autocomplete="off"
                                 ng-pattern="/^[-+]?[0-9]{1,7}(\.[0-9]+)?$/" type="text" pInputText
                                 class="ui-inputtext ui-widget">
                             <div *ngIf="submitted && f.fileReferenceNumber.errors" class="text-error"><br>
@@ -274,9 +262,9 @@
                         <div class="field grid col-3">
                         <span class="p-input-icon-left p-1">
                             <label for="float-input">Registration Division</label>
-                            <p-dropdown class="ui-inputtext ui-widget" [disabled]="isViewOnly" [style]="{'width':'570px'}"
+                            <p-dropdown class="ui-inputtext ui-widget" [ngClass]="{'disabled': isViewOnly}" [readonly]="isViewOnly" [style]="{'width':'570px'}"
                                 inputId="registrationDivision" [options]="registrationDivisions"
-                                placeholder="Please select" [(ngModel)]="registrationDivision"
+                                placeholder="Please Select" 
                                 formControlName="registrationDivision" optionLabel="name"></p-dropdown>
                             <div *ngIf="submitted && f.registrationDivision.errors" class="text-error"><br>
                                 <div *ngIf="l.registrationDivision.errors.required">This field is required.</div>
@@ -286,7 +274,7 @@
                         <div class="field grid col-3">
                         <span class="p-input-icon-left p-1">
                             <label for="float-input">Township Name</label>
-                            <input [attr.disabled]="mode == 'View'" formControlName="townshipName" autocomplete="off"
+                            <input [ngClass]="{'disabled': isViewOnly}" [readonly]="isViewOnly" formControlName="townshipName" autocomplete="off"
                                 type="text" pInputText class="ui-inputtext ui-widget">
                             <div *ngIf="submitted && f.townshipName.errors" class="text-error"><br>
                                 <div *ngIf="l.townshipName.errors.required">This field is required.</div>
@@ -296,7 +284,7 @@
                         <div class="field grid col-3">
                         <span class="p-input-icon-left p-1">
                             <label for="float-input">Land Parcel</label>
-                            <input [attr.disabled]="mode == 'View'" formControlName="landParcel" autocomplete="off"
+                            <input [ngClass]="{'disabled': isViewOnly}" [readonly]="isViewOnly" formControlName="landParcel" autocomplete="off"
                                 type="text" pInputText class="ui-inputtext ui-widget">
                             <div *ngIf="submitted && f.fileReferenceNumber.errors" class="text-error"><br>
                                 <div *ngIf="l.fileReferenceNumber.errors.required">This field is required.</div>
@@ -306,7 +294,7 @@
                         <div class="field grid col-3">
                         <span class="p-input-icon-left p-1">
                             <label for="float-input">Land Portion</label>
-                            <input [attr.disabled]="mode == 'View'" formControlName="landPortion" autocomplete="off"
+                            <input [ngClass]="{'disabled': isViewOnly}" [readonly]="isViewOnly" formControlName="landPortion" autocomplete="off"
                                 type="text" pInputText class="ui-inputtext ui-widget">
                             <div *ngIf="submitted && f.fileReferenceNumber.errors" class="text-error"><br>
                                 <div *ngIf="l.fileReferenceNumber.errors.required">This field is required.</div>
@@ -317,9 +305,9 @@
                     <div class="formgrid grid">
                         <div class="field grid col-3">
                         <span class="p-input-icon-left p-1">
-                            <input [attr.disabled]="mode == 'View'" formControlName="oldDescription" autocomplete="off"
-                                type="text" pInputText class="ui-inputtext ui-widget">
-                            <label for="float-input">Old Description</label>
+                            <label for="oldDescription">Old Description</label>
+                            <input [ngClass]="{'disabled': isViewOnly}" [readonly]="isViewOnly" formControlName="oldDescription" autocomplete="off"
+                                type="text" pInputText class="ui-inputtext ui-widget">                            
                             <div *ngIf="submitted && f.fileReferenceNumber.errors" class="text-error"><br>
                                 <div *ngIf="l.fileReferenceNumber.errors.required">This field is required.</div>
                             </div>
@@ -330,7 +318,7 @@
                             <label for="float-input">Land Remainder</label>
                             <p-dropdown class="ui-inputtext ui-widget" [disabled]="isViewOnly" inputId="landRemainder" [style]="{'width':'570px'}"
                                 [options]="landRemainders" formControlName="landRemainder"
-                                (onChange)="setProvince($event)" optionLabel="name" placeholder="Please select">
+                                (onChange)="setProvince($event)" optionLabel="name" placeholder="Please Select">
                             </p-dropdown>
                             <div *ngIf="submitted && f.fileReferenceNumber.errors" class="text-error"><br>
                                 <div *ngIf="l.fileReferenceNumber.errors.required">This field is required.</div>
@@ -340,7 +328,7 @@
                         <div class="field grid col-3">
                         <span class="p-input-icon-left p-1">
                             <label for="float-input">Farm Name</label>
-                            <input [attr.disabled]="mode == 'View'" formControlName="farmName" autocomplete="off"
+                            <input [ngClass]="{'disabled': isViewOnly}" [readonly]="isViewOnly" formControlName="farmName" autocomplete="off"
                                 type="text" pInputText class="ui-inputtext ui-widget">
                             <div *ngIf="submitted && f.fileReferenceNumber.errors" class="text-error"><br>
                                 <div *ngIf="l.fileReferenceNumber.errors.required">This field is required.</div>
@@ -350,7 +338,7 @@
                         <div class="field grid col-3">
                         <span class="p-input-icon-left p-1">
                             <label for="SGDiagramNumber">SG Diagram Number</label>
-                            <input [attr.disabled]="mode == 'View'" formControlName="SGDiagramNumber" autocomplete="off"
+                            <input [ngClass]="{'disabled': isViewOnly}" [readonly]="isViewOnly" formControlName="SGDiagramNumber" autocomplete="off"
                                 type="text" pInputText class="ui-inputtext ui-widget">
                             <div *ngIf="submitted && f.fileReferenceNumber.errors" class="text-error"><br>
                                 <div *ngIf="l.fileReferenceNumber.errors.required">This field is required.</div>
@@ -362,7 +350,7 @@
                         <div class="field grid col-3">
                         <span class="p-input-icon-left p-1">
                             <label for="extent">Extent (Size of Land) (HA)</label>
-                            <input [attr.disabled]="mode == 'View'" formControlName="extent" autocomplete="off"
+                            <input [ngClass]="{'disabled': isViewOnly}" [readonly]="isViewOnly" formControlName="extent" autocomplete="off"
                                 type="number" pInputText class="ui-inputtext ui-widget">
                             <div *ngIf="submitted && f.fileReferenceNumber.errors" class="text-error"><br>
                                 <div *ngIf="l.fileReferenceNumber.errors.required">This field is required.</div>
@@ -372,7 +360,7 @@
                         <div class="field grid col-3">
                         <span class="p-input-icon-left p-1">
                             <label for="LPICode">LPI Code </label>
-                            <input [attr.disabled]="mode == 'View'" formControlName="LPICode" autocomplete="off"
+                            <input [ngClass]="{'disabled': isViewOnly}" [readonly]="isViewOnly" formControlName="LPICode" autocomplete="off"
                                 type="text" pInputText class="ui-inputtext ui-widget">
                             <div *ngIf="submitted && f.fileReferenceNumber.errors" class="text-error"><br>
                                 <div *ngIf="l.fileReferenceNumber.errors.required">This field is required.</div>
@@ -384,23 +372,38 @@
                             <label for="howAcquired">How Acquired</label>
                             <p-dropdown class="ui-inputtext ui-widget" [disabled]="isViewOnly" inputId="howAcquired"
                                 [options]="howAcquireds" [(ngModel)]="howAcquired" formControlName="acquired" [style]="{'width':'570px'}"
-                                (onChange)="setHowAcquired($event)" optionLabel="name" placeholder="Please select">
+                                (onChange)="setHowAcquired($event)" optionLabel="name" placeholder="Please Select">
                             </p-dropdown>
                             <div *ngIf="submitted && f.fileReferenceNumber.errors" class="text-error"><br>
                                 <div *ngIf="l.fileReferenceNumber.errors.required">This field is required.</div>
                             </div>
                         </span>
-                        </div>
+                        </div>   
                         <div class="field grid col-3">
-                        <span class="p-input-icon-left" *ngIf="howAcquired.name === 'Other'">
-                            <label for="acquiredOther">How acquired: other</label>
-                            <input [attr.disabled]="mode == 'View'" formControlName="acquiredOther" autocomplete="off"
-                                type="text" pInputText class="ui-inputtext ui-widget">
-                            <div *ngIf="submitted && f.howAcquired.errors" class="text-error"><br>
-                                <div *ngIf="l.howAcquired.errors.required">This field is required.</div>
-                            </div>
-                        </span>
+                            <span class="p-input-icon-left p-1">
+                                <label for="survey">Survey</label>
+                                <p-dropdown class="ui-inputtext ui-widget" inputId="survey" [disabled]="isViewOnly" [style]="{'width':'570px'}"
+                                    [options]="surveys" placeholder="Please Select" formControlName="survey"
+                                    optionLabel="name">
+                                </p-dropdown>                                
+                                <div *ngIf="submitted && f.survey.errors" class="text-error"><br>
+                                    <div *ngIf="l.survey.errors.required">This field is required.</div>
+                                </div>
+                            </span>
                         </div>
+                    </div>
+
+                    <div class="formgrid grid">
+                        <div class="field grid col-3">
+                            <span class="p-input-icon-left" *ngIf="howAcquired.name === 'Other'">
+                                <label for="acquiredOther">How Acquired: Other</label>
+                                <input [ngClass]="{'disabled': isViewOnly}" [readonly]="isViewOnly" formControlName="acquiredOther" autocomplete="off"
+                                    type="text" pInputText class="ui-inputtext ui-widget">
+                                <div *ngIf="submitted && f.howAcquired.errors" class="text-error"><br>
+                                    <div *ngIf="l.howAcquired.errors.required">This field is required.</div>
+                                </div>
+                            </span>
+                            </div>
                     </div>
                 </p-fieldset>
 
@@ -409,7 +412,7 @@
                         <div class="field grid col-3">
                         <span class="p-input-icon-left p-1">
                             <label for="titleDeedNumber">Title Deed Number</label>
-                            <input [attr.disabled]="mode == 'View'" formControlName="titleDeedNumber" autocomplete="off"
+                            <input [ngClass]="{'disabled': isViewOnly}" [readonly]="isViewOnly" formControlName="titleDeedNumber" autocomplete="off"
                                 type="text" pInputText class="ui-inputtext ui-widget">
                             <div *ngIf="submitted && f.titleDeedNumber.errors" class="text-error">
                                 <br>
@@ -420,7 +423,7 @@
                         <div class="field grid col-3">
                         <span class="p-input-icon-left p-1">
                             <label for="class">Registration Date</label>
-                            <p-calendar class="ui-inputtext ui-widget" [disabled]="isViewOnly" [maxDate]="today"
+                            <p-calendar [ngClass]="{'disabled': isViewOnly}" class="ui-inputtext ui-widget" [disabled]="isViewOnly" [maxDate]="today"
                                 formControlName="registrationDate" dateFormat="dd/mm/yy" showOtherMonths="true"
                                 showButtonBar="true"></p-calendar>
                             <div *ngIf="submitted&& f.fileReferenceNumber.errors" class="text-error"><br>
@@ -430,10 +433,9 @@
                         </div>
                         <div class="field grid col-3">
                         <span class="p-input-icon-left p-1">
-                            <label for="registeredOwner">Registered Owner</label>
-                            <!--[attr.disabled]="mode == 'View'"-->
-                            <input formControlName="registeredOwner" autocomplete="off" type="text" pInputText
-                                class="ui-inputtext ui-widget">
+                            <label for="registeredOwner">Registered Owner</label>                           
+                            <input formControlName="registeredOwner" [ngClass]="{'disabled': isViewOnly}" [readonly]="isViewOnly"
+                             autocomplete="off" type="text" pInputText class="ui-inputtext ui-widget">
                             <div *ngIf="submitted && f.registeredOwner.errors" class="text-error">
                                 <br>
                                 <div *ngIf="l.registeredOwner.errors.required">This field is required.</div>
@@ -443,7 +445,7 @@
                         <div class="field grid col-3">
                         <span class="p-input-icon-left p-1">
                             <label for="vestingDate">Vesting Date</label>
-                            <p-calendar class="ui-inputtext ui-widget" [disabled]="isViewOnly"
+                            <p-calendar [ngClass]="{'disabled': isViewOnly}" class="ui-inputtext ui-widget" [disabled]="isViewOnly"
                                 formControlName="vestingDate" dateFormat="dd/mm/yy" showOtherMonths="true"
                                 showButtonBar="true"></p-calendar>
                             <div *ngIf="submitted && l.vestingDate.errors" class="text-error"><br>
@@ -457,7 +459,7 @@
                         <div class="field grid col-3">
                         <span class="p-input-icon-left p-1">
                             <label for="conditionsOfTitle">Conditions Of Title</label>
-                            <input [attr.disabled]="mode == 'View'" formControlName="conditionsOfTitle"
+                            <input [ngClass]="{'disabled': isViewOnly}" [readonly]="isViewOnly" formControlName="conditionsOfTitle"
                                 autocomplete="off" type="text" pInputText class="ui-inputtext ui-widget">
                             <div *ngIf="submitted && f.conditionsOfTitle.errors" class="text-error"><br>
                                 <div *ngIf="l.conditionsOfTitle.errors.required">This field is required.</div>
@@ -469,7 +471,7 @@
                             <label for="ownershipCategory">Ownership Category</label>
                             <p-dropdown class="ui-inputtext ui-widget" [disabled]="isViewOnly" 
                                 inputId="ownershipCategory" [options]="ownershipCategories" [style]="{'width':'570px'}"
-                                formControlName="ownershipCategory" optionLabel="name" placeholder="Please select">
+                                formControlName="ownershipCategory" optionLabel="name" placeholder="Please Select">
                             </p-dropdown>
                             <div *ngIf="submitted && f.ownershipCategory.errors" class="text-error"><br>
                                 <div *ngIf="l.ownershipCategory.errors.required">This field is required.</div>
@@ -479,7 +481,7 @@
                         <div class="field grid col-3">
                         <span class="p-input-icon-left p-1">
                             <label for="stateOwnedPercentage">State Owned Percentage</label>
-                            <input [attr.disabled]="mode == 'View'" formControlName="stateOwnedPercentage"
+                            <input [ngClass]="{'disabled': isViewOnly}" [readonly]="isViewOnly" formControlName="stateOwnedPercentage"
                                 autocomplete="off" type="number" pInputText class="ui-inputtext ui-widget">
                             <div *ngIf="submitted && f.stateOwnedPercentage.errors" class="text-error"><br>
                                 <div *ngIf="l.stateOwnedPercentage.errors.required">This field is required.</div>
@@ -489,7 +491,7 @@
                         <div class="field grid col-3">
                         <span class="p-input-icon-left p-1">
                             <label for="landUse">Land Use %</label>
-                            <input [attr.disabled]="mode == 'View'" formControlName="landUse" autocomplete="off"
+                            <input [ngClass]="{'disabled': isViewOnly}" [readonly]="isViewOnly" formControlName="landUse" autocomplete="off"
                                 type="text" pInputText class="ui-inputtext ui-widget">
                             <div *ngIf="submitted && f.landUse.errors" class="text-error"><br>
                                 <div *ngIf="l.landUse.errors.required">This field is required.</div>
@@ -502,7 +504,7 @@
                         <div class="field grid col-3">
                         <span class="p-input-icon-left p-1">
                             <label for="zoning">Zoning</label>
-                            <input [attr.disabled]="mode == 'View'" formControlName="zoning" autocomplete="off"
+                            <input [ngClass]="{'disabled': isViewOnly}" [readonly]="isViewOnly" formControlName="zoning" autocomplete="off"
                                 type="text" pInputText class="ui-inputtext ui-widget">
                             <div *ngIf="submitted && f.zoning.errors" class="text-error"><br>
                                 <div *ngIf="l.zoning.errors.required">This field is required.</div>
@@ -531,7 +533,7 @@
                             <label for="natureOfLease">Nature of Lease</label>
                             <p-dropdown class="ui-inputtext ui-widget" [disabled]="isViewOnly" inputId="natureOfLease"
                                 [options]="natureOfLeases" formControlName="natureOfLease" [style]="{'width':'570px'}"
-                                (onChange)="setDeedsOffice($event)" optionLabel="name" placeholder="Please select">
+                                (onChange)="setDeedsOffice($event)" optionLabel="name" placeholder="Please Select">
                             </p-dropdown>
                             <div *ngIf="submitted && f.natureOfLease.errors" class="text-error">
                                 <br>
@@ -543,7 +545,7 @@
                         <span class="p-input-icon-left p-1">
                             <label for="IDNumberCompanyRegistrationNumber">ID Number/Company Registration
                                 Number</label>
-                            <input [attr.disabled]="mode == 'View'" formControlName="IDNumberCompanyRegistrationNumber"
+                            <input [ngClass]="{'disabled': isViewOnly}" [readonly]="isViewOnly" formControlName="IDNumberCompanyRegistrationNumber"
                                 autocomplete="off" type="text" pInputText class="ui-inputtext ui-widget">
                             <div *ngIf="submitted && f.IDNumberCompanyRegistrationNumber.errors" class="text-error">
                                 <br>
@@ -555,7 +557,7 @@
                         <div class="field grid col-3">
                         <span class="p-input-icon-left p-1">
                             <label for="POBox">P.O.Box</label>
-                            <input [attr.disabled]="mode == 'View'" formControlName="POBox" autocomplete="off"
+                            <input [ngClass]="{'disabled': isViewOnly}" [readonly]="isViewOnly" formControlName="POBox" autocomplete="off"
                                 type="number" pInputText class="ui-inputtext ui-widget">
                             <div *ngIf="submitted && f.POBox.errors" class="text-error"><br>
                                 <div *ngIf="l.POBox.errors.required">This field is required.</div>
@@ -565,7 +567,7 @@
                         <div class="field grid col-3">
                         <span class="p-input-icon-left p-1">
                             <label for="leaseStatusTown">Town</label>
-                            <input [attr.disabled]="mode == 'View'" formControlName="leaseStatusTown" autocomplete="off"
+                            <input [ngClass]="{'disabled': isViewOnly}" [readonly]="isViewOnly" formControlName="leaseStatusTown" autocomplete="off"
                                 type="text" pInputText class="ui-inputtext ui-widget">
                             <div *ngIf="submitted && f.town.errors" class="text-error"><br>
                                 <div *ngIf="l.town.errors.required">This field is required.</div>
@@ -578,7 +580,7 @@
                         <div class="field grid col-3">
                         <span class="p-input-icon-left p-1">
                             <label for="postalCode">Postal Code</label>
-                            <input [attr.disabled]="mode == 'View'" formControlName="postalCode" autocomplete="off"
+                            <input [ngClass]="{'disabled': isViewOnly}" [readonly]="isViewOnly" formControlName="postalCode" autocomplete="off"
                                 type="number" pInputText class="ui-inputtext ui-widget">
                             <div *ngIf="submitted && f.postalCode.errors" class="text-error"><br>
                                 <div *ngIf="l.postalCode.errors.required">This field is required.</div>
@@ -588,7 +590,7 @@
                         <div class="field grid col-3">
                         <span class="p-input-icon-left p-1">
                             <label for="contactPerson">Contact Person</label>
-                            <input [attr.disabled]="mode == 'View'" formControlName="contactPerson" autocomplete="off"
+                            <input [ngClass]="{'disabled': isViewOnly}" [readonly]="isViewOnly" formControlName="contactPerson" autocomplete="off"
                                 type="text" pInputText class="ui-inputtext ui-widget">
                             <div *ngIf="submitted && f.contactPerson.errors" class="text-error">
                                 <br>
@@ -599,7 +601,7 @@
                         <div class="field grid col-3">
                         <span class="p-input-icon-left p-1">
                             <label for="capacityofContactPerson">Capacity of Contact Person</label>
-                            <input [attr.disabled]="mode == 'View'" formControlName="capacityofContactPerson"
+                            <input [ngClass]="{'disabled': isViewOnly}" [readonly]="isViewOnly" formControlName="capacityofContactPerson"
                                 autocomplete="off" type="text" pInputText class="ui-inputtext ui-widget">
                             <div *ngIf="submitted && f.capacityofContactPerson.errors" class="text-error"><br>
                                 <div *ngIf="l.capacityofContactPerson.errors.required">This field is required.</div>
@@ -609,7 +611,7 @@
                         <div class="field grid col-3">
                         <span class="p-input-icon-left p-1">
                             <label for="contactNumber">Contact Number</label>
-                            <input [attr.disabled]="mode == 'View'" formControlName="contactNumber" autocomplete="off"
+                            <input [ngClass]="{'disabled': isViewOnly}" [readonly]="isViewOnly" formControlName="contactNumber" autocomplete="off"
                                 type="text" pInputText class="ui-inputtext ui-widget">
                             <div *ngIf="submitted && f.contactNumber.errors" class="text-error">
                                 <br>
@@ -623,7 +625,7 @@
                         <div class="field grid col-3">
                         <span class="p-input-icon-left p-1">
                             <label for="escalation">Escalation %</label>
-                            <input [attr.disabled]="mode == 'View'" formControlName="escalation" autocomplete="off"
+                            <input [ngClass]="{'disabled': isViewOnly}" [readonly]="isViewOnly" formControlName="escalation" autocomplete="off"
                                 type="number" pInputText class="ui-inputtext ui-widget">
                             <div *ngIf="submitted && f.escalation.errors" class="text-error"><br>
                                 <div *ngIf="l.escalation.errors.required">This field is required.</div>
@@ -633,7 +635,7 @@
                         <div class="field grid col-3">
                         <span class="p-input-icon-left p-1">
                             <label for="occupationDate">Occupation Date</label>
-                            <p-calendar [disabled]="isViewOnly" formControlName="occupationDate" dateFormat="dd/mm/yy"
+                            <p-calendar [ngClass]="{'disabled': isViewOnly}" class="ui-inputtext ui-widget" [disabled]="isViewOnly" formControlName="occupationDate" dateFormat="dd/mm/yy"
                                 showOtherMonths="true" showButtonBar="true"></p-calendar>
                             <div *ngIf="submitted && f.occupationDate.errors" class="text-error">
                                 <br>
@@ -644,7 +646,7 @@
                         <div class="field grid col-3">
                         <span class="p-input-icon-left p-1">
                             <label for="startingDate">Starting Date</label>
-                            <p-calendar class="ui-inputtext ui-widget" [disabled]="isViewOnly"
+                            <p-calendar [ngClass]="{'disabled': isViewOnly}" class="ui-inputtext ui-widget" [disabled]="isViewOnly"
                                 formControlName="startingDate" dateFormat="dd/mm/yy" showOtherMonths="true"
                                 showButtonBar="true"></p-calendar>
                             <div *ngIf="submitted && f.startingDate.errors" class="text-error"><br>
@@ -655,7 +657,7 @@
                         <div class="field grid col-3">
                         <span class="p-input-icon-left p-1">
                             <label for="terminationDate">Termination Date</label>
-                            <p-calendar class="ui-inputtext ui-widget" [disabled]="isViewOnly"
+                            <p-calendar [ngClass]="{'disabled': isViewOnly}" class="ui-inputtext ui-widget" [disabled]="isViewOnly"
                                 formControlName="terminationDate" dateFormat="dd/mm/yy" showOtherMonths="true"
                                 showButtonBar="true"></p-calendar>
                             <div *ngIf="submitted && f.terminationDate.errors" class="text-error">
@@ -692,7 +694,7 @@
                         <div class="field grid col-3">
                         <span class="p-input-icon-left p-1">
                             <label for="leaseNumber">Lease Number</label>
-                            <input [attr.disabled]="mode == 'View'" formControlName="leaseNumber" autocomplete="off"
+                            <input [ngClass]="{'disabled': isViewOnly}" [readonly]="isViewOnly" formControlName="leaseNumber" autocomplete="off"
                                 type="number" pInputText class="ui-inputtext ui-widget">
                             <div *ngIf="submitted && f.leaseNumber.errors" class="text-error"><br>
                                 <div *ngIf="l.leaseNumber.errors.required">This field is required.</div>
@@ -704,7 +706,7 @@
                             <label for="vat">Vat Number</label>
                             <p-dropdown class="ui-inputtext ui-widget" [disabled]="isViewOnly" inputId="vat" [style]="{'width':'570px'}"
                                 [options]="vats" formControlName="vat" (onChange)="setVat($event)"
-                                placeholder="Please select" optionLabel="name"></p-dropdown>
+                                placeholder="Please Select" optionLabel="name"></p-dropdown>
                             <div *ngIf="submitted && f.vat.errors" class="text-error"><br>
                                 <div *ngIf="l.vat.errors.required">This field is required.</div>
                             </div>
@@ -745,7 +747,7 @@
                         <div class="field grid col-4">
                         <span class="p-input-icon-left p-1 w-full">
                             <label for="landUseClass">Land Use Class</label>
-                            <input [attr.disabled]="mode == 'View'" formControlName="landUseClass" autocomplete="off"
+                            <input [ngClass]="{'disabled': isViewOnly}" [readonly]="isViewOnly" formControlName="landUseClass" autocomplete="off"
                                 type="text" pInputText class="ui-inputtext ui-widget w-full">
                             <div *ngIf="submitted && f.landUseClass.errors" class="text-error"><br>
                                 <div *ngIf="f.landUseClass.errors.required">This field is required.</div>
@@ -755,7 +757,7 @@
                         <div class="field grid col-4">
                         <span class="p-input-icon-left p-1 w-full">
                             <label for="class">Nature of Asset</label>
-                            <input [attr.disabled]="mode == 'View'" formControlName="natureofAsset" autocomplete="off"
+                            <input [ngClass]="{'disabled': isViewOnly}" [readonly]="isViewOnly" formControlName="natureofAsset" autocomplete="off"
                                 type="text" pInputText class="ui-inputtext ui-widget w-full">
                             <div *ngIf="submitted && f.natureofAsset.errors" class="text-error"><br>
                                 <div *ngIf="f.natureofAsset.errors.required">This field is required.</div>
@@ -766,7 +768,7 @@
                         <span class="p-input-icon-left p-1 w-full">
                             <label for="afs">AFS</label>
                             <p-dropdown class="ui-inputtext ui-widget w-full" inputId="afs" [disabled]="isViewOnly" [style]="{'width':'570px'}"
-                                [options]="aFSs" placeholder="Please select" formControlName="afs" optionLabel="name">
+                                [options]="aFSs" placeholder="Please Select" formControlName="afs" optionLabel="name">
                             </p-dropdown>
                             <div *ngIf="submitted && f.afs.errors" class="text-error"><br>
                                 <div *ngIf="l.afs.errors.required">This field is required.</div>
@@ -780,7 +782,7 @@
                         <div class="field grid col-4">
                         <span class="p-input-icon-left p-1 w-full">
                             <label for="municipalValuation">Municipal Valuations</label>
-                            <input [attr.disabled]="mode == 'View'" formControlName="municipalValuation"
+                            <input [ngClass]="{'disabled': isViewOnly}" [readonly]="isViewOnly" formControlName="municipalValuation"
                                 autocomplete="off" type="text" pInputText class="ui-inputtext ui-widget w-full">
                             <div *ngIf="submitted && f.municipalValuation.errors" class="text-error"><br>
                                 <div *ngIf="f.municipalValuation.errors.required">This field is required.</div>
@@ -790,7 +792,7 @@
                         <div class="field grid col-4">
                         <span class="p-input-icon-left p-1 w-full">
                             <label for="municipalValuationDate">Date of Municipal Valuation</label>
-                            <p-calendar class="ui-inputtext ui-widget w-full" [disabled]="isViewOnly"
+                            <p-calendar [ngClass]="{'disabled': isViewOnly}" class="ui-inputtext ui-widget" [disabled]="isViewOnly"
                                 formControlName="municipalValuationDate" dateFormat="dd/mm/yy" showOtherMonths="true"
                                 showButtonBar="true"></p-calendar>
                             <div *ngIf="submitted && f.municipalValuationDate.errors" class="text-error"><br>
@@ -804,7 +806,7 @@
                         <div class="field grid col-4">
                         <span class="p-input-icon-left p-1 w-full">
                             <label for="class">Non Municipal Valuation</label>
-                            <input [attr.disabled]="mode == 'View'" formControlName="nonMunicipalValuation"
+                            <input [ngClass]="{'disabled': isViewOnly}" [readonly]="isViewOnly" formControlName="nonMunicipalValuation"
                                 autocomplete="off" type="text" pInputText class="ui-inputtext ui-widget w-full">
                             <div *ngIf="submitted && f.nonMunicipalValuation.errors" class="text-error"><br>
                                 <div *ngIf="f.nonMunicipalValuation.errors.required">This field is required.</div>
@@ -814,7 +816,7 @@
                         <div class="field grid col-4">
                         <span class="p-input-icon-left p-1 w-full">
                             <label for="value">Fair Value</label>
-                            <input [attr.disabled]="mode == 'View'" formControlName="value" autocomplete="off"
+                            <input [ngClass]="{'disabled': isViewOnly}" [readonly]="isViewOnly" formControlName="value" autocomplete="off"
                                 type="text" pInputText class="ui-inputtext ui-widget w-full">
                             <div *ngIf="submitted && f.value.errors" class="text-error"><br>
                                 <div *ngIf="f.value.errors.required">This field is required.</div>
@@ -824,7 +826,7 @@
                         <div class="field grid col-4">
                         <span class="p-input-icon-left p-1 w-full">
                             <label for="nonMunicipalValuationDate">Date of Non Municipal Valuation</label>
-                            <p-calendar class="ui-inputtext ui-widget" [disabled]="isViewOnly"
+                            <p-calendar [ngClass]="{'disabled': isViewOnly}" class="ui-inputtext ui-widget" [disabled]="isViewOnly"
                                 formControlName="nonMunicipalValuationDate" dateFormat="dd/mm/yy" showOtherMonths="true"
                                 showButtonBar="true"></p-calendar>
                             <div *ngIf="submitted && f.nonMunicipalValuationDate.errors" class="text-error"><br>
@@ -839,7 +841,7 @@
                         <div class="field grid col-4">
                         <span class="p-input-icon-left p-1 w-full">
                             <label for="accountNoForService">Account no for Services</label>
-                            <input [attr.disabled]="mode == 'View'" formControlName="accountNoForService"
+                            <input [ngClass]="{'disabled': isViewOnly}" [readonly]="isViewOnly" formControlName="accountNoForService"
                                 autocomplete="off" type="text" pInputText class="ui-inputtext ui-widget w-full"
                                 [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
                             <div *ngIf="submitted && f.accountNoForService.errors" class="text-error"><br>
@@ -850,7 +852,7 @@
                         <div class="field grid col-4">
                         <span class="p-input-icon-left p-1 w-full">
                             <label for="personInstitutionResposible">Institution responsible for account</label>
-                            <input [attr.disabled]="mode == 'View'" formControlName="personInstitutionResposible"
+                            <input [ngClass]="{'disabled': isViewOnly}" [readonly]="isViewOnly" formControlName="personInstitutionResposible"
                                 autocomplete="off" type="text" pInputText class="ui-inputtext ui-widget w-full"
                                 [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
                             <div *ngIf="submitted && f.personInstitutionResposible.errors" class="text-error"><br>
@@ -861,7 +863,7 @@
                         <div class="field grid col-4">
                         <span class="p-input-icon-left p-1 w-full">
                             <label for="propetyRatesAccount">Property Rates Account No</label>
-                            <input [attr.disabled]="mode == 'View'" formControlName="propetyRatesAccount"
+                            <input [ngClass]="{'disabled': isViewOnly}" [readonly]="isViewOnly" formControlName="propetyRatesAccount"
                                 autocomplete="off" type="text" pInputText class="ui-inputtext ui-widget w-full">
                             <div *ngIf="submitted && f.propetyRatesAccount.errors" class="text-error"><br>
                                 <div *ngIf="f.propetyRatesAccount.errors.required">This field is required.</div>
@@ -976,7 +978,7 @@
                         <div class="field grid col-3">
                             <span class="p-input-icon-left p-1 w-full">
                                 <label for="deedsOffice">Building Name</label>
-                                <input [attr.disabled]="mode == 'View'" formControlName="buildingName" autocomplete="off"
+                                <input [ngClass]="{'disabled': isViewOnly}" [readonly]="isViewOnly" formControlName="buildingName" autocomplete="off"
                                     type="text" pInputText class="ui-inputtext ui-widget w-full"
                                     [ngClass]="{ 'is-invalid': submitted && I.name.errors }">
                                 <div *ngIf="submitted && I.buildingName.errors" class="text-error"><br>
@@ -988,7 +990,7 @@
                         <div class="field grid col-3">
                             <span class="p-input-icon-left p-1 w-full">
                                 <label for="type">Size (m2)</label>
-                                <input [attr.disabled]="mode == 'View'" formControlName="size" autocomplete="off"
+                                <input [ngClass]="{'disabled': isViewOnly}" [readonly]="isViewOnly" formControlName="size" autocomplete="off"
                                     type="number" pInputText class="ui-inputtext ui-widget w-full"
                                     [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
                                 <div *ngIf="submitted && I.size.errors" class="text-error"><br>
@@ -1000,7 +1002,7 @@
                         <div class="field grid col-3">
                             <span class="p-input-icon-left p-1 w-full">
                                 <label for="extentofBuilding">Extent of Building (m2)</label>
-                                <input [attr.disabled]="mode == 'View'" formControlName="extentofBuilding"
+                                <input [ngClass]="{'disabled': isViewOnly}" [readonly]="isViewOnly" formControlName="extentofBuilding"
                                     autocomplete="off" type="number" pInputText class="ui-inputtext ui-widget w-full"
                                     [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
                                 <div *ngIf="submitted && I.extentofBuilding.errors" class="text-error"><br>
@@ -1012,7 +1014,7 @@
                         <div class="field grid col-3">
                             <span class="p-input-icon-left p-1 w-full">
                                 <label for="siteCoverag">Site Coverage %</label>
-                                <input [attr.disabled]="mode == 'View'" formControlName="siteCoverag" autocomplete="off"
+                                <input [ngClass]="{'disabled': isViewOnly}" [readonly]="isViewOnly" formControlName="siteCoverag" autocomplete="off"
                                     type="number" pInputText class="ui-inputtext ui-widget w-full"
                                     [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
                                 <div *ngIf="submitted && I.siteCoverag.errors" class="text-error"><br>
@@ -1027,7 +1029,7 @@
                         <span class="p-input-icon-left p-1 w-full">
                             <label for="class">Potential Use</label>
                             <p-dropdown class="ui-inputtext ui-widget w-full" [disabled]="isViewOnly" inputId="potentialUse" [style]="{'width':'570px'}"
-                                [options]="potentialUseList" placeholder="Please select" formControlName="potentialUse"
+                                [options]="potentialUseList" placeholder="Please Select" formControlName="potentialUse"
                                 (onChange)="setClass($event)" optionLabel="name">
                             </p-dropdown>
                             <div *ngIf="submitted && I.potentialUse.errors" class="text-error"><br>
@@ -1041,7 +1043,7 @@
                                 <label for="class">Type</label>
                                 <p-dropdown class="ui-inputtext ui-widget w-full" [disabled]="isViewOnly" inputId="type" [style]="{'width':'570px'}"
                                     [options]="typeOfImprovements" formControlName="type" (onChange)="setClass($event)"
-                                    optionLabel="name" placeholder="Please select">
+                                    optionLabel="name" placeholder="Please Select">
                                 </p-dropdown>
                                 <div *ngIf="submitted && I.type.errors" class="text-error"><br>
                                     <div *ngIf="I.type.errors.required">This field is required.</div>
@@ -1055,7 +1057,7 @@
                                 <label for="class">Condition Rating</label>
                                 <p-dropdown class="ui-inputtext ui-widget w-full" [disabled]="isViewOnly" inputId="conditionRating" [style]="{'width':'570px'}"
                                     [options]="conditionRatings" formControlName="conditionRating"
-                                    (onChange)="setConditionRating($event)" placeholder="Please select" optionLabel="name">
+                                    (onChange)="setConditionRating($event)" placeholder="Please Select" optionLabel="name">
                                 </p-dropdown>
                                 <div *ngIf="submitted && I.conditionRating.errors" class="text-error"><br>
                                     <div *ngIf="I.conditionRating.errors.required">This field is required.</div>
@@ -1069,7 +1071,7 @@
                                 <p-dropdown class="ui-inputtext ui-widget w-full" [disabled]="isViewOnly" [style]="{'width':'570px'}"
                                     inputId="functionalPerformanceRating" [options]="functionalPerformanceRatings"
                                     formControlName="functionalPerformanceRating" (onChange)="setClass($event)"
-                                    placeholder="Please select" optionLabel="name">
+                                    placeholder="Please Select" optionLabel="name">
                                 </p-dropdown>
                                 <div *ngIf="submitted && I.functionalPerformanceRating.errors" class="text-error"><br>
                                     <div *ngIf="I.functionalPerformanceRating.errors.required">This field is required.</div>
@@ -1084,7 +1086,7 @@
                         <div class="field grid col-3">
                             <span class="p-input-icon-left p-1 w-full">
                                 <label for="levelofUtilization">Level of Utilization %</label>
-                                <input [attr.disabled]="mode == 'View'" formControlName="levelofUtilization"
+                                <input [ngClass]="{'disabled': isViewOnly}" [readonly]="isViewOnly" formControlName="levelofUtilization"
                                     autocomplete="off" type="number" pInputText class="ui-inputtext ui-widget w-full"
                                     [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
                                 <div *ngIf="submitted && I.levelofUtilization.errors" class="text-error"><br>
@@ -1096,7 +1098,7 @@
                         <div class="field grid col-3">
                             <span class="p-input-icon-left p-1 w-full">
                                 <label for="type">Usable area(m2)</label>
-                                <input [attr.disabled]="mode == 'View'" formControlName="usableArea" autocomplete="off"
+                                <input [ngClass]="{'disabled': isViewOnly}" [readonly]="isViewOnly" formControlName="usableArea" autocomplete="off"
                                     type="number" pInputText class="ui-inputtext ui-widget w-full"
                                     [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
                                 <div *ngIf="submitted && I.usableArea.errors" class="text-error"><br>
@@ -1108,7 +1110,7 @@
                         <div class="field grid col-3">
                             <span class="p-input-icon-left p-1 w-full">
                                 <label for="type">Comments</label>
-                                <input [attr.disabled]="mode == 'View'" formControlName="comment" autocomplete="off"
+                                <input [ngClass]="{'disabled': isViewOnly}" [readonly]="isViewOnly" formControlName="comment" autocomplete="off"
                                     type="text" pInputText class="ui-inputtext ui-widget w-full"
                                     [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
                                 <div *ngIf="submitted && I.comment.errors" class="text-error"><br>
@@ -1130,7 +1132,7 @@
                             <ng-template pTemplate="caption">
                                 <div style="text-align: right">
                                     <i class="pi pi-search" style="margin:4px 4px 0 0"></i>
-                                    <input [attr.disabled]="mode == 'View'" type="text" pInputText size="50"
+                                    <input [ngClass]="{'disabled': isViewOnly}" [readonly]="isViewOnly" type="text" pInputText size="50"
                                         placeholder="Global Filter" class="ui-inputtext ui-widget"
                                         (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
                                 </div>

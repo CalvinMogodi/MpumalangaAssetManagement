@@ -293,10 +293,33 @@ export class SharedService {
 
   getAssetTypes() {
     const assetTypes = [
-      { name: 'Erf', code: 'E', factor: 1 },
-      { name: 'Farm', code: 'F', factor: 2 },
       { name: 'Agricultural Holding', code: 'A', factor: 3 },
-      { name: 'Sectional Title', code: 'S', factor: 4 }
+      { name: 'Business', code: 'E', factor: 1 },
+      { name: 'Closed School', code: 'E', factor: 1 },
+      { name: 'Clinic', code: 'E', factor: 1 },
+      { name: 'Day Care Centre' , code: 'E', factor: 1 },
+      { name: 'Erf', code: 'E', factor: 1 },
+      { name: 'Faclities', code: 'E', factor: 1 },
+      { name: 'Farm', code: 'F', factor: 2 },      
+      { name: 'Government Garage', code: 'E', factor: 1 },
+      { name: 'Hospital', code: 'E', factor: 1 },
+      { name: 'House', code: 'E', factor: 1 },
+      { name: 'Impounding', code: 'E', factor: 1 },
+      { name: 'Library', code: 'E', factor: 1 },
+      { name: 'Museum', code: 'E', factor: 1 },
+      { name: 'Office', code: 'E', factor: 1 },
+      { name: 'Offices & Road Camp ', code: 'E', factor: 1 },
+      { name: 'Reapeter Station', code: 'E', factor: 1 },
+      { name: 'Research Centre', code: 'E', factor: 1 },
+      { name: 'Road', code: 'E', factor: 1 },
+      { name: 'Road Camp', code: 'E', factor: 1 },
+      { name: 'Road Reserve', code: 'E', factor: 1 },
+      { name: 'Sectional Title', code: 'S', factor: 4 },
+      { name: 'School', code: 'E', factor: 1 },
+      { name: 'Storage', code: 'E', factor: 1 },
+      { name: 'Various Facilities', code: 'E', factor: 1 },
+      { name: 'Workhop', code: 'E', factor: 1 },
+      { name: 'Wheighbridge', code: 'E', factor: 1 },    
     ];
     return assetTypes;
   }

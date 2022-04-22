@@ -40,6 +40,7 @@ export class AssetregisterComponent implements OnInit  {
     { label: 'Asset Register' }];
   cols = [
     { field: 'fileReference', header: 'File Reference' },
+    { field: 'name', header: 'Facility Name' },
     { field: 'type', header: 'Type' },
     { field: 'clientCode', header: 'Property Code' },
     { field: 'status', header: 'Status' }
@@ -47,6 +48,7 @@ export class AssetregisterComponent implements OnInit  {
   facilities = [];
   landTotal: number = 0;
   buildingTotal:number = 0;
+  nonResidentialBuildingTotal:number = 0;
   currentUser: User;
   
   constructor(private router: Router,private authenticationService: AuthenticationService,private confirmationService: ConfirmationService,  public facilityService: FacilityService, private formBuilder: FormBuilder, private messageService: MessageService) { }
@@ -82,7 +84,8 @@ export class AssetregisterComponent implements OnInit  {
       this.loading = false;
       this.facilities = facilities;
       this.landTotal = facilities.filter(f => f.type == "Land").length;
-      this.buildingTotal = facilities.filter(f => f.type != "Land").length;
+      this.buildingTotal = facilities.filter(f => f.type != "Dwelling").length;
+      this.nonResidentialBuildingTotal = facilities.filter(f => f.type != "Non Residential").length;
     });
   }
 
@@ -156,7 +159,8 @@ export class AssetregisterComponent implements OnInit  {
         this.messageService.add({severity:'warn', summary:'Deleted', detail:'Asset is deleted successful.'});
         this.facilities = this.facilities.filter(f => f.id != facility.id);
         this.landTotal = this.facilities.filter(f => f.facilityType == "Land" && f.Id != facility.id).length;
-        this.buildingTotal = this.facilities.filter(f => f.facilityType != "Land" && f.Id != facility.id).length;
+        this.buildingTotal = this.facilities.filter(f => f.facilityType != "Dwelling" && f.Id != facility.id).length;
+        this.nonResidentialBuildingTotal = this.facilities.filter(f => f.facilityType != "Non Residential" && f.Id != facility.id).length;
       }
       else{
         this.deleting = false;

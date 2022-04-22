@@ -35,10 +35,10 @@
     <div>
         <p-card>
             <div style="text-align: center;" class="number-count">
-                {{awaitingVerification}}
+                {{nonResidentialBuildingTotal}}
             </div>
             <div style="text-align: center;">
-                Awaiting Verification
+                Non Residential Buildings
             </div>
         </p-card>
     </div>
@@ -76,7 +76,7 @@
         </ng-template>
         <ng-template pTemplate="header">
             <tr>
-                <th *ngFor="let col of cols">
+                <th *ngFor="let col of cols" style="width:18em">
                     {{col.header}}
                     <p-sortIcon [field]="col.field" ariaLabel="Activate to sort"
                         ariaLabelDesc="Activate to sort in descending order"
