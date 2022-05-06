@@ -27,6 +27,7 @@ import { ConditionAssessmentComponent } from './components/assetregister/conditi
 import { LeaseManagementComponent } from './components/leasemanagement/lease-management.component';
 import { HiringComponent } from './components/hiring/hiring.component';
 import { LeaseRegisterComponent } from './components/lesesregister/leaseregister.component';
+import { FacilityComponent } from './components/facility/facility.component';
 
 const routes: Routes = [
   {
@@ -45,6 +46,10 @@ const routes: Routes = [
   },{
     path: 'assetregister',
     component: AssetregisterComponent,
+    canActivate: [AuthGuard],
+  },{
+    path: 'facility',
+    component: FacilityComponent,
     canActivate: [AuthGuard],
   },  
   {

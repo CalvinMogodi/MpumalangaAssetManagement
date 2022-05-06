@@ -95,6 +95,7 @@ import { LeasedPropertyComponent } from './components/leasemanagement/leasedprop
 import { HiringComponent } from './components/hiring/hiring.component';
 import { LeaseRegisterComponent } from './components/lesesregister/leaseregister.component';
 import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
+import { FacilityComponent } from './components/facility/facility.component';
 
 @NgModule({
   declarations: [
@@ -133,7 +134,8 @@ import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
     LeaseManagementComponent,
     LeasedPropertyComponent,
     HiringComponent,
-    LeaseRegisterComponent
+    LeaseRegisterComponent,
+    FacilityComponent
   ],
   imports: [
     BrowserModule,
