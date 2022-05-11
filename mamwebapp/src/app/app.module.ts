@@ -95,7 +95,11 @@ import { LeasedPropertyComponent } from './components/leasemanagement/leasedprop
 import { HiringComponent } from './components/hiring/hiring.component';
 import { LeaseRegisterComponent } from './components/lesesregister/leaseregister.component';
 import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
-import { FacilityComponent } from './components/facility/facility.component';
+import { ProjectComponent } from './components/facilitymanagement/project/project.component';
+import { ServiceRequestComponent } from './components/facilitymanagement/servicerequest/service-request.component';
+import { FacilityManagementComponent } from './components/facilitymanagement/facility-management.component';
+import { AddEditProjectComponent } from './components/facilitymanagement/project/addeditproject/add-edit-project.component';
+import { AddEditServiceRequestComponent } from './components/facilitymanagement/servicerequest/addeditservicerequest/add-edit-service-request.component';
 
 @NgModule({
   declarations: [
@@ -135,7 +139,11 @@ import { FacilityComponent } from './components/facility/facility.component';
     LeasedPropertyComponent,
     HiringComponent,
     LeaseRegisterComponent,
-    FacilityComponent
+    ProjectComponent,
+    ServiceRequestComponent,
+    FacilityManagementComponent,
+    AddEditProjectComponent,
+    AddEditServiceRequestComponent
   ],
   imports: [
     BrowserModule,
