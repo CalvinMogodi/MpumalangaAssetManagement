@@ -91,15 +91,7 @@ export class UserComponent implements OnInit {
       { name: 'Social development', code: 'SD', factor: 10 },
       { name: 'Public works, roads & transport', code: 'PWRT', factor: 11 },
       { name: 'Finance', code: 'F', factor: 11 },
-    ];
-
-    this.addUserForm = this.formBuilder.group({
-      name: new FormControl('', Validators.compose([Validators.required])),
-      surname: new FormControl('', Validators.compose([Validators.required])),
-      email: new FormControl('', Validators.compose([Validators.required, Validators.email])),
-      role: new FormControl('', Validators.compose([Validators.required])),
-      department: new FormControl('')
-    });
+    ];    
 
     this.items = [{ icon: 'pi pi-home', url: 'dashboard' },
     { label: 'Users' }];
@@ -113,12 +105,29 @@ export class UserComponent implements OnInit {
       { field: 'department', header: 'Department', element: true },
     ];
 
+    this.initUser();
+
     this.loading = true;
     this.userService.getAll().pipe(first()).subscribe(users => {
       this.loading = false;
       this.users = users;
       this.clonedUsers = users;
     });
+  }
+
+  initUser(){
+    this.addUserForm = this.formBuilder.group({
+      name: new FormControl('', Validators.compose([Validators.required])),
+      surname: new FormControl('', Validators.compose([Validators.required])),
+      email: new FormControl('', Validators.compose([Validators.required, Validators.email])),
+      role: new FormControl('', Validators.compose([Validators.required])),
+      department: new FormControl('')
+    });
+  }
+
+  addNewUser(){
+    this.addUserForm.reset();
+    this.initUser();
   }
 
   get f() { return this.addUserForm.controls; }
