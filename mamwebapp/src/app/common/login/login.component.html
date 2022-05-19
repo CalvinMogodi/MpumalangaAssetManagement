@@ -17,7 +17,7 @@
                 <div class="username-container">
                     <label>Username</label>
                     <div class="login-input">
-                        <input formControlName="username" type="text" autocomplete="off" placeholder="Username"
+                        <input style="padding-left: 1em;" formControlName="username" type="text" autocomplete="off" placeholder="Username"
                             class="ui-inputtext ui-widget" [ngClass]="{ 'is-invalid': submitted && f.username.errors }">
                         <div *ngIf="submitted && f.username.errors" class="text-error">
                             <div *ngIf="f.username.errors.required">username is required.</div>
@@ -26,9 +26,10 @@
                 </div>
                 <div class="password-container">
                     <label>Password</label>
-                    <div class="login-input">
-                        <input formControlName="password" type="password" autocomplete="off" placeholder="Password"
-                            class="ui-inputtext ui-widget" [ngClass]="{ 'is-invalid': submitted && f.username.errors }">
+                    <div class="login-input" style="margin-top: unset;">
+                        <p-password [feedback]="false" placeholder="Password" formControlName="password" class="ui-inputtext ui-widget"></p-password>
+                        <!--<input formControlName="password" type="password" autocomplete="off" placeholder="Password"
+                            class="ui-inputtext ui-widget" [ngClass]="{ 'is-invalid': submitted && f.username.errors }">-->
                         <div *ngIf="submitted && f.password.errors" class="text-error">
                             <div *ngIf="f.password.errors.required">password is required.</div>
                         </div>
@@ -54,7 +55,7 @@
         <div class="p-fluid p-grid p-formgrid">
             <span class="p-float-label p-input-icon-left mt-5">
                 <i class="pi pi-user"></i>
-                <input formControlName="username" type="text" style="padding-left: 30px;" pInputText class="ui-inputtext ui-widget"
+                <input formControlName="username" type="text" style="padding-left: 30px !important" pInputText class="ui-inputtext ui-widget"
                     [ngClass]="{ 'is-invalid': forgotPasswordSubmitted && ff.username.errors }" required>
                 <label for="float-input">Username</label>
 

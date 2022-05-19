@@ -14,13 +14,6 @@
     border: unset !important;
 }
 
-label{
-    font-weight: bold;
-    font-family: "calibri"!important;
-    font-size: 14px!important;
-    text-decoration: none!important;
-}
-
 .btn-add{
     margin-top: 18px;
     width: 30%;

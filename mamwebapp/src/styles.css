@@ -286,10 +286,6 @@ p-fieldset {
     appearance: none;
 }
 
-.p-input-icon-left > .p-inputtext {
-    padding-left: 0.3em !important;
-}
-
 .p-dropdown::-webkit-input-placeholder {
 	font-family: "calibri"!important;
     font-size: 14px!important;
@@ -429,4 +425,38 @@ p-fieldset {
 
 .p-calendar:disabled {
     opacity: 0.9 !important;
+}
+
+.p-password{
+    width: 100% !important;	
+}
+
+.p-inputtext{
+	font-size: 13px!important;
+	width: 100% !important;
+}
+
+.p-input-icon-left > .p-inputtext {
+    padding-left: 2px !important;
+}
+
+.text-error {
+	position: absolute;
+    top: 40px;
+	bottom: 15px;
+	color: #a80000;
+	font-size: 12px;
+}
+
+.ui-inputtext:enabled:focus, .p-inputtext:enabled:focus{
+	outline: unset !important;
+	border-color: unset !important;
+	box-shadow: unset !important;
+}
+
+label{
+    font-weight: bold;
+    font-family: "calibri"!important;
+    font-size: 14px!important;
+    text-decoration: none!important;
 }
