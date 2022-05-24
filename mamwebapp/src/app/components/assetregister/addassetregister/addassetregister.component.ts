@@ -9,6 +9,8 @@ import { ConfirmationService } from 'primeng/api';
 import { User } from 'src/app/models/user.model';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { SharedService } from 'src/app/services/shared.service';
+import { isNumber } from 'util';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-addassetregister',
@@ -43,9 +45,11 @@ export class AddassetregisterComponent implements OnInit {
   activeItem: MenuItem;
   loading = true;
   incomeLeaseStatuses: any[];
+  showHiredPropertyLink:boolean = false;
   facilityTypes: any[];
   natureOfLeases: any[];
   showDialog: boolean = false;
+  titleDeedIsInvalid: boolean = false;
   activeIndex: number = 0;
   landForm: FormGroup;
   financialForm: FormGroup;
@@ -71,7 +75,7 @@ export class AddassetregisterComponent implements OnInit {
   userDepartments: any[];
   landRemainders: any[];
   howAcquireds: any[];
-  vestedTypes: any[];
+  //vestedTypes: any[];
   value5: string = 'Disabled';
   aFSs: any[];
   howAcquired: any = {
@@ -105,7 +109,7 @@ export class AddassetregisterComponent implements OnInit {
 
   formattedAmount;
  amount;
-  constructor(private sharedService: SharedService, private authenticationService: AuthenticationService, private confirmationService: ConfirmationService, public facilityService: FacilityService, private formBuilder: FormBuilder, private messageService: MessageService) { }
+  constructor(private router: Router,private sharedService: SharedService, private authenticationService: AuthenticationService, private confirmationService: ConfirmationService, public facilityService: FacilityService, private formBuilder: FormBuilder, private messageService: MessageService) { }
 
   ngOnInit() {
     this.buildForm();
@@ -436,12 +440,11 @@ export class AddassetregisterComponent implements OnInit {
         this.facility.clientCode = this.landForm.controls["clientCode"].value;
         this.facility.survey = this.landForm.controls["survey"].value != undefined ? this.landForm.controls["survey"].value.name : null;
         this.facility.type = this.landForm.controls["facilityType"].value != undefined ? this.landForm.controls["facilityType"].value.name : null;
-        this.facility.vestedType = this.landForm.controls["vestedType"].value != undefined ? this.landForm.controls["vestedType"].value.name : null;
-        this.facility.afs = this.landForm.controls["afs"].value != undefined ? this.landForm.controls["afs"].value.name : null;
+        //this.facility.vestedType = this.landForm.controls["vestedType"].value != undefined ? this.landForm.controls["vestedType"].value.name : null;
         this.facility.userDepartment = userDepartments;
         this.facility.land = {
           id: this.facility.land.id == 0 ? 0 : this.facility.land.id,
-          deedsOffice: this.landForm.controls["deedsOffice"].value != undefined ? this.landForm.controls["deedsOffice"].value.name : null,
+         
           type: this.landForm.controls["type"].value != undefined ? this.landForm.controls["type"].value.name : null,
           class: this.landForm.controls["class"].value != undefined ? this.landForm.controls["class"].value.name : null,
           geographicalLocation: {
@@ -476,10 +479,11 @@ export class AddassetregisterComponent implements OnInit {
           landUseManagementDetail: {
             id: this.facility.land.landUseManagementDetail.id == 0 ? 0 : this.facility.land.landUseManagementDetail.id,
             titleDeedNumber: this.landForm.controls["titleDeedNumber"].value,
+            deedsOffice: this.landForm.controls["deedsOffice"].value != undefined ? this.landForm.controls["deedsOffice"].value.name : null,
             registrationDate: this.landForm.controls["registrationDate"].value != "" ? this.landForm.controls["registrationDate"].value : null,
             registeredOwner: this.landForm.controls["registeredOwner"].value,
             vestingDate: this.landForm.controls["vestingDate"].value != "" ? this.landForm.controls["vestingDate"].value : null,
-            conditionsOfTitle: this.landForm.controls["conditionsOfTitle"].value,
+           // conditionsOfTitle: this.landForm.controls["conditionsOfTitle"].value,
             ownershipCategory: this.landForm.controls["ownershipCategory"].value != undefined ? this.landForm.controls["ownershipCategory"].value.name : null,
             stateOwnedPercentage: this.landForm.controls["stateOwnedPercentage"].value != "" ? this.landForm.controls["stateOwnedPercentage"].value : null,
             landUse: this.landForm.controls["landUse"].value,
@@ -516,6 +520,7 @@ export class AddassetregisterComponent implements OnInit {
           id: this.facility.finance.id == 0 ? 0 : this.facility.finance.id,
           landUseClass: this.financialForm.controls["landUseClass"].value,
           natureofAsset: this.financialForm.controls["natureofAsset"].value,
+          afs: this.financialForm.controls["afs"].value != undefined ? this.financialForm.controls["afs"].value.name : null,
           secondaryInformationNote: {
             id: this.facility.finance.secondaryInformationNote.id == 0 ? 0 : this.facility.finance.secondaryInformationNote.id,
             additionCash: this.financialForm.controls["additionCash"].value != "" ? this.financialForm.controls["additionCash"].value : 0,
@@ -553,7 +558,7 @@ export class AddassetregisterComponent implements OnInit {
       clientCode:[''],
       deedsOffice: [''],
       class: [''],     
-      vestedType: [''],
+      //vestedType: [''],
       type: [''],
       province: [''],
       town: [''],
@@ -581,7 +586,7 @@ export class AddassetregisterComponent implements OnInit {
       registrationDate: [this.today],
       registeredOwner: [''],
       vestingDate: [''],
-      conditionsOfTitle: [''],
+      //conditionsOfTitle: [''],
       ownershipCategory: [''],
       stateOwnedPercentage: [''],
       landUse: [''],
@@ -751,12 +756,12 @@ export class AddassetregisterComponent implements OnInit {
       { name: 'No', code: 'N', factor: 2 },
     ];
 
-    this.vestedTypes = [
+    /*this.vestedTypes = [
       { name: 'Vested', code: 'V', factor: 1 },
       { name: 'Non-Vested', code: 'NV', factor: 2 },
       { name: 'Application submitted', code: 'AS', factor: 3 },
       { name: 'Certificate Issued ', code: 'CI', factor: 3 }           
-    ];
+    ];*/
 
     this.vats = [
       { name: 'Incl', code: 'I', factor: 1 },
@@ -860,7 +865,7 @@ export class AddassetregisterComponent implements OnInit {
     let districtMunicipality = this.districtMunicipalities.filter(d => d.name.toLowerCase().trim() == (this.facility.land.geographicalLocation.districtMunicipality != undefined ? this.facility.land.geographicalLocation.districtMunicipality.toLowerCase().trim() : this.facility.land.geographicalLocation.districtMunicipality))[0];
 
     let afs = this.aFSs.filter(d => d.name.trim() == (this.facility.afs != undefined ? this.facility.afs.trim() : this.facility.afs))[0];
-    let vestedType = this.vestedTypes.filter(d => d.name.toLowerCase().trim() == (this.facility.vestedType != undefined ? this.facility.vestedType.toLowerCase().trim() : this.facility.vestedType))[0];
+    //let vestedType = this.vestedTypes.filter(d => d.name.toLowerCase().trim() == (this.facility.vestedType != undefined ? this.facility.vestedType.toLowerCase().trim() : this.facility.vestedType))[0];
     let facilityType = this.facilityTypes.filter(d => d.name.toLowerCase().trim() == (this.facility.type != undefined ? this.facility.type.toLowerCase().trim() : this.facility.type))[0];
 
     let region = this.regions.filter(d => d.name.toLowerCase().trim() == (this.facility.land.region != undefined ? this.facility.land.region.toLowerCase().trim() : this.facility.land.region))[0];
@@ -892,7 +897,7 @@ export class AddassetregisterComponent implements OnInit {
       deedsOffice: [deedsOffice],
       class: [assetClass],
       afs: [afs],
-      vestedType: [vestedType],
+      //vestedType: [vestedType],
       type: [type],
       province: [province],
       town: [this.facility.land.geographicalLocation.town],
@@ -921,7 +926,7 @@ export class AddassetregisterComponent implements OnInit {
       registrationDate: [this.facility.land.landUseManagementDetail.registrationDate != undefined ? new Date(this.facility.land.landUseManagementDetail.registrationDate) : new Date()],
       registeredOwner: [this.facility.land.landUseManagementDetail.registeredOwner],
       vestingDate: [this.facility.land.landUseManagementDetail.vestingDate != undefined ? new Date(this.facility.land.landUseManagementDetail.vestingDate) : new Date()],
-      conditionsOfTitle: [this.facility.land.landUseManagementDetail.conditionsOfTitle],
+      //conditionsOfTitle: [this.facility.land.landUseManagementDetail.conditionsOfTitle],
       ownershipCategory: [ownershipCategory],
       stateOwnedPercentage: [this.facility.land.landUseManagementDetail.stateOwnedPercentage],
       landUse: [this.facility.land.landUseManagementDetail.landUse],
@@ -980,6 +985,10 @@ export class AddassetregisterComponent implements OnInit {
     });
   }
 
+  navigate(url){
+    this.router.navigate([url]);
+  }
+
   confirmDelete() {
     this.improvements.splice(this.selectedImprovement);
   }
@@ -1005,6 +1014,27 @@ export class AddassetregisterComponent implements OnInit {
 
   selectImprovement(improvement) {
     this.selectedImprovement = improvement;
+  }
+
+  validateTitleDeed(e){
+    this.titleDeedIsInvalid = false;
+    const titleDeeed = this.landForm.controls["titleDeedNumber"].value;
+    var firstNumbers = titleDeeed.substring(1, 5);
+    var specialCharacter = titleDeeed.substring(5, 6);
+    var lastNumbers = titleDeeed.substring(6, 10);
+    const firstLetter = titleDeeed.substring(0, 1).charAt(0);
+    if(!firstLetter.match(/[a-z]/i))
+    {
+      this.titleDeedIsInvalid = true;
+    }
+    if(lastNumbers.length != 4 || !isNumber(Number(lastNumbers)))
+      this.titleDeedIsInvalid = true;
+   
+    if(specialCharacter != '/')
+      this.titleDeedIsInvalid = true;
+
+    if(firstNumbers.length != 4 || !isNumber(Number(firstNumbers)))
+      this.titleDeedIsInvalid = true;
   }
 
   AddImprovement() {
@@ -1084,6 +1114,10 @@ export class AddassetregisterComponent implements OnInit {
 
   setFacilityType(e){
     this.facility.type = e.value.name;
+  }
+
+  goToLink(url){
+    window.open(url, "_blank");
   }
 
   getFiles(fileReference:string){    

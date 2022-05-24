@@ -770,10 +770,10 @@ export class SharedService {
       landUseManagementDetail: {
         id: 0,
         titleDeedNumber: undefined,
+        deedsOffice:undefined,
         registrationDate: undefined,
         registeredOwner: undefined,
         vestingDate: undefined,
-        conditionsOfTitle: undefined,
         ownershipCategory: undefined,
         stateOwnedPercentage: undefined,
         landUse: undefined,

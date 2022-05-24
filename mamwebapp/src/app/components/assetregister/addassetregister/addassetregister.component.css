@@ -31,3 +31,12 @@ input[type="text"]:disabled {
 .p-calendar:disabled {
     opacity: 0.9 !important;
 }
+
+.link{
+    color: #0066CC;
+    text-decoration: underline;
+    font-size: 14px;
+    bottom: 5px;
+    position: absolute;
+    right: 0px;
+}

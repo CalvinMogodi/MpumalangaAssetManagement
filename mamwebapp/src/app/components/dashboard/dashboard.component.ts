@@ -109,8 +109,8 @@ export class DashboardComponent implements OnInit {
         datasets: [
           {
             data: [this.nonResidentialBuildings.total, this.dwellings.total, this.land.total],
-            backgroundColor: [
-              "#147df0",
+           /* backgroundColor: [
+              "#000000",
               "#ed3c76",
               "#599597"
             ],
@@ -118,7 +118,7 @@ export class DashboardComponent implements OnInit {
               "#147df0",
               "#ed3c76",
               "#599597"
-            ]
+            ]*/
           }]
       };
     });

@@ -9,7 +9,7 @@ export class Facility {
     clientCode: string;    
     survey: string;
     afs: string;
-    vestedType: string;
+    //vestedType: string;
     userDepartment: string;
     userId: number;
     status: string;    
@@ -28,7 +28,6 @@ export class Facility {
 
 export class Land {
     id: number;
-    deedsOffice: string;
     class: string;
     type: string;
     geographicalLocation: GeographicalLocation;   
@@ -86,10 +85,11 @@ export class PropertyDescription{
 export class LandUseManagementDetail{
     id: number;
     titleDeedNumber: string;
+    deedsOffice: string;
     registrationDate: Date;
     registeredOwner: string;
     vestingDate: Date;
-    conditionsOfTitle: string;
+   // conditionsOfTitle: string;
     ownershipCategory: string;
     stateOwnedPercentage: number;
     landUse: string;

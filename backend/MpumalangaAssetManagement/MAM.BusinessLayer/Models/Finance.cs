@@ -12,6 +12,7 @@ namespace MAM.BusinessLayer.Models
         public string NatureofAsset { get; set; }
         public int? SecondaryInformationNoteId { get; set; }
         public int? ValuationId { get; set; }
+        public string AFS { get; set; }
         public SecondaryInformationNote SecondaryInformationNote { get; set; }
         public Valuation Valuation { get; set; }
 
@@ -24,6 +25,7 @@ namespace MAM.BusinessLayer.Models
                 NatureofAsset = f.NatureofAsset,
                 SecondaryInformationNoteId = f.SecondaryInformationNoteId,
                 ValuationId = f.ValuationId,
+                AFS = f.AFS,
             }).ToList();
         }
 
@@ -35,6 +37,7 @@ namespace MAM.BusinessLayer.Models
                 NatureofAsset = finance.NatureofAsset,
                 SecondaryInformationNoteId = finance.SecondaryInformationNoteId,
                 ValuationId = finance.ValuationId,
+                AFS = finance.AFS,
             };
         }
 
@@ -47,6 +50,7 @@ namespace MAM.BusinessLayer.Models
                 NatureofAsset = finance.NatureofAsset,
                 SecondaryInformationNoteId = finance.SecondaryInformationNoteId,
                 ValuationId = finance.ValuationId,
+                AFS = finance.AFS
             };
         }
     }

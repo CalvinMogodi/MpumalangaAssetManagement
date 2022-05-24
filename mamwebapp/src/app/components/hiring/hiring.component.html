@@ -46,7 +46,7 @@
                 <td *ngFor="let col of cols">
                     <i *ngIf="col.field == 'status'" class="pi pi-circle-on" style="font-size: 2rem"
                         [style.color]="rowData[col.field]"></i>
-                    <label *ngIf="col.field != 'status'">{{rowData[col.field]}}</label>
+                    <span *ngIf="col.field != 'status'">{{rowData[col.field]}}</span>
                 </td>
                 <td style="text-align:center">
                     <p-splitButton label="More" [model]="buttonItems" (onDropdownClick)="selectProperty(rowData, ri)"
