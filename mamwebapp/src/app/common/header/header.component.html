@@ -31,7 +31,7 @@
         <div class="p-fluid p-grid p-formgrid">
             <span class="p-float-label p-input-icon-left mt-5">
                 <i class="pi pi-key"></i>
-                <p-password formControlName="oldpassword" class="ui-inputtext ui-widget" [feedback]="false"></p-password>
+                <p-password formControlName="oldpassword" class="ui-inputtext ui-widget" [toggleMask]="true" [feedback]="false"></p-password>
                 <label for="float-input">Old Password</label>
                 <small *ngIf="submitted && f.oldpassword.errors && f.oldpassword.errors.required" class="p-error">This
                     field is required.</small>
@@ -39,7 +39,7 @@
 
             <span class="p-float-label p-input-icon-left mt-5">
                 <i class="pi pi-key"></i>
-                <p-password formControlName="newpassword" [(ngModel)]="newPassword" [feedback]="true" class="ui-inputtext ui-widget">
+                <p-password formControlName="newpassword" [(ngModel)]="newPassword" [toggleMask]="true" class="ui-inputtext ui-widget">
                     <ng-template pTemplate="header">
                         <h6>Pick a password</h6>
                     </ng-template>
@@ -61,7 +61,7 @@
 
             <span class="p-float-label p-input-icon-left mt-5">
                     <i class="pi pi-key"></i>
-                    <p-password formControlName="confirmpassword" class="ui-inputtext ui-widget" [feedback]="false"></p-password>
+                    <p-password formControlName="confirmpassword" class="ui-inputtext ui-widget" [toggleMask]="true"></p-password>
                     <label for="float-input">Confirm Password</label>   
                     <small *ngIf="submitted && f.confirmpassword.errors && f.confirmpassword.errors.required" class="p-error">This field is required.</small>
                     <small *ngIf="newPassword.length > 2 && f.confirmpassword.value !== f.newpassword.value" class="p-error">Passwords do not match.</small>

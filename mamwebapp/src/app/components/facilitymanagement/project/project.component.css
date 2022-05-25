@@ -55,4 +55,9 @@
     border: 3px solid green;
   }
 
- 
+  p-dialog, p-footer {
+    width: 100%;
+    float: left;
+    box-sizing: border-box;
+    padding: .5em;
+  }

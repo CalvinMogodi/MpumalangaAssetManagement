@@ -1,11 +1,27 @@
 .form-body{
   overflow-y: auto; 
   overflow-x: hidden;
-  height: 400px;
   width: 100%; 
   padding: 0px 25px 0px 25px;
 }
 
 input{
   width: 100%;
+}
+
+.parent-project{
+  font-size: 14px;
+  padding-left: 5px;
+}
+
+.check-box-container{
+  position: absolute;
+  bottom: 5px;
+}
+
+.btn-add {
+  margin-top: 20px;
+  position: absolute;
+  width: 100px;
+  margin-left: 210px;
 }

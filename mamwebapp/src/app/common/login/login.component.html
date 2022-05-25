@@ -27,7 +27,7 @@
                 <div class="password-container">
                     <label>Password</label>
                     <div class="login-input" style="margin-top: unset;">
-                        <p-password [feedback]="false" placeholder="Password" formControlName="password" class="ui-inputtext ui-widget"></p-password>
+                        <p-password [toggleMask]="true" [feedback]="false" placeholder="Password" formControlName="password" class="ui-inputtext ui-widget"></p-password>
                         <!--<input formControlName="password" type="password" autocomplete="off" placeholder="Password"
                             class="ui-inputtext ui-widget" [ngClass]="{ 'is-invalid': submitted && f.username.errors }">-->
                         <div *ngIf="submitted && f.password.errors" class="text-error">

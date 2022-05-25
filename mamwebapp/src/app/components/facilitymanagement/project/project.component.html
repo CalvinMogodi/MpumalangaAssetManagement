@@ -1,3 +1,4 @@
+<body>
 <p-toast [style]="{marginTop: '80px'}" position="top-right"></p-toast>
 <br/> <br/>
 <div class="text-center" style="color: red;" *ngIf="error">
@@ -51,7 +52,7 @@
 
 
 <div *ngIf="showDialog" class="dialogBackgroud"></div>
-<p-dialog [(visible)]="showDialog" *ngIf="showDialog" [style]="{width: '70vw'}"
+<p-dialog [contentStyle]="{'overflow':'visible'}" [(visible)]="showDialog" *ngIf="showDialog" [style]="{width: '70vw'}"
     [baseZIndex]="10000">
     <p-header> {{ dialogHeader }} </p-header>
     <app-add-edit-project (newAsset)='addUpdateAsset($event)' [selectedAsset]="selectedAsset"></app-add-edit-project>
@@ -66,3 +67,4 @@
             <button style="float: right;" (click)="showdelete=false;deleteFacility()" pButton type="button" label="Yes" class="ui-button-info"></button>
     </p-dialog-footer>
 </p-dialog>
+</body>

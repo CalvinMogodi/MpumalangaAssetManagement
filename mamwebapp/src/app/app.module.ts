@@ -35,7 +35,6 @@ import { TemplateFiveThreeComponent } from './components/uamp/template-five-thre
 import { TemplateFiveTwoComponent } from './components/uamp/template-five-two/template-five-two.component';
 import { TemplateSevenComponent } from './components/uamp/template-seven/template-seven.component';
 import { TemplateSixComponent } from './components/uamp/template-six/template-six.component';
-import { ToggleButtonModule } from 'primeng/togglebutton';
 import { AddMunicipalUtilityServicesComponent } from './components/uamp/template-two-one/add-municipal-utility-services/add-municipal-utility-services';
 import { NgxPrintModule } from 'ngx-print';
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
@@ -83,11 +82,12 @@ import { PrimeNGConfig } from 'primeng/api';
 import { PasswordModule } from 'primeng/password';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { DividerModule } from 'primeng/divider';
-
-import {SliderModule} from 'primeng/slider';
-import {ContextMenuModule} from 'primeng/contextmenu';
-import {ProgressBarModule} from 'primeng/progressbar';
-import {InputTextModule} from 'primeng/inputtext';
+import { ToggleButtonModule } from 'primeng/togglebutton';
+import { RadioButtonModule } from 'primeng/radiobutton';
+import { SliderModule} from 'primeng/slider';
+import { ContextMenuModule} from 'primeng/contextmenu';
+import { ProgressBarModule} from 'primeng/progressbar';
+import { InputTextModule} from 'primeng/inputtext';
 import { UampDetailsComponent } from './components/uamp/uamp-details/uamp-details.component';
 import { ConditionAssessmentComponent } from './components/assetregister/conditionassessment/condition-assessment.component';
 import { LeaseManagementComponent } from './components/leasemanagement/lease-management.component';
@@ -195,7 +195,8 @@ import { AddEditServiceRequestComponent } from './components/facilitymanagement/
     InputSwitchModule,
     TimelineModule,
     DividerModule,
-    GooglePlaceModule
+    GooglePlaceModule,
+    RadioButtonModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

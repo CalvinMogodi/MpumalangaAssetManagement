@@ -14,40 +14,40 @@ export class SharedService {
   getDepartmentCode(department: string): string {
     let code = '';
     switch (department) {
-      case "Agriculture, rural development, land & environmental affairs":
+      case 'Agriculture, rural development, land & environmental affairs':
         code = 'ARALEA';
         break;
-      case "Economic development & tourism":
+      case 'Economic development & tourism':
         code = 'EDT';
         break;
-      case "Co-operative governance & traditional affairs":
+      case 'Co-operative governance & traditional affairs':
         code = 'EDT';
         break;
-      case "Co-operative governance & traditional affairs":
+      case 'Co-operative governance & traditional affairs':
         code = 'CGTA';
         break;
-      case "Community safety, security & liason":
+      case 'Community safety, security & liason':
         code = 'CSSL';
         break;
-      case "Culture, sport & recreation":
+      case 'Culture, sport & recreation':
         code = 'CSR';
         break;
-      case "Education":
+      case 'Education':
         code = 'E';
         break;
-      case "Provincial treasury":
+      case 'Provincial treasury':
         code = 'PT';
         break;
-      case "Health":
+      case 'Health':
         code = 'H';
         break;
-      case "Human settlements":
+      case 'Human settlements':
         code = 'HS';
         break;
-      case "Social development":
+      case 'Social development':
         code = 'SD';
         break;
-      case "Public works, roads & transport":
+      case 'Public works, roads & transport':
         code = 'PWRT';
         break;
     }
@@ -55,20 +55,20 @@ export class SharedService {
   }
 
   getRandomString(length) {
-    var result = '';
-    var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-    var charactersLength = characters.length;
-    for (var i = 0; i < length; i++) {
+    let result = '';
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    const charactersLength = characters.length;
+    for (let i = 0; i < length; i++) {
       result += characters.charAt(Math.floor(Math.random() * charactersLength));
     }
     return result;
   }
 
   getRandomNumber(length): number {
-    var result;
-    var characters = '0123456789';
-    var charactersLength = characters.length;
-    for (var i = 0; i < length; i++) {
+    let result;
+    const characters = '0123456789';
+    const charactersLength = characters.length;
+    for (let i = 0; i < length; i++) {
       result += characters.charAt(Math.floor(Math.random() * charactersLength));
     }
     return result;
@@ -77,14 +77,14 @@ export class SharedService {
   getLocalMunicipalitiesByName(value) {
     let localMunicipalities = [];
     switch (value) {
-      case "Ehlanzeni": localMunicipalities = [
+      case 'Ehlanzeni': localMunicipalities = [
         { name: 'Bushbuckridge', code: 'B', factor: 1 },
         { name: 'Mbombela', code: 'M', factor: 2 },
         { name: 'Nkomazi', code: 'N', factor: 3 },
         { name: 'Thaba Chweu', code: 'TC', factor: 4 },
       ];
         break;
-      case "Gert Sibande": localMunicipalities = [
+      case 'Gert Sibande': localMunicipalities = [
         { name: 'Albert Luthuli', code: 'AL', factor: 1 },
         { name: 'Dipaleseng', code: 'D', factor: 2 },
         { name: 'Govan Mbeki', code: 'GM', factor: 3 },
@@ -95,7 +95,7 @@ export class SharedService {
         { name: 'Pixley Ka Seme', code: 'PKS', factor: 8 },
       ];
         break;
-      case "Nkangala": localMunicipalities = [
+      case 'Nkangala': localMunicipalities = [
         { name: 'Dr. J.S. Moroka', code: 'JSM', factor: 1 },
         { name: 'eMalahleni', code: 'M', factor: 2 },
         { name: 'eMakhazeni', code: 'MK', factor: 3 },
@@ -108,7 +108,7 @@ export class SharedService {
     return localMunicipalities;
   }
 
-  getDistricts(){
+  getDistricts() {
     return [
       { name: 'Ehlanzeni', code: 'E', factor: 1 },
       { name: 'Gert Sibande', code: 'G', factor: 2 },
@@ -117,14 +117,14 @@ export class SharedService {
     ];
   }
 
-  getHiringPropertyStatuses(){
+  getHiringPropertyStatuses() {
     return [
       { name: 'Good Standing', code: 'GS', factor: 1 },
-      { name: 'Month to Month', code: 'MM', factor: 2 }      
+      { name: 'Month to Month', code: 'MM', factor: 2 }
     ];
   }
 
-  getDepartments(){
+  getDepartments() {
     return [
       { name: 'Agriculture, rural development, land & environmental affairs', code: 'ARALEA', factor: 1 },
       { name: 'Economic development & tourism', code: 'EDT', factor: 2 },
@@ -141,30 +141,30 @@ export class SharedService {
   }
 
   getLocalMunicipalityByName(value) {
-    let localMunicipalities = [
-        { name: 'Bushbuckridge', code: 'B', factor: 1 },
-        { name: 'Mbombela', code: 'M', factor: 2 },
-        { name: 'Nkomazi', code: 'N', factor: 3 },
-        { name: 'Thaba Chweu', code: 'TC', factor: 4 },
-        { name: 'Albert Luthuli', code: 'AL', factor: 1 },
-        { name: 'Dipaleseng', code: 'D', factor: 2 },
-        { name: 'Govan Mbeki', code: 'GM', factor: 3 },
-        { name: 'Lekwa', code: 'L', factor: 7 },
-        { name: 'Mkhondo', code: 'M', factor: 4 },
-        { name: 'Msukaligwa', code: 'MS', factor: 5 },
-        { name: 'Mkhondo', code: 'MK', factor: 6 },
-        { name: 'Pixley Ka Seme', code: 'PKS', factor: 8 },
-        { name: 'Dr. J.S. Moroka', code: 'JSM', factor: 1 },
-        { name: 'eMalahleni', code: 'M', factor: 2 },
-        { name: 'eMakhazeni', code: 'MK', factor: 3 },
-        { name: 'Msukaligwa', code: 'MS', factor: 4 },
-        { name: 'Steve Tshwete', code: 'ST', factor: 5 },
-        { name: 'Thembisile Hani', code: 'TH', factor: 6 },
-        { name: 'Victor Khanye', code: 'VK', factor: 7 },
-        { name: 'Bushbuckridge', code: 'B', factor: 1 },
-        { name: 'Thaba Chweu', code: 'TC', factor: 2 },
-      ];    
-    return localMunicipalities.filter(l => l.name == value)[0];
+    const localMunicipalities = [
+      { name: 'Bushbuckridge', code: 'B', factor: 1 },
+      { name: 'Mbombela', code: 'M', factor: 2 },
+      { name: 'Nkomazi', code: 'N', factor: 3 },
+      { name: 'Thaba Chweu', code: 'TC', factor: 4 },
+      { name: 'Albert Luthuli', code: 'AL', factor: 1 },
+      { name: 'Dipaleseng', code: 'D', factor: 2 },
+      { name: 'Govan Mbeki', code: 'GM', factor: 3 },
+      { name: 'Lekwa', code: 'L', factor: 7 },
+      { name: 'Mkhondo', code: 'M', factor: 4 },
+      { name: 'Msukaligwa', code: 'MS', factor: 5 },
+      { name: 'Mkhondo', code: 'MK', factor: 6 },
+      { name: 'Pixley Ka Seme', code: 'PKS', factor: 8 },
+      { name: 'Dr. J.S. Moroka', code: 'JSM', factor: 1 },
+      { name: 'eMalahleni', code: 'M', factor: 2 },
+      { name: 'eMakhazeni', code: 'MK', factor: 3 },
+      { name: 'Msukaligwa', code: 'MS', factor: 4 },
+      { name: 'Steve Tshwete', code: 'ST', factor: 5 },
+      { name: 'Thembisile Hani', code: 'TH', factor: 6 },
+      { name: 'Victor Khanye', code: 'VK', factor: 7 },
+      { name: 'Bushbuckridge', code: 'B', factor: 1 },
+      { name: 'Thaba Chweu', code: 'TC', factor: 2 },
+    ];
+    return localMunicipalities.filter(l => l.name === value)[0];
   }
 
   getLocalMunicipalities(value) {
@@ -207,12 +207,12 @@ export class SharedService {
     return localMunicipalities;
   }
 
-  getPropertyTypes(){
+  getPropertyTypes() {
     return [
       { name: 'Agricultural Holding', code: 'A', factor: 1 },
       { name: 'Clinic', code: 'A', factor: 2 },
       { name: 'Erf', code: 'E', factor: 3 },
-      { name: 'Farm', code: 'F', factor: 4 },      
+      { name: 'Farm', code: 'F', factor: 4 },
       { name: 'Office', code: 'O', factor: 5 },
       { name: 'Residential', code: 'Res', factor: 6 },
       { name: 'Retail', code: 'R', factor: 7 },
@@ -223,7 +223,7 @@ export class SharedService {
   }
 
   getInitialNeedYears() {
-    let initialNeedYears = [
+    const initialNeedYears = [
       { name: '2005', code: '5', factor: 1 },
       { name: '2006', code: '6', factor: 2 },
       { name: '2007', code: '7', factor: 3 },
@@ -242,11 +242,11 @@ export class SharedService {
       { name: '2020', code: '20', factor: 16 },
       { name: '2021', code: '21', factor: 17 },
     ];
-    return initialNeedYears
+    return initialNeedYears;
   }
 
   getRegions() {
-    let regions = [
+    const regions = [
       { name: 'Ehlanzeni ', code: 'U', factor: 1 },
       { name: 'Gert Sibande', code: 'R', factor: 2 },
       { name: 'Nkangala', code: 'U', factor: 3 }
@@ -255,16 +255,16 @@ export class SharedService {
   }
 
   getRegionByName(name) {
-    let regions = [
+    const regions = [
       { name: 'Ehlanzeni ', code: 'U', factor: 1 },
       { name: 'Gert Sibande', code: 'R', factor: 2 },
       { name: 'Nkangala', code: 'U', factor: 3 }
     ];
-    return regions.filter(r => r.name == name)[0];
+    return regions.filter(r => r.name === name)[0];
   }
 
   getPrioities() {
-    let prioities = [
+    const prioities = [
       { name: 'Extremely Critical 1', code: 'C1', factor: 1 },
       { name: '2', code: 'C2', factor: 2 },
       { name: '3', code: 'C3', factor: 3 },
@@ -297,10 +297,10 @@ export class SharedService {
       { name: 'Business', code: 'E', factor: 1 },
       { name: 'Closed School', code: 'E', factor: 1 },
       { name: 'Clinic', code: 'E', factor: 1 },
-      { name: 'Day Care Centre' , code: 'E', factor: 1 },
+      { name: 'Day Care Centre', code: 'E', factor: 1 },
       { name: 'Erf', code: 'E', factor: 1 },
       { name: 'Faclities', code: 'E', factor: 1 },
-      { name: 'Farm', code: 'F', factor: 2 },      
+      { name: 'Farm', code: 'F', factor: 2 },
       { name: 'Government Garage', code: 'E', factor: 1 },
       { name: 'Hospital', code: 'E', factor: 1 },
       { name: 'House', code: 'E', factor: 1 },
@@ -319,7 +319,7 @@ export class SharedService {
       { name: 'Storage', code: 'E', factor: 1 },
       { name: 'Various Facilities', code: 'E', factor: 1 },
       { name: 'Workhop', code: 'E', factor: 1 },
-      { name: 'Wheighbridge', code: 'E', factor: 1 },    
+      { name: 'Wheighbridge', code: 'E', factor: 1 },
     ];
     return assetTypes;
   }
@@ -431,39 +431,41 @@ export class SharedService {
   calculateBudgetPeriods(uamp: UAMP): UAMP {
     uamp.templeteSeven.mtefBudgetPeriods.forEach(element => {
       switch (element.title) {
-        case "New Capital Works T4.1":
+        case 'New Capital Works T4.1':
           const acquisitionPlansT41 = uamp.templeteFourPointOne.acquisitionPlans.filter(r => r.totalAmountRequired != undefined
             || r.totalAmountRequired != null);
-          const year1RequiredBudgetT41 = acquisitionPlansT41.length > 0 ? acquisitionPlansT41.map(r => r.totalAmountRequired).reduce(function (a, b) {
-            return a + b;
-          }) : 0;
+          const year1RequiredBudgetT41 = acquisitionPlansT41.length > 0
+            ? acquisitionPlansT41.map(r => r.totalAmountRequired).reduce(function (a, b) {
+              return a + b;
+            }) : 0;
           element = this.calculateMtefBudgetPeriod(year1RequiredBudgetT41, element);
           const index = uamp.templeteSeven.mtefBudgetPeriods.findIndex(b => b.title == element.title);
           uamp.templeteSeven.mtefBudgetPeriods[index] = element;
           break;
-        case "Refurb., Re-config.& Additions) T5.1":
+        case 'Refurb., Re-config.& Additions) T5.1':
           const acquisitionPlansT51 = uamp.templeteFivePointOne.operationPlans.filter(r => r.totalAmountRequired != undefined
             || r.totalAmountRequired != null);
-          const year1RequiredBudgetT51 = acquisitionPlansT51.length > 0 ? acquisitionPlansT51.map(r => r.totalAmountRequired).reduce(function (a, b) {
-            return a + b;
-          }) : 0;
+          const year1RequiredBudgetT51 = acquisitionPlansT51.length > 0
+            ? acquisitionPlansT51.map(r => r.totalAmountRequired).reduce(function (a, b) {
+              return a + b;
+            }) : 0;
           element = this.calculateMtefBudgetPeriod(year1RequiredBudgetT51, element);
           const indexT5 = uamp.templeteSeven.mtefBudgetPeriods.findIndex(b => b.title == element.title);
           uamp.templeteSeven.mtefBudgetPeriods[indexT5] = element;
           break;
-        case "Total Capital Costs":
+        case 'Total Capital Costs':
           element = this.calculateTotalCapitalCosts(uamp.templeteSeven.mtefBudgetPeriods, element);
           const indexTT = uamp.templeteSeven.mtefBudgetPeriods.findIndex(b => b.title == element.title);
           uamp.templeteSeven.mtefBudgetPeriods[indexTT] = element;
           break;
-        case "% Shortfall":
+        case '% Shortfall':
           if (element.group == 'Capital Projects') {
             element = this.calculateShortfallCapitalCosts(uamp.templeteSeven.mtefBudgetPeriods, element);
             const indexs = uamp.templeteSeven.mtefBudgetPeriods.findIndex(b => b.title == element.title);
             uamp.templeteSeven.mtefBudgetPeriods[indexs] = element;
           }
           break;
-        case "Existing Leases T2.2":
+        case 'Existing Leases T2.2':
           if (element.group == 'Current Expenditure') {
             const propertiesT22 = uamp.templeteTwoPointTwo.properties.filter(r => r.rentalPA != undefined
               || r.rentalPA != null);
@@ -475,7 +477,7 @@ export class SharedService {
             uamp.templeteSeven.mtefBudgetPeriods[indexT22] = element;
           }
           break;
-        case "New leases T4.2":
+        case 'New leases T4.2':
           if (element.group == 'Current Expenditure') {
             const acquisitionPlansT42 = uamp.templeteFourPointTwo.acquisitionPlans.filter(r => r.totalAmountRequired != undefined
               || r.totalAmountRequired != null);
@@ -487,7 +489,7 @@ export class SharedService {
             uamp.templeteSeven.mtefBudgetPeriods[indexT42] = element;
           }
           break;
-          case "Municipal / Utility Services: State-owned (Electricity, water, sewer & refuse) T2.1":
+        case 'Municipal / Utility Services: State-owned (Electricity, water, sewer & refuse) T2.1':
           if (element.group == 'Current Expenditure') {
             const propertiesT21 = uamp.templeteTwoPointOne.properties.filter(r => r.MunicipalUtilityServiceTotal != undefined
               || r.MunicipalUtilityServiceTotal != null);
@@ -499,7 +501,7 @@ export class SharedService {
             uamp.templeteSeven.mtefBudgetPeriods[indexT21] = element;
           }
           break;
-          case "Municipal / Utility Services: Leased-in (Electricity, water, sewer & refuse)T2.2":
+        case 'Municipal / Utility Services: Leased-in (Electricity, water, sewer & refuse)T2.2':
           if (element.group == 'Current Expenditure') {
             const propertiesOCT22 = uamp.templeteTwoPointTwo.properties.filter(r => r.operationalCosts != undefined
               || r.operationalCosts != null);
@@ -511,45 +513,45 @@ export class SharedService {
             uamp.templeteSeven.mtefBudgetPeriods[indexOCT22] = element;
           }
           break;
-          case "Property Rates & Taxes T2.1":
-            if (element.group == 'Current Expenditure') {
-              const propertiesPRT21 = uamp.templeteTwoPointOne.properties.filter(r => r.propertyRatesTaxes != undefined
-                || r.operationalCosts != null);
-              const year1RequiredBudgetPRTT21 = propertiesPRT21.length > 0 ? propertiesPRT21.map(r => r.operationalCosts).reduce(function (a, b) {
-                return a + b;
-              }) : 0;
-              element = this.calculateMtefBudgetPeriod(year1RequiredBudgetPRTT21, element);
-              const indexPRT22 = uamp.templeteSeven.mtefBudgetPeriods.findIndex(b => b.title == element.title);
-              uamp.templeteSeven.mtefBudgetPeriods[indexPRT22] = element;
-            }
-            break;
-            case "Maintenance Requirements (Repairs) T5.2":
-              if (element.group == 'Current Expenditure') {
-                const operationPlansT52 = uamp.templeteFivePointTwo.operationPlans.filter(r => r.totalAmountRequired != undefined
-                  || r.totalAmountRequired != null);
-                const year1RequiredBudgetART52 = operationPlansT52.length > 0 ? operationPlansT52.map(r => r.totalAmountRequired).reduce(function (a, b) {
-                  return a + b;
-                }) : 0;
-                element = this.calculateMtefBudgetPeriod(year1RequiredBudgetART52, element);
-                const indexART52 = uamp.templeteSeven.mtefBudgetPeriods.findIndex(b => b.title == element.title);
-                uamp.templeteSeven.mtefBudgetPeriods[indexART52] = element;
-              }
-              break;
-              case "Total Current Costs":
-                if (element.group == 'Current Expenditure') {
-                  element = this.calculateTotalCurrentCosts(uamp.templeteSeven.mtefBudgetPeriods, element);
-                  const indexTCC = uamp.templeteSeven.mtefBudgetPeriods.findIndex(b => b.title == element.title);
-                  uamp.templeteSeven.mtefBudgetPeriods[indexTCC] = element;
-                }
-                break;
-                case "Total Capital Works & Recurrent Costs":
-                  if (element.group == 'Current Expenditure') {
-                    element = this.calculateCapitalWorksRecurrentCosts(uamp.templeteSeven.mtefBudgetPeriods, element);
-                    const indexTCC = uamp.templeteSeven.mtefBudgetPeriods.findIndex(b => b.title == element.title);
-                    uamp.templeteSeven.mtefBudgetPeriods[indexTCC] = element;
-                  }
-                  break;
-        case "% Shortfall":
+        case 'Property Rates & Taxes T2.1':
+          if (element.group == 'Current Expenditure') {
+            const propertiesPRT21 = uamp.templeteTwoPointOne.properties.filter(r => r.propertyRatesTaxes != undefined
+              || r.operationalCosts != null);
+            const year1RequiredBudgetPRTT21 = propertiesPRT21.length > 0 ? propertiesPRT21.map(r => r.operationalCosts).reduce(function (a, b) {
+              return a + b;
+            }) : 0;
+            element = this.calculateMtefBudgetPeriod(year1RequiredBudgetPRTT21, element);
+            const indexPRT22 = uamp.templeteSeven.mtefBudgetPeriods.findIndex(b => b.title == element.title);
+            uamp.templeteSeven.mtefBudgetPeriods[indexPRT22] = element;
+          }
+          break;
+        case 'Maintenance Requirements (Repairs) T5.2':
+          if (element.group == 'Current Expenditure') {
+            const operationPlansT52 = uamp.templeteFivePointTwo.operationPlans.filter(r => r.totalAmountRequired != undefined
+              || r.totalAmountRequired != null);
+            const year1RequiredBudgetART52 = operationPlansT52.length > 0 ? operationPlansT52.map(r => r.totalAmountRequired).reduce(function (a, b) {
+              return a + b;
+            }) : 0;
+            element = this.calculateMtefBudgetPeriod(year1RequiredBudgetART52, element);
+            const indexART52 = uamp.templeteSeven.mtefBudgetPeriods.findIndex(b => b.title == element.title);
+            uamp.templeteSeven.mtefBudgetPeriods[indexART52] = element;
+          }
+          break;
+        case 'Total Current Costs':
+          if (element.group == 'Current Expenditure') {
+            element = this.calculateTotalCurrentCosts(uamp.templeteSeven.mtefBudgetPeriods, element);
+            const indexTCC = uamp.templeteSeven.mtefBudgetPeriods.findIndex(b => b.title == element.title);
+            uamp.templeteSeven.mtefBudgetPeriods[indexTCC] = element;
+          }
+          break;
+        case 'Total Capital Works & Recurrent Costs':
+          if (element.group == 'Current Expenditure') {
+            element = this.calculateCapitalWorksRecurrentCosts(uamp.templeteSeven.mtefBudgetPeriods, element);
+            const indexTCC = uamp.templeteSeven.mtefBudgetPeriods.findIndex(b => b.title == element.title);
+            uamp.templeteSeven.mtefBudgetPeriods[indexTCC] = element;
+          }
+          break;
+        case '% Shortfall':
           if (element.group == 'Current Expenditure') {
             element = this.calculateShortfallCurrentExpenditure(uamp.templeteSeven.mtefBudgetPeriods, element);
             const indexs = uamp.templeteSeven.mtefBudgetPeriods.findIndex(b => b.title == element.title);
@@ -576,7 +578,7 @@ export class SharedService {
     const year5Allocation = (6 / 100 * year4RequiredBudget) + year4RequiredBudget;
     const year5RequiredBudget = (4 / 100 * year4Allocation) + year4Allocation;
 
-    var _mtefBudgetPeriod: MtefBudgetPeriod = {
+    let _mtefBudgetPeriod: MtefBudgetPeriod = {
       id: mtefBudgetPeriod.id,
       userImmovableAssetManagementPlanId: mtefBudgetPeriod.userImmovableAssetManagementPlanId,
       order: mtefBudgetPeriod.order,
@@ -585,21 +587,21 @@ export class SharedService {
       title: mtefBudgetPeriod.title,
       group: mtefBudgetPeriod.group,
       year1Allocation: mtefBudgetPeriod.year1Allocation == undefined ? 0 : mtefBudgetPeriod.year1Allocation,
-      year1RequiredBudget: year1RequiredBudget,
+      year1RequiredBudget,
       year1Shortfall: mtefBudgetPeriod.year1Allocation - year1RequiredBudget,
-      year2Allocation: year2Allocation,
-      year2RequiredBudget: year2RequiredBudget,
+      year2Allocation,
+      year2RequiredBudget,
       year2Shortfall: year2Allocation - year2RequiredBudget,
-      year3Allocation: year3Allocation,
-      year3RequiredBudget: year3RequiredBudget,
+      year3Allocation,
+      year3RequiredBudget,
       year3Shortfall: year3Allocation - year3RequiredBudget,
-      year4Allocation: year4Allocation,
-      year4RequiredBudget: year4RequiredBudget,
+      year4Allocation,
+      year4RequiredBudget,
       year4Shortfall: year4Allocation - year4RequiredBudget,
-      year5Allocation: year5Allocation,
-      year5RequiredBudget: year5RequiredBudget,
+      year5Allocation,
+      year5RequiredBudget,
       year5Shortfall: year5Allocation - year5RequiredBudget,
-    }
+    };
     return _mtefBudgetPeriod;
   }
 
@@ -607,7 +609,7 @@ export class SharedService {
     const _mtefBudgetPeriods = mtefBudgetPeriods.filter(m => m.group == 'Capital Projects'
       && !m.title.includes('Total')
       && !m.title.includes('Shortfall'));
-    var _mtefBudgetPeriod: MtefBudgetPeriod = {
+    let _mtefBudgetPeriod: MtefBudgetPeriod = {
       id: mtefBudgetPeriod.id,
       userImmovableAssetManagementPlanId: mtefBudgetPeriod.userImmovableAssetManagementPlanId,
       order: mtefBudgetPeriod.order,
@@ -630,7 +632,7 @@ export class SharedService {
       year5Allocation: _mtefBudgetPeriods.length > 0 ? _mtefBudgetPeriods.map(r => r.year5Allocation).reduce(function (a, b) { return a + b; }) : 0,
       year5RequiredBudget: _mtefBudgetPeriods.length > 0 ? _mtefBudgetPeriods.map(r => r.year5RequiredBudget).reduce(function (a, b) { return a + b; }) : 0,
       year5Shortfall: _mtefBudgetPeriods.length > 0 ? _mtefBudgetPeriods.map(r => r.year5Shortfall).reduce(function (a, b) { return a + b; }) : 0,
-    }
+    };
     return _mtefBudgetPeriod;
   }
 
@@ -638,7 +640,7 @@ export class SharedService {
     const _mtefBudgetPeriods = mtefBudgetPeriods.filter(m => m.group == 'Current Expenditure'
       && !m.title.includes('Total')
       && !m.title.includes('Shortfall'));
-    var _mtefBudgetPeriod: MtefBudgetPeriod = {
+    let _mtefBudgetPeriod: MtefBudgetPeriod = {
       id: mtefBudgetPeriod.id,
       userImmovableAssetManagementPlanId: mtefBudgetPeriod.userImmovableAssetManagementPlanId,
       order: mtefBudgetPeriod.order,
@@ -661,14 +663,14 @@ export class SharedService {
       year5Allocation: _mtefBudgetPeriods.length > 0 ? _mtefBudgetPeriods.map(r => r.year5Allocation).reduce(function (a, b) { return a + b; }) : 0,
       year5RequiredBudget: _mtefBudgetPeriods.length > 0 ? _mtefBudgetPeriods.map(r => r.year5RequiredBudget).reduce(function (a, b) { return a + b; }) : 0,
       year5Shortfall: _mtefBudgetPeriods.length > 0 ? _mtefBudgetPeriods.map(r => r.year5Shortfall).reduce(function (a, b) { return a + b; }) : 0,
-    }
+    };
     return _mtefBudgetPeriod;
   }
 
   calculateCapitalWorksRecurrentCosts(mtefBudgetPeriods: MtefBudgetPeriod[], mtefBudgetPeriod: MtefBudgetPeriod): MtefBudgetPeriod {
     const _mtefBudgetPeriods = mtefBudgetPeriods.filter(m => !m.title.includes('Total')
       && !m.title.includes('Shortfall'));
-    var _mtefBudgetPeriod: MtefBudgetPeriod = {
+    let _mtefBudgetPeriod: MtefBudgetPeriod = {
       id: mtefBudgetPeriod.id,
       userImmovableAssetManagementPlanId: mtefBudgetPeriod.userImmovableAssetManagementPlanId,
       order: mtefBudgetPeriod.order,
@@ -691,14 +693,14 @@ export class SharedService {
       year5Allocation: _mtefBudgetPeriods.length > 0 ? _mtefBudgetPeriods.map(r => r.year5Allocation).reduce(function (a, b) { return a + b; }) : 0,
       year5RequiredBudget: _mtefBudgetPeriods.length > 0 ? _mtefBudgetPeriods.map(r => r.year5RequiredBudget).reduce(function (a, b) { return a + b; }) : 0,
       year5Shortfall: _mtefBudgetPeriods.length > 0 ? _mtefBudgetPeriods.map(r => r.year5Shortfall).reduce(function (a, b) { return a + b; }) : 0,
-    }
+    };
     return _mtefBudgetPeriod;
   }
 
   calculateShortfallCapitalCosts(mtefBudgetPeriods: MtefBudgetPeriod[], mtefBudgetPeriod: MtefBudgetPeriod): MtefBudgetPeriod {
     const _totalMtefBudgetPeriod = mtefBudgetPeriods.filter(m => m.group == 'Capital Projects'
       && m.title.includes('Shortfall'))[0];
-    var _mtefBudgetPeriod: MtefBudgetPeriod = {
+    let _mtefBudgetPeriod: MtefBudgetPeriod = {
       id: mtefBudgetPeriod.id,
       userImmovableAssetManagementPlanId: mtefBudgetPeriod.userImmovableAssetManagementPlanId,
       order: mtefBudgetPeriod.order,
@@ -721,41 +723,41 @@ export class SharedService {
       year5Allocation: 0,
       year5RequiredBudget: 0,
       year5Shortfall: Number(_totalMtefBudgetPeriod.year5Shortfall / _totalMtefBudgetPeriod.year5Allocation),
-    }
-    return _mtefBudgetPeriod;
-  }
-  
-  calculateShortfallCurrentExpenditure(mtefBudgetPeriods: MtefBudgetPeriod[], mtefBudgetPeriod: MtefBudgetPeriod): MtefBudgetPeriod {
-    const _totalMtefBudgetPeriod = mtefBudgetPeriods.filter(m => m.group == 'Capital Projects'
-      && m.title.includes('Shortfall'))[0];
-    var _mtefBudgetPeriod: MtefBudgetPeriod = {
-      id: mtefBudgetPeriod.id,
-      userImmovableAssetManagementPlanId: mtefBudgetPeriod.userImmovableAssetManagementPlanId,
-      order: mtefBudgetPeriod.order,
-      isHeader: mtefBudgetPeriod.isHeader,
-      isPercentage: mtefBudgetPeriod.isPercentage,
-      title: mtefBudgetPeriod.title,
-      group: mtefBudgetPeriod.group,
-      year1Allocation: 0,
-      year1RequiredBudget: 0,
-      year1Shortfall: Number(_totalMtefBudgetPeriod.year1Shortfall / _totalMtefBudgetPeriod.year1Allocation),
-      year2Allocation: 0,
-      year2RequiredBudget: 0,
-      year2Shortfall: Number(_totalMtefBudgetPeriod.year2Shortfall / _totalMtefBudgetPeriod.year2Allocation),
-      year3Allocation: 0,
-      year3RequiredBudget: 0,
-      year3Shortfall: Number(_totalMtefBudgetPeriod.year3Shortfall / _totalMtefBudgetPeriod.year3Allocation),
-      year4Allocation: 0,
-      year4RequiredBudget: 0,
-      year4Shortfall: Number(_totalMtefBudgetPeriod.year4Shortfall / _totalMtefBudgetPeriod.year4Allocation),
-      year5Allocation: 0,
-      year5RequiredBudget: 0,
-      year5Shortfall: Number(_totalMtefBudgetPeriod.year5Shortfall / _totalMtefBudgetPeriod.year5Allocation),
-    }
+    };
     return _mtefBudgetPeriod;
   }
 
-  initLeasedProperty(){
+  calculateShortfallCurrentExpenditure(mtefBudgetPeriods: MtefBudgetPeriod[], mtefBudgetPeriod: MtefBudgetPeriod): MtefBudgetPeriod {
+    const _totalMtefBudgetPeriod = mtefBudgetPeriods.filter(m => m.group == 'Capital Projects'
+      && m.title.includes('Shortfall'))[0];
+    let _mtefBudgetPeriod: MtefBudgetPeriod = {
+      id: mtefBudgetPeriod.id,
+      userImmovableAssetManagementPlanId: mtefBudgetPeriod.userImmovableAssetManagementPlanId,
+      order: mtefBudgetPeriod.order,
+      isHeader: mtefBudgetPeriod.isHeader,
+      isPercentage: mtefBudgetPeriod.isPercentage,
+      title: mtefBudgetPeriod.title,
+      group: mtefBudgetPeriod.group,
+      year1Allocation: 0,
+      year1RequiredBudget: 0,
+      year1Shortfall: Number(_totalMtefBudgetPeriod.year1Shortfall / _totalMtefBudgetPeriod.year1Allocation),
+      year2Allocation: 0,
+      year2RequiredBudget: 0,
+      year2Shortfall: Number(_totalMtefBudgetPeriod.year2Shortfall / _totalMtefBudgetPeriod.year2Allocation),
+      year3Allocation: 0,
+      year3RequiredBudget: 0,
+      year3Shortfall: Number(_totalMtefBudgetPeriod.year3Shortfall / _totalMtefBudgetPeriod.year3Allocation),
+      year4Allocation: 0,
+      year4RequiredBudget: 0,
+      year4Shortfall: Number(_totalMtefBudgetPeriod.year4Shortfall / _totalMtefBudgetPeriod.year4Allocation),
+      year5Allocation: 0,
+      year5RequiredBudget: 0,
+      year5Shortfall: Number(_totalMtefBudgetPeriod.year5Shortfall / _totalMtefBudgetPeriod.year5Allocation),
+    };
+    return _mtefBudgetPeriod;
+  }
+
+  initLeasedProperty() {
     const leasedProperty: LeasedProperty = {
       leaseStatusesId: 0,
       fileReference: undefined,
@@ -770,7 +772,7 @@ export class SharedService {
       landUseManagementDetail: {
         id: 0,
         titleDeedNumber: undefined,
-        deedsOffice:undefined,
+        deedsOffice: undefined,
         registrationDate: undefined,
         registeredOwner: undefined,
         vestingDate: undefined,
@@ -782,7 +784,8 @@ export class SharedService {
         facilityName: undefined,
         incomeLeaseStatus: undefined
       },
-      leaseStatus: {id: 0,    
+      leaseStatus: {
+        id: 0,
         natureOfLease: undefined,
         iDNumberCompanyRegistrationNumber: undefined,
         pOBox: undefined,
@@ -798,9 +801,16 @@ export class SharedService {
         escalation: undefined,
         vat: undefined,
         leaseNumber: undefined,
-        otherCharges:undefined
+        otherCharges: undefined
       }
-    }
+    };
     return leasedProperty;
+  }
+
+  getManagedBylist() {
+    return [
+      { name: 'Employee', code: 'E', factor: 1 },
+      { name: 'External Company', code: 'C', factor: 2 },
+    ];
   }
 }
