@@ -15,6 +15,9 @@ import { SharedService } from 'src/app/services/shared.service';
 })
 export class AddEditProjectComponent implements OnInit {
 
+  val: string;
+  val6: string;
+  public isManagedByExternalCompany = false;
   public hasParentChecked: false;
   public financeChecked: false;
   public loading = false;
@@ -23,6 +26,7 @@ export class AddEditProjectComponent implements OnInit {
   public supplierForm: FormGroup;
   public projects: Array<Project> = [];
   public projectList: any[] = [];
+  public suppliers: any[] = [];
   public city: string;
   public projectsInProgress = 0;
   public serviceRequestsLogged = 0;
@@ -38,6 +42,9 @@ export class AddEditProjectComponent implements OnInit {
   public activeIndex = 0;
   public managedBylist: any[] = [];
   public supplierList: any[] = [];
+  public selectedSupplierIndex = 0;
+  public selectedSupplier: any;
+  buttonItems: MenuItem[];
   public supplierCols = [
     { field: 'supplier', header: 'Supplier' },
     { field: 'companyName', header: 'Company Name' },
@@ -45,14 +52,19 @@ export class AddEditProjectComponent implements OnInit {
     { field: 'contactName', header: 'Contact Name' },
     { field: 'contactNumber', header: 'Contact Number' }
   ];
-  
+
   constructor(private authenticationService: AuthenticationService, private formBuilder: FormBuilder
     ,         private sharedService: SharedService) {
   }
 
   ngOnInit() {
 
-    this.buildForm();
+    this.buttonItems = [
+      {label: 'Delete', icon: 'pi pi-trash', command: () => 
+          this.deleteSupplier()
+      }
+  ];
+
     this.authenticationService.currentUser.pipe().subscribe(x => {
       this.currentUser = x;
     });
@@ -62,11 +74,17 @@ export class AddEditProjectComponent implements OnInit {
       { name: 'N1 repair', code: 'B', factor: 1 }
     ];
 
+    this.suppliers = [ { name: '1st Supplier', code: 'B', factor: 1 },
+    { name: '2nd Supplier', code: 'B', factor: 2 },
+    { name: '3th Supplier', code: 'B', factor: 3 }];
+
     this.managedBylist = this.sharedService.getManagedBylist();
 
     this.projectList = [
       { name: 'N1 repair', code: '1', factor: 1 }
     ];
+
+    this.buildForm();
   }
 
   get f() { return this.detailsForm.controls; }
@@ -87,8 +105,9 @@ export class AddEditProjectComponent implements OnInit {
       completionDate: ['']
     });
 
+    const managedByEmployee = this.managedBylist[0];
     this.managedByForm = this.formBuilder.group({
-      managedBy: [''],
+      managedBy: [managedByEmployee],
       name: [''],
       employeeCompanyNumber: [''],
       contactName: [''],
@@ -125,15 +144,37 @@ export class AddEditProjectComponent implements OnInit {
   }
 
   onManagedByChange(e) {
-    if (e.value === 'yes') {
-      this.parentProjectHasFinance = true;
+    if (e.value.factor === 2) {
+      this.isManagedByExternalCompany = true;
     } else {
-      this.parentProjectHasFinance = false;
+      this.isManagedByExternalCompany = false;
     }
   }
 
-  supplierImprovement(){
+  onAddSupplier() {
+    const supplier = {
+      supplier: this.supplierForm.controls.supplier.value !== undefined ? this.supplierForm.controls.supplier.value.name : null,
+      companyName: this.supplierForm.controls.companyName.value,
+      companyNumber: this.supplierForm.controls.companyNumber.value,
+      contactName: this.supplierForm.controls.contactName.value,
+      contactNumber: this.supplierForm.controls.contactNumber.value
+    };
 
+    this.supplierList.push(supplier);    
+    this.supplierForm = this.formBuilder.group({
+      supplier: [''],
+      companyName: [''],
+      companyNumber: [''],
+      contactName: [''],
+      contactNumber: [''],
+    });
+  }
+  selectSupplier(supplier: any) {
+    this.selectedSupplier = supplier;
   }
 
+  deleteSupplier(){
+    const index = this.supplierList.indexOf(this.selectedSupplier);
+    this.supplierList.splice(index, 1);
+  }
 }

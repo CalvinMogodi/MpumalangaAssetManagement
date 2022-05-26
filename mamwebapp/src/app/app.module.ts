@@ -44,6 +44,7 @@ import { ConfirmationService } from 'primeng/api';
 //import { TooltipModule } from 'ng2-tooltip-directive';
 
 //primeng
+import { InputMaskModule } from 'primeng/inputmask';
 import { SlideMenuModule } from 'primeng/slidemenu';
 import { TimelineModule } from 'primeng/timeline';
 import { SidebarModule } from 'primeng/sidebar';
@@ -196,7 +197,8 @@ import { AddEditServiceRequestComponent } from './components/facilitymanagement/
     TimelineModule,
     DividerModule,
     GooglePlaceModule,
-    RadioButtonModule
+    RadioButtonModule,
+    InputMaskModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
