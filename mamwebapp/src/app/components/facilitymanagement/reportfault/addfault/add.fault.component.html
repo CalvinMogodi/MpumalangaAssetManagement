@@ -1,0 +1,99 @@
+<p-toast [style]="{marginTop: '80px'}" position="top-right"></p-toast>
+
+<div class="text-center" style="color: red;" *ngIf="error">
+    <h5 class="mt-20">
+        <li class="pi pi-exclamation-triangle" style="color: red;font-size: xx-large;"></li>
+        <span> An error has occured...</span>
+    </h5>
+    <h6 class="color-aqua">{{errorMsg}}</h6>
+</div>
+
+<div>
+    <form [formGroup]="reportFaultForm" *ngIf="!isSuccessful">
+        <div class="p-fluid p-grid p-formgrid form-body">
+            <div class="formgrid grid">
+                <div class="field grid col-12">
+                    <span class="p-input-icon-left p-1">
+                        <label for="float-input">Building name</label>
+                        <p-dropdown class="ui-inputtext ui-widget" [style]="{'width':'470px'}"
+                            inputId="buildingName" [options]="buildings" placeholder="Please Select"
+                            formControlName="buildingName" (onChange)="onBuildingNameChange($event)" optionLabel="name">
+                        </p-dropdown>
+                        <div *ngIf="submitted && f.buildingName.errors" class="text-error"><br>
+                            <div *ngIf="f.buildingName.errors.required">This field is required.</div>
+                        </div>
+                    </span>
+                </div>
+
+                <div class="field grid col-12">
+                    <span class="p-input-icon-left p-1">
+                        <label for="float-input">Property description</label>
+                        <input formControlName="propertyDescription" autocomplete="off" type="text" pInputText class="ui-inputtext ui-widget">
+                        <div *ngIf="submitted && f.propertyDescription.errors" class="text-error"><br>
+                            <div *ngIf="f.propertyDescription.errors.required">This field is required.</div>
+                        </div>
+                    </span>
+                </div>
+
+                <div class="field grid col-12">
+                    <span class="p-input-icon-left p-1">
+                        <label for="float-input">Description of the issue</label>
+                        <input formControlName="descriptionoftheIssue" autocomplete="off" type="text" pInputText class="ui-inputtext ui-widget">
+                        <div *ngIf="submitted && f.descriptionoftheIssue.errors" class="text-error"><br>
+                            <div *ngIf="f.descriptionoftheIssue.errors.required">This field is required.</div>
+                        </div>
+                    </span>
+                </div>
+
+                <div class="field grid col-12">
+                    <span class="p-input-icon-left p-1">
+                        <label for="float-input">Name & Surname</label>
+                        <input formControlName="nameSurname" autocomplete="off" type="text" pInputText class="ui-inputtext ui-widget">
+                        <div *ngIf="submitted && f.nameSurname.errors" class="text-error"><br>
+                            <div *ngIf="f.nameSurname.errors.required">This field is required.</div>
+                        </div>
+                    </span>
+                </div>
+
+                <div class="field grid col-12">
+                    <span class="p-input-icon-left p-1">
+                        <label for="float-input">Contact Number</label>
+                        <input formControlName="contactNumber" autocomplete="off" type="text" pInputText class="ui-inputtext ui-widget">
+                        <div *ngIf="submitted && f.contactNumber.errors" class="text-error"><br>
+                            <div *ngIf="f.contactNumber.errors.required">This field is required.</div>
+                        </div>
+                    </span>
+                </div>
+
+                <div class="field grid col-12">
+                    <p-fileUpload accept="image/*" [showUploadButton]="false" styleClass="file-upload" [showCancelButton]="false"
+                        (onRemove)="onRemoveAttachment($event)" multiple="multiple"
+                        (onSelect)="onSelectAttachment($event.files)">
+                        <ng-template pTemplate="content">
+                            <ul *ngFor="let file of attachments; let i = index" style="list-style-type:none;">
+                                <li>
+                                    <p><a target="_blank" href="{{ file.url }}">{{ file.name }}</a></p>
+                                </li>
+                            </ul>
+                        </ng-template>
+                    </p-fileUpload>
+                </div>
+
+            </div>     
+        </div>
+    </form>
+    <div *ngIf="isSuccessful">
+        <p class="success">
+            Your fault has been successfully reported.
+            <br/>
+            Your reference number is <strong>{{referenceNumber}}</strong> 
+        </p>
+    </div>
+</div>
+
+<p-footer>
+    <div style="text-align: center;">        
+        <button style="float: right" type="button" *ngIf="!isSuccessful" (click)="onSubmit()" pButton label="Submit"></button>
+        <a *ngIf="isSuccessful" target="_blank" href="">Track Progress</a>
+    </div>
+</p-footer>

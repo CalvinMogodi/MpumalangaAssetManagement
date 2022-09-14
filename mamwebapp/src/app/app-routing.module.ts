@@ -28,6 +28,7 @@ import { LeaseManagementComponent } from './components/leasemanagement/lease-man
 import { HiringComponent } from './components/hiring/hiring.component';
 import { LeaseRegisterComponent } from './components/lesesregister/leaseregister.component';
 import { FacilityManagementComponent } from './components/facilitymanagement/facility-management.component';
+import { ReportFaultComponent } from './components/facilitymanagement/reportfault/report.fault.component';
 
 const routes: Routes = [
   {
@@ -96,7 +97,11 @@ const routes: Routes = [
     path: 'leaseManagement',
     component: LeaseManagementComponent,
     canActivate: [AuthGuard],
-  },  
+  },
+  {
+    path: 'reportfault',
+    component: ReportFaultComponent,
+  },
   {
     path: 'uampDetails',
     component: UampDetailsComponent,

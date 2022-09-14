@@ -15,14 +15,16 @@ export class ServiceRequestComponent implements OnInit {
   public loading: boolean = false;
   public showdelete:boolean = false;
   public serviceRequests: Array<Project> = [];
-
+  public canCloseTicket = false;
+  public showReportFaultDialog = false;
   public errorMsg: string;
   public currentUser: User;
   public showDialog: boolean;
   public cols = [
-    { field: 'district', header: 'District' },
-    { field: 'name', header: 'Name' },
-    { field: 'managedBy', header: 'Managed By' },
+    { field: 'loggedDate', header: 'Logged Date' },
+    { field: 'location', header: 'Location' },
+    { field: 'description', header: 'Description' },
+    { field: 'loggedBy', header: 'Logged By' },
     { field: 'status', header: 'Status' }
   ];
 
@@ -38,16 +40,16 @@ export class ServiceRequestComponent implements OnInit {
     this.buttonItems = [
       {
         label: 'View', icon: 'pi pi-eye', command: () =>
-          this.viewProject()
+          this.viewServiceRequest()
       },
       { separator: true },
-      {label: 'Print', icon: 'pi pi-print', command: () => 
-          this.printProject()
+      {label: 'Close', icon: 'pi pi-times', command: () => 
+          this.closeTicket()
       },
-      { separator: true },
+    /*  { separator: true },
       {label: 'Update', icon: 'pi pi-pencil', command: () => 
           this.updateProject()
-      },
+      },*/
       {separator: true},
       {label: 'Delete', icon: 'pi pi-trash', command: () => 
           this.confirmDeleteProject()
@@ -55,9 +57,10 @@ export class ServiceRequestComponent implements OnInit {
 
       const serviceRequest = {
         id: 0,
-        'district': 'Ehlanzeni',
-        'name': 'Faulty Traffic Lights',
-        'managedBy': 'John Joe',
+        'loggedDate': '14 June 2022',
+        'location': 'N1 south',
+        'description': 'There is big pothole N1 north that is the size on the baby grave.',
+        'loggedBy':'John Joe',
         'status': 'New',
       }
       this.serviceRequests.push(serviceRequest);
@@ -72,15 +75,21 @@ export class ServiceRequestComponent implements OnInit {
     this.showDialog = true;
   }
 
-  viewProject(){
+  viewServiceRequest(){
     this.showDialog = true;
+    this.canCloseTicket = false;
   }
 
-  printProject(){
-    //this.showdelete = true;
+  closeTicket(){
+    this.showDialog = true;
+    this.canCloseTicket = true;
   }
 
   addProject(){
+
+  }
+
+  selectFacility (){
 
   }
 

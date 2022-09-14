@@ -35,13 +35,14 @@ import { TemplateFiveThreeComponent } from './components/uamp/template-five-thre
 import { TemplateFiveTwoComponent } from './components/uamp/template-five-two/template-five-two.component';
 import { TemplateSevenComponent } from './components/uamp/template-seven/template-seven.component';
 import { TemplateSixComponent } from './components/uamp/template-six/template-six.component';
+import { ReportFaultComponent } from './components/facilitymanagement/reportfault/report.fault.component'
 import { AddMunicipalUtilityServicesComponent } from './components/uamp/template-two-one/add-municipal-utility-services/add-municipal-utility-services';
 import { NgxPrintModule } from 'ngx-print';
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
 import { PanelModule } from 'primeng/panel';
 import { ConfirmationService } from 'primeng/api';
 
-//import { TooltipModule } from 'ng2-tooltip-directive';
+import { QrCodeModule } from 'ng-qrcode';
 
 //primeng
 import { InputMaskModule } from 'primeng/inputmask';
@@ -100,7 +101,7 @@ import { ProjectComponent } from './components/facilitymanagement/project/projec
 import { ServiceRequestComponent } from './components/facilitymanagement/servicerequest/service-request.component';
 import { FacilityManagementComponent } from './components/facilitymanagement/facility-management.component';
 import { AddEditProjectComponent } from './components/facilitymanagement/project/addeditproject/add-edit-project.component';
-import { AddEditServiceRequestComponent } from './components/facilitymanagement/servicerequest/addeditservicerequest/add-edit-service-request.component';
+import { ViewServiceRequestComponent } from './components/facilitymanagement/servicerequest/viewservicerequest/view-service-request.component';
 
 @NgModule({
   declarations: [
@@ -144,7 +145,8 @@ import { AddEditServiceRequestComponent } from './components/facilitymanagement/
     ServiceRequestComponent,
     FacilityManagementComponent,
     AddEditProjectComponent,
-    AddEditServiceRequestComponent
+    ViewServiceRequestComponent,
+    ReportFaultComponent
   ],
   imports: [
     BrowserModule,
@@ -198,12 +200,13 @@ import { AddEditServiceRequestComponent } from './components/facilitymanagement/
     DividerModule,
     GooglePlaceModule,
     RadioButtonModule,
-    InputMaskModule
+    InputMaskModule,
+    QrCodeModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    CurrencyPipe,FilterService,PrimeNGConfig,ConfirmationService,
-    AddMunicipalUtilityServicesComponent,DatePipe
+    CurrencyPipe, FilterService, PrimeNGConfig, ConfirmationService,
+    AddMunicipalUtilityServicesComponent, DatePipe
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

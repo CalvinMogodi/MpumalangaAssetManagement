@@ -1,0 +1,14 @@
+.form-body{
+    overflow-y: auto; 
+    overflow-x: hidden;
+    height: 400px;
+    width: 100%; 
+    padding: 0px 25px 0px 25px;
+}
+
+input{
+    width: 100%;
+}
+.no-border{
+    border-bottom: none !important
+}

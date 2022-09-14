@@ -1,0 +1,169 @@
+<p-toast [style]="{marginTop: '80px'}" position="top-right"></p-toast>
+
+<div class="text-center" style="color: red;" *ngIf="error">
+    <h5 class="mt-20">
+        <li class="pi pi-exclamation-triangle" style="color: red;font-size: xx-large;"></li><span> An error has
+            occured...</span>
+    </h5>
+    <h6 class="color-aqua">{{errorMsg}}</h6>
+</div>
+<div>
+    <div class="p-fluid p-grid p-formgrid">
+        <div class="formgrid grid">
+            <div class="field grid col-4">
+                <span class="p-input-icon-left p-1">
+                    <label for="float-input">Date Logged</label>
+                    <div class="ui-inputtext ui-widget no-border">
+                        08 July 2022
+                    </div>
+                </span>
+            </div>
+            <div class="field grid col-4">
+                <span class="p-input-icon-left p-1">
+                    <label for="float-input">Date By</label>
+                    <div class="ui-inputtext ui-widget no-border">
+                        Sipho Nkosi
+                    </div>
+                </span>
+            </div>
+
+            <div class="field grid col-4">
+                <span class="p-input-icon-left p-1">
+                    <label for="float-input">Contact Number</label>
+                    <div class="ui-inputtext ui-widget no-border">
+                        076 123 4562
+                    </div>
+                </span>
+            </div>
+        </div>
+
+        <div class="formgrid grid">
+            <div class="field grid col-4">
+                <span class="p-input-icon-left p-1">
+                    <label for="float-input">Facility Name</label>
+                    <div class="ui-inputtext ui-widget no-border">
+                        Riverside Govenment Complex
+                    </div>
+                </span>
+            </div>
+            <div class="field grid col-4">
+                <span class="p-input-icon-left p-1">
+                    <label for="float-input">Proterty Description</label>
+                    <div class="ui-inputtext ui-widget no-border">
+                        Building 2
+                    </div>
+                </span>
+            </div>
+
+            <div class="field grid col-4">
+                <span class="p-input-icon-left p-1">
+                    <label for="float-input">Incident Description</label>
+                    <div class="ui-inputtext ui-widget no-border">
+                        There's big pothole N1 north that is the size on the baby grave.
+                    </div>
+                </span>
+            </div>
+        </div>
+        <div class="formgrid grid">
+            <div class="field grid col-4">
+                <span class="p-input-icon-left p-1">
+                    <label for="float-input">Attachments</label>
+                    <div class="ui-inputtext ui-widget no-border">
+                        <ul  style="list-style: none; margin-top: auto;padding-left: 1px;">
+                            <li><a href="" target="_blank">image 1.jpg</a></li>
+                            <li> <a href="" target="_blank">image 2.jpg</a></li>
+                            <li><a href="" target="_blank">image 3.jpg</a></li>
+                            <li><a href="" target="_blank">image 4.jpg</a></li>
+                        </ul>
+                    </div>
+                </span>
+            </div>
+            <div class="field grid col-4">
+                <span class="p-input-icon-left p-1">
+                    <label for="float-input">Completion Certifigate</label>
+                    <div class="ui-inputtext ui-widget no-border">
+                        <ul style="list-style: none; width: 100%; padding-left: 10px;margin-top: auto;">
+                            <li style="height: 25px;">
+                                <div class="formgrid grid">
+                                    <div class="field grid col-10">
+                                        <span>Completion certificate </span>
+                                    </div>
+                                    <div class="field grid col-2">
+                                        <p-checkbox name="groupname" value="completionCertificate"
+                                            [(ngModel)]="ticketHasCompletionCertificate"></p-checkbox>
+                                    </div>
+                                </div>
+                            </li>
+                            <li style="height: 25px;">
+                                <div class="formgrid grid">
+                                    <div class="field grid col-10">
+                                        <span>Contract invoice</span>
+                                    </div>
+                                    <div class="field grid col-2">
+                                        <p-checkbox name="groupname" value="contractInvoice"
+                                            [(ngModel)]="ticketHasContractInvoice"></p-checkbox>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </span>
+            </div>
+         
+                <div class="field grid col-4">
+                    <span class="p-input-icon-left p-1">
+                        <label for="float-input">Notes</label>
+                        <div class="ui-inputtext ui-widget no-border">
+                            <textarea style="border: gray solid 1px;" [rows]="3" autoResize="false" [cols]="90" pInputTextarea [(ngModel)]="property"></textarea>
+                        </div>
+                    </span>
+                </div>
+        
+        </div>
+        <div class="formgrid grid">
+            <div class="field grid col-4">
+                <span class="p-input-icon-left p-1">
+                    <label for="float-input">Supplier</label>
+                    <p-dropdown class="ui-inputtext ui-widget" [disabled]="isViewOnly" [style]="{'width':'470px'}"
+                        inputId="supplier" [options]="suppliers" placeholder="Please Select"
+                        (onChange)="onSupplierChange($event);" optionLabel="name">
+                    </p-dropdown>
+                    <div *ngIf="submitted && f.supplier.errors" class="text-error"><br>
+                        <div *ngIf="s.supplier.errors.required">This field is required.</div>
+                    </div>
+                </span>
+            </div>
+            <div class="field grid col-4">
+                <span class="p-input-icon-left p-1">
+                    <label for="float-input">Project</label>
+                    <p-dropdown class="ui-inputtext ui-widget" [disabled]="isViewOnly" [style]="{'width':'470px'}"
+                        inputId="supplier" [options]="suppliers" placeholder="Please Select"
+                        (onChange)="onSupplierChange($event);" optionLabel="name">
+                    </p-dropdown>
+                    <div *ngIf="submitted && f.supplier.errors" class="text-error"><br>
+                        <div *ngIf="s.supplier.errors.required">This field is required.</div>
+                    </div>
+                </span>
+            </div>
+        </div>
+    </div>
+    <p-footer>
+        <div style="text-align: center;" *ngIf="errorMsg != ''">
+
+        </div>
+        <div>
+            <button style="float: left; margin-top: 15px;" type="button" pButton label="Cancel"
+                class="ui-button-secondary" (click)="showDialog=false"></button>
+                <button *ngIf="!canCloseTicket" style="float: right;
+                margin-top: 15px;
+                width: fit-content;
+                height: fit-content;" type="button"
+                (click)="onSubmit(); activeIndex = 2" pButton label="Submit"></button>   
+                <button *ngIf="canCloseTicket" style="float: right;
+                margin-top: 15px;
+                width: fit-content;
+                height: fit-content;" type="button"
+                (click)="onSubmit(); activeIndex = 2" pButton label="Close This Ticket"></button>   
+          
+        </div>
+    </p-footer>

@@ -10,11 +10,6 @@
 </div>
 
 <div class="row">
-    <button *ngIf="currentUser.roleId == 2 || currentUser.roleId == 3" style="float: right;" (click)="addProject();showDialog=true; dialogHeader='New Service Request'" pButton type="button" label="Add New"
-        class="ui-button-info"></button>
-</div>
-
-<div class="row">
     <p-table #dt [columns]="cols" [paginator]="true" [rows]="10" selectionMode="single" rowExpandMode="single"
         *ngIf="!loading" [value]="serviceRequests" dataKey="id" editMode="row" styleClass="p-datatable-striped">
         <ng-template pTemplate="caption">
@@ -54,8 +49,15 @@
 <div *ngIf="showDialog || showPrintDialog" class="dialogBackgroud"></div>
 <p-dialog [(visible)]="showDialog" *ngIf="showDialog" [style]="{width: '50vw'}"
     [baseZIndex]="10000">
-    <p-header> {{ dialogHeader }} </p-header>
-    <app-add-edit-service-request (newAsset)='addUpdateAsset($event)' [selectedAsset]="selectedAsset"></app-add-edit-service-request>
+    <p-header> Reference no: 7856221 </p-header>
+    <app-view-service-request (newAsset)='addUpdateAsset($event)' [canCloseTicket]="canCloseTicket" [selectedServiceRequest]="selectedServiceRequest"></app-view-service-request>
+</p-dialog>
+
+<div *ngIf="showReportFaultDialog" class="dialogBackgroud"></div>
+<p-dialog [(visible)]="showReportFaultDialog" *ngIf="showReportFaultDialog" [style]="{width: '30vw'}"
+    [baseZIndex]="10000">
+    <p-header> Report a fault </p-header>
+    <app-report-fault ></app-report-fault>
 </p-dialog>
 
 <div *ngIf="showdelete" class="dialogBackgroud"></div>

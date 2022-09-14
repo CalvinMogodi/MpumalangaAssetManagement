@@ -1,0 +1,29 @@
+<p-toast [style]="{marginTop: '80px'}" position="top-right"></p-toast>
+
+<div class="text-center" style="color: red;" *ngIf="error">
+    <h5 class="mt-20">
+        <li class="pi pi-exclamation-triangle" style="color: red;font-size: xx-large;"></li>
+        <span> An error has occured...</span>
+    </h5>
+    <h6 class="color-aqua">{{errorMsg}}</h6>
+</div>
+
+<div>
+    <h1>Mpumalanga facilities Management</h1>
+    <div *ngIf="!isSuccessful">
+        <qr-code value="https://www.npmjs.com/package/ng-qrcode"
+         size="300"
+         errorCorrectionLevel="M"
+         centerImageSrc="undefined"
+         centerImageSize="undefined"
+         margin="4">
+</qr-code>
+    </div>
+</div>
+
+<p-footer>
+    <div style="text-align: center;">        
+        <button style="float: right" type="button" *ngIf="!isSuccessful" (click)="onSubmit()" pButton label="Submit"></button>
+        <a *ngIf="isSuccessful" target="_blank" href="">Track Progress</a>
+    </div>
+</p-footer>
