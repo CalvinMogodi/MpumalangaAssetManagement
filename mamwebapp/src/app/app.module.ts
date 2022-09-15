@@ -42,7 +42,7 @@ import { DynamicDialogModule } from 'primeng/dynamicdialog';
 import { PanelModule } from 'primeng/panel';
 import { ConfirmationService } from 'primeng/api';
 
-import { QrCodeModule } from 'ng-qrcode';
+import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
 
 //primeng
 import { InputMaskModule } from 'primeng/inputmask';
@@ -102,6 +102,8 @@ import { ServiceRequestComponent } from './components/facilitymanagement/service
 import { FacilityManagementComponent } from './components/facilitymanagement/facility-management.component';
 import { AddEditProjectComponent } from './components/facilitymanagement/project/addeditproject/add-edit-project.component';
 import { ViewServiceRequestComponent } from './components/facilitymanagement/servicerequest/viewservicerequest/view-service-request.component';
+import { AddFaultComponent } from './components/facilitymanagement/reportfault/addfault/add.fault.component';
+import { TrackTicketComponent } from './components/facilitymanagement/reportfault/trackticket/track.ticket.component';
 
 @NgModule({
   declarations: [
@@ -146,7 +148,9 @@ import { ViewServiceRequestComponent } from './components/facilitymanagement/ser
     FacilityManagementComponent,
     AddEditProjectComponent,
     ViewServiceRequestComponent,
-    ReportFaultComponent
+    ReportFaultComponent,
+    AddFaultComponent,
+    TrackTicketComponent
   ],
   imports: [
     BrowserModule,
@@ -201,7 +205,7 @@ import { ViewServiceRequestComponent } from './components/facilitymanagement/ser
     GooglePlaceModule,
     RadioButtonModule,
     InputMaskModule,
-    QrCodeModule
+    NgxQRCodeModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

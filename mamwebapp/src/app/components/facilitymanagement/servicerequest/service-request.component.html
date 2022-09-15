@@ -53,13 +53,6 @@
     <app-view-service-request (newAsset)='addUpdateAsset($event)' [canCloseTicket]="canCloseTicket" [selectedServiceRequest]="selectedServiceRequest"></app-view-service-request>
 </p-dialog>
 
-<div *ngIf="showReportFaultDialog" class="dialogBackgroud"></div>
-<p-dialog [(visible)]="showReportFaultDialog" *ngIf="showReportFaultDialog" [style]="{width: '30vw'}"
-    [baseZIndex]="10000">
-    <p-header> Report a fault </p-header>
-    <app-report-fault ></app-report-fault>
-</p-dialog>
-
 <div *ngIf="showdelete" class="dialogBackgroud"></div>
 <p-dialog header="Confirmation" [(visible)]="showdelete" [breakpoints]="{'960px': '75vw'}" [style]="{width: '25vw'}" [baseZIndex]="10000" 
     [draggable]="false" [resizable]="false">

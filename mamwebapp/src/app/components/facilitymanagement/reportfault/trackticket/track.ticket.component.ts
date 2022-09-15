@@ -1,29 +1,23 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { ConfirmationService, MenuItem, MessageService } from 'primeng/api';
-import { RadioButtonModule, RadioControlRegistry } from 'primeng/radiobutton';
-import { Project } from 'src/app/models/project.model';
-import { User } from 'src/app/models/user.model';
+import { ConfirmationService, MessageService } from 'primeng/api';
+import { RadioControlRegistry } from 'primeng/radiobutton';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { SharedService } from 'src/app/services/shared.service';
 
 @Component({
-  selector: 'app-report-fault',
-  templateUrl: './report.fault.component.html',
-  styleUrls: ['./report.fault.component.css'],
+  selector: 'app-track-ticket',
+  templateUrl: './track.ticket.component.html',
+  styleUrls: ['./track.ticket.component.css'],
   providers: [MessageService, ConfirmationService, RadioControlRegistry]
 })
-export class ReportFaultComponent implements OnInit {
+export class TrackTicketComponent implements OnInit {
+
+  public attachments: [];
   public submitted = false;
   public isSuccessful = false;
   public reportFaultForm: FormGroup;
   public referenceNumber = '';
-  public showReportFaultDialog = false;
-  public showTrackTicketDialog = false;
-  public showDialog = true;
-  public title = 'app';
-  public elementType = 'url';
-  public value = 'Techiediaries';
   public buildings = [
     { code: 'supplier', name: 'Vacant Land (Loshlelo Roads Camp) - Stinkhout Street, Bethal Rand, Bethal, Mpumalanga' },
     { code: 'companyName', name: 'Land for Cultural Hub - Cnr Brugman Street/Pienaar Street, Badplaas, Badplaas, Mpumalanga' },

@@ -27,6 +27,7 @@
     "@angular/router": "~8.2.0",
     "@ngx-loading-bar/core": "^5.1.2",
     "@ngx-loading-bar/http-client": "^5.1.2",
+    "@techiediaries/ngx-qrcode": "^9.1.0",
     "chart.js": "^2.9.4",
     "cors": "^2.8.5",
     "file-saver": "^2.0.5",

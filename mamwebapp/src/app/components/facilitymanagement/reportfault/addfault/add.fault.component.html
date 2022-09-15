@@ -88,12 +88,12 @@
             <br/>
             Your reference number is <strong>{{referenceNumber}}</strong> 
         </p>
+        <br/>  <br/>
     </div>
 </div>
 
 <p-footer>
     <div style="text-align: center;">        
-        <button style="float: right" type="button" *ngIf="!isSuccessful" (click)="onSubmit()" pButton label="Submit"></button>
-        <a *ngIf="isSuccessful" target="_blank" href="">Track Progress</a>
+        <button style="float: right" type="button" *ngIf="!isSuccessful" (click)="onSubmit()" pButton label="Submit"></button>     
     </div>
 </p-footer>

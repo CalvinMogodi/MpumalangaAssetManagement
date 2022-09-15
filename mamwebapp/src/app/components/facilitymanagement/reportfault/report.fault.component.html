@@ -1,29 +1,54 @@
 <p-toast [style]="{marginTop: '80px'}" position="top-right"></p-toast>
+<div style="text-align: -webkit-center;width: 100%;">
 
-<div class="text-center" style="color: red;" *ngIf="error">
-    <h5 class="mt-20">
-        <li class="pi pi-exclamation-triangle" style="color: red;font-size: xx-large;"></li>
-        <span> An error has occured...</span>
-    </h5>
-    <h6 class="color-aqua">{{errorMsg}}</h6>
+
+    <div class="text-center" style="color: red;" *ngIf="error">
+        <h5 class="mt-20">
+            <li class="pi pi-exclamation-triangle" style="color: red;font-size: xx-large;"></li>
+            <span> An error has occured...</span>
+        </h5>
+        <h6 class="color-aqua">{{errorMsg}}</h6>
+    </div>
+
 </div>
 
-<div>
-    <h1>Mpumalanga facilities Management</h1>
-    <div *ngIf="!isSuccessful">
-        <qr-code value="https://www.npmjs.com/package/ng-qrcode"
-         size="300"
-         errorCorrectionLevel="M"
-         centerImageSrc="undefined"
-         centerImageSize="undefined"
-         margin="4">
-</qr-code>
-    </div>
-</div>
+<div *ngIf="showReportFaultDialog" class="dialogBackgroud"></div>
+<p-dialog [(visible)]="showReportFaultDialog" *ngIf="showReportFaultDialog" [style]="{width: '30vw'}"
+    [baseZIndex]="10000">
+    <p-header> Report a fault </p-header>
+    <app-add-fault></app-add-fault>
+</p-dialog>
 
-<p-footer>
-    <div style="text-align: center;">        
-        <button style="float: right" type="button" *ngIf="!isSuccessful" (click)="onSubmit()" pButton label="Submit"></button>
-        <a *ngIf="isSuccessful" target="_blank" href="">Track Progress</a>
-    </div>
-</p-footer>
+<div *ngIf="showTrackTicketDialog" class="dialogBackgroud"></div>
+<p-dialog [(visible)]="showTrackTicketDialog" *ngIf="showTrackTicketDialog" [style]="{width: '30vw'}"
+    [baseZIndex]="10000">
+    <p-header> Track Progress </p-header>
+    <app-track-ticket></app-track-ticket>
+</p-dialog>
+
+<div *ngIf="showDialog" class="dialogBackgroud"></div>
+<p-dialog [(visible)]="showDialog" *ngIf="showDialog" [style]="{width: '30vw'}" [baseZIndex]="10000">
+    <p-header> Mpumalanga facilities Management </p-header>
+    <p-content style="text-align: center;">
+        <div *ngIf="!isSuccessful">
+            <ngx-qrcode [elementType]="elementType" [value]="value" cssClass="aclass" errorCorrectionLevel="L">
+            </ngx-qrcode>
+            <div>
+                <span>Scan Me</span>
+            </div>
+        </div>
+        <div *ngIf="isSuccessful">
+            <p>What would you like to do?</p>
+        </div>
+    </p-content>
+    <p-footer>
+        <div *ngIf="isSuccessful">
+            <button type="button" style="float: left;" (click)="showTrackTicketDialog=true" pButton
+                label="Track Progress"></button>
+            <button type="button" style="float: right;" (click)="showReportFaultDialog=true" pButton
+                label="Report Fault"></button>
+        </div>
+        <button style="float: right" type="button" *ngIf="!isSuccessful" (click)="isSuccessful=true" pButton
+            label="Continue"></button>
+    </p-footer>
+</p-dialog>

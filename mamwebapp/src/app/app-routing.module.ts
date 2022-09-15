@@ -160,13 +160,13 @@ const routes: Routes = [
       },{
         path: 'uampTemp7',
         component: TemplateSevenComponent,
-        canActivate: [AuthGuard],        
+        canActivate: [AuthGuard],
       }
     ]
-  },  
+  },
   {
     path: 'login',
-    component: LoginComponent,    
+    component: LoginComponent,
   },{ path: '**', redirectTo: '' }
 ];
 

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 //import { PrimeNGConfig } from 'primeng/api';
 import { AuthenticationService } from '../app/services/authentication.service';
@@ -17,18 +18,24 @@ export class AppComponent implements OnInit {
 
   constructor(//private primengConfig: PrimeNGConfig,
     private router: Router,
+    private location: Location,
     private authenticationService: AuthenticationService
   ) {
     this.authenticationService.currentUser.pipe().subscribe(x => {
       this.currentUser = x;
       this.loggedIn = this.currentUser == null ? false : true;
-      if(this.currentUser != null)  {
-        this.loggedIn = this.currentUser.id == 0 ? false : true;
+      if (this.currentUser != null)  {
+        this.loggedIn = this.currentUser.id === 0 ? false : true;
       }
-      if(!this.loggedIn){       
+      const currentPath  = this.location.path();
+
+      if (currentPath === '/reportfault') {
+        return;
+      }
+
+      if(!this.loggedIn){
         this.router.navigate(['login']);
       }
-        
     }
     );
   }
