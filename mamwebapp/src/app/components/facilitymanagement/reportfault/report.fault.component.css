@@ -2,7 +2,7 @@
   overflow-y: auto; 
   overflow-x: hidden;
   width: 100%; 
-  padding: 0px 25px 0px 25px;
+  padding: 0px 4px 0px 4px;
 }
 
 input{
@@ -48,3 +48,6 @@ p-fileupload{
   width: 550px !important;
 }
 
+.p-dialog-footer{
+  padding: 0.5rem 0rem 0.5rem 0.5rem !important;
+}

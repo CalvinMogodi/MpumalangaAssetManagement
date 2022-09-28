@@ -24,13 +24,6 @@ export class ReportFaultComponent implements OnInit {
   public title = 'app';
   public elementType = 'url';
   public value = 'Techiediaries';
-  public buildings = [
-    { code: 'supplier', name: 'Vacant Land (Loshlelo Roads Camp) - Stinkhout Street, Bethal Rand, Bethal, Mpumalanga' },
-    { code: 'companyName', name: 'Land for Cultural Hub - Cnr Brugman Street/Pienaar Street, Badplaas, Badplaas, Mpumalanga' },
-    { code: 'companyNumber', name: 'Township Development - Brugman Street, Badplaas, Badplaas, Mpumalanga' },
-    { code: 'contactName', name: 'Farm - Sarel Cilliers Street, Badplaas, Badplaas, Mpumalanga' },
-    { code: 'contactNumber', name: 'Lynnville Township - Louws Creek Street 6, Aerorand, Middelburg, Mpumalanga' }
-  ];
 
   constructor(private authenticationService: AuthenticationService, private formBuilder: FormBuilder, private sharedService: SharedService)
   {

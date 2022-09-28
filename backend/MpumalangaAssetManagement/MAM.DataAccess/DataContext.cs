@@ -47,6 +47,10 @@ namespace MAM.DataAccess
         public DbSet<ConditionAssessment> ConditionAssessments { get; set; }
         public DbSet<HiredProperty> HiredProperties { get; set; }
         public DbSet<Camp> Camps { get; set; }
+        public DbSet<Project> Projects { get; set; }
+        public DbSet<ProjectSupplier> ProjectSuppliers { get; set; }
+        public DbSet<Supplier> Suppliers { get; set; }
+        public DbSet<Fault> Faults { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(_connectionString, o => o.CommandTimeout(280));

@@ -3,6 +3,7 @@ import { ConfirmationService, MenuItem, MessageService } from 'primeng/api';
 import { Project } from 'src/app/models/project.model';
 import { User } from 'src/app/models/user.model';
 import { AuthenticationService } from 'src/app/services/authentication.service';
+import { FaultService } from 'src/app/services/facility-management/fault.service';
 
 @Component({
   selector: 'app-service-request',
@@ -21,16 +22,19 @@ export class ServiceRequestComponent implements OnInit {
   public currentUser: User;
   public showDialog: boolean;
   public cols = [
-    { field: 'loggedDate', header: 'Logged Date' },
-    { field: 'location', header: 'Location' },
-    { field: 'description', header: 'Description' },
-    { field: 'loggedBy', header: 'Logged By' },
+    { field: 'createdDate', header: 'Logged Date' },
+    { field: 'propertyDescription', header: 'Property Description' },
+    { field: 'incidentDescription', header: 'Description' },
+    { field: 'contactName', header: 'Logged By' },
     { field: 'status', header: 'Status' }
   ];
 
   buttonItems: MenuItem[]; 
+  status: any;
+  isSuccessful: boolean;
+  messageService: any;
                     
-  constructor(private authenticationService: AuthenticationService) { }
+  constructor(private authenticationService: AuthenticationService, private faultService: FaultService) { }
 
   ngOnInit() {
     this.authenticationService.currentUser.pipe().subscribe(x => {
@@ -54,6 +58,16 @@ export class ServiceRequestComponent implements OnInit {
       {label: 'Delete', icon: 'pi pi-trash', command: () => 
           this.confirmDeleteProject()
       }]
+
+      this.faultService.getFaults().subscribe(faults => {
+        if (faults) {
+          this.serviceRequests = faults;
+        }
+      },
+      (error) => {
+        this.messageService.add({ severity: 'error', summary: 'Error Occoured', detail: 'Unable to get fault' });
+        this.isSuccessful = false;
+      });
 
       const serviceRequest = {
         id: 0,

@@ -9,15 +9,15 @@
 </div>
 
 <div>
-    <form [formGroup]="reportFaultForm">
+    <form [formGroup]="trackFaultForm">
         <div class="p-fluid p-grid p-formgrid form-body">
             <div class="formgrid grid">
                 <div class="field grid col-12">
                     <span class="p-input-icon-left p-1">
                         <label for="float-input">Enter your reference number</label>
-                        <input [(ngModel)]="referenceNumber" formControlName="nameSurname" autocomplete="off" type="text" pInputText class="ui-inputtext ui-widget">
-                        <div *ngIf="submitted && f.nameSurname.errors" class="text-error"><br>
-                            <div *ngIf="f.nameSurname.errors.required">This field is required.</div>
+                        <input [(ngModel)]="referenceNumber" formControlName="referenceNumber" autocomplete="off" type="text" pInputText class="ui-inputtext ui-widget">
+                        <div *ngIf="submitted && f.referenceNumber.errors" class="text-error"><br>
+                            <div *ngIf="f.referenceNumber.errors.required">This field is required.</div>
                         </div>
                     </span>
                 </div>                
@@ -26,14 +26,14 @@
     </form>
     <br/>
     <div style="text-align: center;">        
-        <button type="button" (click)="isSuccessful=true" pButton label="Search"></button>      
+        <button type="button" (click)="onSearch()" pButton label="Search"></button>      
     </div>
     <br/>
     <div *ngIf="isSuccessful">
         <p class="success">
             Reference: {{referenceNumber}}
             <br/>
-            Your fault status is <b>In Progress</b> 
+            Your fault status is <b>{{status}}</b> 
         </p>
     </div>
 </div>

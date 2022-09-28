@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { RadioControlRegistry } from 'primeng/radiobutton';
-import { AuthenticationService } from 'src/app/services/authentication.service';
+import { FaultService } from 'src/app/services/facility-management/fault.service';
 import { SharedService } from 'src/app/services/shared.service';
 
 @Component({
@@ -16,8 +16,9 @@ export class TrackTicketComponent implements OnInit {
   public attachments: [];
   public submitted = false;
   public isSuccessful = false;
-  public reportFaultForm: FormGroup;
+  public trackFaultForm: FormGroup;
   public referenceNumber = '';
+  public status = '';
   public buildings = [
     { code: 'supplier', name: 'Vacant Land (Loshlelo Roads Camp) - Stinkhout Street, Bethal Rand, Bethal, Mpumalanga' },
     { code: 'companyName', name: 'Land for Cultural Hub - Cnr Brugman Street/Pienaar Street, Badplaas, Badplaas, Mpumalanga' },
@@ -26,23 +27,20 @@ export class TrackTicketComponent implements OnInit {
     { code: 'contactNumber', name: 'Lynnville Township - Louws Creek Street 6, Aerorand, Middelburg, Mpumalanga' }
   ];
 
-  constructor(private authenticationService: AuthenticationService, private formBuilder: FormBuilder, private sharedService: SharedService)
+  constructor(private faultService: FaultService, private formBuilder: FormBuilder, private messageService: MessageService)
   {
+  
   }
 
   ngOnInit() {
     this.buildForm();
   }
 
-  get f() { return this.reportFaultForm.controls; }
+  get f() { return this.trackFaultForm.controls; }
 
   buildForm() {
-    this.reportFaultForm = this.formBuilder.group({
-      buildingName: [''],
-      propertyDescription: [''],
-      descriptionoftheIssue: [''],
-      nameSurname: [''],
-      contactNumber: ['']
+    this.trackFaultForm = this.formBuilder.group({
+      referenceNumber: [''],
     });
   }
 
@@ -50,11 +48,20 @@ export class TrackTicketComponent implements OnInit {
 
   onSelectAttachment(files) { }
 
-  onSubmit() {
-    this.submitted = true;
-    if (this.reportFaultForm.valid) {
-      this.isSuccessful = true;
-      this.referenceNumber = this.getReferenceNumber(7);
+  onSearch() {
+    this.isSuccessful = false;
+    if (this.trackFaultForm.valid) {
+      const referenceNo = this.trackFaultForm.controls['referenceNumber'].value;
+      this.faultService.getFaultReferenceNo(referenceNo).subscribe(fault => {
+        if (fault) {
+          this.status = fault.status;
+          this.isSuccessful = true;
+        }
+      },
+      (error) => {
+        this.messageService.add({ severity: 'error', summary: 'Error Occoured', detail: 'Unable to get fault' });
+        this.isSuccessful = false;
+      });
     }
   }
 

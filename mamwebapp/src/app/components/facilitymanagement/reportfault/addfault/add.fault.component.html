@@ -17,7 +17,7 @@
                         <label for="float-input">Building name</label>
                         <p-dropdown class="ui-inputtext ui-widget" [style]="{'width':'470px'}"
                             inputId="buildingName" [options]="buildings" placeholder="Please Select"
-                            formControlName="buildingName" (onChange)="onBuildingNameChange($event)" optionLabel="name">
+                            formControlName="buildingName" (onChange)="onBuildingChange($event)" optionLabel="name">
                         </p-dropdown>
                         <div *ngIf="submitted && f.buildingName.errors" class="text-error"><br>
                             <div *ngIf="f.buildingName.errors.required">This field is required.</div>

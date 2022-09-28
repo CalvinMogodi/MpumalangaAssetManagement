@@ -13,21 +13,21 @@
 </div>
 
 <div *ngIf="showReportFaultDialog" class="dialogBackgroud"></div>
-<p-dialog [(visible)]="showReportFaultDialog" *ngIf="showReportFaultDialog" [style]="{width: '30vw'}"
+<p-dialog [(visible)]="showReportFaultDialog" *ngIf="showReportFaultDialog" [style]="{width: '95%'}"
     [baseZIndex]="10000">
     <p-header> Report a fault </p-header>
     <app-add-fault></app-add-fault>
 </p-dialog>
 
 <div *ngIf="showTrackTicketDialog" class="dialogBackgroud"></div>
-<p-dialog [(visible)]="showTrackTicketDialog" *ngIf="showTrackTicketDialog" [style]="{width: '30vw'}"
+<p-dialog [(visible)]="showTrackTicketDialog" *ngIf="showTrackTicketDialog" [style]="{width: '95%'}"
     [baseZIndex]="10000">
     <p-header> Track Progress </p-header>
     <app-track-ticket></app-track-ticket>
 </p-dialog>
 
 <div *ngIf="showDialog" class="dialogBackgroud"></div>
-<p-dialog [(visible)]="showDialog" *ngIf="showDialog" [style]="{width: '30vw'}" [baseZIndex]="10000">
+<p-dialog [(visible)]="showDialog" *ngIf="showDialog" [style]="{width: '95%'}" [baseZIndex]="10000">
     <p-header> Mpumalanga facilities Management </p-header>
     <p-content style="text-align: center;">
         <div *ngIf="!isSuccessful">
@@ -43,9 +43,9 @@
     </p-content>
     <p-footer>
         <div *ngIf="isSuccessful">
-            <button type="button" style="float: left;" (click)="showTrackTicketDialog=true" pButton
+            <button type="button" style="float: left;width: 51%;" (click)="showTrackTicketDialog=true" pButton
                 label="Track Progress"></button>
-            <button type="button" style="float: right;" (click)="showReportFaultDialog=true" pButton
+            <button type="button" style="float: right;width: 45%;margin-left: -6px;" (click)="showReportFaultDialog=true" pButton
                 label="Report Fault"></button>
         </div>
         <button style="float: right" type="button" *ngIf="!isSuccessful" (click)="isSuccessful=true" pButton

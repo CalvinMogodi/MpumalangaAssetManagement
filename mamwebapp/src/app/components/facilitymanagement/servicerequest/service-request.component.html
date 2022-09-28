@@ -33,7 +33,12 @@
         <ng-template pTemplate="body" let-rowData let-editing="editing" let-ri="rowIndex">
             <tr [pEditableRow]="rowData">
                 <td *ngFor="let col of cols">
-                    {{rowData[col.field]}}
+                    <span *ngIf="col.field === 'createdDate'">
+                        {{rowData[col.field] | date:'yyyy MMMM d'}}
+                    </span>
+                    <span *ngIf="col.field !== 'createdDate'">
+                        {{rowData[col.field]}}
+                    </span>                    
                 </td>
 
                 <td style="text-align: center;">
