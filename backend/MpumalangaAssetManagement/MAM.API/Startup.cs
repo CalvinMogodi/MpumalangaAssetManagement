@@ -76,6 +76,7 @@ namespace MAM.API
             services.AddScoped <IHiringRegisterService, HiringRegisterService>();
             services.AddScoped<IFaultService, FaultService>();
             services.AddScoped<IProjectService, ProjectService>();
+            services.AddScoped<ISupplierService, SupplierService>();
             services.AddSwaggerGen();
 
             services.Configure<FormOptions>(f => {

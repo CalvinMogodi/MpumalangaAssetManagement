@@ -23,12 +23,13 @@ namespace MAM.DataAccess.Repositories
             _connectionString = connectionString;
         }
 
-        public void AddSupplier(Supplier supplier)
+        public int AddSupplier(Supplier supplier)
         {
             using (var db = new DataContext(_connectionString))
             {
                 db.Suppliers.Add(supplier);
                 db.SaveChanges();
+                return supplier.Id;
             }
         }
 
@@ -45,7 +46,8 @@ namespace MAM.DataAccess.Repositories
         {
             using (var db = new DataContext(_connectionString))
             {
-                return db.Suppliers.ToList();
+                var suppliers = db.Suppliers.Select(s => s).ToList();
+                return suppliers;
             }
         }
 

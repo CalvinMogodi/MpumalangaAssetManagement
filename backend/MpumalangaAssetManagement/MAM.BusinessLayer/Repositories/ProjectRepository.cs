@@ -29,12 +29,32 @@ namespace MAM.BusinessLayer.Repositories
                 return projects;
             };  
         }
-        public bool UpdateProject(Project project)
+        public Project UpdateProject(Project project)
         {
             using (var dataAccess = new DataAccess.Repositories.ProjectRepository(appSettings.ConnectionString))
             {
                 dataAccess.UpdateProject(project.ConvertToProjectTable(project));
-                return true;
+                DeleteProjectSupplier(project.Id);
+                AddUpdateProjectSupplier(project);
+                return project;
+            };
+        }
+
+        public void AddUpdateProjectSupplier(Project project)
+        {
+            using (var dataAccess = new DataAccess.Repositories.ProjectSupplierRepository(appSettings.ConnectionString))
+            {
+                foreach (var supplier in project.Suppliers)
+                {
+                    if (supplier.Id > 0) {
+                        DataAccess.Tables.ProjectSupplier projectSupplier = new DataAccess.Tables.ProjectSupplier() { 
+                            Id = 0,
+                            ProjectId = project.Id,
+                            SupplierId = supplier.Id,
+                        };
+                        dataAccess.AddProjectSupplier(projectSupplier);
+                    }                   
+                }
             };
         }
 
@@ -43,6 +63,15 @@ namespace MAM.BusinessLayer.Repositories
             using (var dataAccess = new DataAccess.Repositories.ProjectRepository(appSettings.ConnectionString))
             {
                 dataAccess.UpdateProject(project.ConvertToProjectTable(project));
+                return true;
+            };
+        }
+
+        public bool DeleteProjectSupplier(int projectId)
+        {
+            using (var dataAccess = new DataAccess.Repositories.ProjectSupplierRepository(appSettings.ConnectionString))
+            {
+                dataAccess.DeleteProjectSupplierById(projectId);
                 return true;
             };
         }

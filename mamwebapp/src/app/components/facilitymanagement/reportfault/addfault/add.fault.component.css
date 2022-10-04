@@ -43,3 +43,9 @@ p-fileupload{
   text-align: center;
   color: green;
 }
+
+.link{
+  color: -webkit-link;
+    cursor: pointer;
+    text-decoration: underline;
+}

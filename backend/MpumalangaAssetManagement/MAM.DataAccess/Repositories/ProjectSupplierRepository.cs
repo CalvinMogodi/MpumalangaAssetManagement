@@ -58,6 +58,19 @@ namespace MAM.DataAccess.Repositories
             }
         }
 
+        public void DeleteProjectSupplierById(int projectId)
+        {
+            using (var db = new DataContext(_connectionString))
+            {
+                var projectSuppliers = db.ProjectSuppliers.Where(s => s.ProjectId == projectId).ToList();
+                foreach (var projectSupplier in projectSuppliers)
+                {
+                    db.ProjectSuppliers.Remove(projectSupplier);
+                }
+                
+            }
+        }
+
         public void Dispose()
         {
             // Dispose of unmanaged resources.

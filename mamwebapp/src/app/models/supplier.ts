@@ -1,7 +1,7 @@
 export class Supplier {
     id: number;
-    sompanyName: string;
-    cumpanyNumber: string;
+    companyName: string;
+    companyNumber: string;
     contactName: string;
     contactNumber: string;
     createdDate: Date;

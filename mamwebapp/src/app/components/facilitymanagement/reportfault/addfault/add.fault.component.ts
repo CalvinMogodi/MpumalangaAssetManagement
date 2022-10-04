@@ -4,6 +4,7 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 import { RadioControlRegistry } from 'primeng/radiobutton';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { FaultService } from 'src/app/services/facility-management/fault.service';
+import { ProjectService } from 'src/app/services/facility-management/project.service';
 import { SharedService } from 'src/app/services/shared.service';
 import { Fault } from '../../../../models/fault';
 
@@ -20,14 +21,9 @@ export class AddFaultComponent implements OnInit {
   public submitted = false;
   public isSuccessful = false;
   public reportFaultForm: FormGroup;
+  public showTrackTicketDialog: boolean;
   public referenceNumber = '';
-  public buildings = [
-    { code: '1', name: 'Vacant Land (Loshlelo Roads Camp) - Stinkhout Street, Bethal Rand, Bethal, Mpumalanga' },
-    { code: '2', name: 'Land for Cultural Hub - Cnr Brugman Street/Pienaar Street, Badplaas, Badplaas, Mpumalanga' },
-    { code: '3', name: 'Township Development - Brugman Street, Badplaas, Badplaas, Mpumalanga' },
-    { code: '4', name: 'Farm - Sarel Cilliers Street, Badplaas, Badplaas, Mpumalanga' },
-    { code: '5', name: 'Lynnville Township - Louws Creek Street 6, Aerorand, Middelburg, Mpumalanga' }
-  ];
+  public properties: any = [];
 
   getReferenceNumber(length): string {
     let result = '';
@@ -39,7 +35,8 @@ export class AddFaultComponent implements OnInit {
     return result;
   }
 
-  constructor(private formBuilder: FormBuilder, private faultService: FaultService, private messageService: MessageService) {
+  constructor(private formBuilder: FormBuilder, private faultService: FaultService, private messageService: MessageService,
+              private projectService: ProjectService) {
     this.fault = {
       id: 0,
       facilityId: 1,
@@ -62,6 +59,22 @@ export class AddFaultComponent implements OnInit {
 
   ngOnInit() {
     this.buildForm();
+
+    this.projectService.getProperties().subscribe(propertyList => {
+      if (propertyList.length > 0) {
+
+        this.properties = [];
+        propertyList.forEach(element => {
+           const option = { name: element.clientCode + ' - ' + element.name, code: element.id, factor: element.id };
+           this.properties.push(option);
+        });
+      }
+    },
+    (error) => {
+      this.messageService.add({ severity: 'error', summary: 'Error Occoured', detail: 'Unable to get fault' });
+      this.isSuccessful = false;
+    });
+
   }
 
   get f() { return this.reportFaultForm.controls; }
@@ -96,15 +109,15 @@ export class AddFaultComponent implements OnInit {
 
       this.faultService.addFault(this.fault).pipe().subscribe(id => {
           if (id > 0) {
-            this.showToast('Report a Fault', 'Your fault has been added successfully.', 'success');
+            //this.showToast('Report a Fault', 'Your fault has been added successfully.', 'success');
             this.isSuccessful = true;
           } else {
-            this.showToast('Report a Fault', 'Your fault has not been added successfully.', 'error');
+            //this.showToast('Report a Fault', 'Your fault has not been added successfully.', 'error');
           }
       },
       error => {
-        this.messageService.add({ severity: 'error', summary: 'Error Occurred',
-         detail: 'An error occurred while processing your request. please try again!' });
+        //this.messageService.add({ severity: 'error', summary: 'Error Occurred',
+        // detail: 'An error occurred while processing your request. please try again!' });
         this.isSuccessful = false;
       });
 

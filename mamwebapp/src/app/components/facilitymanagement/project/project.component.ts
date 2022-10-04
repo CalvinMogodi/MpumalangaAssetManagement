@@ -3,6 +3,7 @@ import { ConfirmationService, MenuItem, MessageService } from 'primeng/api';
 import { Project } from 'src/app/models/project.model';
 import { User } from 'src/app/models/user.model';
 import { AuthenticationService } from 'src/app/services/authentication.service';
+import { ProjectService } from 'src/app/services/facility-management/project.service';
 
 @Component({
   selector: 'app-project',
@@ -12,8 +13,9 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
 })
 export class ProjectComponent implements OnInit {
 
+  public isSuccessful: boolean = false;
   public loading: boolean = false;
-  public projects: Array<Project> = [];
+  public projects: Array<any> = [];
   public showdelete:boolean = false;
   public projectsInProgress: number = 0;
   public serviceRequestsLogged: number = 0;
@@ -35,7 +37,7 @@ export class ProjectComponent implements OnInit {
   ];
 
 
-  constructor(private authenticationService: AuthenticationService) { }
+  constructor(private authenticationService: AuthenticationService, private projectService: ProjectService) { }
 
   ngOnInit() {
     this.authenticationService.currentUser.pipe().subscribe(x => {
@@ -62,14 +64,26 @@ export class ProjectComponent implements OnInit {
         label: 'Delete', icon: 'pi pi-trash', command: () =>
           this.confirmDeleteProject()
       }];
-    const project = {
-      id: 0,
-      'district': 'Ehlanzeni',
-      'name': 'N1 repair',
-      'managedBy': 'John Joe',
-      'status': 'In Process',
-    }
-    this.projects.push(project);
+    this.projectService.getProjects().subscribe( projects => {
+        if (projects.length > 0) {
+          this.projects = [];
+          projects.forEach(project => {
+            const thisProject = {
+              district: project.district,
+              name: project.name,
+              managedBy: project.employeeName !== '' ? project.employeeName  + ' - ' + project.employeeNumber
+              : project.businessName + ' - ' + project.businessRegNumber,
+              status: project.status, 
+            };
+            this.projects.push(thisProject);
+          });
+
+          this.isSuccessful = true;
+        }
+      },
+      (error) => {
+        this.isSuccessful = false;
+      });
 
   }
 
@@ -84,7 +98,7 @@ export class ProjectComponent implements OnInit {
   printProject() { }
 
   addProject() {
-
+    
   }
 
 }

@@ -21,10 +21,12 @@ namespace MAM.API.Controllers
         private static readonly ILog log = LogManager.GetLogger(typeof(ProjectController));
 
         private IProjectService _projectService;
+        private IFacilityService _facilityService;
 
-        public ProjectController(IProjectService ProjectService)
+        public ProjectController(IProjectService projectService, IFacilityService facilityService)
         {
-            _projectService = ProjectService;
+            _projectService = projectService;
+            _facilityService = facilityService;
             SetLog4NetConfiguration();
         }
 
@@ -36,6 +38,22 @@ namespace MAM.API.Controllers
             {
                 List<Project> projects = _projectService.GetProjects();
                 return Ok(projects);
+            }
+            catch (Exception ex)
+            {
+                log.Info("Error");
+                throw ex;
+            }
+        }
+
+        [HttpGet]
+        [Route("getproperties")]
+        public IActionResult GetProperties()
+        {
+            try
+            {
+                List<Facility> facilities = _facilityService.GetProjectFacilities();
+                return Ok(facilities);
             }
             catch (Exception ex)
             {
@@ -66,8 +84,8 @@ namespace MAM.API.Controllers
         {
             try
             {
-                bool isUpdated = _projectService.UpdateProject(project);
-                return Ok(isUpdated);
+                project = _projectService.UpdateProject(project);
+                return Ok(project);
             }
             catch (Exception ex)
             {

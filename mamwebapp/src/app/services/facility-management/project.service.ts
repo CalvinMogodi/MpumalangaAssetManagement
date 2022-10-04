@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Project } from 'src/app/models/project';
+import { Facility } from 'src/app/models/facility.model';
+import { Project } from 'src/app/models/project.model';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -20,9 +21,13 @@ export class ProjectService {
     }
 
     updateProject(project: Project) {
-        return this.http.post<boolean>(`${environment.apiUrl}/api/project/updateproject`, project);
+        return this.http.post<Project>(`${environment.apiUrl}/api/project/updateproject`, project);
     }
     deleteProject(project: Project) {
         return this.http.post<boolean>(`${environment.apiUrl}/api/project/deleteproject`, project);
+    }
+
+    getProperties(): Observable<Array<Facility>> {
+        return this.http.get<Array<Facility>>(`${environment.apiUrl}/api/project/getproperties`);
     }
 }

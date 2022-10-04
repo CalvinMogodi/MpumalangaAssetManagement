@@ -15,7 +15,7 @@ export class TrackTicketComponent implements OnInit {
 
   public attachments: [];
   public submitted = false;
-  public isSuccessful = false;
+  public ticketisFound = false;
   public trackFaultForm: FormGroup;
   public referenceNumber = '';
   public status = '';
@@ -49,18 +49,18 @@ export class TrackTicketComponent implements OnInit {
   onSelectAttachment(files) { }
 
   onSearch() {
-    this.isSuccessful = false;
+    this.ticketisFound = false;
     if (this.trackFaultForm.valid) {
       const referenceNo = this.trackFaultForm.controls['referenceNumber'].value;
       this.faultService.getFaultReferenceNo(referenceNo).subscribe(fault => {
         if (fault) {
           this.status = fault.status;
-          this.isSuccessful = true;
+          this.ticketisFound = true;
         }
       },
       (error) => {
         this.messageService.add({ severity: 'error', summary: 'Error Occoured', detail: 'Unable to get fault' });
-        this.isSuccessful = false;
+        this.ticketisFound = false;
       });
     }
   }

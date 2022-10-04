@@ -8,7 +8,7 @@ namespace MAM.BusinessLayer.Interfaces
     public interface IProjectRepository
     {
         List<Project> GetProjects();
-        bool UpdateProject(Project project);
+        Project UpdateProject(Project project);
         bool DeleteProject(Project project);
         int AddProject(Project project);
     }

@@ -28,7 +28,8 @@
 
 <div *ngIf="showDialog" class="dialogBackgroud"></div>
 <p-dialog [(visible)]="showDialog" *ngIf="showDialog" [style]="{width: '95%'}" [baseZIndex]="10000">
-    <p-header> Mpumalanga facilities Management </p-header>
+    <p-header><img style="float: left" class="logo-img" src="../../../assets/images/logo.png"><br/>
+        Mpumalanga facilities Management  </p-header>
     <p-content style="text-align: center;">
         <div *ngIf="!isSuccessful">
             <ngx-qrcode [elementType]="elementType" [value]="value" cssClass="aclass" errorCorrectionLevel="L">
@@ -43,10 +44,11 @@
     </p-content>
     <p-footer>
         <div *ngIf="isSuccessful">
-            <button type="button" style="float: left;width: 51%;" (click)="showTrackTicketDialog=true" pButton
-                label="Track Progress"></button>
-            <button type="button" style="float: right;width: 45%;margin-left: -6px;" (click)="showReportFaultDialog=true" pButton
+           
+            <button type="button" style="float: left;width: 45%;margin-left: -6px;" (click)="showReportFaultDialog=true" pButton
                 label="Report Fault"></button>
+
+                <a class="link" style="float: right;margin-top: 15px;" (click)="showTrackTicketDialog=true">Track Progress</a>
         </div>
         <button style="float: right" type="button" *ngIf="!isSuccessful" (click)="isSuccessful=true" pButton
             label="Continue"></button>

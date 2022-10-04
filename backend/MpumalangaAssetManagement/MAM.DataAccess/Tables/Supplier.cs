@@ -8,10 +8,10 @@ namespace MAM.DataAccess.Tables
     {
         public int Id { get; set; }
         public string CompanyName { get; set; }
-        public string CumpanyNumber { get; set; }
+        public string CompanyNumber { get; set; }
         public string ContactName { get; set; }
         public string ContactNumber { get; set; }
         public DateTime CreatedDate { get; set; }
-        public DateTime ModifiedDate { get; set; }
+        public DateTime? ModifiedDate { get; set; }
     }
 }

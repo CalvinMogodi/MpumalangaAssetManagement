@@ -25,9 +25,6 @@
     filter: progid:DXImageTransform.Microsoft.gradient(startColorStr="#26343f", endColorStr="#26343f", gradientType="1");
 }
 
-.topbar .topbar-left .topbar-logo {
-    height: 40px;
-}
 .topbar .topbar-right #menu-button {
     color: #007bff;
     display: inline-block;

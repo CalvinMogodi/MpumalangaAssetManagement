@@ -11,7 +11,7 @@ namespace MAM.API.Services
     public interface IProjectService
     {
         List<Project> GetProjects();
-        bool UpdateProject(Project project);
+        Project UpdateProject(Project project);
         bool DeleteProject(Project project);
         int AddProject(Project project);
     }
@@ -30,7 +30,7 @@ namespace MAM.API.Services
             using var _projectRepository = new ProjectRepository(_appSettings);
             return _projectRepository.GetProjects();
         }
-        public bool UpdateProject(Project project)
+        public Project UpdateProject(Project project)
         {
             using var _projectRepository = new ProjectRepository(_appSettings);
             return _projectRepository.UpdateProject(project);

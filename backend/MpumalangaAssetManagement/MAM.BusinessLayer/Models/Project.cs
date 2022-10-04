@@ -9,7 +9,7 @@ namespace MAM.BusinessLayer.Models
     {
         public int Id { get; set; }
         public string OrderNumber { get; set; }
-        public int DistrictId { get; set; }
+        public string District { get; set; }
         public int PropertyId { get; set; }
         public string Name { get; set; }
         public string PlannedDuration { get; set; }
@@ -19,17 +19,18 @@ namespace MAM.BusinessLayer.Models
         public bool HasFinancials { get; set; }
         public bool HasParentProject { get; set; }
         public int? ParentProjectId { get; set; }
-        public int? Amount { get; set; }
-        public string Account { get; set; }
+        public double? Amount { get; set; }
+        public long? Account { get; set; }
         public string ManagedBy { get; set; }
         public string EmployeeName { get; set; }
-        public string EmployeeNumber { get; set; }
+        public long? EmployeeNumber { get; set; }
         public string ContactName { get; set; }
         public string ContactNumber { get; set; }
         public string BusinessName { get; set; }
         public string BusinessRegNumber { get; set; }
+        public string Status { get; set; }
         public DateTime CreatedDate { get; set; }
-        public DateTime ModifiedDate { get; set; }
+        public DateTime? ModifiedDate { get; set; }
         public List<Supplier> Suppliers { get; set; }
         public bool? IsDeleted { get; set; }
 
@@ -39,7 +40,7 @@ namespace MAM.BusinessLayer.Models
             {
                 Id = f.Id,
                 OrderNumber = f.OrderNumber,
-                DistrictId = f.DistrictId,
+                District = f.District,
                 PropertyId = f.PropertyId,
                 Name = f.Name,
                 PlannedDuration = f.PlannedDuration,
@@ -61,6 +62,7 @@ namespace MAM.BusinessLayer.Models
                 CreatedDate = f.CreatedDate,
                 ModifiedDate = f.ModifiedDate,
                // Suppliers = f.Suppliers,
+                Status = f.Status,
                 IsDeleted = f.IsDeleted
             }).ToList();
         }
@@ -70,7 +72,7 @@ namespace MAM.BusinessLayer.Models
             return new DataAccess.Tables.Project() {
                 Id = project.Id,
                 OrderNumber = project.OrderNumber,
-                DistrictId = project.DistrictId,
+                District = project.District,
                 PropertyId = project.PropertyId,
                 Name = project.Name,
                 PlannedDuration = project.PlannedDuration,
@@ -89,6 +91,7 @@ namespace MAM.BusinessLayer.Models
                 ContactNumber = project.ContactNumber,
                 BusinessName = project.BusinessName,
                 BusinessRegNumber = project.BusinessRegNumber,
+                Status = project.Status,
                 CreatedDate = project.CreatedDate,
                 ModifiedDate = project.ModifiedDate,
                 // Suppliers = project.Suppliers,

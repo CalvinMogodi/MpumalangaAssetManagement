@@ -141,7 +141,7 @@ export class TemplateSixComponent implements OnInit {
   relinquishSurrenderPlan(surrenderPlan: SurrenderPlan, $event) {
     if ($event.checked) {
       this.confirmationService.confirm({
-        message: 'Are you sure that you want to relinquish this proterty?',
+        message: 'Are you sure that you want to relinquish this property?',
         accept: () => {
           surrenderPlan.relinquish = true;
         },

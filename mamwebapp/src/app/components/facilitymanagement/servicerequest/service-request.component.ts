@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ConfirmationService, MenuItem, MessageService } from 'primeng/api';
+import { Fault } from 'src/app/models/fault';
 import { Project } from 'src/app/models/project.model';
 import { User } from 'src/app/models/user.model';
 import { AuthenticationService } from 'src/app/services/authentication.service';
@@ -15,7 +16,8 @@ export class ServiceRequestComponent implements OnInit {
 
   public loading: boolean = false;
   public showdelete:boolean = false;
-  public serviceRequests: Array<Project> = [];
+  public serviceRequests: Array<Fault> = [];
+  public selectedServiceRequest: Fault;
   public canCloseTicket = false;
   public showReportFaultDialog = false;
   public errorMsg: string;
@@ -32,9 +34,9 @@ export class ServiceRequestComponent implements OnInit {
   buttonItems: MenuItem[]; 
   status: any;
   isSuccessful: boolean;
-  messageService: any;
                     
-  constructor(private authenticationService: AuthenticationService, private faultService: FaultService) { }
+  constructor(private authenticationService: AuthenticationService, private faultService: FaultService,
+              private messageService: MessageService) { }
 
   ngOnInit() {
     this.authenticationService.currentUser.pipe().subscribe(x => {
@@ -57,9 +59,9 @@ export class ServiceRequestComponent implements OnInit {
       {separator: true},
       {label: 'Delete', icon: 'pi pi-trash', command: () => 
           this.confirmDeleteProject()
-      }]
+      }];
 
-      this.faultService.getFaults().subscribe(faults => {
+    this.faultService.getFaults().subscribe(faults => {
         if (faults) {
           this.serviceRequests = faults;
         }
@@ -68,17 +70,6 @@ export class ServiceRequestComponent implements OnInit {
         this.messageService.add({ severity: 'error', summary: 'Error Occoured', detail: 'Unable to get fault' });
         this.isSuccessful = false;
       });
-
-      const serviceRequest = {
-        id: 0,
-        'loggedDate': '14 June 2022',
-        'location': 'N1 south',
-        'description': 'There is big pothole N1 north that is the size on the baby grave.',
-        'loggedBy':'John Joe',
-        'status': 'New',
-      }
-      this.serviceRequests.push(serviceRequest);
-
   }
 
   confirmDeleteProject(){
@@ -89,9 +80,26 @@ export class ServiceRequestComponent implements OnInit {
     this.showDialog = true;
   }
 
+  closeServiceRequest(e){
+    if (e.isChild) {
+      this.showDialog = false;
+    }
+  }
+
   viewServiceRequest(){
-    this.showDialog = true;
-    this.canCloseTicket = false;
+    if (this.selectedServiceRequest.status === 'New') {
+      this.selectedServiceRequest.status = 'In Progress';
+      this.selectedServiceRequest.modifiedDate = new Date();
+      this.faultService.updateFault(this.selectedServiceRequest).pipe().subscribe(isUpdated =>{
+        if (isUpdated) {
+          this.showDialog = true;
+          this.canCloseTicket = false;
+        }
+      });
+    } else {
+      this.showDialog = true;
+      this.canCloseTicket = false;
+    }
   }
 
   closeTicket(){
@@ -103,8 +111,31 @@ export class ServiceRequestComponent implements OnInit {
 
   }
 
-  selectFacility (){
+  selectFacility (selectedServiceRequest: Fault) {   
+    this.selectedServiceRequest = selectedServiceRequest;
+  }
 
+  showToast(summary: string, detail: string, severity: string) {
+    this.messageService.add({ severity, summary, detail });
+  }
+
+  onDeleteFault(){
+    this.faultService.deleteFault(this.selectedServiceRequest).pipe().subscribe(isUpdated => {
+      if (isUpdated) {
+        this.showToast('Fault', 'Your fault has been deleted successfully.', 'success');
+        const index = this.serviceRequests.indexOf(this.selectedServiceRequest);
+        this.serviceRequests.splice(index, 1);
+      } else {
+        this.showToast('Report a Fault', 'Your fault has not been deleted successfully.', 'error');
+      }
+      this.showdelete = false;
+    },
+      error => {
+        this.messageService.add({
+          severity: 'error', summary: 'Error Occurred',
+          detail: 'An error occurred while processing your request. please try again!'
+        });
+      });
   }
 
 }
