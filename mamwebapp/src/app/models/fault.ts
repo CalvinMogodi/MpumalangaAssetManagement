@@ -1,6 +1,7 @@
 export class Fault {
     id: number;
     facilityId: number;
+    facilityName: string;
     propertyDescription: string;
     incidentDescription: string;
     contactName: string;

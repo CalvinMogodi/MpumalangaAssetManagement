@@ -4,7 +4,9 @@ using MAM.BusinessLayer.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 
 namespace MAM.API.Controllers
@@ -107,6 +109,58 @@ namespace MAM.API.Controllers
                 log.Error(ex);
                 throw ex;
             }
-        }
+        }    
+
+    [HttpGet]
+    [Route("getFiles/{fileReference}")]
+    public IActionResult GetFiles(string fileReference)
+    {
+        var pathToSave = Directory.GetCurrentDirectory();
+        var fullPath = Path.Combine(pathToSave, "Uploads", "Faults");
+        var files = Directory.GetFiles(fullPath).Where(f => f.Contains(fileReference)).ToList();
+        return Ok(files);
     }
+
+    [HttpPost, DisableRequestSizeLimit]
+    [Route("uploadFiles/{fileName}")]
+    public IActionResult UploadFiles(string fileName)
+    {
+
+        bool isUploaded = false;
+
+        try
+        {
+            for (int i = 0; i < Request.Form.Files.Count(); i++)
+            {
+                var file = Request.Form.Files[i];
+                //fileName = fileName + '_' + i;
+                var oFileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
+                string _fileName = fileName + "_" + i + Path.GetExtension(oFileName);
+                var folderName = Path.Combine("Uploads", "Faults");
+                var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderName);
+
+                if (file.Length > 0)
+                {
+                    var fullPath = Path.Combine(pathToSave, _fileName);
+                    var dbPath = Path.Combine(folderName, _fileName);
+                    using (FileStream stream = new FileStream(fullPath, FileMode.Create))
+                    {
+                        file.CopyTo(stream);
+                    }
+                }
+                else
+                {
+                    return BadRequest();
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            throw;
+        }
+
+        isUploaded = true;
+        return Ok(isUploaded);
+    }
+}
 }

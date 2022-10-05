@@ -17,7 +17,7 @@ import { Fault } from '../../../../models/fault';
 export class AddFaultComponent implements OnInit {
 
   public fault: Fault;
-  public attachments: [];
+  public attachments: any = [];
   public submitted = false;
   public isSuccessful = false;
   public reportFaultForm: FormGroup;
@@ -40,6 +40,7 @@ export class AddFaultComponent implements OnInit {
     this.fault = {
       id: 0,
       facilityId: 1,
+      facilityName: null,
       propertyDescription: '',
       incidentDescription: '',
       contactName: '',
@@ -109,8 +110,9 @@ export class AddFaultComponent implements OnInit {
 
       this.faultService.addFault(this.fault).pipe().subscribe(id => {
           if (id > 0) {
-            //this.showToast('Report a Fault', 'Your fault has been added successfully.', 'success');
+            this.uploadFiles();
             this.isSuccessful = true;
+            this.fault.id = id;
           } else {
             //this.showToast('Report a Fault', 'Your fault has not been added successfully.', 'error');
           }
@@ -128,5 +130,18 @@ export class AddFaultComponent implements OnInit {
 
   showToast(summary: string, detail: string, severity: string) {
     this.messageService.add({ severity, summary, detail });
+  }
+
+  onChooseFile(evt: any) {
+    const uploadedFile = evt[0];
+    this.attachments.push(uploadedFile);
+  }
+
+  uploadFiles(){
+    this.faultService.uploadFiles(this.attachments, 'Fault' + this.fault.referenceNo + '_' + this.fault.id).pipe().subscribe(isUploaded => {
+      if (isUploaded) {
+
+      }
+    });
   }
 }

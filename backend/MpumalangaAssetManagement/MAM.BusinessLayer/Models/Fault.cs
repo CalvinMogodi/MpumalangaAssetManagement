@@ -9,6 +9,7 @@ namespace MAM.BusinessLayer.Models
     {
         public int Id { get; set; }
         public int FacilityId { get; set; }
+        public string FacilityName { get; set; }
         public string PropertyDescription { get; set; }
         public string IncidentDescription { get; set; }
         public string ContactName { get; set; }
@@ -30,6 +31,7 @@ namespace MAM.BusinessLayer.Models
             {
                 Id = f.Id,
                 FacilityId = f.FacilityId,
+                FacilityName = f.Facility.Name,
                 PropertyDescription = f.PropertyDescription,
                 IncidentDescription = f.IncidentDescription,
                 ContactName = f.ContactName,
@@ -52,6 +54,7 @@ namespace MAM.BusinessLayer.Models
             return new Fault(){
                 Id = fault.Id,
                 FacilityId = fault.FacilityId,
+                FacilityName = fault.Facility.Name,
                 PropertyDescription = fault.PropertyDescription,
                 IncidentDescription = fault.IncidentDescription,
                 ContactName = fault.ContactName,

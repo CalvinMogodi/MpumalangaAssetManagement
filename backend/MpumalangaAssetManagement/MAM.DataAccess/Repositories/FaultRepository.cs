@@ -1,5 +1,6 @@
 ﻿using MAM.DataAccess.Interfaces;
 using MAM.DataAccess.Tables;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Win32.SafeHandles;
 using System;
 using System.Collections.Generic;
@@ -46,7 +47,8 @@ namespace MAM.DataAccess.Repositories
         {
             using (var db = new DataContext(_connectionString))
             {
-                return db.Faults.Where(f => f.IsDeleted == false).ToList();
+                return db.Faults.Where(f => f.IsDeleted == false)
+                    .Include(a => a.Facility).ToList();
             }
         }
 

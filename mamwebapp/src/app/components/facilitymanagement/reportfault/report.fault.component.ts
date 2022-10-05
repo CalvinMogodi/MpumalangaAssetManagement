@@ -18,9 +18,8 @@ export class ReportFaultComponent implements OnInit {
   public isSuccessful = false;
   public reportFaultForm: FormGroup;
   public referenceNumber = '';
-  public showReportFaultDialog = false;
   public showTrackTicketDialog = false;
-  public showDialog = true;
+  public showReportFaultDialog = true;
   public title = 'app';
   public elementType = 'url';
   public value = 'Techiediaries';

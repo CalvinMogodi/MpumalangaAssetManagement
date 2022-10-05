@@ -12,10 +12,12 @@
 
 </div>
 
-<div *ngIf="showReportFaultDialog" class="dialogBackgroud"></div>
+<div *ngIf="showReportFaultDialog" class="dialogBackgroud dialogNoBackgroud"></div>
 <p-dialog [(visible)]="showReportFaultDialog" *ngIf="showReportFaultDialog" [style]="{width: '95%'}"
     [baseZIndex]="10000">
-    <p-header> Report a fault </p-header>
+    <p-header>
+        <img style="float: left" class="logo-img" src="../../../assets/images/logo.png"> <h4>Mpumalanga facilities Management</h4> 
+    </p-header>
     <app-add-fault></app-add-fault>
 </p-dialog>
 
@@ -31,26 +33,26 @@
     <p-header><img style="float: left" class="logo-img" src="../../../assets/images/logo.png"><br/>
         Mpumalanga facilities Management  </p-header>
     <p-content style="text-align: center;">
-        <div *ngIf="!isSuccessful">
+      <!--  <div *ngIf="!isSuccessful">
             <ngx-qrcode [elementType]="elementType" [value]="value" cssClass="aclass" errorCorrectionLevel="L">
             </ngx-qrcode>
             <div>
                 <span>Scan Me</span>
             </div>
-        </div>
-        <div *ngIf="isSuccessful">
+        </div>-->
+        <div >
             <p>What would you like to do?</p>
         </div>
     </p-content>
     <p-footer>
-        <div *ngIf="isSuccessful">
+        <div>
            
             <button type="button" style="float: left;width: 45%;margin-left: -6px;" (click)="showReportFaultDialog=true" pButton
                 label="Report Fault"></button>
 
-                <a class="link" style="float: right;margin-top: 15px;" (click)="showTrackTicketDialog=true">Track Progress</a>
+                
         </div>
-        <button style="float: right" type="button" *ngIf="!isSuccessful" (click)="isSuccessful=true" pButton
-            label="Continue"></button>
+        <!--<button style="float: right" type="button" *ngIf="!isSuccessful" (click)="isSuccessful=true" pButton
+            label="Continue"></button>-->
     </p-footer>
 </p-dialog>

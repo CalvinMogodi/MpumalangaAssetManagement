@@ -8,6 +8,7 @@ namespace MAM.DataAccess.Tables
     {
         public int Id { get; set; }
         public int FacilityId { get; set; }
+        public Facility Facility { get; set; }
         public string PropertyDescription { get; set; }
         public string IncidentDescription { get; set; }
         public string ContactName { get; set; }

@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Fault } from 'src/app/models/fault';
@@ -30,4 +30,21 @@ export class FaultService {
     getFaultReferenceNo(referenceNo: string) {
         return this.http.get<Fault>(`${environment.apiUrl}/api/fault/getfaultbyreferenceno/${referenceNo}`);
     }
+
+    uploadFiles(files : any, fileName: string) {
+        const formData: FormData = new FormData();
+        files.forEach(file => {
+          formData.append('file', file, file.name);
+        });
+        
+        let header = new HttpHeaders({
+            'enctype': 'multipart/form-data',
+            'Accept': 'application/json'
+          });
+        return this.http.post<Fault>(`${environment.apiUrl}/api/fault/uploadFiles/` + fileName, formData, { headers: header });
+      }
+      
+      getFiles(fileReference: string) {
+        return this.http.get<any[]>(`${environment.apiUrl}/api/fault/getFiles/` + fileReference);
+      }
 }

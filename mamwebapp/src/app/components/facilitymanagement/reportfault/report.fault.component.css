@@ -58,3 +58,7 @@ p-fileupload{
     text-decoration: underline;
 }
 
+.dialogNoBackgroud {
+  z-index: 100 !important;
+  opacity: 2 !important;
+}

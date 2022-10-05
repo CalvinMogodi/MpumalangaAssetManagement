@@ -21,6 +21,7 @@ export class ViewServiceRequestComponent implements OnInit {
   @Input() selectedServiceRequest: Fault;
   @Output("closeServiceRequest") closeServiceRequest = new EventEmitter<any>();
 
+  public checked: boolean = true;
   public isUpdated: boolean = false;
   public showSupplier = true;
   public projects: any[] = [];
@@ -33,16 +34,20 @@ export class ViewServiceRequestComponent implements OnInit {
   public showDialog: boolean;
   public showAssets: boolean = false;
   public suppliers: any[] = [];
+  public supplier: any = {};
+  public project: any = {};
   public completionCertificate = false;
   public contractInvoice = false;
   public ticketHasCompletionCertificate: boolean = false;
   public ticketHasContractInvoice: boolean = false;
+  public attachments: any = [];
 
   constructor(private authenticationService: AuthenticationService, private sharedService: SharedService,
               private messageService: MessageService, private projectService: ProjectService, 
               private supplierService: SupplierService, private faultService: FaultService) { }
 
   ngOnInit() {
+    this.getFiles(this.selectedServiceRequest.referenceNo + '_' + this.selectedServiceRequest.id);
 
     this.ticketHasCompletionCertificate = this.selectedServiceRequest.hasCompletionCertificate;
     this.ticketHasContractInvoice = this.selectedServiceRequest.hasContractInvoice;
@@ -56,6 +61,9 @@ export class ViewServiceRequestComponent implements OnInit {
         suppliers.forEach(element => {
           const option = { name: element.companyName + ' - ' + element.companyNumber, code: element.id, factor: element.id };
           this.suppliers.push(option);
+          if (option.code === this.selectedServiceRequest.supplierId) {
+            this.supplier = option;
+          }
         });
       }
     },
@@ -72,6 +80,9 @@ export class ViewServiceRequestComponent implements OnInit {
             : project.businessName + ' - ' + project.businessRegNumber;
           const option = { name: name, code: project.id, factor: project.id };
           this.projects.push(option);
+          if (option.code === this.selectedServiceRequest.projectId) {
+            this.project = option;
+          }
         });
       }
     },
@@ -83,13 +94,6 @@ export class ViewServiceRequestComponent implements OnInit {
       this.ticketHasCompletionCertificate = true;
       this.ticketHasContractInvoice = true;
     }
-
-    this.suppliers = [
-      { name: 'Property 1', code: 'B', factor: 1 },
-      { name: 'Property 2', code: 'M', factor: 2 },
-      { name: 'Property 3', code: 'N', factor: 3 },
-      { name: 'Property 4', code: 'TC', factor: 4 },
-    ];
   }
 
   onDistrictChange(e) {
@@ -161,8 +165,15 @@ export class ViewServiceRequestComponent implements OnInit {
         });
         this.isUpdated = false;
       });
-
   }
 
-
+  getFiles(fileReference:string){    
+    this.faultService.getFiles(fileReference).pipe().subscribe(files => {
+      for (let i = 0; i < files.length ; i++) {       
+          let name = files[i].split('\\').pop();
+          let url = "https://amethysthemisphere.dedicated.co.za:81/Uploads/Faults/"+ name;
+          this.attachments.push({url: url, name: 'Fault'+fileReference+'_'+i});                       
+      };
+    });
+  }
 }

@@ -68,7 +68,7 @@
                 <div class="field grid col-12">
                     <p-fileUpload accept="image/*" [showUploadButton]="false" styleClass="file-upload" [showCancelButton]="false"
                         (onRemove)="onRemoveAttachment($event)" multiple="multiple"
-                        (onSelect)="onSelectAttachment($event.files)">
+                        (onSelect)="onChooseFile($event.files)">
                         <ng-template pTemplate="content">
                             <ul *ngFor="let file of attachments; let i = index" style="list-style-type:none;">
                                 <li>
@@ -93,9 +93,9 @@
 </div>
 
 <p-footer>
-    <div style="text-align: center;">        
-        <button style="float: right" type="button" *ngIf="!isSuccessful" (click)="onSubmit()" pButton label="Submit"></button>  
-        <a *ngIf="isSuccessful" class="link" style="float: right;margin-top: 15px;" (click)="showTrackTicketDialog=true">Track Progress</a>   
+    <div style="text-align: center;">      
+        <a class="link" style="float: left;margin-top: 15px;" (click)="showTrackTicketDialog=true">Track Progress</a>  
+        <button style="float: right" type="button" *ngIf="!isSuccessful" (click)="onSubmit()" pButton label="Submit"></button>    
     </div>
 </p-footer>
 
