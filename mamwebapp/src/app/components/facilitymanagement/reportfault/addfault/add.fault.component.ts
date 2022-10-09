@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { RadioControlRegistry } from 'primeng/radiobutton';
 import { AuthenticationService } from 'src/app/services/authentication.service';
@@ -86,7 +86,7 @@ export class AddFaultComponent implements OnInit {
       propertyDescription: [''],
       descriptionoftheIssue: [''],
       nameSurname: [''],
-      contactNumber: ['']
+      contactNumber: ['', Validators.minLength(10)]
     });
   }
 

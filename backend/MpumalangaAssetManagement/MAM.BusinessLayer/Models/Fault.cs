@@ -51,10 +51,14 @@ namespace MAM.BusinessLayer.Models
 
         public Fault ConvertToFault(DataAccess.Tables.Fault fault)
         {
+            if(fault == null)
+            {
+                return null;
+            }
             return new Fault(){
                 Id = fault.Id,
                 FacilityId = fault.FacilityId,
-                FacilityName = fault.Facility.Name,
+                FacilityName = fault.Facility != null ? fault.Facility.Name : null,
                 PropertyDescription = fault.PropertyDescription,
                 IncidentDescription = fault.IncidentDescription,
                 ContactName = fault.ContactName,

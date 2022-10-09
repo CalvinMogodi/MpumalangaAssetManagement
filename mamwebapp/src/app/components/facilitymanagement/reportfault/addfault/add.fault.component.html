@@ -58,7 +58,7 @@
                 <div class="field grid col-12">
                     <span class="p-input-icon-left p-1">
                         <label for="float-input">Contact Number</label>
-                        <input formControlName="contactNumber" autocomplete="off" type="text" pInputText class="ui-inputtext ui-widget">
+                        <input type="text" pattern="[0-9]+" maxlength="10" placeholder="(000) 000 0000" formControlName="contactNumber" autocomplete="off" type="text" pInputText class="ui-inputtext ui-widget">
                         <div *ngIf="submitted && f.contactNumber.errors" class="text-error"><br>
                             <div *ngIf="f.contactNumber.errors.required">This field is required.</div>
                         </div>

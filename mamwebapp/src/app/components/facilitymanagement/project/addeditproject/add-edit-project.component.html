@@ -236,7 +236,7 @@
                     <div class="field grid col-4">
                         <span class="p-input-icon-left p-1">
                             <label for="float-input">Contact Number</label>                                
-                            <p-inputMask [ngClass]="{'disabled': isViewOnly}" [readonly]="isViewOnly" class="ui-inputtext ui-widget" mask="(999) 999 9999" formControlName="contactNumber" placeholder="(000) 000 0000"></p-inputMask>
+                            <input type="text" pattern="[0-9]+" maxlength="10" placeholder="(000) 000 0000" formControlName="contactNumber" autocomplete="off" type="text" pInputText class="ui-inputtext ui-widget">
                             <div *ngIf="submitted && m.contactNumber.errors" class="text-error"><br>
                                 <div *ngIf="m.contactNumber.errors.required">This field is required.</div>
                             </div>

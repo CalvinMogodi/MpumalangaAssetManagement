@@ -129,6 +129,7 @@ export class ViewServiceRequestComponent implements OnInit {
       if (isUpdated) {
         this.showToast('Fault', 'Your fault has been submitted successfully.', 'success');
         this.isUpdated = true;
+        this.onCancel();
       } else {
         this.showToast('Report a Fault', 'Your fault has not been submitted successfully.', 'error');
       }
@@ -148,12 +149,13 @@ export class ViewServiceRequestComponent implements OnInit {
 
   onCloseicket() {
     this.isUpdated = false;
-    this.selectedServiceRequest.status = 'Close';
+    this.selectedServiceRequest.status = 'Closed';
     this.selectedServiceRequest.modifiedDate = new Date();
     this.faultService.updateFault(this.selectedServiceRequest).pipe().subscribe(isUpdated => {
       if (isUpdated) {
         this.showToast('Fault', 'Your fault has been closed successfully.', 'success');
         this.isUpdated = true;
+        this.onCancel();
       } else {
         this.showToast('Report a Fault', 'Your fault has not been closed successfully.', 'error');
       }
