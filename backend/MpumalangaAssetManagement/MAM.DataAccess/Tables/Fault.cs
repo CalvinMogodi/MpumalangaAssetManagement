@@ -20,8 +20,8 @@ namespace MAM.DataAccess.Tables
         public bool? HasContractInvoice { get; set; }
         public int? SupplierId { get; set; }
         public int? ProjectId { get; set; }
-        public string Notes { get; set; }
         public string Status { get; set; }
         public bool? IsDeleted { get; set; }
+        public List<FaultNote> FaultNotes { get; set; }
     }
 }

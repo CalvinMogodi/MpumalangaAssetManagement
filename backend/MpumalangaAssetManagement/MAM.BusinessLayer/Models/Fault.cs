@@ -21,32 +21,40 @@ namespace MAM.BusinessLayer.Models
         public bool? HasContractInvoice { get; set; }
         public int? SupplierId { get; set; }
         public int? ProjectId { get; set; }
-        public string Notes { get; set; }
+        public List<FaultNote> FaultNotes { get; set; }
         public string Status { get; set; }
         public bool? IsDeleted { get; set; }
 
         public List<Fault> ConvertToFaults(List<DataAccess.Tables.Fault> faults)
         {
-            return faults.Select(f => new Fault()
+            var faultList = new List<Fault>();
+            foreach (var fault in faults)
             {
-                Id = f.Id,
-                FacilityId = f.FacilityId,
-                FacilityName = f.Facility.Name,
-                PropertyDescription = f.PropertyDescription,
-                IncidentDescription = f.IncidentDescription,
-                ContactName = f.ContactName,
-                ContactNumber = f.ContactNumber,
-                CreatedDate = f.CreatedDate,
-                ModifiedDate = f.ModifiedDate,
-                ReferenceNo = f.ReferenceNo,
-                HasCompletionCertificate = f.HasCompletionCertificate,
-                HasContractInvoice = f.HasContractInvoice,
-                SupplierId = f.SupplierId,
-                ProjectId = f.ProjectId,
-                Notes = f.Notes,
-                Status = f.Status,
-                IsDeleted = f.IsDeleted
-            }).ToList();
+                var faultNote = new FaultNote();
+                var notes = faultNote.ConvertToFaults(fault.FaultNotes);
+                var newFault = new Fault()
+                {
+                    Id = fault.Id,
+                    FacilityId = fault.FacilityId,
+                    FacilityName = fault.Facility.Name,
+                    PropertyDescription = fault.PropertyDescription,
+                    IncidentDescription = fault.IncidentDescription,
+                    ContactName = fault.ContactName,
+                    ContactNumber = fault.ContactNumber,
+                    CreatedDate = fault.CreatedDate,
+                    ModifiedDate = fault.ModifiedDate,
+                    ReferenceNo = fault.ReferenceNo,
+                    HasCompletionCertificate = fault.HasCompletionCertificate,
+                    HasContractInvoice = fault.HasContractInvoice,
+                    SupplierId = fault.SupplierId,
+                    ProjectId = fault.ProjectId,
+                    FaultNotes = notes,
+                    Status = fault.Status,
+                    IsDeleted = fault.IsDeleted
+                };
+                faultList.Add(newFault);
+            }
+            return faultList;
         }
 
         public Fault ConvertToFault(DataAccess.Tables.Fault fault)
@@ -55,6 +63,9 @@ namespace MAM.BusinessLayer.Models
             {
                 return null;
             }
+            var faultNote = new FaultNote();
+            var notes = faultNote.ConvertToFaults(fault.FaultNotes);
+
             return new Fault(){
                 Id = fault.Id,
                 FacilityId = fault.FacilityId,
@@ -70,7 +81,7 @@ namespace MAM.BusinessLayer.Models
                 HasContractInvoice = fault.HasContractInvoice,
                 SupplierId = fault.SupplierId,
                 ProjectId = fault.ProjectId,
-                Notes = fault.Notes,
+                FaultNotes = notes,
                 Status = fault.Status,
                 IsDeleted = fault.IsDeleted
             };
@@ -92,7 +103,6 @@ namespace MAM.BusinessLayer.Models
                 HasContractInvoice = fault.HasContractInvoice,
                 SupplierId = fault.SupplierId,
                 ProjectId = fault.ProjectId,
-                Notes = fault.Notes,
                 Status = fault.Status,
                 IsDeleted = fault.IsDeleted
             };

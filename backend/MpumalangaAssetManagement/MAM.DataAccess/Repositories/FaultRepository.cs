@@ -48,6 +48,7 @@ namespace MAM.DataAccess.Repositories
             using (var db = new DataContext(_connectionString))
             {
                 return db.Faults.Where(f => f.IsDeleted == false)
+                    .Include(a => a.FaultNotes)
                     .Include(a => a.Facility).ToList();
             }
         }

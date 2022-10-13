@@ -51,6 +51,9 @@ namespace MAM.DataAccess
         public DbSet<ProjectSupplier> ProjectSuppliers { get; set; }
         public DbSet<Supplier> Suppliers { get; set; }
         public DbSet<Fault> Faults { get; set; }
+
+        public DbSet<FaultNote> FaultNotes { get; set; }
+        
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(_connectionString, o => o.CommandTimeout(280));

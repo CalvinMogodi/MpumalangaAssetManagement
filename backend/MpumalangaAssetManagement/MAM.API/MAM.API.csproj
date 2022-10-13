@@ -6,9 +6,13 @@
 	</PropertyGroup>
 	<ItemGroup>
 		<Compile Remove="Uploads\Facilties\**" />
+		<Compile Remove="Uploads\NewFolder\**" />
 		<Content Remove="Uploads\Facilties\**" />
+		<Content Remove="Uploads\NewFolder\**" />
 		<EmbeddedResource Remove="Uploads\Facilties\**" />
+		<EmbeddedResource Remove="Uploads\NewFolder\**" />
 		<None Remove="Uploads\Facilties\**" />
+		<None Remove="Uploads\NewFolder\**" />
 	</ItemGroup>
 
 	
@@ -39,7 +43,6 @@
 		<Folder Include="Uploads\HandoverDocuments\" />
 		<Folder Include="Uploads\Faults\" />
 		<Folder Include="Uploads\SnagList\" />
-		<Folder Include="Uploads\NewFolder\" />
 	</ItemGroup>
 
 	<ItemGroup>

@@ -6,7 +6,7 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
 import { FaultService } from 'src/app/services/facility-management/fault.service';
 import { ProjectService } from 'src/app/services/facility-management/project.service';
 import { SharedService } from 'src/app/services/shared.service';
-import { Fault } from '../../../../models/fault';
+import { Fault } from '../../../../models/fault.model';
 
 @Component({
   selector: 'app-add-fault',
@@ -52,7 +52,7 @@ export class AddFaultComponent implements OnInit {
       hasContractInvoice: false,
       supplierId: null,
       projectId: null,
-      notes: undefined,
+      faultNotes: [],
       status: 'New',
       isDeleted: false,
     };

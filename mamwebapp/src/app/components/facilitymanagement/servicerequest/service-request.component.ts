@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ConfirmationService, MenuItem, MessageService } from 'primeng/api';
-import { Fault } from 'src/app/models/fault';
+import { Fault } from 'src/app/models/fault.model';
 import { Project } from 'src/app/models/project.model';
 import { User } from 'src/app/models/user.model';
 import { AuthenticationService } from 'src/app/services/authentication.service';
@@ -47,19 +47,8 @@ export class ServiceRequestComponent implements OnInit {
       {
         label: 'View', icon: 'pi pi-eye', command: () =>
           this.viewServiceRequest()
-      },
-      { separator: true },
-      {label: 'Close', icon: 'pi pi-times', command: () => 
-          this.closeTicket()
-      },
-    /*  { separator: true },
-      {label: 'Update', icon: 'pi pi-pencil', command: () => 
-          this.updateProject()
-      },*/
-      {separator: true},
-      {label: 'Delete', icon: 'pi pi-trash', command: () => 
-          this.confirmDeleteProject()
-      }];
+      }     
+    ];
 
     this.faultService.getFaults().subscribe(faults => {
         if (faults) {

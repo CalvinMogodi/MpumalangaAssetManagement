@@ -11,7 +11,9 @@
 
 <div class="row">
     <p-table #dt [columns]="cols" [paginator]="true" [rows]="10" selectionMode="single" rowExpandMode="single"
-        *ngIf="!loading" [value]="serviceRequests" dataKey="id" editMode="row" styleClass="p-datatable-striped">
+        *ngIf="!loading" [value]="serviceRequests" sortMode="multiple" 
+        [multiSortMeta]="[{field: 'createdDate', order: -1},{field: 'status', order: 1}]"
+         dataKey="id" editMode="row" styleClass="p-datatable-striped">
         <ng-template pTemplate="caption">
             <div style="text-align: right">
                 <i class="pi pi-search" style="margin:4px 4px 0 0"></i>
@@ -52,7 +54,7 @@
 
 
 <div *ngIf="showDialog || showPrintDialog" class="dialogBackgroud"></div>
-<p-dialog [(visible)]="showDialog" *ngIf="showDialog" [style]="{width: '50vw'}"
+<p-dialog [(visible)]="showDialog" *ngIf="showDialog" [style]="{width: '70vw'}"
     [baseZIndex]="10000">
     <p-header> Reference no: {{selectedServiceRequest.referenceNo}} </p-header>
     <app-view-service-request (closeServiceRequest)="closeServiceRequest($event)" [canCloseTicket]="canCloseTicket" [selectedServiceRequest]="selectedServiceRequest"></app-view-service-request>

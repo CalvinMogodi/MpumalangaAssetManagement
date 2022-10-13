@@ -45,6 +45,8 @@ namespace MAM.BusinessLayer.Repositories
             using (var dataAccess = new DataAccess.Repositories.FaultRepository(appSettings.ConnectionString))
             {
                 dataAccess.UpdateFault(fault.ConvertToFaultTable(fault));
+                DeleteFaultNotesByFaultId(fault.Id);
+                AddFaultNote(fault.FaultNotes);
                 return true;
             };
         }
@@ -62,8 +64,29 @@ namespace MAM.BusinessLayer.Repositories
         {
             using (var dataAccess = new DataAccess.Repositories.FaultRepository(appSettings.ConnectionString))
             {
-                return dataAccess.AddFault(fault.ConvertToFaultTable(fault));
-                
+                return dataAccess.AddFault(fault.ConvertToFaultTable(fault));                
+            };
+        }
+
+        public List<FaultNote> AddFaultNote(List<FaultNote> faultNotes)
+        {
+            using (var dataAccess = new DataAccess.Repositories.FaultNoteRepository(appSettings.ConnectionString))
+            {
+                FaultNote faultNote = new FaultNote();
+                foreach (var item in faultNotes)
+                {
+                    item.Id = 0;
+                    dataAccess.AddFaultNote(faultNote.ConvertToFaultNoteTable(item));
+                }
+                return faultNotes;
+            };
+        }
+
+        public void DeleteFaultNotesByFaultId(int faultId)
+        {
+            using (var dataAccess = new DataAccess.Repositories.FaultNoteRepository(appSettings.ConnectionString))
+            {
+                dataAccess.DeleteFaultNotesByFaultId(faultId);
             };
         }
 

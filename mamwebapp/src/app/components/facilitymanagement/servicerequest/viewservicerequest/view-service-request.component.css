@@ -12,3 +12,16 @@ input{
 .no-border{
     border-bottom: none !important
 }
+
+.date{
+    font-size: 14px;
+    margin-left: -5px;
+    margin-top: -9px;
+    color: gray;
+}
+
+.details{
+    font-size: 14px;
+    font-weight: normal;
+    margin-top: -18px;
+}
