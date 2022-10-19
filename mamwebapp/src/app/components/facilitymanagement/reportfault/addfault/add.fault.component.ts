@@ -111,7 +111,9 @@ export class AddFaultComponent implements OnInit {
       this.faultService.addFault(this.fault).pipe().subscribe(id => {
           if (id > 0) {
             this.fault.id = id;
-            this.uploadFiles();
+            if(this.attachments.length > 0){
+              this.uploadFiles();
+            }
             this.isSuccessful = true;
           } else {
             //this.showToast('Report a Fault', 'Your fault has not been added successfully.', 'error');

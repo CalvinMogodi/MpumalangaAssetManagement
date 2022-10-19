@@ -23,6 +23,7 @@ namespace MAM.API.Services
         Facility SaveFacility(string step, Facility facility);
         bool UpdateFacility(string step, Facility facility);
         bool DeleteFacility(int id);
+        List<Facility> GetBuildings();
     }
 
     public class FacilityService : IFacilityService
@@ -77,6 +78,14 @@ namespace MAM.API.Services
             using (var _facilityRepository = new FacilityRepository(_appSettings))
             {
                 return _facilityRepository.GetProjectFacilities();
+            }
+        }
+
+        public List<Facility> GetBuildings()
+        {
+            using (var _facilityRepository = new FacilityRepository(_appSettings))
+            {
+                return _facilityRepository.GetBuildings();
             }
         }
 

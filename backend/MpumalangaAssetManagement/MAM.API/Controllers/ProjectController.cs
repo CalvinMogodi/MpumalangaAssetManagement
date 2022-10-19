@@ -52,7 +52,7 @@ namespace MAM.API.Controllers
         {
             try
             {
-                List<Facility> facilities = _facilityService.GetProjectFacilities();
+                List<Facility> facilities = _facilityService.GetBuildings();
                 return Ok(facilities);
             }
             catch (Exception ex)

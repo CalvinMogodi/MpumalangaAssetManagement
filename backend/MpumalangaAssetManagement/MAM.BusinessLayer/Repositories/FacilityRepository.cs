@@ -245,6 +245,18 @@ namespace MAM.BusinessLayer.Repositories
             return facilities;
         }
 
+        public List<Facility> GetBuildings()
+        {
+            List<Facility> facilities = new List<Facility>();
+            Facility facility = new Facility();
+            using (var dataAccess = new DataAccess.Repositories.FacilityRepository(appSettings.ConnectionString))
+            {
+                var _facilities = facility.ConvertToFacilities(dataAccess.GetBuildings());
+                facilities.AddRange(_facilities);
+            }
+            return facilities;
+        }
+
         public Facility GetFacilityById(int id, FacilityTypes facilityType)
         {
             Facility facility = new Facility();

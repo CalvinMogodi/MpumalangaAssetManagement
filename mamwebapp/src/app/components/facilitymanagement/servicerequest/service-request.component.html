@@ -35,10 +35,12 @@
         <ng-template pTemplate="body" let-rowData let-editing="editing" let-ri="rowIndex">
             <tr [pEditableRow]="rowData">
                 <td *ngFor="let col of cols">
+                    <i *ngIf="col.field == 'status'" class="pi pi-circle-on" style="font-size: 2rem"
+                    [style.color]="rowData[col.field]"></i>
                     <span *ngIf="col.field === 'createdDate'">
                         {{rowData[col.field] | date:'yyyy MMMM d'}}
                     </span>
-                    <span *ngIf="col.field !== 'createdDate'">
+                    <span *ngIf="col.field !== 'createdDate' && col.field != 'status'">
                         {{rowData[col.field]}}
                     </span>                    
                 </td>

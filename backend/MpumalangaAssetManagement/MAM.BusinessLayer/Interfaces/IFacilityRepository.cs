@@ -24,5 +24,6 @@ namespace MAM.BusinessLayer.Interfaces
         bool DeleteFacility(int id);
         List<Facility> GetProperties(string userDepartment);
         List<Facility> GetProjectFacilities();
+        List<Facility> GetBuildings();
     }
 }

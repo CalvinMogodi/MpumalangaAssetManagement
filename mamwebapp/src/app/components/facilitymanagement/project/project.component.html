@@ -42,7 +42,7 @@
                 </td>
 
                 <td style="text-align: center;">
-                    <p-splitButton label="More" [model]="buttonItems" (onDropdownClick)="selectFacility(rowData)" styleClass="p-button-secondary">                    
+                    <p-splitButton label="More" [model]="buttonItems" (onDropdownClick)="selectProject(rowData)" styleClass="p-button-secondary">                    
                     </p-splitButton>
                 </td>
             </tr>
@@ -53,9 +53,9 @@
 
 <div *ngIf="showDialog" class="dialogBackgroud"></div>
 <p-dialog [contentStyle]="{'overflow':'visible'}" [(visible)]="showDialog" *ngIf="showDialog" [style]="{width: '70vw'}"
-    [baseZIndex]="10000">
+[baseZIndex]="2">
     <p-header> {{ dialogHeader }} </p-header>
-    <app-add-edit-project (newAsset)='addUpdateAsset($event)' [selectedAsset]="selectedAsset"></app-add-edit-project>
+    <app-add-edit-project (newAsset)='addUpdateAsset($event)' [project]="project"></app-add-edit-project>
 </p-dialog>
 
 <div *ngIf="showdelete" class="dialogBackgroud"></div>

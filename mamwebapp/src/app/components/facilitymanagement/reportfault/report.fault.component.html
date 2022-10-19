@@ -13,10 +13,11 @@
 </div>
 
 <div *ngIf="showReportFaultDialog" class="dialogBackgroud dialogNoBackgroud"></div>
-<p-dialog [(visible)]="showReportFaultDialog" *ngIf="showReportFaultDialog" [style]="{width: '95%'}"
+<p-dialog [(visible)]="showReportFaultDialog" *ngIf="showReportFaultDialog" [style]="{width: '97%'}"
     [baseZIndex]="10000">
     <p-header>
-        <img style="float: left" class="logo-img" src="../../../assets/images/logo.png"> <h4>Mpumalanga facilities Management</h4> 
+        <img style="float: left; width: 80px;
+        margin-top: 15px;" class="logo-img" src="../../../assets/images/logo.png"> <h3>Mpumalanga facilities Management</h3> 
     </p-header>
     <app-add-fault></app-add-fault>
 </p-dialog>

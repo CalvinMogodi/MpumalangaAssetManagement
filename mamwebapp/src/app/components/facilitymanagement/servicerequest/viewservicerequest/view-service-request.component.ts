@@ -24,6 +24,8 @@ export class ViewServiceRequestComponent implements OnInit {
   @Output('closeServiceRequest') closeServiceRequest = new EventEmitter<any>();
 
   public checked: boolean = true;
+  public supplierCheckbox: boolean = false;
+  public projectCheckbox: boolean = false;
   public isUpdated: boolean = false;
   public note: string = '';
   public showSupplier = true;
@@ -57,6 +59,8 @@ export class ViewServiceRequestComponent implements OnInit {
 
     this.ticketHasCompletionCertificate = this.selectedServiceRequest.hasCompletionCertificate;
     this.ticketHasContractInvoice = this.selectedServiceRequest.hasContractInvoice;
+    this.supplierCheckbox = this.selectedServiceRequest.supplierId == null ? false : true;
+    this.projectCheckbox = this.selectedServiceRequest.projectId == null ? false : true;
     this.authenticationService.currentUser.pipe().subscribe(x => {
       this.currentUser = x;
     });
@@ -199,6 +203,26 @@ export class ViewServiceRequestComponent implements OnInit {
       });
   }
 
+  onSupplierCheckboxChange(e){
+    this.showSupplier = e.checked;
+    this.showProject = !this.showSupplier;
+    if (this.showSupplier) {
+      this.project = undefined;
+      this.selectedServiceRequest.projectId = null;
+      this.projectCheckbox = false;
+    }
+  }
+
+  onProjectCheckboxChange(e){
+    this.showProject  = e.checked;
+    this.showSupplier = !this.showProject;
+    if (this.showProject) {
+      this.supplier = undefined;
+      this.selectedServiceRequest.supplierId = null;
+      this.supplierCheckbox = false;
+    }
+  }
+
   getFiles(fileReference: string) {
     this.faultService.getFiles(fileReference).pipe().subscribe(files => {
       for (let i = 0; i < files.length; i++) {
@@ -226,6 +250,7 @@ export class ViewServiceRequestComponent implements OnInit {
         createdById: this.currentUser.id
       };
       this.selectedServiceRequest.faultNotes.push(faultnote);
+      this.note = '';
     }
   }
 

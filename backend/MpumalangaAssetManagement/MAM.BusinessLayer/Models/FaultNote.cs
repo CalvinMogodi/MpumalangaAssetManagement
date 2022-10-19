@@ -17,6 +17,9 @@ namespace MAM.BusinessLayer.Models
 
         public List<FaultNote> ConvertToFaults(List<DataAccess.Tables.FaultNote> notes)
         {
+            if (notes == null) {
+                return new List<FaultNote>();
+            }
             return notes.Select(note => new FaultNote()
             {
                 Id = note.Id,

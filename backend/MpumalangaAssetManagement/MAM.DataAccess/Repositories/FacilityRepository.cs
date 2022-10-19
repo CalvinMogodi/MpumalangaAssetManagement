@@ -71,6 +71,16 @@ namespace MAM.DataAccess.Repositories
             }
         }
 
+        public List<Facility> GetBuildings()
+        {
+            using (var db = new DataContext(_connectionString))
+            {
+                var list = db.Facilities.Where(f => f.Status != "Deleted" && f.Type.ToLower() != "land" &&
+                                            !f.Name.ToLower().Contains("land") && !f.Name.ToLower().Contains("farm")).ToList();
+                return list;
+            }
+        }
+
         public List<Facility> GetFacilities()
         {
             using (var db = new DataContext(_connectionString))

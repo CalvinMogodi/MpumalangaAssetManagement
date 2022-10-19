@@ -293,7 +293,7 @@ export class AddEditProjectComponent implements OnInit {
       this.project.businessRegNumber = this.managedByForm.controls['employeeCompanyNumber'].value;
     } else {
       this.project.employeeName = this.managedByForm.controls['name'].value;
-      this.project.employeeNumber = this.managedByForm.controls['employeeCompanyNumber'].value;
+      this.project.employeeNumber = Number(this.managedByForm.controls['employeeCompanyNumber'].value);
     }
 
     this.project.contactName = this.managedByForm.controls['contactName'].value;

@@ -52,6 +52,19 @@ export class ServiceRequestComponent implements OnInit {
 
     this.faultService.getFaults().subscribe(faults => {
         if (faults) {
+          faults.forEach(element => {
+            switch (element.status) {
+              case 'Closed':
+                element.status = 'red';
+                break;
+              case 'New':
+                  element.status = 'green';
+                  break;
+              default:
+                element.status = 'orange';
+                break;
+            }
+          });
           this.serviceRequests = faults;
         }
       },

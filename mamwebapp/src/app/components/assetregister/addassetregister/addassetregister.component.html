@@ -436,7 +436,7 @@
                         <div class="field grid col-3">
                             <span class="p-input-icon-left p-1">
                                 <label for="class">Registration Date</label>
-                                <p-calendar [ngClass]="{'disabled': isViewOnly}" class="ui-inputtext ui-widget"
+                                <p-calendar appendTo="body" [ngClass]="{'disabled': isViewOnly}" class="ui-inputtext ui-widget"
                                     [disabled]="isViewOnly" [maxDate]="today" formControlName="registrationDate"
                                     dateFormat="dd/mm/yy" showOtherMonths="true" showButtonBar="true"></p-calendar>
                                 <div *ngIf="submitted&& f.fileReferenceNumber.errors" class="text-error"><br>
@@ -459,7 +459,7 @@
                         <div class="field grid col-3">
                             <span class="p-input-icon-left p-1">
                                 <label for="vestingDate">Vesting Date</label>
-                                <p-calendar [ngClass]="{'disabled': isViewOnly}" class="ui-inputtext ui-widget"
+                                <p-calendar appendTo="body" [ngClass]="{'disabled': isViewOnly}" class="ui-inputtext ui-widget"
                                     [disabled]="isViewOnly" formControlName="vestingDate" dateFormat="dd/mm/yy"
                                     showOtherMonths="true" showButtonBar="true"></p-calendar>
                                 <div *ngIf="submitted && l.vestingDate.errors" class="text-error"><br>
@@ -1079,7 +1079,7 @@
                         <div class="field grid col-4">
                             <span class="p-input-icon-left p-1 w-full">
                                 <label for="municipalValuationDate">Date of Municipal Valuation</label>
-                                <p-calendar [ngClass]="{'disabled': isViewOnly}" class="ui-inputtext ui-widget"
+                                <p-calendar appendTo="body" [ngClass]="{'disabled': isViewOnly}" class="ui-inputtext ui-widget"
                                     [disabled]="isViewOnly" formControlName="municipalValuationDate"
                                     dateFormat="dd/mm/yy" showOtherMonths="true" showButtonBar="true"></p-calendar>
                                 <div *ngIf="submitted && f.municipalValuationDate.errors" class="text-error"><br>
@@ -1115,7 +1115,7 @@
                         <div class="field grid col-4">
                             <span class="p-input-icon-left p-1 w-full">
                                 <label for="nonMunicipalValuationDate">Date of Non Municipal Valuation</label>
-                                <p-calendar [ngClass]="{'disabled': isViewOnly}" class="ui-inputtext ui-widget"
+                                <p-calendar appendTo="body" [ngClass]="{'disabled': isViewOnly}" class="ui-inputtext ui-widget"
                                     [disabled]="isViewOnly" formControlName="nonMunicipalValuationDate"
                                     dateFormat="dd/mm/yy" showOtherMonths="true" showButtonBar="true"></p-calendar>
                                 <div *ngIf="submitted && f.nonMunicipalValuationDate.errors" class="text-error"><br>

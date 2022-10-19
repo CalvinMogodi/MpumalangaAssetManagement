@@ -18,7 +18,7 @@
                     <div class="field grid col-4">
                         <span class="p-input-icon-left p-1">
                             <label for="float-input">District</label>
-                            <p-dropdown class="ui-inputtext ui-widget" [disabled]="isViewOnly"
+                            <p-dropdown appendTo="body" class="ui-inputtext ui-widget" [disabled]="isViewOnly"
                                 [style]="{'width':'470px'}" inputId="district" [options]="districts"
                                 placeholder="Please Select" formControlName="district"
                                 (onChange)="onDistrictChange($event); showAssets=true" optionLabel="name">
@@ -31,7 +31,7 @@
                     <div class="field grid col-4">
                         <span class="p-input-icon-left p-1">
                             <label for="float-input">Property</label>
-                            <p-dropdown class="ui-inputtext ui-widget" [disabled]="isViewOnly"
+                            <p-dropdown appendTo="body" class="ui-inputtext ui-widget" [disabled]="isViewOnly"
                                 [style]="{'width':'570px'}" inputId="property" [options]="properties"
                                 placeholder="Please Select" formControlName="property"
                                 (onChange)="onPropertyChange($event); showAll=true" optionLabel="name">
@@ -67,7 +67,7 @@
                         <div class="field grid col-4">
                             <span class="p-input-icon-left p-1 w-full">
                                 <label for="startDate">Start Date</label>
-                                <p-calendar [ngClass]="{'disabled': isViewOnly}" class="ui-inputtext ui-widget"
+                                <p-calendar appendTo="body" class="center-date-picker" appendTo="body" [ngClass]="{'disabled': isViewOnly}" class="ui-inputtext ui-widget"
                                     [disabled]="isViewOnly" formControlName="startDate" dateFormat="dd/mm/yy"
                                     showOtherMonths="true" showButtonBar="true"></p-calendar>
                                 <div *ngIf="submitted && f.startDate.errors" class="text-error"><br>
@@ -78,7 +78,7 @@
                         <div class="field grid col-4">
                             <span class="p-input-icon-left p-1 w-full">
                                 <label for="completionDate">Practical Completion Date</label>
-                                <p-calendar [ngClass]="{'disabled': isViewOnly}" class="ui-inputtext ui-widget"
+                                <p-calendar appendTo="body" [ngClass]="{'disabled': isViewOnly}" class="ui-inputtext ui-widget"
                                     [disabled]="isViewOnly" formControlName="completionDate" dateFormat="dd/mm/yy"
                                     showOtherMonths="true" showButtonBar="true"></p-calendar>
                                 <div *ngIf="submitted && f.completionDate.errors" class="text-error"><br>
@@ -163,7 +163,7 @@
                     <div class="field grid col-4" *ngIf="hasParentChecked">
                         <span class="p-input-icon-left p-1">
                             <label for="float-input">Parent Project</label>
-                            <p-dropdown class="ui-inputtext ui-widget" [disabled]="isViewOnly"
+                            <p-dropdown appendTo="body" class="ui-inputtext ui-widget" [disabled]="isViewOnly"
                                 [style]="{'width':'570px'}" inputId="property" [options]="properties"
                                 placeholder="Please Select" formControlName="property"
                                 (onChange)="onProperty($event); showAll=true" optionLabel="name">
@@ -187,7 +187,7 @@
                     <div class="field grid col-4">
                         <span class="p-input-icon-left p-1">
                             <label for="float-input">Managed By</label>
-                            <p-dropdown class="ui-inputtext ui-widget" [disabled]="isViewOnly"
+                            <p-dropdown appendTo="body" class="ui-inputtext ui-widget" [disabled]="isViewOnly"
                                 [style]="{'width':'470px'}" inputId="managedBy" [options]="managedBylist"
                                 placeholder="Please Select" formControlName="managedBy"
                                 (onChange)="onManagedByChange($event)" optionLabel="name">
@@ -256,7 +256,7 @@
                     <div class="field grid col-4">
                         <span class="p-input-icon-left p-1">
                             <label for="float-input">Supplier</label>
-                            <p-dropdown class="ui-inputtext ui-widget" [disabled]="isViewOnly" (onChange)="onSupplierChange($event);"
+                            <p-dropdown appendTo="body" class="ui-inputtext ui-widget" [disabled]="isViewOnly" (onChange)="onSupplierChange($event);"
                                 [style]="{'width':'470px'}" inputId="supplier" [options]="supplierDropdownOptions"
                                 placeholder="Please Select" formControlName="supplier" optionLabel="name">
                             </p-dropdown>

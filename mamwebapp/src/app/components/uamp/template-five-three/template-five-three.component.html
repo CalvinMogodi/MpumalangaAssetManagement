@@ -60,12 +60,12 @@
                         </td>
                         <td>{{operationPlan.extent}}</td>
                         <td>
-                            <p-calendar class="ui-inputtext ui-widget" [(ngModel)]="operationPlan.leaseStartDate"
+                            <p-calendar appendTo="body" class="ui-inputtext ui-widget" [(ngModel)]="operationPlan.leaseStartDate"
                                 [ngModelOptions]="{standalone: true}" dateFormat="dd/mm/yy" showOtherMonths="true"
                                 showButtonBar="true"></p-calendar>
                         </td>
                         <td>
-                            <p-calendar class="ui-inputtext ui-widget" [(ngModel)]="operationPlan.leaseEndDate"
+                            <p-calendar appendTo="body" class="ui-inputtext ui-widget" [(ngModel)]="operationPlan.leaseEndDate"
                                 [ngModelOptions]="{standalone: true}" dateFormat="dd/mm/yy" showOtherMonths="true"
                                 showButtonBar="true"></p-calendar>
                         </td>

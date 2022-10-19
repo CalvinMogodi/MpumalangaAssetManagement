@@ -61,7 +61,7 @@ namespace MAM.BusinessLayer.Models
         {
             if(fault == null)
             {
-                return null;
+                return new Fault();
             }
             var faultNote = new FaultNote();
             var notes = faultNote.ConvertToFaults(fault.FaultNotes);

@@ -11,7 +11,8 @@
 		<Content Remove="Uploads\NewFolder\**" />
 		<EmbeddedResource Remove="Uploads\Facilties\**" />
 		<EmbeddedResource Remove="Uploads\NewFolder\**" />
-		<None Remove="Uploads\Facilties\**" />
+		<None Remove="Uploads\Facilties\**" />3
+		
 		<None Remove="Uploads\NewFolder\**" />
 	</ItemGroup>
 

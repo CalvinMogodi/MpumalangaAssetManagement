@@ -13,6 +13,7 @@ import { ProjectService } from 'src/app/services/facility-management/project.ser
 })
 export class ProjectComponent implements OnInit {
 
+  public project: Project;
   public isSuccessful: boolean = false;
   public loading: boolean = false;
   public projects: Array<any> = [];
@@ -93,12 +94,19 @@ export class ProjectComponent implements OnInit {
 
   updateProject() { }
 
-  viewProject() { }
+  viewProject() {
+    this.showDialog = true;
+   }
 
   printProject() { }
 
   addProject() {
     
   }
+
+  selectProject(project: Project){
+    this.project = project;
+  }
+  
 
 }

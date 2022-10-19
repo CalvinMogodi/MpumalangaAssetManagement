@@ -224,7 +224,7 @@
                     <div class="field grid col-4">
                         <span class="p-input-icon-left p-1 w-full">
                             <label for="startDate">Start Date of Leased </label>
-                            <p-calendar class="ui-inputtext ui-widget w-full" [disabled]="isView"
+                            <p-calendar appendTo="body" class="ui-inputtext ui-widget w-full" [disabled]="isView"
                                 formControlName="startDate" dateFormat="dd/mm/yy" showOtherMonths="true"
                                 showButtonBar="true">
                             </p-calendar>
@@ -237,7 +237,7 @@
                     <div class="field grid col-4">
                         <span class="p-input-icon-left p-1 w-full">
                             <label for="terminationDate">Termination Date of Lease </label>
-                            <p-calendar class="ui-inputtext ui-widget w-full" [disabled]="isView"
+                            <p-calendar appendTo="body" class="ui-inputtext ui-widget w-full" [disabled]="isView"
                                 formControlName="terminationDate" dateFormat="dd/mm/yy" showOtherMonths="true"
                                 showButtonBar="true"></p-calendar>
                             <div *ngIf="submitted && f.terminationDate.errors" class="text-error"><br>
@@ -249,7 +249,7 @@
                     <div class="field grid col-4">
                         <span class="p-input-icon-left p-1 w-full">
                             <label for="escalationDate">Escalation Date </label>
-                            <p-calendar class="ui-inputtext ui-widget w-full" [disabled]="isView"
+                            <p-calendar appendTo="body" class="ui-inputtext ui-widget w-full" [disabled]="isView"
                                 formControlName="escalationDate" dateFormat="dd/mm/yy" showOtherMonths="true"
                                 showButtonBar="true">
                             </p-calendar>

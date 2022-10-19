@@ -359,7 +359,7 @@ p-fieldset {
 
 .p-dropdown .p-dropdown-label.p-placeholder {
 	font-family: "calibri"!important;
-    font-size: 14px!important;
+    font-size: 16px!important;
     text-decoration: none!important;
 }
 
@@ -393,7 +393,8 @@ p-fieldset {
   }
 
   .p-datepicker { 
-    top: -334px !important;
+	top: 10% !important;
+    left: 577.938px;
   }
 
   .modal { z-index: 1001 !important;} 
@@ -457,7 +458,7 @@ p-fieldset {
 label{
     font-weight: bold;
     font-family: "calibri"!important;
-    font-size: 14px!important;
+    font-size: 16px!important;
     text-decoration: none!important;
 }
 
@@ -470,6 +471,11 @@ label{
 .p-fileupload-row{
 	padding-top: 5px;
 	border-bottom: #585858 solid 1px;
+}
+
+.center-date-picker{
+	top: 10% !important;
+    left: 577.938px;
 }
 
 .p-fileupload-row>div {

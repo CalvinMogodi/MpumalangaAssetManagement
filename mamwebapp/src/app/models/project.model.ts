@@ -17,7 +17,7 @@ export class Project {
     account?: number;
     managedBy: string;
     employeeName: string;
-    employeeNumber?: string;
+    employeeNumber?: number;
     contactName: string;
     contactNumber: string;
     businessName: string;

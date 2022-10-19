@@ -28,9 +28,10 @@
                 </span>
             </div>
             <div class="field grid col-4">
-                <span class="p-input-icon-left p-1" *ngIf="showSupplier">
-                    <label for="float-input">Supplier</label>
-                    <p-dropdown class="ui-inputtext ui-widget" [disabled]="isViewOnly" [style]="{'width':'470px'}"
+                <span class="p-input-icon-left p-1">
+                    <label for="float-input">Supplier <p-checkbox [binary]="true" [(ngModel)]="supplierCheckbox" inputId="checkbox1"
+                        (onChange)="onSupplierCheckboxChange($event)"></p-checkbox></label>
+                    <p-dropdown class="ui-inputtext ui-widget" [ngClass]="{'disabled': !showSupplier}" [disabled]="!showSupplier" [style]="{'width':'470px'}"
                         inputId="supplier" [options]="suppliers" placeholder="Please Select" [(ngModel)]="supplier"
                         (onChange)="onSupplierChange($event);" optionLabel="name">
                     </p-dropdown>
@@ -59,9 +60,10 @@
             </div>
 
             <div class="field grid col-4">
-                <span class="p-input-icon-left p-1" *ngIf="showProject">
-                    <label for="float-input">Project</label>
-                    <p-dropdown class="ui-inputtext ui-widget" [disabled]="isViewOnly" [style]="{'width':'470px'}"
+                <span class="p-input-icon-left p-1">
+                    <label for="float-input" >Project <p-checkbox [binary]="true" [(ngModel)]="projectCheckbox" inputId="checkbox1"
+                        (onChange)="onProjectCheckboxChange($event)"></p-checkbox></label>
+                    <p-dropdown class="ui-inputtext ui-widget" [ngClass]="{'disabled': !showProject}"  [disabled]="!showProject" [style]="{'width':'470px'}"
                         inputId="project" [options]="projects" placeholder="Please Select" [(ngModel)]="project"
                         (onChange)="onProjectChange($event);" optionLabel="name">
                     </p-dropdown>
@@ -112,7 +114,7 @@
                     <ul style="list-style: none;padding-left: 1px;">
                         <li *ngFor="let note of selectedServiceRequest.faultNotes; let i = index">
                             <label>
-                                <p> {{note.createdDate | date :'d MMMM yyyy'}}</p>
+                                <p> {{note.createdDate | date :'d MMMM yyyy h:mm a'}}</p>
                                 <span class="details"> {{note.comment}}</span>
                             </label>
                         </li>
