@@ -55,13 +55,13 @@ export class ServiceRequestComponent implements OnInit {
           faults.forEach(element => {
             switch (element.status) {
               case 'Closed':
-                element.status = 'red';
+                element.statusColor = 'red';
                 break;
               case 'New':
-                  element.status = 'green';
+                  element.statusColor = 'green';
                   break;
               default:
-                element.status = 'orange';
+                element.statusColor = 'orange';
                 break;
             }
           });

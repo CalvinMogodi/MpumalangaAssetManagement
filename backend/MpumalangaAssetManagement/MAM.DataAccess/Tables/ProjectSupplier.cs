@@ -9,5 +9,6 @@ namespace MAM.DataAccess.Tables
         public int Id { get; set; }
         public int ProjectId { get; set; }
         public int SupplierId { get; set; }
+        public Supplier Supplier { get; set; }
     }
 }

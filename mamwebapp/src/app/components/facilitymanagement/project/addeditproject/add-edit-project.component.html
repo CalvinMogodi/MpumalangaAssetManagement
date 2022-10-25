@@ -10,8 +10,7 @@
 
 
 <p-tabView [(activeIndex)]="activeIndex">
-    <p-tabPanel header="Details" style="background-color: var(--surface-b);
-        color: var(--text-color);">
+    <p-tabPanel header="Details" style="background-color: var(--surface-b); color: var(--text-color);">
         <form [formGroup]="projectForm">
             <div class="p-fluid p-grid p-formgrid form-body">
                 <div class="formgrid grid">
@@ -104,7 +103,7 @@
                             <span class="p-input-icon-left p-1">
                                 <label for="float-input">Scope of work</label>
                                 <input [ngClass]="{'disabled': isViewOnly}" [readonly]="isViewOnly"
-                                    formControlName="name" autocomplete="off" type="text" pInputText
+                                    formControlName="scope" autocomplete="off" type="text" pInputText
                                     class="ui-inputtext ui-widget">
                                 <div *ngIf="submitted && f.scope.errors" class="text-error"><br>
                                     <div *ngIf="f.scope.errors.required">This field is required.</div>
@@ -268,7 +267,7 @@
                     <div class="field grid col-4">
                         <span class="p-input-icon-left p-1">
                             <label for="float-input">Company Name</label>
-                            <input [ngModelOptions]="{standalone: true}" [(ngModel)]="selectedSupplier.companyName" [ngClass]="{'disabled': isViewOnly}" [readonly]="isViewOnly"
+                            <input [ngModelOptions]="{standalone: true}" [(ngModel)]="projectSupplier.companyName" [ngClass]="{'disabled': isViewOnly}" [readonly]="isViewOnly"
                                 autocomplete="off" type="text" pInputText class="ui-inputtext ui-widget">
                             <div *ngIf="submitted && s.companyName.errors" class="text-error"><br>
                                 <div *ngIf="s.companyName.errors.required">This field is required.</div>
@@ -278,7 +277,7 @@
                     <div class="field grid col-4">
                         <span class="p-input-icon-left p-1">
                             <label for="float-input">Cumpany Number</label>               
-                            <input [ngModelOptions]="{standalone: true}" [(ngModel)]="selectedSupplier.companyNumber" [ngClass]="{'disabled': isViewOnly}" [readonly]="isViewOnly"
+                            <input [ngModelOptions]="{standalone: true}" [(ngModel)]="projectSupplier.companyNumber" [ngClass]="{'disabled': isViewOnly}" [readonly]="isViewOnly"
                                 autocomplete="off" type="text" pInputText class="ui-inputtext ui-widget">
                             <div *ngIf="submitted && s.companyNumber.errors" class="text-error"><br>
                                 <div *ngIf="s.companyNumber.errors.required">This field is required.</div>
@@ -291,7 +290,7 @@
                     <div class="field grid col-4">
                         <span class="p-input-icon-left p-1">
                             <label for="float-input">Contact Name</label>                            
-                            <input [ngModelOptions]="{standalone: true}" [(ngModel)]="selectedSupplier.contactName" [ngClass]="{'disabled': isViewOnly}" [readonly]="isViewOnly"
+                            <input [ngModelOptions]="{standalone: true}" [(ngModel)]="projectSupplier.contactName" [ngClass]="{'disabled': isViewOnly}" [readonly]="isViewOnly"
                                 autocomplete="off" type="text" pInputText class="ui-inputtext ui-widget">
                             <div *ngIf="submitted && s.contactName.errors" class="text-error"><br>
                                 <div *ngIf="s.contactName.errors.required">This field is required.</div>
@@ -301,7 +300,7 @@
                     <div class="field grid col-4">
                         <span class="p-input-icon-left p-1">
                             <label for="float-input">Contact Number</label>
-                            <p-inputMask [ngModelOptions]="{standalone: true}" [(ngModel)]="selectedSupplier.contactNumber" [ngClass]="{'disabled': isViewOnly}" [readonly]="isViewOnly" 
+                            <p-inputMask [ngModelOptions]="{standalone: true}" [(ngModel)]="projectSupplier.contactNumber" [ngClass]="{'disabled': isViewOnly}" [readonly]="isViewOnly" 
                             class="ui-inputtext ui-widget" mask="(999) 999 9999"
                             placeholder="(000) 000 0000"></p-inputMask>
                             <div *ngIf="submitted && s.contactNumber.errors" class="text-error"><br>
@@ -319,7 +318,7 @@
         </form>
         <div class="formgrid grid">
             <p-table #dt [columns]="supplierCols" [paginator]="true" [rows]="5" selectionMode="single"
-                rowExpandMode="single" [value]="this.project.suppliers" dataKey="id" editMode="row"
+                rowExpandMode="single" [value]="this.project.projectSuppliers" dataKey="id" editMode="row"
                 styleClass="p-datatable-striped">
                 <ng-template pTemplate="caption">
                     <div style="text-align: right">

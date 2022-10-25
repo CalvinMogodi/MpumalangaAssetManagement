@@ -137,6 +137,13 @@ export class ViewServiceRequestComponent implements OnInit {
 
   onSubmit() {
     this.isUpdated = false;
+    const now = new Date();
+    const today = new Date(now.setHours(now.getHours() + 2));
+    this.selectedServiceRequest.faultNotes.forEach(element => {
+      if(element.id < 1){
+        element.createdDate = today;
+      }
+    });
     this.faultService.updateFault(this.selectedServiceRequest).pipe().subscribe(isUpdated => {
       if (isUpdated) {
         if (this.selectedServiceRequest.hasCompletionCertificate && this.completionCertificate) {
@@ -184,7 +191,15 @@ export class ViewServiceRequestComponent implements OnInit {
   onCloseicket() {
     this.isUpdated = false;
     this.selectedServiceRequest.status = 'Closed';
-    this.selectedServiceRequest.modifiedDate = new Date();
+    
+    const now = new Date();
+    const today = new Date(now.setHours(now.getHours() + 2));
+    this.selectedServiceRequest.faultNotes.forEach(element => {
+      if(element.id < 1){
+        element.createdDate = today;
+      }
+    });
+    this.selectedServiceRequest.modifiedDate = today;
     this.faultService.updateFault(this.selectedServiceRequest).pipe().subscribe(isUpdated => {
       if (isUpdated) {
         this.showToast('Fault', 'Your fault has been closed successfully.', 'success');

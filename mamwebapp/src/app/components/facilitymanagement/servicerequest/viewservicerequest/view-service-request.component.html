@@ -8,9 +8,9 @@
     <h6 class="color-aqua">{{errorMsg}}</h6>
 </div>
 <div>
-    
+
     <div class="p-fluid p-grid p-formgrid">
-        <div class="formgrid grid">             
+        <div class="formgrid grid">
             <div class="field grid col-4">
                 <span class="p-input-icon-left p-1">
                     <label for="float-input">Facility Name</label>
@@ -29,11 +29,12 @@
             </div>
             <div class="field grid col-4">
                 <span class="p-input-icon-left p-1">
-                    <label for="float-input">Supplier <p-checkbox [binary]="true" [(ngModel)]="supplierCheckbox" inputId="checkbox1"
-                        (onChange)="onSupplierCheckboxChange($event)"></p-checkbox></label>
-                    <p-dropdown class="ui-inputtext ui-widget" [ngClass]="{'disabled': !showSupplier}" [disabled]="!showSupplier" [style]="{'width':'470px'}"
-                        inputId="supplier" [options]="suppliers" placeholder="Please Select" [(ngModel)]="supplier"
-                        (onChange)="onSupplierChange($event);" optionLabel="name">
+                    <label for="float-input">Supplier <p-checkbox [binary]="true" [(ngModel)]="supplierCheckbox"
+                            inputId="checkbox1" (onChange)="onSupplierCheckboxChange($event)"></p-checkbox></label>
+                    <p-dropdown class="ui-inputtext ui-widget" [ngClass]="{'disabled': !showSupplier}"
+                        [disabled]="!showSupplier" [style]="{'width':'470px'}" inputId="supplier" [options]="suppliers"
+                        placeholder="Please Select" [(ngModel)]="supplier" (onChange)="onSupplierChange($event);"
+                        optionLabel="name">
                     </p-dropdown>
                     <div *ngIf="submitted && f.supplier.errors" class="text-error"><br>
                         <div *ngIf="s.supplier.errors.required">This field is required.</div>
@@ -41,7 +42,7 @@
                 </span>
             </div>
         </div>
-        <div class="formgrid grid">            
+        <div class="formgrid grid">
             <div class="field grid col-4">
                 <span class="p-input-icon-left p-1">
                     <label for="float-input">Property Description</label>
@@ -61,20 +62,21 @@
 
             <div class="field grid col-4">
                 <span class="p-input-icon-left p-1">
-                    <label for="float-input" >Project <p-checkbox [binary]="true" [(ngModel)]="projectCheckbox" inputId="checkbox1"
-                        (onChange)="onProjectCheckboxChange($event)"></p-checkbox></label>
-                    <p-dropdown class="ui-inputtext ui-widget" [ngClass]="{'disabled': !showProject}"  [disabled]="!showProject" [style]="{'width':'470px'}"
-                        inputId="project" [options]="projects" placeholder="Please Select" [(ngModel)]="project"
-                        (onChange)="onProjectChange($event);" optionLabel="name">
+                    <label for="float-input">Project <p-checkbox [binary]="true" [(ngModel)]="projectCheckbox"
+                            inputId="checkbox1" (onChange)="onProjectCheckboxChange($event)"></p-checkbox></label>
+                    <p-dropdown class="ui-inputtext ui-widget" [ngClass]="{'disabled': !showProject}"
+                        [disabled]="!showProject" [style]="{'width':'470px'}" inputId="project" [options]="projects"
+                        placeholder="Please Select" [(ngModel)]="project" (onChange)="onProjectChange($event);"
+                        optionLabel="name">
                     </p-dropdown>
                     <div *ngIf="submitted && f.supplier.errors" class="text-error"><br>
                         <div *ngIf="s.supplier.errors.required">This field is required.</div>
                     </div>
                 </span>
             </div>
-            
+
         </div>
-        <div class="formgrid grid">            
+        <div class="formgrid grid">
             <div class="field grid col-4">
                 <span class="p-input-icon-left p-1">
                     <label for="float-input">Description of the issue</label>
@@ -92,7 +94,7 @@
                 </span>
             </div>
         </div>
-        <div class="formgrid grid">  
+        <div class="formgrid grid">
             <div class="field grid col-4">
                 <div class="field grid col-12">
                     <div class="field grid col-8">
@@ -121,8 +123,8 @@
                         <br />
                     </ul>
                 </div>
-            </div>          
-            <div class="field grid col-4">
+            </div>
+            <div class="field grid col-2">
                 <span class="p-input-icon-left p-1">
                     <label for="float-input">Attachments</label>
                     <div class="ui-inputtext ui-widget no-border">
@@ -135,12 +137,13 @@
                     </div>
                 </span>
             </div>
-            <div class="field grid col-4" style="border: darkgray solid 1px; height: fit-content;">
+
+            <div class="field grid col-6" style="border: darkgray solid 1px; height: fit-content;">
                 <span class="p-input-icon-left p-1">
                     <label for="float-input">Completion certificate</label>
                     <div class="ui-inputtext ui-widget no-border">
                         <ul style="list-style: none; width: 100%; padding-left: 10px;margin-top: auto;">
-                            <li style="height: 25px;">
+                            <li style="height: 25px;margin-top: 5px;">
                                 <div class="formgrid grid">
                                     <div class="field grid col-10">
                                         <span>Completion certificate </span>
@@ -156,14 +159,17 @@
                             <li *ngIf="selectedServiceRequest.hasCompletionCertificate">
                                 <p-fileUpload [showUploadButton]="false" styleClass="file-upload"
                                     [showCancelButton]="false" (onRemove)="onRemoveCompletionCertificate($event)"
-                                    multiple="multiple" (onSelect)="onChooseCompletionCertificate($event.files)">
+                                    accept="image/*,application/pdf,application/msword,
+  application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                                    (onSelect)="onChooseCompletionCertificate($event.files)">
                                     <ng-template pTemplate="content">
                                         <p *ngIf="showCompletionCertificateUrl"><a target="_blank"
-                                            href="{{completionCertificateUrl()}}">View completion
-                                            certificate</a></p>
+                                                href="{{completionCertificateUrl()}}">View completion
+                                                certificate</a></p>
                                     </ng-template>
-                                </p-fileUpload>                                
-                            </li>
+
+                                </p-fileUpload>
+                            </li> <br />
                             <li style="height: 25px;">
                                 <div class="formgrid grid">
                                     <div class="field grid col-10">
@@ -178,9 +184,10 @@
                                 </div>
                             </li>
                             <li *ngIf="selectedServiceRequest.hasContractInvoice">
-                                <p-fileUpload accept="application/pdf" [showUploadButton]="false" styleClass="file-upload"
-                                    [showCancelButton]="false" (onRemove)="onRemoveContractInvoice($event)"
-                                    multiple="multiple" (onSelect)="onChooseContractInvoice($event.files)">
+                                <p-fileUpload [showUploadButton]="false" styleClass="file-upload"
+                                    [showCancelButton]="false" (onRemove)="onRemoveContractInvoice($event)" accept="image/*,application/pdf,application/msword,
+  application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                                    (onSelect)="onChooseContractInvoice($event.files)">
                                     <ng-template pTemplate="content">
                                         <p *ngIf="showContractInvoiceUrl"><a target="_blank"
                                                 href="{{contractInvoiceUrl()}}">View contract invoice</a></p>
@@ -193,7 +200,7 @@
                 </span>
             </div>
         </div>
-        
+
     </div>
 </div>
 

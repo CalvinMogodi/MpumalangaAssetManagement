@@ -8,6 +8,7 @@ namespace MAM.BusinessLayer.Models
     public class Fault
     {
         public int Id { get; set; }
+        public string Town { get; set; }
         public int FacilityId { get; set; }
         public string FacilityName { get; set; }
         public string PropertyDescription { get; set; }
@@ -35,6 +36,7 @@ namespace MAM.BusinessLayer.Models
                 var newFault = new Fault()
                 {
                     Id = fault.Id,
+                    Town = fault.Town,
                     FacilityId = fault.FacilityId,
                     FacilityName = fault.Facility.Name,
                     PropertyDescription = fault.PropertyDescription,
@@ -68,6 +70,7 @@ namespace MAM.BusinessLayer.Models
 
             return new Fault(){
                 Id = fault.Id,
+                Town = fault.Town,
                 FacilityId = fault.FacilityId,
                 FacilityName = fault.Facility != null ? fault.Facility.Name : null,
                 PropertyDescription = fault.PropertyDescription,
@@ -91,6 +94,7 @@ namespace MAM.BusinessLayer.Models
         {
             return new DataAccess.Tables.Fault() {
                 Id = fault.Id,
+                Town = fault.Town,
                 FacilityId = fault.FacilityId,
                 PropertyDescription = fault.PropertyDescription,
                 IncidentDescription = fault.IncidentDescription,

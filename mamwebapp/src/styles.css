@@ -480,15 +480,16 @@ label{
 
 .p-fileupload-row>div {
 	padding: 0rem 1rem !important;
-	font-size: 14px;
-	clear: both;
-	margin-left: -17px;
-	display: inline-block;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	white-space: nowrap;
-  }
-  
+    font-size: 14px;
+    clear: both;
+    margin-left: -17px;
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 400px;
+    text-transform: capitalize;
+}
   .p-fileupload-row>div:last-child {
 	text-align: right;
 	position: inherit;
@@ -507,6 +508,13 @@ label{
 
   .p-fileupload-row>div:nth-child(1) {
 	height: 40px;
+    max-width: 150px !important;
+    width: auto;
+    margin-right: 5px;
   }
+
+  .p-autocomplete {
+    width: 100%;
+}
 
   

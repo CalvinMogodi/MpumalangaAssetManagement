@@ -30,4 +30,12 @@ export class ProjectService {
     getProperties(): Observable<Array<Facility>> {
         return this.http.get<Array<Facility>>(`${environment.apiUrl}/api/project/getproperties`);
     }
+
+    getTowns(): Observable<Array<Facility>> {
+        return this.http.get<Array<Facility>>(`${environment.apiUrl}/api/facility/gettowns`);
+    }
+
+    getBuildingByTown(town): Observable<Array<Facility>> {
+        return this.http.get<Array<Facility>>(`${environment.apiUrl}/api/facility/getbuildings/${town}`);
+    }
 }

@@ -31,11 +31,12 @@ namespace MAM.BusinessLayer.Models
         public string Status { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime? ModifiedDate { get; set; }
-        public List<Supplier> Suppliers { get; set; }
+        public List<ProjectSupplier> ProjectSuppliers { get; set; }
         public bool? IsDeleted { get; set; }
 
         public List<Project> ConvertToProjects(List<DataAccess.Tables.Project> projects)
         {
+
             return projects.Select(f => new Project()
             {
                 Id = f.Id,
@@ -61,7 +62,7 @@ namespace MAM.BusinessLayer.Models
                 BusinessRegNumber = f.BusinessRegNumber,
                 CreatedDate = f.CreatedDate,
                 ModifiedDate = f.ModifiedDate,
-               // Suppliers = f.Suppliers,
+                ProjectSuppliers = new ProjectSupplier().ConvertToProjectSuppliers(f.ProjectSuppliers),
                 Status = f.Status,
                 IsDeleted = f.IsDeleted
             }).ToList();

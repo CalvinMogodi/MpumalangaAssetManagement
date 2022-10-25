@@ -7,6 +7,7 @@ namespace MAM.DataAccess.Tables
     public class Fault
     {
         public int Id { get; set; }
+        public string Town { get; set; }
         public int FacilityId { get; set; }
         public Facility Facility { get; set; }
         public string PropertyDescription { get; set; }

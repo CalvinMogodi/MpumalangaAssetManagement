@@ -38,7 +38,7 @@ namespace MAM.BusinessLayer.Repositories
             using (var dataAccess = new DataAccess.Repositories.SupplierRepository(appSettings.ConnectionString))
             {
                 Supplier supplier = new Supplier();
-                return supplier.ConvertToSupplier(dataAccess.GetSuppliers());
+                return supplier.ConvertToSuppliers(dataAccess.GetSuppliers());
             }
         }
 

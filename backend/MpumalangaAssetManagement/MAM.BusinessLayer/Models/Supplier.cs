@@ -29,7 +29,21 @@ namespace MAM.BusinessLayer.Models
             };
         }
 
-        public List<Supplier> ConvertToSupplier(List<DataAccess.Tables.Supplier> suppliers)
+        public Supplier ConvertToSupplier(DataAccess.Tables.Supplier supplier)
+        {
+            return new Supplier()
+            {
+                Id = supplier.Id,
+                CompanyName = supplier.CompanyName,
+                CompanyNumber = supplier.CompanyNumber,
+                ContactName = supplier.ContactName,
+                ContactNumber = supplier.ContactNumber,
+                CreatedDate = supplier.CreatedDate,
+                ModifiedDate = supplier.ModifiedDate
+            };
+        }
+
+        public List<Supplier> ConvertToSuppliers(List<DataAccess.Tables.Supplier> suppliers)
         {
             return suppliers.Select(f => new Supplier()
             {

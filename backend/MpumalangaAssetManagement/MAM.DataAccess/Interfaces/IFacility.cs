@@ -13,5 +13,7 @@ namespace MAM.DataAccess.Interfaces
         Facility GetFacilityById(int id);
         List<Facility> GetAssetRegisterFacilities();
         List<Facility> GetBuildings();
+        List<string> GetTowns();
+        List<Facility> GetBuildingsByTown(string town);
     }
 }

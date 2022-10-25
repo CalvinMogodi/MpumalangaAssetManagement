@@ -117,6 +117,22 @@ namespace MAM.API.Controllers
         }
 
         [HttpGet]
+        [Route("getbuildings/{town}")]
+        public IActionResult GetBuildingsByTown(string town)
+        {
+            try
+            {
+                List<Facility> facilities = _facilityService.GetBuildingsByTown(town);
+                return Ok(facilities);
+            }
+            catch (Exception ex)
+            {
+                log.Info("Error");
+                throw ex;
+            }
+        }
+
+        [HttpGet]
         [Route("getallfacilities")]
         public IActionResult GetAllFacilities()
         {
@@ -124,6 +140,22 @@ namespace MAM.API.Controllers
             {
                 List<Facility> facilities = _facilityService.GetAllFacilities();
                 return Ok(facilities);
+            }
+            catch (Exception ex)
+            {
+                log.Info("Error");
+                throw ex;
+            }
+        }
+
+        [HttpGet]
+        [Route("gettowns")]
+        public IActionResult GetTowns()
+        {
+            try
+            {
+                List<string> towns = _facilityService.GetTowns();
+                return Ok(towns);
             }
             catch (Exception ex)
             {

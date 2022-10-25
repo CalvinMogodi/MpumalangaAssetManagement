@@ -60,6 +60,7 @@ import { BreadcrumbModule } from 'primeng/breadcrumb';
 import { CheckboxModule } from 'primeng/checkbox';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { TooltipModule } from 'primeng/tooltip';
+import { AutoCompleteModule } from 'primeng/autocomplete';
 import { ChartModule } from 'primeng/chart';
 import { CardModule } from 'primeng/card';
 import { MessageModule} from 'primeng/message';
@@ -190,6 +191,7 @@ import { TrackTicketComponent } from './components/facilitymanagement/reportfaul
     InputNumberModule,
     DynamicDialogModule,
     PanelModule,
+    AutoCompleteModule,
 		SliderModule,
 		DialogModule,
 		MultiSelectModule,

@@ -34,7 +34,6 @@ namespace MAM.BusinessLayer.Repositories
             using (var dataAccess = new DataAccess.Repositories.ProjectRepository(appSettings.ConnectionString))
             {
                 dataAccess.UpdateProject(project.ConvertToProjectTable(project));
-                DeleteProjectSupplier(project.Id);
                 AddUpdateProjectSupplier(project);
                 return project;
             };
@@ -44,15 +43,14 @@ namespace MAM.BusinessLayer.Repositories
         {
             using (var dataAccess = new DataAccess.Repositories.ProjectSupplierRepository(appSettings.ConnectionString))
             {
-                foreach (var supplier in project.Suppliers)
+                foreach (var projectSupplier in project.ProjectSuppliers)
                 {
-                    if (supplier.Id > 0) {
-                        DataAccess.Tables.ProjectSupplier projectSupplier = new DataAccess.Tables.ProjectSupplier() { 
-                            Id = 0,
-                            ProjectId = project.Id,
-                            SupplierId = supplier.Id,
-                        };
-                        dataAccess.AddProjectSupplier(projectSupplier);
+                    if (projectSupplier.Id > 0)
+                    {
+                        dataAccess.UpdateProjectSupplier(projectSupplier.ConvertToProjectSupplierTable(projectSupplier));
+                    }
+                    else {
+                        dataAccess.AddProjectSupplier(projectSupplier.ConvertToProjectSupplierTable(projectSupplier));
                     }                   
                 }
             };
@@ -62,6 +60,7 @@ namespace MAM.BusinessLayer.Repositories
         {
             using (var dataAccess = new DataAccess.Repositories.ProjectRepository(appSettings.ConnectionString))
             {
+                project.IsDeleted = true;
                 dataAccess.UpdateProject(project.ConvertToProjectTable(project));
                 return true;
             };

@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ConfirmationService, MenuItem, MessageService } from 'primeng/api';
 import { RadioControlRegistry } from 'primeng/radiobutton';
+import { ProjectSupplier } from 'src/app/models/project-supplier';
 import { Project } from 'src/app/models/project.model';
 import { Supplier } from 'src/app/models/supplier';
 import { User } from 'src/app/models/user.model';
@@ -18,7 +19,7 @@ import { SharedService } from 'src/app/services/shared.service';
 })
 export class AddEditProjectComponent implements OnInit {
 
-  public project: Project;
+  @Input() project: Project;
   public isSuccessful = false;
   public projectForm: FormGroup;
 
@@ -50,7 +51,7 @@ export class AddEditProjectComponent implements OnInit {
   public activeIndex = 0;
   public managedBylist: any[] = [];
   public selectedSupplierIndex = 0;
-  public selectedSupplier:any =  {
+  public projectSupplier: any =  {
     companyName: '',
     companyNumber: '',
     contactName: '',
@@ -58,54 +59,15 @@ export class AddEditProjectComponent implements OnInit {
   };
   buttonItems: MenuItem[];
   public supplierCols = [
-    { field: 'supplier', header: 'Supplier' },
     { field: 'companyName', header: 'Company Name' },
     { field: 'companyNumber', header: 'Company Number' },
     { field: 'contactName', header: 'Contact Name' },
     { field: 'contactNumber', header: 'Contact Number' }
   ];
 
-  getOrderNumber(length): string {
-    let result = '';
-    const characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    const charactersLength = characters.length;
-    for (let i = 0; i < length; i++) {
-      result += characters.charAt(Math.floor(Math.random() * charactersLength));
-    }
-    return result;
-  }
-
   constructor(private authenticationService: AuthenticationService, private formBuilder: FormBuilder,
               private supplierService: SupplierService, private sharedService: SharedService,
               private projectService: ProjectService, private messageService: MessageService) {
-    this.project = {
-      id: 0,
-      orderNumber: this.getOrderNumber(7),
-      district: '',
-      propertyId: 0,
-      name: '',
-      plannedDuration: '',
-      startDate: new Date,
-      practicalCompletionDate: new Date(),
-      scopeofWork: '',
-      hasFinancials: false,
-      hasParentProject: false,
-      parentProjectId: null,
-      amount: 0,
-      account: 0,
-      managedBy: '',
-      employeeName: '',
-      employeeNumber: null,
-      contactName: '',
-      contactNumber: '',
-      businessName: '',
-      businessRegNumber: '',
-      createdDate: new Date(),
-      modifiedDate: null,
-      suppliers: [],
-      isDeleted: false,
-      status: 'New'
-    };
   }
 
   ngOnInit() {
@@ -123,7 +85,7 @@ export class AddEditProjectComponent implements OnInit {
 
     this.districts = this.sharedService.getDistricts();
     this.properties = [
-      { name: 'N1 repair', code: 'B', factor: 1 }
+      { name: 'Loading...', code: '0', factor: 0 }
     ];
 
     this.supplierService.getSuppliers().subscribe(suppliers => {
@@ -149,6 +111,7 @@ export class AddEditProjectComponent implements OnInit {
            const option = { name: element.clientCode + ' - ' + element.name, code: element.id, factor: element.id };
            this.properties.push(option);
         });
+        this.SetPropertyDropdown();
       }
     },
     (error) => {
@@ -167,7 +130,46 @@ export class AddEditProjectComponent implements OnInit {
 
   get f() { return this.projectForm.controls; }
 
+  SetPropertyDropdown() {
+    const property = this.properties.filter(d => Number(d.code) === this.project.propertyId)[0];
+    this.projectForm.controls['property'].setValue(property);
+  }
+
   buildForm() {
+    if (this.project.id > 0) {
+      const district = this.districts.filter(d => d.name === this.project.district)[0];
+
+      this.projectForm = this.formBuilder.group({
+        district: [district],
+        property: [''],
+        name: [this.project.name],
+        hasParentProject: [this.project.hasParentProject],
+        hasProjectFinance: [this.project.hasFinancials],
+        duration: [this.project.plannedDuration],
+        amount: [this.project.amount],
+        account: [this.project.account],
+        startDate: [new Date(this.project.startDate)],
+        scope: [this.project.scopeofWork],
+        completionDate: [new Date(this.project.practicalCompletionDate)]
+      });
+  
+      const managedByEmployee = this.managedBylist.filter(m => m.name === this.project.managedBy)[0];
+      this.managedByForm = this.formBuilder.group({
+        managedBy: [managedByEmployee],
+        name: [this.project.managedBy === 'Employee' ?  this.project.employeeName : this.project.businessName],
+        employeeCompanyNumber: [this.project.managedBy === 'Employee' ?  this.project.employeeNumber : this.project.businessRegNumber],
+        contactName: [this.project.contactName],
+        contactNumber: [this.project.contactNumber],
+      });
+  
+      this.supplierForm = this.formBuilder.group({
+        supplier: [''],
+        companyName: [''],
+        companyNumber: [''],
+        contactName: [''],
+        contactNumber: [''],
+      });
+    } else {
     this.projectForm = this.formBuilder.group({
       district: [''],
       property: [''],
@@ -199,13 +201,18 @@ export class AddEditProjectComponent implements OnInit {
       contactNumber: [''],
     });
   }
+  }
 
   saveDetails() {
     switch (this.activeIndex) {
       case this.activeIndex = 0:
         if (this.projectForm.valid) {
           this.assignProject();
-          this.addProject();
+          if (this.project.id > 0) {
+            this.updateProject();
+          } else {
+            this.addProject();
+          }
         }
         break;
       case this.activeIndex = 1:
@@ -242,12 +249,12 @@ export class AddEditProjectComponent implements OnInit {
   printProject() { }
 
   onSaveSuppliers() {
-    if (this.project.suppliers.length > 0) {
-      this.addSuppliers();
+    if (this.project.projectSuppliers.length > 0) {
+      this.AddProjectSuppliers();
     }
   }
 
-  addSuppliers(){
+  AddProjectSuppliers() {
     this.projectService.updateProject(this.project).pipe().subscribe(project => {
       if (project) {
         this.showToast('Add project', 'Your project details has been saved successfully.', 'success');
@@ -287,13 +294,17 @@ export class AddEditProjectComponent implements OnInit {
       });
   }
 
-  assignManager(){
+  assignManager() {
     if (this.isManagedByExternalCompany) {
       this.project.businessName = this.managedByForm.controls['name'].value;
-      this.project.businessRegNumber = this.managedByForm.controls['employeeCompanyNumber'].value;
+      this.project.businessRegNumber = this.managedByForm.controls['employeeCompanyNumber'].value.toString();
+      this.project.employeeName = null;
+      this.project.employeeNumber = null;
     } else {
       this.project.employeeName = this.managedByForm.controls['name'].value;
       this.project.employeeNumber = Number(this.managedByForm.controls['employeeCompanyNumber'].value);
+      this.project.businessName = null;
+      this.project.businessRegNumber = null;
     }
 
     this.project.contactName = this.managedByForm.controls['contactName'].value;
@@ -336,26 +347,33 @@ export class AddEditProjectComponent implements OnInit {
     if (e.value.factor === 2) {
       this.isManagedByExternalCompany = true;
     } else {
-      this.isManagedByExternalCompany = false;
+      this.isManagedByExternalCompany = false;      
     }
+    this.managedByForm.controls['employeeCompanyNumber'].setValue('');
+    this.project.managedBy = e.value.name;
   }
 
   onSupplierChange(e){
-    this.selectedSupplier = e.value;
+    this.projectSupplier = e.value;
   }
 
   onAddSupplier() {
-    const supplier = this.suppliers.filter(s => s.id === this.selectedSupplier.code)[0];
-    this.project.suppliers.push(supplier);
+    const supplier = this.suppliers.filter(s => s.id === this.projectSupplier.code)[0];
+    const projectSupplier: ProjectSupplier = {
+      id: 0,
+      projectId: this.project.id,
+      supplierId: supplier.code,
+    };
+    this.project.projectSuppliers.push(projectSupplier);
   }
 
-  selectSupplier(supplier: any) {
-    this.selectedSupplier = supplier;
+  selectSupplier(projectSupplier: any) {
+    this.projectSupplier = projectSupplier;
   }
 
   deleteSupplier() {
-    const index = this.project.suppliers.indexOf(this.selectedSupplier);
-    this.project.suppliers.splice(index, 1);
+    const index = this.project.projectSuppliers.indexOf(this.projectSupplier);
+    this.project.projectSuppliers.splice(index, 1);
   }
 
   showToast(summary: string, detail: string, severity: string) {

@@ -62,6 +62,32 @@ namespace MAM.DataAccess.Repositories
             }
         }
 
+        public List<string> GetTowns()
+        {
+            using (var db = new DataContext(_connectionString))
+            {
+                var towns = db.GeographicalLocations.Select(t => t.Town).Where(t => !string.IsNullOrEmpty(t)).Distinct().OrderBy(t => t).ToList();
+                return towns;
+            }
+        }
+
+        public List<Facility> GetBuildingsByTown(string town)
+        {
+            using (var db = new DataContext(_connectionString))
+            {
+                var query = from facility in db.Facilities
+                            join land in db.Lands
+                              on facility.LandId equals land.Id
+                            join gl in db.GeographicalLocations
+                              on land.GeographicalLocationId equals gl.Id
+                            where gl.Town == town && facility.Type.ToLower() != "land" &&
+                                !facility.Name.ToLower().Contains("land") && !facility.Name.ToLower().Contains("farm")
+                            select facility;
+                List<Facility> facilities = query.ToList();
+                return facilities;
+            }
+        }
+
         public List<Facility> GetAllFacilities()
         {
             using (var db = new DataContext(_connectionString))
@@ -123,7 +149,7 @@ namespace MAM.DataAccess.Repositories
         {
             using (var db = new DataContext(_connectionString))
             {
-                var list = db.Facilities.Where(f => f.Status.ToLower() != "signedoff" )
+                var list = db.Facilities.Where(f => f.Status.ToLower() != "signedoff")
                    .Include(a => a.Land)
                    .Include(f => f.Land.PropertyDescription)
                   .Include(a => a.Land.GeographicalLocation)

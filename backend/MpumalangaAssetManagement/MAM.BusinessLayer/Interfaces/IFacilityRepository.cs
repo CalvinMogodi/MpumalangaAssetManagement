@@ -25,5 +25,7 @@ namespace MAM.BusinessLayer.Interfaces
         List<Facility> GetProperties(string userDepartment);
         List<Facility> GetProjectFacilities();
         List<Facility> GetBuildings();
+        List<string> GetTowns();
+        List<Facility> GetBuildingsByTown(string town);
     }
 }

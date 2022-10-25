@@ -165,6 +165,25 @@ namespace MAM.BusinessLayer.Repositories
             return facilitySummaryChartData;
         }
 
+        public List<Facility> GetBuildingsByTown(string town)
+        {
+            using (var dataAccess = new DataAccess.Repositories.FacilityRepository(appSettings.ConnectionString))
+            {
+                Facility facility = new Facility();
+                List<Facility> facilities = facility.ConvertToFacilities(dataAccess.GetBuildingsByTown(town));
+                return facilities;
+            }
+        }
+
+        public List<string> GetTowns()
+        {
+            using (var dataAccess = new DataAccess.Repositories.FacilityRepository(appSettings.ConnectionString))
+            {
+                var towns = dataAccess.GetTowns();
+                return towns;
+            }
+        }
+
         public List<MapCoordinate> GetMapCoordinates()
         {
             List<MapCoordinate> mapCoordinates = new List<MapCoordinate>();

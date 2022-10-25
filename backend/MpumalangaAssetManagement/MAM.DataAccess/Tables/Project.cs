@@ -31,6 +31,7 @@ namespace MAM.DataAccess.Tables
         public DateTime CreatedDate { get; set; }
         public DateTime? ModifiedDate { get; set; }
         public List<Supplier> Suppliers { get; set; }
+        public List<ProjectSupplier> ProjectSuppliers { get; set; }
         public bool? IsDeleted { get; set; }
     }
 }

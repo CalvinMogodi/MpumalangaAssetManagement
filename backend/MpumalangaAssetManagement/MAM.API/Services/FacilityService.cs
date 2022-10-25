@@ -24,6 +24,9 @@ namespace MAM.API.Services
         bool UpdateFacility(string step, Facility facility);
         bool DeleteFacility(int id);
         List<Facility> GetBuildings();
+        List<string> GetTowns();
+
+        List<Facility> GetBuildingsByTown(string town);
     }
 
     public class FacilityService : IFacilityService
@@ -136,6 +139,22 @@ namespace MAM.API.Services
             using (var _facilityRepository = new FacilityRepository(_appSettings))
             {
                 return _facilityRepository.DeleteFacility(id);
+            }
+        }
+
+        public List<string> GetTowns()
+        {
+            using (var _facilityRepository = new FacilityRepository(_appSettings))
+            {
+                return _facilityRepository.GetTowns();
+            }
+        }
+
+        public List<Facility> GetBuildingsByTown(string town)
+        {
+            using (var _facilityRepository = new FacilityRepository(_appSettings))
+            {
+                return _facilityRepository.GetBuildingsByTown(town);
             }
         }
     }

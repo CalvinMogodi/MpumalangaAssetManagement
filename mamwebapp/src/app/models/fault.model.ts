@@ -2,6 +2,7 @@ import { FaultNote } from "./fault-note.model";
 
 export class Fault {
     id: number;
+    town: string;
     facilityId: number;
     facilityName: string;
     propertyDescription: string;
@@ -19,5 +20,6 @@ export class Fault {
     projectId?: number;
     faultNotes: Array<FaultNote>;
     status: string;
+    statusColor?: string;
     isDeleted: boolean;
 }
